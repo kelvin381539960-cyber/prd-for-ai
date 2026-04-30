@@ -1,183 +1,178 @@
 ---
 module: account
-feature: login
-version: 1.0
-last_updated: 2025-11-11
-authors: [吴忆锋]
-status: released
-depends_on: [security/otp-verification, security/biometric, security/password-policy]
+page: login
+title: 登录功能
+source_doc: "AIX Card 注册登录需求V1.0 (2).docx"
+version: "1.0"
+last_updated: 2025-01-20
+country_support: [VN, PH, AU]
+status: active
+tags: [login, account, biometric, email, phone, otp, country-selector]
 ---
 
-# Login 登录
+# AIX Card 注册登录需求 V1.0 — 登录功能
 
-## 1. 功能概述
-
-已注册用户通过邮箱/手机号 + 密码登录，或通过 Biometric 快捷登录 AIX Card。
-
-## 2. 用户流程
-
-![登录流程图](../assets/account/image2.png)
-
-### 流程步骤（AI-readable）
-
-| 步骤 | 角色 | 动作 | 条件/分支 | 下一步 |
-|------|------|------|-----------|--------|
-| 1 | 用户 | 打开APP，进入 Navigation Page | - | 2 |
-| 2 | 用户 | 点击 "I already have an account" | - | 3 |
-| 3 | 用户 | 输入邮箱/手机号 | - | 4 |
-| 4 | 前端 | 格式校验 | 不通过→错误提示 | 5 |
-| 5 | 后端 | 校验账号存在性、账号状态 | 不存在→提示 / Banned→提示 | 6 |
-| 6 | 用户 | 进入身份验证流程 | 见 [security/](../security/) | 7 |
-| 7 | 系统 | 验证通过，检测BIO状态 | 已启用BIO→首页 / 未启用→Enable BIO Page | 8 |
-| 8 | 用户 | (可选) 启用BIO | 跳过→首页 | 9 |
-| 9 | 系统 | 进入APP首页 | - | - |
-
-**Biometric 快捷登录路径：**
-
-| 步骤 | 角色 | 动作 | 条件/分支 | 下一步 |
-|------|------|------|-----------|--------|
-| 1 | 用户 | 点击 Quick Login | 需本地有BIO密钥 | 2 |
-| 2 | 设备 | 拉起生物识别验证 | - | 3 |
-| 3 | 设备 | 验证结果 | 成功→后端验证 / 失败→弹窗处理 | 4 |
-| 4 | 后端 | 验证BIO签名 | 成功→进入首页 / 失败→清除BIO，跳转手动登录 | - |
-
-## 3. 页面清单
+> 本文档由原始 PRD（飞书导出 .docx）100% 原文转译为结构化 Markdown，未做任何内容精简或归纳。
+> 项目背景、项目目的、国家线、账户规则等全局信息见 [registration.md](./registration.md) 章节2-5。
 
 ---
 
-### 3.1 Navigation Page（引导页）
+## 7.2 登录功能
 
-> 复用注册功能 Navigation Page，见 [registration.md#31](./registration.md#31-navigation-page引导页)
+### 7.2.1 流程说明
 
----
+> 原始PRD参考截图（飞书文档截图，含登录流程概览图）
 
-### 3.2 Login Page（登录页）
+![登录流程说明](../assets/account/image28.jpeg)
 
-![Login Page](../assets/account/image8.png)
+### 7.2.2 页面概览
 
-#### 页面元素
+> 原始PRD参考截图（飞书文档截图，含登录功能所有页面概览）
 
-| 元素 | 类型 | 规则 | 必填 |
-|------|------|------|------|
-| Email/Phone 输入框 | TextInput | 支持邮箱或手机号 | ✅ |
-| 国家区号选择器 | Picker | 点击打开国家列表 | 仅手机号时 |
-| Next 按钮 | Button | 输入非空+格式通过→可点击 | - |
-| Quick Login 按钮 | Button | 仅本地有BIO密钥时显示 | - |
-| 协议复选框 | Checkbox | 同注册页 | ✅ |
-
-#### Next 按钮逻辑
-
-| 场景 | 处理 |
-|------|------|
-| 账号不存在/未注册 | 提示：`您输入的账号信息有误，请检查或注册新账号` |
-| 手机号少于6位 | 提示：`Phone number must be at least 6 digits` |
-| 账号被 Banned | 提示：`Account locked. Please contact customer support.` |
-| 正常 | 跳转身份验证流程页 |
-
-#### Quick Login 按钮
-
-- **显示条件**：App本地检测到可用的 Biometric 密钥信息
-- **功能**：点击触发 Biometric 登录流程（见 3.4）
+![登录页面概览](../assets/account/image29.jpeg)
 
 ---
 
-### 3.3 Select Country Page（国家选择页）
+### 7.2.3 Navigation Page（引导页）
 
-![Select Country Page](../assets/account/image9.png)
-
-#### 页面规则
-
-- 展示全部国家列表（参考国家和地区list）
-- 后端隐藏：中国、中国台湾
-- 排序规则：`new Intl.Collator('vi-VN').compare`
-
-#### 常用地区（置顶）
-
-- 澳大利亚
-- 新加坡
-- 菲律宾
-- 越南
+> 复用注册功能-Navigation Page
+> 详见 [registration.md → 7.3 Navigation Page](./registration.md#73-navigation-page引导页)
 
 ---
 
-### 3.4 Biometric 登录
+### 7.2.4 Login Page（登录页）
 
-![Biometric Login](../assets/account/image10.png)
+#### UX 参考截图
 
-#### iOS 人脸识别
+> 原始PRD参考截图（飞书文档截图，含登录页UI原型 — 多状态展示同一页面）
 
-| 步骤 | 处理 |
-|------|------|
-| 点击 Quick Login | 拉起设备人脸验证 |
-| 设备端验证通过 | → 后端验证 BIO 签名 |
-| 后端验证成功 | → 进入下一步流程 |
-| 后端验证失败 | → 弹窗提示错误 + 清除本地BIO + 后端关闭BIO开关 → 跳转手动登录 |
-| 设备端验证失败（单数次） | 系统弹窗：`Try FaceID Again` / `Cancel` |
-| 设备端验证失败（双数次） | 弹窗：`Cancel` / `Use Other Methods` → 跳转手动登录 |
+| 状态 | UX截图 |
+|------|--------|
+| 默认状态 | ![Login Page UX](../assets/account/image30.png) |
 
-#### iOS 指纹识别
+#### 功能说明
 
-| 步骤 | 处理 |
-|------|------|
-| 设备端验证失败（第1次/每轮） | 系统弹窗：`Cancel` |
-| 设备端验证失败（第2次/每轮） | 弹窗：`Cancel` / `Use another method` |
-| 失败5次（第3轮第1次） | 指纹被锁，引导用户使用其他方式 |
+> 注：原文档 Description 列从第4项开始，1-3项内容见 UX 截图中的页面交互说明。
 
-#### Android 人脸 / 指纹
+**4. 下一步按钮**
 
-| 步骤 | 处理 |
-|------|------|
-| 失败弹窗 | 系统弹窗，以各机型实际展示为准 |
-| 失败次数限制 | 不限制，以各机型实际限制为准 |
-| 超过设备限制次数 | 弹窗提示错误 + `Use another method` → 跳转手动登录 + 清除本地BIO + 隐藏 Quick Login 按钮 |
+- 初始状态为禁用。仅当输入框内容不为空，且输入格式校验通过，变为可用；
 
----
+点击按钮处理逻辑：
+- 账号不存在或未注册：提示文案：您输入的账号信息有误，请检查或注册新账号。
+- 手机号少于6位：提示：Phone number must be at least 6 digits
+- 账号被Banned：提示文案：Account locked. Please contact customer support.
+- 正常流程：自动跳转至 身份验证流程页；
 
-### 3.5 身份验证流程页面
+**5. Quick Login按钮**
 
-> 👉 见 [security/otp-verification.md](../security/otp-verification.md)
+显示条件：
+- 仅当App本地检测到存在可用的生物识别（Biometric）密钥信息时，才向用户展示此按钮。
+
+功能逻辑：
+- 点击后触发生物识别登录流程，具体逻辑见独立的"Biometric登录"章节。
 
 ---
 
-### 3.6 Enable BIO Page（BIO启用引导页）
+### 7.2.4.1 Select Country Page（国家选择页）
 
-![Enable BIO Page](../assets/account/image11.png)
+#### UX 参考截图
 
-#### 页面规则
+> 原始PRD参考截图（飞书文档截图，含国家选择页UI原型）
 
-| 条件 | 行为 |
-|------|------|
-| 未启用BIO | 引导进入此页面 |
-| 已启用BIO | 跳过，直接进入APP首页 |
-| 手机系统未开启人脸/指纹 | 不弹出引导页，直接进入首页 |
+| 状态 | UX截图 |
+|------|--------|
+| 默认状态 | ![Select Country Page UX](../assets/account/image32.png) |
 
-#### 页面元素
+#### 功能说明
 
-| 元素 | 类型 | 规则 |
-|------|------|------|
-| 关闭按钮 | Button | 点击直接进入首页，Toast：`Login success` |
-| 图片 & 标题 & 副标题 | Static | 固定文案 |
-| Enable now 按钮 | Button | 点击检测设备BIO权限 |
+**1. 页面规则**
 
-#### Enable now 按钮逻辑
+- 点击打开国家列表，展示全部国家。
+- 展示完整国家list参考，见国家和地区list；
+- 国家list，后端需要隐藏中国和中国台湾选项；
 
-| 设备权限状态 | 处理 |
-|--------------|------|
-| 已授权 | 直接调起生物认证流程 |
-| 未授权 | 弹窗引导至系统权限设置 |
+列表排序规则：
+- 实现方式：采用组件 `new Intl.Collator('vi-VN').compare`
 
-#### 特殊处理
+**2. 常用地区**
 
+- 显示常用国家地区，固定为：澳大利亚、新加坡、菲律宾、越南
+
+---
+
+### 7.2.5 Biometric登录
+
+#### UX 参考截图
+
+> 原始PRD参考截图（飞书文档截图，含Biometric登录各平台UI原型）
+
+| 模块 | UX截图 |
+|------|--------|
+| iOS人脸 | ![iOS Face ID](../assets/account/image33.jpeg) |
+| iOS指纹 | ![iOS Touch ID](../assets/account/image34.jpeg) |
+| Android人脸 | ![Android Face](../assets/account/image36.jpeg) |
+| Android指纹 | ![Android Fingerprint](../assets/account/image37.jpeg) |
+
+#### 功能说明
+
+| 模块 | 需求说明 |
+|------|----------|
+| iOS人脸 | 点击「Quick Login」，拉起设备人脸验证<br>判断是否验证通过：<br>- 设备端验证通过，则进行后端验证<br>- 后端验证成功，进入下一步流程，并使用biometric签名请求身份认证；<br>- 后端验证失败，则弹窗提示 |
+| iOS指纹 | 点击「Quick Login」，拉起设备指纹验证<br>判断是否验证通过：<br>- 设备端验证通过，则进行后端验证<br>- 后端验证成功，进入下一步流程，并使用biometric签名请求身份认证；<br>- 后端验证失败，则弹窗提示 |
+| Android人脸 | 点击「Quick Login」，拉起设备人脸验证<br>判断是否验证通过：<br>- 设备端验证通过，则进行后端验证<br>- 后端验证成功，进入下一步流程，并使用biometric签名请求身份认证；<br>- 后端验证失败，则弹窗提示 |
+| Android指纹 | 点击「Quick Login」，若协议已全部勾选，则拉起设备人脸验证<br>判断是否验证通过：<br>- 设备端验证通过，则进行后端验证<br>- 后端验证成功，进入下一步流程，并使用biometric签名请求身份认证；<br>- 后端验证失败，则弹窗提示 |
+
+> 补充截图：Android指纹验证弹窗
+
+![Android指纹验证弹窗](../assets/account/image35.png)
+
+---
+
+### 7.2.6 身份验证流程页面
+
+> 详细需求见：AIX Security 身份认证需求V1.0
+
+---
+
+### 7.2.7 Enable BIO Page（启用生物识别引导页）
+
+#### UX 参考截图
+
+> 原始PRD参考截图（飞书文档截图，含启用BIO引导页UI原型 — 多状态展示同一页面）
+
+| 状态 | UX截图 |
+|------|--------|
+| 默认状态 | ![Enable BIO Page UX](../assets/account/image38.png) |
+
+#### Description 参考截图
+
+![Enable BIO Page Description](../assets/account/image39.png)
+
+#### 功能说明
+
+**1. 页面规则**
+
+用户登录成功后，系统将检测其生物识别（BIO）状态：
+- 若未启用BIO：则引导用户进入此功能启用页面。
+- 若已启用BIO：则跳过此页面，直接进入APP首页。
+- 若用户未在手机系统中开启人脸或指纹识别功能，则登录成功后不弹出生物识别引导页，直接进入首页
+
+**2. 关闭按钮**
+
+- 点击关闭按钮，直接进入APP首页，并toast提示：Login success
+
+**3. 图片&标题&副标题**
+
+- 固定文案
+
+**4. Enable now按钮**
+
+点击按钮，检测设备生物识别权限状态：
+- 已授权：直接调起生物认证流程
+- 未授权：弹窗引导至系统权限设置
+
+特殊处理：
 - 需调用身份认证接口
-- 登录后 **5分钟内**：无需再次身份验证
-- 登录后 **5分钟后**：需身份验证后再设置
-
----
-
-## 4. 版本记录
-
-| 日期 | 变更内容 | 变更人 |
-|------|----------|--------|
-| 2025-10-21 | 初稿 | 吴忆锋 |
-| 2025-10-29 | 登录密码规则调整 | 吴忆锋 |
-| 2025-11-11 | 补充BIO相关规则 | 吴忆锋 |
+- 用户在完成手动登录后的5分钟内，无需再次进行身份验证
+- 用户在完成手动登录后的5分钟后，需要进行身份验证后再继续设置
