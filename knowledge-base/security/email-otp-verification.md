@@ -1,19 +1,19 @@
 ---
 module: security
-page: otp-verification
-title: OTP 认证页面（短信验证码）
+page: email-otp-verification
+title: Email OTP 认证页面（邮箱验证码）
 version: "1.0"
 source_doc: "AIX Security 身份认证需求V1.0 (1).docx"
-section: "8.2"
+section: "8.3"
 ---
 
-# 8.2 OTP认证
+# 8.3 Email OTP认证
 
-## 8.2.1 OTP Verify Page
+## 8.3.1 Email OTP Verify Page
 
 ### 页面截图
 
-![原始PRD参考截图（飞书文档截图，含导航+UI原型+描述）— 仅供参考](../assets/security/image8.png)
+![原始PRD参考截图（飞书文档截图，含导航+UI原型+描述）— 仅供参考](../assets/security/image10.png)
 
 ### 页面规则
 
@@ -29,42 +29,35 @@ section: "8.2"
   - **Stay and continue**: 点击后关闭弹窗，停留在当前页；
   - **Leave**: 点击后关闭弹窗，返回到业务流程发起页；
 
-### 标题 (Title)
+### 标题/副标题
 
-Verify Mobile Number
+固定文案。
 
-### 副标题 (Subtitle)
+**邮箱地址**：取user_info中的email 地址，掩码展示，邮箱@之前的首位和末位以及邮箱后缀明文展示，中间位数用掩码*展示，*的展示个数与位数相同；
 
-We will send a 4-digit verification to you on {mobile number}
-
-### 手机号码显示
-
-- **登录注册场景**：明文展示用户填写的手机号码。以PH为例，前端展示为： +638****2412；
-- **非登录场景**：进行掩码处理。
-  - 格式：+国际手机区号&手机号前N位掩码&最后三位明文
-  - 示例（PH）：+63******412
+举例：用户email地址为：test43500@gmail.com，前端展示为：t*******0@gmail.com；
 
 ### 密码输入框
 
-#### 6.1 验证码发送与接收
+#### 4.1 验证码发送与接收
 
-系统需向用户手机号发送一封包含 **4位数字验证码（OTP）** 。
+系统需向用户指定的邮箱发送一封包含 **4位数字验证码（OTP）** 的邮件。
 
 用户需在验证页面输入收到的完整4位验证码。
 
 验证码5分钟有效期。
 
-#### 6.2 验证码输入规则
+#### 4.2 验证码输入规则
 
 - 输入框仅接受4位数字输入，非数字字符无效。
 - 用户必须按顺序依次输入每一位数字。
 - 删除操作仅支持从最后一位开始逐位向前删除。
 
-#### 6.3 自动提交验证
+#### 4.3 自动提交验证
 
 当系统检测到用户已输入完4位验证码时，应自动触发提交验证请求，无需用户手动点击确认按钮。
 
-#### 6.4 验证处理规则
+#### 4.4 验证处理规则
 
 **验证成功**，进入下一流程。
 
@@ -80,7 +73,7 @@ We will send a 4-digit verification to you on {mobile number}
 **验证失败（用户在24小时内连续失败等于 5次）**，触发锁定20分钟，弹窗提示：
 - Title：Too Many Attempts
 - Content：You've reached the maximum number of attempts. Please try again in {time}.
-- "Try again later"按钮，点击后退出登录并返回到业务流程发起页。
+- "Try again later"按钮，点击后退出登录并返回上一级页面。
 - 此弹窗复用【7.6.2 Too many failed popup】
 
 **验证失败（连续失败次数（5，10）， 但剩余可尝试次数 大于2次）**，不触发锁定：
@@ -96,15 +89,14 @@ We will send a 4-digit verification to you on {mobile number}
 - Title：Too Many requests
 - Content：You've requested new codes too frequently. Please try again in {time}.
 - "Try again later"按钮，点击后退出登录并返回业务流程发起页。
-- 此弹窗复用【7.6.2 Too many failed popup】
 
-#### 6.5 重新发送规则
+#### 4.5 重新发送规则
 
 60s倒数结束，用户可请求重新发送验证码。
 
 **冷却限制**：用户在 24 小时内最多可执行 3 次验证码"重新发送"操作。达到上限后，系统将触发20分钟的冷却期，弹窗提示：
-- Title：Resend Limit Reached
-- Content：You've reached the resend limit. Please try again in {time}.
+- Title：Too Many requests
+- Content：You've requested new codes too frequently. Please try again in {time}.
 - "Try again later"按钮，点击后退出登录并返回业务流程发起页。
 
 **验证码安全规则：**
