@@ -1,7 +1,7 @@
 ---
 module: _meta
 feature: writing-standard
-version: "1.2"
+version: "1.3"
 status: active
 source_doc: IMPLEMENTATION_PLAN.md
 source_section: "6. 单个功能文件标准结构"
@@ -14,11 +14,10 @@ owner: 吴忆锋
 ## 1. 写作原则
 
 - 只写事实，不写推测。
-- 先写业务规则，再写页面表现。
-- 涉及资金、账户、卡、交易、KYC 时，必须写风控 / 合规边界。
-- 页面截图可以保留，但规则必须文字化。
-- 流程必须可被 UI、开发、测试、业务和 AI 共同理解。
-- 页面关系不得只依赖原始 PRD 截图，必须使用结构化文本或 Mermaid 表达。
+- 任何业务规则、流程分支、字段、状态、错误提示、页面落点、风控 / 合规边界，必须基于历史 PRD、接口文档、截图、已确认评审结论或既有知识库来源。
+- 不得为了补全流程、让图更完整、让文档更好看而编造未确认事实。
+- 如历史文档未说明，必须写入 `knowledge-base/changelog/knowledge-gaps.md`，不得在功能正文中当作事实表达。
+- 若需要补全表达但事实来源不足，只能写“按对应模块规则处理”或引用 `knowledge-gaps.md`，不得新增具体页面、文案、状态、接口动作。
 - 功能正文是事实来源，不写评审型内容；待确认事项统一进入 `knowledge-base/changelog/knowledge-gaps.md`。
 
 ## 2. 标准章节
@@ -35,8 +34,6 @@ owner: 吴忆锋
 8. 异常与失败处理
 9. 风控 / 合规边界
 10. 来源引用
-
-如存在不确定点、文档冲突、原文疑似错误，不在功能正文中展开，统一记录到 `knowledge-base/changelog/knowledge-gaps.md`。
 
 ## 3. 表达规则
 
@@ -56,7 +53,7 @@ owner: 吴忆锋
 - 页面跳转关系：放在“页面关系总览”。
 - 系统交互过程：放在“业务流程”。
 - 页面元素规则：放在“页面卡片与交互规则”。
-- 详细校验、系统动作、成功/失败结果：放在“业务逻辑矩阵”。
+- 详细校验、系统动作、成功 / 失败结果：放在“业务逻辑矩阵”。
 
 ### 4.2 强制形式
 
@@ -69,65 +66,24 @@ owner: 吴忆锋
 - 多方案并存。
 - “试验版”“方案 A / B / C”等过程性标记。
 
-允许补充简单文本主链路，但主交互图必须使用 Mermaid 时序图。
-
 ### 4.3 写法原则
 
 形式使用时序图，表达方式采用职能泳道图的业务语言。
-
-也就是说：
 
 - 图形结构按时间顺序展开。
 - 参与方按职责分层。
 - 文案写“参与方做了什么业务动作”，不写纯技术调用名。
 - 每个异常分支必须写清失败落点。
-
-推荐写法：
-
-```mermaid
-sequenceDiagram
-    actor User as User
-    participant Client as AIX App / Client
-    participant Backend as AIX Backend
-    participant Security as Security Module
-
-    User->>Client: 输入账号信息并点击 Next
-    Client->>Client: 执行前端格式校验
-    alt 输入不合法
-        Client-->>User: 留在当前页面，展示字段错误
-    else 输入合法
-        Client->>Backend: 提交账号信息，校验账号存在性与账户状态
-        alt 账户不可登录
-            Backend-->>Client: 返回账户拦截
-            Client-->>User: 留在当前页面，展示账户拦截
-        else 账户可登录
-            Backend->>Security: 发起身份验证流程
-            Security-->>Client: 身份验证成功
-            Client-->>User: 进入下一页面
-        end
-    end
-```
-
-不推荐写法：
-
-```mermaid
-sequenceDiagram
-    FE->>BE: call login api
-    BE-->>FE: 200
-```
-
-原因：该写法只表达技术调用，缺少业务动作、校验意图、异常落点，不能作为产品事实知识库。
+- 失败落点必须来自来源文档、公共规则或已确认知识库；来源不足时，只能写“按对应模块规则处理”。
 
 ### 4.4 标准参与方
-
-常用参与方命名如下：
 
 | 参与方 | 使用场景 | 说明 |
 |---|---|---|
 | User | 用户动作 | 点击、输入、选择、确认、关闭 |
 | Client / AIX App | 前端 / App | 页面展示、输入校验、弹窗、Toast、设备能力判断 |
 | Backend / AIX Backend | 后端服务 | 账号校验、状态校验、业务提交、状态查询 |
-| Security Module | 身份认证 | OTP、Email OTP、Login Passcode、Biometric、认证失败/锁定 |
+| Security Module | 身份认证 | OTP、Email OTP、Login Passcode、Biometric、认证失败 / 锁定 |
 | Device OS | 设备系统能力 | Face ID、Touch ID、Android Fingerprint、Android Face |
 | DTC / AAI / Third Party | 外部系统 | KYC、发卡、钱包、渠道服务、第三方能力 |
 
@@ -149,13 +105,7 @@ Mermaid 中统一使用 `alt / else / end` 表达分支。
 异常分支写法必须包含三要素：
 
 ```text
-失败原因 → 系统动作 → 用户/状态落点
-```
-
-示例：
-
-```text
-Account not found → 返回账号错误 → 留在 Login Page，展示账号错误
+失败原因 → 系统动作 → 用户 / 状态落点
 ```
 
 禁止只写：
@@ -164,36 +114,13 @@ Account not found → 返回账号错误 → 留在 Login Page，展示账号错
 失败 → 提示错误
 ```
 
-### 4.6 子流程拆分规则
-
-单个 Mermaid 图过长时，应按业务子链路拆分，但仍放在同一章节下。
-
-推荐拆法：
-
-```text
-A. Manual Login
-B. Quick Login
-C. Enable BIO
-```
-
-每个子链路必须独立可读，并能与业务逻辑矩阵互相对应。
-
 ## 5. 页面关系与截图规则
 
 ### 5.1 页面关系总览定位
 
 页面关系总览用于表达当前功能涉及的页面节点，以及页面之间的跳转关系。
 
-页面关系总览不承担：
-
-- 业务流程。
-- 系统交互。
-- 字段规则。
-- 后端校验。
-- 风控判断。
-- 异常处理细节。
-
-以上内容分别放在“业务流程”“业务逻辑矩阵”“页面卡片与交互规则”“异常与失败处理”“风控 / 合规边界”中。
+页面关系总览不承担业务流程、系统交互、字段规则、后端校验、风控判断、异常处理细节。
 
 ### 5.2 页面地图强制形式
 
@@ -218,17 +145,6 @@ C. Enable BIO
 结果页 / 异常承接
 ```
 
-复杂功能可以扩展分组，例如：
-
-```text
-卡申请前置页
-KYC 相关页
-卡管理页
-支付结果页
-```
-
-分组必须围绕页面层级或用户路径，不按后端系统或接口分组。
-
 连线文案只写短动作或短入口，例如：
 
 ```text
@@ -247,65 +163,16 @@ Quick Login
 
 ### 5.4 正常与异常连线
 
-页面地图中：
-
 ```text
 实线 = 正常页面跳转
 虚线 = 异常 / 拦截 / 失败承接
 ```
 
-示例：
+### 5.5 截图规则
 
-```mermaid
-flowchart LR
-    Login[Login Page]
-    Identity[Identity Verification]
-    Home[Home]
-    Error((Security Error Handling))
-
-    Login -->|Next| Identity
-    Identity -->|Success| Home
-    Identity -.->|Failed / locked| Error
-```
-
-### 5.5 不推荐写法
-
-不推荐在页面地图中写长条件：
-
-```text
-验证成功 + BIO 未启用 + 设备支持 BIO
-```
-
-应改成短动作或短状态：
-
-```text
-Need BIO setup
-```
-
-具体判断条件放在第 4 章业务流程和业务逻辑矩阵中。
-
-### 5.6 原始 PRD 页面概览截图
-
-原始 PRD 页面概览截图可以保留，但只能作为追溯证据，不作为主要规则表达。
-
-推荐写法：
-
-```markdown
-## 原始 PRD 参考截图
-
-> 以下截图来自原始飞书 PRD，仅用于追溯原始设计上下文。  
-> 页面关系以本文“页面关系总览”和结构化规则为准。
-```
-
-### 5.7 单页截图
-
-具体页面截图可以保留，但必须配套结构化页面元素表。
-
-```markdown
-| 元素 | 类型 | 展示条件 | 交互规则 | 异常 |
-|---|---|---|---|---|
-| TBD | TBD | TBD | TBD | TBD |
-```
+- 原始 PRD 页面概览截图可以保留，但只能作为追溯证据，不作为主要规则表达。
+- 具体页面截图可以保留，但必须配套结构化页面元素表。
+- 如果截图与文字规则冲突，以文字规则为准，并记录冲突点。
 
 ## 6. 来源引用规则
 
