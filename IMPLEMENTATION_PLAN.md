@@ -1,6 +1,6 @@
 # prd-for-ai 实施计划
 
-版本：v1.7  
+版本：v1.8  
 状态：执行中  
 适用仓库：`prd-for-ai`  
 更新时间：2026-05-01
@@ -35,7 +35,7 @@
 |---|---|---|---|---|---|
 | 1 | Account 样板 | 已完成 | 固化知识库写法 | Login / Registration / Password Reset | 已完成 |
 | 2 | 基础规则沉淀 | 部分完成 | 建立长期规则 | Writing Standard / Source Rules | 持续完善 |
-| 3 | Security 标准化 | 进行中（AIX 自有认证 + BIO 已完成） | 统一认证事实源 | OTP / Email OTP / Passcode / BIO / IVS | 继续 Face Authentication |
+| 3 | Security 标准化 | 进行中（核心认证能力已完成） | 统一认证事实源 | OTP / Email OTP / Passcode / BIO / Face Auth | 继续 API Reference |
 | 4 | Card 批量推进 | 未开始 | 转译卡模块 | Application / Manage / Transaction | 等 Security 完成 |
 | 5 | Wallet 批量推进 | 未开始 | 转译钱包模块 | KYC / Send / Swap / Receive / Deposit | 等 Security 完成 |
 | 6 | Transaction 统一层 | 未开始 | 统一交易状态 | Card / Wallet / Swap / History | Card / Wallet 后执行 |
@@ -56,8 +56,8 @@
 | email-otp-verification.md | 已完成 | 邮箱 OTP 已标准化 |
 | login-passcode-verification.md | 已完成 | Login Passcode 已标准化 |
 | biometric-verification.md | 已完成 | 设备生物识别已标准化，已与 Face Authentication 分离 |
-| face-authentication.md | 未开始 | 下一步执行 |
-| api-reference.md | 未开始 | 待执行 |
+| face-authentication.md | 已完成 | DTC / AAI 侧活体识别已标准化 |
+| api-reference.md | 未开始 | 下一步执行 |
 
 ---
 
@@ -75,7 +75,8 @@
 | Security / Email OTP | 已完成 | 邮箱 OTP 完成 |
 | Security / Passcode | 已完成 | 登录密码认证完成 |
 | Security / BIO | 已完成 | 设备生物识别完成 |
-| Security / Face Auth | 未开始 | 下一步 |
+| Security / Face Auth | 已完成 | DTC / AAI 活体识别完成 |
+| Security / API Reference | 未开始 | 下一步 |
 
 ---
 
@@ -83,16 +84,13 @@
 
 当前执行点：
 
-1. 开始 `face-authentication.md`
-2. 按同样标准结构重构
-3. 不重复 global rules
-4. 区分 DTC / AAI Face Authentication 与设备 Biometric
-5. 完成后更新 `security/_index.md`
-6. 完成后同步更新本实施计划
+1. 开始 `api-reference.md`
+2. 仅整理 Security 已有接口 / 字段 / 错误码引用，不补不存在的接口
+3. 若接口文档缺失，必须写入 `knowledge-gaps.md`
+4. 完成后判断 Security 阶段是否可收口
 
 当前禁止事项：
 
 - 不得跳到 Card / Wallet
-- 不得重复写 global rules
-- 不得把 Biometric 与 Face Authentication 混写
-- 不得在未引用来源的情况下补规则
+- 不得自行补接口字段或错误码
+- 不得把接口缺口写成已确认事实
