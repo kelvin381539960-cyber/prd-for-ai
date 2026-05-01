@@ -96,3 +96,14 @@ owner: 吴忆锋
 | KG-CARD-ACT-002 | Card Activation 接口失败错误码、失败响应字段和失败页文案未明确 | Card Activation / API Error | AIX Card manage模块需求V1.0 / 7.2 / 8.1 | 正文只写失败承接，不补错误码 | open |
 | KG-CARD-ACT-003 | 激活成功后卡状态如何从待激活更新为 Active，依赖接口响应还是状态通知，原文未明确 | Card Activation / Status Update | AIX Card manage模块需求V1.0 / 7.2；Card Status & Fields | 正文写归入已激活展示组，状态回写机制待确认 | open |
 | KG-CARD-ACT-004 | 激活成功页是否必须强制进入 Set PIN，还是只提供入口，原文未明确 | Card Activation / Set PIN Entry | AIX Card manage模块需求V1.0 / 7.2 / 7.3 | 正文按“提供 Set PIN 入口”处理，不写强制 | open |
+
+## 9. Card / PIN
+
+| 编号 | 问题 | 影响范围 | 来源 | 当前处理 | 状态 |
+|---|---|---|---|---|---|
+| KG-CARD-PIN-001 | Set PIN / Change PIN / Reset PIN 的页面文案、成功页和失败页文案未明确 | Card PIN / Page Copy | AIX Card manage模块需求V1.0 / 7.3 | 正文只写流程和接口，不补文案 | open |
+| KG-CARD-PIN-002 | PIN 可尝试次数、错误锁定规则、冷却时间未明确 | Card PIN / Risk Control | AIX Card manage模块需求V1.0 / 7.3 | 正文不补失败次数，只记录缺口 | open |
+| KG-CARD-PIN-003 | Change PIN 与 Reset PIN 的产品关系未明确：页面入口写 Change PIN，接口清单写 Reset Card PIN | Card PIN / Change vs Reset | AIX Card V1.0【Application】 / 5.2；AIX Card manage模块需求V1.0 / 8.1 | 正文合并为 Change / Reset PIN，并标注待确认 | open |
+| KG-CARD-PIN-004 | `pinSetStatus` 字段名为产品占位，原文未给出判断是否已设置 PIN 的真实字段 | Card PIN / Field | AIX Card V1.0【Application】 / 5.2 | 正文标注为占位字段，不作为接口字段 | open |
+| KG-CARD-PIN-005 | PIN 公钥加密算法、请求字段、响应字段未明确 | Card PIN / Encryption | AIX Card manage模块需求V1.0 / 8.1 | 正文只写需调用 Public Pin Key，不补加密细节 | open |
+| KG-CARD-PIN-006 | Set Card PIN / Reset Card PIN 的请求响应字段与错误码未明确 | Card PIN / API | AIX Card manage模块需求V1.0 / 8.1 | 正文只写接口路径和业务用途，不补字段 | open |
