@@ -1,7 +1,7 @@
 # prd-for-ai 实施计划
 
-版本：v3.3  
-状态：Card 阶段回扫仍阻塞，但阻塞范围已收窄  
+版本：v3.4  
+状态：Card 阶段回扫仍阻塞，但阻塞范围继续收窄  
 适用仓库：`prd-for-ai`  
 更新时间：2026-05-01
 
@@ -115,7 +115,7 @@
 | pin.md | 已完成 | PIN 相关能力已收口 |
 | sensitive-info.md | 已完成 | 卡信息安全查看流程已收口 |
 | card-management.md | 已完成 | 卡管理操作、状态边界、接口依赖与失败处理已收口 |
-| card-transaction-flow.md | 已完成但阻塞 | 已同步 DTC 字段、通知去重基础、归集触发类型、transfer-to-wallet 字段、失败不重试等确认结论；AIX 内部 ID、归集请求、Wallet 入账流水和对账链路仍未闭环 |
+| card-transaction-flow.md | 已完成但阻塞 | 已同步 DTC 字段、通知去重基础、归集触发类型、transfer-to-wallet 字段、失败不重试、Wallet 交易 id 和 Wallet state 等确认结论；AIX 内部 ID、归集请求、Wallet 关联规则和对账链路仍未闭环 |
 | stage-review.md | 已完成 | Card 阶段回扫已更新，结论仍为 `BLOCK`，暂缓进入 Wallet |
 | transaction-flow-traceability-checklist.md | 已完成 | 已收敛为后端 / Wallet / 账务待确认清单 |
 
@@ -128,7 +128,7 @@
 | Account | 已完成 | PASS | Login / Registration / Password Reset 已完成 |
 | Security | 已完成 | PASS | Security 阶段全部收口 |
 | Card / 页面与卡管能力 | 已完成 | PARTIAL PASS | Application / Home / Activation / PIN / Sensitive Info / Management 已完成 |
-| Card / Transaction Flow | 阻塞范围已收窄 | BLOCK | DTC 通知字段、交易 ID、触发类型、transfer-to-wallet 字段、失败不重试等已确认；AIX 内部追踪、Wallet 入账流水和对账链路仍未闭环 |
+| Card / Transaction Flow | 阻塞范围继续收窄 | BLOCK | DTC 通知字段、交易 ID、触发类型、transfer-to-wallet 字段、失败不重试、Wallet 交易 id 和 Wallet state 已确认；AIX 内部追踪、Wallet 关联规则和对账链路仍未闭环 |
 | Card / Traceability Checklist | 已完成 | BLOCK 支撑材料 | 已生成后端 / Wallet / 账务待确认清单 |
 | Wallet | 未开始 | 不允许进入 | 等 Card 阻塞解除后执行 |
 
@@ -138,9 +138,9 @@
 
 当前执行点：
 
-1. 不再继续追问 DTC Card Transaction Notify 字段表、Transaction ID、Transfer Balance to Wallet 请求字段、Transfer 成功是否返回业务流水、Top-up 是否触发归集、失败是否重试等问题；这些已在 `transaction-flow-traceability-checklist.md` v1.4 和 `card-transaction-flow.md` v1.1 中收口。
+1. 不再继续追问 DTC Card Transaction Notify 字段表、Transaction ID、Transfer Balance to Wallet 请求字段、Transfer 成功是否返回业务流水、Top-up 是否触发归集、失败是否重试、Wallet 交易 id、Wallet `transactionId` 入参、Wallet `state` 枚举等问题。
 2. 直接向 AIX 后端确认：内部交易处理 ID、Webhook 原始报文落库、重复通知去重实现、归集请求 ID、`D-REQUEST-ID` 生成与保存、查询 balance 失败处理、归集失败人工补偿入口。
-3. 直接向 Wallet / 账务确认：Wallet 入账流水 ID、钱包流水关联字段、Wallet `relatedId` 取值、入账币种与入账状态、最终对账字段组合。
+3. 直接向 Wallet / 账务确认：Wallet 交易 `id` 与 DTC `data.id` / AIX 归集请求 ID / `D-REQUEST-ID` 的关联规则、Wallet `relatedId` 取值、入账币种、最终对账字段组合。
 4. 收到确认后更新 `card-transaction-flow.md`、`knowledge-gaps.md`、`stage-review.md` 和本文件。
 5. 重新执行 Card Stage Review。
 6. 只有 Gate 结果为 `PASS` 后，才允许进入 Wallet 批量推进。
@@ -148,6 +148,6 @@
 当前禁止事项：
 
 - 不得直接跳到 Wallet。
-- 不得把 AIX 内部交易 ID、归集请求 ID、Wallet 入账流水、Wallet relatedId、对账字段写成事实。
+- 不得把 AIX 内部交易 ID、归集请求 ID、Wallet 关联规则、Wallet relatedId、对账字段写成事实。
 - 不得新增无来源状态、字段或接口。
 - 不得把 Transaction 统一层提前混入 Card 阶段正文。
