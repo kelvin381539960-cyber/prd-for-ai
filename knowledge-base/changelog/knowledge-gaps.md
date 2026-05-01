@@ -1,7 +1,7 @@
 ---
 module: changelog
 feature: knowledge-gaps
-version: "1.1"
+version: "1.2"
 status: active
 source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/card/card-transaction-flow.md；knowledge-base/card/stage-review.md；knowledge-base/card/transaction-flow-traceability-checklist.md
 source_section: source-policy；Card Transaction Flow；Card Stage Review
@@ -27,16 +27,14 @@ owner: 吴忆锋
 | KG-CARD-TXN-004 | 自动归集触发是否只判断 `type=REFUND/REVERSAL/DEPOSIT`，还是还需判断 `state` / `indicator` 未确认 | Card Transaction Flow / 归集触发 | 用户确认只关注 refund / reversal / deposit；DTC 枚举已补齐 | 触发类型已写入正文；附加状态判断待后端确认 | open |
 | KG-CARD-TXN-005 | AIX 发起 `Transfer Balance to Wallet` 前是否生成归集请求 ID，字段名未确认 | Card Transaction Flow / 归集追踪 | stage-review.md；traceability-checklist.md | 正文不补字段名；等待后端确认 | open |
 | KG-CARD-TXN-006 | `D-REQUEST-ID` 如何生成、保存，并与归集请求 ID 关联未确认 | Card Transaction Flow / 请求追踪 / 幂等 | DTC Card Issuing / 2.4；traceability-checklist.md | 仅写 DTC 文档中的请求唯一标识，不写成幂等键 | open |
-| KG-CARD-TXN-007 | DTC `data.id`、AIX 内部交易处理 ID、AIX 归集请求 ID、`D-REQUEST-ID`、钱包流水之间的链路关系未确认 | Card Transaction Flow / 资金可追溯 | stage-review.md；traceability-checklist.md | 阶段继续 BLOCK | open |
+| KG-CARD-TXN-007 | DTC `data.id`、AIX 内部交易处理 ID、AIX 归集请求 ID、`D-REQUEST-ID`、Wallet 交易 `id` 之间的链路关系未确认 | Card Transaction Flow / 资金可追溯 | stage-review.md；traceability-checklist.md | 阶段继续 BLOCK | open |
 | KG-CARD-TXN-008 | 查询卡 `balance` 失败后的处理规则未确认 | Card Transaction Flow / 异常处理 | AIX Card交易【transaction】/ 9 | 正文仅标记待确认 | open |
 | KG-CARD-TXN-009 | 归集失败告警后是否存在后台人工补偿入口未确认 | Card Transaction Flow / 人工处理 | 用户确认失败不自动重试；AIX Card交易【transaction】/ 7.3 | 记录为后端待确认 | open |
 | KG-CARD-TXN-010 | 除系统原因 / 金额大于卡余额外，其他失败类型与责任分派未确认 | Card Transaction Flow / 异常责任 | AIX Card交易【transaction】/ 7.3 | 记录为后端待确认 | open |
-| KG-CARD-TXN-011 | `Transfer Balance to Wallet` 成功后 Wallet 侧是否生成入账流水 ID，字段名未确认 | Card Transaction Flow / Wallet 入账 | DTC Wallet OpenAPI / 4.2.4；traceability-checklist.md | 记录为 Wallet / 账务待确认 | open |
-| KG-CARD-TXN-012 | Wallet 流水如何关联 DTC `data.id`、AIX 归集请求 ID 或 `D-REQUEST-ID` 未确认 | Card Transaction Flow / 对账 | traceability-checklist.md | 记录为 Wallet / 账务待确认 | open |
-| KG-CARD-TXN-013 | Wallet `Search Balance History.relatedId` 在卡余额转 Wallet 场景下取哪个 ID 未确认 | Card Transaction Flow / Wallet relatedId | DTC Wallet OpenAPI / 4.2.4 | 记录为 Wallet / 账务待确认 | open |
-| KG-CARD-TXN-014 | card balance 转 Wallet 后，入账币种是否与 card currency 完全一致未确认 | Card Transaction Flow / 币种口径 | traceability-checklist.md | 记录为 Wallet / 账务待确认 | open |
-| KG-CARD-TXN-015 | 钱包入账是否有 pending / success / failed 等状态未确认 | Card Transaction Flow / 入账状态 | DTC Wallet OpenAPI / 4.2.4 | 记录为 Wallet / 账务待确认 | open |
-| KG-CARD-TXN-016 | 财务 / 运营最终使用哪些字段串起 DTC 通知、AIX 归集请求、DTC transfer 调用和钱包流水未确认 | Card Transaction Flow / 对账字段 | 用户确认尚未定 | 记录为 Wallet / 账务待确认；阶段继续 BLOCK | open |
+| KG-CARD-TXN-011 | Wallet 交易 `id` 如何关联 DTC `data.id`、AIX 归集请求 ID 或 `D-REQUEST-ID` 未确认 | Card Transaction Flow / Wallet 入账 / 对账 | 用户确认 Wallet 交易记录 / 详情有 `id`；关联规则未说明 | 记录为 Wallet / 账务待确认 | open |
+| KG-CARD-TXN-012 | Wallet `Search Balance History.relatedId` 在卡余额转 Wallet 场景下取哪个 ID 未确认 | Card Transaction Flow / Wallet relatedId | DTC Wallet OpenAPI / 4.2.4 | 记录为 Wallet / 账务待确认 | open |
+| KG-CARD-TXN-013 | card balance 转 Wallet 后，入账币种是否与 card currency 完全一致未确认 | Card Transaction Flow / 币种口径 | traceability-checklist.md | 记录为 Wallet / 账务待确认 | open |
+| KG-CARD-TXN-014 | 财务 / 运营最终使用哪些字段串起 DTC 通知、AIX 归集请求、DTC transfer 调用和 Wallet 交易 `id` 未确认 | Card Transaction Flow / 对账字段 | 用户确认尚未定 | 记录为 Wallet / 账务待确认；阶段继续 BLOCK | open |
 
 ## 3. Card / Transaction Flow 已消除缺口
 
@@ -55,6 +53,9 @@ owner: 吴忆锋
 | KG-CARD-TXN-RESOLVED-011 | 归集失败是否自动重试未确认 | 用户确认不自动重试，发送异常告警至监控群 | 用户确认 2026-05-01 | resolved |
 | KG-CARD-TXN-RESOLVED-012 | DTC transfer 成功但 Wallet 未入账如何发现未明确 | 用户确认当前无法系统自动发现，靠用户反馈 | 用户确认 2026-05-01 | resolved |
 | KG-CARD-TXN-RESOLVED-013 | 用户收到退款 / 卡交易成功通知是否代表 Wallet 可见资金未明确 | 用户确认正常代表 Wallet 可见，极端情况下可能卡有钱但转 Wallet 失败 | 用户确认 2026-05-01 | resolved |
+| KG-CARD-TXN-RESOLVED-014 | Wallet 入账是否有交易 ID 未确认 | 已确认钱包交易记录 / 详情出参均包含 `id`，Long，交易 id | DTC Wallet OpenAPI；用户确认 2026-05-01 | resolved |
+| KG-CARD-TXN-RESOLVED-015 | Wallet 单笔交易详情查询入参未确认 | 已确认入参为 `transactionId`，Unique transaction ID from DTC；但与 Card `data.id` / `D-REQUEST-ID` 的关联未说明 | DTC Wallet OpenAPI；用户确认 2026-05-01 | resolved |
+| KG-CARD-TXN-RESOLVED-016 | Wallet 入账状态字段与枚举未确认 | 已确认字段为 `state`，枚举为 `PENDING`、`PROCESSING`、`AUTHORIZED`、`COMPLETED`、`REJECTED`、`CLOSED` | DTC Wallet OpenAPI；用户确认 2026-05-01 | resolved |
 
 ## 4. Account / Login
 
