@@ -53,6 +53,54 @@ Login 用于已注册用户通过邮箱、手机号或 Biometric 快捷登录进
 Navigation Page → Login Page → Identity Verification → Home
 ```
 
+### 4.1 主流程图
+
+```text
+┌─────────────────┐
+│ Navigation Page │
+└────────┬────────┘
+         │ I already have an account
+         ▼
+┌─────────────────┐
+│ Login Page      │
+│ Email / Phone / │
+│ Quick Login     │
+└───┬─────────┬───┘
+    │         │
+    │         │ Quick Login
+    │         ▼
+    │   ┌────────────────────────┐
+    │   │ Biometric Verification │
+    │   └───────────┬────────────┘
+    │               │ Success
+    │               ▼
+    │          ┌────────┐
+    │          │ Home   │
+    │          └────────┘
+    │
+    │ Email / Phone + Next
+    ▼
+┌────────────────────────┐
+│ Identity Verification  │
+└───────────┬────────────┘
+            │ Success
+            ▼
+┌────────────────────────┐
+│ BIO Check              │
+└───────┬─────────┬──────┘
+        │         │
+        │ BIO on  │ BIO off + device supports BIO
+        ▼         ▼
+   ┌────────┐  ┌─────────────────┐
+   │ Home   │  │ Enable BIO Page │
+   └────────┘  └───────┬─────────┘
+                       │ Close / Enable completed
+                       ▼
+                  ┌────────┐
+                  │ Home   │
+                  └────────┘
+```
+
 登录成功后：
 
 | 条件 | 下一步 |
@@ -257,7 +305,8 @@ Next 按钮处理逻辑：
 
 ### UI 视角
 
-- 通过页面关系总览确认页面范围和跳转关系，通过页面卡片查看具体页面截图和元素规则。
+- 先看主流程图理解登录主链路，再看页面关系总览确认页面范围和跳转关系。
+- 通过页面卡片查看具体页面截图和元素规则。
 - 不再依赖原始 PRD 页面概览截图作为主表达。
 - 重点页面：Login Page、Select Country Page、Biometric 系统弹窗、Enable BIO Page。
 
