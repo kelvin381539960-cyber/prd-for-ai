@@ -87,3 +87,12 @@ owner: 吴忆锋
 | KG-CARD-STATUS-007 | Manage Unlock 成功后写“状态更新为 Activate”，与其他文档 `Active` 口径不一致 | Card Management / Unlock | AIX Card manage模块需求V1.0 / 7.5 | 正文标记为疑似 `Active`，不直接替换 | open |
 | KG-CARD-STATUS-008 | Get Card Basic Info 接口在 Application 与 Manage 中路径不一致 | Card API / Basic Info | Application / 2.2；Manage / 8.1 | `card-status-and-fields.md` 并列保留，待接口最终确认 | open |
 | KG-CARD-STATUS-009 | Get Card Sensitive Info 接口在 Application 与 Manage 中路径不一致 | Card API / Sensitive Info | Application / 2.2；Manage / 8.1 | `card-status-and-fields.md` 并列保留，待接口最终确认 | open |
+
+## 8. Card / Activation
+
+| 编号 | 问题 | 影响范围 | 来源 | 当前处理 | 状态 |
+|---|---|---|---|---|---|
+| KG-CARD-ACT-001 | 卡号后四位不匹配时的最终英文提示文案未明确 | Card Activation / Last 4 Digits | AIX Card manage模块需求V1.0 / 7.2 | 正文只写阻止继续，不补具体文案 | open |
+| KG-CARD-ACT-002 | Card Activation 接口失败错误码、失败响应字段和失败页文案未明确 | Card Activation / API Error | AIX Card manage模块需求V1.0 / 7.2 / 8.1 | 正文只写失败承接，不补错误码 | open |
+| KG-CARD-ACT-003 | 激活成功后卡状态如何从待激活更新为 Active，依赖接口响应还是状态通知，原文未明确 | Card Activation / Status Update | AIX Card manage模块需求V1.0 / 7.2；Card Status & Fields | 正文写归入已激活展示组，状态回写机制待确认 | open |
+| KG-CARD-ACT-004 | 激活成功页是否必须强制进入 Set PIN，还是只提供入口，原文未明确 | Card Activation / Set PIN Entry | AIX Card manage模块需求V1.0 / 7.2 / 7.3 | 正文按“提供 Set PIN 入口”处理，不写强制 | open |
