@@ -1,10 +1,10 @@
 ---
 module: card
 feature: transaction-flow-traceability-checklist
-version: "1.1"
+version: "1.2"
 status: active
-source_doc: knowledge-base/card/card-transaction-flow.md；knowledge-base/card/stage-review.md；IMPLEMENTATION_PLAN.md
-source_section: Card Transaction Flow 6.3 / 8 / 9 / 10；Card Stage Review 4 / 5；IMPLEMENTATION_PLAN v3.2
+source_doc: AIX Card交易【transaction】.docx；AIX Card V1.0【Application】.docx；AIX APP V1.0【Transaction & History】.docx；knowledge-base/card/card-transaction-flow.md；knowledge-base/card/stage-review.md；IMPLEMENTATION_PLAN.md
+source_section: Card Transaction Flow 6.3 / 8 / 9 / 10；Card Stage Review 4 / 5；IMPLEMENTATION_PLAN v3.2；AIX Card交易【transaction】7.3 / 8.1；Application 6.2；Transaction & History 6.1 / 6.2 / 6.3
 last_updated: 2026-05-01
 owner: 吴忆锋
 depends_on:
@@ -15,69 +15,73 @@ depends_on:
 
 # Card Transaction Flow 资金追踪字段确认稿
 
-## 1. 发送对象
+## 1. 文档定位
 
-DTC / AIX 后端 / Wallet 负责人。
+本文档不是原文 PRD 转译正文，也不是接口事实源。
 
-## 2. 背景
+本文档用于 Card Transaction Flow Gate Review 阻塞期间，将“原文已明确”和“仍需 DTC / 后端 / Wallet 确认”的事项拆开，避免重复向负责人追问已在历史 PRD 或接口文档中存在的信息。
 
-Card Transaction Flow 当前已梳理到以下链路：
-
-```text
-DTC Card Transaction Notification
-→ AIX 判断交易类型
-→ 查询卡 balance
-→ balance > 0 时发起 Transfer Balance to Wallet
-→ 归集成功 / 归集失败告警人工处理
-```
-
-当前 Card 阶段 Gate Review 结果为 `BLOCK`。原因不是业务流程未梳理，而是资金归集链路的可追溯字段和异常规则还未确认。
-
-为避免后续出现重复通知、重复归集、归集失败、钱包未到账、人工补单时无法定位，请各方确认下面字段和规则。
-
-> 说明：以下内容均为待确认项，不代表当前已实现或已定稿。
+确认前，仍未闭环的字段不得写入功能正文作为已生效规则。
 
 ---
 
-## 3. 需要 DTC 确认
+## 2. Review 后已消除的问题
 
-请 DTC 侧确认：
+以下内容已能从历史 PRD 或现有知识库找到，不再作为对外确认问题。
 
-1. Card Transaction Notification 的完整字段表：字段名、类型、是否必填、示例值。
-2. 通知是否有唯一 ID，例如 event id / notification id。
-3. 卡交易是否有原始交易 ID，例如 transaction id。
-4. 重复通知时，AIX 应使用哪个字段做幂等去重。
-5. 交易类型枚举中，refund / reversal / Top-up / deposit 的准确取值是什么。
-6. Retrieve Basic Card Info / 查询卡 balance 的实际接口路径、请求字段、响应字段。
-7. balance 字段口径：是可用余额、账面余额，还是当前卡余额。
-8. Transfer Balance to Wallet 的请求字段，尤其是 card id、amount、currency、reference / request id。
-9. Transfer Balance to Wallet 的响应字段，尤其是归集结果 ID、状态、失败码、失败原因。
-10. 归集失败时，哪些失败码可重试，哪些不可重试；重试间隔和最大次数是什么。
-
-请优先回复：字段表、ID 字段、幂等字段、失败码、重试规则。
+| 编号 | 原问题 | Review 结论 | 来源 |
+|---|---|---|---|
+| RESOLVED-001 | Card Transaction Flow 是否由 DTC 通知触发 | 已明确：DTC 检测发生交易后，通过 `Card Transaction Notification` 向 AIX 发送交易通知 | AIX Card交易【transaction】/ 7.3 |
+| RESOLVED-002 | 哪些交易类型进入自动归集 | 已明确：AIX 收到通知后先校验 `type` 是否为 `refund` / `reversal` / `Top-up` / `deposit`；不匹配则终止 | AIX Card交易【transaction】/ 7.3 |
+| RESOLVED-003 | 查询卡余额使用哪个接口 | 已明确：调用 `Retrieve Basic Card Info` 主动查询当前卡余额；接口路径为 `[POST] /openapi/v1/card/inquiry-card-info` | AIX Card交易【transaction】/ 7.3；AIX Card V1.0【Application】/ 6.2 |
+| RESOLVED-004 | balance 字段是否存在及用途 | 已明确：DTC 返回最新卡 `balance`，记录接口字段为 `balance`；该字段作为后续归集金额依据 | AIX Card交易【transaction】/ 7.3 |
+| RESOLVED-005 | 归集金额如何计算 | 已明确：当 `balance > 0` 时，AIX 调用 transfer to wallet，入参 `amount = balance` | AIX Card交易【transaction】/ 7.3 |
+| RESOLVED-006 | balance = 0 如何处理 | 已明确：当卡当前余额 `balance = 0` 时，流程终止 | AIX Card交易【transaction】/ 7.3 |
+| RESOLVED-007 | 资金归集接口路径 | 已明确：`Transfer Balance to Wallet` 接口路径为 `openapi/v1/card/transfer-to-wallet` | AIX Card交易【transaction】/ 8.1 |
+| RESOLVED-008 | 归集失败是否需要告警 | 已明确：若回退失败，发送异常告警至监控群，并人工介入处理 | AIX Card交易【transaction】/ 7.3 |
+| RESOLVED-009 | 归集失败责任初始分派 | 已明确：系统原因由开发跟进；交易金额大于卡余额由产品侧跟进 | AIX Card交易【transaction】/ 7.3 |
+| RESOLVED-010 | 归集成功后的业务结果 | 已明确：若成功，资金已转入用户钱包，流程结束 | AIX Card交易【transaction】/ 7.3 |
+| RESOLVED-011 | 卡交易列表接口路径 | 已明确：`Transaction History of Card` 路径为 `[POST] /openapi/v1/card/inquiry-card-transaction` | AIX APP V1.0【Transaction & History】/ 6.1 / 7.1 |
+| RESOLVED-012 | 卡交易详情接口与查询 ID | 已明确：进入 Card Transaction Details 后，上送 `Transaction ID` 获取最新交易记录；接口为 `Card Transaction Detail Inquiry` | AIX APP V1.0【Transaction & History】/ 5.3 / 6.2 |
+| RESOLVED-013 | Card Transaction Notify 是否存在 | 已明确：`Card Transaction Notify` 用于接收 DTC Webhook 异步通知卡交易记录 | AIX APP V1.0【Transaction & History】/ 6.3 |
 
 ---
 
-## 4. 需要 AIX 后端确认
+## 3. Review 后仍需确认的问题
 
-请后端确认：
+以下问题在现有可读原文中仍未闭环，继续保留为对外确认项。
+
+### 3.1 需要 DTC 确认
+
+请 DTC 优先确认以下内容：
+
+1. `Card Transaction Notification / Card Transaction Notify` 的完整字段表：字段名、类型、是否必填、示例值。
+2. 通知是否有唯一 ID，例如 event id / notification id；若有，字段名是什么。
+3. 通知中的原始卡交易 ID 是哪个字段；是否就是前端详情页使用的 `Transaction ID`。
+4. 通知中 `type` 字段的真实枚举值：是否与 PRD 中的 `refund` / `reversal` / `Top-up` / `deposit` 完全一致，包括大小写和下划线格式。
+5. `Transfer Balance to Wallet` 的完整请求字段：是否有 card id、amount、currency、reference / request id 等字段。
+6. `Transfer Balance to Wallet` 的完整响应字段：是否有归集结果 ID、状态、失败码、失败原因。
+7. 重复通知时，AIX 应使用哪个字段做幂等去重。
+8. 重复发起 `Transfer Balance to Wallet` 时，DTC 侧是否支持幂等；幂等键字段是什么。
+9. 归集失败时，哪些失败码可重试，哪些不可重试；重试间隔和最大次数是什么。
+10. `Card Transaction Notification` 与 `Transfer Balance to Wallet` 结果之间，DTC 侧是否有可关联字段。
+
+### 3.2 需要 AIX 后端确认
+
+请后端确认以下内容：
 
 1. 收到 DTC 通知后，AIX 是否生成内部交易 ID；字段名是什么。
 2. DTC 原始通知是否完整落库；落库表或日志是否可用于审计和回放。
-3. 发起 Transfer Balance to Wallet 前，AIX 是否生成归集请求 ID；字段名是什么。
+3. 发起 `Transfer Balance to Wallet` 前，AIX 是否生成归集请求 ID；字段名是什么。
 4. DTC 通知 ID、DTC 原始交易 ID、AIX 内部交易 ID、归集请求 ID 之间如何关联。
-5. 查询卡 balance 失败时，是否重试、是否告警、是否进入待处理队列。
-6. 归集失败时，系统失败、余额异常、DTC 返回失败分别由谁处理。
-7. 重复通知时，是忽略、更新状态，还是重新校验后处理。
-8. 是否有后台重试 / 人工补偿入口；如果有，入口和操作边界是什么。
+5. 查询 `balance` 失败时，是否重试、是否告警、是否进入待处理队列。
+6. 重复通知时，是忽略、更新状态，还是重新校验后处理。
+7. 归集失败进入人工处理后，是否有后台重试 / 人工补偿入口；如果有，入口和操作边界是什么。
+8. 已知“系统原因开发跟进、金额大于卡余额产品跟进”之外，是否还有其他失败类型与责任分派。
 
-请优先回复：内部交易 ID、归集请求 ID、通知落库、重复通知处理、失败处理责任。
+### 3.3 需要 Wallet / 账务确认
 
----
-
-## 5. 需要 Wallet / 账务确认
-
-请 Wallet / 账务侧确认：
+请 Wallet / 账务侧确认以下内容：
 
 1. 归集成功后，钱包侧是否生成入账流水 ID；字段名是什么。
 2. 钱包入账流水如何关联 DTC 归集结果 ID 或 AIX 归集请求 ID。
@@ -86,54 +90,68 @@ DTC Card Transaction Notification
 5. 如果 DTC 归集成功但钱包入账失败，如何处理资金悬挂。
 6. 财务对账时，需要哪些字段串起 DTC 通知、归集结果和钱包流水。
 
-请优先回复：钱包入账流水 ID、关联字段、入账状态、入账失败处理。
+---
+
+## 4. 对外发送精简版
+
+可直接复制以下内容发给 DTC / 后端 / Wallet 负责人。
+
+```text
+各位好，Card Transaction Flow 当前卡在资金归集链路可追溯字段未闭环，需要请 DTC / 后端 / Wallet 一起确认。
+
+已从历史 PRD 确认的信息：
+1. DTC 通过 Card Transaction Notification / Card Transaction Notify 通知 AIX 卡交易。
+2. AIX 判断 type 是否为 refund / reversal / Top-up / deposit；不匹配则终止。
+3. 匹配后调用 Retrieve Basic Card Info 查询当前卡 balance。
+4. Retrieve Basic Card Info 路径为 [POST] /openapi/v1/card/inquiry-card-info。
+5. balance > 0 时调用 Transfer Balance to Wallet，amount = balance。
+6. Transfer Balance to Wallet 路径为 openapi/v1/card/transfer-to-wallet。
+7. balance = 0 时终止。
+8. 归集失败需告警到监控群并人工介入；系统原因开发跟进，金额大于卡余额产品跟进。
+
+还需要确认：
+
+DTC：
+1. Card Transaction Notification / Notify 的完整字段表。
+2. 通知唯一 ID、原始卡交易 ID 字段名。
+3. type 的真实枚举值是否与 refund / reversal / Top-up / deposit 一致。
+4. Transfer Balance to Wallet 的完整请求 / 响应字段，尤其是归集结果 ID、状态、失败码、失败原因。
+5. 通知幂等字段、归集幂等字段、可重试失败码、重试间隔、最大次数。
+
+后端：
+1. AIX 内部交易 ID、归集请求 ID 字段名。
+2. DTC 通知 ID、DTC 原始交易 ID、AIX 内部交易 ID、归集请求 ID 的关联关系。
+3. 原始通知是否落库，是否支持审计 / 回放。
+4. 查询 balance 失败怎么处理。
+5. 重复通知怎么处理。
+6. 是否有后台重试 / 人工补偿入口。
+
+Wallet / 账务：
+1. 钱包入账流水 ID 字段名。
+2. 钱包流水如何关联 DTC 归集结果 ID 或 AIX 归集请求 ID。
+3. 入账币种、入账状态、入账失败处理。
+4. 对账需要哪些字段串起 DTC 通知、归集结果和钱包流水。
+```
 
 ---
 
-## 6. 建议统一确认表
+## 5. Gate Review 判断
 
-请各方尽量按下表补充，便于后续写入知识库和接口事实源。
+本次 Review 只能消除部分重复确认项，不能解除 Card 阶段 `BLOCK`。
 
-| 链路节点 | 需确认字段 / 规则 | 负责人 | 当前结论 |
-|---|---|---|---|
-| DTC 通知 | 通知唯一 ID | DTC | 待确认 |
-| DTC 交易 | 原始卡交易 ID | DTC | 待确认 |
-| AIX 接收 | AIX 内部交易 ID | 后端 | 待确认 |
-| 通知落库 | 原始通知落库与审计方式 | 后端 | 待确认 |
-| 余额查询 | 查询接口路径、balance 字段口径 | DTC / 后端 | 待确认 |
-| 归集请求 | AIX 归集请求 ID / reference 字段 | 后端 / DTC | 待确认 |
-| DTC 归集结果 | 归集结果 ID、状态、失败码 | DTC | 待确认 |
-| 钱包入账 | 钱包入账流水 ID、入账状态 | Wallet / 账务 | 待确认 |
-| 幂等控制 | 重复通知、重复归集的判断字段 | DTC / 后端 | 待确认 |
-| 重试策略 | 可重试失败、间隔、最大次数 | DTC / 后端 | 待确认 |
-| 异常处理 | 告警、人工补偿、责任分派 | 后端 / Wallet / 运营 | 待确认 |
-| 对账闭环 | 通知、归集、钱包流水的关联字段 | DTC / 后端 / Wallet | 待确认 |
+原因：资金链路仍缺少通知唯一 ID、原始交易 ID、AIX 内部交易 ID、归集请求 ID、DTC 归集结果 ID、钱包入账流水 ID、幂等键、重试规则和钱包入账失败处理等闭环字段。
+
+只有上述关键项确认后，才可更新 `card-transaction-flow.md`、`knowledge-gaps.md`、`stage-review.md`，并重新执行 Card Stage Review。
 
 ---
 
-## 7. 验收口径
+## 6. 来源引用
 
-Card Transaction Flow 解除阻塞前，至少需要确认以下内容：
-
-1. DTC 通知唯一 ID。
-2. DTC 原始卡交易 ID。
-3. AIX 内部交易 ID。
-4. 归集请求 ID。
-5. DTC 归集结果 ID。
-6. 钱包入账流水 ID。
-7. 幂等规则。
-8. 重复通知处理规则。
-9. 查询 balance 失败处理。
-10. 归集失败重试、告警和人工处理规则。
-
-以上任一关键项未确认，Card 阶段仍保持 `BLOCK`，暂不进入 Wallet 阶段。
-
----
-
-## 8. 来源引用
-
-- (Ref: knowledge-base/card/card-transaction-flow.md / 6.3 可追溯性当前状态 / 2026-05-01)
-- (Ref: knowledge-base/card/card-transaction-flow.md / 8 字段与接口依赖 / 2026-05-01)
-- (Ref: knowledge-base/card/card-transaction-flow.md / 9 异常与失败处理 / 2026-05-01)
-- (Ref: knowledge-base/card/stage-review.md / 4 阻塞问题 / 2026-05-01)
-- (Ref: IMPLEMENTATION_PLAN.md / v3.2 / 18 下一步)
+- (Ref: AIX Card交易【transaction】.docx / 7.3 流程说明 / 2026-01-04)
+- (Ref: AIX Card交易【transaction】.docx / 8.1 外部接口清单 / 2026-01-04)
+- (Ref: AIX Card V1.0【Application】.docx / 6.2 Retrieve Basic Card Info / 2026-01-04)
+- (Ref: AIX APP V1.0【Transaction & History】.docx / 5.3 Card Transaction Details / 2026-01-04)
+- (Ref: AIX APP V1.0【Transaction & History】.docx / 6.1 Transaction History of Card / 2026-01-04)
+- (Ref: AIX APP V1.0【Transaction & History】.docx / 6.2 Card Transaction Detail Inquiry / 2026-01-04)
+- (Ref: AIX APP V1.0【Transaction & History】.docx / 6.3 Card Transaction Notify / 2026-01-04)
+- (Ref: IMPLEMENTATION_PLAN.md / v3.2 / Stage Review Gate / 2026-05-01)
