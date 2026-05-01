@@ -1,7 +1,7 @@
 # prd-for-ai 实施计划
 
-版本：v2.9  
-状态：执行中  
+版本：v3.0  
+状态：Card 阶段回扫阻塞  
 适用仓库：`prd-for-ai`  
 更新时间：2026-05-01
 
@@ -36,8 +36,8 @@
 | 1 | Account 样板 | 已完成 | 固化知识库写法 | Login / Registration / Password Reset | 已完成 |
 | 2 | 基础规则沉淀 | 部分完成 | 建立长期规则 | Writing Standard / Source Rules | 持续完善 |
 | 3 | Security 标准化 | 已完成 | 统一认证事实源 | OTP / Email OTP / Passcode / BIO / Face Auth / API Reference | 已完成 |
-| 4 | Card 批量推进 | 当前阶段 | 转译卡模块 | Application / Status & Fields / Home / Manage / Transaction | 进入 Card 阶段回扫 |
-| 5 | Wallet 批量推进 | 未开始 | 转译钱包模块 | KYC / Send / Swap / Receive / Deposit | 等 Card 回扫完成 |
+| 4 | Card 批量推进 | 阻塞 | 转译卡模块 | Application / Status & Fields / Home / Manage / Transaction | 补齐 Card Transaction Flow 追踪字段缺口 |
+| 5 | Wallet 批量推进 | 未开始 | 转译钱包模块 | KYC / Send / Swap / Receive / Deposit | 等 Card 阻塞解除 |
 | 6 | Transaction 统一层 | 未开始 | 统一交易状态 | Card / Wallet / Swap / History | Card / Wallet 后执行 |
 | 7 | Common / Integration | 未开始 | 抽公共能力 | DTC / AAI / WC / Error / FAQ | Transaction 后执行 |
 | 8 | 全仓库回扫 | 未开始 | 去重复、补引用 | 字段 / 状态 / 来源 / gaps | 最后执行 |
@@ -46,20 +46,7 @@
 
 ## 12. 阶段内任务拆解
 
-### 12.3 阶段 3：Security 标准化（已完成）
-
-| 子任务 | 状态 | 说明 |
-|---|---|---|
-| security/_index.md | 已完成 | Security 模块边界与功能清单已收口 |
-| global-rules.md | 已完成 | 全局认证规则、场景矩阵、优先级、有效期、状态机已收口 |
-| otp-verification.md | 已完成 | 短信 OTP 已标准化 |
-| email-otp-verification.md | 已完成 | 邮箱 OTP 已标准化 |
-| login-passcode-verification.md | 已完成 | Login Passcode 已标准化 |
-| biometric-verification.md | 已完成 | 设备生物识别已标准化，已与 Face Authentication 分离 |
-| face-authentication.md | 已完成 | DTC / AAI 侧活体识别已标准化 |
-| api-reference.md | 已完成 | 外部验证 URL、结果查询、错误码映射与接口缺口已收口 |
-
-### 12.4 阶段 4：Card 批量推进（当前阶段）
+### 12.4 阶段 4：Card 批量推进（阻塞）
 
 | 子任务 | 状态 | 说明 |
 |---|---|---|
@@ -71,8 +58,8 @@
 | pin.md | 已完成 | PIN 相关能力已收口 |
 | sensitive-info.md | 已完成 | 卡信息安全查看流程已收口 |
 | card-management.md | 已完成 | 卡管理操作、状态边界、接口依赖与失败处理已收口 |
-| card-transaction-flow.md | 已完成 | 卡交易通知、目标类型判断、余额查询、归集处理、交易展示边界已收口 |
-| card-stage-review | 未开始 | 下一步执行，Card 阶段回扫与问题收口 |
+| card-transaction-flow.md | 已完成但阻塞 | 卡交易通知、目标类型判断、余额查询、归集处理、交易展示边界已收口；追踪字段未闭环 |
+| stage-review.md | 已完成 | Card 阶段回扫完成，结论为暂缓进入 Wallet |
 
 ---
 
@@ -80,21 +67,12 @@
 
 | 模块 | 状态 | 说明 |
 |---|---|---|
-| Account / Login | 已完成 | 样板完成 |
-| Account / Registration | 已完成 | 已按原 PRD 重构 |
-| Account / Password Reset | 已完成 | 已标准化 |
-| Account / _index | 已完成 | 模块收口 |
+| Account | 已完成 | Login / Registration / Password Reset 已完成 |
 | Security | 已完成 | Security 阶段全部收口 |
-| Card / _index | 已完成 | Card 模块边界完成 |
-| Card / Application | 已完成 | 申卡流程完成，缺口已记录 |
-| Card / Status & Fields | 已完成 | 状态展示组、字段字典、接口路径表、缺口记录已建立 |
-| Card / Home | 已完成 | 首页展示与入口完成 |
-| Card / Activation | 已完成 | 实体卡激活完成，缺口已记录 |
-| Card / PIN | 已完成 | PIN 能力完成，缺口已记录 |
-| Card / Sensitive Info | 已完成 | 卡信息安全查看完成，缺口已记录 |
-| Card / Management | 已完成 | 卡管理能力完成，缺口已记录 |
-| Card / Transaction Flow | 已完成 | 卡交易关联流程完成，资金字段缺口已记录在正文 |
-| Card / Stage Review | 未开始 | 下一步 |
+| Card / 页面与卡管能力 | 已完成 | Application / Home / Activation / PIN / Sensitive Info / Management 已完成 |
+| Card / Transaction Flow | 阻塞 | 资金归集链路缺少可追溯字段闭环 |
+| Card / Stage Review | 已完成 | 已生成 `knowledge-base/card/stage-review.md` |
+| Wallet | 未开始 | 等 Card 阻塞解除后执行 |
 
 ---
 
@@ -102,13 +80,14 @@
 
 当前执行点：
 
-1. 开始 Card 阶段回扫
-2. 回扫范围：`knowledge-base/card/` 下已完成文件
-3. 检查重复定义、状态口径、字段口径、接口路径、资金追踪缺口和来源引用
-4. 回扫后决定是否进入 Wallet 批量推进
+1. 暂停进入 Wallet
+2. 补齐 Card Transaction Flow 追踪字段缺口
+3. 需要确认：DTC 通知字段、AIX 内部交易 ID、归集请求 ID、归集结果流水、钱包入账流水、幂等键、重试策略
+4. 补齐后重新执行 Card 阶段回扫
 
 当前禁止事项：
 
 - 不得直接跳到 Wallet
+- 不得把未确认流水字段写成事实
 - 不得新增无来源状态、字段或接口
 - 不得把 Transaction 统一层提前混入 Card 阶段正文
