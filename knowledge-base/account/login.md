@@ -54,48 +54,209 @@ Login 用于已注册用户通过邮箱、手机号或 Biometric 快捷登录进
 Navigation Page → Login Page → 输入 / 快捷登录 → 身份验证 / 生物识别 → 登录成功 → BIO 检查 → Home
 ```
 
-### 4.2 业务流程与系统交互树
+### 4.2 业务流程与系统交互（试验版）
+
+> 本节同时保留两种表达方案，用于对比后确定长期模板。
+> 方案 B 更接近标准时序图；方案 C 更接近职能泳道图的业务文案，但用时序方式展开。
+
+#### 4.2.1 方案 B：Mermaid 时序图
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as User
+    participant Client as AIX App / Client
+    participant Backend as AIX Backend
+    participant Security as Security Module
+    participant Device as Device OS
+
+    rect rgb(245, 245, 245)
+    Note over User,Security: A. Manual Login（Email / Phone）
+    User->>Client: 进入 Login Page，选择 Email 或 Phone 登录方式
+    User->>Client: 输入账号信息
+    Client->>Client: 执行前端格式校验
+    alt Email / Phone invalid
+        Client-->>User: 留在 Login Page，展示字段错误
+    else Valid input
+        Client-->>User: Next enabled
+        User->>Client: 点击 Next
+        Client->>Backend: 提交账号信息，校验账号存在性与账户状态
+        alt Account not found / not registered
+            Backend-->>Client: 返回账号错误
+            Client-->>User: 留在 Login Page，展示账号错误
+        else Banned / Closed / Locked
+            Backend-->>Client: 返回账户拦截
+            Client-->>User: 留在 Login Page，展示账户拦截
+        else Active
+            Backend-->>Security: 发起身份验证流程
+            alt Verification failed / locked
+                Security-->>Client: 返回验证失败或锁定
+                Client-->>User: 进入 Security Error Handling
+            else Verification success
+                Security-->>Backend: 身份验证成功
+                Backend-->>Client: Login Success
+                Client->>Backend: 查询 BIO 状态与设备能力
+                alt BIO enabled
+                    Client-->>User: 进入 Home
+                else BIO not enabled + device biometric available
+                    Client-->>User: 展示 Enable BIO Page
+                else device biometric unavailable
+                    Client-->>User: 进入 Home
+                end
+            end
+        end
+    end
+    end
+
+    rect rgb(245, 245, 245)
+    Note over User,Device: B. Quick Login（Biometric）
+    Client->>Client: 检查本地是否存在可用 Biometric 密钥
+    alt Local biometric key not exists
+        Client-->>User: 不展示 Quick Login
+    else Local biometric key exists
+        Client-->>User: 展示 Quick Login
+        User->>Client: 点击 Quick Login
+        Client->>Device: 拉起系统生物识别
+        alt Device verification failed
+            Device-->>Client: 设备验证失败
+            Client-->>User: 留在 Login Page，展示 Biometric 失败提示
+        else Device verification passed
+            Device-->>Client: 设备验证通过
+            Client->>Backend: 提交 Biometric 凭证并发起签名认证
+            alt Backend verification failed
+                Backend-->>Client: 后端验证失败
+                Client-->>User: 留在 Login Page，展示失败弹窗
+            else Backend verification success
+                Backend-->>Client: 验证成功
+                Client-->>User: 进入 Home
+            end
+        end
+    end
+    end
+
+    rect rgb(245, 245, 245)
+    Note over User,Device: C. Enable BIO（登录后引导）
+    Client-->>User: Login Success + BIO not enabled + device biometric available 时展示 Enable BIO Page
+    alt User clicks Close
+        User->>Client: 点击 Close
+        Client-->>User: 进入 Home，Toast: Login success
+    else User clicks Enable now within 5 minutes
+        User->>Client: 点击 Enable now
+        Client->>Device: 拉起设备生物识别
+        Device-->>Client: Device BIO success
+        Client-->>User: Enable Success，进入 Home
+    else User clicks Enable now after 5 minutes
+        User->>Client: 点击 Enable now
+        Client->>Security: 发起身份验证
+        Security-->>Client: 身份验证成功
+        Client->>Device: 拉起设备生物识别
+        Device-->>Client: Device BIO success
+        Client-->>User: Enable Success，进入 Home
+    end
+    end
+```
+
+#### 4.2.2 方案 C：伪时序图 + 职能泳道文案
 
 ```text
-Login Flow
-├─ A. Manual Login（Email / Phone）
-│  ├─ User：进入 Login Page，选择 Email 或 Phone 登录方式
-│  ├─ Client：执行输入校验
-│  │  ├─ Email invalid → Login Page，展示 Email 错误
-│  │  ├─ Phone invalid → Login Page，展示 Phone 错误
-│  │  └─ Valid input → Next enabled
-│  ├─ User：点击 Next
-│  ├─ Backend：校验账号存在性与账户状态
-│  │  ├─ Account not found / not registered → Login Page，展示账号错误
-│  │  ├─ Banned / Closed / Locked → Login Page，展示账户拦截
-│  │  └─ Active → Security Identity Verification
-│  ├─ Security：执行身份验证
-│  │  ├─ Failed / Locked → Security Error Handling
-│  │  └─ Success → Login Success
-│  └─ Client / Backend：登录后 BIO 检查
-│     ├─ BIO enabled → Home
-│     ├─ BIO not enabled + device biometric available → Enable BIO Page
-│     └─ device biometric unavailable → Home
-│
-├─ B. Quick Login（Biometric）
-│  ├─ Client：检查本地是否存在可用 Biometric 密钥
-│  │  ├─ Not exists → 不展示 Quick Login
-│  │  └─ Exists → 展示 Quick Login
-│  ├─ User：点击 Quick Login
-│  ├─ Device OS：拉起系统生物识别
-│  │  ├─ Device verification failed → Login Page，展示 Biometric 失败提示
-│  │  └─ Device verification passed → Backend Biometric Verification
-│  └─ Backend：校验 Biometric 凭证并发起签名认证
-│     ├─ Failed → Login Page，展示后端验证失败弹窗
-│     └─ Success → 使用 biometric 签名请求身份认证 → Home
-│
-└─ C. Enable BIO（登录后引导）
-   ├─ Entry：Login Success + BIO not enabled + device biometric available
-   ├─ User：点击 Close
-   │  └─ Client：关闭引导页 → Home + Toast: Login success
-   └─ User：点击 Enable now
-      ├─ Within 5 minutes after manual login → Device BIO → Enable Success → Home
-      └─ After 5 minutes after manual login → Security Identity Verification → Device BIO → Enable Success → Home
+A. Manual Login（Email / Phone）
+
+User                    Client / AIX App                  Backend                      Security
+│                       │                                 │                            │
+│ 进入 Login Page        │                                 │                            │
+│ 选择 Email / Phone     │                                 │                            │
+│ 输入账号信息            │                                 │                            │
+│──────────────────────>│                                 │                            │
+│                       │ 执行前端格式校验                  │                            │
+│                       │ - Email：非空 + 格式校验 + ≤254   │                            │
+│                       │ - Phone：数字 + 长度校验          │                            │
+│                       │                                 │                            │
+│                       ├─ 校验失败：展示字段错误，留在 Login Page                    │
+│                       └─ 校验通过：Next enabled                                      │
+│ 点击 Next              │                                 │                            │
+│──────────────────────>│ 提交账号信息                      │                            │
+│                       │────────────────────────────────>│                            │
+│                       │                                 │ 校验账号存在性与账户状态     │
+│                       │                                 ├─ 账号不存在 / 未注册         │
+│                       │<────────────────────────────────│ 返回账号错误                 │
+│<──────────────────────│ 展示账号错误，留在 Login Page      │                            │
+│                       │                                 ├─ Banned / Closed / Locked   │
+│                       │<────────────────────────────────│ 返回账户拦截                 │
+│<──────────────────────│ 展示账户拦截，留在 Login Page      │                            │
+│                       │                                 └─ Active                     │
+│                       │                                 │ 发起身份验证                 │
+│                       │                                 │───────────────────────────>│
+│                       │                                 │                            │ 执行身份验证
+│                       │                                 │                            ├─ 失败 / 锁定
+│                       │<────────────────────────────────────────────────────────────│ 返回失败 / 锁定
+│<──────────────────────│ 进入 Security Error Handling       │                            │
+│                       │                                 │                            └─ 成功
+│                       │<────────────────────────────────────────────────────────────│ 返回验证成功
+│                       │ 登录成功后检查 BIO 状态与设备能力   │                            │
+│                       ├─ BIO 已启用：进入 Home                                        │
+│                       ├─ BIO 未启用 + 设备可用：展示 Enable BIO Page                  │
+│                       └─ 设备不可用：进入 Home                                        │
+```
+
+```text
+B. Quick Login（Biometric）
+
+User                    Client / AIX App                  Device OS                    Backend
+│                       │                                 │                            │
+│                       │ 检查本地是否存在可用 BIO 密钥       │                            │
+│                       ├─ 不存在：不展示 Quick Login       │                            │
+│                       └─ 存在：展示 Quick Login           │                            │
+│ 点击 Quick Login       │                                 │                            │
+│──────────────────────>│ 拉起系统生物识别                  │                            │
+│                       │────────────────────────────────>│                            │
+│                       │                                 │ 执行设备端生物识别           │
+│                       │                                 ├─ 验证失败                   │
+│                       │<────────────────────────────────│ 返回设备验证失败             │
+│<──────────────────────│ 展示 Biometric 失败提示，留在 Login Page                     │
+│                       │                                 └─ 验证通过                   │
+│                       │<────────────────────────────────│ 返回设备验证成功             │
+│                       │ 提交 Biometric 凭证并发起签名认证 │                            │
+│                       │────────────────────────────────────────────────────────────>│
+│                       │                                 │                            │ 校验 Biometric 凭证
+│                       │                                 │                            ├─ 后端验证失败
+│                       │<────────────────────────────────────────────────────────────│ 返回失败
+│<──────────────────────│ 展示失败弹窗，留在 Login Page       │                            │
+│                       │                                 │                            └─ 后端验证成功
+│                       │<────────────────────────────────────────────────────────────│ 返回成功
+│<──────────────────────│ 进入 Home                         │                            │
+```
+
+```text
+C. Enable BIO（登录后引导）
+
+User                    Client / AIX App                  Security                     Device OS
+│                       │                                 │                            │
+│                       │ Login Success 后检查 BIO 状态       │                            │
+│                       ├─ BIO 已启用：进入 Home             │                            │
+│                       ├─ BIO 未启用 + 设备可用：展示 Enable BIO Page                  │
+│                       └─ 设备不可用：进入 Home             │                            │
+│ 点击 Close             │                                 │                            │
+│──────────────────────>│ 关闭引导页                        │                            │
+│<──────────────────────│ 进入 Home，Toast: Login success     │                            │
+│                       │                                 │                            │
+│ 点击 Enable now        │                                 │                            │
+│──────────────────────>│ 判断是否仍在手动登录 5 分钟窗口内    │                            │
+│                       ├─ 5 分钟内：免再次身份认证                                      │
+│                       │ 拉起设备生物识别                  │                            │
+│                       │────────────────────────────────────────────────────────────>│
+│                       │                                 │                            │ 执行 Device BIO
+│                       │<────────────────────────────────────────────────────────────│ 返回成功
+│<──────────────────────│ Enable Success，进入 Home           │                            │
+│                       │                                 │                            │
+│                       └─ 超过 5 分钟：先进入身份验证                                  │
+│                       │────────────────────────────────>│                            │
+│                       │                                 │ 执行身份验证                 │
+│                       │<────────────────────────────────│ 返回验证成功                 │
+│                       │ 拉起设备生物识别                  │                            │
+│                       │────────────────────────────────────────────────────────────>│
+│                       │                                 │                            │ 执行 Device BIO
+│                       │<────────────────────────────────────────────────────────────│ 返回成功
+│<──────────────────────│ Enable Success，进入 Home           │                            │
 ```
 
 ### 4.3 业务逻辑矩阵
