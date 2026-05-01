@@ -51,7 +51,7 @@ Account、Wallet、Card、Transaction 等业务模块不得重复定义认证方
 |---|---|---|---|---|
 | Security Global Rules | [global-rules.md](./global-rules.md) | active | 客户端接入方式、认证方式、场景矩阵、优先级、有效期、状态机、通用页面 | AIX Security 身份认证需求V1.0 / 6-7 |
 | OTP Verification | [otp-verification.md](./otp-verification.md) | active | 短信 OTP Verify Page、输入规则、失败锁定、重发规则 | AIX Security 身份认证需求V1.0 / 8.2 |
-| Email OTP Verification | [email-otp-verification.md](./email-otp-verification.md) | 待重构 | Email OTP Verify Page、邮箱掩码、输入规则、失败锁定、重发规则 | AIX Security 身份认证需求V1.0 / 8.3 |
+| Email OTP Verification | [email-otp-verification.md](./email-otp-verification.md) | active | Email OTP Verify Page、邮箱掩码、输入规则、失败锁定、重发规则 | AIX Security 身份认证需求V1.0 / 8.3 |
 | Login Passcode Verification | [login-passcode-verification.md](./login-passcode-verification.md) | 待重构 | 登录密码验证页、密码输入规则、失败锁定 | AIX Security 身份认证需求V1.0 / 8.4 |
 | Biometric Verification | [biometric-verification.md](./biometric-verification.md) | 待重构 | iOS / Android 设备生物识别、Quick Login、BIO 失败处理 | AIX Security 身份认证需求V1.0 / 8.5 |
 | Face Authentication | [face-authentication.md](./face-authentication.md) | 待重构 | DTC / AAI 侧活体识别、人脸比对、锁定、失败页 | AIX Security 身份认证需求V1.0 / 8.6 |
