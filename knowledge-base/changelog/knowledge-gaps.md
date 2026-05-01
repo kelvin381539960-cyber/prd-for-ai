@@ -107,3 +107,13 @@ owner: 吴忆锋
 | KG-CARD-PIN-004 | `pinSetStatus` 字段名为产品占位，原文未给出判断是否已设置 PIN 的真实字段 | Card PIN / Field | AIX Card V1.0【Application】 / 5.2 | 正文标注为占位字段，不作为接口字段 | open |
 | KG-CARD-PIN-005 | PIN 公钥加密算法、请求字段、响应字段未明确 | Card PIN / Encryption | AIX Card manage模块需求V1.0 / 8.1 | 正文只写需调用 Public Pin Key，不补加密细节 | open |
 | KG-CARD-PIN-006 | Set Card PIN / Reset Card PIN 的请求响应字段与错误码未明确 | Card PIN / API | AIX Card manage模块需求V1.0 / 8.1 | 正文只写接口路径和业务用途，不补字段 | open |
+
+## 10. Card / Sensitive Info
+
+| 编号 | 问题 | 影响范围 | 来源 | 当前处理 | 状态 |
+|---|---|---|---|---|---|
+| KG-CARD-SENS-001 | Card Sensitive Info 查询接口在 Application 与 Manage 中路径不一致 | Card Sensitive Info / API Path | AIX Card V1.0【Application】 / 2.2；AIX Card manage模块需求V1.0 / 8.1 | 正文引用 `card-status-and-fields.md` 中的并列路径，不强行统一 | open |
+| KG-CARD-SENS-002 | 查看敏感信息失败页、失败文案和错误码未明确 | Card Sensitive Info / Error Handling | AIX Card manage模块需求V1.0 / 7.1 / 8.1 | 正文只写失败承接，不补错误码和文案 | open |
+| KG-CARD-SENS-003 | 敏感信息页面停留时长、自动隐藏、切后台隐藏、截图限制等安全策略未明确 | Card Sensitive Info / Security UX | AIX Card manage模块需求V1.0 / 7.1 | 正文不补策略，只记录缺口 | open |
+| KG-CARD-SENS-004 | 敏感信息是否允许复制、复制哪些字段、复制后是否提示未明确 | Card Sensitive Info / Copy Rule | AIX Card manage模块需求V1.0 / 7.1 | 正文不补复制规则 | open |
+| KG-CARD-SENS-005 | Face Authentication 成功后的有效期与 Sensitive Info 是否复用 Security Token 仍需最终确认 | Card Sensitive Info / Authentication Validity | AIX Security 身份认证需求V1.0 / 7.4；AIX Card manage模块需求V1.0 / 7.1 | 正文按 Security 规则引用，不单独定义有效期 | open |
