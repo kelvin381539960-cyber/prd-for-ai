@@ -1,6 +1,6 @@
 # prd-for-ai 实施计划
 
-版本：v3.0  
+版本：v3.1  
 状态：Card 阶段回扫阻塞  
 适用仓库：`prd-for-ai`  
 更新时间：2026-05-01
@@ -36,7 +36,7 @@
 | 1 | Account 样板 | 已完成 | 固化知识库写法 | Login / Registration / Password Reset | 已完成 |
 | 2 | 基础规则沉淀 | 部分完成 | 建立长期规则 | Writing Standard / Source Rules | 持续完善 |
 | 3 | Security 标准化 | 已完成 | 统一认证事实源 | OTP / Email OTP / Passcode / BIO / Face Auth / API Reference | 已完成 |
-| 4 | Card 批量推进 | 阻塞 | 转译卡模块 | Application / Status & Fields / Home / Manage / Transaction | 补齐 Card Transaction Flow 追踪字段缺口 |
+| 4 | Card 批量推进 | 阻塞 | 转译卡模块 | Application / Status & Fields / Home / Manage / Transaction | 等待追踪字段确认 |
 | 5 | Wallet 批量推进 | 未开始 | 转译钱包模块 | KYC / Send / Swap / Receive / Deposit | 等 Card 阻塞解除 |
 | 6 | Transaction 统一层 | 未开始 | 统一交易状态 | Card / Wallet / Swap / History | Card / Wallet 后执行 |
 | 7 | Common / Integration | 未开始 | 抽公共能力 | DTC / AAI / WC / Error / FAQ | Transaction 后执行 |
@@ -60,6 +60,7 @@
 | card-management.md | 已完成 | 卡管理操作、状态边界、接口依赖与失败处理已收口 |
 | card-transaction-flow.md | 已完成但阻塞 | 卡交易通知、目标类型判断、余额查询、归集处理、交易展示边界已收口；追踪字段未闭环 |
 | stage-review.md | 已完成 | Card 阶段回扫完成，结论为暂缓进入 Wallet |
+| transaction-flow-traceability-checklist.md | 已完成 | 已形成 DTC / 后端 / Wallet 需确认清单 |
 
 ---
 
@@ -71,7 +72,7 @@
 | Security | 已完成 | Security 阶段全部收口 |
 | Card / 页面与卡管能力 | 已完成 | Application / Home / Activation / PIN / Sensitive Info / Management 已完成 |
 | Card / Transaction Flow | 阻塞 | 资金归集链路缺少可追溯字段闭环 |
-| Card / Stage Review | 已完成 | 已生成 `knowledge-base/card/stage-review.md` |
+| Card / Traceability Checklist | 已完成 | 已生成确认清单，等待 DTC / 后端 / Wallet 确认 |
 | Wallet | 未开始 | 等 Card 阻塞解除后执行 |
 
 ---
@@ -80,10 +81,10 @@
 
 当前执行点：
 
-1. 暂停进入 Wallet
-2. 补齐 Card Transaction Flow 追踪字段缺口
-3. 需要确认：DTC 通知字段、AIX 内部交易 ID、归集请求 ID、归集结果流水、钱包入账流水、幂等键、重试策略
-4. 补齐后重新执行 Card 阶段回扫
+1. 将 `knowledge-base/card/transaction-flow-traceability-checklist.md` 发给 DTC / 后端 / Wallet 确认
+2. 等待确认 DTC 通知字段、AIX 内部交易 ID、归集请求 ID、归集结果流水、钱包入账流水、幂等键、重试策略
+3. 收到确认后更新 `card-transaction-flow.md`、`knowledge-gaps.md`、`stage-review.md`
+4. 重新执行 Card 阶段回扫
 
 当前禁止事项：
 
