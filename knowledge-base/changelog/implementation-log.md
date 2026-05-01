@@ -23,7 +23,8 @@ readers: [product, ai]
 | 日期 | 阶段 | 分支 / PR | 修改范围 | 产出 | 是否改业务规则 | 备注 |
 |------|------|-----------|----------|------|----------------|------|
 | 2026-05-01 | Phase 0 | PR #1 | 新增 `IMPLEMENTATION_PLAN.md` | 建立长期实施计划 v1.1 | 否 | 已合并到 main |
-| 2026-05-01 | Phase 1 | phase1/knowledge-base-foundation | 更新 README，新增 _meta / integrations / common / changelog / prd-template 骨架 | 待 PR review | 否 | 仅建骨架和规范，不转译业务正文 |
+| 2026-05-01 | Phase 1 | PR #2 | 更新 README，新增 _meta / integrations / common / changelog / prd-template 骨架 | 建立知识库基础骨架 | 否 | 已合并到 main |
+| 2026-05-01 | Phase 2 | phase2/account-security-index-refactor | 重构 Account / Security 模块入口，补充状态字典样板 | 待 PR review | 是 | 未改历史原文；未重写功能正文；仅整理模块入口、依赖、状态、待确认事项 |
 
 ## 3. 后续记录规则
 
