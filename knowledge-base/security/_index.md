@@ -54,7 +54,7 @@ Account、Wallet、Card、Transaction 等业务模块不得重复定义认证方
 | Email OTP Verification | [email-otp-verification.md](./email-otp-verification.md) | active | Email OTP Verify Page、邮箱掩码、输入规则、失败锁定、重发规则 | AIX Security 身份认证需求V1.0 / 8.3 |
 | Login Passcode Verification | [login-passcode-verification.md](./login-passcode-verification.md) | active | 登录密码验证页、密码输入规则、失败锁定 | AIX Security 身份认证需求V1.0 / 8.4 |
 | Biometric Verification | [biometric-verification.md](./biometric-verification.md) | active | iOS / Android 设备生物识别、Quick Login、BIO 失败处理 | AIX Security 身份认证需求V1.0 / 8.5 |
-| Face Authentication | [face-authentication.md](./face-authentication.md) | 待重构 | DTC / AAI 侧活体识别、人脸比对、锁定、失败页 | AIX Security 身份认证需求V1.0 / 8.6 |
+| Face Authentication | [face-authentication.md](./face-authentication.md) | active | DTC / AAI 侧活体识别、人脸比对、锁定、失败页 | AIX Security 身份认证需求V1.0 / 8.6 |
 | API Reference | [api-reference.md](./api-reference.md) | 待重构 | 接口依赖、错误码映射 | AIX Security 身份认证需求V1.0 / 接口与错误码 |
 
 ## 5. 业务流程
