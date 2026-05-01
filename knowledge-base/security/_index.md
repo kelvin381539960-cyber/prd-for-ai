@@ -55,7 +55,7 @@ Account、Wallet、Card、Transaction 等业务模块不得重复定义认证方
 | Login Passcode Verification | [login-passcode-verification.md](./login-passcode-verification.md) | active | 登录密码验证页、密码输入规则、失败锁定 | AIX Security 身份认证需求V1.0 / 8.4 |
 | Biometric Verification | [biometric-verification.md](./biometric-verification.md) | active | iOS / Android 设备生物识别、Quick Login、BIO 失败处理 | AIX Security 身份认证需求V1.0 / 8.5 |
 | Face Authentication | [face-authentication.md](./face-authentication.md) | active | DTC / AAI 侧活体识别、人脸比对、锁定、失败页 | AIX Security 身份认证需求V1.0 / 8.6 |
-| API Reference | [api-reference.md](./api-reference.md) | 待重构 | 接口依赖、错误码映射 | AIX Security 身份认证需求V1.0 / 接口与错误码 |
+| API Reference | [api-reference.md](./api-reference.md) | active | 生成验证 URL、查询验证结果、错误码映射 | AIX Security 身份认证需求V1.0 / 9-10 |
 
 ## 5. 业务流程
 
@@ -151,6 +151,8 @@ sequenceDiagram
 | DTC 认证失败 | 活体、人脸或相关认证失败 | 进入对应失败页或返回业务流程入口 | 失败 / 可重试 / 锁定 | 8.6 |
 | Challenge 过期 | 10 分钟内未完成验证 | Challenge 自动失效，需重新发起认证 | EXPIRED | 7.4 / 7.5 |
 | DTC Token 过期 | 超过 AIX 5 分钟校验窗口 | 需重新活体认证 | 重新认证 | 7.4 |
+| 外部验证结果 FAIL | Query Auth Result 返回 FAIL | 失败，需要重新生成 URL | 认证失败 | 9.1.2 |
+| 外部验证结果 INCOMPLETE | Query Auth Result 返回 INCOMPLETE | 包含未验证和验证中 | 认证未完成 | 9.1.2 |
 | 账户被拦截 | 账户 Banned，无法发起身份认证流程 | Account interception popup，关闭后留在当前页 | 阻止认证 | 7.6.3 |
 
 ## 9. 风控 / 合规边界
@@ -163,6 +165,7 @@ sequenceDiagram
 | DTC 活体有效期 | AIX 按 5 分钟窗口校验 DTC Token | 影响申卡、提现、卡敏感信息、PIN 等场景免重认证 | 7.4 验证有效期说明 |
 | AIX 自有认证无缓存 | 每次操作均需重新认证 | 影响钱包地址、兑换、转账、解冻卡等场景 | 7.4 验证有效期说明 |
 | Challenge 状态闭环 | INITIAL / VALIDATING / DONE / EXPIRED 必须闭环 | 防止认证状态不可追踪 | 7.5 身份认证状态机 |
+| 外部验证 requestId 可追溯 | 查询验证结果依赖 requestId | 外部认证结果可查询 | 9.1.1 / 9.1.2 |
 
 ## 10. 来源引用
 
@@ -173,9 +176,11 @@ sequenceDiagram
 - (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 7.4 验证有效期说明 / V1.0)
 - (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 7.5 身份认证状态机 / V1.0)
 - (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 7.6 通用页面 / V1.0)
+- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 9-10 外部接口依赖与错误码映射 / V1.0)
 - (Ref: knowledge-base/security/global-rules.md)
 - (Ref: knowledge-base/security/otp-verification.md)
 - (Ref: knowledge-base/security/email-otp-verification.md)
 - (Ref: knowledge-base/security/login-passcode-verification.md)
 - (Ref: knowledge-base/security/biometric-verification.md)
 - (Ref: knowledge-base/security/face-authentication.md)
+- (Ref: knowledge-base/security/api-reference.md)
