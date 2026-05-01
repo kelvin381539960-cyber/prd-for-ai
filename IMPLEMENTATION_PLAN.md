@@ -1,5 +1,9 @@
 # prd-for-ai 实施计划
 
+版本：v1.1  
+状态：待执行  
+适用仓库：`prd-for-ai`
+
 ## 1. 文档定位
 
 本文件是 `prd-for-ai` 仓库的长期实施主控文件。
@@ -17,8 +21,8 @@
 核心目标：
 
 1. 将历史 PRD 统一归档，作为不可随意修改的原始事实源。
-2. 将历史 PRD 转译为结构化 Markdown，形成 AI 可读、可检索、可复用的知识库。
-3. 将 DTC、AAI、WalletConnect、OBOSS 等外部系统能力沉淀为独立事实层。
+2. 将 DTC、AAI、WalletConnect、OBOSS 等外部系统能力沉淀为独立事实层。
+3. 将历史 PRD 与接口文档转译为结构化 Markdown，形成 AI 可读、可检索、可复用的知识库。
 4. 将状态、字段、错误码、国家线、限额、合规边界沉淀为全局规则。
 5. 支撑后续 AI 辅助编写新 PRD 时，能准确复用既有业务规则、接口、状态机、异常处理和验收标准。
 6. 保证所有知识均可追溯到原始 PRD、接口文档或已确认的项目结论，禁止无来源推测。
@@ -27,30 +31,25 @@
 
 ## 3. 仓库分层原则
 
-仓库采用四层结构：
+`历史prd/` 与 `DTC接口文档/` 是并列的原始事实源，不是上下游关系。
 
 ```text
 ┌────────────────────────────┐
-│  1. 历史prd/                │
-│  原始 PRD 归档，不直接修改   │
+│  原始事实源                  │
+│  - 历史prd/                  │
+│  - DTC接口文档/              │
 └──────────────┬─────────────┘
-               │ 转译 / 提取
+               │ 提取 / 映射 / 转译
                ▼
 ┌────────────────────────────┐
-│  2. DTC接口文档/             │
-│  外部接口原始事实源           │
-└──────────────┬─────────────┘
-               │ 提取 / 映射
-               ▼
-┌────────────────────────────┐
-│  3. knowledge-base/         │
-│  AI-readable 事实知识库      │
-│  规则 / 流程 / 状态 / 字段    │
+│  knowledge-base/            │
+│  AI-readable 事实知识库       │
+│  规则 / 流程 / 状态 / 字段     │
 └──────────────┬─────────────┘
                │ 复用
                ▼
 ┌────────────────────────────┐
-│  4. prd-template/           │
+│  prd-template/              │
 │  后续新 PRD 写作模板          │
 └────────────────────────────┘
 ```
@@ -65,7 +64,7 @@
 
 规则：
 
-- 作为原始事实源保留。
+- 作为原始 PRD 事实源保留。
 - 不直接修改原始文件内容。
 - 不在该目录内做结构化加工。
 - 如发现历史 PRD 与当前知识库冲突，应在知识库中标记“冲突 / 待确认”，不得直接篡改原始文档。
@@ -168,6 +167,12 @@ knowledge-base/
 ├── assets/                      # 图片资源
 └── changelog/                   # 实施日志与知识库变更记录
 ```
+
+### 4.1 app-common 迁移口径
+
+原 `knowledge-base/README.md` 中的 `app-common` 后续统一迁移为 `common`。
+
+后续不再新增 `app-common` 目录。FAQ、通用错误页、通用弹窗、通知内容等统一归入 `common/`。
 
 ---
 
@@ -403,6 +408,7 @@ readers: [product, ui, dev, qa, business, ai]
 产出：
 
 - `IMPLEMENTATION_PLAN.md`
+- 更新 `knowledge-base/README.md`，使目录结构与本实施计划一致
 - `knowledge-base/_meta/glossary.md`
 - `knowledge-base/_meta/countries-and-regions.md`
 - `knowledge-base/_meta/status-dictionary.md`
@@ -416,6 +422,7 @@ readers: [product, ui, dev, qa, business, ai]
 - `knowledge-base/_meta/feature-template.md`
 - `knowledge-base/integrations/_index.md`
 - `knowledge-base/common/_index.md`
+- `knowledge-base/changelog/implementation-log.md`
 - `prd-template/`
 
 验收标准：
@@ -425,6 +432,8 @@ readers: [product, ui, dev, qa, business, ai]
 - 功能文件结构统一。
 - 来源引用规则清晰。
 - 多角色阅读视角明确。
+- `knowledge-base/README.md` 与本实施计划目录一致。
+- `implementation-log.md` 已创建，后续执行可持续记录。
 - 后续任何对话都可以按本计划继续执行。
 
 状态：待执行。
@@ -496,11 +505,11 @@ readers: [product, ui, dev, qa, business, ai]
 
 产出：
 
-- `knowledge-base/changelog/implementation-log.md`
 - 模块验收清单
 - 新 PRD 入库流程
 - 冲突处理流程
 - 待确认事项追踪规则
+- 知识库版本管理规则
 
 状态：待执行。
 
@@ -555,7 +564,7 @@ readers: [product, ui, dev, qa, business, ai]
 1. `IMPLEMENTATION_PLAN.md`
 2. 当前目标模块的 `_index.md`
 3. 相关功能文件
-4. `knowledge-base/changelog/implementation-log.md`，如已存在
+4. `knowledge-base/changelog/implementation-log.md`
 5. 相关原始 PRD 或接口文档
 
 每次执行必须遵守：
@@ -598,14 +607,15 @@ readers: [product, ui, dev, qa, business, ai]
 具体任务：
 
 1. 创建或更新 `IMPLEMENTATION_PLAN.md`
-2. 创建 `knowledge-base/_meta/`
-3. 创建 `knowledge-base/integrations/`
-4. 创建 `knowledge-base/common/`
-5. 创建 `prd-template/`
-6. 创建知识库写作规范
-7. 创建来源引用规范
-8. 创建模块模板
-9. 创建功能模板
-10. 更新执行日志
+2. 更新 `knowledge-base/README.md`
+3. 创建 `knowledge-base/_meta/`
+4. 创建 `knowledge-base/integrations/`
+5. 创建 `knowledge-base/common/`
+6. 创建 `knowledge-base/changelog/implementation-log.md`
+7. 创建 `prd-template/`
+8. 创建知识库写作规范
+9. 创建来源引用规范
+10. 创建模块模板
+11. 创建功能模板
 
 Phase 1 完成后，再进入 Account + Security 重构。
