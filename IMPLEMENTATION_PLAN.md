@@ -1,6 +1,6 @@
 # prd-for-ai 实施计划
 
-版本：v1.6  
+版本：v1.7  
 状态：执行中  
 适用仓库：`prd-for-ai`  
 更新时间：2026-05-01
@@ -35,7 +35,7 @@
 |---|---|---|---|---|---|
 | 1 | Account 样板 | 已完成 | 固化知识库写法 | Login / Registration / Password Reset | 已完成 |
 | 2 | 基础规则沉淀 | 部分完成 | 建立长期规则 | Writing Standard / Source Rules | 持续完善 |
-| 3 | Security 标准化 | 进行中（AIX 自有认证基础已完成） | 统一认证事实源 | OTP / Email OTP / Passcode / BIO / IVS | 继续 Biometric |
+| 3 | Security 标准化 | 进行中（AIX 自有认证 + BIO 已完成） | 统一认证事实源 | OTP / Email OTP / Passcode / BIO / IVS | 继续 Face Authentication |
 | 4 | Card 批量推进 | 未开始 | 转译卡模块 | Application / Manage / Transaction | 等 Security 完成 |
 | 5 | Wallet 批量推进 | 未开始 | 转译钱包模块 | KYC / Send / Swap / Receive / Deposit | 等 Security 完成 |
 | 6 | Transaction 统一层 | 未开始 | 统一交易状态 | Card / Wallet / Swap / History | Card / Wallet 后执行 |
@@ -55,8 +55,8 @@
 | otp-verification.md | 已完成 | 短信 OTP 已标准化 |
 | email-otp-verification.md | 已完成 | 邮箱 OTP 已标准化 |
 | login-passcode-verification.md | 已完成 | Login Passcode 已标准化 |
-| biometric-verification.md | 未开始 | 下一步执行 |
-| face-authentication.md | 未开始 | 待执行 |
+| biometric-verification.md | 已完成 | 设备生物识别已标准化，已与 Face Authentication 分离 |
+| face-authentication.md | 未开始 | 下一步执行 |
 | api-reference.md | 未开始 | 待执行 |
 
 ---
@@ -74,8 +74,8 @@
 | Security / OTP | 已完成 | 短信 OTP 完成 |
 | Security / Email OTP | 已完成 | 邮箱 OTP 完成 |
 | Security / Passcode | 已完成 | 登录密码认证完成 |
-| Security / BIO | 未开始 | 下一步 |
-| Security / Face Auth | 未开始 | 待执行 |
+| Security / BIO | 已完成 | 设备生物识别完成 |
+| Security / Face Auth | 未开始 | 下一步 |
 
 ---
 
@@ -83,11 +83,12 @@
 
 当前执行点：
 
-1. 开始 `biometric-verification.md`
+1. 开始 `face-authentication.md`
 2. 按同样标准结构重构
 3. 不重复 global rules
-4. 区分设备生物识别与 DTC Face Authentication
-5. 完成后判断是否形成能力块；若形成，更新实施计划
+4. 区分 DTC / AAI Face Authentication 与设备 Biometric
+5. 完成后更新 `security/_index.md`
+6. 完成后同步更新本实施计划
 
 当前禁止事项：
 
