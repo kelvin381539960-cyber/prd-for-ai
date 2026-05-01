@@ -1,8 +1,9 @@
 # prd-for-ai 实施计划
 
-版本：v1.1  
-状态：待执行  
+版本：v1.2  
+状态：执行中  
 适用仓库：`prd-for-ai`
+更新时间：2026-05-01
 
 ## 1. 文档定位
 
@@ -31,59 +32,38 @@
 
 ## 3. 仓库分层原则
 
-`历史prd/` 与 `DTC接口文档/` 是并列的原始事实源，不是上下游关系。
+`历史prd/`、`DTC接口文档/`、其他外部系统文档均属于原始事实源，不直接修改。
 
 ```text
 ┌────────────────────────────┐
-│  原始事实源                  │
-│  - 历史prd/                  │
-│  - DTC接口文档/              │
+│ 原始事实源                   │
+│ - 历史prd/                   │
+│ - DTC接口文档/               │
+│ - 外部系统/接口/评审结论      │
 └──────────────┬─────────────┘
                │ 提取 / 映射 / 转译
                ▼
 ┌────────────────────────────┐
-│  knowledge-base/            │
-│  AI-readable 事实知识库       │
-│  规则 / 流程 / 状态 / 字段     │
+│ knowledge-base/             │
+│ AI-readable 事实知识库        │
+│ 规则 / 流程 / 状态 / 字段      │
 └──────────────┬─────────────┘
                │ 复用
                ▼
 ┌────────────────────────────┐
-│  prd-template/              │
-│  后续新 PRD 写作模板          │
+│ prd-template/               │
+│ 后续新 PRD 写作模板           │
 └────────────────────────────┘
 ```
 
-### 3.1 历史 PRD
+### 3.1 原始事实源规则
 
-目录：
-
-```text
-历史prd/
-```
-
-规则：
-
-- 作为原始 PRD 事实源保留。
+- 原始 PRD、接口文档、截图、评审结论仅作为事实来源保留。
 - 不直接修改原始文件内容。
-- 不在该目录内做结构化加工。
-- 如发现历史 PRD 与当前知识库冲突，应在知识库中标记“冲突 / 待确认”，不得直接篡改原始文档。
+- 不在原始目录内做结构化加工。
+- 若原始事实源之间存在冲突，必须记录到 `knowledge-base/changelog/knowledge-gaps.md` 或相关冲突记录，不得自行拍板。
 
-### 3.2 DTC 接口文档
-
-目录：
-
-```text
-DTC接口文档/
-```
-
-规则：
-
-- 作为外部接口、字段、状态、回调、资金路径的原始事实源。
-- 不直接修改原始文件内容。
-- 与业务 PRD 冲突时，必须标记冲突，并明确需要产品、技术或 DTC 确认。
-
-### 3.3 Knowledge Base
+### 3.2 Knowledge Base 规则
 
 目录：
 
@@ -97,9 +77,9 @@ knowledge-base/
 - 只写可验证、可追溯的业务事实。
 - 每个规则必须尽量关联来源文档、章节或接口文档。
 - 不写推测，不写未确认方案。
-- 如存在文档缺口，必须显式标记为“待确认事项”。
+- 功能正文不写评审型内容；不确定点集中进入 `knowledge-base/changelog/knowledge-gaps.md`。
 
-### 3.4 PRD Template
+### 3.3 PRD Template 规则
 
 目录：
 
@@ -137,17 +117,9 @@ knowledge-base/
 ├── integrations/                # 外部系统事实源
 │   ├── _index.md
 │   ├── dtc/
-│   │   ├── _index.md
-│   │   ├── wallet-api.md
-│   │   ├── card-api.md
-│   │   ├── transaction-notification.md
-│   │   └── status-and-fields.md
 │   ├── aai/
-│   │   ├── _index.md
-│   │   └── kyc-and-face.md
-│   └── walletconnect/
-│       ├── _index.md
-│       └── deposit-flow.md
+│   ├── walletconnect/
+│   └── oboss/
 │
 ├── common/                      # APP 通用能力
 │   ├── _index.md
@@ -165,7 +137,7 @@ knowledge-base/
 ├── website/                     # 官网一期、官网二期、外部投放
 ├── platform/                    # OBOSS、多语言、系统邮件等平台能力
 ├── assets/                      # 图片资源
-└── changelog/                   # 实施日志与知识库变更记录
+└── changelog/                   # 实施日志、知识缺口、冲突记录
 ```
 
 ### 4.1 app-common 迁移口径
@@ -188,6 +160,7 @@ knowledge-base/
 - 不按原始 PRD 文件机械拆分。
 - 不拆成页面级小文件，避免维护成本过高。
 - 资金、交易、KYC、卡、钱包相关模块必须单独沉淀状态机与字段规则。
+- 公共规则不在各功能文件中重复维护，应沉淀到 `_meta/` 或对应公共模块。
 
 推荐粒度示例：
 
@@ -228,7 +201,7 @@ transaction/
 
 ## 6. 单个功能文件标准结构
 
-每个功能文件必须使用统一结构。
+每个核心功能文件应使用统一结构。
 
 ```markdown
 ---
@@ -241,7 +214,6 @@ source_section:
 last_updated:
 owner:
 depends_on:
-readers: [product, ui, dev, qa, business, ai]
 ---
 
 # 功能名称
@@ -255,112 +227,142 @@ readers: [product, ui, dev, qa, business, ai]
 ## 3. 前置条件
 说明用户必须满足什么条件。
 
-## 4. 标准流程
-使用步骤表 + Mermaid / ASCII 流程图描述主流程。
+## 4. 业务流程
+包含主链路、Mermaid sequenceDiagram、业务逻辑矩阵。
 
-## 5. 页面与交互规则
+## 5. 页面关系总览
+使用 Mermaid flowchart 表达页面地图。只表达页面节点和跳转关系，不展开业务校验。
+
+## 6. 页面卡片与交互规则
 说明页面、按钮、输入框、校验、跳转、截图引用。
-
-## 6. 状态机
-如适用，必须列状态、含义、可迁移路径、终态。
 
 ## 7. 字段与接口依赖
 说明接口、字段、读写关系、系统动作、异步回调。
 
 ## 8. 异常与失败处理
-说明失败场景、错误提示、重试、兜底动作。
+说明失败场景、错误提示、重试、兜底动作、最终状态。
 
 ## 9. 风控 / 合规边界
 涉及账户、资金、卡、交易、KYC 时必须说明。
 
-## 10. 多角色阅读视角
-- UI 视角
-- 开发视角
-- 测试视角
-- 业务视角
-- AI 复用视角
-
-## 11. 待确认事项
-只放真实缺口，不脑补。
-
-## 12. 来源引用
+## 10. 来源引用
 列出原始 PRD、接口文档、章节、版本。
+```
+
+禁止在功能正文中固定保留：
+
+- `readers` frontmatter。
+- 多角色阅读视角。
+- 待确认事项章节。
+- 试验版 / 方案 A/B/C 等过程性内容。
+
+不确定点统一记录到：
+
+```text
+knowledge-base/changelog/knowledge-gaps.md
 ```
 
 ---
 
-## 7. 多角色阅读视角要求
+## 7. 流程图与页面地图规则
 
-每个核心功能文件必须能服务以下阅读对象。
+### 7.1 业务流程与系统交互
 
-### 7.1 UI 视角
+核心业务流程统一使用 Mermaid `sequenceDiagram`。
 
-需要回答：
+定位：
 
-- 页面有哪些。
-- 每个页面有哪些组件。
-- 按钮、输入框、状态、文案如何展示。
-- 是否有截图、状态变体、弹窗。
-- 用户每一步看到什么。
+- 表达产品业务流程和系统交互。
+- 不替代页面概览图。
+- 写法使用“时序图形式 + 职能泳道图表达 + 业务规则语言”。
 
-### 7.2 开发视角
+写法要求：
 
-需要回答：
+- 参与方按职责分层，例如 User、Client / AIX App、Backend / AIX Backend、Security Module、Device OS、DTC / AAI / Third Party。
+- 文案写业务动作，不写纯技术调用。
+- 异常分支必须写清失败原因、系统动作、用户/状态落点。
+- 使用 `alt / else / end` 表达分支。
+- 复杂流程可按子链路拆分，但仍放在同一功能文件内。
 
-- 依赖哪些接口。
-- 读取哪些字段。
-- 写入哪些字段。
-- 状态如何迁移。
-- 回调如何处理。
-- 幂等、重试、超时、异常如何处理。
+不推荐：
 
-### 7.3 测试视角
+```mermaid
+sequenceDiagram
+    FE->>BE: call login api
+    BE-->>FE: 200
+```
 
-需要回答：
+推荐：
 
-- 主流程如何验收。
-- 异常流如何验收。
-- 边界条件是什么。
-- 状态迁移是否闭环。
-- 失败后是否有可验证结果。
+```mermaid
+sequenceDiagram
+    actor User as User
+    participant Client as AIX App / Client
+    participant Backend as AIX Backend
+    participant Security as Security Module
 
-### 7.4 业务视角
+    User->>Client: 输入账号信息并点击 Next
+    Client->>Client: 执行前端格式校验
+    alt 输入不合法
+        Client-->>User: 留在当前页面，展示字段错误
+    else 输入合法
+        Client->>Backend: 提交账号信息，校验账号存在性与账户状态
+        alt 账户不可登录
+            Backend-->>Client: 返回账户拦截
+            Client-->>User: 留在当前页面，展示账户拦截
+        else 账户可登录
+            Backend->>Security: 发起身份验证流程
+            Security-->>Client: 身份验证成功
+            Client-->>User: 进入下一页面
+        end
+    end
+```
 
-需要回答：
+### 7.2 页面关系总览
 
-- 用户能做什么。
-- 哪些用户不能做。
-- 哪些国家 / 地区支持。
-- 哪些场景不支持。
-- 是否影响 CS、运营、合规、风控。
+页面关系总览统一使用 Mermaid `flowchart` 表达页面地图。
 
-### 7.5 AI 复用视角
+定位：
 
-需要回答：
+- 只表达当前功能涉及的页面节点和页面跳转关系。
+- 不表达业务流程、系统交互、字段规则、后端校验、风控判断、异常处理细节。
 
-- 未来写类似 PRD 时应复用哪些规则。
-- 哪些状态、字段、接口、错误提示不能改。
-- 哪些内容是可配置项。
-- 哪些内容需要重新确认。
+要求：
+
+- 必须完整覆盖当前功能相关的页面、弹窗页、认证页、结果页、异常承接页。
+- 不得为了追求简洁而删除页面节点。
+- 不限制节点数量；复杂功能应通过 `subgraph` 分组控制可读性。
+- 连线文案只写短动作或短入口，例如 Next、Submit、Confirm、Back、Close、Enable now。
+- 复杂业务条件放在第 4 章业务流程或业务逻辑矩阵中。
+- 实线表示正常页面跳转，虚线表示异常 / 拦截 / 失败承接。
+
+推荐分组：
+
+```text
+入口层
+主页面层
+分支页面 / 能力页
+结果页 / 异常承接
+```
 
 ---
 
-## 8. 图片与流程图规则
+## 8. 图片与截图规则
 
 图片继续保留，但不作为唯一事实表达。
 
 规则：
 
 1. 原 PRD 截图保留在 `knowledge-base/assets/`。
-2. 关键流程必须转成 Mermaid 或 ASCII，方便 AI 读取。
-3. 页面截图可作为证据引用，但规则必须写成文字。
+2. 页面截图可作为证据引用，但规则必须写成文字。
+3. 原始 PRD 页面概览截图可以保留，但只能作为追溯证据，不作为主要规则表达。
 4. 如果截图与文字规则冲突，以文字规则为准，并标记冲突点。
 5. 不删除历史截图，除非确认重复或错误。
 
 表达优先级：
 
 ```text
-结构化 Markdown 规则 > Mermaid / ASCII 流程图 > 页面截图
+结构化 Markdown 规则 > Mermaid 图 > 页面截图
 ```
 
 ---
@@ -378,12 +380,12 @@ readers: [product, ui, dev, qa, business, ai]
 
 禁止：
 
-- 无来源推测
-- 把未确认事项写成已确认规则
-- 私自补全接口字段
-- 私自改变状态机
-- 私自改变资金路径
-- 私自改变风控 / 合规边界
+- 无来源推测。
+- 把未确认事项写成已确认规则。
+- 私自补全接口字段。
+- 私自改变状态机。
+- 私自改变资金路径。
+- 私自改变风控 / 合规边界。
 
 如发现冲突，必须标记：
 
@@ -399,194 +401,126 @@ readers: [product, ui, dev, qa, business, ai]
 
 ---
 
-## 10. 实施阶段
+## 10. 后续实施路线表
 
-### Phase 1：建立工程规范与事实层骨架
-
-目标：先统一怎么写，避免后续越转越乱。
-
-产出：
-
-- `IMPLEMENTATION_PLAN.md`
-- 更新 `knowledge-base/README.md`，使目录结构与本实施计划一致
-- `knowledge-base/_meta/glossary.md`
-- `knowledge-base/_meta/countries-and-regions.md`
-- `knowledge-base/_meta/status-dictionary.md`
-- `knowledge-base/_meta/field-dictionary.md`
-- `knowledge-base/_meta/error-code-dictionary.md`
-- `knowledge-base/_meta/limits-and-rules.md`
-- `knowledge-base/_meta/compliance-boundaries.md`
-- `knowledge-base/_meta/source-policy.md`
-- `knowledge-base/_meta/writing-standard.md`
-- `knowledge-base/_meta/module-template.md`
-- `knowledge-base/_meta/feature-template.md`
-- `knowledge-base/integrations/_index.md`
-- `knowledge-base/common/_index.md`
-- `knowledge-base/changelog/implementation-log.md`
-- `prd-template/`
-
-验收标准：
-
-- 仓库目录规则清晰。
-- 文件命名规则清晰。
-- 功能文件结构统一。
-- 来源引用规则清晰。
-- 多角色阅读视角明确。
-- `knowledge-base/README.md` 与本实施计划目录一致。
-- `implementation-log.md` 已创建，后续执行可持续记录。
-- 后续任何对话都可以按本计划继续执行。
-
-状态：待执行。
-
-### Phase 2：重构 Account + Security
-
-目标：将已有 Account 和 Security 作为标准样板。
-
-范围：
-
-- `knowledge-base/account/`
-- `knowledge-base/security/`
-
-动作：
-
-- 统一 frontmatter。
-- 统一章节结构。
-- 补齐来源引用。
-- 检查状态、字段、流程是否冲突。
-- 保留已有有效内容，不做无意义重写。
-- 将公共认证事实沉淀到 `_meta` 或 `security`，供 Card / Wallet / Transaction 复用。
-
-验收标准：
-
-- Account 模块可作为后续业务模块样板。
-- Security 模块可作为公共认证能力事实源。
-- 所有认证规则可以被 Card / Wallet / Transaction 复用。
-
-状态：待执行。
-
-### Phase 3：转译核心业务模块
-
-优先级：
-
-1. Wallet
-2. Card
-3. Transaction
-
-优先原因：
-
-- 涉及资金路径。
-- 涉及 KYC、卡、交易、钱包状态。
-- 依赖 DTC、AAI、WalletConnect 外部系统事实。
-- 后续新 PRD 最容易复用这些规则。
-- 错误成本最高，必须优先结构化。
-
-状态：待执行。
-
-### Phase 4：转译增长、平台、官网与通用能力
-
-范围：
-
-1. Growth
-2. Platform
-3. Website
-4. Common
-
-目标：
-
-- 补齐运营、通知、MGM、Banner、Popup、Waitlist、官网、多语言、系统邮件、FAQ 等模块。
-- 将通用能力沉淀到 `common/`。
-- 将平台能力沉淀到 `platform/`。
-
-状态：待执行。
-
-### Phase 5：建立长期维护机制
-
-目标：让仓库可长期维护，而不是一次性整理。
-
-产出：
-
-- 模块验收清单
-- 新 PRD 入库流程
-- 冲突处理流程
-- 待确认事项追踪规则
-- 知识库版本管理规则
-
-状态：待执行。
+| 顺序 | 阶段 | 目标 | 主要动作 | 产出 | 状态 |
+|---|---|---|---|---|---|
+| 1 | 样板收口 | 固化 Login 样板 | 检查 Login 是否符合新规范：时序图、页面地图、知识缺口集中管理 | `knowledge-base/account/login.md` | 进行中 |
+| 2 | 规范同步 | 更新主实施计划 | 将最新规范写入本文件，删除旧口径 | `IMPLEMENTATION_PLAN.md v1.2` | 进行中 |
+| 3 | Account 完成 | 补齐账号模块 | 按 Login 样板整理 Registration / Forgot Password / Account Index | `knowledge-base/account/*.md` | 待执行 |
+| 4 | Security 对齐 | 建公共认证事实源 | 统一 OTP / Email OTP / Passcode / BIO / IVS 规则 | `knowledge-base/security/*.md` | 待执行 |
+| 5 | 全局规则抽取 | 避免规则重复 | 抽账户状态、认证规则、BIO规则、设备规则、字段字典 | `_meta/*` + `security/*` | 待执行 |
+| 6 | Login 回扫 | 去重复、强引用 | Login 中公共规则改为引用全局规则，不重复写多遍 | `login.md` 精修版 | 待执行 |
+| 7 | Card 模块 | 转译卡核心流程 | Application / Manage / Transaction / 状态字段 | `knowledge-base/card/*.md` | 待执行 |
+| 8 | Wallet 模块 | 转译钱包核心流程 | KYC / Deposit / Receive / Send / Swap / GTR / WalletConnect | `knowledge-base/wallet/*.md` | 待执行 |
+| 9 | Transaction 模块 | 建交易事实层 | 交易类型、交易状态、历史记录、卡交易、钱包交易 | `knowledge-base/transaction/*.md` | 待执行 |
+| 10 | Integrations | 外部系统事实源 | DTC / AAI / WalletConnect / OBOSS 能力、字段、状态 | `knowledge-base/integrations/*` | 待执行 |
+| 11 | Common / Platform | 通用能力 | 通用弹窗、错误页、FAQ、通知、多语言、系统邮件 | `common/*` / `platform/*` | 待执行 |
+| 12 | PRD Template | 新 PRD 写作模板 | 基于知识库规则生成新 PRD 模板 | `prd-template/*` | 待执行 |
+| 13 | 验收机制 | 长期维护 | 模块验收清单、冲突处理、知识缺口、版本管理 | `changelog/*` + checklist | 待执行 |
 
 ---
 
-## 11. 模块验收标准
+## 11. 第一阶段完成标准
+
+当前第一阶段指：样板收口 + 规范同步。
+
+完成标准：
+
+- `IMPLEMENTATION_PLAN.md` 已更新到 v1.2。
+- `knowledge-base/_meta/writing-standard.md` 已包含流程图与页面地图规范。
+- `knowledge-base/account/login.md` 已作为 Login 样板，包含：
+  - 标准 frontmatter。
+  - 1–10 标准章节。
+  - Mermaid `sequenceDiagram` 业务流程与系统交互图。
+  - Mermaid `flowchart` 页面地图。
+  - 页面截图与页面卡片。
+  - 字段与接口依赖。
+  - 异常与失败处理。
+  - 风控 / 合规边界。
+  - 来源引用。
+- `knowledge-base/changelog/knowledge-gaps.md` 已集中承接 Login 知识缺口。
+- PR #5 可作为后续 Account / Security 模块样板。
+
+---
+
+## 12. 模块验收标准
 
 每个模块必须满足：
 
-- 有 `_index.md`
-- 有功能清单
-- 有适用范围
-- 有核心流程
-- 有状态机，或说明不适用
-- 有字段与接口依赖
-- 有异常处理
-- 有风控 / 合规边界
-- 有来源引用
-- 有待确认事项
-- 有 Mermaid / ASCII 流程表达
-- 有 UI / 开发 / 测试 / 业务 / AI 复用视角
-- 不把推测写成事实
+- 有 `_index.md`。
+- 有功能清单。
+- 有适用范围。
+- 有核心流程。
+- 有状态机，或说明不适用。
+- 有字段与接口依赖。
+- 有异常处理。
+- 有风控 / 合规边界。
+- 有来源引用。
+- 有知识缺口记录或明确无缺口。
+- 有 Mermaid `sequenceDiagram` 表达业务流程与系统交互。
+- 有 Mermaid `flowchart` 表达页面关系总览。
+- 不把推测写成事实。
 
 ---
 
-## 12. 单个功能验收标准
+## 13. 单个功能验收标准
 
 每个功能文件必须能回答：
 
 1. 这个功能是什么？
 2. 谁可以用？
 3. 前置条件是什么？
-4. 标准流程怎么走？
-5. 失败怎么办？
-6. 依赖哪些状态？
-7. 依赖哪些接口和字段？
-8. 涉及哪些风控 / 合规边界？
-9. UI 能否据此画页面？
-10. 开发能否据此理解接口与状态？
-11. 测试能否据此写测试用例？
-12. 业务能否据此判断支持 / 不支持范围？
-13. AI 能否据此复用到新 PRD？
-14. 来源文档是什么？
-15. 还有哪些待确认？
+4. 业务流程怎么走？
+5. 系统交互怎么发生？
+6. 页面关系是什么？
+7. 失败怎么办？
+8. 依赖哪些状态？
+9. 依赖哪些接口和字段？
+10. 涉及哪些风控 / 合规边界？
+11. UI 能否据此画页面？
+12. 开发能否据此理解接口与状态？
+13. 测试能否据此写测试用例？
+14. 业务能否据此判断支持 / 不支持范围？
+15. AI 能否据此复用到新 PRD？
+16. 来源文档是什么？
+17. 还有哪些缺口或冲突？
 
 ---
 
-## 13. 跨对话执行规则
+## 14. 跨对话执行规则
 
 由于本项目会跨多个对话、多个时间段执行，后续每次开始任务前必须先读取：
 
 1. `IMPLEMENTATION_PLAN.md`
-2. 当前目标模块的 `_index.md`
-3. 相关功能文件
-4. `knowledge-base/changelog/implementation-log.md`
-5. 相关原始 PRD 或接口文档
+2. `knowledge-base/_meta/writing-standard.md`
+3. 当前目标模块的 `_index.md`
+4. 相关功能文件
+5. `knowledge-base/changelog/knowledge-gaps.md`
+6. 相关原始 PRD 或接口文档
 
 每次执行必须遵守：
 
 - 先确认当前阶段。
 - 再确认当前模块。
 - 再确认待办任务。
-- 不跳阶段。
-- 不直接改业务内容，除非当前阶段允许。
-- 每次修改必须更新执行日志。
+- 不直接跨阶段批量重构，除非用户明确开启代理模式并限定范围。
+- 每次修改必须能回溯来源。
 - 发现冲突必须先记录冲突，不得自行拍板。
+- 当前阶段完成前，不启动下一阶段代理执行。
 
 ---
 
-## 14. 当前状态
-
-当前已知状态：
+## 15. 当前状态
 
 | 模块 | 状态 | 说明 |
-|------|------|------|
-| Account | 已有内容，需重构校准 | 注册、登录、忘记密码已转译 |
-| Security | 已有内容，需重构校准 | 身份认证公共能力已建立骨架 |
+|---|---|---|
+| IMPLEMENTATION_PLAN | 进行中 | v1.2 正在更新 |
+| writing-standard | 已更新 | 已包含时序图与页面地图规范 |
+| Account / Login | 进行中 | 已完成样板结构，需最终 review |
+| Account / Registration | 待执行 | 下一阶段按 Login 样板重构 |
+| Account / Forgot Password | 待执行 | 下一阶段按 Login 样板重构 |
+| Security | 待执行 | 需统一公共认证事实源 |
 | Wallet | 待转译 | 原始 PRD 已归档 |
 | Card | 待转译 | 原始 PRD 已归档 |
 | Transaction | 待转译 | 原始 PRD 已归档 |
@@ -594,28 +528,23 @@ readers: [product, ui, dev, qa, business, ai]
 | Website | 待转译 | 原始 PRD 已归档 |
 | Platform | 待转译 | 原始 PRD 已归档 |
 | Common | 待建设 | FAQ、通用错误页、通用弹窗、通知内容待结构化 |
-| Integrations | 待建设 | DTC、AAI、WalletConnect 外部事实层待结构化 |
-| _meta | 待建设 | 工程规范、术语、字段、状态、错误码、合规边界待补齐 |
+| Integrations | 待建设 | DTC、AAI、WalletConnect、OBOSS 外部事实层待结构化 |
 | prd-template | 待建设 | 新 PRD 写作模板待建设 |
 
 ---
 
-## 15. 下一步
+## 16. 下一步
 
-下一步执行 Phase 1。
+当前第一阶段剩余任务：
 
-具体任务：
+1. Review `IMPLEMENTATION_PLAN.md v1.2` 是否与最新规范一致。
+2. Review `knowledge-base/account/login.md` 是否满足第一阶段样板要求。
+3. 如无问题，关闭或废弃旧 PR #4，保留 PR #5 作为 clean PR。
+4. 第一阶段完成后，再进入 Account 完整化阶段。
 
-1. 创建或更新 `IMPLEMENTATION_PLAN.md`
-2. 更新 `knowledge-base/README.md`
-3. 创建 `knowledge-base/_meta/`
-4. 创建 `knowledge-base/integrations/`
-5. 创建 `knowledge-base/common/`
-6. 创建 `knowledge-base/changelog/implementation-log.md`
-7. 创建 `prd-template/`
-8. 创建知识库写作规范
-9. 创建来源引用规范
-10. 创建模块模板
-11. 创建功能模板
+第二阶段建议任务：
 
-Phase 1 完成后，再进入 Account + Security 重构。
+1. 按 Login 样板重构 `registration.md`。
+2. 按 Login 样板重构 `forgot-password.md`。
+3. 更新 `account/_index.md`。
+4. 统一 Account 模块内的来源引用和知识缺口记录。
