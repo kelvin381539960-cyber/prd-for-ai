@@ -1,6 +1,6 @@
 # prd-for-ai 实施计划
 
-版本：v2.7  
+版本：v2.8  
 状态：执行中  
 适用仓库：`prd-for-ai`  
 更新时间：2026-05-01
@@ -36,7 +36,7 @@
 | 1 | Account 样板 | 已完成 | 固化知识库写法 | Login / Registration / Password Reset | 已完成 |
 | 2 | 基础规则沉淀 | 部分完成 | 建立长期规则 | Writing Standard / Source Rules | 持续完善 |
 | 3 | Security 标准化 | 已完成 | 统一认证事实源 | OTP / Email OTP / Passcode / BIO / Face Auth / API Reference | 已完成 |
-| 4 | Card 批量推进 | 当前阶段 | 转译卡模块 | Application / Status & Fields / Home / Manage / Transaction | 继续 card-management.md |
+| 4 | Card 批量推进 | 当前阶段 | 转译卡模块 | Application / Status & Fields / Home / Manage / Transaction | 继续 card-transaction-flow.md |
 | 5 | Wallet 批量推进 | 未开始 | 转译钱包模块 | KYC / Send / Swap / Receive / Deposit | 等 Card 完成 |
 | 6 | Transaction 统一层 | 未开始 | 统一交易状态 | Card / Wallet / Swap / History | Card / Wallet 后执行 |
 | 7 | Common / Integration | 未开始 | 抽公共能力 | DTC / AAI / WC / Error / FAQ | Transaction 后执行 |
@@ -70,8 +70,8 @@
 | activation.md | 已完成 | 实体卡激活流程已收口 |
 | pin.md | 已完成 | PIN 相关能力已收口 |
 | sensitive-info.md | 已完成 | 卡信息安全查看流程已收口 |
-| card-management.md | 未开始 | 下一步执行，卡管理操作 |
-| card-transaction-flow.md | 未开始 | 卡交易关联流程 |
+| card-management.md | 已完成 | 卡管理操作、状态边界、接口依赖与失败处理已收口 |
+| card-transaction-flow.md | 未开始 | 下一步执行，卡交易关联流程 |
 
 ---
 
@@ -91,8 +91,8 @@
 | Card / Activation | 已完成 | 实体卡激活完成，缺口已记录 |
 | Card / PIN | 已完成 | PIN 能力完成，缺口已记录 |
 | Card / Sensitive Info | 已完成 | 卡信息安全查看完成，缺口已记录 |
-| Card / Management | 未开始 | 下一步 |
-| Card / Transaction Flow | 未开始 | 待执行 |
+| Card / Management | 已完成 | 卡管理能力完成，缺口已记录 |
+| Card / Transaction Flow | 未开始 | 下一步 |
 
 ---
 
@@ -100,15 +100,15 @@
 
 当前执行点：
 
-1. 开始 `card/card-management.md`
-2. 只写卡管理操作流程、状态边界、接口依赖与失败处理
+1. 开始 `card/card-transaction-flow.md`
+2. 只写卡交易关联流程、状态边界、接口依赖与失败处理
 3. 必须引用 `card-status-and-fields.md`，不得重新定义卡状态
-4. 必须引用 Security 认证事实源，不重复定义认证规则
-5. 完成后再进入 `card/card-transaction-flow.md`
+4. 涉及资金处理必须明确可追溯字段和文档缺口
+5. 完成后进入 Card 阶段回扫
 
 当前禁止事项：
 
 - 不得直接跳到 Wallet
 - 不得重复写 Security 认证规则
 - 不得重新发明 Card 状态
-- 不得把交易关联流程细节混入 Card Management 正文
+- 不得把 Wallet 模块流程混入 Card Transaction Flow 正文
