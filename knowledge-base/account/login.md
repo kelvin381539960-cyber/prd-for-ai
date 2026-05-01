@@ -54,38 +54,48 @@ Login 用于已注册用户通过邮箱、手机号或 Biometric 快捷登录进
 Navigation Page → Login Page → 输入 / 快捷登录 → 身份验证 / 生物识别 → 登录成功 → BIO 检查 → Home
 ```
 
-### 4.2 完整业务流程树
+### 4.2 业务流程与系统交互树
 
 ```text
-Login Page
-├─ Forgot Password → Password Reset Page
-├─ Email / Phone Login
-│  ├─ 输入校验
-│  │  ├─ Email：非空 + 格式校验 + ≤254
-│  │  ├─ Phone：数字 + 长度校验
-│  │  └─ Next 初始禁用，校验通过才可点击
-│  ├─ 点击 Next
-│  ├─ 账号与账户状态校验
-│  │  ├─ 账号不存在 / 未注册 → 提示错误，留在 Login Page
-│  │  ├─ Banned / Closed / Locked → 拦截，留在 Login Page
-│  │  └─ Active → Identity Verification
-│  ├─ Identity Verification
-│  │  ├─ 失败 / 锁定 → Security Error Handling
-│  │  └─ 成功 → Login Success
-│  └─ Login Success → BIO Check
-│     ├─ BIO 已启用 → Home
-│     ├─ BIO 未启用 + 设备支持 BIO → Enable BIO Page
-│     │  ├─ Close → Home + Toast: Login success
-│     │  ├─ Enable now + 手动登录 5 分钟内 → Device BIO → Home
-│     │  └─ Enable now + 手动登录超过 5 分钟 → Identity Verification → Device BIO → Home
-│     └─ 设备未开启人脸或指纹识别 → Home
-└─ Quick Login
-   ├─ 展示条件：App 本地存在可用 Biometric 密钥
-   ├─ 点击 Quick Login → Device Biometric Verification
-   ├─ 设备端失败 → 失败提示 / 留在 Login Page
-   └─ 设备端通过 → 后端验证
-      ├─ 后端成功 → 使用 biometric 签名请求身份认证 → Home
-      └─ 后端失败 → 弹窗提示
+Login Flow
+├─ A. Manual Login（Email / Phone）
+│  ├─ User：进入 Login Page，选择 Email 或 Phone 登录方式
+│  ├─ Client：执行输入校验
+│  │  ├─ Email invalid → Login Page，展示 Email 错误
+│  │  ├─ Phone invalid → Login Page，展示 Phone 错误
+│  │  └─ Valid input → Next enabled
+│  ├─ User：点击 Next
+│  ├─ Backend：校验账号存在性与账户状态
+│  │  ├─ Account not found / not registered → Login Page，展示账号错误
+│  │  ├─ Banned / Closed / Locked → Login Page，展示账户拦截
+│  │  └─ Active → Security Identity Verification
+│  ├─ Security：执行身份验证
+│  │  ├─ Failed / Locked → Security Error Handling
+│  │  └─ Success → Login Success
+│  └─ Client / Backend：登录后 BIO 检查
+│     ├─ BIO enabled → Home
+│     ├─ BIO not enabled + device biometric available → Enable BIO Page
+│     └─ device biometric unavailable → Home
+│
+├─ B. Quick Login（Biometric）
+│  ├─ Client：检查本地是否存在可用 Biometric 密钥
+│  │  ├─ Not exists → 不展示 Quick Login
+│  │  └─ Exists → 展示 Quick Login
+│  ├─ User：点击 Quick Login
+│  ├─ Device OS：拉起系统生物识别
+│  │  ├─ Device verification failed → Login Page，展示 Biometric 失败提示
+│  │  └─ Device verification passed → Backend Biometric Verification
+│  └─ Backend：校验 Biometric 凭证并发起签名认证
+│     ├─ Failed → Login Page，展示后端验证失败弹窗
+│     └─ Success → 使用 biometric 签名请求身份认证 → Home
+│
+└─ C. Enable BIO（登录后引导）
+   ├─ Entry：Login Success + BIO not enabled + device biometric available
+   ├─ User：点击 Close
+   │  └─ Client：关闭引导页 → Home + Toast: Login success
+   └─ User：点击 Enable now
+      ├─ Within 5 minutes after manual login → Device BIO → Enable Success → Home
+      └─ After 5 minutes after manual login → Security Identity Verification → Device BIO → Enable Success → Home
 ```
 
 ### 4.3 业务逻辑矩阵
