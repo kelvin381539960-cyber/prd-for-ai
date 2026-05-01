@@ -1,6 +1,6 @@
 # prd-for-ai 实施计划
 
-版本：v1.9  
+版本：v2.0  
 状态：执行中  
 适用仓库：`prd-for-ai`  
 更新时间：2026-05-01
@@ -36,7 +36,7 @@
 | 1 | Account 样板 | 已完成 | 固化知识库写法 | Login / Registration / Password Reset | 已完成 |
 | 2 | 基础规则沉淀 | 部分完成 | 建立长期规则 | Writing Standard / Source Rules | 持续完善 |
 | 3 | Security 标准化 | 已完成 | 统一认证事实源 | OTP / Email OTP / Passcode / BIO / Face Auth / API Reference | 已完成 |
-| 4 | Card 批量推进 | 当前阶段 | 转译卡模块 | Application / Manage / Transaction | 先做 card/_index.md |
+| 4 | Card 批量推进 | 当前阶段 | 转译卡模块 | Application / Manage / Transaction | 继续 application.md |
 | 5 | Wallet 批量推进 | 未开始 | 转译钱包模块 | KYC / Send / Swap / Receive / Deposit | 等 Card 完成 |
 | 6 | Transaction 统一层 | 未开始 | 统一交易状态 | Card / Wallet / Swap / History | Card / Wallet 后执行 |
 | 7 | Common / Integration | 未开始 | 抽公共能力 | DTC / AAI / WC / Error / FAQ | Transaction 后执行 |
@@ -63,8 +63,8 @@
 
 | 子任务 | 状态 | 说明 |
 |---|---|---|
-| card/_index.md | 未开始 | 下一步执行，先收口 Card 模块功能清单 |
-| application.md | 未开始 | 申卡流程 |
+| card/_index.md | 已完成 | Card 模块边界与功能清单已收口 |
+| application.md | 未开始 | 下一步执行，申卡流程 |
 | card-home.md | 未开始 | 卡首页 |
 | activation.md | 未开始 | 实体卡激活 |
 | pin.md | 未开始 | Set / Change / Reset PIN |
@@ -83,15 +83,11 @@
 | Account / Registration | 已完成 | 已按原 PRD 重构 |
 | Account / Password Reset | 已完成 | 已标准化 |
 | Account / _index | 已完成 | 模块收口 |
-| Security / index | 已完成 | 模块边界完成 |
-| Security / global-rules | 已完成 | 认证核心规则完成 |
-| Security / OTP | 已完成 | 短信 OTP 完成 |
-| Security / Email OTP | 已完成 | 邮箱 OTP 完成 |
-| Security / Passcode | 已完成 | 登录密码认证完成 |
-| Security / BIO | 已完成 | 设备生物识别完成 |
-| Security / Face Auth | 已完成 | DTC / AAI 活体识别完成 |
-| Security / API Reference | 已完成 | 接口引用与错误码映射完成，缺口已记录 |
-| Card | 当前阶段 | 下一步从 card/_index.md 开始 |
+| Security | 已完成 | Security 阶段全部收口 |
+| Card / _index | 已完成 | Card 模块边界完成 |
+| Card / Application | 未开始 | 下一步 |
+| Card / Manage | 未开始 | 待执行 |
+| Card / Transaction Flow | 未开始 | 待执行 |
 
 ---
 
@@ -99,15 +95,15 @@
 
 当前执行点：
 
-1. 开始 `card/_index.md`
-2. 先收口 Card 模块边界与功能清单
-3. 引用 Security 已完成认证事实源
-4. 不重复定义 Face Authentication、OTP、BIO 等认证规则
-5. 不补未在 Card 原始 PRD 或已确认知识库中出现的字段、状态或接口
+1. 开始 `card/application.md`
+2. 只写申卡流程、资格、费用、币种、地区、卡类型、自动扣款、接口依赖
+3. 引用 Security Face Authentication，不重复定义认证规则
+4. 引用 Wallet KYC / Balance，不重复定义钱包开户和钱包余额规则
+5. 若 Application 文档字段或费用规则不完整，写入 `knowledge-gaps.md`
 
 当前禁止事项：
 
 - 不得直接跳到 Wallet
 - 不得重复写 Security 认证规则
 - 不得自行补 Card 状态、字段、接口或费用规则
-- 若 Card 文档之间存在冲突，必须写入 `knowledge-gaps.md`
+- 不得把 Card Home、Activation、PIN、Card Transaction 的细节混入 Application 正文
