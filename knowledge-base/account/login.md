@@ -47,71 +47,140 @@ Login 用于已注册用户通过邮箱、手机号或 Biometric 快捷登录进
 | Biometric 快捷登录需要本地存在可用 BIO 密钥 | 仅检测到可用生物识别密钥时展示 Quick Login | AIX Card 注册登录需求V1.0 / 7.2.5 |
 | Biometric 启用依赖设备绑定 | 仅当设备已绑定，登录时方可启用 Biometric | AIX Card 注册登录需求V1.0 / 6.2.6 |
 
-## 4. 主路径
+## 4. 业务流程
+
+### 4.1 主链路
 
 ```text
-Navigation Page → Login Page → Identity Verification → Home
+Navigation Page → Login Page → 输入 / 快捷登录 → 身份验证 / 生物识别 → 登录成功 → BIO 检查 → Home
 ```
 
-### 4.1 主流程图
+### 4.2 完整业务流程图
 
 ```text
 ┌─────────────────┐
 │ Navigation Page │
 └────────┬────────┘
-         │ I already have an account
+         │ 点击 I already have an account
          ▼
-┌─────────────────┐
-│ Login Page      │
-│ Email / Phone / │
-│ Quick Login     │
-└───┬─────────┬───┘
-    │         │
-    │         │ Quick Login
-    │         ▼
-    │   ┌────────────────────────┐
-    │   │ Biometric Verification │
-    │   └───────────┬────────────┘
-    │               │ Success
-    │               ▼
-    │          ┌────────┐
-    │          │ Home   │
-    │          └────────┘
-    │
-    │ Email / Phone + Next
-    ▼
-┌────────────────────────┐
-│ Identity Verification  │
-└───────────┬────────────┘
-            │ Success
-            ▼
-┌────────────────────────┐
-│ BIO Check              │
-└───────┬─────────┬──────┘
-        │         │
-        │ BIO on  │ BIO off + device supports BIO
-        ▼         ▼
-   ┌────────┐  ┌─────────────────┐
-   │ Home   │  │ Enable BIO Page │
-   └────────┘  └───────┬─────────┘
-                       │ Close / Enable completed
-                       ▼
-                  ┌────────┐
-                  │ Home   │
-                  └────────┘
+┌────────────────────────────────────┐
+│ Login Page                         │
+│ - Email Login                      │
+│ - Phone Login                      │
+│ - Quick Login（有 BIO 密钥才展示）  │
+│ - Forgot Password                  │
+└───────┬──────────────┬─────────────┘
+        │              │
+        │              ├──────────────────────────────────────────┐
+        │              │ Forgot Password                         │
+        │              ▼                                          │
+        │        ┌─────────────────────┐                          │
+        │        │ Password Reset Page │                          │
+        │        └─────────────────────┘                          │
+        │                                                         │
+        ├─────────────────────────────────────────────────────────┤
+        │ Email / Phone 登录                                      │
+        ▼                                                         │
+┌────────────────────────────────────┐                            │
+│ 输入校验                            │                            │
+│ - Email：非空 + 格式校验 + ≤254     │                            │
+│ - Phone：数字 + 长度校验            │                            │
+│ - Next 初始禁用，校验通过才可点击   │                            │
+└───────┬────────────────────────────┘                            │
+        │ 校验通过 + 点击 Next                                    │
+        ▼                                                         │
+┌────────────────────────────────────┐                            │
+│ 账号与账户状态校验                  │                            │
+│ - 账号不存在 / 未注册 → 提示错误    │                            │
+│ - Banned / Closed / Locked → 拦截   │                            │
+│ - Active → 进入身份验证             │                            │
+└───────┬────────────────────────────┘                            │
+        │ Active                                                   │
+        ▼                                                         │
+┌────────────────────────────────────┐                            │
+│ Identity Verification              │                            │
+│ 具体认证方式由 Security 模块决定    │                            │
+└───────┬──────────────┬─────────────┘                            │
+        │              │                                          │
+        │ 失败 / 锁定   │ 成功                                     │
+        ▼              ▼                                          │
+┌────────────────┐   ┌────────────────────┐                       │
+│ Security Error │   │ Login Success      │                       │
+│ Handling       │   └─────────┬──────────┘                       │
+└────────────────┘             │                                  │
+                               ▼                                  │
+                      ┌────────────────────┐                      │
+                      │ BIO 状态检查        │                      │
+                      └───────┬─────┬──────┘                      │
+                              │     │                             │
+                    BIO 已启用 │     │ BIO 未启用 + 设备支持 BIO   │
+                              ▼     ▼                             │
+                         ┌──────┐ ┌─────────────────┐             │
+                         │ Home │ │ Enable BIO Page │             │
+                         └──────┘ └───────┬─────────┘             │
+                                          │                       │
+                     ┌────────────────────┼────────────────────┐  │
+                     │                    │                    │  │
+                     ▼                    ▼                    ▼  │
+                点击 Close        Enable now 且 5分钟内   Enable now 且超5分钟
+                     │                    │                    │
+                     ▼                    ▼                    ▼
+                 ┌──────┐        ┌────────────────┐    ┌────────────────────┐
+                 │ Home │        │ Device BIO     │    │ Identity Verification│
+                 └──────┘        └───────┬────────┘    └─────────┬──────────┘
+                                          │ 成功                  │ 成功
+                                          ▼                       ▼
+                                      ┌──────┐            ┌────────────────┐
+                                      │ Home │            │ Device BIO     │
+                                      └──────┘            └───────┬────────┘
+                                                                  │ 成功
+                                                                  ▼
+                                                              ┌──────┐
+                                                              │ Home │
+                                                              └──────┘
+
+┌────────────────────────────────────┐
+│ Quick Login 分支                    │
+│ 仅本地存在 BIO 密钥时展示按钮        │
+└───────┬────────────────────────────┘
+        │ 点击 Quick Login
+        ▼
+┌────────────────────────────────────┐
+│ Device Biometric Verification      │
+│ - iOS Face ID / Touch ID           │
+│ - Android Face / Fingerprint       │
+└───────┬──────────────┬─────────────┘
+        │              │
+        │ 设备端通过    │ 设备端失败
+        ▼              ▼
+┌────────────────────┐ ┌────────────────────┐
+│ 后端验证            │ │ 失败提示 / 留在登录 │
+└───────┬────────────┘ └────────────────────┘
+        │
+        ├─ 后端成功 → 使用 biometric 签名请求身份认证 → Home
+        └─ 后端失败 → 弹窗提示
 ```
 
-登录成功后：
+### 4.3 业务逻辑矩阵
 
-| 条件 | 下一步 |
-|------|--------|
-| BIO 已启用 | 直接进入 Home |
-| BIO 未启用，且设备支持 Biometric | 进入 Enable BIO Page |
-| 设备未开启人脸或指纹识别 | 不展示 Enable BIO Page，直接进入 Home |
+| 阶段 | 触发条件 | 前端校验 / 展示 | 后端 / 系统动作 | 成功结果 | 失败结果 |
+|------|----------|-----------------|-----------------|----------|----------|
+| 进入登录 | Navigation Page 点击 `I already have an account` | 展示 Login Page | 无 | 用户进入登录页 | 无 |
+| Email 输入 | 用户选择 Email tab | 校验非空、邮箱格式、最大 254 字符 | 无 | Next 可点击 | 展示 Email 错误提示 |
+| Phone 输入 | 用户选择 Phone tab | 校验数字、长度；Country Code 可选择 | 无 | Next 可点击 | 展示 Phone 错误提示 |
+| 国家选择 | 点击 Country Code | 展示全部国家，隐藏中国和中国台湾；常用地区固定展示 | 返回所选区号 | 回到 Login Page | 无 |
+| Next 登录 | 输入合法后点击 Next | 前端阻止非法输入 | 校验账号是否存在、账户状态是否可登录 | 进入 Identity Verification | 账号不存在 / Banned / Locked 等提示 |
+| 身份验证 | 账号可登录 | 展示 Security 认证流程 | 按 Security 模块处理 OTP / Email OTP / Passcode 等 | 登录成功 | 认证失败 / 锁定 |
+| Quick Login 展示 | 本地存在可用 BIO 密钥 | 展示 Quick Login 按钮 | 无 | 用户可点击快捷登录 | 无 BIO 密钥则不展示 |
+| Quick Login 验证 | 点击 Quick Login | 拉起系统生物识别 | 设备通过后进行后端验证，并使用 biometric 签名请求身份认证 | 进入 Home | 设备失败 / 后端失败弹窗 |
+| 登录后 BIO 检查 | 身份验证成功 | 判断是否已启用 BIO、设备是否支持 BIO | 读取 BIO 状态与设备能力 | Home 或 Enable BIO Page | 设备不支持则直接 Home |
+| Enable BIO 关闭 | 点击 Close | 关闭引导页 | 无 | 进入 Home，Toast: `Login success` | 无 |
+| Enable now 5分钟内 | 手动登录完成 5 分钟内点击 Enable now | 调起设备生物识别 | 免再次身份认证 | 设置成功后进入 Home | 设备验证失败按 Biometric 处理 |
+| Enable now 超过5分钟 | 手动登录完成超过 5 分钟点击 Enable now | 进入身份验证流程 | Security 认证通过后继续设备生物识别 | 设置成功后进入 Home | 认证失败 / 设备失败 |
 
 ## 5. 页面关系总览
 
-本表同时承担页面地图与页面跳转关系。用于快速确认：有哪些页面 / 能力、页面目的、触发条件、下一步和关键说明。
+本表用于快速确认页面 / 能力、触发条件、下一步和关键说明。完整业务逻辑以“4. 业务流程”为准。
 
 | 当前页面 / 能力 | 页面目的 | 用户动作 / 触发条件 | 下一步 | 说明 |
 |----------------|----------|--------------------|--------|------|
@@ -232,10 +301,10 @@ Next 按钮处理逻辑：
 | 元素 / 能力 | 类型 | 展示条件 | 交互规则 | 异常 |
 |-------------|------|----------|----------|------|
 | Quick Login | Button | 本地存在可用 Biometric 密钥 | 点击拉起设备生物识别 | 设备端失败 / 后端验证失败 |
-| iOS Face ID | Device Auth | iOS 设备且支持 Face ID | 设备验证通过后进行后端验证 | 后端失败弹窗提示 |
-| iOS Touch ID | Device Auth | iOS 设备且支持 Touch ID | 设备验证通过后进行后端验证 | 后端失败弹窗提示 |
-| Android Face | Device Auth | Android 设备且支持人脸 | 设备验证通过后进行后端验证 | 后端失败弹窗提示 |
-| Android Fingerprint | Device Auth | Android 设备且支持指纹 | 设备验证通过后进行后端验证 | 后端失败弹窗提示 |
+| iOS Face ID | Device Auth | iOS 设备且支持 Face ID | 设备验证通过后进行后端验证，并使用 biometric 签名请求身份认证 | 后端失败弹窗提示 |
+| iOS Touch ID | Device Auth | iOS 设备且支持 Touch ID | 设备验证通过后进行后端验证，并使用 biometric 签名请求身份认证 | 后端失败弹窗提示 |
+| Android Face | Device Auth | Android 设备且支持人脸 | 设备验证通过后进行后端验证，并使用 biometric 签名请求身份认证 | 后端失败弹窗提示 |
+| Android Fingerprint | Device Auth | Android 设备且支持指纹 | 设备验证通过后进行后端验证，并使用 biometric 签名请求身份认证 | 后端失败弹窗提示 |
 
 ### 6.5 Enable BIO Page
 
@@ -255,16 +324,16 @@ Next 按钮处理逻辑：
 |------|------|----------|----------|------|
 | Enable BIO Page | Guide Page | 登录成功后，用户未启用 BIO，且设备支持生物识别 | 引导用户选择是否开启 BIO | 若设备未开启人脸或指纹识别，不展示该页，直接进入 Home |
 | Close | Button | 页面展示时 | 点击进入 Home，并 Toast：`Login success` | 无 |
-| Enable now | Button | 页面展示时 | 检测设备生物识别权限状态；已授权则调起设备认证；未授权则引导系统权限设置 | 认证失败按 Security / Biometric 规则处理 |
+| Enable now | Button | 页面展示时 | 检测设备生物识别权限状态；已授权则调起生物认证流程；未授权则弹窗引导至系统权限设置 | 认证失败按 Security / Biometric 规则处理 |
 
 特殊规则：
 
 | 规则 | 内容 | 来源 |
 |------|------|------|
 | 手动登录 5 分钟内免重认证 | 用户完成手动登录后的 5 分钟内，无需再次进行身份验证即可继续设置 BIO | AIX Card 注册登录需求V1.0 / 7.2.7；Security 场景矩阵 |
-| 超过 5 分钟需重新认证 | 用户完成手动登录 5 分钟后，需要进行身份验证后再继续设置 BIO | AIX Card 注册登录需求V1.0 / 7.2.7 |
+| 超过 5 分钟需重新认证 | 用户完成手动登录 5 分钟后，需要进行身份验证后再继续设置 | AIX Card 注册登录需求V1.0 / 7.2.7 |
 | 已启用 BIO | 登录成功后跳过 Enable BIO Page，直接进入 Home | AIX Card 注册登录需求V1.0 / 7.2.7 |
-| 未开启系统生物识别 | 登录成功后不弹出 BIO 引导页，直接进入 Home | 当前知识库旧内容 |
+| 未开启系统生物识别 | 登录成功后不弹出 BIO 引导页，直接进入 Home | AIX Card 注册登录需求V1.0 / 7.2.7 |
 
 ## 7. 字段与接口依赖
 
@@ -287,6 +356,7 @@ Next 按钮处理逻辑：
 | Phone 少于 6 位 | Phone 长度不足 | `Phone number must be at least 6 digits` | 阻止 Next | 留在 Login Page | 当前知识库旧内容 |
 | 账号不存在 / 未注册 | 后端判断账号不存在 | 原文中文：`您输入的账号信息有误，请检查或注册新账号。` | 不进入认证流程 | 留在 Login Page | AIX Card 注册登录需求V1.0 / 7.2.4 |
 | 账户 Banned | 账户被限制登录 | `Account locked. Please contact customer support.` | 阻止登录 | 留在 Login Page | 当前知识库旧内容 / Account Status |
+| 身份验证失败 / 锁定 | Security 认证失败或达到锁定条件 | 按 Security 模块规则 | 阻止进入 Home | Security Error Handling | AIX Security 身份认证需求V1.0 |
 | Biometric 设备失败 | 设备端验证失败 | 按设备 / Security 规则提示 | 不进入 Home | 留在 Login / 认证失败状态 | AIX Card 注册登录需求V1.0 / 7.2.5 |
 | Biometric 后端验证失败 | 后端验证不通过 | 弹窗提示 | 不进入 Home | 留在 Login / 认证失败状态 | AIX Card 注册登录需求V1.0 / 7.2.5 |
 | Enable BIO 认证超时 | 手动登录超过 5 分钟后设置 BIO | 需重新身份认证 | 进入 Security 认证流程 | 认证通过后继续设置 BIO | AIX Card 注册登录需求V1.0 / 7.2.7 |
@@ -305,9 +375,8 @@ Next 按钮处理逻辑：
 
 ### UI 视角
 
-- 先看主流程图理解登录主链路，再看页面关系总览确认页面范围和跳转关系。
-- 通过页面卡片查看具体页面截图和元素规则。
-- 不再依赖原始 PRD 页面概览截图作为主表达。
+- 先看业务流程图理解登录完整链路，再看页面卡片查看具体页面截图和元素规则。
+- 原始 PRD 页面概览截图不再作为主表达。
 - 重点页面：Login Page、Select Country Page、Biometric 系统弹窗、Enable BIO Page。
 
 ### 开发视角
@@ -315,10 +384,11 @@ Next 按钮处理逻辑：
 - 登录页需支持 Email / Phone 两种输入方式。
 - Phone 登录依赖 Country Code 选择器，国家 / 地区列表需隐藏中国和中国台湾。
 - Quick Login 展示依赖本地 Biometric 密钥；Enable BIO 展示依赖登录后 BIO 状态判断。
+- Biometric 设备端验证通过后，仍需后端验证，并使用 biometric 签名请求身份认证。
 
 ### 测试视角
 
-- 必测 Email 登录、Phone 登录、Country Select、账号不存在、Banned 拦截、Quick Login、Enable BIO 展示 / 跳过、5 分钟免认证窗口。
+- 必测 Email 登录、Phone 登录、Country Select、账号不存在、Banned 拦截、Quick Login、后端验证失败、Enable BIO 展示 / 跳过、5 分钟免认证窗口。
 - 需覆盖设备未开启生物识别时不展示 Enable BIO Page。
 
 ### 业务视角
