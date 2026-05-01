@@ -1,6 +1,6 @@
 # prd-for-ai 实施计划
 
-版本：v2.8  
+版本：v2.9  
 状态：执行中  
 适用仓库：`prd-for-ai`  
 更新时间：2026-05-01
@@ -36,8 +36,8 @@
 | 1 | Account 样板 | 已完成 | 固化知识库写法 | Login / Registration / Password Reset | 已完成 |
 | 2 | 基础规则沉淀 | 部分完成 | 建立长期规则 | Writing Standard / Source Rules | 持续完善 |
 | 3 | Security 标准化 | 已完成 | 统一认证事实源 | OTP / Email OTP / Passcode / BIO / Face Auth / API Reference | 已完成 |
-| 4 | Card 批量推进 | 当前阶段 | 转译卡模块 | Application / Status & Fields / Home / Manage / Transaction | 继续 card-transaction-flow.md |
-| 5 | Wallet 批量推进 | 未开始 | 转译钱包模块 | KYC / Send / Swap / Receive / Deposit | 等 Card 完成 |
+| 4 | Card 批量推进 | 当前阶段 | 转译卡模块 | Application / Status & Fields / Home / Manage / Transaction | 进入 Card 阶段回扫 |
+| 5 | Wallet 批量推进 | 未开始 | 转译钱包模块 | KYC / Send / Swap / Receive / Deposit | 等 Card 回扫完成 |
 | 6 | Transaction 统一层 | 未开始 | 统一交易状态 | Card / Wallet / Swap / History | Card / Wallet 后执行 |
 | 7 | Common / Integration | 未开始 | 抽公共能力 | DTC / AAI / WC / Error / FAQ | Transaction 后执行 |
 | 8 | 全仓库回扫 | 未开始 | 去重复、补引用 | 字段 / 状态 / 来源 / gaps | 最后执行 |
@@ -71,7 +71,8 @@
 | pin.md | 已完成 | PIN 相关能力已收口 |
 | sensitive-info.md | 已完成 | 卡信息安全查看流程已收口 |
 | card-management.md | 已完成 | 卡管理操作、状态边界、接口依赖与失败处理已收口 |
-| card-transaction-flow.md | 未开始 | 下一步执行，卡交易关联流程 |
+| card-transaction-flow.md | 已完成 | 卡交易通知、目标类型判断、余额查询、归集处理、交易展示边界已收口 |
+| card-stage-review | 未开始 | 下一步执行，Card 阶段回扫与问题收口 |
 
 ---
 
@@ -92,7 +93,8 @@
 | Card / PIN | 已完成 | PIN 能力完成，缺口已记录 |
 | Card / Sensitive Info | 已完成 | 卡信息安全查看完成，缺口已记录 |
 | Card / Management | 已完成 | 卡管理能力完成，缺口已记录 |
-| Card / Transaction Flow | 未开始 | 下一步 |
+| Card / Transaction Flow | 已完成 | 卡交易关联流程完成，资金字段缺口已记录在正文 |
+| Card / Stage Review | 未开始 | 下一步 |
 
 ---
 
@@ -100,15 +102,13 @@
 
 当前执行点：
 
-1. 开始 `card/card-transaction-flow.md`
-2. 只写卡交易关联流程、状态边界、接口依赖与失败处理
-3. 必须引用 `card-status-and-fields.md`，不得重新定义卡状态
-4. 涉及资金处理必须明确可追溯字段和文档缺口
-5. 完成后进入 Card 阶段回扫
+1. 开始 Card 阶段回扫
+2. 回扫范围：`knowledge-base/card/` 下已完成文件
+3. 检查重复定义、状态口径、字段口径、接口路径、资金追踪缺口和来源引用
+4. 回扫后决定是否进入 Wallet 批量推进
 
 当前禁止事项：
 
 - 不得直接跳到 Wallet
-- 不得重复写 Security 认证规则
-- 不得重新发明 Card 状态
-- 不得把 Wallet 模块流程混入 Card Transaction Flow 正文
+- 不得新增无来源状态、字段或接口
+- 不得把 Transaction 统一层提前混入 Card 阶段正文
