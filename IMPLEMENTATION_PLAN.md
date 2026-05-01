@@ -1,7 +1,7 @@
 # prd-for-ai 实施计划
 
-版本：v3.2  
-状态：Card 阶段回扫阻塞  
+版本：v3.3  
+状态：Card 阶段回扫仍阻塞，但阻塞范围已收窄  
 适用仓库：`prd-for-ai`  
 更新时间：2026-05-01
 
@@ -93,7 +93,7 @@
 | 1 | Account 样板 | 已完成 | 固化知识库写法 | Login / Registration / Password Reset | 已完成 |
 | 2 | 基础规则沉淀 | 部分完成 | 建立长期规则 | Writing Standard / Source Rules | 持续完善 |
 | 3 | Security 标准化 | 已完成 | 统一认证事实源 | OTP / Email OTP / Passcode / BIO / Face Auth / API Reference | 已完成 |
-| 4 | Card 批量推进 | 阻塞 | 转译卡模块 | Application / Status & Fields / Home / Manage / Transaction | 等待追踪字段确认 |
+| 4 | Card 批量推进 | 阻塞 | 转译卡模块 | Application / Status & Fields / Home / Manage / Transaction | 等待后端 / Wallet / 账务确认剩余追踪字段 |
 | 5 | Wallet 批量推进 | 未开始 | 转译钱包模块 | KYC / Send / Swap / Receive / Deposit | 等 Card 阻塞解除 |
 | 6 | Transaction 统一层 | 未开始 | 统一交易状态 | Card / Wallet / Swap / History | Card / Wallet 后执行 |
 | 7 | Common / Integration | 未开始 | 抽公共能力 | DTC / AAI / WC / Error / FAQ | Transaction 后执行 |
@@ -115,9 +115,9 @@
 | pin.md | 已完成 | PIN 相关能力已收口 |
 | sensitive-info.md | 已完成 | 卡信息安全查看流程已收口 |
 | card-management.md | 已完成 | 卡管理操作、状态边界、接口依赖与失败处理已收口 |
-| card-transaction-flow.md | 已完成但阻塞 | 卡交易通知、目标类型判断、余额查询、归集处理、交易展示边界已收口；追踪字段未闭环 |
-| stage-review.md | 已完成 | Card 阶段回扫完成，结论为 `BLOCK`，暂缓进入 Wallet |
-| transaction-flow-traceability-checklist.md | 已完成 | 已形成 DTC / 后端 / Wallet 需确认清单 |
+| card-transaction-flow.md | 已完成但阻塞 | 已同步 DTC 字段、通知去重基础、归集触发类型、transfer-to-wallet 字段、失败不重试等确认结论；AIX 内部 ID、归集请求、Wallet 入账流水和对账链路仍未闭环 |
+| stage-review.md | 已完成 | Card 阶段回扫已更新，结论仍为 `BLOCK`，暂缓进入 Wallet |
+| transaction-flow-traceability-checklist.md | 已完成 | 已收敛为后端 / Wallet / 账务待确认清单 |
 
 ---
 
@@ -128,8 +128,8 @@
 | Account | 已完成 | PASS | Login / Registration / Password Reset 已完成 |
 | Security | 已完成 | PASS | Security 阶段全部收口 |
 | Card / 页面与卡管能力 | 已完成 | PARTIAL PASS | Application / Home / Activation / PIN / Sensitive Info / Management 已完成 |
-| Card / Transaction Flow | 阻塞 | BLOCK | 资金归集链路缺少可追溯字段闭环 |
-| Card / Traceability Checklist | 已完成 | BLOCK 支撑材料 | 已生成确认清单，等待 DTC / 后端 / Wallet 确认 |
+| Card / Transaction Flow | 阻塞范围已收窄 | BLOCK | DTC 通知字段、交易 ID、触发类型、transfer-to-wallet 字段、失败不重试等已确认；AIX 内部追踪、Wallet 入账流水和对账链路仍未闭环 |
+| Card / Traceability Checklist | 已完成 | BLOCK 支撑材料 | 已生成后端 / Wallet / 账务待确认清单 |
 | Wallet | 未开始 | 不允许进入 | 等 Card 阻塞解除后执行 |
 
 ---
@@ -138,15 +138,16 @@
 
 当前执行点：
 
-1. 将 `knowledge-base/card/transaction-flow-traceability-checklist.md` 发给 DTC / 后端 / Wallet 确认。
-2. 等待确认 DTC 通知字段、AIX 内部交易 ID、归集请求 ID、归集结果流水、钱包入账流水、幂等键、重试策略。
-3. 收到确认后更新 `card-transaction-flow.md`、`knowledge-gaps.md`、`stage-review.md`。
-4. 重新执行 Card Stage Review。
-5. 只有 Gate 结果为 `PASS` 后，才允许进入 Wallet 批量推进。
+1. 不再继续追问 DTC Card Transaction Notify 字段表、Transaction ID、Transfer Balance to Wallet 请求字段、Transfer 成功是否返回业务流水、Top-up 是否触发归集、失败是否重试等问题；这些已在 `transaction-flow-traceability-checklist.md` v1.4 和 `card-transaction-flow.md` v1.1 中收口。
+2. 直接向 AIX 后端确认：内部交易处理 ID、Webhook 原始报文落库、重复通知去重实现、归集请求 ID、`D-REQUEST-ID` 生成与保存、查询 balance 失败处理、归集失败人工补偿入口。
+3. 直接向 Wallet / 账务确认：Wallet 入账流水 ID、钱包流水关联字段、Wallet `relatedId` 取值、入账币种与入账状态、最终对账字段组合。
+4. 收到确认后更新 `card-transaction-flow.md`、`knowledge-gaps.md`、`stage-review.md` 和本文件。
+5. 重新执行 Card Stage Review。
+6. 只有 Gate 结果为 `PASS` 后，才允许进入 Wallet 批量推进。
 
 当前禁止事项：
 
 - 不得直接跳到 Wallet。
-- 不得把未确认流水字段写成事实。
+- 不得把 AIX 内部交易 ID、归集请求 ID、Wallet 入账流水、Wallet relatedId、对账字段写成事实。
 - 不得新增无来源状态、字段或接口。
 - 不得把 Transaction 统一层提前混入 Card 阶段正文。
