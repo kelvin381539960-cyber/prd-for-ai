@@ -24,7 +24,8 @@ readers: [product, ai]
 |------|------|-----------|----------|------|----------------|------|
 | 2026-05-01 | Phase 0 | PR #1 | 新增 `IMPLEMENTATION_PLAN.md` | 建立长期实施计划 v1.1 | 否 | 已合并到 main |
 | 2026-05-01 | Phase 1 | PR #2 | 更新 README，新增 _meta / integrations / common / changelog / prd-template 骨架 | 建立知识库基础骨架 | 否 | 已合并到 main |
-| 2026-05-01 | Phase 2 | phase2/account-security-index-refactor | 重构 Account / Security 模块入口，补充状态字典样板 | 待 PR review | 是 | 未改历史原文；未重写功能正文；仅整理模块入口、依赖、状态、待确认事项 |
+| 2026-05-01 | Phase 2 | PR #3 | 重构 Account / Security 模块入口，补充状态字典样板 | 建立 Account / Security 模块入口样板 | 是 | 已合并到 main；未改历史原文 |
+| 2026-05-01 | Phase 2 | phase2/account-feature-files-refactor | 重构 Account 详细功能文件：registration / login / password-reset；修正 account index 注册流程口径 | 待 PR review | 是 | 未改历史原文；落实页面关系 ASCII 规则；AIX Tag 改为注册后可选引导 |
 
 ## 3. 后续记录规则
 
