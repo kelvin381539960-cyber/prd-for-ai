@@ -170,24 +170,54 @@ sequenceDiagram
 
 ## 5. 页面关系总览
 
-| 当前页面 / 能力 | 页面目的 | 用户动作 / 触发条件 | 下一步 | 说明 |
-|---|---|---|---|---|
-| Navigation Page | 选择注册或登录 | 点击 `I already have an account` | Login Page | 进入登录 |
-| Navigation Page | 选择注册或登录 | 点击 `Create account` | Registration Page | 进入注册 |
-| Login Page | 输入邮箱、手机号，或使用 Quick Login | Email 输入合法 + 点击 `Next` | Identity Verification | 邮箱登录 |
-| Login Page | 输入邮箱、手机号，或使用 Quick Login | Phone 输入合法 + 点击 `Next` | Identity Verification | 手机号登录 |
-| Login Page | 输入邮箱、手机号，或使用 Quick Login | 点击 Country Code | Select Country Page | 选择手机号区号 |
-| Select Country Page | 选择手机号国家 / 地区区号 | 选择国家 / 地区 | Login Page | 带回区号 |
-| Login Page | 输入邮箱、手机号，或使用 Quick Login | 点击 `Forgot password` | Password Reset Page | 进入忘记密码 |
-| Login Page | 输入邮箱、手机号，或使用 Quick Login | 点击 `Quick Login` | Biometric Verification | 仅本地有 Biometric 密钥时展示 |
-| Identity Verification | 登录身份验证 | 验证成功 + BIO 已启用 | Home | 直接登录成功 |
-| Identity Verification | 登录身份验证 | 验证成功 + BIO 未启用 + 设备支持 BIO | Enable BIO Page | 登录后引导开启 BIO |
-| Identity Verification | 登录身份验证 | 验证失败 / 锁定 | Security Error Handling | 按 Security 模块规则处理 |
-| Biometric Verification | 快捷登录验证 | 验证成功 | Home | 快捷登录成功 |
-| Biometric Verification | 快捷登录验证 | 验证失败 | Security Error Handling | 设备端或后端验证失败 |
-| Enable BIO Page | 登录后引导开启 BIO | 点击 Close | Home | Toast: `Login success` |
-| Enable BIO Page | 登录后引导开启 BIO | 点击 Enable now，且手动登录 5 分钟内 | Biometric Verification | 免再次身份认证 |
-| Enable BIO Page | 登录后引导开启 BIO | 点击 Enable now，且手动登录超过 5 分钟 | Identity Verification | 需重新身份认证后继续设置 |
+本节仅表达 Login 模块涉及的页面节点和页面跳转关系。
+
+系统校验、身份认证、BIO 判断、5 分钟窗口和异常处理细节以第 4 章业务流程为准；单页元素与交互规则以第 6 章为准。
+
+```mermaid
+flowchart LR
+    subgraph Entry[入口层]
+        Navigation[Navigation Page]
+    end
+
+    subgraph Main[主页面层]
+        Login[Login Page]
+    end
+
+    subgraph Branch[分支页面 / 能力页]
+        Registration[Registration Page]
+        Country[Select Country Page]
+        PasswordReset[Password Reset Page]
+        Identity[Identity Verification]
+        Biometric[Biometric Verification]
+        EnableBio[Enable BIO Page]
+    end
+
+    subgraph Result[结果页 / 异常承接]
+        Home[Home]
+        SecurityError((Security Error Handling))
+    end
+
+    Navigation -->|I already have an account| Login
+    Navigation -->|Create account| Registration
+
+    Login -->|Country Code| Country
+    Country -->|Select| Login
+
+    Login -->|Forgot password| PasswordReset
+    Login -->|Next| Identity
+    Login -->|Quick Login| Biometric
+
+    Identity -->|Success| Home
+    Identity -->|Need BIO setup| EnableBio
+    Identity -.->|Failed / locked| SecurityError
+
+    Biometric -->|Success| Home
+    Biometric -.->|Failed| SecurityError
+
+    EnableBio -->|Close| Home
+    EnableBio -->|Enable now| Biometric
+```
 
 ## 6. 页面卡片与交互规则
 
