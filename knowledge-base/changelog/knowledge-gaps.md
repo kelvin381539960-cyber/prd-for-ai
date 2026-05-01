@@ -64,9 +64,12 @@ owner: 吴忆锋
 |---|---|---|---|---|---|
 | KG-CARD-APP-001 | 申卡数量限制写“可配置”，但未给出配置来源、配置项名称或后台位置 | Card Application / 申卡入口 | AIX Card V1.0【Application】 / 5.1.4 | 正文按 5 张规则保留，并标注来源 | open |
 | KG-CARD-APP-002 | “仅可一张在途”注明 DTC 可配置是否限制，但未给出最终配置口径 | Card Application / 在途卡限制 | AIX Card V1.0【Application】 / 2.1 | 正文保留单在途规则，不扩展配置实现 | open |
-| KG-CARD-APP-003 | Card Application 接口请求 / 响应表在 PDF 抽取中不可读，字段级定义需后续从接口原文或截图补齐 | Card Application / DTC 接口字段 | AIX Card V1.0【Application】 / 6.1.4 / 6.1.5 | 正文只列接口路径和明确业务字段，不补接口字段 | open |
+| KG-CARD-APP-003 | Card Application 接口请求 / 响应表在 PDF 抽取中不可读，字段级定义需后续从接口原文或截图补齐 | Card Application / DTC 接口字段 | AIX Card V1.0【Application】 / 6.1.4 / 6.1.5 | 接口路径已统一为 `/openapi/v1/card/request-card`；字段级定义仍保留缺口 | open |
 | KG-CARD-APP-004 | DTC 错误码表在 PDF 抽取中不可读，无法结构化列出错误码 | Card Application / 错误码 | AIX Card V1.0【Application】 / 6.1.6 | 正文只写未知错误码报警，不补错误码表 | open |
 | KG-CARD-APP-005 | Add to Google Wallet 绑卡方案待定，原文不确定是仅唤起 App 还是 API 一键绑卡 | Card Application Result / Google Wallet | AIX Card V1.0【Application】 / 5.1.4 | 正文保留待定口径，不作为已确认方案 | open |
 | KG-CARD-APP-006 | 高风险及制裁地区过滤规则只在修订记录中出现，未给出具体国家/地区名单与过滤责任方 | Card Application / 地区选择 / 合规 | AIX Card V1.0【Application】 / 1.2 | 正文只写边界，不补国家名单 | open |
 | KG-CARD-APP-007 | FAQ 配置来源、OBoss 可视化 Dashboard 未完成，当前为数据库预设口径 | Card Application / FAQ | AIX Card V1.0【Application】 / 5.1.4 | 正文保留预设数据库口径，不补 OBoss 配置能力 | open |
 | KG-CARD-APP-008 | 减免费来源写 MGM 提供减免传参，但未给出具体字段名、接口或回调机制 | Card Application / Discount / MGM | AIX Card V1.0【Application】 / 5.1.4 | 正文只写业务动作，不补接口字段 | open |
+| KG-CARD-APP-009 | 申卡支付链路缺少可追溯字段闭环，未明确 Apply Order、referenceNo、钱包扣减流水、DTC 扣费流水、退款流水、MGM discount id 之间的关联 | Card Application / 支付 / 退款 / 对账 | AIX Card V1.0【Application】 / 5.1.4 / 6.1 / 6.3 | 不补字段；后续应在 `card-status-and-fields.md` 或接口事实源中统一收口 | open |
+| KG-CARD-APP-010 | Application Result 使用 Processing / Pending / Active / Pending activation / Terminated / Cancelled 等状态，但 Card 统一状态字典尚未建立 | Card Application / Card Status | AIX Card V1.0【Application】 / 5.1.4；AIX Card manage模块需求V1.0 / 6.4 | 下一步改为优先建设 `card-status-and-fields.md`，先收敛状态再写 Card Home | open |
+| KG-CARD-APP-011 | Card Application 原文接口清单早期摘要处出现 `/requestcard`，6.1 正式接口处出现 `/request-card`；当前按 6.1 正式接口路径统一为 `/request-card` | Card Application / API Path | AIX Card V1.0【Application】 / 2.2 / 6.1 | `_index.md` 已统一；如 DTC 最终接口与 6.1 不一致，需重新确认 | open |
