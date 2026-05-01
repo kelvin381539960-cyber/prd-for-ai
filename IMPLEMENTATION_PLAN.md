@@ -1,6 +1,6 @@
 # prd-for-ai 实施计划
 
-版本：v2.3  
+版本：v2.4  
 状态：执行中  
 适用仓库：`prd-for-ai`  
 更新时间：2026-05-01
@@ -36,7 +36,7 @@
 | 1 | Account 样板 | 已完成 | 固化知识库写法 | Login / Registration / Password Reset | 已完成 |
 | 2 | 基础规则沉淀 | 部分完成 | 建立长期规则 | Writing Standard / Source Rules | 持续完善 |
 | 3 | Security 标准化 | 已完成 | 统一认证事实源 | OTP / Email OTP / Passcode / BIO / Face Auth / API Reference | 已完成 |
-| 4 | Card 批量推进 | 当前阶段 | 转译卡模块 | Application / Status & Fields / Home / Manage / Transaction | 继续 card-home.md |
+| 4 | Card 批量推进 | 当前阶段 | 转译卡模块 | Application / Status & Fields / Home / Manage / Transaction | 继续 activation.md |
 | 5 | Wallet 批量推进 | 未开始 | 转译钱包模块 | KYC / Send / Swap / Receive / Deposit | 等 Card 完成 |
 | 6 | Transaction 统一层 | 未开始 | 统一交易状态 | Card / Wallet / Swap / History | Card / Wallet 后执行 |
 | 7 | Common / Integration | 未开始 | 抽公共能力 | DTC / AAI / WC / Error / FAQ | Transaction 后执行 |
@@ -66,8 +66,8 @@
 | card/_index.md | 已完成 | Card 模块边界与功能清单已收口 |
 | application.md | 已完成 | 申卡流程、资格、费用、币种、地区、卡类型、自动扣款、接口依赖已收口；资金链路缺口已记录 |
 | card-status-and-fields.md | 已完成 | 卡状态、字段、接口路径、操作限制缺口已收口；不可读状态表已记录 gaps |
-| card-home.md | 未开始 | 下一步执行，卡首页 |
-| activation.md | 未开始 | 实体卡激活 |
+| card-home.md | 已完成 | 卡首页、卡片展示、操作入口、Recent Transactions、物流信息和 FAQ 已收口 |
+| activation.md | 未开始 | 下一步执行，实体卡激活 |
 | pin.md | 未开始 | Set / Change / Reset PIN |
 | sensitive-info.md | 未开始 | 查看敏感卡信息 |
 | card-management.md | 未开始 | Lock / Unlock / Cancel |
@@ -87,8 +87,11 @@
 | Card / _index | 已完成 | Card 模块边界完成，接口路径已统一为 `/openapi/v1/card/request-card` |
 | Card / Application | 已完成 | 申卡流程完成；资金链路、状态口径、接口字段缺口已记录 |
 | Card / Status & Fields | 已完成 | 已建立状态展示组、字段字典、接口路径表、缺口记录 |
-| Card / Home | 未开始 | 下一步 |
-| Card / Manage | 未开始 | 待执行 |
+| Card / Home | 已完成 | 首页展示与入口完成 |
+| Card / Activation | 未开始 | 下一步 |
+| Card / PIN | 未开始 | 待执行 |
+| Card / Sensitive Info | 未开始 | 待执行 |
+| Card / Management | 未开始 | 待执行 |
 | Card / Transaction Flow | 未开始 | 待执行 |
 
 ---
@@ -97,17 +100,15 @@
 
 当前执行点：
 
-1. 开始 `card/card-home.md`
-2. 只写卡首页、卡片展示、卡片操作入口、Recent Transactions、物流信息和 FAQ 入口
+1. 开始 `card/activation.md`
+2. 只写实体卡激活流程
 3. 必须引用 `card-status-and-fields.md`，不得重新定义卡状态
-4. 必须引用 Card Application，不重复写申卡全流程
-5. 引用 Card Manage，不提前展开 Activation / PIN / Lock / Unlock 的正文细节
-6. 若 Home 文档字段或状态规则不完整，写入 `knowledge-gaps.md`
+4. 必须引用 Security Face Authentication，不重复定义活体识别规则
+5. 完成后再进入 `card/pin.md`
 
 当前禁止事项：
 
 - 不得直接跳到 Wallet
 - 不得重复写 Security 认证规则
 - 不得重新发明 Card 状态
-- 不得自行补 Card 接口或费用规则
-- 不得把 Activation、PIN、Card Transaction Flow 的细节混入 Card Home 正文
+- 不得把 PIN、Lock / Unlock、Card Transaction Flow 的正文细节混入 Activation 正文
