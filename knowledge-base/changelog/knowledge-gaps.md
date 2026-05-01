@@ -45,3 +45,15 @@ owner: 吴忆锋
 | KG-PWD-002 | Reset Password Page 输入不合法或为空时的具体错误文案原文未明确 | Password Reset / 异常文案 | AIX Card 注册登录需求V1.0 / 7.3.3 | 正文仅写 Next 不可点击或阻止继续，不补具体文案 | open |
 | KG-PWD-003 | 身份验证流程在 Password Reset 中具体采用 OTP、Email OTP 或其他方式，原文仅指向 Security 文档 | Password Reset / Identity Verification | AIX Card 注册登录需求V1.0 / 7.3.4；AIX Security 身份认证需求V1.0 | 正文引用 Security，不在 Account 中重复定义 | open |
 | KG-PWD-004 | 密码重置成功后的成功提示、跳转页或登录页落点原文未明确，只明确强制登出并需新密码重新登录 | Password Reset / 成功结果 | AIX Card 注册登录需求V1.0 / 7.3.5 | 正文只写强制登出和新密码重新登录 | open |
+
+## 5. Security / API Reference
+
+| 编号 | 问题 | 影响范围 | 来源 | 当前处理 | 状态 |
+|---|---|---|---|---|---|
+| KG-SEC-API-001 | `tokenAuthType` 为必填字段，但原文未说明枚举值、含义和与业务场景的映射关系 | Security API / Generate Verification URL | AIX Security 身份认证需求V1.0 / 9.1.1 | 正文保留字段，并标注“原文未给出说明” | open |
+| KG-SEC-API-002 | Generate Verification URL 接口未列出失败响应、错误码、重试规则和幂等要求 | Security API / Generate Verification URL | AIX Security 身份认证需求V1.0 / 9.1.1 | 正文不补失败处理，仅记录缺口 | open |
+| KG-SEC-API-003 | Query Auth Result 接口未列出 HTTP 失败、系统异常、网络异常、超时等响应字段 | Security API / Query Auth Result | AIX Security 身份认证需求V1.0 / 9.1.2 | 正文仅保留 status = INCOMPLETE / PASS / FAIL | open |
+| KG-SEC-API-004 | `INCOMPLETE` 同时包含未验证和验证中，原文未拆分具体状态 | Security API / Query Auth Result / 状态映射 | AIX Security 身份认证需求V1.0 / 9.1.2 | 正文按原文保留，不拆分新状态 | open |
+| KG-SEC-API-005 | 原文 `10.1 passport error code` 标题与错误码内容存在口径疑问，错误码多为活体 / 人脸相关错误 | Security API / Error Code Mapping | AIX Security 身份认证需求V1.0 / 10.1 | 正文说明原文标题与内容，不自行重命名事实来源 | open |
+| KG-SEC-API-006 | 原文 `9.2 外部接口地址` 仅写“Master sub account 设计方案”，没有可结构化接口地址或字段 | Security API / External API Address | AIX Security 身份认证需求V1.0 / 9.2 | 正文保留缺口，不补接口地址 | open |
+| KG-SEC-API-007 | 旧版 api-reference 中“验证处理规则需要列出10次，以及验证错误4、5次提示语优化”属于待定事项，需确认是否仍有效 | Security API / 错误提示规则 | 旧版 knowledge-base/security/api-reference.md / 11 待定事项 | 迁移至 gaps，不放入功能正文 | open |
