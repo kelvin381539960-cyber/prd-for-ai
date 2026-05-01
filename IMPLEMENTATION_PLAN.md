@@ -1,6 +1,6 @@
 # prd-for-ai 实施计划
 
-版本：v2.1  
+版本：v2.2  
 状态：执行中  
 适用仓库：`prd-for-ai`  
 更新时间：2026-05-01
@@ -36,7 +36,7 @@
 | 1 | Account 样板 | 已完成 | 固化知识库写法 | Login / Registration / Password Reset | 已完成 |
 | 2 | 基础规则沉淀 | 部分完成 | 建立长期规则 | Writing Standard / Source Rules | 持续完善 |
 | 3 | Security 标准化 | 已完成 | 统一认证事实源 | OTP / Email OTP / Passcode / BIO / Face Auth / API Reference | 已完成 |
-| 4 | Card 批量推进 | 当前阶段 | 转译卡模块 | Application / Manage / Transaction | 继续 card-home.md |
+| 4 | Card 批量推进 | 当前阶段 | 转译卡模块 | Application / Status & Fields / Home / Manage / Transaction | 继续 card-status-and-fields.md |
 | 5 | Wallet 批量推进 | 未开始 | 转译钱包模块 | KYC / Send / Swap / Receive / Deposit | 等 Card 完成 |
 | 6 | Transaction 统一层 | 未开始 | 统一交易状态 | Card / Wallet / Swap / History | Card / Wallet 后执行 |
 | 7 | Common / Integration | 未开始 | 抽公共能力 | DTC / AAI / WC / Error / FAQ | Transaction 后执行 |
@@ -63,14 +63,14 @@
 
 | 子任务 | 状态 | 说明 |
 |---|---|---|
-| card/_index.md | 已完成 | Card 模块边界与功能清单已收口 |
-| application.md | 已完成 | 申卡流程、资格、费用、币种、地区、卡类型、自动扣款、接口依赖已收口 |
-| card-home.md | 未开始 | 下一步执行，卡首页 |
+| card/_index.md | 已完成 | Card 模块边界与功能清单已收口，已将 Status & Fields 前置 |
+| application.md | 已完成 | 申卡流程、资格、费用、币种、地区、卡类型、自动扣款、接口依赖已收口；资金链路缺口已记录 |
+| card-status-and-fields.md | 未开始 | 下一步执行，先统一卡状态、字段、接口路径和操作限制 |
+| card-home.md | 未开始 | 等状态与字段收口后执行 |
 | activation.md | 未开始 | 实体卡激活 |
 | pin.md | 未开始 | Set / Change / Reset PIN |
 | sensitive-info.md | 未开始 | 查看敏感卡信息 |
 | card-management.md | 未开始 | Lock / Unlock / Cancel |
-| card-status-and-fields.md | 未开始 | 卡状态与字段 |
 | card-transaction-flow.md | 未开始 | 卡退款 / 回退钱包流程 |
 
 ---
@@ -84,9 +84,10 @@
 | Account / Password Reset | 已完成 | 已标准化 |
 | Account / _index | 已完成 | 模块收口 |
 | Security | 已完成 | Security 阶段全部收口 |
-| Card / _index | 已完成 | Card 模块边界完成 |
-| Card / Application | 已完成 | 申卡流程完成，缺口已记录 |
-| Card / Home | 未开始 | 下一步 |
+| Card / _index | 已完成 | Card 模块边界完成，接口路径已统一为 `/openapi/v1/card/request-card` |
+| Card / Application | 已完成 | 申卡流程完成；资金链路、状态口径、接口字段缺口已记录 |
+| Card / Status & Fields | 未开始 | 下一步 |
+| Card / Home | 未开始 | 需等 Status & Fields 后执行 |
 | Card / Manage | 未开始 | 待执行 |
 | Card / Transaction Flow | 未开始 | 待执行 |
 
@@ -96,15 +97,16 @@
 
 当前执行点：
 
-1. 开始 `card/card-home.md`
-2. 只写卡首页、卡片展示、卡片操作入口、Recent Transactions、物流信息和 FAQ 入口
-3. 引用 Card Application，不重复写申卡全流程
-4. 引用 Card Manage，不提前展开 Activation / PIN / Lock / Unlock 的正文细节
-5. 若 Home 文档字段或状态规则不完整，写入 `knowledge-gaps.md`
+1. 开始 `card/card-status-and-fields.md`
+2. 先统一 Card Application、Card Home、Card Manage、Card Transaction 会引用的卡状态、字段、接口路径和操作限制
+3. 明确哪些状态来自 Application 文档，哪些来自 Manage 文档，冲突进入 `knowledge-gaps.md`
+4. 明确申卡资金链路的已知字段与缺口，不得自行补不存在的流水字段
+5. 完成后再进入 `card/card-home.md`
 
 当前禁止事项：
 
 - 不得直接跳到 Wallet
+- 不得在状态未收口前继续 Card Home
 - 不得重复写 Security 认证规则
 - 不得自行补 Card 状态、字段、接口或费用规则
-- 不得把 Activation、PIN、Card Transaction Flow 的细节混入 Card Home 正文
+- 不得把未知资金流水字段写成已确认事实
