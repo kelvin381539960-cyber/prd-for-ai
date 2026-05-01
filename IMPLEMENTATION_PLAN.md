@@ -1,6 +1,6 @@
 # prd-for-ai 实施计划
 
-版本：v2.6  
+版本：v2.7  
 状态：执行中  
 适用仓库：`prd-for-ai`  
 更新时间：2026-05-01
@@ -9,7 +9,7 @@
 
 本文件是 `prd-for-ai` 仓库的长期实施主控文件。
 
-本项目会跨多个对话、多个时间段持续推进。后续每次开始执行前，必须先读取本文件，确认当前阶段、当前模块、待办任务和验收标准，再继续执行。
+后续每次开始执行前，必须先读取本文件，确认当前阶段、当前模块、待办任务和验收标准，再继续执行。
 
 本文件优先级高于临时对话结论。若临时任务与本实施计划冲突，必须先更新本实施计划，再执行具体任务。
 
@@ -36,7 +36,7 @@
 | 1 | Account 样板 | 已完成 | 固化知识库写法 | Login / Registration / Password Reset | 已完成 |
 | 2 | 基础规则沉淀 | 部分完成 | 建立长期规则 | Writing Standard / Source Rules | 持续完善 |
 | 3 | Security 标准化 | 已完成 | 统一认证事实源 | OTP / Email OTP / Passcode / BIO / Face Auth / API Reference | 已完成 |
-| 4 | Card 批量推进 | 当前阶段 | 转译卡模块 | Application / Status & Fields / Home / Manage / Transaction | 继续 sensitive-info.md |
+| 4 | Card 批量推进 | 当前阶段 | 转译卡模块 | Application / Status & Fields / Home / Manage / Transaction | 继续 card-management.md |
 | 5 | Wallet 批量推进 | 未开始 | 转译钱包模块 | KYC / Send / Swap / Receive / Deposit | 等 Card 完成 |
 | 6 | Transaction 统一层 | 未开始 | 统一交易状态 | Card / Wallet / Swap / History | Card / Wallet 后执行 |
 | 7 | Common / Integration | 未开始 | 抽公共能力 | DTC / AAI / WC / Error / FAQ | Transaction 后执行 |
@@ -64,14 +64,14 @@
 | 子任务 | 状态 | 说明 |
 |---|---|---|
 | card/_index.md | 已完成 | Card 模块边界与功能清单已收口 |
-| application.md | 已完成 | 申卡流程、资格、费用、币种、地区、卡类型、自动扣款、接口依赖已收口；资金链路缺口已记录 |
-| card-status-and-fields.md | 已完成 | 卡状态、字段、接口路径、操作限制缺口已收口；不可读状态表已记录 gaps |
-| card-home.md | 已完成 | 卡首页、卡片展示、操作入口、Recent Transactions、物流信息和 FAQ 已收口 |
-| activation.md | 已完成 | 实体卡激活流程、卡号后四位校验、Face Authentication、激活接口与 Set PIN 入口已收口 |
-| pin.md | 已完成 | Set PIN / Change PIN / Reset PIN、PIN 公钥、OTP For Reset PIN 与 Reset Card PIN 已收口 |
-| sensitive-info.md | 未开始 | 下一步执行，卡敏感信息查看 |
-| card-management.md | 未开始 | Lock / Unlock / Cancel |
-| card-transaction-flow.md | 未开始 | 卡退款 / 回退钱包流程 |
+| application.md | 已完成 | 申卡流程、资格、费用、币种、地区、卡类型、自动扣款、接口依赖已收口；缺口已记录 |
+| card-status-and-fields.md | 已完成 | 卡状态、字段、接口路径、操作限制缺口已收口 |
+| card-home.md | 已完成 | 卡首页、展示、入口、交易摘要、物流信息和 FAQ 已收口 |
+| activation.md | 已完成 | 实体卡激活流程已收口 |
+| pin.md | 已完成 | PIN 相关能力已收口 |
+| sensitive-info.md | 已完成 | 卡信息安全查看流程已收口 |
+| card-management.md | 未开始 | 下一步执行，卡管理操作 |
+| card-transaction-flow.md | 未开始 | 卡交易关联流程 |
 
 ---
 
@@ -84,14 +84,14 @@
 | Account / Password Reset | 已完成 | 已标准化 |
 | Account / _index | 已完成 | 模块收口 |
 | Security | 已完成 | Security 阶段全部收口 |
-| Card / _index | 已完成 | Card 模块边界完成，接口路径已统一为 `/openapi/v1/card/request-card` |
-| Card / Application | 已完成 | 申卡流程完成；资金链路、状态口径、接口字段缺口已记录 |
-| Card / Status & Fields | 已完成 | 已建立状态展示组、字段字典、接口路径表、缺口记录 |
+| Card / _index | 已完成 | Card 模块边界完成 |
+| Card / Application | 已完成 | 申卡流程完成，缺口已记录 |
+| Card / Status & Fields | 已完成 | 状态展示组、字段字典、接口路径表、缺口记录已建立 |
 | Card / Home | 已完成 | 首页展示与入口完成 |
 | Card / Activation | 已完成 | 实体卡激活完成，缺口已记录 |
 | Card / PIN | 已完成 | PIN 能力完成，缺口已记录 |
-| Card / Sensitive Info | 未开始 | 下一步 |
-| Card / Management | 未开始 | 待执行 |
+| Card / Sensitive Info | 已完成 | 卡信息安全查看完成，缺口已记录 |
+| Card / Management | 未开始 | 下一步 |
 | Card / Transaction Flow | 未开始 | 待执行 |
 
 ---
@@ -100,15 +100,15 @@
 
 当前执行点：
 
-1. 开始 `card/sensitive-info.md`
-2. 只写卡敏感信息查看流程、认证边界、展示规则、接口依赖与失败处理
-3. 必须引用 `card-status-and-fields.md`，不得重新定义卡字段
-4. 必须引用 Security Face Authentication，不重复定义活体识别规则
-5. 完成后再进入 `card/card-management.md`
+1. 开始 `card/card-management.md`
+2. 只写卡管理操作流程、状态边界、接口依赖与失败处理
+3. 必须引用 `card-status-and-fields.md`，不得重新定义卡状态
+4. 必须引用 Security 认证事实源，不重复定义认证规则
+5. 完成后再进入 `card/card-transaction-flow.md`
 
 当前禁止事项：
 
 - 不得直接跳到 Wallet
 - 不得重复写 Security 认证规则
-- 不得重新发明 Card 状态或敏感字段
-- 不得把 Lock / Unlock、Card Transaction Flow 的正文细节混入 Sensitive Info 正文
+- 不得重新发明 Card 状态
+- 不得把交易关联流程细节混入 Card Management 正文
