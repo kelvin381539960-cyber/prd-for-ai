@@ -1,6 +1,6 @@
 # prd-for-ai 实施计划
 
-版本：v1.8  
+版本：v1.9  
 状态：执行中  
 适用仓库：`prd-for-ai`  
 更新时间：2026-05-01
@@ -35,9 +35,9 @@
 |---|---|---|---|---|---|
 | 1 | Account 样板 | 已完成 | 固化知识库写法 | Login / Registration / Password Reset | 已完成 |
 | 2 | 基础规则沉淀 | 部分完成 | 建立长期规则 | Writing Standard / Source Rules | 持续完善 |
-| 3 | Security 标准化 | 进行中（核心认证能力已完成） | 统一认证事实源 | OTP / Email OTP / Passcode / BIO / Face Auth | 继续 API Reference |
-| 4 | Card 批量推进 | 未开始 | 转译卡模块 | Application / Manage / Transaction | 等 Security 完成 |
-| 5 | Wallet 批量推进 | 未开始 | 转译钱包模块 | KYC / Send / Swap / Receive / Deposit | 等 Security 完成 |
+| 3 | Security 标准化 | 已完成 | 统一认证事实源 | OTP / Email OTP / Passcode / BIO / Face Auth / API Reference | 已完成 |
+| 4 | Card 批量推进 | 当前阶段 | 转译卡模块 | Application / Manage / Transaction | 先做 card/_index.md |
+| 5 | Wallet 批量推进 | 未开始 | 转译钱包模块 | KYC / Send / Swap / Receive / Deposit | 等 Card 完成 |
 | 6 | Transaction 统一层 | 未开始 | 统一交易状态 | Card / Wallet / Swap / History | Card / Wallet 后执行 |
 | 7 | Common / Integration | 未开始 | 抽公共能力 | DTC / AAI / WC / Error / FAQ | Transaction 后执行 |
 | 8 | 全仓库回扫 | 未开始 | 去重复、补引用 | 字段 / 状态 / 来源 / gaps | 最后执行 |
@@ -46,7 +46,7 @@
 
 ## 12. 阶段内任务拆解
 
-### 12.3 阶段 3：Security 标准化（已更新进度）
+### 12.3 阶段 3：Security 标准化（已完成）
 
 | 子任务 | 状态 | 说明 |
 |---|---|---|
@@ -57,7 +57,21 @@
 | login-passcode-verification.md | 已完成 | Login Passcode 已标准化 |
 | biometric-verification.md | 已完成 | 设备生物识别已标准化，已与 Face Authentication 分离 |
 | face-authentication.md | 已完成 | DTC / AAI 侧活体识别已标准化 |
-| api-reference.md | 未开始 | 下一步执行 |
+| api-reference.md | 已完成 | 外部验证 URL、结果查询、错误码映射与接口缺口已收口 |
+
+### 12.4 阶段 4：Card 批量推进（当前阶段）
+
+| 子任务 | 状态 | 说明 |
+|---|---|---|
+| card/_index.md | 未开始 | 下一步执行，先收口 Card 模块功能清单 |
+| application.md | 未开始 | 申卡流程 |
+| card-home.md | 未开始 | 卡首页 |
+| activation.md | 未开始 | 实体卡激活 |
+| pin.md | 未开始 | Set / Change / Reset PIN |
+| sensitive-info.md | 未开始 | 查看敏感卡信息 |
+| card-management.md | 未开始 | Lock / Unlock / Cancel |
+| card-status-and-fields.md | 未开始 | 卡状态与字段 |
+| card-transaction-flow.md | 未开始 | 卡退款 / 回退钱包流程 |
 
 ---
 
@@ -76,7 +90,8 @@
 | Security / Passcode | 已完成 | 登录密码认证完成 |
 | Security / BIO | 已完成 | 设备生物识别完成 |
 | Security / Face Auth | 已完成 | DTC / AAI 活体识别完成 |
-| Security / API Reference | 未开始 | 下一步 |
+| Security / API Reference | 已完成 | 接口引用与错误码映射完成，缺口已记录 |
+| Card | 当前阶段 | 下一步从 card/_index.md 开始 |
 
 ---
 
@@ -84,13 +99,15 @@
 
 当前执行点：
 
-1. 开始 `api-reference.md`
-2. 仅整理 Security 已有接口 / 字段 / 错误码引用，不补不存在的接口
-3. 若接口文档缺失，必须写入 `knowledge-gaps.md`
-4. 完成后判断 Security 阶段是否可收口
+1. 开始 `card/_index.md`
+2. 先收口 Card 模块边界与功能清单
+3. 引用 Security 已完成认证事实源
+4. 不重复定义 Face Authentication、OTP、BIO 等认证规则
+5. 不补未在 Card 原始 PRD 或已确认知识库中出现的字段、状态或接口
 
 当前禁止事项：
 
-- 不得跳到 Card / Wallet
-- 不得自行补接口字段或错误码
-- 不得把接口缺口写成已确认事实
+- 不得直接跳到 Wallet
+- 不得重复写 Security 认证规则
+- 不得自行补 Card 状态、字段、接口或费用规则
+- 若 Card 文档之间存在冲突，必须写入 `knowledge-gaps.md`
