@@ -71,5 +71,19 @@ owner: 吴忆锋
 | KG-CARD-APP-007 | FAQ 配置来源、OBoss 可视化 Dashboard 未完成，当前为数据库预设口径 | Card Application / FAQ | AIX Card V1.0【Application】 / 5.1.4 | 正文保留预设数据库口径，不补 OBoss 配置能力 | open |
 | KG-CARD-APP-008 | 减免费来源写 MGM 提供减免传参，但未给出具体字段名、接口或回调机制 | Card Application / Discount / MGM | AIX Card V1.0【Application】 / 5.1.4 | 正文只写业务动作，不补接口字段 | open |
 | KG-CARD-APP-009 | 申卡支付链路缺少可追溯字段闭环，未明确 Apply Order、referenceNo、钱包扣减流水、DTC 扣费流水、退款流水、MGM discount id 之间的关联 | Card Application / 支付 / 退款 / 对账 | AIX Card V1.0【Application】 / 5.1.4 / 6.1 / 6.3 | 不补字段；后续应在 `card-status-and-fields.md` 或接口事实源中统一收口 | open |
-| KG-CARD-APP-010 | Application Result 使用 Processing / Pending / Active / Pending activation / Terminated / Cancelled 等状态，但 Card 统一状态字典尚未建立 | Card Application / Card Status | AIX Card V1.0【Application】 / 5.1.4；AIX Card manage模块需求V1.0 / 6.4 | 下一步改为优先建设 `card-status-and-fields.md`，先收敛状态再写 Card Home | open |
+| KG-CARD-APP-010 | Application Result 使用 Processing / Pending / Active / Pending activation / Terminated / Cancelled 等状态，但 Card 统一状态字典尚未建立 | Card Application / Card Status | AIX Card V1.0【Application】 / 5.1.4；AIX Card manage模块需求V1.0 / 6.4 | 已在 `card-status-and-fields.md` 建立已知状态分组；状态映射表仍需确认 | open |
 | KG-CARD-APP-011 | Card Application 原文接口清单早期摘要处出现 `/requestcard`，6.1 正式接口处出现 `/request-card`；当前按 6.1 正式接口路径统一为 `/request-card` | Card Application / API Path | AIX Card V1.0【Application】 / 2.2 / 6.1 | `_index.md` 已统一；如 DTC 最终接口与 6.1 不一致，需重新确认 | open |
+
+## 7. Card / Status & Fields
+
+| 编号 | 问题 | 影响范围 | 来源 | 当前处理 | 状态 |
+|---|---|---|---|---|---|
+| KG-CARD-STATUS-001 | Application 3.1 卡状态映射、3.2 虚拟卡状态机、3.3 实体卡状态机均为外链，PDF 正文未给出结构化状态表 | Card Status / 状态映射 | AIX Card V1.0【Application】 / 3.1-3.3 | `card-status-and-fields.md` 仅保留正文中出现的状态 | open |
+| KG-CARD-STATUS-002 | Application 4.3 cardStatus 卡状态在 PDF 中无可读表格内容 | Card Status / 数据字典 | AIX Card V1.0【Application】 / 4.3 | 不补 cardStatus 枚举 ID | open |
+| KG-CARD-STATUS-003 | Manage 6.1-6.4 状态映射、虚拟卡状态机、实体卡状态机、操作限制表在 DOCX 中为图片/同步块，无法结构化读取 | Card Status / 操作限制 | AIX Card manage模块需求V1.0 / 6.1-6.4 | 不补完整操作限制矩阵 | open |
+| KG-CARD-STATUS-004 | Home 3.5 卡状态映射为外链，无法结构化读取 | Card Home / 状态映射 | AIX APP V1.0【Home】 / 3.5 | 使用 Home 6.1 正文出现状态做展示分组 | open |
+| KG-CARD-STATUS-005 | `Pending` 与 `Processing` 是否为同一审核中状态未明确 | Card Status / Application Result / Home | Application / 6.10；Home / 6.1 | 当前归入“审核中”展示组，但不强行统一为一个系统状态 | open |
+| KG-CARD-STATUS-006 | `Pending activation` 与 `Inactive` 是否为同一待激活状态未明确 | Card Status / Application Result / Home | Application / 6.10；Home / 6.1 | 当前归入“待激活”展示组，但不强行统一为一个系统状态 | open |
+| KG-CARD-STATUS-007 | Manage Unlock 成功后写“状态更新为 Activate”，与其他文档 `Active` 口径不一致 | Card Management / Unlock | AIX Card manage模块需求V1.0 / 7.5 | 正文标记为疑似 `Active`，不直接替换 | open |
+| KG-CARD-STATUS-008 | Get Card Basic Info 接口在 Application 与 Manage 中路径不一致 | Card API / Basic Info | Application / 2.2；Manage / 8.1 | `card-status-and-fields.md` 并列保留，待接口最终确认 | open |
+| KG-CARD-STATUS-009 | Get Card Sensitive Info 接口在 Application 与 Manage 中路径不一致 | Card API / Sensitive Info | Application / 2.2；Manage / 8.1 | `card-status-and-fields.md` 并列保留，待接口最终确认 | open |
