@@ -1,6 +1,6 @@
 # prd-for-ai 实施计划
 
-版本：v1.4  
+版本：v1.5  
 状态：执行中  
 适用仓库：`prd-for-ai`  
 更新时间：2026-05-01
@@ -25,6 +25,7 @@
 8. 所有内容必须来源于历史 PRD、接口文档、截图、已确认结论或已存在知识库。
 9. 允许跨文档、跨模块引用已确认事实。
 10. 禁止无来源补流程、补页面、补字段、补状态、补文案。
+11. 每完成一个能力块，必须同步更新本文件；单文件未形成能力块时，可只更新模块 `_index.md`。
 
 ---
 
@@ -34,7 +35,7 @@
 |---|---|---|---|---|---|
 | 1 | Account 样板 | 已完成 | 固化知识库写法 | Login / Registration / Password Reset | 已完成 |
 | 2 | 基础规则沉淀 | 部分完成 | 建立长期规则 | Writing Standard / Source Rules | 持续完善 |
-| 3 | Security 标准化 | 进行中（已完成部分） | 统一认证事实源 | OTP / Email OTP / Passcode / BIO / IVS | 继续 Email OTP |
+| 3 | Security 标准化 | 进行中（AIX OTP类已完成） | 统一认证事实源 | OTP / Email OTP / Passcode / BIO / IVS | 继续 Login Passcode |
 | 4 | Card 批量推进 | 未开始 | 转译卡模块 | Application / Manage / Transaction | 等 Security 完成 |
 | 5 | Wallet 批量推进 | 未开始 | 转译钱包模块 | KYC / Send / Swap / Receive / Deposit | 等 Security 完成 |
 | 6 | Transaction 统一层 | 未开始 | 统一交易状态 | Card / Wallet / Swap / History | Card / Wallet 后执行 |
@@ -52,8 +53,8 @@
 | security/_index.md | 已完成 | Security 模块边界与功能清单已收口 |
 | global-rules.md | 已完成 | 全局认证规则、场景矩阵、优先级、有效期、状态机已收口 |
 | otp-verification.md | 已完成 | 短信 OTP 已标准化 |
-| email-otp-verification.md | 未开始 | 下一步执行 |
-| login-passcode-verification.md | 未开始 | 待执行 |
+| email-otp-verification.md | 已完成 | 邮箱 OTP 已标准化 |
+| login-passcode-verification.md | 未开始 | 下一步执行 |
 | biometric-verification.md | 未开始 | 待执行 |
 | face-authentication.md | 未开始 | 待执行 |
 | api-reference.md | 未开始 | 待执行 |
@@ -71,8 +72,8 @@
 | Security / index | 已完成 | 模块边界完成 |
 | Security / global-rules | 已完成 | 认证核心规则完成 |
 | Security / OTP | 已完成 | 短信 OTP 完成 |
-| Security / Email OTP | 未开始 | 下一步 |
-| Security / Passcode | 未开始 | 待执行 |
+| Security / Email OTP | 已完成 | 邮箱 OTP 完成 |
+| Security / Passcode | 未开始 | 下一步 |
 | Security / BIO | 未开始 | 待执行 |
 | Security / Face Auth | 未开始 | 待执行 |
 
@@ -82,10 +83,10 @@
 
 当前执行点：
 
-1. 开始 `email-otp-verification.md`
+1. 开始 `login-passcode-verification.md`
 2. 按同样标准结构重构
 3. 不重复 global rules
-4. 完成后再更新实施计划
+4. 完成后判断是否形成能力块；若形成，更新实施计划
 
 当前禁止事项：
 
