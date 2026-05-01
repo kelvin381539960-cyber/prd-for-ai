@@ -47,47 +47,56 @@ Login 用于已注册用户通过邮箱、手机号或 Biometric 快捷登录进
 | Biometric 快捷登录需要本地存在可用 BIO 密钥 | 仅检测到可用生物识别密钥时展示 Quick Login | AIX Card 注册登录需求V1.0 / 7.2.5 |
 | Biometric 启用依赖设备绑定 | 仅当设备已绑定，登录时方可启用 Biometric | AIX Card 注册登录需求V1.0 / 6.2.6 |
 
-## 4. 页面关系图
+## 4. 主路径
 
-> Mermaid 用于当前知识库主表达，便于 GitHub 渲染和人工阅读。  
-> 原始 PRD 页面概览截图仅用于追溯，不作为主规则表达。
-
-```mermaid
-flowchart TD
-    A[Navigation Page] -->|I already have an account| B[Login Page]
-    A -->|Create account| R[Registration Page]
-
-    B -->|Email tab: input email + Next| C[Identity Verification]
-    B -->|Phone tab: country code| D[Select Country Page]
-    D -->|Select country / region| B
-    B -->|Phone tab: input phone + Next| C
-    B -->|Forgot password| P[Password Reset Page]
-    B -->|Quick Login| Q[Biometric Verification]
-
-    C -->|Success + BIO enabled| H[Home]
-    C -->|Success + BIO not enabled + device supports BIO| E[Enable BIO Page]
-    C -->|Failed / Locked| S[Security Error Handling]
-
-    Q -->|Success| H
-    Q -->|Failed| S
-
-    E -->|Close| H
-    E -->|Enable now: within 5 min manual login| Q
-    E -->|Enable now: over 5 min| C
+```text
+Navigation Page → Login Page → Identity Verification → Home
 ```
 
-## 5. 原始 PRD 页面概览
+登录成功后：
 
-> 以下截图来自原始飞书 PRD，仅用于追溯原始设计上下文。  
-> 当前页面关系以 Mermaid 图和结构化规则为准。
+| 条件 | 下一步 |
+|------|--------|
+| BIO 已启用 | 直接进入 Home |
+| BIO 未启用，且设备支持 Biometric | 进入 Enable BIO Page |
+| 设备未开启人脸或指纹识别 | 不展示 Enable BIO Page，直接进入 Home |
 
-![登录流程说明](../assets/account/image28.jpeg)
+## 5. 页面地图
 
-![登录页面概览](../assets/account/image29.jpeg)
+| 页面 / 能力 | 页面目的 | 入口 | 主要出口 | 关联页面 / 能力 |
+|-------------|----------|------|----------|----------------|
+| Navigation Page | 选择注册或登录 | App 未登录态 | Login Page / Registration Page | - |
+| Login Page | 输入邮箱、手机号，或使用 Quick Login | Navigation Page | Identity Verification / Password Reset / Select Country / Biometric Verification | Account Status / Security |
+| Select Country Page | 选择手机号国家 / 地区区号 | Login Page | Login Page | Countries and Regions |
+| Identity Verification | 登录身份验证 | Login Page | Home / Enable BIO Page / Security Error Handling | Security |
+| Biometric Verification | 快捷登录验证 | Login Page 的 Quick Login | Home / Security Error Handling | Device Biometric / Security |
+| Enable BIO Page | 登录后引导开启 BIO | Login Success | Home / Biometric Verification / Identity Verification | Device Biometric / Security |
+| Password Reset Page | 忘记密码入口 | Login Page | Identity Verification | Password Reset |
 
-## 6. 页面卡片与交互规则
+## 6. 页面跳转关系
 
-### 6.1 Navigation Page
+| 当前页面 | 用户动作 / 触发条件 | 下一步 | 说明 |
+|----------|--------------------|--------|------|
+| Navigation Page | 点击 `I already have an account` | Login Page | 进入登录 |
+| Navigation Page | 点击 `Create account` | Registration Page | 进入注册 |
+| Login Page | Email 输入合法 + 点击 `Next` | Identity Verification | 邮箱登录 |
+| Login Page | Phone 输入合法 + 点击 `Next` | Identity Verification | 手机号登录 |
+| Login Page | 点击 Country Code | Select Country Page | 选择手机号区号 |
+| Select Country Page | 选择国家 / 地区 | Login Page | 带回区号 |
+| Login Page | 点击 `Forgot password` | Password Reset Page | 进入忘记密码 |
+| Login Page | 点击 `Quick Login` | Biometric Verification | 仅本地有 Biometric 密钥时展示 |
+| Identity Verification | 验证成功 + BIO 已启用 | Home | 直接登录成功 |
+| Identity Verification | 验证成功 + BIO 未启用 + 设备支持 BIO | Enable BIO Page | 登录后引导开启 BIO |
+| Identity Verification | 验证失败 / 锁定 | Security Error Handling | 按 Security 模块规则处理 |
+| Biometric Verification | 验证成功 | Home | 快捷登录成功 |
+| Biometric Verification | 验证失败 | Security Error Handling | 设备端或后端验证失败 |
+| Enable BIO Page | 点击 Close | Home | Toast: `Login success` |
+| Enable BIO Page | 点击 Enable now，且手动登录 5 分钟内 | Biometric Verification | 免再次身份认证 |
+| Enable BIO Page | 点击 Enable now，且手动登录超过 5 分钟 | Identity Verification | 需重新身份认证后继续设置 |
+
+## 7. 页面卡片与交互规则
+
+### 7.1 Navigation Page
 
 > Navigation Page 复用 Registration 中的 Navigation Page。
 
@@ -103,7 +112,7 @@ flowchart TD
 | I already have an account | Button | 默认展示 | 点击进入 Login Page | 无 |
 | Create account | Button | 默认展示 | 点击进入 Registration Page | 无 |
 
-### 6.2 Login Page
+### 7.2 Login Page
 
 ![Login Page UX](../assets/account/image30.png)
 
@@ -134,7 +143,7 @@ Next 按钮处理逻辑：
 | 账户 Banned | 账户被限制登录 | `Account locked. Please contact customer support.` | 当前知识库旧内容 |
 | 正常流程 | 输入合法且账号可登录 | 自动跳转至身份验证流程页 | AIX Card 注册登录需求V1.0 / 7.2.4 |
 
-### 6.3 Select Country Page
+### 7.3 Select Country Page
 
 ![Select Country Page UX](../assets/account/image32.png)
 
@@ -152,7 +161,15 @@ Next 按钮处理逻辑：
 | 常用地区 | List | 默认展示 | 固定展示 Australia、Singapore、Philippines、Vietnam | 无 |
 | Search | SearchInput | 如 UI 提供 | 支持搜索国家 / 地区 | 无 |
 
-### 6.4 Biometric Quick Login
+### 7.4 Biometric Quick Login
+
+| 维度 | 内容 |
+|------|------|
+| 页面 / 能力目的 | 用户通过设备生物识别完成快捷登录 |
+| 入口 | Login Page 点击 Quick Login |
+| 出口 | 验证成功 → Home；验证失败 → 错误提示或留在 Login Page |
+| 展示条件 | App 本地检测到存在可用 Biometric 密钥 |
+| 关联模块 | `security/biometric-verification.md` |
 
 #### iOS Face ID
 
@@ -174,14 +191,6 @@ Next 按钮处理逻辑：
 
 ![Android Fingerprint](../assets/account/image37.jpeg)
 
-| 维度 | 内容 |
-|------|------|
-| 页面 / 能力目的 | 用户通过设备生物识别完成快捷登录 |
-| 入口 | Login Page 点击 Quick Login |
-| 出口 | 验证成功 → Home；验证失败 → 错误提示或留在 Login Page |
-| 展示条件 | App 本地检测到存在可用 Biometric 密钥 |
-| 关联模块 | `security/biometric-verification.md` |
-
 | 元素 / 能力 | 类型 | 展示条件 | 交互规则 | 异常 |
 |-------------|------|----------|----------|------|
 | Quick Login | Button | 本地存在可用 Biometric 密钥 | 点击拉起设备生物识别 | 设备端失败 / 后端验证失败 |
@@ -190,7 +199,7 @@ Next 按钮处理逻辑：
 | Android Face | Device Auth | Android 设备且支持人脸 | 设备验证通过后进行后端验证 | 后端失败弹窗提示 |
 | Android Fingerprint | Device Auth | Android 设备且支持指纹 | 设备验证通过后进行后端验证 | 后端失败弹窗提示 |
 
-### 6.5 Enable BIO Page
+### 7.5 Enable BIO Page
 
 ![Enable BIO Page UX](../assets/account/image38.png)
 
@@ -218,40 +227,6 @@ Next 按钮处理逻辑：
 | 超过 5 分钟需重新认证 | 用户完成手动登录 5 分钟后，需要进行身份验证后再继续设置 BIO | AIX Card 注册登录需求V1.0 / 7.2.7 |
 | 已启用 BIO | 登录成功后跳过 Enable BIO Page，直接进入 Home | AIX Card 注册登录需求V1.0 / 7.2.7 |
 | 未开启系统生物识别 | 登录成功后不弹出 BIO 引导页，直接进入 Home | 当前知识库旧内容 |
-
-## 7. 状态机
-
-### 7.1 登录结果状态
-
-```mermaid
-stateDiagram-v2
-    [*] --> LoginInput
-    LoginInput --> Verifying: Next / Quick Login
-    Verifying --> LoggedIn: Success
-    Verifying --> SecurityErrorHandling: Auth failed / locked
-    Verifying --> LoginBlocked: Account banned / closed / locked
-    LoggedIn --> Home: BIO enabled
-    LoggedIn --> EnableBIO: BIO not enabled + device supports BIO
-    EnableBIO --> Home: Close
-    EnableBIO --> BiometricVerification: Enable now within 5 min
-    EnableBIO --> Verifying: Enable now over 5 min
-```
-
-### 7.2 Enable BIO 引导状态
-
-```mermaid
-flowchart TD
-    A[Login Success] --> B{BIO enabled?}
-    B -->|Yes| H[Home]
-    B -->|No| C{Device supports biometric?}
-    C -->|No| H
-    C -->|Yes| D[Enable BIO Page]
-    D -->|Close| H
-    D -->|Enable now within 5 min| E[Device Biometric]
-    D -->|Enable now over 5 min| F[Identity Verification]
-    F --> E
-    E --> H
-```
 
 ## 8. 字段与接口依赖
 
@@ -292,8 +267,8 @@ flowchart TD
 
 ### UI 视角
 
-- 页面关系以 Mermaid 图为主，原页面概览截图只做追溯证据。
-- 具体页面使用截图 + Page Card + 元素表表达，便于直接查看页面上下文。
+- 通过页面地图确认页面范围，通过页面卡片查看具体页面截图和元素规则。
+- 不再依赖原始 PRD 页面概览截图作为主表达。
 - 重点页面：Login Page、Select Country Page、Biometric 系统弹窗、Enable BIO Page。
 
 ### 开发视角
