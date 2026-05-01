@@ -1,178 +1,336 @@
 ---
 module: account
-page: login
-title: 登录功能
-source_doc: "AIX Card 注册登录需求V1.0 (2).docx"
+feature: login
 version: "1.0"
-last_updated: 2025-01-20
-country_support: [VN, PH, AU]
 status: active
-tags: [login, account, biometric, email, phone, otp, country-selector]
+source_doc: 历史prd/AIX Card 注册登录需求V1.0.docx
+source_section: 7.2 登录功能
+last_updated: 2026-05-01
+owner: 吴忆锋
+depends_on:
+  - account/_index
+  - registration
+  - security/global-rules
+  - security/otp-verification
+  - security/email-otp-verification
+  - security/login-passcode-verification
+  - security/biometric-verification
+  - _meta/status-dictionary
+  - _meta/writing-standard
+readers: [product, ui, dev, qa, business, ai]
 ---
 
-# AIX Card 注册登录需求 V1.0 — 登录功能
-
-> 本文档由原始 PRD（飞书导出 .docx）100% 原文转译为结构化 Markdown，未做任何内容精简或归纳。
-> 项目背景、项目目的、国家线、账户规则等全局信息见 [registration.md](./registration.md) 章节2-5。
-
----
-
-## 7.2 登录功能
-
-### 7.2.1 流程说明
-
-> 原始PRD参考截图（飞书文档截图，含登录流程概览图）
-
-![登录流程说明](../assets/account/image28.jpeg)
-
-### 7.2.2 页面概览
-
-> 原始PRD参考截图（飞书文档截图，含登录功能所有页面概览）
-
-![登录页面概览](../assets/account/image29.jpeg)
-
----
-
-### 7.2.3 Navigation Page（引导页）
-
-> 复用注册功能-Navigation Page
-> 详见 [registration.md → 7.3 Navigation Page](./registration.md#73-navigation-page引导页)
-
----
-
-### 7.2.4 Login Page（登录页）
-
-#### UX 参考截图
-
-> 原始PRD参考截图（飞书文档截图，含登录页UI原型 — 多状态展示同一页面）
-
-| 状态 | UX截图 |
-|------|--------|
-| 默认状态 | ![Login Page UX](../assets/account/image30.png) |
-
-#### 功能说明
-
-> 注：原文档 Description 列从第4项开始，1-3项内容见 UX 截图中的页面交互说明。
-
-**4. 下一步按钮**
-
-- 初始状态为禁用。仅当输入框内容不为空，且输入格式校验通过，变为可用；
-
-点击按钮处理逻辑：
-- 账号不存在或未注册：提示文案：您输入的账号信息有误，请检查或注册新账号。
-- 手机号少于6位：提示：Phone number must be at least 6 digits
-- 账号被Banned：提示文案：Account locked. Please contact customer support.
-- 正常流程：自动跳转至 身份验证流程页；
-
-**5. Quick Login按钮**
-
-显示条件：
-- 仅当App本地检测到存在可用的生物识别（Biometric）密钥信息时，才向用户展示此按钮。
-
-功能逻辑：
-- 点击后触发生物识别登录流程，具体逻辑见独立的"Biometric登录"章节。
-
----
-
-### 7.2.4.1 Select Country Page（国家选择页）
-
-#### UX 参考截图
-
-> 原始PRD参考截图（飞书文档截图，含国家选择页UI原型）
-
-| 状态 | UX截图 |
-|------|--------|
-| 默认状态 | ![Select Country Page UX](../assets/account/image32.png) |
-
-#### 功能说明
-
-**1. 页面规则**
-
-- 点击打开国家列表，展示全部国家。
-- 展示完整国家list参考，见国家和地区list；
-- 国家list，后端需要隐藏中国和中国台湾选项；
-
-列表排序规则：
-- 实现方式：采用组件 `new Intl.Collator('vi-VN').compare`
-
-**2. 常用地区**
-
-- 显示常用国家地区，固定为：澳大利亚、新加坡、菲律宾、越南
-
----
-
-### 7.2.5 Biometric登录
-
-#### UX 参考截图
-
-> 原始PRD参考截图（飞书文档截图，含Biometric登录各平台UI原型）
-
-| 模块 | UX截图 |
-|------|--------|
-| iOS人脸 | ![iOS Face ID](../assets/account/image33.jpeg) |
-| iOS指纹 | ![iOS Touch ID](../assets/account/image34.jpeg) |
-| Android人脸 | ![Android Face](../assets/account/image36.jpeg) |
-| Android指纹 | ![Android Fingerprint](../assets/account/image37.jpeg) |
-
-#### 功能说明
-
-| 模块 | 需求说明 |
-|------|----------|
-| iOS人脸 | 点击「Quick Login」，拉起设备人脸验证<br>判断是否验证通过：<br>- 设备端验证通过，则进行后端验证<br>- 后端验证成功，进入下一步流程，并使用biometric签名请求身份认证；<br>- 后端验证失败，则弹窗提示 |
-| iOS指纹 | 点击「Quick Login」，拉起设备指纹验证<br>判断是否验证通过：<br>- 设备端验证通过，则进行后端验证<br>- 后端验证成功，进入下一步流程，并使用biometric签名请求身份认证；<br>- 后端验证失败，则弹窗提示 |
-| Android人脸 | 点击「Quick Login」，拉起设备人脸验证<br>判断是否验证通过：<br>- 设备端验证通过，则进行后端验证<br>- 后端验证成功，进入下一步流程，并使用biometric签名请求身份认证；<br>- 后端验证失败，则弹窗提示 |
-| Android指纹 | 点击「Quick Login」，若协议已全部勾选，则拉起设备人脸验证<br>判断是否验证通过：<br>- 设备端验证通过，则进行后端验证<br>- 后端验证成功，进入下一步流程，并使用biometric签名请求身份认证；<br>- 后端验证失败，则弹窗提示 |
-
-> 补充截图：Android指纹验证弹窗
-
-![Android指纹验证弹窗](../assets/account/image35.png)
-
----
-
-### 7.2.6 身份验证流程页面
-
-> 详细需求见：AIX Security 身份认证需求V1.0
-
----
-
-### 7.2.7 Enable BIO Page（启用生物识别引导页）
-
-#### UX 参考截图
-
-> 原始PRD参考截图（飞书文档截图，含启用BIO引导页UI原型 — 多状态展示同一页面）
-
-| 状态 | UX截图 |
-|------|--------|
-| 默认状态 | ![Enable BIO Page UX](../assets/account/image38.png) |
-
-#### Description 参考截图
-
-![Enable BIO Page Description](../assets/account/image39.png)
-
-#### 功能说明
-
-**1. 页面规则**
-
-用户登录成功后，系统将检测其生物识别（BIO）状态：
-- 若未启用BIO：则引导用户进入此功能启用页面。
-- 若已启用BIO：则跳过此页面，直接进入APP首页。
-- 若用户未在手机系统中开启人脸或指纹识别功能，则登录成功后不弹出生物识别引导页，直接进入首页
-
-**2. 关闭按钮**
-
-- 点击关闭按钮，直接进入APP首页，并toast提示：Login success
-
-**3. 图片&标题&副标题**
-
-- 固定文案
-
-**4. Enable now按钮**
-
-点击按钮，检测设备生物识别权限状态：
-- 已授权：直接调起生物认证流程
-- 未授权：弹窗引导至系统权限设置
-
-特殊处理：
-- 需调用身份认证接口
-- 用户在完成手动登录后的5分钟内，无需再次进行身份验证
-- 用户在完成手动登录后的5分钟后，需要进行身份验证后再继续设置
+# Login 登录功能
+
+## 1. 功能定位
+
+Login 用于已注册用户通过邮箱、手机号或 Biometric 快捷登录进入 AIX App。
+
+登录成功后，系统根据用户是否已启用 Biometric 决定是否展示 Enable BIO Page。若已启用 BIO，则跳过该引导页直接进入 Home。
+
+## 2. 适用范围
+
+| 维度 | 规则 | 来源 | 备注 |
+|------|------|------|------|
+| 用户状态 | 已注册用户 | AIX Card 注册登录需求V1.0 / 7.2 登录功能 | 未注册用户应引导注册 |
+| 账户状态 | Active 可登录；Banned / Closed / Locked 不可登录 | AIX Card 注册登录需求V1.0 / 6.2 账户说明 | 状态定义见 `_meta/status-dictionary.md` |
+| 登录方式 | Email / Phone / Biometric | AIX Card 注册登录需求V1.0 / 7.2.4；7.2.5 | Biometric 依赖设备绑定与本地凭证 |
+| 国家 / 地区选择 | 手机号登录展示全球国家 / 地区区号列表 | AIX Card 注册登录需求V1.0 / 2025-11-18 变更记录；7.2.4.1 | 中国和中国台湾选项后端隐藏 |
+| 身份认证 | 登录可选择 OTP / Email OTP / Login Passcode / BIO | AIX Security 身份认证需求V1.0 / 7.2 | Bio 登录目前可跳过其他认证 |
+
+## 3. 前置条件
+
+| 条件 | 说明 | 来源 |
+|------|------|------|
+| 用户已有 AIX 账户 | 登录面向已注册用户 | AIX Card 注册登录需求V1.0 / 7.2 |
+| 账户未被禁止登录 | Banned / Closed / Locked 均影响登录能力 | AIX Card 注册登录需求V1.0 / 6.2 |
+| Biometric 快捷登录需要本地存在可用 BIO 密钥 | 仅检测到可用生物识别密钥时展示 Quick Login | AIX Card 注册登录需求V1.0 / 7.2.5 |
+| Biometric 启用依赖设备绑定 | 仅当设备已绑定，登录时方可启用 Biometric | AIX Card 注册登录需求V1.0 / 6.2.6 |
+
+## 4. 标准流程
+
+```text
+┌─────────────────┐
+│ Navigation Page │
+└────────┬────────┘
+         │ 点击 I already have an account
+         ▼
+┌─────────────────┐
+│ Login Page      │
+└───────┬─────────┘
+        │
+        ├─ Email login
+        │   ├─ 输入 Email
+        │   └─ Next → Identity Verification
+        │
+        ├─ Phone login
+        │   ├─ 点击 Country Code → Select Country Page
+        │   ├─ 选择区号 + 输入 Phone
+        │   └─ Next → Identity Verification
+        │
+        └─ Quick Login
+            └─ Biometric Verification
+
+Identity Verification / Biometric
+        │ 验证成功
+        ▼
+┌─────────────────────────┐
+│ Login Success           │
+└────────┬────────────────┘
+         │
+         ├─ BIO 已启用 → Home
+         │
+         └─ BIO 未启用且设备支持 → Enable BIO Page
+                                      ├─ Close → Home + Login success toast
+                                      └─ Enable now → Identity Verification if needed
+                                                      → Device Biometric
+                                                      → Home
+```
+
+## 5. 页面关系图
+
+页面关系以 ASCII 图为主。原始页面概览截图仅用于追溯，不作为主规则表达。
+
+```text
+Navigation Page
+  ├─ Create account → Registration Page
+  └─ I already have an account → Login Page
+
+Login Page
+  ├─ Email tab
+  │   ├─ Email input valid + Next → Identity Verification
+  │   └─ Forgot password → Password Reset Page
+  │
+  ├─ Phone tab
+  │   ├─ Country Code → Select Country Page → Login Page
+  │   ├─ Phone input valid + Next → Identity Verification
+  │   └─ Forgot password → Password Reset Page
+  │
+  └─ Quick Login
+      └─ Biometric Verification → Home / Error Popup
+
+Identity Verification
+  ├─ Success + BIO enabled → Home
+  ├─ Success + BIO not enabled + device supports BIO → Enable BIO Page
+  └─ Failed / Locked → Security module error handling
+
+Enable BIO Page
+  ├─ Close → Home
+  └─ Enable now
+      ├─ 手动登录 5 分钟内 → Device Biometric
+      └─ 超过 5 分钟 → Identity Verification → Device Biometric
+```
+
+## 6. 页面与交互规则
+
+### 6.1 原始 PRD 参考截图
+
+> 以下截图来自原始飞书 PRD，仅用于追溯原始设计上下文。  
+> 页面关系以本文 ASCII 图和结构化规则为准。
+
+| 内容 | 截图 |
+|------|------|
+| 登录流程说明 | `../assets/account/image28.jpeg` |
+| 登录页面概览 | `../assets/account/image29.jpeg` |
+| Login Page UX | `../assets/account/image30.png` |
+| Select Country Page UX | `../assets/account/image32.png` |
+| iOS Face ID | `../assets/account/image33.jpeg` |
+| iOS Touch ID | `../assets/account/image34.jpeg` |
+| Android Fingerprint Popup | `../assets/account/image35.png` |
+| Android Face | `../assets/account/image36.jpeg` |
+| Android Fingerprint | `../assets/account/image37.jpeg` |
+| Enable BIO Page UX | `../assets/account/image38.png` |
+| Enable BIO Page Description | `../assets/account/image39.png` |
+
+### 6.2 Navigation Page
+
+Navigation Page 复用 Registration 中的 Navigation Page。
+
+| 元素 | 类型 | 展示条件 | 交互规则 | 异常 |
+|------|------|----------|----------|------|
+| I already have an account | Button | 默认展示 | 点击进入 Login Page | 无 |
+| Create account | Button | 默认展示 | 点击进入 Registration Page | 无 |
+
+### 6.3 Login Page
+
+| 元素 | 类型 | 展示条件 | 交互规则 | 异常 |
+|------|------|----------|----------|------|
+| Email / Phone 切换 | Tab | 默认展示 | 默认选中 Email；用户可切换到 Phone | 切换时是否保留输入内容需按当前实现或 UI 确认 |
+| Email 输入框 | TextInput | Email tab | 最长 254 字符；校验邮箱格式；不能为空 | `Email format is invalid`；`Email should not be empty` |
+| Country Code | Selector | Phone tab | 点击进入 Select Country Page | 中国和中国台湾选项隐藏 |
+| Phone 输入框 | TextInput | Phone tab | 仅允许数字；最长 20 位；少于 6 位提示错误 | `Phone number must be at least 6 digits` |
+| Next | Button | 输入非空且格式校验通过 | 点击进入身份验证流程 | 账号不存在、账户 Banned、认证失败 |
+| Quick Login | Button | 本地检测到可用 Biometric 密钥 | 点击触发设备生物识别登录流程 | 设备验证失败、后端验证失败 |
+| Forgot password | Link / Button | 登录页展示 | 点击进入 Password Reset Page | 无 |
+
+Next 按钮处理逻辑：
+
+| 场景 | 规则 | 用户提示 / 动作 | 来源 |
+|------|------|----------------|------|
+| 账号不存在或未注册 | 后端判断账号不存在 | 原文中文：`您输入的账号信息有误，请检查或注册新账号。` | AIX Card 注册登录需求V1.0 / 7.2.4 |
+| Phone 少于 6 位 | Phone 输入不满足最小长度 | `Phone number must be at least 6 digits` | 当前知识库旧内容 |
+| 账户 Banned | 账户被限制登录 | `Account locked. Please contact customer support.` | 当前知识库旧内容 |
+| 正常流程 | 输入合法且账号可登录 | 自动跳转至身份验证流程页 | AIX Card 注册登录需求V1.0 / 7.2.4 |
+
+### 6.4 Select Country Page
+
+| 元素 | 类型 | 展示条件 | 交互规则 | 异常 |
+|------|------|----------|----------|------|
+| 国家 / 地区列表 | List | Phone tab 点击 Country Code | 展示全部国家 / 地区；按排序规则展示 | 中国和中国台湾选项后端隐藏 |
+| 常用地区 | List | 默认展示 | 固定展示 Australia、Singapore、Philippines、Vietnam | 无 |
+| Search | SearchInput | 如 UI 提供 | 支持搜索国家 / 地区 | 无 |
+
+排序规则：采用组件 `new Intl.Collator('vi-VN').compare`。
+
+### 6.5 Biometric Quick Login
+
+| 元素 / 能力 | 类型 | 展示条件 | 交互规则 | 异常 |
+|-------------|------|----------|----------|------|
+| Quick Login | Button | 本地存在可用 Biometric 密钥 | 点击拉起设备生物识别 | 设备端失败 / 后端验证失败 |
+| iOS Face ID | Device Auth | iOS 设备且支持 Face ID | 设备验证通过后进行后端验证 | 后端失败弹窗提示 |
+| iOS Touch ID | Device Auth | iOS 设备且支持 Touch ID | 设备验证通过后进行后端验证 | 后端失败弹窗提示 |
+| Android Face | Device Auth | Android 设备且支持人脸 | 设备验证通过后进行后端验证 | 后端失败弹窗提示 |
+| Android Fingerprint | Device Auth | Android 设备且支持指纹 | 设备验证通过后进行后端验证 | 后端失败弹窗提示 |
+
+## 7. Enable BIO Page
+
+| 元素 | 类型 | 展示条件 | 交互规则 | 异常 |
+|------|------|----------|----------|------|
+| Enable BIO Page | Guide Page | 登录成功后，用户未启用 BIO，且设备支持生物识别 | 引导用户选择是否开启 BIO | 若设备未开启人脸或指纹识别，不展示该页，直接进入 Home |
+| Close | Button | 页面展示时 | 点击进入 Home，并 Toast：`Login success` | 无 |
+| Enable now | Button | 页面展示时 | 检测设备生物识别权限状态；已授权则调起设备认证；未授权则引导系统权限设置 | 认证失败按 Security / Biometric 规则处理 |
+
+特殊规则：
+
+| 规则 | 内容 | 来源 |
+|------|------|------|
+| 手动登录 5 分钟内免重认证 | 用户完成手动登录后的 5 分钟内，无需再次进行身份验证即可继续设置 BIO | AIX Card 注册登录需求V1.0 / 7.2.7；Security 场景矩阵 |
+| 超过 5 分钟需重新认证 | 用户完成手动登录 5 分钟后，需要进行身份验证后再继续设置 BIO | AIX Card 注册登录需求V1.0 / 7.2.7 |
+| 已启用 BIO | 登录成功后跳过 Enable BIO Page，直接进入 Home | AIX Card 注册登录需求V1.0 / 7.2.7 |
+| 未开启系统生物识别 | 登录成功后不弹出 BIO 引导页，直接进入 Home | 当前知识库旧内容 |
+
+## 8. 状态机
+
+### 8.1 登录结果状态
+
+```text
+┌──────────────┐
+│ Login Input  │
+└──────┬───────┘
+       │ 输入合法 + Next / Quick Login
+       ▼
+┌──────────────┐
+│ Verifying    │
+└──────┬───────┘
+       │
+       ├─ 成功 ────────────────┐
+       │                       ▼
+       │              ┌──────────────┐
+       │              │ Logged In    │
+       │              └──────────────┘
+       │
+       ├─ 认证失败 → Security Error Handling
+       │
+       └─ 账户状态不可登录 → Login Blocked
+```
+
+### 8.2 Enable BIO 引导状态
+
+```text
+┌──────────────┐
+│ Login Success│
+└──────┬───────┘
+       │
+       ├─ BIO enabled ───────────────→ Home
+       │
+       └─ BIO not enabled
+              │
+              ├─ Device supports BIO → Enable BIO Page
+              └─ Device not available → Home
+```
+
+## 9. 字段与接口依赖
+
+| 字段 / 能力 | 用途 | 读/写 | 来源 | 备注 |
+|-------------|------|------|------|------|
+| email | Email 登录账号 | 读 | Login Page | 最长 254 字符 |
+| phone | Phone 登录账号 | 读 | Login Page | 仅数字，最长 20 位 |
+| countryCode | 手机国家 / 地区区号 | 读 | Select Country Page | 全量国家 / 地区，隐藏中国和中国台湾 |
+| accountStatus | 登录拦截 | 读 | Account Status | Active / Locked / Banned / Closed |
+| biometricLocalKey | 判断是否展示 Quick Login | 读 | App 本地 | 本地存在可用密钥才展示 Quick Login |
+| deviceId | 判断 BIO 前置条件 | 读 / 写 | 设备绑定策略 | 注册 / 登录成功后自动绑定 |
+| bioEnabled | 判断是否展示 Enable BIO Page | 读 / 写 | Security / Biometric | 未启用时登录后可引导设置 |
+
+## 10. 异常与失败处理
+
+| 场景 | 触发条件 | 用户提示 | 系统动作 | 最终状态 | 来源 |
+|------|----------|----------|----------|----------|------|
+| Email 为空 | Email tab 未输入 | `Email should not be empty` | 阻止 Next | 留在 Login Page | AIX Card 注册登录需求V1.0 / 7.2.4 |
+| Email 格式错误 | Email 格式不合法 | `Email format is invalid` | 阻止 Next | 留在 Login Page | AIX Card 注册登录需求V1.0 / 7.2.4 |
+| Phone 少于 6 位 | Phone 长度不足 | `Phone number must be at least 6 digits` | 阻止 Next | 留在 Login Page | 当前知识库旧内容 |
+| 账号不存在 / 未注册 | 后端判断账号不存在 | 原文中文：`您输入的账号信息有误，请检查或注册新账号。` | 不进入认证流程 | 留在 Login Page | AIX Card 注册登录需求V1.0 / 7.2.4 |
+| 账户 Banned | 账户被限制登录 | `Account locked. Please contact customer support.` | 阻止登录 | 留在 Login Page | 当前知识库旧内容 / Account Status |
+| Biometric 设备失败 | 设备端验证失败 | 按设备 / Security 规则提示 | 不进入 Home | 留在 Login / 认证失败状态 | AIX Card 注册登录需求V1.0 / 7.2.5 |
+| Biometric 后端验证失败 | 后端验证不通过 | 弹窗提示 | 不进入 Home | 留在 Login / 认证失败状态 | AIX Card 注册登录需求V1.0 / 7.2.5 |
+| Enable BIO 认证超时 | 手动登录超过 5 分钟后设置 BIO | 需重新身份认证 | 进入 Security 认证流程 | 认证通过后继续设置 BIO | AIX Card 注册登录需求V1.0 / 7.2.7 |
+
+## 11. 风控 / 合规边界
+
+| 边界 | 规则 | 影响 | 来源 |
+|------|------|------|------|
+| 账户状态拦截 | Banned / Closed / Locked 不可登录 | 防止异常账户进入业务流程 | AIX Card 注册登录需求V1.0 / 6.2 |
+| Biometric 本地凭证 | Quick Login 仅在本地存在可用 BIO 密钥时展示 | 防止无凭证快捷登录 | AIX Card 注册登录需求V1.0 / 7.2.5 |
+| 设备绑定 | 仅设备已绑定时，登录方可启用 Biometric | BIO 前置条件 | AIX Card 注册登录需求V1.0 / 6.2.6 |
+| 身份认证 | 登录认证方式由 Security 模块统一定义 | 认证失败、锁定、有效期复用 Security | AIX Security 身份认证需求V1.0 |
+| Enable BIO 5 分钟窗口 | 手动登录后 5 分钟内免再次身份认证 | 用户体验与安全平衡 | AIX Card 注册登录需求V1.0 / 7.2.7 |
+
+## 12. 多角色阅读视角
+
+### UI 视角
+
+- 页面关系以 ASCII 图为准，原页面概览截图只做追溯证据。
+- 重点页面：Login Page、Select Country Page、Biometric 系统弹窗、Enable BIO Page。
+
+### 开发视角
+
+- 登录页需支持 Email / Phone 两种输入方式。
+- Phone 登录依赖 Country Code 选择器，国家 / 地区列表需隐藏中国和中国台湾。
+- Quick Login 展示依赖本地 Biometric 密钥；Enable BIO 展示依赖登录后 BIO 状态判断。
+
+### 测试视角
+
+- 必测 Email 登录、Phone 登录、Country Select、账号不存在、Banned 拦截、Quick Login、Enable BIO 展示 / 跳过、5 分钟免认证窗口。
+- 需覆盖设备未开启生物识别时不展示 Enable BIO Page。
+
+### 业务视角
+
+- 登录是 Wallet / Card / Transaction 等业务入口前置能力。
+- Enable BIO 是登录后引导，不是强制阻断；用户关闭后可进入 Home。
+
+### AI 复用视角
+
+- 新 PRD 涉及登录态、Quick Login、BIO 引导或账户拦截时，应引用本文件与 Security 模块。
+- 不得在业务模块中重复定义 Biometric 登录与身份认证失败规则。
+
+## 13. 待确认事项
+
+| 问题 | 影响范围 | 建议确认人 | 状态 |
+|------|----------|------------|------|
+| Login Page 当前知识库旧文档缺少 Description 第 1-3 项，已按原始 PRD 片段补齐，但仍需结合最新 UI 校准 | Login Page | 产品 / UI | open |
+| 账号不存在 / 未注册提示文案原始 PRD 为中文描述，需确认英文最终文案 | Login Page | 产品 / UI | open |
+| Phone 少于 6 位错误提示来自当前知识库旧内容，需确认是否在原始 PRD / 翻译表中最终生效 | Login Page | 产品 / UI / 技术 | open |
+| 中国和中国台湾隐藏规则需确认由后端过滤还是前端过滤 | Select Country Page | 产品 / 技术 | open |
+| Android 指纹原旧文档出现“若协议已全部勾选”描述，疑似串入注册协议逻辑，需确认是否删除 | Biometric Login | 产品 / UI | open |
+| Enable BIO 的系统授权差异不建议写成用户话术，需在技术实现中确认 iOS / Android 最终处理方式 | Enable BIO | 产品 / 技术 | open |
+
+## 14. 来源引用
+
+- (Ref: 历史prd/AIX Card 注册登录需求V1.0.docx / 2025-11-18 需求变更日志 / V1.0)
+- (Ref: 历史prd/AIX Card 注册登录需求V1.0.docx / 6.2 账户说明 / V1.0)
+- (Ref: 历史prd/AIX Card 注册登录需求V1.0.docx / 7.2.3 Navigation Page / V1.0)
+- (Ref: 历史prd/AIX Card 注册登录需求V1.0.docx / 7.2.4 Login Page / V1.0)
+- (Ref: 历史prd/AIX Card 注册登录需求V1.0.docx / 7.2.4.1 Select Country Page / V1.0)
+- (Ref: 历史prd/AIX Card 注册登录需求V1.0.docx / 7.2.5 Biometric登录 / V1.0)
+- (Ref: 历史prd/AIX Card 注册登录需求V1.0.docx / 7.2.7 Enable BIO Page / V1.0)
+- (Ref: knowledge-base/security/global-rules.md)
+- (Ref: knowledge-base/security/biometric-verification.md)
