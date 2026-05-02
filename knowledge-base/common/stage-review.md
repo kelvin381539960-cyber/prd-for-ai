@@ -1,7 +1,7 @@
 ---
 module: common
 feature: common-stage-review
-version: "1.1"
+version: "1.2"
 status: active
 source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/common/_index.md；knowledge-base/common/dtc.md；knowledge-base/common/notification.md；knowledge-base/common/walletconnect.md；knowledge-base/common/errors.md；knowledge-base/common/aai.md；knowledge-base/common/faq.md；knowledge-base/kyc/wallet-kyc.md；knowledge-base/transaction/reconciliation.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-02
 source_section: Common / Integration 阶段回扫；IMPLEMENTATION_PLAN v4.6；外部依赖收窄；KYC 独立；Transaction Reconciliation；ALL-GAP 唯一总表
@@ -71,9 +71,9 @@ Common 阶段不维护独立 gap。相关不确定项统一引用：
 | 编号 | 主题 |
 |---|---|
 | ALL-GAP-010 | GTR / WalletConnect 是否复用 Deposit success / under review 通知 |
-| ALL-GAP-012 | WalletConnect `payment_info false / Transaction not found` 后续处理 |
+| ALL-GAP-012 | WalletConnect payment_info false / Transaction not found 后续处理 |
 | ALL-GAP-013 | WalletConnect 失败是否需要告警 |
-| ALL-GAP-021 | `D-REQUEST-ID` 是否仅是请求唯一标识，还是也承担幂等 / 去重 |
+| ALL-GAP-021 | D-REQUEST-ID 是否仅是请求唯一标识，还是也承担幂等 / 去重 |
 | ALL-GAP-022 | DTC Webhook 原始报文是否完整落库 |
 | ALL-GAP-026 | Transfer Balance to Wallet 失败后是否存在后台人工补偿入口 |
 | ALL-GAP-027 | DTC transfer 成功但 Wallet 未入账是否有系统对账 / 告警机制 |
@@ -83,8 +83,23 @@ Common 阶段不维护独立 gap。相关不确定项统一引用：
 | ALL-GAP-038 | 通用错误页文案与错误码映射 |
 | ALL-GAP-039 | 告警规则、监控群、责任分派 |
 | ALL-GAP-040 | FAQ Row 14 无答案 |
+| ALL-GAP-043 | DTC 通用响应结构和通用错误码边界 |
+| ALL-GAP-044 | WalletConnect Declare / Travel Rule / 白名单规则边界 |
+| ALL-GAP-045 | 通知失败重试 / 补发策略 |
+| ALL-GAP-046 | AAI OCR / Liveness / KYC 状态和失败原因边界 |
+| ALL-GAP-047 | FAQ 原文和客服口径完整性 |
 
-## 5. 阶段判断
+## 5. 旧 COMMON-GAP 映射说明
+
+原 Common Stage Review 中的 COMMON-GAP-001 到 COMMON-GAP-010 已迁入 ALL-GAP 总表，不再作为模块级 checklist 维护。
+
+| 原范围 | 当前处理 |
+|---|---|
+| COMMON-GAP-001 ~ 002 | 已纳入 ALL-GAP-043、ALL-GAP-021 |
+| COMMON-GAP-003 ~ 005 | 已阶段性回填，剩余引用 ALL-GAP-007、008、010、012、044 |
+| COMMON-GAP-006 ~ 010 | 已纳入 ALL-GAP-038、039、040、045、046、047 |
+
+## 6. 阶段判断
 
 | 判断项 | 结论 |
 |---|---|
@@ -100,17 +115,17 @@ Common 阶段不维护独立 gap。相关不确定项统一引用：
 | 是否允许继续全仓库回扫 | 允许，带 ALL-GAP 继续 |
 | 是否允许把 ALL-GAP 写成事实 | 不允许 |
 
-## 6. 后续要求
+## 7. 后续要求
 
 1. 全仓库回扫阶段可引用 Common 已确认边界。
 2. 不得把 Common 未确认项写成事实。
 3. 不得把 Send / Swap 写成 active 能力。
-4. 不得把 `D-REQUEST-ID` 写成幂等键。
-5. 不得把 Wallet `transactionId`、Wallet `id`、Wallet `relatedId` 与 Card `data.id` 强行关联。
+4. 不得把 D-REQUEST-ID 写成幂等键。
+5. 不得把 Wallet transactionId、Wallet id、Wallet relatedId 与 Card data.id 强行关联。
 6. DTC / AAI 不维护完整供应商说明书，只保留 AIX 系统设计相关边界。
 7. 所有不确定项只进入 `knowledge-base/changelog/knowledge-gaps.md` 的 ALL-GAP 总表。
 
-## 7. 来源引用
+## 8. 来源引用
 
 - (Ref: IMPLEMENTATION_PLAN.md / v4.6)
 - (Ref: knowledge-base/common/_index.md)
