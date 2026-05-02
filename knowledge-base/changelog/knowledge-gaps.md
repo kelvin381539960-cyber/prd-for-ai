@@ -1,11 +1,11 @@
 ---
 module: changelog
 feature: knowledge-gaps
-version: "1.3"
+version: "1.4"
 status: active
-source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/card/card-transaction-flow.md；knowledge-base/card/stage-review.md；knowledge-base/card/transaction-flow-traceability-checklist.md；用户确认结论 2026-05-01
-source_section: source-policy；Card Transaction Flow；Card Stage Review；deferred gaps decision
-last_updated: 2026-05-01
+source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/card/card-transaction-flow.md；knowledge-base/card/stage-review.md；knowledge-base/card/transaction-flow-traceability-checklist.md；knowledge-base/wallet/transaction-history.md；knowledge-base/common/dtc.md；用户确认结论 2026-05-01；用户确认结论 2026-05-02
+source_section: source-policy；Card Transaction Flow；Card Stage Review；deferred gaps decision；traceability follow-up list
+last_updated: 2026-05-02
 owner: 吴忆锋
 ---
 
@@ -17,7 +17,34 @@ owner: 吴忆锋
 
 功能正文应优先承载稳定事实；不确定事项集中放在本文档，避免污染事实来源正文。
 
-## 2. Card / Transaction Flow deferred gaps
+当前用户已确认：资金追踪链路相关问题短期无法得到答案，先整理为待回头确认清单，不阻塞后续非资金链路内容继续推进。
+
+## 2. 资金追踪链路待回头确认清单
+
+以下清单用于后续统一向后端 / Wallet / DTC / 账务确认。当前全部保持 `deferred`，不得写入功能正文作为事实。
+
+| 编号 | 待确认问题 | 需要确认对象 | 影响 | 当前处理 |
+|---|---|---|---|---|
+| TRACE-FOLLOWUP-001 | Card Transaction / refund / reversal / deposit 与 Wallet Transaction 是否存在一一对应关系 | 后端 / Wallet / 账务 | 决定是否能从卡交易追踪到钱包入账 | deferred |
+| TRACE-FOLLOWUP-002 | 如果存在关联，具体用哪个字段关联：Card `data.id`、Wallet `transactionId`、Wallet `id`、`relatedId`、`D-REQUEST-ID`、AIX 内部 ID 或其他字段 | 后端 / Wallet / 账务 | 决定对账字段组合 | deferred |
+| TRACE-FOLLOWUP-003 | AIX 收到 DTC Card Transaction Notify 后是否生成内部交易处理 ID，字段名是什么 | 后端 | 影响内部处理链路追踪 | deferred |
+| TRACE-FOLLOWUP-004 | AIX 发起 Transfer Balance to Wallet 前是否生成归集请求 ID，字段名是什么 | 后端 / 账务 | 影响归集请求追踪 | deferred |
+| TRACE-FOLLOWUP-005 | `D-REQUEST-ID` 是否仅是请求唯一标识，还是也承担幂等 / 重试去重作用 | 后端 / DTC | 影响请求幂等和重试设计 | deferred |
+| TRACE-FOLLOWUP-006 | DTC Webhook 原始报文是否完整落库，是否可回放 / 查询 | 后端 / 运维 | 影响审计、排障、补偿 | deferred |
+| TRACE-FOLLOWUP-007 | 重复通知实际如何去重，是否按 `event + data.id` | 后端 | 影响重复推送处理 | deferred |
+| TRACE-FOLLOWUP-008 | 自动归集触发是否只依赖 `type=refund/reversal/deposit`，还是还需要判断 state / indicator / amount | 后端 / 产品 | 影响归集触发准确性 | deferred |
+| TRACE-FOLLOWUP-009 | 查询 Card balance 失败后如何处理：告警、重试、跳过、人工介入 | 后端 / 运维 | 影响资金遗漏风险 | deferred |
+| TRACE-FOLLOWUP-010 | Transfer Balance to Wallet 失败后是否只有告警，是否存在后台人工补偿入口 | 后端 / 运维 / 账务 | 影响异常闭环 | deferred |
+| TRACE-FOLLOWUP-011 | DTC transfer 成功但 Wallet 未入账，是否有系统对账 / 告警机制；若无，是否只靠用户反馈 | 后端 / Wallet / 账务 | 影响用户资金可见性和风险发现 | deferred |
+| TRACE-FOLLOWUP-012 | Wallet `relatedId` 在 Card balance 转 Wallet、GTR、WalletConnect 场景下分别取什么值 | Wallet / DTC / 后端 | 影响 Wallet History 关联和对账 | deferred |
+| TRACE-FOLLOWUP-013 | Deposit success 与 Wallet `state=COMPLETED` 是否存在确定映射 | Wallet / 后端 | 影响状态展示 | deferred |
+| TRACE-FOLLOWUP-014 | Risk Withheld 与 Wallet `state` 是否存在映射，是否影响冻结余额 / 可用余额 | Wallet / 后端 / 产品 | 影响余额展示和用户提示 | deferred |
+| TRACE-FOLLOWUP-015 | GTR 是否使用 `FIAT_DEPOSIT=6`，WalletConnect 是否使用 `CRYPTO_DEPOSIT=10` | Wallet / 后端 / 产品 | 影响交易分类和筛选 | deferred |
+| TRACE-FOLLOWUP-016 | Deposit success 后余额何时对用户可见 / 可用 | Wallet / 后端 / 产品 | 影响用户体验和 FAQ 口径 | deferred |
+| TRACE-FOLLOWUP-017 | Card balance 转 Wallet 后，入账币种是否与 card currency 完全一致 | Wallet / 账务 | 影响币种对账 | deferred |
+| TRACE-FOLLOWUP-018 | 财务 / 运营最终使用哪些字段串起 DTC 通知、AIX 处理、DTC transfer、Wallet 交易、用户反馈 | 账务 / 运营 / 后端 | 影响最终对账 SOP | deferred |
+
+## 3. Card / Transaction Flow deferred gaps
 
 以下问题当前暂无答案，经用户确认先跳过并继续其他知识库转译。状态统一标记为 `deferred`，不得写入功能正文作为事实。
 
@@ -38,7 +65,7 @@ owner: 吴忆锋
 | KG-CARD-TXN-013 | card balance 转 Wallet 后，入账币种是否与 card currency 完全一致未确认 | Card Transaction Flow / 币种口径 | traceability-checklist.md | 暂无答案，后续 Wallet / 账务确认后回填 | deferred |
 | KG-CARD-TXN-014 | 财务 / 运营最终使用哪些字段串起 DTC 通知、AIX 归集请求、DTC transfer 调用和 Wallet 交易 `id` 未确认 | Card Transaction Flow / 对账字段 | 用户确认尚未定 | 暂无答案，后续确认后回填 | deferred |
 
-## 3. Card / Transaction Flow 已消除缺口
+## 4. Card / Transaction Flow 已消除缺口
 
 | 编号 | 原问题 | 处理结果 | 来源 | 状态 |
 |---|---|---|---|---|
@@ -59,13 +86,13 @@ owner: 吴忆锋
 | KG-CARD-TXN-RESOLVED-015 | Wallet 单笔交易详情查询入参未确认 | 已确认入参为 `transactionId`，Unique transaction ID from DTC；但与 Card `data.id` / `D-REQUEST-ID` 的关联未说明 | DTC Wallet OpenAPI；用户确认 2026-05-01 | resolved |
 | KG-CARD-TXN-RESOLVED-016 | Wallet 入账状态字段与枚举未确认 | 已确认字段为 `state`，枚举为 `PENDING`、`PROCESSING`、`AUTHORIZED`、`COMPLETED`、`REJECTED`、`CLOSED` | DTC Wallet OpenAPI；用户确认 2026-05-01 | resolved |
 
-## 4. Account / Login
+## 5. Account / Login
 
 | 编号 | 问题 | 影响范围 | 来源 | 当前处理 | 状态 |
 |---|---|---|---|---|---|
 | KG-LOGIN-001 | Login Page 原始 PRD Description 列从第 4 项开始，1-3 项仅存在于 UX 截图，缺少可结构化文字规则 | Login Page / 页面元素 | AIX Card 注册登录需求V1.0 / 7.2.4 Login Page | 正文保留截图与已知结构化规则；缺失项不脑补 | open |
 | KG-LOGIN-002 | 账号不存在 / 未注册提示为中文原文：`您输入的账号信息有误，请检查或注册新账号。`，英文最终文案缺失 | Login Page / 文案 | AIX Card 注册登录需求V1.0 / 7.2.4 Login Page | 正文保留中文原文，不替换为英文推测 | open |
 
-## 5. 其他历史缺口
+## 6. 其他历史缺口
 
 本文件当前重点已同步 Card Transaction Flow 缺口。Account / Security / Card 其他历史缺口保持在既有知识库正文与阶段文件中，后续全仓库回扫时再统一归并。
