@@ -1,10 +1,10 @@
 ---
 module: changelog
 feature: knowledge-gaps
-version: "1.12"
+version: "1.13"
 status: active
-source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/wallet/deposit.md；knowledge-base/wallet/balance.md；knowledge-base/wallet/receive.md；knowledge-base/card/card-transaction-flow.md；knowledge-base/card/stage-review.md；knowledge-base/card/transaction-flow-traceability-checklist.md；knowledge-base/wallet/transaction-history.md；knowledge-base/wallet/kyc.md；knowledge-base/common/dtc.md；knowledge-base/common/aai.md；knowledge-base/common/errors.md；knowledge-base/common/stage-review.md；knowledge-base/common/notification.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/status-model.md；用户确认结论 2026-05-01；用户确认结论 2026-05-02
-source_section: source-policy；all-module centralized confirmation table；Card Transaction Flow；Wallet Deposit；Wallet Balance；Wallet Receive；Wallet KYC；Common DTC / AAI；Common Notification；Common Stage Review；Transaction Detail；Transaction Status Model；deferred gaps decision；single global checklist rule
+source_doc: knowledge-base/_ai-query-router.md；knowledge-base/_system-boundary.md；knowledge-base/kyc/account-opening.md；knowledge-base/common/aai.md；knowledge-base/common/dtc.md；knowledge-base/wallet/deposit.md；knowledge-base/wallet/balance.md；knowledge-base/wallet/receive.md；knowledge-base/card/card-transaction-flow.md；knowledge-base/common/errors.md；knowledge-base/common/notification.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/status-model.md；用户确认结论 2026-05-01；用户确认结论 2026-05-02
+source_section: all-module centralized confirmation table；Account Opening / KYC；AAI Dependency；DTC Master / Sub Account；D-SUB-ACCOUNT-ID；WalletAccount；Card Transaction Flow；Wallet Deposit；Wallet Balance；Wallet Receive；Common Notification；Transaction Detail；Transaction Status Model；single global checklist rule
 last_updated: 2026-05-02
 owner: 吴忆锋
 ---
@@ -54,12 +54,12 @@ owner: 吴忆锋
 | ALL-GAP-027 | P0 | Card / Transaction Flow | DTC transfer 成功但 Wallet 未入账，是否有系统对账 / 告警机制 | 用户确认当前无法系统自动发现，主要靠用户反馈 | 后端 / Wallet / 账务 | 影响用户资金可见性和风险发现 | deferred |
 | ALL-GAP-028 | P1 | Card / Transaction Flow | Card balance 转 Wallet 后，入账币种是否与 card currency 完全一致 | 未确认 | Wallet / 账务 | 影响币种对账 | deferred |
 | ALL-GAP-029 | P0 | Card / Transaction Flow | 财务 / 运营最终使用哪些字段串起 DTC 通知、AIX 处理、DTC transfer、Wallet 交易、用户反馈 | 用户确认尚未定 | 账务 / 运营 / 后端 | 影响最终对账 SOP | deferred |
-| ALL-GAP-030 | P1 | Wallet / KYC | Wallet KYC 与 Card KYC 关系 | 未确认复用 / 独立 / 部分复用 | 产品 / KYC / 后端 | 影响准入和状态复用 | deferred |
-| ALL-GAP-031 | P1 | Wallet / KYC | Wallet KYC 是否为 GTR / WalletConnect Deposit 前置 | 未确认 | 产品 / 合规 / 后端 | 影响 Deposit 入口拦截 | deferred |
-| ALL-GAP-032 | P1 | Wallet / KYC | Wallet 开户触发时机 | 注册后自动、进入 Wallet 自动、用户主动触发未确认 | 产品 / 后端 | 影响 Wallet 初始化 | deferred |
-| ALL-GAP-033 | P1 | Wallet / KYC | KYC 失败 / 重试 / 人工处理规则 | 未确认用户如何重试、是否人工介入 | 产品 / KYC / 运营 | 影响异常闭环 | deferred |
-| ALL-GAP-034 | P2 | Wallet / KYC | KYC 结果是否触发通知 | 未确认 push / 站内信 / email | 产品 / Notification | 影响通知规则 | deferred |
-| ALL-GAP-035 | P1 | Common / AAI | AIX 实际依赖哪些 AAI 结果 | 已收窄为 AIX 设计边界，但具体结果类型未补齐 | 产品 / 后端 / KYC | 影响页面、准入、错误处理 | deferred |
+| ALL-GAP-030 | P1 | KYC / Account Opening | Account Opening / KYC 与 Card KYC 的关系 | 仍未确认复用 / 独立 / 部分复用；当前不得默认等同 | 产品 / KYC / 后端 | 影响准入、状态复用、Card 与 Wallet 关系 | deferred |
+| ALL-GAP-031 | P1 | KYC / Account Opening / Deposit | Account Opening / KYC 是否为 GTR / WalletConnect Deposit 前置 | WalletConnect 技术链路依赖 `D-SUB-ACCOUNT-ID`；但 KYC Approved 是否作为 App 入口前置、GTR 是否同样前置、Sub Account 是否由 KYC Approved 触发创建仍未确认 | 产品 / 合规 / 后端 / DTC | 影响 Deposit 入口拦截、WalletConnect 技术依赖和合规准入 | deferred |
+| ALL-GAP-032 | P1 | KYC / Account Opening | Account Opening / KYC 入口触发场景是否覆盖所有路径 | Account Opening PRD 已回填 KYC Loading、Start、国家选择、OCR、Face、POA、Submission Success 等页面流程；但注册后自动、进入 Wallet 自动、进入 Deposit 触发、用户主动触发等入口覆盖范围仍需确认 | 产品 / 后端 | 影响 Wallet 初始化、入口拦截和用户路径 | deferred |
+| ALL-GAP-033 | P1 | KYC / Account Opening | KYC 失败 / 重试 / 人工处理完整规则 | 页面级失败已回填：OCR 失败回 Identity Verify、Face 失败进入 Face Failed、Loading 超 30 秒进入 Loading Failed、Face 失败 5 次锁 20 分钟、10 次锁 24 小时；人工处理、外部原始错误码、DTC Sub Account 创建失败补偿仍未确认 | 产品 / KYC / 运营 / 后端 | 影响异常闭环、客服口径和人工处理 | deferred |
+| ALL-GAP-034 | P2 | KYC / Notification | KYC 结果是否触发通知 | Account Opening PRD 已确认 KYC Approved / Rejected / Failed 均有 Email / in-app notification / push；模板、跳转、补发策略仍以 Notification 文件和 ALL-GAP-045 为准 | 产品 / Notification | 影响通知规则 | resolved |
+| ALL-GAP-035 | P1 | Common / AAI / KYC | AIX 实际依赖哪些 AAI 结果 | 已回填 AIX 侧结果类别：Passport OCR 成功 / 失败、Face capture 成功 / 失败、Face Comparison 成功 / 失败、Face 验证超时、KYC Approved / Rejected / Failed / Under review；字段映射、原始状态和失败原因仍未完整确认 | 产品 / 后端 / KYC | 影响页面、准入、错误处理 | deferred |
 | ALL-GAP-036 | P0 | Common / DTC | Webhook 原始报文落库规则 | 与 Card / Wallet 排障、对账相关 | 后端 / 运维 | 影响审计、排障、补偿 | deferred |
 | ALL-GAP-037 | P1 | Common / DTC | ActivityType 到 AIX 前端交易类型的映射 | 已知部分 DTC ActivityType，不确认 AIX 前端展示映射 | 产品 / 前端 / 后端 | 影响交易历史筛选和展示 | deferred |
 | ALL-GAP-038 | P2 | Common / Errors | 通用错误页文案与错误码映射 | 当前只写已有 PRD / FAQ 文案，不补通用错误码表 | 产品 / UX / 后端 | 影响全局错误处理 | deferred |
@@ -70,7 +70,7 @@ owner: 吴忆锋
 | ALL-GAP-043 | P1 | Common / DTC | DTC 通用响应结构和通用错误码边界 | Common Stage Review 原 COMMON-GAP-001 提到 DTC 通用响应结构和错误码表未补齐；当前不维护完整供应商说明书，但 AIX 统一错误处理所需边界仍需确认 | 后端 / DTC / 产品 | 影响接口统一处理、错误处理、排障 | deferred |
 | ALL-GAP-044 | P1 | Common / WalletConnect / Compliance | WalletConnect Declare / Travel Rule / 白名单规则边界 | Common Stage Review 原 COMMON-GAP-004 提到 WC Declare / Travel Rule / 白名单规则未确认；当前已确认 WC Approved 后自动 add whitelist，但 Declare / Travel Rule 的触发和展示边界仍未完整确认 | 产品 / 合规 / 后端 | 影响合规前置、异常处理、用户提示 | deferred |
 | ALL-GAP-045 | P1 | Common / Notification | 通知失败重试 / 补发策略 | Common Stage Review 原 COMMON-GAP-006 提到通知失败重试 / 补发策略未确认 | 后端 / Notification / 运维 | 影响通知可靠性和用户感知 | deferred |
-| ALL-GAP-046 | P1 | Common / AAI / KYC | AAI OCR / Liveness / KYC 状态和失败原因边界 | Common Stage Review 原 COMMON-GAP-009 提到 AAI OCR / Liveness / KYC 状态和失败原因未补齐；当前只收窄为 AIX 依赖边界 | 产品 / KYC / 后端 | 影响准入、失败提示、人工处理 | deferred |
+| ALL-GAP-046 | P1 | Common / AAI / KYC | AAI OCR / Liveness / KYC 原始状态、失败原因和错误码边界 | Account Opening PRD 已回填页面级处理和 Face 锁定规则；AAI 原始状态、原始失败原因、错误码与 AIX 错误页 / 文案映射仍未完整确认 | 产品 / KYC / 后端 | 影响准入、失败提示、人工处理 | deferred |
 | ALL-GAP-047 | P2 | Common / FAQ | FAQ 原文和客服口径完整性 | Common Stage Review 原 COMMON-GAP-010 提到 FAQ 原文和客服口径未补齐；当前只确认 Row 14 明确缺失，其他口径仍需以原文为准 | 产品 / 客服 | 影响客服答复完整性 | deferred |
 | ALL-GAP-048 | P1 | Transaction / Detail | Wallet Transaction Detail 完整请求 / 响应 / 页面展示 / 复制规则 | Transaction Detail 原 TXN-DETAIL-GAP-001~004 提到 Wallet Detail 完整请求字段、响应字段、页面展示字段、是否支持复制交易 ID 未补齐 | 产品 / 前端 / 后端 / Wallet | 影响 Wallet 交易详情页展示和交互 | deferred |
 | ALL-GAP-049 | P1 | Transaction / Detail | Card Detail 前端展示字段完整列表 | Transaction Detail 原 TXN-DETAIL-GAP-007 提到 Card Detail 前端展示字段完整列表待补 | 产品 / 前端 | 影响 Card 交易详情页展示完整性 | deferred |
@@ -90,13 +90,17 @@ owner: 吴忆锋
 | ALL-GAP-063 | P1 | Common / Notification | Wallet 入金失败通知规则 | Notification 原 NOTIF-GAP-003 提到 Wallet 入金失败通知未确认；当前只确认 Deposit success 与 under review 通知 | 产品 / 后端 / Notification / 风控 | 影响失败状态用户感知、跳转目标和客服处理 | deferred |
 | ALL-GAP-064 | P2 | Common / Notification | 站内信与 Push 是否完全一致 | Notification 原 NOTIF-GAP-005 提到站内信与 Push 是否完全一致未确认 | 产品 / Notification / 前端 | 影响通知渠道一致性和模板维护 | deferred |
 | ALL-GAP-065 | P1 | Common / Notification / Wallet | Deposit 通知是否以 Wallet 入账为触发点 | Notification 原 NOTIF-GAP-007 提到 Deposit 通知是否以 Wallet 入账为触发点未确认；当前不能把通知触发等同于余额已可用 | 后端 / Wallet / Notification / 产品 | 影响通知触发时点、余额可见性和用户预期 | deferred |
+| ALL-GAP-066 | P1 | KYC / DTC / Account Opening | AIX user 与 DTC Sub Account 是否一一对应 | DTC 文档确认 Sub Account 注册在 Master Account 下；但 AIX user 与 DTC Sub Account 的映射关系、唯一性和生命周期未确认 | 后端 / DTC / 账务 | 影响开户账户模型、Wallet 能力上下文、排障和对账 | deferred |
+| ALL-GAP-067 | P1 | KYC / DTC / WalletAccount | `D-SUB-ACCOUNT-ID` 与 WalletAccount.clientId 的准确关系 | DTC 文档显示 `D-SUB-ACCOUNT-ID` 是 Sub Account Header，WalletAccount 有 `clientId` 字段；WalletConnect 文档中存在 client_id 语义，但不能写死两者完全等价 | 后端 / DTC | 影响接口请求上下文、字段引用和账户排障 | deferred |
+| ALL-GAP-068 | P1 | KYC / DTC / Account Opening | DTC Sub Account 创建时机与创建失败处理 | 未确认 KYC Approved 后是否立即创建 Sub Account，也未确认创建失败时 AIX 是否重试、告警、人工处理或限制用户能力 | 后端 / DTC / 运维 / 产品 | 影响开户闭环、异常处理和用户准入 | deferred |
+| ALL-GAP-069 | P1 | KYC / DTC / WalletAccount | WalletAccount.status 与 AIX 能力准入映射 | DTC WalletAccount 有 `status` 字段，但具体枚举、进入 / 退出条件、与 Wallet Balance / Deposit / WalletConnect / Receive 的准入映射未确认 | 后端 / DTC / 产品 | 影响 Wallet 页面、能力开关、错误提示和客服口径 | deferred |
 
 ## 3. 优先级定义
 
 | 优先级 | 定义 | 处理原则 |
 |---|---|---|
 | P0 | 影响资金、对账、状态闭环、用户资产可见性、核心链路追踪 | 优先找后端 / Wallet / 账务确认；未确认前不得写成事实 |
-| P1 | 影响页面准入、状态展示、流程体验、分类筛选、KYC 边界 | 可继续推进其他模块，但后续需要确认 |
+| P1 | 影响页面准入、状态展示、流程体验、分类筛选、KYC / Account Opening / 外部账户边界 | 可继续推进其他模块，但后续需要确认 |
 | P2 | 影响文案、FAQ、低优先、非核心体验 | 不阻塞主链路，可最后统一处理 |
 
 ## 4. 已消除 / 已确认项
@@ -119,6 +123,8 @@ owner: 吴忆锋
 | RESOLVED-014 | Wallet 入账是否有交易 ID 未确认 | 已确认钱包交易记录 / 详情出参均包含 `id`，Long，交易 id | DTC Wallet OpenAPI；用户确认 2026-05-01 | resolved |
 | RESOLVED-015 | Wallet 单笔交易详情查询入参未确认 | 已确认入参为 `transactionId`，Unique transaction ID from DTC；但与 Card `data.id` / `D-REQUEST-ID` 的关联未说明 | DTC Wallet OpenAPI；用户确认 2026-05-01 | resolved |
 | RESOLVED-016 | Wallet 入账状态字段与枚举未确认 | 已确认字段为 `state`，枚举为 `PENDING`、`PROCESSING`、`AUTHORIZED`、`COMPLETED`、`REJECTED`、`CLOSED` | DTC Wallet OpenAPI；用户确认 2026-05-01 | resolved |
+| RESOLVED-017 | KYC 结果是否触发通知 | 已确认 KYC Approved / Rejected / Failed 均有 Email / in-app notification / push；模板和补发策略另见 Notification 与 ALL-GAP-045 | AIX Wallet Account Opening & KYC PRD；knowledge-base/kyc/account-opening.md | resolved |
+| RESOLVED-018 | KYC 页面级失败和 Face 锁定基础规则 | 已回填 OCR 失败、Face 失败、Loading 超时、Face 失败 5 次 / 10 次锁定、人脸通过清零等页面级规则；人工处理和外部原始错误码仍见 ALL-GAP-033 / ALL-GAP-046 | AIX Wallet Account Opening & KYC PRD；knowledge-base/kyc/account-opening.md | resolved |
 
 ## 5. 使用规则
 
@@ -126,6 +132,6 @@ owner: 吴忆锋
 2. 功能正文不得把 `deferred` 或 `open` 的问题写成事实。
 3. 功能正文如需提及未确认事项，只引用 `ALL-GAP-XXX` 编号，不再展开维护模块级 checklist。
 4. 用户后续确认后，应更新本表状态，并同步回填对应功能文件。
-5. 已确认但仍有实现细节缺口的问题，可标记为 `resolved-by-user`，并在影响文件中写入边界。
+5. 已确认但仍有实现细节缺口的问题，可标记为 `resolved-by-user` 或 `resolved`，并在影响文件中写入边界。
 6. 已彻底闭环的问题可迁移至“已消除 / 已确认项”。
-7. `IMPLEMENTATION_PLAN.md` 只维护阶段状态和执行规则，不再维护另一套待确认清单。
+7. 本文档是唯一待确认表；不得在模块文件、Common 文件或过程文件中新增本地 GAP 表。
