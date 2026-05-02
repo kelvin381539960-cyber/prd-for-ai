@@ -1,7 +1,7 @@
 # prd-for-ai 实施计划
 
-版本：v4.9  
-状态：补材料与精修阶段 PARTIAL PASS；主干无损 gap 迁移已完成；ALL-GAP 留待后续统一确认；当前工作收口完成  
+版本：v5.0  
+状态：补材料与精修阶段 PARTIAL PASS；主干无损 gap 迁移已完成；ALL-GAP 留待后续统一确认；AI 查询路由表已建立；当前工作收口完成  
 适用仓库：`prd-for-ai`  
 更新时间：2026-05-02
 
@@ -14,6 +14,10 @@
 待确认事项的唯一事实源为：
 
 `knowledge-base/changelog/knowledge-gaps.md`
+
+AI 查询与写需求的路由文件为：
+
+`knowledge-base/_ai-query-router.md`
 
 本文件不再维护另一套待确认清单。
 
@@ -36,6 +40,7 @@
 15. 不接受“精简导致问题丢失”。历史模块级 gap / checklist / TODO 在清理时必须无损迁移到 ALL-GAP 总表，或建立明确的旧编号到 ALL-GAP 映射；不得仅用概括性文字替代原问题。
 16. 主干无损 gap 迁移已阶段性完成；后续发现新的分散待确认项，必须先写入 ALL-GAP，再更新对应模块引用。
 17. 当前用户已明确：ALL-GAP 现阶段无法确认，全部留待以后统一确认；不得因未确认 ALL-GAP 阻塞当前知识库收口完成。
+18. 后续 AI 查询、写需求、改需求、回答需求逻辑时，必须先读取 `IMPLEMENTATION_PLAN.md`，再读取 `knowledge-base/_ai-query-router.md`，再按路由表读取模块事实文件。
 
 ---
 
@@ -48,10 +53,27 @@
 | `kyc/` | KYC / 业务准入能力 | 维护 wallet-kyc；AAI 仍保留在 common/aai 作为外部依赖 |
 | `common/` | 公共能力和外部依赖边界 | 维护 dtc、aai、walletconnect、notification、errors、faq |
 | `changelog/` | 变更、回扫、唯一待确认表 | `knowledge-gaps.md` 是唯一 ALL-GAP 总表 |
+| `knowledge-base/_ai-query-router.md` | AI 查询路由与使用说明 | 指导 AI 按问题类型读取事实文件，不新增业务事实 |
 
 ---
 
-## 4. Stage Review Gate 机制
+## 4. AI 查询标准路径
+
+AI 使用知识库时，必须按以下顺序读取：
+
+```text
+1. IMPLEMENTATION_PLAN.md
+2. knowledge-base/_ai-query-router.md
+3. 对应模块 _index.md
+4. 对应功能事实文件
+5. knowledge-base/changelog/knowledge-gaps.md
+```
+
+不得跳过主控计划，不得不看路由表就全仓库乱扫，不得把 ALL-GAP deferred / open 项写成事实。
+
+---
+
+## 5. Stage Review Gate 机制
 
 | 检查项 | 标准 |
 |---|---|
@@ -66,11 +88,12 @@
 | 外部依赖边界 | DTC / AAI 等供应商系统只能记录影响 AIX 系统设计的依赖边界，不维护其内部逻辑或完整说明书 |
 | 待确认唯一源 | 所有待确认项必须集中到 `knowledge-base/changelog/knowledge-gaps.md`，不得分散在模块文档 |
 | 目录边界 | KYC 不挂在 Wallet；Wallet Transaction History 主事实归 Transaction；Wallet 只保留钱包产品能力 |
+| AI 查询路径 | 查询 / 写需求 / 改需求时必须先读 `_ai-query-router.md` 并按路由读取事实文件 |
 | 实施计划同步 | Gate 结果必须写回 `IMPLEMENTATION_PLAN.md`，但不重复维护问题清单 |
 
 ---
 
-## 5. 阶段实施路线表
+## 6. 阶段实施路线表
 
 | 阶段 | 名称 | 当前状态 | 目标 | 阶段产出 | 下一步 |
 |---|---|---|---|---|---|
@@ -84,10 +107,11 @@
 | 8 | Common / Integration | PARTIAL PASS | 抽公共能力与外部依赖边界 | DTC / AAI / WC / Error / FAQ / Notification | DTC / AAI 已收窄为系统设计边界；ALL-GAP 待以后确认 |
 | 9 | 全仓库回扫 | PARTIAL PASS | 去重复、补引用、核对状态 | 字段 / 状态 / 来源 / gaps / index | 主干无损 gap 迁移已完成 |
 | 10 | 补材料与精修 | PARTIAL PASS | 按真实材料回填并统一未确认项 | Deposit / WalletConnect / Errors / FAQ / ALL-GAP / 目录结构 / 无损迁移 | 当前工作收口完成 |
+| 11 | AI 查询路由 | PASS | 建立 AI 查询与引用路径 | `_ai-query-router.md` | 已完成 |
 
 ---
 
-## 6. 阶段 10：补材料与精修进度
+## 7. 阶段 10：补材料与精修进度
 
 | 子任务 | 状态 | 已完成 / 当前边界 | 目标文件 |
 |---|---|---|---|
@@ -104,11 +128,12 @@
 | ALL-GAP 总表 | 已完成阶段性收口 | 所有模块不确定项统一进入 `knowledge-base/changelog/knowledge-gaps.md`，已加 P0 / P1 / P2 优先级；现阶段不确认，待以后统一确认 | changelog/knowledge-gaps |
 | 历史 gap 无损迁移 | 已完成主干回扫 | DEP-GAP、ERR-GAP、TXN-DETAIL-GAP、TXN-STATUS-GAP、BE/WALLET traceability、DTC-GAP、NOTIF-GAP、Balance / Receive 待补字段均已映射 | changelog/knowledge-gaps、wallet、card、transaction、common |
 | 分散 gap 清理 | 已完成主干回扫 | 主干模块正文改为引用 ALL-GAP，不再维护独立 checklist | wallet、card、transaction、common |
+| AI 查询路由 | 已完成 | 新增 `knowledge-base/_ai-query-router.md`，定义问题类型到事实文件的读取路径 | knowledge-base/_ai-query-router.md |
 | P0 gap 收敛 | 延后 | 用户明确当前无法确认，留待以后统一确认 | changelog/knowledge-gaps |
 
 ---
 
-## 7. 当前已确认事实
+## 8. 当前已确认事实
 
 | 事实 | 来源 | 使用限制 |
 |---|---|---|
@@ -129,7 +154,7 @@
 
 ---
 
-## 8. 当前状态
+## 9. 当前状态
 
 | 模块 | 状态 | Gate 结果 | 说明 |
 |---|---|---|---|
@@ -142,16 +167,17 @@
 | KYC | 已独立 | PARTIAL PASS | Wallet KYC 已迁移；Card KYC / Wallet KYC 关系待以后确认 |
 | Common / Integration | 已完成基础版 + 真实材料回填 + 无损 gap 迁移 | PARTIAL PASS | DTC / AAI 已收窄为系统设计边界；Notification / Errors / WalletConnect 已补真实材料 |
 | 全仓库回扫 | 已完成主干无损迁移 | PARTIAL PASS | 主干模块级 gaps 已统一迁入 ALL-GAP |
+| AI 查询路由 | 已完成 | PASS | `_ai-query-router.md` 已建立，后续 AI 按路由读取事实文件 |
 | 补材料与精修 | 已完成当前收口 | PARTIAL PASS | ALL-GAP 留待以后确认，当前工作不再阻塞 |
 
 ---
 
-## 9. 下一步
+## 10. 下一步
 
 当前执行点：
 
 1. 当前工作已完成收口，不再要求立即确认 ALL-GAP。
-2. 后续如继续，应先读取本文件，再读取 `knowledge-base/changelog/knowledge-gaps.md`。
+2. 后续如继续，应先读取本文件，再读取 `knowledge-base/_ai-query-router.md`，再读取 `knowledge-base/changelog/knowledge-gaps.md` 或对应模块事实文件。
 3. 后续若用户能提供答案，再按 ALL-GAP 编号逐条确认。
 4. 用户确认 ALL-GAP 后，先更新 `knowledge-gaps.md` 状态，再同步回填相关功能文件。
 5. 若发现新的分散待确认项，必须先迁入 ALL-GAP，再更新模块引用。
@@ -170,3 +196,4 @@
 - 不得在任何模块文档单独维护 checklist / TODO / gaps 表。
 - 不得新增无来源状态、字段、接口、文案或页面规则。
 - 不得因精简、合并、改写、迁移而删除或弱化历史待确认问题。
+- 不得跳过 `_ai-query-router.md` 直接全仓库乱扫。
