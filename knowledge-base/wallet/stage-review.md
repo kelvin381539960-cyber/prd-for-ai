@@ -1,20 +1,21 @@
 ---
 module: wallet
 feature: wallet-stage-review
-version: "1.0"
+version: "1.1"
 status: active
-source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/wallet/_index.md；knowledge-base/wallet/transaction-history.md；knowledge-base/wallet/balance.md；knowledge-base/wallet/deposit.md；knowledge-base/wallet/receive.md；knowledge-base/wallet/send.md；knowledge-base/wallet/kyc.md；knowledge-base/changelog/knowledge-gaps.md
-source_section: Wallet 阶段回扫；IMPLEMENTATION_PLAN v3.8；Wallet active/deferred boundaries
-last_updated: 2026-05-01
+source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/wallet/_index.md；knowledge-base/wallet/balance.md；knowledge-base/wallet/deposit.md；knowledge-base/wallet/receive.md；knowledge-base/wallet/send.md；knowledge-base/kyc/wallet-kyc.md；knowledge-base/transaction/history.md；knowledge-base/transaction/reconciliation.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-02
+source_section: Wallet 阶段回扫；IMPLEMENTATION_PLAN v4.6；KYC 独立；Wallet Transaction History 合并至 Transaction History；ALL-GAP 唯一总表
+last_updated: 2026-05-02
 owner: 吴忆锋
 depends_on:
   - wallet/_index
-  - wallet/transaction-history
   - wallet/balance
   - wallet/deposit
   - wallet/receive
   - wallet/send
-  - wallet/kyc
+  - kyc/wallet-kyc
+  - transaction/history
+  - transaction/reconciliation
   - changelog/knowledge-gaps
 ---
 
@@ -22,123 +23,98 @@ depends_on:
 
 ## 1. 回扫结论
 
-Wallet 阶段已完成基础版知识库沉淀，但未达到完整 `PASS`。
+Wallet 阶段已完成钱包产品能力基础版知识库沉淀，但未达到完整 `PASS`。
 
 本次 Stage Review 结果为：`PARTIAL PASS`。
 
 含义：
 
-- Wallet 基础边界、交易记录、余额、Deposit、Receive、KYC 已建立基础文件。
-- Deposit 已恢复为 active，范围包含 GTR 和 WalletConnect，但两条子路径的完整字段、状态、风控、通知和异常边界仍待补。
+- Wallet 目录当前只承接钱包产品能力：Balance、Deposit、Receive、Send。
+- Deposit 为 active，范围包含 GTR / Exchange 地址充值与 WalletConnect / Self-custodial Wallet 充值。
 - Send 与 Swap 因合规原因未上线或需重做，保持 `deferred`，不作为 active 功能事实源。
-- Wallet 可进入后续 Transaction 统一层，但不得把待补项写成事实。
+- KYC 主事实已迁移至 `knowledge-base/kyc/wallet-kyc.md`。
+- Wallet Transaction History 主事实已合并至 `knowledge-base/transaction/history.md`。
+- 资金追踪 / ID 链路 / 对账边界由 `knowledge-base/transaction/reconciliation.md` 承接。
+- 所有不确定项统一引用 `knowledge-base/changelog/knowledge-gaps.md` 的 ALL-GAP 编号，Wallet 模块不再维护独立 checklist / gaps。
 
 ## 2. 回扫范围
 
 | 文件 | 状态 | 回扫结果 |
 |---|---|---|
-| `wallet/_index.md` | active | Wallet 模块边界已建立；Deposit active；Send / Swap deferred |
-| `wallet/transaction-history.md` | active / 基础版 | Wallet `id`、`transactionId`、`state` 基础事实已沉淀；完整字段待补 |
-| `wallet/balance.md` | active / 基础版 | Balance 边界已建立；余额接口字段待补 |
-| `wallet/deposit.md` | active / 基础版 | Deposit 包含 GTR 和 WalletConnect；子路径细节待补 |
-| `wallet/receive.md` | active / 基础版 | Receive 基础占位已建立；与 Deposit 子路径关系待确认 |
+| `wallet/_index.md` | active | Wallet 模块边界已更新；只承接钱包产品能力 |
+| `wallet/balance.md` | active | Balance 边界已建立；余额字段和可用性细节仍按 ALL-GAP 收敛 |
+| `wallet/deposit.md` | active | GTR / Exchange 与 WalletConnect 流程、异常和结果状态已阶段性回填 |
+| `wallet/receive.md` | active / 基础版 | Receive 基础占位已建立；与 Deposit 子路径关系待来源确认 |
 | `wallet/send.md` | deferred | 因合规原因未上线，不作为 active 功能事实源 |
-| `wallet/swap.md` | deferred | 未创建 active 正文；因合规原因未上线且需重做 |
-| `wallet/kyc.md` | active / 基础版 | Wallet KYC / 开户前置边界已建立；完整流程和接口待补 |
+| `wallet/swap.md` | deferred | 因合规原因未上线且需重做，不创建 active 功能正文 |
+| `wallet/kyc.md` | moved | 兼容入口，主事实源为 `kyc/wallet-kyc.md` |
+| `wallet/transaction-history.md` | moved | 兼容入口，主事实源为 `transaction/history.md` |
 
 ## 3. 已通过项
 
 | 检查项 | 结果 | 说明 |
 |---|---|---|
-| 模块边界 | 通过 | Wallet 与 Card、Transaction、Send / Swap deferred 边界已明确 |
+| 目录边界 | 通过 | Wallet 只承接产品能力；KYC 与 Transaction History 已迁出 |
 | 功能上线状态 | 通过 | Deposit active；Send / Swap deferred；未把未上线功能写成 active |
-| Wallet 基础字段 | 部分通过 | Wallet `id`、`transactionId`、`state` 已确认 |
-| Wallet 状态枚举 | 通过 | `PENDING` / `PROCESSING` / `AUTHORIZED` / `COMPLETED` / `REJECTED` / `CLOSED` 已沉淀 |
-| Card deferred gaps 隔离 | 通过 | 未把 Card 资金追踪遗留项写成 Wallet 事实 |
-| Deposit 范围 | 部分通过 | 已确认包含 GTR / WalletConnect；细节待补 |
-| KYC 边界 | 部分通过 | 已明确不默认等同 Card KYC / AAI KYC；完整规则待补 |
+| Deposit 范围 | 通过 | 已拆分 GTR / Exchange 与 WalletConnect 两条子路径 |
+| WalletConnect 关键流程 | 部分通过 | token、WebSocket、create_payment_intent、自动加白、send_payment、payment_info 已回填 |
+| GTR 关键流程 | 部分通过 | Select Asset、Select Network、Receive Crypto、Get Deposit Address、Binance / GTR Wallet 转账已回填 |
+| KYC 边界 | 通过 | Wallet KYC 已迁入 KYC 模块，不再由 Wallet 目录维护主事实 |
+| Transaction History 边界 | 通过 | Wallet History 已迁入 Transaction 模块，不再由 Wallet 目录维护主事实 |
+| ALL-GAP 唯一源 | 通过 | Wallet 不再维护模块级待确认表，只引用 ALL-GAP |
 | 无来源补写 | 通过 | 未把缺失字段、状态、文案、流程写成事实 |
 
-## 4. 当前待补 / deferred 问题
+## 4. 当前 ALL-GAP 引用
 
-### 4.1 Wallet 通用待补
+Wallet 阶段不维护独立 gap。相关不确定项统一引用：
 
-| 编号 | 问题 | 影响 |
+| 编号 | 主题 | 影响 |
 |---|---|---|
-| WALLET-GAP-001 | Wallet 当前余额查询接口路径、请求字段、响应字段未完整抽取 | Balance 事实源不完整 |
-| WALLET-GAP-002 | 可用余额 / 冻结余额 / 总余额字段未确认 | 余额展示与对账口径不完整 |
-| WALLET-GAP-003 | Wallet 交易记录完整请求 / 响应字段表未补齐 | Transaction History 事实源不完整 |
-| WALLET-GAP-004 | `activityType` 枚举未补齐 | 交易分类与展示口径不完整 |
-| WALLET-GAP-005 | Wallet 状态与前端展示文案映射未确认 | 用户展示不完整 |
-
-### 4.2 Deposit 待补
-
-| 编号 | 问题 | 影响 |
-|---|---|---|
-| WALLET-DEPOSIT-001 | GTR Deposit 完整流程、接口字段、状态未补齐 | GTR 入金事实源不完整 |
-| WALLET-DEPOSIT-002 | WalletConnect Deposit 完整流程、接口字段、状态未补齐 | WalletConnect 入金事实源不完整 |
-| WALLET-DEPOSIT-003 | GTR / WalletConnect 是否需要 Declare / Travel Rule 未确认 | 合规边界不完整 |
-| WALLET-DEPOSIT-004 | GTR / WalletConnect 是否需要白名单未确认 | 入金前置条件不完整 |
-| WALLET-DEPOSIT-005 | on-hold / risk rejected 规则未确认 | 风控异常分支不完整 |
-| WALLET-DEPOSIT-006 | Deposit 通知规则未补齐 | 用户通知边界不完整 |
-| WALLET-DEPOSIT-007 | GTR 与 WalletConnect 是否共用状态 / 字段 / 风控规则未确认 | 子路径边界不完整 |
-
-### 4.3 Receive 待补
-
-| 编号 | 问题 | 影响 |
-|---|---|---|
-| WALLET-RECEIVE-001 | Receive 是否独立于 Deposit 上线未确认 | Receive active 状态仍需核验 |
-| WALLET-RECEIVE-002 | Receive 地址、链、币种、memo/tag、二维码字段未补齐 | 收款地址事实源不完整 |
-| WALLET-RECEIVE-003 | Receive 与 GTR / WalletConnect 的关系未确认 | 可能与 Deposit 子路径重叠 |
-| WALLET-RECEIVE-004 | Receive 状态与 Wallet `state` 的映射未确认 | 状态闭环不完整 |
-
-### 4.4 KYC 待补
-
-| 编号 | 问题 | 影响 |
-|---|---|---|
-| WALLET-KYC-001 | Wallet 是否有独立开户 / KYC 流程未确认 | Wallet 准入规则不完整 |
-| WALLET-KYC-002 | Wallet KYC 与 Account / Security / Card KYC 的关系未确认 | 跨模块依赖不完整 |
-| WALLET-KYC-003 | Wallet KYC 是否为 GTR / WalletConnect Deposit 前置条件未确认 | 入金准入不完整 |
-| WALLET-KYC-004 | Wallet 开户接口路径、请求字段、响应字段未补齐 | 接口事实源不完整 |
-| WALLET-KYC-005 | KYC 失败、重试、重新提交、人工处理规则未补齐 | 失败分支不完整 |
-
-### 4.5 Deferred 功能
-
-| 功能 | 当前状态 | 处理 |
-|---|---|---|
-| Send / Withdraw | deferred | 因合规原因未上线，不作为 active 功能事实源；新方案确认后再转译 |
-| Swap | deferred | 因合规原因未上线且需重做；新方案确认后再转译 |
+| ALL-GAP-001 | GTR 是否使用 `FIAT_DEPOSIT=6` | 交易历史分类、筛选、统计 |
+| ALL-GAP-002 | WalletConnect 是否使用 `CRYPTO_DEPOSIT=10` | 交易历史分类、筛选、统计 |
+| ALL-GAP-007 | `relatedId / transactionId / id` 如何串联 GTR / WalletConnect 入金 | 入金记录追踪和对账 |
+| ALL-GAP-008 | Risk Withheld 与 Wallet `state` / 余额关系 | 详情状态、余额展示、状态筛选 |
+| ALL-GAP-009 | GTR 地址充值是否有与 WalletConnect 相同的结果页 | GTR 充值完成体验 |
+| ALL-GAP-010 | GTR / WalletConnect 是否复用 Deposit success / under review 通知 | 通知触发与跳转 |
+| ALL-GAP-011 | GTR 异常处理和客服口径 | 异常闭环 |
+| ALL-GAP-012 | WalletConnect `payment_info false / Transaction not found` 后续处理 | 状态不明场景 |
+| ALL-GAP-013 | WalletConnect 失败是否需要告警 | 排障和监控 |
+| ALL-GAP-030 | Wallet KYC 与 Card KYC 关系 | 准入状态复用 |
+| ALL-GAP-031 | Wallet KYC 是否为 GTR / WalletConnect Deposit 前置 | Deposit 入口拦截 |
+| ALL-GAP-032 | Wallet 开户触发时机 | Wallet 初始化 |
+| ALL-GAP-033 | KYC 失败 / 重试 / 人工处理规则 | KYC 异常闭环 |
 
 ## 5. 阶段判断
 
 | 判断项 | 结论 |
 |---|---|
-| Wallet 模块边界 | PASS |
-| Wallet 交易基础字段 | PARTIAL PASS |
+| Wallet 产品能力目录边界 | PASS |
 | Wallet Balance | PARTIAL PASS |
 | Wallet Deposit | PARTIAL PASS |
 | Wallet Receive | PARTIAL PASS |
-| Wallet KYC | PARTIAL PASS |
+| Wallet KYC 归属 | PASS，已迁至 KYC 模块 |
+| Wallet Transaction History 归属 | PASS，已迁至 Transaction 模块 |
 | Send / Swap 上线状态处理 | PASS |
-| 是否允许进入 Transaction 统一层 | 允许，带 deferred / 待补项继续 |
-| 是否允许把待补项写成事实 | 不允许 |
+| 资金追踪 / 对账 | PARTIAL PASS，见 Transaction Reconciliation 与 ALL-GAP |
+| 是否允许继续后续回扫 | 允许，带 ALL-GAP 继续 |
+| 是否允许把 ALL-GAP 写成事实 | 不允许 |
 
 ## 6. 后续要求
 
-1. 进入 Transaction 统一层前，可以引用 Wallet 已确认基础事实：`id`、`transactionId`、`state`、Search Balance History 基础能力、Deposit 包含 GTR / WalletConnect。
-2. 不得引用以下内容为事实：GTR / WalletConnect 完整状态机、Declare / Travel Rule、白名单、风控、通知、Receive 独立上线、Wallet KYC 独立流程。
-3. Send / Swap 必须继续保持 `deferred`，新方案确认后才能转译。
-4. 后续若拿到 Wallet PRD / DTC Wallet OpenAPI 完整字段，应优先回填：`transaction-history.md`、`balance.md`、`deposit.md`、`receive.md`、`kyc.md`。
-5. Transaction 阶段应把 Wallet `state` 作为 Wallet 交易状态基础来源，但不得把 Deposit / Receive 子状态脑补为完整状态机。
+1. Wallet 目录后续只维护 Balance、Deposit、Receive、Send 等产品能力。
+2. Wallet KYC 新事实写入 `kyc/wallet-kyc.md`。
+3. Wallet Transaction History 新事实写入 `transaction/history.md`。
+4. 资金追踪 / 对账新事实写入 `transaction/reconciliation.md`，并同步 ALL-GAP。
+5. Send / Swap 必须继续保持 `deferred`，新方案确认后才能转译。
+6. 所有不确定项只能写入 `knowledge-base/changelog/knowledge-gaps.md`，不得在 Wallet 文件中新增 checklist / TODO / gaps 表。
 
 ## 7. 来源引用
 
-- (Ref: IMPLEMENTATION_PLAN.md / v3.8 / Wallet 阶段)
-- (Ref: knowledge-base/wallet/_index.md / v1.3)
-- (Ref: knowledge-base/wallet/transaction-history.md / v1.0)
-- (Ref: knowledge-base/wallet/balance.md / v1.0)
-- (Ref: knowledge-base/wallet/deposit.md / v1.2)
-- (Ref: knowledge-base/wallet/receive.md / v1.0)
-- (Ref: knowledge-base/wallet/send.md / v1.0)
-- (Ref: knowledge-base/wallet/kyc.md / v1.0)
-- (Ref: knowledge-base/changelog/knowledge-gaps.md / Card Transaction Flow deferred gaps)
+- (Ref: IMPLEMENTATION_PLAN.md / v4.6)
+- (Ref: knowledge-base/wallet/_index.md / v1.4)
+- (Ref: knowledge-base/wallet/deposit.md / v1.5)
+- (Ref: knowledge-base/kyc/wallet-kyc.md / v1.0)
+- (Ref: knowledge-base/transaction/history.md / v1.2)
+- (Ref: knowledge-base/transaction/reconciliation.md / v1.0)
+- (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP 总表)
+- (Ref: 用户确认结论 / 2026-05-02 / KYC 独立，Wallet Transaction History 合并进 Transaction History)
