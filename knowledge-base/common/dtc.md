@@ -1,14 +1,18 @@
 ---
 module: common
 feature: dtc-dependency
-version: "1.2"
+version: "1.3"
 status: active
-source_doc: IMPLEMENTATION_PLAN.md；DTC接口文档/DTC Wallet OpenAPI Document20260126 (1).docx；DTC接口文档/卡交易&钱包交易状态梳理 (1).docx；knowledge-base/wallet/deposit.md；knowledge-base/common/walletconnect.md；knowledge-base/common/notification.md；knowledge-base/common/errors.md；knowledge-base/changelog/knowledge-gaps.md
-source_section: DTC Wallet OpenAPI / 3.4 Crypto Deposit；4.2.4 Search Balance History；4.4 Crypto；4.6 Webhook Service；Appendix ActivityType；Notification deposit rows
+source_doc: IMPLEMENTATION_PLAN.md；DTC接口文档/DTC Wallet OpenAPI Document20260126 (1).docx；DTC接口文档/卡交易&钱包交易状态梳理 (1).docx；knowledge-base/wallet/deposit.md；knowledge-base/wallet/transaction-history.md；knowledge-base/wallet/balance.md；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/common/walletconnect.md；knowledge-base/common/notification.md；knowledge-base/common/errors.md；knowledge-base/changelog/knowledge-gaps.md
+source_section: DTC Wallet OpenAPI / 3.4 Crypto Deposit；4.2.4 Search Balance History；4.4 Crypto；4.6 Webhook Service；Appendix ActivityType；Transaction History v1.1；Transaction Detail v1.1
 last_updated: 2026-05-01
 owner: 吴忆锋
 depends_on:
   - wallet/deposit
+  - wallet/transaction-history
+  - wallet/balance
+  - transaction/history
+  - transaction/detail
   - common/walletconnect
   - common/notification
   - common/errors
@@ -36,7 +40,7 @@ DTC 是 AIX 的外部供应商系统，不是 AIX 内部系统，也不是本知
 | Risk Withheld | 未添加 senderAddress 白名单时，交易会被设为 risky transaction，status=102 Risk Withheld | DTC Wallet OpenAPI / 3.4 Crypto Deposit | 可作为 Deposit 风控 / on-hold 边界 |
 | Whitelist 后自动成功 | 用户继续加白并 enable 后，交易会自动变为 success | DTC Wallet OpenAPI / 3.4 Crypto Deposit | 只记录 DTC 规则，不补 AIX 页面处理 |
 | Search Balance History | `[GET] /openapi/v1/wallet/balance/history/search` 查询 client wallet transaction history | DTC Wallet OpenAPI / 4.2.4 | Wallet History 来源之一 |
-| ActivityType | `CRYPTO_DEPOSIT=10 Stablecoin Deposit`，`FIAT_DEPOSIT=6 Fiat Deposit`，`DTC_WALLET=13 DTC Wallet Payment`，`CARD_PAYMENT_REFUND=20 Card Payment Refund` | DTC Wallet OpenAPI / Appendix ActivityType | 可用于 Wallet 交易分类 |
+| ActivityType | `FIAT_DEPOSIT=6`、`CRYPTO_DEPOSIT=10`、`DTC_WALLET=13`、`CARD_PAYMENT_REFUND=20` | DTC Wallet OpenAPI / Appendix ActivityType | 可用于 Wallet 交易分类，不等同产品路径 |
 | Card Transaction Notify | DTC 全量通知 AIX 卡交易 | Card Transaction Flow / DTC Card Issuing | AIX 只针对 refund / reversal / deposit 触发查卡余额和归集 |
 | `D-REQUEST-ID` | DTC API 请求唯一标识 Header | Card Transaction Flow / DTC Card Issuing | 只记录为请求唯一标识；不写成幂等键 |
 
@@ -57,12 +61,22 @@ DTC 文档描述的是 Crypto Deposit 通用依赖，不直接等同于 AIX Wall
 | 能力 | 已确认 | 待补 |
 |---|---|---|
 | Search Balance History endpoint | `[GET] /openapi/v1/wallet/balance/history/search` | 完整 response 字段 |
-| Request filters | `currency`、`type`、`yearMonth`、`createTimeStart` 等 | 完整分页字段 |
+| Request filters | `currency`、`type`、`yearMonth`、`createTimeStart` 等 | 完整分页字段和前端是否暴露 |
 | `type` | 引用 ActivityType | 前端展示分类映射 |
 | `relatedId` | Search Balance History / Card Balance History 中存在相关字段 | Wallet `relatedId` 在 GTR / WC / Card 归集场景下的具体取值仍未确认 |
 | `activityType` | ActivityType 枚举已部分确认 | 完整枚举是否全部用于 AIX 待确认 |
+| `state` | Wallet 交易状态字段 | 与 Deposit `success` / `Risk Withheld` 的映射待补 |
 
-## 5. Webhook / Notification 依赖边界
+## 5. ActivityType 边界
+
+| 枚举 | 值 | 含义 | AIX 侧处理 |
+|---|---:|---|---|
+| `FIAT_DEPOSIT` | 6 | Fiat Deposit | 可作为法币入金分类引用；不得直接写成 GTR |
+| `CRYPTO_DEPOSIT` | 10 | Stablecoin Deposit | 可作为 Crypto / Stablecoin 入金分类引用；不得直接写成 WalletConnect |
+| `DTC_WALLET` | 13 | DTC Wallet Payment | 可作为 DTC Wallet Payment 分类引用 |
+| `CARD_PAYMENT_REFUND` | 20 | Card Payment Refund | 可作为卡退款相关分类引用；与 Card 归集链路关联仍 deferred |
+
+## 6. Webhook / Notification 依赖边界
 
 | 场景 | 已确认 | 来源 |
 |---|---|---|
@@ -70,7 +84,7 @@ DTC 文档描述的是 Crypto Deposit 通用依赖，不直接等同于 AIX Wall
 | Deposit Risk Withheld 通知触发 | Notification 表记录：Webhook→notify，event=`CRYPTO_TXN`，type=`DEPOSIT`，state=`RISK_WITHHELD` | Notification PRD / sheet4 |
 | Webhook 具体逻辑 | Notification 表备注“具体逻辑待定义” | Notification PRD / sheet4 |
 
-## 6. 不写入事实的内容
+## 7. 不写入事实的内容
 
 以下内容不得在 DTC 外部依赖文件中写成事实：
 
@@ -79,13 +93,16 @@ DTC 文档描述的是 Crypto Deposit 通用依赖，不直接等同于 AIX Wall
 3. Wallet `id` 等同于 Card `data.id`。
 4. Wallet `relatedId` 等同于 Card `data.id` 或 AIX 归集请求 ID。
 5. DTC Crypto Deposit 规则自动等同于所有 GTR / WalletConnect 产品流程。
-6. 所有 Deposit 都一定需要 Declare / Travel Rule。
-7. 所有 Deposit 都一定需要白名单。
-8. Transfer Balance to Wallet 返回 transferId / resultId。
-9. DTC 内部系统实现逻辑。
-10. DTC 未提供但由 AIX 推测的字段、状态或错误码。
+6. `FIAT_DEPOSIT` 必然等同 GTR。
+7. `CRYPTO_DEPOSIT` 必然等同 WalletConnect。
+8. Deposit `success` 必然等同 Wallet `COMPLETED`。
+9. `Risk Withheld` 必然等同 Wallet `REJECTED` / `PENDING` / `PROCESSING`。
+10. 所有 Deposit 都一定需要 Declare / Travel Rule。
+11. Transfer Balance to Wallet 返回 transferId / resultId。
+12. DTC 内部系统实现逻辑。
+13. DTC 未提供但由 AIX 推测的字段、状态或错误码。
 
-## 7. 待补项
+## 8. 待补项
 
 | 编号 | 待补项 | 来源建议 | 当前处理 |
 |---|---|---|---|
@@ -94,11 +111,16 @@ DTC 文档描述的是 Crypto Deposit 通用依赖，不直接等同于 AIX Wall
 | DTC-GAP-003 | GTR / WalletConnect 是否全部适用 Crypto Deposit whitelist 规则 | GTR / WC PRD / 产品确认 | 待补 |
 | DTC-GAP-004 | `D-REQUEST-ID` 是否支持幂等 | DTC / 后端确认 | deferred |
 | DTC-GAP-005 | Webhook 原始报文落库规则 | 后端确认 | deferred |
+| DTC-GAP-006 | ActivityType 到 AIX 前端交易类型的映射 | 产品 / UX / 前端确认 | 待补 |
 
-## 8. 来源引用
+## 9. 来源引用
 
 - (Ref: DTC Wallet OpenAPI Document20260126 / 3.4 Crypto Deposit)
 - (Ref: DTC Wallet OpenAPI Document20260126 / 4.2.4 Search Balance History)
 - (Ref: DTC Wallet OpenAPI Document20260126 / Appendix ActivityType)
 - (Ref: [2025-11-25] AIX+Notification / Deposit rows)
+- (Ref: knowledge-base/transaction/history.md / v1.1)
+- (Ref: knowledge-base/transaction/detail.md / v1.1)
+- (Ref: knowledge-base/wallet/transaction-history.md / v1.1)
+- (Ref: knowledge-base/wallet/balance.md / v1.1)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / deferred gaps)
