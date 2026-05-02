@@ -1,10 +1,10 @@
 ---
 module: changelog
 feature: final-repository-review
-version: "1.0"
+version: "1.1"
 status: active
-source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/card/stage-review.md；knowledge-base/wallet/stage-review.md；knowledge-base/transaction/stage-review.md；knowledge-base/common/stage-review.md；knowledge-base/changelog/knowledge-gaps.md
-source_section: IMPLEMENTATION_PLAN v4.1 / 全仓库回扫；各阶段 Stage Review；deferred gaps
+source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/card/stage-review.md；knowledge-base/wallet/stage-review.md；knowledge-base/transaction/stage-review.md；knowledge-base/common/stage-review.md；knowledge-base/common/_index.md；knowledge-base/common/dtc.md；knowledge-base/common/aai.md；knowledge-base/changelog/knowledge-gaps.md
+source_section: IMPLEMENTATION_PLAN v4.2 / 全仓库回扫；各阶段 Stage Review；Common external dependency boundary；deferred gaps
 last_updated: 2026-05-01
 owner: 吴忆锋
 ---
@@ -21,6 +21,7 @@ owner: 吴忆锋
 - Card、Wallet、Transaction、Common / Integration 均已完成基础版沉淀，但保留 deferred / 待补项。
 - Send / Swap 因合规原因未上线或需重做，保持 deferred。
 - Deposit 为 active，范围限定为 GTR / WalletConnect。
+- DTC / AAI 已修正为外部依赖边界，不作为供应商系统说明书维护。
 - Card / Wallet 资金追踪链路中未确认的 ID、relatedId、对账字段继续保留为 deferred gaps。
 - 当前知识库可作为 AI 使用的基础事实层，但不能把待补项当作已确认规则。
 
@@ -33,7 +34,7 @@ owner: 吴忆锋
 | Card | PARTIAL PASS | 页面与卡管能力完成；Transaction Flow 资金追踪留 deferred gaps |
 | Wallet | PARTIAL PASS | 基础文件完成；Deposit active；Send / Swap deferred；细节待补 |
 | Transaction | PARTIAL PASS | 状态、历史、详情边界完成；状态映射和字段细节待补 |
-| Common / Integration | PARTIAL PASS | DTC / Notification / WC / Errors / AAI / FAQ 边界完成；细节待补 |
+| Common / Integration | PARTIAL PASS | 外部依赖边界、Notification、WC、Errors、FAQ 边界完成；细节待补 |
 | 全仓库回扫 | PARTIAL PASS | 状态一致，可进入后续补材料与精修阶段 |
 
 ## 3. 文件完整性检查
@@ -43,7 +44,7 @@ owner: 吴忆锋
 | Card | `_index`、application、status、home、activation、pin、sensitive-info、management、transaction-flow、stage-review、traceability-checklist | 已完成基础版 |
 | Wallet | `_index`、transaction-history、balance、deposit、receive、send、kyc、stage-review | 已完成基础版；send deferred |
 | Transaction | `_index`、status-model、history、detail、stage-review | 已完成基础版 |
-| Common | `_index`、dtc、notification、walletconnect、errors、aai、faq、stage-review | 已完成基础版 |
+| Common | `_index`、dtc、notification、walletconnect、errors、aai、faq、stage-review | 已完成基础版；dtc/aai 为外部依赖边界 |
 | Changelog | knowledge-gaps、final-repository-review | 已完成 |
 
 ## 4. Active / Deferred 状态检查
@@ -55,6 +56,8 @@ owner: 吴忆锋
 | Swap | deferred | 正确；未上线且需重做，不作为 active 功能事实源 |
 | Card Transaction Flow | active + deferred gaps | 正确；基础事实可用，资金追踪链路不闭环 |
 | WalletConnect | active 公共边界 | 正确；仅作为 Deposit 子路径边界，不补写完整规则 |
+| DTC | external dependency | 正确；只记录 AIX 对 DTC 的依赖边界，不维护 DTC 内部逻辑 |
+| AAI | external dependency | 正确；只记录 AIX 对 AAI 的依赖边界，不维护 AAI 内部逻辑 |
 | Receive | active 基础占位 | 需后续确认是否独立上线 |
 
 ## 5. Deferred gaps 检查
@@ -73,6 +76,7 @@ owner: 吴忆锋
 10. Receive 是否独立上线。
 11. Wallet KYC 完整流程。
 12. 通用错误码、通知补发、人工补偿入口。
+13. DTC / AAI 内部系统逻辑、内部审核逻辑或未提供字段。
 
 ## 6. 一致性检查
 
@@ -86,15 +90,16 @@ owner: 吴忆锋
 | 是否把 Card / Wallet ID 强行关联 | 否 |
 | 是否把通知写成必然 Wallet 到账 | 否 |
 | 是否把 Card / Wallet 状态强行合并 | 否 |
+| 是否把 DTC / AAI 写成供应商系统说明书 | 否；已改为外部依赖边界 |
 
 ## 7. 后续补材料优先级
 
 | 优先级 | 补充项 | 目标文件 |
 |---|---|---|
 | P0 | GTR / WalletConnect 入金流程、字段、状态、风控、通知 | wallet/deposit、common/walletconnect、common/notification |
-| P0 | DTC Wallet 完整字段、activityType、relatedId 规则 | wallet/transaction-history、transaction/status-model、common/dtc |
+| P0 | AIX 实际依赖的 DTC Wallet 字段、activityType、relatedId 规则 | wallet/transaction-history、transaction/status-model、common/dtc |
 | P0 | Card / Wallet 资金追踪 ID 关联规则 | card/transaction-flow、knowledge-gaps |
-| P1 | Wallet KYC / AAI 状态、接口、失败处理 | wallet/kyc、common/aai |
+| P1 | AIX 实际依赖的 Wallet KYC / AAI 状态、接口、失败处理 | wallet/kyc、common/aai |
 | P1 | 通用错误码、错误页、告警和人工补偿入口 | common/errors |
 | P2 | FAQ 原文和客服口径 | common/faq |
 
@@ -110,12 +115,17 @@ owner: 吴忆锋
 - 不可引用 deferred gaps 为事实。
 - 不可把未上线功能作为 active 能力。
 - 不可把待补状态机、错误码、通知、合规规则补写完整。
+- 不可把 DTC / AAI 当作 AIX 自有系统或供应商系统说明书维护。
+- 只能记录 AIX 实际使用到的 DTC / AAI 外部依赖边界。
 
 ## 9. 来源引用
 
-- (Ref: IMPLEMENTATION_PLAN.md / v4.1 / 全仓库回扫)
+- (Ref: IMPLEMENTATION_PLAN.md / v4.2 / 全仓库回扫)
 - (Ref: knowledge-base/card/stage-review.md / v1.3)
 - (Ref: knowledge-base/wallet/stage-review.md / v1.0)
 - (Ref: knowledge-base/transaction/stage-review.md / v1.0)
 - (Ref: knowledge-base/common/stage-review.md / v1.0)
+- (Ref: knowledge-base/common/_index.md / v2.1)
+- (Ref: knowledge-base/common/dtc.md / v1.1)
+- (Ref: knowledge-base/common/aai.md / v1.1)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / deferred gaps)
