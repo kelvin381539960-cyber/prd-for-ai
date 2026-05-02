@@ -1,7 +1,7 @@
 # prd-for-ai 实施计划
 
-版本：v5.0  
-状态：补材料与精修阶段 PARTIAL PASS；主干无损 gap 迁移已完成；ALL-GAP 留待后续统一确认；AI 查询路由表已建立；当前工作收口完成  
+版本：v5.1  
+状态：补材料与精修阶段 PARTIAL PASS；主干无损 gap 迁移已完成；ALL-GAP 留待后续统一确认；AI 查询路由表与系统边界总说明已建立；当前工作收口完成  
 适用仓库：`prd-for-ai`  
 更新时间：2026-05-02
 
@@ -9,7 +9,7 @@
 
 本文件是 `prd-for-ai` 仓库的长期实施主控文件。后续每次开始执行前，必须先读取本文件，确认当前阶段、当前模块、执行规则和验收标准，再继续执行。
 
-本文件优先级高于临时对话结论。若临时任务与本实施计划冲突，必须先更新本文件，再执行具体任务。
+本文件优先级高于临时对话结论。若临时任务与本实施计划冲突，必须先更新本实施计划，再执行具体任务。
 
 待确认事项的唯一事实源为：
 
@@ -18,6 +18,10 @@
 AI 查询与写需求的路由文件为：
 
 `knowledge-base/_ai-query-router.md`
+
+系统责任与外部依赖边界文件为：
+
+`knowledge-base/_system-boundary.md`
 
 本文件不再维护另一套待确认清单。
 
@@ -41,6 +45,7 @@ AI 查询与写需求的路由文件为：
 16. 主干无损 gap 迁移已阶段性完成；后续发现新的分散待确认项，必须先写入 ALL-GAP，再更新对应模块引用。
 17. 当前用户已明确：ALL-GAP 现阶段无法确认，全部留待以后统一确认；不得因未确认 ALL-GAP 阻塞当前知识库收口完成。
 18. 后续 AI 查询、写需求、改需求、回答需求逻辑时，必须先读取 `IMPLEMENTATION_PLAN.md`，再读取 `knowledge-base/_ai-query-router.md`，再按路由表读取模块事实文件。
+19. 涉及系统责任、外部依赖、AIX 与供应商边界、是否应写入需求时，必须读取 `knowledge-base/_system-boundary.md`。
 
 ---
 
@@ -54,12 +59,13 @@ AI 查询与写需求的路由文件为：
 | `common/` | 公共能力和外部依赖边界 | 维护 dtc、aai、walletconnect、notification、errors、faq |
 | `changelog/` | 变更、回扫、唯一待确认表 | `knowledge-gaps.md` 是唯一 ALL-GAP 总表 |
 | `knowledge-base/_ai-query-router.md` | AI 查询路由与使用说明 | 指导 AI 按问题类型读取事实文件，不新增业务事实 |
+| `knowledge-base/_system-boundary.md` | AIX 系统边界总说明 | 定义 AIX / DTC / AAI / WalletConnect / 第三方钱包 / 区块链 / Notification 的责任边界 |
 
 ---
 
 ## 4. AI 查询标准路径
 
-AI 使用知识库时，必须按以下顺序读取：
+AI 使用知识库时，默认按以下顺序读取：
 
 ```text
 1. IMPLEMENTATION_PLAN.md
@@ -69,7 +75,13 @@ AI 使用知识库时，必须按以下顺序读取：
 5. knowledge-base/changelog/knowledge-gaps.md
 ```
 
-不得跳过主控计划，不得不看路由表就全仓库乱扫，不得把 ALL-GAP deferred / open 项写成事实。
+如问题涉及系统责任、外部依赖边界、是否属于 AIX 责任、是否应写入需求，则必须额外读取：
+
+```text
+knowledge-base/_system-boundary.md
+```
+
+不得跳过主控计划，不得不看路由表就全仓库乱扫，不得把 ALL-GAP deferred / open 项写成事实，不得把外部系统内部逻辑写成 AIX 自有能力。
 
 ---
 
@@ -86,6 +98,7 @@ AI 使用知识库时，必须按以下顺序读取：
 | 资金可追溯 | 涉及资金时必须能串起通知、处理、结果、入账、对账；不能确认时必须记录 ALL-GAP |
 | 功能上线状态 | 未上线 / 需重做功能必须标记 deferred，不能写成 active 事实 |
 | 外部依赖边界 | DTC / AAI 等供应商系统只能记录影响 AIX 系统设计的依赖边界，不维护其内部逻辑或完整说明书 |
+| 系统责任边界 | 涉及 AIX / 外部系统责任划分时，必须引用 `_system-boundary.md` |
 | 待确认唯一源 | 所有待确认项必须集中到 `knowledge-base/changelog/knowledge-gaps.md`，不得分散在模块文档 |
 | 目录边界 | KYC 不挂在 Wallet；Wallet Transaction History 主事实归 Transaction；Wallet 只保留钱包产品能力 |
 | AI 查询路径 | 查询 / 写需求 / 改需求时必须先读 `_ai-query-router.md` 并按路由读取事实文件 |
@@ -108,6 +121,7 @@ AI 使用知识库时，必须按以下顺序读取：
 | 9 | 全仓库回扫 | PARTIAL PASS | 去重复、补引用、核对状态 | 字段 / 状态 / 来源 / gaps / index | 主干无损 gap 迁移已完成 |
 | 10 | 补材料与精修 | PARTIAL PASS | 按真实材料回填并统一未确认项 | Deposit / WalletConnect / Errors / FAQ / ALL-GAP / 目录结构 / 无损迁移 | 当前工作收口完成 |
 | 11 | AI 查询路由 | PASS | 建立 AI 查询与引用路径 | `_ai-query-router.md` | 已完成 |
+| 12 | 系统边界总说明 | PASS | 建立 AIX 与外部系统责任边界 | `_system-boundary.md` | 已完成 |
 
 ---
 
@@ -129,6 +143,7 @@ AI 使用知识库时，必须按以下顺序读取：
 | 历史 gap 无损迁移 | 已完成主干回扫 | DEP-GAP、ERR-GAP、TXN-DETAIL-GAP、TXN-STATUS-GAP、BE/WALLET traceability、DTC-GAP、NOTIF-GAP、Balance / Receive 待补字段均已映射 | changelog/knowledge-gaps、wallet、card、transaction、common |
 | 分散 gap 清理 | 已完成主干回扫 | 主干模块正文改为引用 ALL-GAP，不再维护独立 checklist | wallet、card、transaction、common |
 | AI 查询路由 | 已完成 | 新增 `knowledge-base/_ai-query-router.md`，定义问题类型到事实文件的读取路径 | knowledge-base/_ai-query-router.md |
+| 系统边界总说明 | 已完成 | 新增 `knowledge-base/_system-boundary.md`，定义 AIX 与外部系统责任边界 | knowledge-base/_system-boundary.md |
 | P0 gap 收敛 | 延后 | 用户明确当前无法确认，留待以后统一确认 | changelog/knowledge-gaps |
 
 ---
@@ -151,6 +166,7 @@ AI 使用知识库时，必须按以下顺序读取：
 | Deposit success 通知 | Notification PRD / Deposit row | 不代表所有 Deposit 子路径状态机闭环；通知触发点见 ALL-GAP-065 |
 | Deposit under review / Risk Withheld 通知 | Notification PRD / Deposit row | 不代表 Declare / Travel Rule 流程闭环 |
 | AAI / KYC 外部依赖 | 用户确认 / common/aai | 只保留影响 AIX 准入、页面状态、通知、错误、人工处理的结果边界 |
+| AIX 系统边界 | `_system-boundary.md` | AIX 只维护自身系统责任，外部系统只维护依赖边界 |
 
 ---
 
@@ -168,6 +184,7 @@ AI 使用知识库时，必须按以下顺序读取：
 | Common / Integration | 已完成基础版 + 真实材料回填 + 无损 gap 迁移 | PARTIAL PASS | DTC / AAI 已收窄为系统设计边界；Notification / Errors / WalletConnect 已补真实材料 |
 | 全仓库回扫 | 已完成主干无损迁移 | PARTIAL PASS | 主干模块级 gaps 已统一迁入 ALL-GAP |
 | AI 查询路由 | 已完成 | PASS | `_ai-query-router.md` 已建立，后续 AI 按路由读取事实文件 |
+| 系统边界总说明 | 已完成 | PASS | `_system-boundary.md` 已建立，后续 AI 按边界判断责任归属 |
 | 补材料与精修 | 已完成当前收口 | PARTIAL PASS | ALL-GAP 留待以后确认，当前工作不再阻塞 |
 
 ---
@@ -177,7 +194,7 @@ AI 使用知识库时，必须按以下顺序读取：
 当前执行点：
 
 1. 当前工作已完成收口，不再要求立即确认 ALL-GAP。
-2. 后续如继续，应先读取本文件，再读取 `knowledge-base/_ai-query-router.md`，再读取 `knowledge-base/changelog/knowledge-gaps.md` 或对应模块事实文件。
+2. 后续如继续，应先读取本文件，再读取 `knowledge-base/_ai-query-router.md`，再读取 `knowledge-base/_system-boundary.md` 或对应模块事实文件。
 3. 后续若用户能提供答案，再按 ALL-GAP 编号逐条确认。
 4. 用户确认 ALL-GAP 后，先更新 `knowledge-gaps.md` 状态，再同步回填相关功能文件。
 5. 若发现新的分散待确认项，必须先迁入 ALL-GAP，再更新模块引用。
@@ -197,3 +214,4 @@ AI 使用知识库时，必须按以下顺序读取：
 - 不得新增无来源状态、字段、接口、文案或页面规则。
 - 不得因精简、合并、改写、迁移而删除或弱化历史待确认问题。
 - 不得跳过 `_ai-query-router.md` 直接全仓库乱扫。
+- 不得跳过 `_system-boundary.md` 将外部系统内部逻辑写成 AIX 自身责任。
