@@ -1,10 +1,10 @@
 ---
 module: changelog
 feature: knowledge-gaps
-version: "1.6"
+version: "1.7"
 status: active
-source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/wallet/deposit.md；knowledge-base/card/card-transaction-flow.md；knowledge-base/card/stage-review.md；knowledge-base/card/transaction-flow-traceability-checklist.md；knowledge-base/wallet/transaction-history.md；knowledge-base/wallet/kyc.md；knowledge-base/common/dtc.md；knowledge-base/common/aai.md；knowledge-base/common/errors.md；用户确认结论 2026-05-01；用户确认结论 2026-05-02
-source_section: source-policy；all-module centralized confirmation table；Card Transaction Flow；Wallet Deposit；Wallet KYC；Common DTC / AAI；deferred gaps decision；single global checklist rule
+source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/wallet/deposit.md；knowledge-base/card/card-transaction-flow.md；knowledge-base/card/stage-review.md；knowledge-base/card/transaction-flow-traceability-checklist.md；knowledge-base/wallet/transaction-history.md；knowledge-base/wallet/kyc.md；knowledge-base/common/dtc.md；knowledge-base/common/aai.md；knowledge-base/common/errors.md；knowledge-base/common/stage-review.md；用户确认结论 2026-05-01；用户确认结论 2026-05-02
+source_section: source-policy；all-module centralized confirmation table；Card Transaction Flow；Wallet Deposit；Wallet KYC；Common DTC / AAI；Common Stage Review；deferred gaps decision；single global checklist rule
 last_updated: 2026-05-02
 owner: 吴忆锋
 ---
@@ -67,6 +67,11 @@ owner: 吴忆锋
 | ALL-GAP-040 | P2 | Common / FAQ | FAQ Row 14：How can I check the delivery status of my physical card? 无答案 | FAQ 原文缺失答案 | 产品 / 客服 | 影响客服口径 | open |
 | ALL-GAP-041 | P2 | Account / Login | Login Page 原始 PRD Description 列从第 4 项开始，1-3 项仅存在于 UX 截图，缺少可结构化文字规则 | 正文保留截图与已知结构化规则 | 产品 / UX | 影响 Login 页面结构化沉淀 | open |
 | ALL-GAP-042 | P2 | Account / Login | 账号不存在 / 未注册提示英文最终文案缺失 | 中文原文：`您输入的账号信息有误，请检查或注册新账号。` | 产品 / UX / 文案 | 影响英文文案 | open |
+| ALL-GAP-043 | P1 | Common / DTC | DTC 通用响应结构和通用错误码边界 | Common Stage Review 原 COMMON-GAP-001 提到 DTC 通用响应结构和错误码表未补齐；当前不维护完整供应商说明书，但 AIX 统一错误处理所需边界仍需确认 | 后端 / DTC / 产品 | 影响接口统一处理、错误处理、排障 | deferred |
+| ALL-GAP-044 | P1 | Common / WalletConnect / Compliance | WalletConnect Declare / Travel Rule / 白名单规则边界 | Common Stage Review 原 COMMON-GAP-004 提到 WC Declare / Travel Rule / 白名单规则未确认；当前已确认 WC Approved 后自动 add whitelist，但 Declare / Travel Rule 的触发和展示边界仍未完整确认 | 产品 / 合规 / 后端 | 影响合规前置、异常处理、用户提示 | deferred |
+| ALL-GAP-045 | P1 | Common / Notification | 通知失败重试 / 补发策略 | Common Stage Review 原 COMMON-GAP-006 提到通知失败重试 / 补发策略未确认 | 后端 / Notification / 运维 | 影响通知可靠性和用户感知 | deferred |
+| ALL-GAP-046 | P1 | Common / AAI / KYC | AAI OCR / Liveness / KYC 状态和失败原因边界 | Common Stage Review 原 COMMON-GAP-009 提到 AAI OCR / Liveness / KYC 状态和失败原因未补齐；当前只收窄为 AIX 依赖边界 | 产品 / KYC / 后端 | 影响准入、失败提示、人工处理 | deferred |
+| ALL-GAP-047 | P2 | Common / FAQ | FAQ 原文和客服口径完整性 | Common Stage Review 原 COMMON-GAP-010 提到 FAQ 原文和客服口径未补齐；当前只确认 Row 14 明确缺失，其他口径仍需以原文为准 | 产品 / 客服 | 影响客服答复完整性 | deferred |
 
 ## 3. 优先级定义
 
