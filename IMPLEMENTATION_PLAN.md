@@ -1,9 +1,9 @@
 # prd-for-ai 实施计划
 
-版本：v4.3  
-状态：补材料与精修阶段阶段性 PARTIAL PASS，继续补前端展示 / GTR / WalletConnect / KYC 细节  
+版本：v4.4  
+状态：补材料与精修阶段阶段性 PARTIAL PASS；外部依赖已收窄为 AIX 系统设计边界  
 适用仓库：`prd-for-ai`  
-更新时间：2026-05-01
+更新时间：2026-05-02
 
 ## 1. 文档定位
 
@@ -24,7 +24,7 @@
 9. 涉及账户、卡、钱包、交易、资金处理的阶段，Stage Review 必须检查状态闭环、接口一致性、字段来源、失败分支和可追溯性。
 10. 涉及资金处理时，必须确认通知 ID、业务 ID、请求 ID、结果流水、入账流水、幂等键、重试策略和异常责任分派；不能确认时必须记录 deferred gap。
 11. 未上线且需重做的功能不得作为 active 功能事实归档；只能标记为 `deferred` 或 `redesign-required`。
-12. DTC / AAI 是外部供应商依赖，不是 AIX 内部系统；知识库只记录 AIX 实际使用到的外部依赖边界，不维护供应商内部系统逻辑或完整系统说明书。
+12. DTC / AAI 是外部供应商依赖，不是 AIX 内部系统；知识库只记录与 AIX 系统设计有关的外部依赖边界，不维护供应商内部逻辑、完整接口说明书、完整错误码表或与 AIX 无关的供应商字段。
 
 ---
 
@@ -39,7 +39,7 @@
 | 无脑补事实 | 文档缺失必须写 gaps，不得写成事实 |
 | 资金可追溯 | 涉及资金时必须能串起通知、处理、结果、入账、对账；不能确认时必须记录 deferred gap |
 | 功能上线状态 | 未上线 / 需重做功能必须标记 deferred，不能写成 active 事实 |
-| 外部依赖边界 | DTC / AAI 等供应商系统只能记录 AIX 依赖边界，不维护其内部逻辑 |
+| 外部依赖边界 | DTC / AAI 等供应商系统只能记录影响 AIX 系统设计的依赖边界，不维护其内部逻辑或完整说明书 |
 | 实施计划同步 | Gate 结果必须写回 `IMPLEMENTATION_PLAN.md` |
 
 ---
@@ -54,9 +54,9 @@
 | 4 | Card 批量推进 | PARTIAL PASS | 转译卡模块 | Application / Status & Fields / Home / Manage / Transaction | 遗留资金追踪项 deferred |
 | 5 | Wallet 批量推进 | PARTIAL PASS | 转译钱包模块 | KYC / Balance / Deposit / Receive / Transaction History | Wallet 细节继续待补 |
 | 6 | Transaction 统一层 | PARTIAL PASS | 统一交易状态 | Card / Wallet / History / Detail | 待补项继续保留 |
-| 7 | Common / Integration | PARTIAL PASS | 抽公共能力与外部依赖边界 | DTC Dependency / AAI Dependency / WC / Error / FAQ / Notification | 待补项继续保留 |
+| 7 | Common / Integration | PARTIAL PASS | 抽公共能力与外部依赖边界 | DTC Dependency / AAI Dependency / WC / Error / FAQ / Notification | DTC / AAI 已收窄为系统设计边界 |
 | 8 | 全仓库回扫 | PARTIAL PASS | 去重复、补引用、核对状态 | 字段 / 状态 / 来源 / gaps / index | 已生成最终回扫记录 |
-| 9 | 补材料与精修 | 阶段性 PARTIAL PASS | 按 P0/P1/P2 回填真实材料 | Deposit / Wallet History / DTC / Notification / Errors 已阶段性回填 | 继续补前端展示、GTR / WC 产品流程、KYC / AAI |
+| 9 | 补材料与精修 | 阶段性 PARTIAL PASS | 按 P0/P1/P2 回填真实材料 | Deposit / Wallet History / DTC / AAI / Notification / Errors 已阶段性回填 | 继续补前端展示、GTR / WC 产品流程、FAQ / 客服口径 |
 
 ---
 
@@ -64,17 +64,17 @@
 
 | 子任务 | 状态 | 已完成 / 当前边界 | 目标文件 |
 |---|---|---|---|
-| DTC Crypto Deposit 外部依赖 | 已完成阶段性回填 | whitelisting / deposit / withdrawal、senderAddress、destinationAddress、Risk Withheld、success | wallet/deposit、common/dtc、common/walletconnect、common/errors |
+| DTC Crypto Deposit 外部依赖 | 已完成阶段性回填并收窄 | 只保留影响 AIX Deposit、Wallet History、通知、状态、错误、对账的设计边界 | wallet/deposit、common/dtc、common/walletconnect、common/errors |
+| AAI 外部依赖 | 已完成边界收窄 | 只保留影响 AIX KYC 准入、页面状态、通知、错误、人工处理的结果边界 | common/aai、wallet/kyc |
 | Deposit Notification | 已完成阶段性回填 | Deposit success、Deposit under review / Risk Withheld 通知规则、模板参数和跳转边界 | common/notification、wallet/deposit |
 | Wallet Search Balance History | 已完成阶段性回填 | endpoint、查询条件边界、`activityType` / `relatedId` / `state` / `time` | wallet/transaction-history、wallet/balance、transaction/history |
-| ActivityType | 已完成阶段性回填 | `FIAT_DEPOSIT=6`、`CRYPTO_DEPOSIT=10`、`DTC_WALLET=13`、`CARD_PAYMENT_REFUND=20` | wallet/transaction-history、wallet/balance、transaction/status-model、transaction/history、transaction/detail、common/dtc |
+| ActivityType | 已完成阶段性回填 | `FIAT_DEPOSIT=6`、`CRYPTO_DEPOSIT=10`、`DTC_WALLET=13`、`CARD_PAYMENT_REFUND=20`，但不等同产品路径 | wallet/transaction-history、wallet/balance、transaction/status-model、transaction/history、transaction/detail、common/dtc |
 | Transaction 统一层同步 | 已完成阶段性回填 | Deposit History / Deposit Detail / Risk Withheld / success 边界已同步 | transaction/status-model、transaction/history、transaction/detail |
 | 阶段性回扫 | 已完成 | `knowledge-base/changelog/refinement-stage-review.md` 已生成，结论 `PARTIAL PASS` | changelog/refinement-stage-review |
 | GTR 产品流程 | 待补 | GTR 是否使用 `FIAT_DEPOSIT`、页面入口、状态、风控、通知覆盖待确认 | wallet/deposit、transaction/history |
 | WalletConnect 产品流程 | 待补 | WC 是否使用 `CRYPTO_DEPOSIT`、senderAddress 获取、SDK / 页面流程、状态展示待确认 | wallet/deposit、common/walletconnect |
 | Declare / Travel Rule | 待补 | 触发条件、用户路径、通知 / 状态影响待确认 | wallet/deposit、common/walletconnect、common/errors |
-| Wallet KYC / AAI | 待补 | AIX 实际依赖的 KYC 状态、OCR / Liveness / 失败处理待补 | wallet/kyc、common/aai |
-| FAQ / 客服口径 | 待补 | GTR / WC / Risk Withheld / Deposit success 等客服口径待补 | common/faq |
+| FAQ / 客服口径 | 待补 | GTR / WC / Risk Withheld / Deposit success / KYC 等客服口径待补 | common/faq |
 
 ---
 
@@ -88,13 +88,14 @@
 | senderAddress 需要 whitelist 并 enable | DTC Wallet OpenAPI / 3.4 Crypto Deposit | GTR / WC 是否全部适用仍待确认 |
 | 未加白进入 `status=102 Risk Withheld` | DTC Wallet OpenAPI / 3.4 Crypto Deposit | 不等同 Wallet `REJECTED` / `PENDING` / `PROCESSING` |
 | 加白成功后自动变为 success | DTC Wallet OpenAPI / 3.4 Crypto Deposit | 不等同 Wallet `COMPLETED`；余额可见时点待补 |
-| Search Balance History endpoint 为 `[GET] /openapi/v1/wallet/balance/history/search` | DTC Wallet OpenAPI / 4.2.4 | 完整响应字段、分页和前端筛选待补 |
+| Search Balance History endpoint 为 `[GET] /openapi/v1/wallet/balance/history/search` | DTC Wallet OpenAPI / 4.2.4 | 不维护完整接口说明书；只作为 AIX Wallet History 来源 |
 | `FIAT_DEPOSIT=6` | DTC Wallet OpenAPI / Appendix ActivityType | 不得写死为 GTR |
 | `CRYPTO_DEPOSIT=10` | DTC Wallet OpenAPI / Appendix ActivityType | 不得写死为 WalletConnect |
 | `DTC_WALLET=13` | DTC Wallet OpenAPI / Appendix ActivityType | 仅作为分类来源 |
 | `CARD_PAYMENT_REFUND=20` | DTC Wallet OpenAPI / Appendix ActivityType | 与 Card 归集链路关联仍 deferred |
 | Deposit success 通知 | Notification PRD / Deposit row | 不代表所有 Deposit 子路径状态机闭环 |
 | Deposit under review / Risk Withheld 通知 | Notification PRD / Deposit row | 不代表 Declare / Travel Rule 流程闭环 |
+| AAI / KYC 外部依赖 | 用户确认 / common/aai | 只保留影响 AIX 准入、页面状态、通知、错误、人工处理的结果边界 |
 
 ---
 
@@ -108,9 +109,9 @@
 | Card / Transaction Flow | 已完成但留 deferred gaps | PARTIAL PASS | 资金追踪部分 deferred |
 | Wallet | 已完成基础版 + 部分真实材料回填 | PARTIAL PASS | Deposit active；Send / Swap deferred；Crypto Deposit / ActivityType 已补，GTR / WC 细节待补 |
 | Transaction | 已完成基础版 + 部分真实材料回填 | PARTIAL PASS | Wallet History / Detail / ActivityType / Risk Withheld 边界已补，状态映射待补 |
-| Common / Integration | 已完成基础版 + 部分真实材料回填 | PARTIAL PASS | DTC / Notification / Errors / WalletConnect 已补部分真实材料，AAI 待补 |
+| Common / Integration | 已完成基础版 + 部分真实材料回填 | PARTIAL PASS | DTC / AAI 已收窄为系统设计边界；Notification / Errors / WalletConnect 已补部分真实材料 |
 | 全仓库回扫 | 已完成基础版 | PARTIAL PASS | 状态一致，可继续补材料与精修 |
-| 补材料与精修 | 当前执行 | PARTIAL PASS | P0 Deposit / Wallet History 已阶段性回填，继续补 GTR / WC / KYC / FAQ |
+| 补材料与精修 | 当前执行 | PARTIAL PASS | 继续补 GTR / WC 产品流程、FAQ / 客服口径 |
 
 ---
 
@@ -118,10 +119,10 @@
 
 当前执行点：
 
-1. 继续在历史 PRD / DTC 接口文档中补前端展示与业务流程。
+1. 继续在历史 PRD / 截图中补前端展示与业务流程。
 2. 优先补：GTR / WalletConnect 页面入口、用户路径、状态展示、Declare / Travel Rule、余额可见时点、人工处理。
-3. 其次补：Wallet KYC / AAI 外部依赖边界。
-4. 最后补：FAQ / 客服口径。
+3. 其次补：FAQ / 客服口径。
+4. 外部依赖继续保持“只保留 AIX 系统设计相关内容”的原则。
 
 当前禁止事项：
 
@@ -132,4 +133,5 @@
 - 不得把 Risk Withheld 写死为 Wallet `REJECTED` / `PENDING` / `PROCESSING`。
 - 不得把 Wallet `relatedId` 与 Card / GTR / WC 强行关联。
 - 不得把 DTC / AAI 写成 AIX 自有系统或供应商系统说明书。
+- 不得维护与 AIX 系统设计无关的供应商字段、错误码、接口说明或内部逻辑。
 - 不得新增无来源状态、字段、接口、文案或页面规则。
