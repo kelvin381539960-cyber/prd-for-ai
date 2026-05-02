@@ -1,31 +1,32 @@
 ---
 module: changelog
 feature: final-repository-review
-version: "1.4"
+version: "1.5"
 status: active
-source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/changelog/refinement-stage-review.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/wallet/_index.md；knowledge-base/transaction/_index.md；knowledge-base/transaction/history.md；knowledge-base/transaction/reconciliation.md；knowledge-base/kyc/_index.md；knowledge-base/kyc/wallet-kyc.md；knowledge-base/common/dtc.md；knowledge-base/common/aai.md；knowledge-base/common/walletconnect.md；knowledge-base/common/errors.md；用户确认结论 2026-05-02
-source_section: IMPLEMENTATION_PLAN v4.6；KYC 独立；Wallet Transaction History 合并；Transaction Reconciliation 新增；ALL-GAP 唯一总表；外部依赖收窄原则
+source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/changelog/refinement-stage-review.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/wallet/_index.md；knowledge-base/wallet/deposit.md；knowledge-base/wallet/balance.md；knowledge-base/wallet/receive.md；knowledge-base/transaction/_index.md；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/status-model.md；knowledge-base/transaction/reconciliation.md；knowledge-base/kyc/_index.md；knowledge-base/kyc/wallet-kyc.md；knowledge-base/card/card-transaction-flow.md；knowledge-base/card/transaction-flow-traceability-checklist.md；knowledge-base/common/dtc.md；knowledge-base/common/aai.md；knowledge-base/common/walletconnect.md；knowledge-base/common/notification.md；knowledge-base/common/errors.md；用户确认结论 2026-05-02
+source_section: IMPLEMENTATION_PLAN v4.8；ALL-GAP v1.12；无损 gap 迁移；KYC 独立；Wallet Transaction History 合并；Transaction Reconciliation；外部依赖收窄原则
 last_updated: 2026-05-02
 owner: 吴忆锋
 ---
 
 # 全仓库回扫记录
 
-## 1. 回扫结论
+## 1. 收口结论
 
-本轮知识库已完成目录边界重构和补材料阶段性回填。当前仓库状态为：`PARTIAL PASS`。
+本轮知识库已完成结构边界重构、补材料阶段性回填，以及主干模块的无损 gap 迁移。当前仓库状态为：`PARTIAL PASS / 基础事实层完成 / ALL-GAP 统一待确认`。
 
 含义：
 
 - Account 与 Security 已完成并通过。
 - Card、Wallet、Transaction、KYC、Common / Integration 均已形成基础事实层。
-- Send / Swap 因合规原因未上线或需重做，保持 `deferred`。
+- Send / Swap 因未上线或需重做，保持 `deferred`。
 - Deposit 为 `active`，范围限定为 GTR / Exchange 地址充值与 WalletConnect / Self-custodial Wallet 充值。
 - KYC 已独立为 `knowledge-base/kyc/`，Wallet 目录不再维护 KYC 主事实。
 - Wallet Transaction History 已合并至 `transaction/history.md`，Wallet 目录不再维护交易历史主事实。
-- 新增 `transaction/reconciliation.md`，承接资金追踪 / ID 链路 / 对账边界。
+- `transaction/reconciliation.md` 已承接资金追踪 / ID 链路 / 对账边界。
 - DTC / AAI 已收窄为外部依赖边界，只保留影响 AIX 系统设计的内容。
 - 全模块不确定项已统一至 `knowledge-base/changelog/knowledge-gaps.md` 的 ALL-GAP 总表。
+- 主干模块级 gap / checklist / 待补清单已完成无损迁移：旧编号或旧待补项均保留到 ALL-GAP 映射。
 - 当前知识库可作为 AI 使用的基础事实层，但不能把 ALL-GAP 中的 deferred / open 项当作已确认规则。
 
 ## 2. 当前目录边界
@@ -38,7 +39,30 @@ owner: 吴忆锋
 | `common/` | 公共能力和外部依赖边界 | 维护 dtc、aai、walletconnect、notification、errors、faq |
 | `changelog/` | 变更、回扫、唯一待确认表 | `knowledge-gaps.md` 是唯一 ALL-GAP 总表 |
 
-## 3. 外部依赖收窄原则
+## 3. 无损 gap 迁移结果
+
+本轮已迁移的历史分散问题类型：
+
+| 原类型 / 来源 | 当前处理 |
+|---|---|
+| `DEP-GAP` | 已迁入 ALL-GAP，并在 `wallet/deposit.md` 保留映射 |
+| `ERR-GAP` | 已迁入 ALL-GAP，并在 `common/errors.md` 保留映射 |
+| `TXN-DETAIL-GAP` | 已迁入 ALL-GAP，并在 `transaction/detail.md` 保留映射 |
+| `TXN-STATUS-GAP` | 已迁入 ALL-GAP，并在 `transaction/status-model.md` 保留映射 |
+| Card traceability checklist 的 `BE-*` / `WALLET-*` | 已迁入 ALL-GAP，原文件改为 `migrated-reference` |
+| Wallet Balance 待补字段 | 已迁入 ALL-GAP，并在 `wallet/balance.md` 保留映射 |
+| Wallet Receive 待补字段 | 已迁入 ALL-GAP，并在 `wallet/receive.md` 保留映射 |
+| `DTC-GAP` | 已迁入 ALL-GAP，并在 `common/dtc.md` 保留映射 |
+| `NOTIF-GAP` | 已迁入 ALL-GAP，并在 `common/notification.md` 保留映射 |
+
+迁移原则：
+
+1. 不删除历史问题。
+2. 不用概括性文字替代原问题。
+3. 模块正文只保留事实和 ALL-GAP 引用。
+4. 旧编号 / 旧待补项只作为迁移追溯，不再作为新的待确认表维护。
+
+## 4. 外部依赖收窄原则
 
 DTC / AAI 等供应商能力不作为供应商系统说明书维护。
 
@@ -56,7 +80,7 @@ DTC / AAI 等供应商能力不作为供应商系统说明书维护。
 4. 完整错误码表。
 5. 与 AIX 系统设计无关的供应商字段。
 
-## 4. 阶段状态总表
+## 5. 阶段状态总表
 
 | 阶段 | Gate 结果 | 说明 |
 |---|---|---|
@@ -67,24 +91,24 @@ DTC / AAI 等供应商能力不作为供应商系统说明书维护。
 | Transaction | PARTIAL PASS | 状态、历史、详情、资金追踪边界完成基础版；对账字段仍留 ALL-GAP |
 | KYC | PARTIAL PASS | 已独立目录；Wallet KYC 已迁移；Card KYC / Wallet KYC 关系待确认 |
 | Common / Integration | PARTIAL PASS | DTC / AAI / WalletConnect / Notification / Errors / FAQ 边界完成基础版 |
-| 全仓库回扫 | PARTIAL PASS | 结构边界已调整，仍需继续清理旧引用和 Stage Review |
-| 补材料与精修 | PARTIAL PASS | Deposit / WalletConnect / Errors / FAQ / ALL-GAP / 目录结构已阶段性回填 |
+| 全仓库回扫 | PARTIAL PASS | 主干结构边界、旧引用、无损 gap 迁移已阶段性完成 |
+| 补材料与精修 | PARTIAL PASS | Deposit / WalletConnect / Errors / FAQ / ALL-GAP / 目录结构 / 无损迁移已阶段性收口 |
 
-## 5. 本轮结构调整结果
+## 6. 本轮结构调整结果
 
 | 调整项 | 结果 |
 |---|---|
-| KYC 独立 | 新增 `kyc/_index.md`、`kyc/wallet-kyc.md` |
+| KYC 独立 | 新增并维护 `kyc/_index.md`、`kyc/wallet-kyc.md` |
 | Wallet KYC 旧路径 | `wallet/kyc.md` 改为 moved notice |
 | Wallet Transaction History 合并 | 主事实合并至 `transaction/history.md` |
 | Wallet Transaction History 旧路径 | `wallet/transaction-history.md` 改为 moved notice |
-| Transaction Reconciliation | 新增 `transaction/reconciliation.md` |
+| Transaction Reconciliation | 新增并维护 `transaction/reconciliation.md` |
 | Wallet index | 已更新为只承接钱包产品能力 |
 | Transaction index | 已更新为承接 history / detail / status / reconciliation |
-| 主控计划 | `IMPLEMENTATION_PLAN.md` 已升级到 v4.6 |
-| ALL-GAP 总表 | 已作为唯一待确认表并加 P0 / P1 / P2 优先级 |
+| 主控计划 | `IMPLEMENTATION_PLAN.md` 升级到 v4.8 |
+| ALL-GAP 总表 | 升级到 v1.12，已作为唯一待确认表并加 P0 / P1 / P2 优先级 |
 
-## 6. 文件完整性检查
+## 7. 文件完整性检查
 
 | 模块 | 核心文件 | 状态 |
 |---|---|---|
@@ -95,7 +119,7 @@ DTC / AAI 等供应商能力不作为供应商系统说明书维护。
 | Common | `_index`、dtc、notification、walletconnect、errors、aai、faq、stage-review | 基础版完成；外部依赖已收窄 |
 | Changelog | knowledge-gaps、final-repository-review、refinement-stage-review | ALL-GAP 为唯一待确认表 |
 
-## 7. 一致性检查
+## 8. 一致性检查
 
 | 检查项 | 结果 |
 |---|---|
@@ -114,8 +138,9 @@ DTC / AAI 等供应商能力不作为供应商系统说明书维护。
 | 是否把 Risk Withheld 写死为 Wallet `REJECTED` / `PENDING` / `PROCESSING` | 否；见 ALL-GAP-008 |
 | 是否把 Wallet `relatedId` 与 Card / GTR / WC 强行关联 | 否；见 ALL-GAP-014 |
 | 是否允许模块级 checklist / TODO / gaps 表 | 否；唯一来源为 `knowledge-gaps.md` |
+| 是否允许迁移时丢失问题 | 否；旧 gap / 待补项已保留映射 |
 
-## 8. 当前关键 ALL-GAP 引用
+## 9. 当前关键 ALL-GAP 引用
 
 | 优先级 | 编号 | 主题 |
 |---|---|---|
@@ -135,21 +160,21 @@ DTC / AAI 等供应商能力不作为供应商系统说明书维护。
 | P0 | ALL-GAP-029 | 财务 / 运营最终对账字段组合 |
 | P0 | ALL-GAP-036 | Webhook 原始报文落库规则 |
 
-## 9. 后续执行建议
+## 10. 后续执行建议
 
 | 顺序 | 事项 | 目标 |
 |---|---|---|
-| 1 | 回扫旧引用 | 修正仍指向 `wallet/kyc.md`、`wallet/transaction-history.md` 的正文引用 |
-| 2 | 回扫 stage-review | 同步 Wallet / Transaction / Common / Changelog 的 Gate Review 结构结论 |
-| 3 | 清理模块级 gaps | 确保模块正文只引用 ALL-GAP，不维护独立 checklist |
-| 4 | 优先确认 P0 ALL-GAP | 收敛资金、对账、状态闭环和资产可见性 |
-| 5 | 再处理 P1 / P2 | 流程体验、文案、FAQ、低频展示 |
+| 1 | 关键词残留抽查 | 搜索 `待补项`、`checklist`、`TODO`、`GAP-`，如发现真实待确认项则迁入 ALL-GAP |
+| 2 | 优先确认 P0 ALL-GAP | 收敛资金、对账、状态闭环和资产可见性 |
+| 3 | 再处理 P1 / P2 | 流程体验、文案、FAQ、低频展示 |
+| 4 | 确认后反向回填 | 更新 ALL-GAP 状态，并同步回填相关功能文件 |
+| 5 | 最后做 Stage Review | 用 PASS / PARTIAL PASS / BLOCK 更新主控状态 |
 
-## 10. 最终判断
+## 11. 最终判断
 
 当前仓库可作为 AIX AI 知识库的基础版本使用，但应标记为：
 
-`PARTIAL PASS / 基础事实层完成 / Deposit 与 WalletConnect 已阶段性回填 / KYC 已独立 / Wallet History 已并入 Transaction / Reconciliation 已建立 / ALL-GAP 统一待确认`
+`PARTIAL PASS / 基础事实层完成 / Deposit 与 WalletConnect 已阶段性回填 / KYC 已独立 / Wallet History 已并入 Transaction / Reconciliation 已建立 / ALL-GAP 统一待确认 / 主干无损 gap 迁移完成`
 
 使用限制：
 
@@ -161,20 +186,29 @@ DTC / AAI 等供应商能力不作为供应商系统说明书维护。
 - 不可维护与 AIX 系统设计无关的供应商字段、错误码、接口说明或内部逻辑。
 - 不可把 ActivityType、Risk Withheld、Deposit success 与具体产品路径或 Wallet state 做未确认等价映射。
 - 不可在模块文档内新增 checklist / TODO / gaps 表。
+- 不可因精简、合并、改写、迁移导致历史问题丢失。
 
-## 11. 来源引用
+## 12. 来源引用
 
-- (Ref: IMPLEMENTATION_PLAN.md / v4.6)
-- (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP 总表)
+- (Ref: IMPLEMENTATION_PLAN.md / v4.8)
+- (Ref: knowledge-base/changelog/knowledge-gaps.md / v1.12 / ALL-GAP 总表)
 - (Ref: knowledge-base/changelog/refinement-stage-review.md / v1.0)
 - (Ref: knowledge-base/wallet/_index.md / v1.4)
+- (Ref: knowledge-base/wallet/deposit.md / v1.6)
+- (Ref: knowledge-base/wallet/balance.md / v1.2)
+- (Ref: knowledge-base/wallet/receive.md / v1.1)
 - (Ref: knowledge-base/transaction/_index.md / v1.1)
-- (Ref: knowledge-base/transaction/history.md / v1.2)
-- (Ref: knowledge-base/transaction/reconciliation.md / v1.0)
+- (Ref: knowledge-base/transaction/history.md / v1.3)
+- (Ref: knowledge-base/transaction/detail.md / v1.2)
+- (Ref: knowledge-base/transaction/status-model.md / v1.2)
+- (Ref: knowledge-base/transaction/reconciliation.md / v1.1)
+- (Ref: knowledge-base/card/card-transaction-flow.md / v1.3)
+- (Ref: knowledge-base/card/transaction-flow-traceability-checklist.md / v1.6 migrated-reference)
 - (Ref: knowledge-base/kyc/_index.md / v1.0)
 - (Ref: knowledge-base/kyc/wallet-kyc.md / v1.0)
-- (Ref: knowledge-base/common/dtc.md / v1.4)
+- (Ref: knowledge-base/common/dtc.md / v1.5)
 - (Ref: knowledge-base/common/aai.md / v1.2)
-- (Ref: knowledge-base/common/walletconnect.md / v1.3)
-- (Ref: knowledge-base/common/errors.md / v1.3)
-- (Ref: 用户确认结论 / 2026-05-02 / KYC 独立，common/aai.md 不迁移，Wallet Transaction History 合并进 Transaction History)
+- (Ref: knowledge-base/common/walletconnect.md / v1.4)
+- (Ref: knowledge-base/common/notification.md / v1.3)
+- (Ref: knowledge-base/common/errors.md / v1.4)
+- (Ref: 用户确认结论 / 2026-05-02 / KYC 独立，common/aai.md 不迁移，Wallet Transaction History 合并进 Transaction History，ALL-GAP 唯一总表与无损迁移规则)
