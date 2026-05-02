@@ -1,10 +1,10 @@
 ---
 module: changelog
 feature: knowledge-gaps
-version: "1.7"
+version: "1.8"
 status: active
-source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/wallet/deposit.md；knowledge-base/card/card-transaction-flow.md；knowledge-base/card/stage-review.md；knowledge-base/card/transaction-flow-traceability-checklist.md；knowledge-base/wallet/transaction-history.md；knowledge-base/wallet/kyc.md；knowledge-base/common/dtc.md；knowledge-base/common/aai.md；knowledge-base/common/errors.md；knowledge-base/common/stage-review.md；用户确认结论 2026-05-01；用户确认结论 2026-05-02
-source_section: source-policy；all-module centralized confirmation table；Card Transaction Flow；Wallet Deposit；Wallet KYC；Common DTC / AAI；Common Stage Review；deferred gaps decision；single global checklist rule
+source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/wallet/deposit.md；knowledge-base/card/card-transaction-flow.md；knowledge-base/card/stage-review.md；knowledge-base/card/transaction-flow-traceability-checklist.md；knowledge-base/wallet/transaction-history.md；knowledge-base/wallet/kyc.md；knowledge-base/common/dtc.md；knowledge-base/common/aai.md；knowledge-base/common/errors.md；knowledge-base/common/stage-review.md；knowledge-base/transaction/detail.md；用户确认结论 2026-05-01；用户确认结论 2026-05-02
+source_section: source-policy；all-module centralized confirmation table；Card Transaction Flow；Wallet Deposit；Wallet KYC；Common DTC / AAI；Common Stage Review；Transaction Detail；deferred gaps decision；single global checklist rule
 last_updated: 2026-05-02
 owner: 吴忆锋
 ---
@@ -72,6 +72,8 @@ owner: 吴忆锋
 | ALL-GAP-045 | P1 | Common / Notification | 通知失败重试 / 补发策略 | Common Stage Review 原 COMMON-GAP-006 提到通知失败重试 / 补发策略未确认 | 后端 / Notification / 运维 | 影响通知可靠性和用户感知 | deferred |
 | ALL-GAP-046 | P1 | Common / AAI / KYC | AAI OCR / Liveness / KYC 状态和失败原因边界 | Common Stage Review 原 COMMON-GAP-009 提到 AAI OCR / Liveness / KYC 状态和失败原因未补齐；当前只收窄为 AIX 依赖边界 | 产品 / KYC / 后端 | 影响准入、失败提示、人工处理 | deferred |
 | ALL-GAP-047 | P2 | Common / FAQ | FAQ 原文和客服口径完整性 | Common Stage Review 原 COMMON-GAP-010 提到 FAQ 原文和客服口径未补齐；当前只确认 Row 14 明确缺失，其他口径仍需以原文为准 | 产品 / 客服 | 影响客服答复完整性 | deferred |
+| ALL-GAP-048 | P1 | Transaction / Detail | Wallet Transaction Detail 完整请求 / 响应 / 页面展示 / 复制规则 | Transaction Detail 原 TXN-DETAIL-GAP-001~004 提到 Wallet Detail 完整请求字段、响应字段、页面展示字段、是否支持复制交易 ID 未补齐 | 产品 / 前端 / 后端 / Wallet | 影响 Wallet 交易详情页展示和交互 | deferred |
+| ALL-GAP-049 | P1 | Transaction / Detail | Card Detail 前端展示字段完整列表 | Transaction Detail 原 TXN-DETAIL-GAP-007 提到 Card Detail 前端展示字段完整列表待补 | 产品 / 前端 | 影响 Card 交易详情页展示完整性 | deferred |
 
 ## 3. 优先级定义
 
