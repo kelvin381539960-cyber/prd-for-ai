@@ -1,10 +1,10 @@
 ---
 module: knowledge-base
 feature: ai-query-router
-version: "2.0"
+version: "2.1"
 status: active
-source_doc: knowledge-base/_system-boundary.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/wallet/_index.md；knowledge-base/card/_index.md；knowledge-base/transaction/_index.md；knowledge-base/kyc/_index.md；knowledge-base/common/_index.md；用户确认结论 2026-05-02
-source_section: runtime AI usage；query routing；fact source rules；system boundary usage；ALL-GAP usage
+source_doc: knowledge-base/_system-boundary.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/wallet/_index.md；knowledge-base/card/_index.md；knowledge-base/transaction/_index.md；knowledge-base/kyc/_index.md；knowledge-base/common/_index.md；knowledge-base/kyc/account-opening.md；用户确认结论 2026-05-02
+source_section: runtime AI usage；query routing；fact source rules；system boundary usage；ALL-GAP usage；Account Opening / KYC routing
 last_updated: 2026-05-02
 owner: 吴忆锋
 ---
@@ -40,6 +40,7 @@ migrated-reference 文件
 历史 checklist / review 类文件
 changelog/final-repository-review.md
 changelog/refinement-stage-review.md
+kyc/wallet-kyc.md
 ```
 
 ## 3. 当前产品范围
@@ -51,7 +52,7 @@ AIX 当前知识库覆盖：
 | Wallet | Balance、Deposit、Receive、Send 占位 |
 | Card | Card Application、Card Home、Activation、PIN、Sensitive Info、Card Management、Card Transaction Flow |
 | Transaction | History、Detail、Status Model、Reconciliation |
-| KYC | Wallet KYC / 钱包开户准入边界 |
+| KYC | Account Opening / KYC 开户、身份认证、Sub Account、业务准入边界 |
 | Common | DTC、AAI、WalletConnect、Notification、Errors、FAQ |
 
 ## 4. Active / Deferred 能力
@@ -63,7 +64,7 @@ AIX 当前知识库覆盖：
 | Wallet Receive | active / 基础版 | 读取 `wallet/receive.md`；未确认边界查 ALL-GAP |
 | Wallet Send | deferred | 不写成当前 active 能力 |
 | Wallet Swap | deferred | 不写成当前 active 能力 |
-| Wallet KYC | active / 边界版 | 主事实源为 `kyc/wallet-kyc.md` |
+| Account Opening / KYC | active | 主事实源为 `kyc/account-opening.md` |
 | Wallet Transaction History | active | 主事实源为 `transaction/history.md` |
 | Card Transaction Flow | active / partial | 资金追踪与对账缺口查 `transaction/reconciliation.md` 与 ALL-GAP |
 | DTC / AAI / WalletConnect | external dependency | 只记录 AIX 设计相关依赖边界，不维护供应商内部逻辑 |
@@ -89,11 +90,12 @@ AIX 当前知识库覆盖：
 | Card refund / reversal / deposit 自动归集 | `card/card-transaction-flow.md` | `transaction/reconciliation.md`、`common/errors.md`、`knowledge-gaps.md`、`_system-boundary.md` | `wallet/deposit.md` |
 | 资金追踪 / 对账 / ID 串联 | `transaction/reconciliation.md` | `card/card-transaction-flow.md`、`transaction/history.md`、`transaction/detail.md`、`knowledge-gaps.md`、`_system-boundary.md` | 旧 checklist |
 | Transaction 状态模型 | `transaction/status-model.md` | `transaction/history.md`、`transaction/detail.md`、`knowledge-gaps.md` | 强行合并 Card / Wallet 状态 |
-| KYC / Wallet KYC | `kyc/wallet-kyc.md` | `common/aai.md`、`knowledge-gaps.md`、`_system-boundary.md` | `wallet/kyc.md` |
-| AAI 外部依赖 | `common/aai.md` | `kyc/wallet-kyc.md`、`knowledge-gaps.md`、`_system-boundary.md` | AAI 完整供应商说明 |
+| Account Opening / KYC / 开户准入 | `kyc/account-opening.md` | `common/aai.md`、`common/dtc.md`、`common/notification.md`、`knowledge-gaps.md`、`_system-boundary.md` | `kyc/wallet-kyc.md` |
+| DTC Master / Sub Account / D-SUB-ACCOUNT-ID | `kyc/account-opening.md`、`common/dtc.md` | `wallet/deposit.md`、`common/walletconnect.md`、`wallet/balance.md`、`knowledge-gaps.md`、`_system-boundary.md` | DTC 完整供应商说明书 |
+| AAI 外部依赖 | `common/aai.md` | `kyc/account-opening.md`、`knowledge-gaps.md`、`_system-boundary.md` | AAI 完整供应商说明 |
 | DTC 外部依赖 | `common/dtc.md` | 对应业务事实文件、`knowledge-gaps.md`、`_system-boundary.md` | DTC 完整接口说明书 |
-| Notification / Push / 站内信 | `common/notification.md` | `wallet/deposit.md`、`card/card-transaction-flow.md`、`knowledge-gaps.md`、`_system-boundary.md` | 用业务流程文件替代通知文件 |
-| Errors / 错误处理 | `common/errors.md` | `common/walletconnect.md`、`wallet/deposit.md`、`card/card-transaction-flow.md`、`knowledge-gaps.md` | 自行补错误码表 |
+| Notification / Push / 站内信 | `common/notification.md` | `wallet/deposit.md`、`card/card-transaction-flow.md`、`kyc/account-opening.md`、`knowledge-gaps.md`、`_system-boundary.md` | 用业务流程文件替代通知文件 |
+| Errors / 错误处理 | `common/errors.md` | `common/walletconnect.md`、`wallet/deposit.md`、`card/card-transaction-flow.md`、`kyc/account-opening.md`、`knowledge-gaps.md` | 自行补错误码表 |
 | FAQ / 客服口径 | `common/faq.md` | 对应业务文件、`knowledge-gaps.md` | 自行扩写 FAQ |
 
 ## 6. ALL-GAP 使用规则
@@ -132,6 +134,7 @@ AIX 当前知识库覆盖：
 4. 通知是否等同到账。
 5. Deposit success、Risk Withheld、Wallet state、Card transaction 是否能做确定映射。
 6. 对账、资金追踪、异常补偿、告警责任分派。
+7. Account Opening / KYC 与 AAI / DTC Master / Sub Account / Wallet Account 的责任边界。
 
 简版原则：AIX 只维护自身页面、调用、接收、展示、通知、告警、人工处理和记录边界；外部系统只记录 AIX 需要感知的结果、字段、事件和状态，不维护外部系统内部逻辑。
 
@@ -153,6 +156,9 @@ AI 使用本知识库时不得：
 12. 把 Send / Swap 写成 active。
 13. 为了回答问题自行补页面、接口、字段、状态、文案。
 14. 将外部系统内部逻辑写成 AIX 需求。
+15. 把 `D-SUB-ACCOUNT-ID` 与 WalletAccount.clientId 写死为完全等价。
+16. 把 KYC Approved 写成 Wallet / Deposit / WalletConnect / Receive 全部可用。
+17. 把 `kyc/wallet-kyc.md` 当作当前 KYC 主事实源。
 
 ## 9. 标准回答结构
 
@@ -184,5 +190,6 @@ AI 使用本知识库时不得：
 - (Ref: knowledge-base/card/_index.md)
 - (Ref: knowledge-base/transaction/_index.md)
 - (Ref: knowledge-base/kyc/_index.md)
+- (Ref: knowledge-base/kyc/account-opening.md)
 - (Ref: knowledge-base/common/_index.md)
-- (Ref: 用户确认结论 / 2026-05-02 / 知识库切换为使用态；AI 日常入口为 _ai-query-router.md)
+- (Ref: 用户确认结论 / 2026-05-02 / 知识库切换为使用态；AI 日常入口为 _ai-query-router.md；KYC 文件名不应带 wallet)
