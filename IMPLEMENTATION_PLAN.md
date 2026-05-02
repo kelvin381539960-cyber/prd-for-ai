@@ -1,7 +1,7 @@
 # prd-for-ai 实施计划
 
-版本：v3.7  
-状态：Wallet 阶段当前执行，Deposit / Send / Swap 因合规原因 deferred  
+版本：v3.8  
+状态：Wallet 阶段当前执行，Deposit active（GTR / WalletConnect），Send / Swap deferred  
 适用仓库：`prd-for-ai`  
 更新时间：2026-05-01
 
@@ -97,7 +97,7 @@
 | 2 | 基础规则沉淀 | 部分完成 | 建立长期规则 | Writing Standard / Source Rules | 持续完善 |
 | 3 | Security 标准化 | 已完成 | 统一认证事实源 | OTP / Email OTP / Passcode / BIO / Face Auth / API Reference | 已完成 |
 | 4 | Card 批量推进 | PARTIAL PASS | 转译卡模块 | Application / Status & Fields / Home / Manage / Transaction | 遗留资金追踪项 deferred，继续后续阶段 |
-| 5 | Wallet 批量推进 | 当前执行 | 转译钱包模块 | KYC / Balance / Receive / Transaction History | 继续 Wallet 已上线或基础能力；Deposit / Send / Swap deferred |
+| 5 | Wallet 批量推进 | 当前执行 | 转译钱包模块 | KYC / Balance / Deposit / Receive / Transaction History | 继续 Deposit（GTR / WalletConnect）与 Wallet 基础能力；Send / Swap deferred |
 | 6 | Transaction 统一层 | 未开始 | 统一交易状态 | Card / Wallet / History | Wallet 后执行 |
 | 7 | Common / Integration | 未开始 | 抽公共能力 | DTC / AAI / WC / Error / FAQ | Transaction 后执行 |
 | 8 | 全仓库回扫 | 未开始 | 去重复、补引用 | 字段 / 状态 / 来源 / gaps | 最后执行 |
@@ -113,24 +113,24 @@
 | card/_index.md | 已完成 | Card 模块边界与功能清单已收口 |
 | application.md | 已完成 | 申卡流程、资格、费用、币种、地区、卡类型、自动扣款、接口依赖已收口；缺口已记录 |
 | card-status-and-fields.md | 已完成 | 卡状态、字段、接口路径、操作限制缺口已收口 |
-| card-home.md | 已完成 | 卡首页、展示、入口、交易摘要、物流信息和 FAQ 已收口 |
+| card-home.md | 已完成 | 卡首页、展示、入口、交易摘要和 FAQ 已收口 |
 | activation.md | 已完成 | 实体卡激活流程已收口 |
 | pin.md | 已完成 | PIN 相关能力已收口 |
 | sensitive-info.md | 已完成 | 卡信息安全查看流程已收口 |
 | card-management.md | 已完成 | 卡管理操作、状态边界、接口依赖与失败处理已收口 |
-| card-transaction-flow.md | 已完成但有 deferred gaps | 已同步 DTC 字段、通知去重基础、归集触发类型、transfer-to-wallet 字段、失败不重试、Wallet 交易 id 和 Wallet state 等确认结论；AIX 内部 ID、归集请求、Wallet 关联规则和对账链路暂时 deferred |
-| stage-review.md | 已完成 | Card 阶段回扫已更新，结论为 `PARTIAL PASS`，允许继续后续转译 |
+| card-transaction-flow.md | 已完成但有 deferred gaps | DTC 字段、归集触发类型、transfer-to-wallet 字段、Wallet 交易 id 和 Wallet state 已确认；AIX 内部 ID、归集请求、Wallet 关联规则和对账链路暂时 deferred |
+| stage-review.md | 已完成 | Card 阶段回扫已更新，结论为 `PARTIAL PASS` |
 | transaction-flow-traceability-checklist.md | 已完成 | 已收敛为 deferred gaps 记录 |
 
 ### 12.5 阶段 5：Wallet 批量推进（当前执行）
 
 | 子任务 | 状态 | 说明 |
 |---|---|---|
-| wallet/_index.md | 已完成 | 已建立 Wallet 模块边界；Deposit / Send / Swap 标记 deferred |
+| wallet/_index.md | 已完成 | 已建立 Wallet 模块边界；Deposit 恢复 active；Send / Swap 标记 deferred |
 | wallet/transaction-history.md | 已完成基础版 | 已建立 Wallet 交易记录、详情、state 基础事实源；字段待补 |
 | wallet/balance.md | 已完成基础版 | 已建立钱包余额基础文件；接口字段待补 |
-| wallet/deposit.md | deferred | 因合规原因未上线且需重做，不作为 active 功能事实源 |
-| wallet/receive.md | 已完成基础版 | 已建立 Receive 基础占位；是否独立上线仍需核验 |
+| wallet/deposit.md | 已完成基础版 | Deposit 存在，包含 GTR 和 WalletConnect；需继续补细节 |
+| wallet/receive.md | 已完成基础版 | 已建立 Receive 基础占位；与 Deposit 子路径关系待确认 |
 | wallet/send.md | deferred | 因合规原因未上线，不作为 active 功能事实源 |
 | wallet/kyc.md | Todo | 转译 Wallet KYC / DTC 钱包开户与前置条件 |
 | wallet/swap.md | deferred | 因合规原因未上线且需重做；新方案确认后再转译 |
@@ -148,8 +148,8 @@
 | Card / Transaction Flow | 已完成但留 deferred gaps | PARTIAL PASS | DTC 通知字段、交易 ID、触发类型、transfer-to-wallet 字段、失败不重试、Wallet 交易 id 和 Wallet state 已确认；AIX 内部追踪、Wallet 关联规则和对账链路 deferred |
 | Wallet / Transaction History | 已完成基础版 | 未评审 | 字段待补 |
 | Wallet / Balance | 已完成基础版 | 未评审 | 字段待补 |
-| Wallet / Receive | 已完成基础版 | 未评审 | 是否独立上线仍需核验 |
-| Wallet / Deposit | deferred | 不评审为 active | 因合规原因未上线且需重做 |
+| Wallet / Deposit | 已完成基础版 | 未评审 | Deposit 包含 GTR 和 WalletConnect；细节待补 |
+| Wallet / Receive | 已完成基础版 | 未评审 | 与 Deposit 子路径关系待确认 |
 | Wallet / Send | deferred | 不评审为 active | 因合规原因未上线 |
 | Wallet / Swap | deferred | 不评审为 active | 因合规原因未上线且需重做 |
 | Wallet | 当前执行 | 未评审 | 继续 KYC / Stage Review |
@@ -160,16 +160,18 @@
 
 当前执行点：
 
-1. Deposit / Send / Swap 因合规原因未上线或需重做，均不进入 active 功能归档。
-2. Deposit、Send 仅保留 deferred 占位；Swap 不创建 active 功能正文，新方案确认后再转译。
+1. Deposit 恢复 active，范围包含 GTR 和 WalletConnect。
+2. Send / Swap 因合规原因未上线或需重做，均不进入 active 功能归档。
 3. 下一步继续 `wallet/kyc.md`，确认 Wallet 开户 / KYC / DTC 钱包前置条件。
-4. Wallet 阶段可引用 Card Transaction Flow 已确认事实；遇到 deferred gap 时只能标注为未确认，不能补写事实。
-5. Wallet 阶段完成后执行 Wallet Stage Review。
+4. 后续需要继续补齐 GTR / WalletConnect 的入金流程、字段、状态、风控、通知和异常边界。
+5. Wallet 阶段可引用 Card Transaction Flow 已确认事实；遇到 deferred gap 时只能标注为未确认，不能补写事实。
+6. Wallet 阶段完成后执行 Wallet Stage Review。
 
 当前禁止事项：
 
-- 不得把 Deposit / Send / Swap 写成当前已上线能力。
-- 不得把 Deposit / Send / Swap 旧流程作为 active 功能事实源。
+- 不得把 Send / Swap 写成当前已上线能力。
+- 不得把 Send / Swap 旧流程作为 active 功能事实源。
+- 不得将 GTR 与 WalletConnect 混成同一套 Deposit 字段 / 状态 / 风控规则，除非来源明确。
 - 不得把 AIX 内部交易 ID、归集请求 ID、Wallet 关联规则、Wallet relatedId、对账字段写成事实。
 - 不得新增无来源状态、字段或接口。
 - 不得把 Transaction 统一层提前混入 Wallet 阶段正文。
