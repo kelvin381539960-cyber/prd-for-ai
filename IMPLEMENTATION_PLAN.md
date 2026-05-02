@@ -1,7 +1,7 @@
 # prd-for-ai 实施计划
 
-版本：v3.6  
-状态：Wallet 阶段当前执行，Deposit / Swap 因合规原因 deferred  
+版本：v3.7  
+状态：Wallet 阶段当前执行，Deposit / Send / Swap 因合规原因 deferred  
 适用仓库：`prd-for-ai`  
 更新时间：2026-05-01
 
@@ -97,7 +97,7 @@
 | 2 | 基础规则沉淀 | 部分完成 | 建立长期规则 | Writing Standard / Source Rules | 持续完善 |
 | 3 | Security 标准化 | 已完成 | 统一认证事实源 | OTP / Email OTP / Passcode / BIO / Face Auth / API Reference | 已完成 |
 | 4 | Card 批量推进 | PARTIAL PASS | 转译卡模块 | Application / Status & Fields / Home / Manage / Transaction | 遗留资金追踪项 deferred，继续后续阶段 |
-| 5 | Wallet 批量推进 | 当前执行 | 转译钱包模块 | KYC / Balance / Receive / Send / Transaction History | 继续 Wallet 已上线或基础能力；Deposit / Swap deferred |
+| 5 | Wallet 批量推进 | 当前执行 | 转译钱包模块 | KYC / Balance / Receive / Transaction History | 继续 Wallet 已上线或基础能力；Deposit / Send / Swap deferred |
 | 6 | Transaction 统一层 | 未开始 | 统一交易状态 | Card / Wallet / History | Wallet 后执行 |
 | 7 | Common / Integration | 未开始 | 抽公共能力 | DTC / AAI / WC / Error / FAQ | Transaction 后执行 |
 | 8 | 全仓库回扫 | 未开始 | 去重复、补引用 | 字段 / 状态 / 来源 / gaps | 最后执行 |
@@ -126,12 +126,12 @@
 
 | 子任务 | 状态 | 说明 |
 |---|---|---|
-| wallet/_index.md | 已完成 | 已建立 Wallet 模块边界；Deposit / Swap 标记 deferred |
+| wallet/_index.md | 已完成 | 已建立 Wallet 模块边界；Deposit / Send / Swap 标记 deferred |
 | wallet/transaction-history.md | 已完成基础版 | 已建立 Wallet 交易记录、详情、state 基础事实源；字段待补 |
 | wallet/balance.md | 已完成基础版 | 已建立钱包余额基础文件；接口字段待补 |
 | wallet/deposit.md | deferred | 因合规原因未上线且需重做，不作为 active 功能事实源 |
-| wallet/receive.md | Todo | 转译 Receive / 收款地址相关能力；不得默认等同 Deposit |
-| wallet/send.md | Todo | 转译 Crypto Withdraw / Send 相关能力 |
+| wallet/receive.md | 已完成基础版 | 已建立 Receive 基础占位；是否独立上线仍需核验 |
+| wallet/send.md | deferred | 因合规原因未上线，不作为 active 功能事实源 |
 | wallet/kyc.md | Todo | 转译 Wallet KYC / DTC 钱包开户与前置条件 |
 | wallet/swap.md | deferred | 因合规原因未上线且需重做；新方案确认后再转译 |
 | wallet/stage-review.md | Todo | Wallet 阶段完成后执行 Stage Review |
@@ -148,9 +148,11 @@
 | Card / Transaction Flow | 已完成但留 deferred gaps | PARTIAL PASS | DTC 通知字段、交易 ID、触发类型、transfer-to-wallet 字段、失败不重试、Wallet 交易 id 和 Wallet state 已确认；AIX 内部追踪、Wallet 关联规则和对账链路 deferred |
 | Wallet / Transaction History | 已完成基础版 | 未评审 | 字段待补 |
 | Wallet / Balance | 已完成基础版 | 未评审 | 字段待补 |
+| Wallet / Receive | 已完成基础版 | 未评审 | 是否独立上线仍需核验 |
 | Wallet / Deposit | deferred | 不评审为 active | 因合规原因未上线且需重做 |
+| Wallet / Send | deferred | 不评审为 active | 因合规原因未上线 |
 | Wallet / Swap | deferred | 不评审为 active | 因合规原因未上线且需重做 |
-| Wallet | 当前执行 | 未评审 | 继续 Receive / Send / KYC |
+| Wallet | 当前执行 | 未评审 | 继续 KYC / Stage Review |
 
 ---
 
@@ -158,17 +160,16 @@
 
 当前执行点：
 
-1. Deposit / Swap 因合规原因未上线且需重做，均不进入 active 功能归档。
-2. Deposit 仅保留 `wallet/deposit.md` deferred 占位；Swap 不创建 active 功能正文，新方案确认后再转译。
-3. 下一步继续 `wallet/receive.md`，但必须确认 Receive 是否独立于 Deposit 上线，不得默认复用 Deposit 旧方案。
+1. Deposit / Send / Swap 因合规原因未上线或需重做，均不进入 active 功能归档。
+2. Deposit、Send 仅保留 deferred 占位；Swap 不创建 active 功能正文，新方案确认后再转译。
+3. 下一步继续 `wallet/kyc.md`，确认 Wallet 开户 / KYC / DTC 钱包前置条件。
 4. Wallet 阶段可引用 Card Transaction Flow 已确认事实；遇到 deferred gap 时只能标注为未确认，不能补写事实。
-5. Wallet 每完成一个能力块，更新对应文件和本实施计划。
-6. Wallet 阶段完成后执行 Wallet Stage Review。
+5. Wallet 阶段完成后执行 Wallet Stage Review。
 
 当前禁止事项：
 
-- 不得把 Deposit / Swap 写成当前已上线能力。
-- 不得把 Deposit / Swap 旧流程作为 active 功能事实源。
+- 不得把 Deposit / Send / Swap 写成当前已上线能力。
+- 不得把 Deposit / Send / Swap 旧流程作为 active 功能事实源。
 - 不得把 AIX 内部交易 ID、归集请求 ID、Wallet 关联规则、Wallet relatedId、对账字段写成事实。
 - 不得新增无来源状态、字段或接口。
 - 不得把 Transaction 统一层提前混入 Wallet 阶段正文。
