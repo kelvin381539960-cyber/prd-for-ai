@@ -1,17 +1,16 @@
 ---
 module: transaction
 feature: history
-version: "1.1"
+version: "1.2"
 status: active
-source_doc: IMPLEMENTATION_PLAN.md；DTC接口文档/DTC Wallet OpenAPI Document20260126 (1).docx；knowledge-base/transaction/_index.md；knowledge-base/transaction/status-model.md；knowledge-base/card/card-transaction-flow.md；knowledge-base/wallet/transaction-history.md；knowledge-base/wallet/balance.md；knowledge-base/wallet/deposit.md；knowledge-base/changelog/knowledge-gaps.md
-source_section: Transaction _index v1.0；Transaction Status Model v1.1；Wallet Transaction History v1.1；Wallet Balance v1.1；Wallet Deposit v1.4；Search Balance History / 4.2.4；Appendix ActivityType
-last_updated: 2026-05-01
+source_doc: IMPLEMENTATION_PLAN.md；DTC接口文档/DTC Wallet OpenAPI Document20260126 (1).docx；knowledge-base/transaction/_index.md；knowledge-base/transaction/status-model.md；knowledge-base/card/card-transaction-flow.md；knowledge-base/wallet/transaction-history.md；knowledge-base/wallet/balance.md；knowledge-base/wallet/deposit.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-02
+source_section: Transaction _index；Wallet Transaction History v1.1 merged；Wallet Balance；Wallet Deposit v1.5；Search Balance History / 4.2.4；Appendix ActivityType；ALL-GAP 总表
+last_updated: 2026-05-02
 owner: 吴忆锋
 depends_on:
   - transaction/_index
   - transaction/status-model
   - card/card-transaction-flow
-  - wallet/transaction-history
   - wallet/balance
   - wallet/deposit
   - changelog/knowledge-gaps
@@ -21,9 +20,11 @@ depends_on:
 
 ## 1. 功能定位
 
-Transaction History 用于统一沉淀 AIX 中 Card History 与 Wallet Transaction History 的边界、入口、查询字段和展示限制。
+Transaction History 用于统一沉淀 AIX 中 Card History、Wallet Transaction History、Deposit History 的边界、入口、查询字段和展示限制。
 
-本文件不是全局交易流水表设计，不合并 Card / Wallet 字段来源，不补写未确认状态机。
+本文件现在是 Wallet Transaction History 的主事实源。原 `wallet/transaction-history.md` 已改为兼容入口，不再维护交易历史正文。
+
+本文件不是全局交易流水表设计，不合并 Card / Wallet 字段来源，不补写未确认状态机。跨资金链路、字段关联、对账关系统一进入 `transaction/reconciliation.md` 与 `knowledge-base/changelog/knowledge-gaps.md`。
 
 ## 2. 历史记录类型
 
@@ -32,10 +33,10 @@ Transaction History 用于统一沉淀 AIX 中 Card History 与 Wallet Transacti
 | Card History | active | Card Transaction Flow | 可引用已确认字段和规则 |
 | Card Home Recent Transactions | active | Card Transaction Flow | 作为 Card 首页交易摘要入口 |
 | Card Transaction Details | active | Card Transaction Flow | 详情字段在 `transaction/detail.md` 汇总 |
-| Wallet Transaction History | active / 基础版 | Wallet Transaction History | 可引用 `id`、`transactionId`、`state`、`activityType` 等基础字段 |
-| Wallet Search Balance History | active / 基础版 | DTC Wallet OpenAPI / 4.2.4 | 可引用 endpoint、查询字段、ActivityType、`relatedId`、`time`、`state` |
-| Deposit History | active / 基础版 | Wallet Deposit / Wallet Transaction History | 可引用 Deposit success、Risk Withheld、ActivityType 边界；完整状态机待补 |
-| Send / Swap History | deferred | Wallet Stage Review | 当前不纳入 active Transaction History |
+| Wallet Transaction History | active | DTC Wallet OpenAPI / Search Balance History | 主事实源已合并至本文件 |
+| Wallet Search Balance History | active | DTC Wallet OpenAPI / 4.2.4 | 可引用 endpoint、查询字段、ActivityType、`relatedId`、`time`、`state` |
+| Deposit History | active / 基础版 | Wallet Deposit / Wallet Transaction History | 可引用 Deposit success、Risk Withheld、ActivityType 边界；完整状态机见 ALL-GAP |
+| Send / Swap History | deferred | Wallet Stage Review / 用户确认 | 当前不纳入 active Transaction History |
 
 ## 3. Card History 已确认规则
 
@@ -63,42 +64,43 @@ Transaction History 用于统一沉淀 AIX 中 Card History 与 Wallet Transacti
 
 | 规则 / 字段 | 当前结论 | 来源 | 备注 |
 |---|---|---|---|
-| Wallet 交易记录能力 | 存在 Wallet 交易记录能力 | Wallet Transaction History | 完整请求 / 响应字段待补 |
-| Wallet 交易详情能力 | 存在 Wallet 交易详情能力 | Wallet Transaction History | 入参为 `transactionId` |
-| `id` | Wallet 交易记录 / 详情出参均包含 `id`，Long，交易 id | Wallet Transaction History | 可作为 Wallet 交易基础 ID |
-| `transactionId` | 单笔 Wallet 交易详情入参，Unique transaction ID from DTC | Wallet Transaction History | 不等同于 Card `data.id` |
-| `state` | Wallet 交易状态字段 | Wallet Transaction History | 枚举引用 `transaction/status-model.md` |
+| Wallet 交易记录能力 | 存在 Wallet 交易记录能力 | DTC Wallet OpenAPI；用户确认 2026-05-01 | 完整请求 / 响应字段待补，不在 Wallet 目录维护 |
+| Wallet 交易详情能力 | 存在 Wallet 交易详情能力 | DTC Wallet OpenAPI；用户确认 2026-05-01 | 入参为 `transactionId` |
+| `id` | Wallet 交易记录 / 详情出参均包含 `id`，Long，交易 id | DTC Wallet OpenAPI；用户确认 2026-05-01 | 可作为 Wallet 交易基础 ID |
+| `transactionId` | 单笔 Wallet 交易详情入参，Unique transaction ID from DTC | DTC Wallet OpenAPI；用户确认 2026-05-01 | 与 Wallet `id`、Card `data.id` 的关系见 ALL-GAP-015、ALL-GAP-018 |
+| `state` | Wallet 交易状态字段 | DTC Wallet OpenAPI；用户确认 2026-05-01 | 枚举引用 `transaction/status-model.md` |
 | Search Balance History | `[GET] /openapi/v1/wallet/balance/history/search` 查询 client wallet transaction history | DTC Wallet OpenAPI / 4.2.4 | Wallet 历史能力来源之一 |
 | Request filter `currency` | 查询条件之一 | DTC Wallet OpenAPI / 4.2.4 | 前端是否暴露待补 |
-| Request filter `type` | 查询条件之一，引用 ActivityType | DTC Wallet OpenAPI / 4.2.4 | 前端展示映射待补 |
+| Request filter `type` | 查询条件之一，引用 ActivityType | DTC Wallet OpenAPI / 4.2.4 | 前端展示映射见 ALL-GAP-037 |
 | Request filter `yearMonth` / `createTimeStart` | 查询条件之一 | DTC Wallet OpenAPI / 4.2.4 | 完整时间规则待补 |
 | `activityType` | ActivityType 分类字段 | DTC Wallet OpenAPI / Appendix ActivityType | 已确认部分枚举 |
-| `relatedId` | Search Balance History 返回字段 | DTC Wallet OpenAPI / 4.2.4 | Card / GTR / WC 场景取值仍 deferred |
+| `relatedId` | Search Balance History 返回字段 | DTC Wallet OpenAPI / 4.2.4 | Card / GTR / WC 场景取值见 ALL-GAP-014 |
 | `time` | Search Balance History 返回字段 | DTC Wallet OpenAPI / 4.2.4 | 时间格式待补 |
 
 ## 6. ActivityType 已确认枚举
 
 | 枚举 | 值 | 含义 | Transaction History 处理 |
 |---|---:|---|---|
-| `FIAT_DEPOSIT` | 6 | Fiat Deposit | 可作为法币入金历史分类引用；是否对应 GTR 待确认 |
-| `CRYPTO_DEPOSIT` | 10 | Stablecoin Deposit | 可作为 Crypto / WalletConnect 入金历史分类引用；是否对应 WC 待确认 |
+| `FIAT_DEPOSIT` | 6 | Fiat Deposit | 可作为法币入金历史分类引用；是否对应 GTR 见 ALL-GAP-001 |
+| `CRYPTO_DEPOSIT` | 10 | Stablecoin Deposit | 可作为 Crypto / WalletConnect 入金历史分类引用；是否对应 WC 见 ALL-GAP-002 |
 | `DTC_WALLET` | 13 | DTC Wallet Payment | 可作为 DTC Wallet Payment 历史分类引用 |
-| `CARD_PAYMENT_REFUND` | 20 | Card Payment Refund | 可作为 Card refund 入 Wallet 相关分类引用；与 Card 归集链路关联仍 deferred |
+| `CARD_PAYMENT_REFUND` | 20 | Card Payment Refund | 可作为 Card refund 入 Wallet 相关分类引用；与 Card 归集链路关联见 ALL-GAP-017、ALL-GAP-018 |
 
 ## 7. Deposit History 边界
 
 | 场景 | 可引用事实 | 不得推导 |
 |---|---|---|
-| Deposit success | Notification PRD 有 `event=CRYPTO_TXN`、`type=DEPOSIT`、`state=success` 通知；DTC Crypto Deposit 加白后自动 success | 不得直接等同 Wallet `COMPLETED`；不代表余额立即可用 |
-| Deposit Risk Withheld | DTC Crypto Deposit 未加白进入 `status=102 Risk Withheld`；Notification PRD 有 `state=RISK_WITHHELD` under review 通知 | 不得直接等同 Wallet `REJECTED`、`PENDING`、`PROCESSING` |
-| GTR Deposit | Deposit 包含 GTR；`FIAT_DEPOSIT=6` 存在 | 不得写成 GTR 必然等同 FIAT_DEPOSIT |
-| WalletConnect Deposit | Deposit 包含 WC；`CRYPTO_DEPOSIT=10` 存在；DTC Crypto Deposit 规则可引用 | 不得写成 WC 必然等同 CRYPTO_DEPOSIT |
+| Deposit success | Notification PRD 有 `event=CRYPTO_TXN`、`type=DEPOSIT`、`state=success` 通知；payment_info success 会同步触发资金流转账，理论立即可用但实际可能很短延迟 | 不得直接等同 Wallet `COMPLETED`；状态映射见 ALL-GAP-016 |
+| Deposit Risk Withheld | 用户确认 Risk Withheld 是异步返回，不触发充值结果页；用户查询交易详情时状态为 under review | 不得直接等同 Wallet `REJECTED`、`PENDING`、`PROCESSING`；余额影响见 ALL-GAP-008 |
+| Deposit Refunded | 用户确认 Refunded 没有 AIX 对客结果页 | 不补 Refunded 结果页 |
+| GTR Deposit | Deposit 包含 GTR；`FIAT_DEPOSIT=6` 存在 | 不得写成 GTR 必然等同 FIAT_DEPOSIT，见 ALL-GAP-001 |
+| WalletConnect Deposit | Deposit 包含 WC；`CRYPTO_DEPOSIT=10` 存在；DTC Crypto Deposit 规则可引用 | 不得写成 WC 必然等同 CRYPTO_DEPOSIT，见 ALL-GAP-002 |
 
 ## 8. Card History 与 Wallet History 边界
 
 | 维度 | Card History | Wallet History | 处理 |
 |---|---|---|---|
-| 交易 ID | Card `Transaction ID` / DTC `data.id` | Wallet `id` / `transactionId` | 不等同，不混写 |
+| 交易 ID | Card `Transaction ID` / DTC `data.id` | Wallet `id` / `transactionId` | 不等同，不混写；见 ALL-GAP-018 |
 | 状态字段 | Card DTC transaction status / state 来源 | Wallet `state`；Deposit `Risk Withheld` / `success` | 并列引用，不合并 |
 | 详情接口 | Card Transaction Detail Inquiry | Wallet Transaction Detail | `transaction/detail.md` 区分 |
 | 历史接口 | `/openapi/v1/card/inquiry-card-transaction` | Wallet 交易记录 / Search Balance History | 不合并路径 |
@@ -123,20 +125,20 @@ Transaction History 用于统一沉淀 AIX 中 Card History 与 Wallet Transacti
 11. Deposit success 必然等同 Wallet `COMPLETED`。
 12. Risk Withheld 必然等同 Wallet `REJECTED`。
 
-## 10. 待补项
+## 10. 统一待确认引用
 
-| 编号 | 待补项 | 来源建议 | 当前处理 |
-|---|---|---|---|
-| TXN-HIS-GAP-001 | Wallet 交易记录完整请求字段 | DTC Wallet OpenAPI | 待补 |
-| TXN-HIS-GAP-002 | Wallet 交易记录完整响应字段 | DTC Wallet OpenAPI | 待补 |
-| TXN-HIS-GAP-003 | Wallet History 前端筛选条件 | Wallet PRD / DTC Wallet OpenAPI | 待补 |
-| TXN-HIS-GAP-004 | Wallet History 时间范围 / 分页规则 | Wallet PRD / DTC Wallet OpenAPI | 待补 |
-| TXN-HIS-GAP-005 | Wallet History 展示字段 | Wallet PRD / 截图 | 待补 |
-| TXN-HIS-GAP-006 | GTR 与 `FIAT_DEPOSIT` 映射 | GTR PRD / 产品确认 | 待补 |
-| TXN-HIS-GAP-007 | WalletConnect 与 `CRYPTO_DEPOSIT` 映射 | WC PRD / 产品确认 | 待补 |
-| TXN-HIS-GAP-008 | `relatedId` 在 GTR / WC / Card 归集场景下取值 | DTC / 后端确认 | deferred |
-| TXN-HIS-GAP-009 | Receive 是否进入 Wallet History | Receive PRD / 产品确认 | 待补 |
-| TXN-HIS-GAP-010 | Card / Wallet 历史是否需要统一入口 | 产品确认 / UX | 待补 |
+本文件不维护独立 gap / checklist。涉及 Transaction History 的不确定项统一引用 ALL-GAP：
+
+| 编号 | 主题 |
+|---|---|
+| ALL-GAP-001 | GTR 是否使用 `FIAT_DEPOSIT=6` |
+| ALL-GAP-002 | WalletConnect 是否使用 `CRYPTO_DEPOSIT=10` |
+| ALL-GAP-007 | `relatedId / transactionId / id` 如何串联 GTR / WalletConnect 入金 |
+| ALL-GAP-008 | Risk Withheld 与 Wallet `state` / 余额关系 |
+| ALL-GAP-014 | Wallet `relatedId` 在 Card / GTR / WC 场景取值 |
+| ALL-GAP-015 | Wallet `transactionId` 与 Wallet `id` 的关系 |
+| ALL-GAP-016 | Deposit success 与 Wallet `state=COMPLETED` 的映射 |
+| ALL-GAP-037 | ActivityType 到 AIX 前端交易类型的映射 |
 
 ## 11. 来源引用
 
@@ -144,8 +146,9 @@ Transaction History 用于统一沉淀 AIX 中 Card History 与 Wallet Transacti
 - (Ref: DTC Wallet OpenAPI Document20260126 / Appendix ActivityType)
 - (Ref: DTC Wallet OpenAPI Document20260126 / 3.4 Crypto Deposit)
 - (Ref: knowledge-base/transaction/status-model.md / v1.1)
-- (Ref: knowledge-base/wallet/transaction-history.md / v1.1)
+- (Ref: knowledge-base/wallet/transaction-history.md / v1.1 / merged source)
 - (Ref: knowledge-base/wallet/balance.md / v1.1)
-- (Ref: knowledge-base/wallet/deposit.md / v1.4)
+- (Ref: knowledge-base/wallet/deposit.md / v1.5)
 - (Ref: knowledge-base/card/card-transaction-flow.md / v1.2)
-- (Ref: knowledge-base/changelog/knowledge-gaps.md / deferred gaps)
+- (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP 总表)
+- (Ref: 用户确认结论 / 2026-05-02 / Wallet Transaction History 合并进 Transaction History)
