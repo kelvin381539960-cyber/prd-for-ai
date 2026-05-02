@@ -1,18 +1,17 @@
 ---
 module: common
 feature: aai-dependency
-version: "1.2"
+version: "1.3"
 status: active
-source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/common/_index.md；knowledge-base/wallet/kyc.md；knowledge-base/wallet/stage-review.md；knowledge-base/card/stage-review.md；knowledge-base/security/_index.md；用户确认结论 2026-05-02
-source_section: IMPLEMENTATION_PLAN v4.3；Common Index v2.1；Wallet KYC v1.0；用户确认：外部依赖只保留与 AIX 系统设计有关内容
+source_doc: knowledge-base/common/_index.md；knowledge-base/kyc/account-opening.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/_system-boundary.md；用户确认结论 2026-05-02
+source_section: AAI Dependency；Account Opening / KYC；Passport OCR；Liveness + Face Comparison；POA；KYC 状态与失败边界；ALL-GAP-035 / ALL-GAP-046
 last_updated: 2026-05-02
 owner: 吴忆锋
 depends_on:
   - common/_index
-  - wallet/kyc
-  - wallet/stage-review
-  - card/stage-review
-  - security/_index
+  - kyc/account-opening
+  - changelog/knowledge-gaps
+  - _system-boundary
 ---
 
 # AAI Dependency 外部依赖边界
@@ -21,90 +20,103 @@ depends_on:
 
 AAI 是 AIX 的外部身份认证 / KYC 供应商能力，不是 AIX 内部系统，也不是本知识库需要维护的供应商系统说明书。
 
-本文只记录与 AIX 系统设计有关的 AAI 依赖边界，不维护 AAI 的完整接口、完整字段、完整错误码、完整审核规则或供应商内部逻辑。
+本文只记录 AIX 在 Account Opening / KYC 等流程中实际需要感知和承接的 AAI 依赖边界，包括：Passport OCR、Liveness、Face Comparison、POA、KYC 结果类别、失败 / 重试 / 页面处理边界。
 
-保留范围：
-
-1. AIX 哪些业务能力依赖 AAI 结果。
-2. AIX 需要感知哪些结果类型，例如 KYC 是否通过、是否失败、是否需要重试、是否需要人工处理。
-3. AIX 侧页面、状态、通知、能力准入、异常处理需要依赖哪些外部结果。
-4. AAI 变化可能影响 AIX 哪些模块。
-
-不保留范围：
+本文不维护：
 
 1. AAI 内部审核逻辑。
 2. AAI 完整接口字段。
 3. AAI 完整错误码表。
 4. AAI 算法、OCR、Liveness、Face Match 的供应商侧细节。
 5. 未被 AIX 产品 / 后端 / 前端使用的供应商字段。
+6. AAI 内部状态机。
+
+Account Opening / KYC 的用户流程、页面状态、Sub Account、DTC Wallet Account、能力准入主事实源为：
+
+`knowledge-base/kyc/account-opening.md`
 
 ## 2. 当前已确认边界
 
-| 项目 | 当前结论 | AIX 侧处理 |
-|---|---|---|
-| Security 阶段 | OTP / Email OTP / Passcode / BIO / Face Auth / API Reference 已收口 | Common 只引用，不重复定义 |
-| Wallet KYC | 已建立基础占位，完整流程和接口待补 | 不默认等同 Card KYC / AAI KYC |
-| Card KYC / Wallet KYC 关系 | 未确认 | 不做复用推导 |
-| Wallet KYC 是否为 GTR / WalletConnect Deposit 前置 | 未确认 | 不补写准入规则 |
-| AAI OCR / Liveness | 供应商能力存在可能性高，但 AIX 实际使用边界待补 | 不补供应商字段，只保留 AIX 依赖结果 |
+| 项目 | 当前结论 | AIX 侧处理 | 主事实源 |
+|---|---|---|---|
+| AAI 是外部依赖 | AAI 不是 AIX 内部系统 | AIX 只承接结果、状态和失败边界，不维护 AAI 内部实现 | `_system-boundary.md` |
+| Passport OCR | Account Opening / KYC 流程中通过外部 H5 完成护照扫描 | AIX 处理页面跳转、权限、失败返回；不维护 OCR 内部识别逻辑 | `kyc/account-opening.md` |
+| Liveness / Face capture | Face Scan Page 通过外部 H5 完成活体采集 | AIX 根据采集成功 / 失败进入 Face Loading 或 Face Failed | `kyc/account-opening.md` |
+| Face Comparison | Face Loading Page 等待后端验证结果 | AIX 轮询 / 等待结果，并按成功 / 失败 / 超时分流 | `kyc/account-opening.md` |
+| POA / Address Upload | Account Opening / KYC 流程包含 Address Upload / POA | AIX 承接页面与提交结果，AAI / KUN 侧识别和审核细节不在本文维护 | `kyc/account-opening.md` |
+| KYC 结果通知 | KYC Approved / Rejected / Failed 会触发 Email / in-app notification / push | 通知模板、跳转和重试策略以 Notification 文件与 ALL-GAP 为准 | `kyc/account-opening.md`、`common/notification.md` |
+| Face 失败锁定 | 24 小时内 Face 失败 5 次锁 20 分钟，10 次锁 24 小时；只统计 Face 失败，不含 passport 失败；人脸通过后清零 | AIX 可引用为页面级重试 / 锁定规则 | `kyc/account-opening.md` |
 
-## 3. AIX 需要关心的 AAI 结果类型
+## 3. AIX 需要关心的 AAI 结果类别
 
-以下不是 AAI 完整状态机，只是 AIX 侧可能需要承接的结果类别。
+以下不是 AAI 完整状态机，只是 AIX 侧需要承接的结果类别。
 
 | 结果类别 | AIX 需要关心的原因 | 当前处理 |
 |---|---|---|
-| KYC 通过 | 可能影响 Wallet 开户、Deposit、Card 或其他能力准入 | 待补具体业务关系 |
-| KYC 未通过 / 失败 | 可能影响页面提示、重新提交、人工处理、通知 | 待补 |
-| KYC 审核中 | 可能影响能力锁定、状态展示、用户等待提示 | 待补 |
-| 需要用户补充 / 重试 | 可能影响重新提交入口和用户提示 | 待补 |
-| 人工处理 | 可能影响运营后台和客服口径 | 待补 |
+| Passport OCR 成功 | 影响是否进入 Face Guide / 后续验证 | 可作为页面流转事实引用 |
+| Passport OCR 失败 | 影响是否回到 Identity Verify | 可作为页面失败处理引用 |
+| Face capture 成功 | 影响是否进入 Face Loading | 可作为页面流转事实引用 |
+| Face capture 失败 | 影响是否进入 Face Failed | 可作为页面失败处理引用 |
+| Face Comparison 成功 | 影响是否进入 Address Upload / POA | 可作为页面流转事实引用 |
+| Face Comparison 失败 | 影响是否进入 Face Failed | 可作为页面失败处理引用 |
+| Face 验证超时 | 30 秒无结果进入 Loading Failed | 可作为页面超时处理引用 |
+| KYC Approved | 影响用户 KYC 结果、通知和后续能力准入判断 | 可引用，但不得推导所有 Wallet 能力必然可用 |
+| KYC Rejected | 影响用户结果展示、通知和后续处理 | 可引用，但失败原因和人工处理仍需确认 |
+| KYC Failed | 影响用户结果展示、通知、失败 / 重试处理 | 可引用，但 AAI 原始失败原因仍需确认 |
+| Under review | 影响 Verification unavailable 和等待状态 | 可作为 AIX 页面分流状态引用 |
 
 ## 4. 与 AIX 业务模块的关系
 
 | 模块 | 关系 | 当前处理 |
 |---|---|---|
-| Account | KYC / 身份认证可能依赖账户基础信息 | 不写具体字段，待 Account / KYC PRD 支撑 |
-| Security | OTP、Face Auth、Passcode 是 AIX 安全层能力 | 引用 Security，不在 AAI 重写 |
-| Card | Card 申卡可能依赖 KYC / 身份认证 | 不默认复用为 Wallet KYC |
-| Wallet | Wallet KYC / 钱包开户前置待补 | 只记录准入关系，不维护 AAI 细节 |
-| Deposit | GTR / WalletConnect 是否依赖 KYC 待确认 | 不补写 |
-| Notification | KYC 结果是否通知待确认 | 不补写通知文案 |
-| Errors | KYC 失败 / 重试 / 人工处理待确认 | 不补写错误码 |
+| KYC / Account Opening | AAI 支撑 Passport OCR、Liveness、Face Comparison、POA 等外部能力 | 主事实源为 `kyc/account-opening.md` |
+| Account | KYC 可能依赖账户基础信息、手机号绑定、用户身份 | 不在 AAI 中补 Account 字段 |
+| Security | 相机权限、OTP、Face Auth、Passcode 等属于 AIX 安全层能力 | 引用 Security，不在 AAI 重写 |
+| Card | Card 申卡可能依赖 KYC / 身份认证 | 不默认复用为 Account Opening / KYC，见 ALL-GAP-030 |
+| Wallet | Wallet Balance / Deposit / WalletConnect / Receive 可能依赖开户、Sub Account 或 KYC 结果 | 主事实源为 `kyc/account-opening.md`；不在 AAI 中补 Wallet 准入规则 |
+| Deposit | GTR / WalletConnect 是否在产品入口强制 KYC / Account Opening 仍需确认 | 见 ALL-GAP-031 |
+| Notification | KYC Approved / Rejected / Failed 有通知规则 | 模板、跳转、补发策略以 Notification 文件和 ALL-GAP-045 为准 |
+| Errors | 页面级失败已在 `account-opening.md` 回填；AAI 原始错误码仍未完整确认 | 见 ALL-GAP-046 |
 
 ## 5. 不写入事实的内容
 
 以下内容不得写成事实：
 
-1. Wallet KYC 与 Card KYC 完全相同。
-2. Wallet KYC 与 AAI KYC 完全相同。
-3. AAI KYC 状态枚举已确认。
-4. Wallet 开户一定在注册时自动完成。
-5. Wallet KYC 一定是 GTR / WalletConnect Deposit 前置。
-6. KYC 失败 / 重试 / 重新提交规则已确认。
-7. OCR / Liveness 字段、接口、错误码已确认。
-8. Face Authentication 规则在 Common 中重新定义。
-9. AAI 内部审核逻辑。
-10. AAI 未提供但由 AIX 推测的字段、状态或错误码。
-11. 与 AIX 系统设计无关的供应商字段。
+1. Account Opening / KYC 与 Card KYC 完全相同。
+2. Account Opening / KYC 与 AAI 内部 KYC 完全相同。
+3. AAI KYC 内部状态枚举已完整确认。
+4. AAI OCR / Liveness / Face Match 的原始字段和错误码已完整确认。
+5. KYC Approved 一定立即创建 DTC Sub Account。
+6. KYC Approved 一定代表 Wallet / Deposit / WalletConnect / Receive 全部可用。
+7. AAI 内部审核逻辑。
+8. AAI 未提供但由 AIX 推测的字段、状态或错误码。
+9. 与 AIX 系统设计无关的供应商字段。
+10. Face Authentication 规则在 Common / AAI 中重新定义。
 
-## 6. 待补项
+## 6. ALL-GAP 映射
 
-| 编号 | 待补项 | 目标问题 | 当前处理 |
-|---|---|---|---|
-| AAI-GAP-001 | AIX 实际依赖哪些 AAI 结果 | 哪些结果会影响 AIX 页面、状态、准入、通知、错误 | 待补 |
-| AAI-GAP-002 | Wallet KYC 与 Card KYC 关系 | 是否复用、是否独立、是否有差异 | 待补 |
-| AAI-GAP-003 | Wallet KYC 与 Deposit 关系 | GTR / WalletConnect 是否必须 KYC 通过 | 待补 |
-| AAI-GAP-004 | KYC 失败 / 重试 / 人工处理 | 用户如何重新提交、是否人工介入 | 待补 |
-| AAI-GAP-005 | KYC 通知规则 | 是否发 push / 站内信 / email | 待补 |
-| AAI-GAP-006 | AAI 结果变化对 AIX 的影响范围 | 供应商状态 / 字段变更会影响哪些 AIX 模块 | 待补 |
+本文不维护本地 `AAI-GAP-*` 表。所有未确认项统一进入 `knowledge-base/changelog/knowledge-gaps.md`。
 
-## 7. 来源引用
+| ALL-GAP | 主题 | 当前处理 |
+|---|---|---|
+| ALL-GAP-030 | Account Opening / KYC 与 Card KYC 关系 | 仍未确认复用 / 独立 / 部分复用 |
+| ALL-GAP-031 | Account Opening / KYC 是否为 GTR / WalletConnect Deposit 前置 | 应拆分产品入口前置、技术依赖、Sub Account 前置等 |
+| ALL-GAP-033 | KYC 失败 / 重试 / 人工处理规则 | 页面级失败与 Face 锁定已回填；人工处理、外部错误码仍需确认 |
+| ALL-GAP-035 | AIX 实际依赖哪些 AAI 结果 | 已回填结果类别；字段、状态、失败原因映射仍需确认 |
+| ALL-GAP-046 | AAI OCR / Liveness / KYC 状态和失败原因边界 | 页面级处理已回填；AAI 原始状态 / 错误码仍需确认 |
 
-- (Ref: IMPLEMENTATION_PLAN.md / v4.3)
-- (Ref: knowledge-base/common/_index.md / v2.1)
-- (Ref: knowledge-base/wallet/kyc.md / v1.0)
-- (Ref: knowledge-base/wallet/stage-review.md / v1.0)
-- (Ref: knowledge-base/card/stage-review.md / v1.3)
-- (Ref: knowledge-base/security/_index.md / Security 阶段)
-- (Ref: 用户确认结论 / 2026-05-02 / 外部依赖只保留与 AIX 系统设计有关内容)
+## 7. 使用规则
+
+1. 查询 AAI 外部依赖边界时，读本文。
+2. 查询开户、KYC、页面状态、Sub Account、能力准入时，读 `kyc/account-opening.md`。
+3. 查询 AAI / AIX / DTC / KUN 责任边界时，读 `knowledge-base/_system-boundary.md`。
+4. 查询未确认项时，读 `knowledge-base/changelog/knowledge-gaps.md`。
+5. 不默认读取旧 `wallet/kyc.md`、`kyc/wallet-kyc.md`、stage-review 或本地 AAI-GAP 表。
+
+## 8. 来源引用
+
+- (Ref: knowledge-base/kyc/account-opening.md / Account Opening / KYC / Passport OCR / Face / POA / 通知 / 错误处理)
+- (Ref: knowledge-base/common/_index.md)
+- (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP-030 / ALL-GAP-031 / ALL-GAP-033 / ALL-GAP-035 / ALL-GAP-046)
+- (Ref: knowledge-base/_system-boundary.md)
+- (Ref: 用户确认结论 / 2026-05-02 / KYC 文件名不应带 wallet；AAI 只保留 AIX 设计相关外部依赖边界)
