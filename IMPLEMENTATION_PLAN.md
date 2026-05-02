@@ -1,7 +1,7 @@
 # prd-for-ai 实施计划
 
-版本：v4.7  
-状态：补材料与精修阶段阶段性 PARTIAL PASS；KYC 已独立，Wallet Transaction History 已合并至 Transaction History；已固化历史 gap 无损迁移规则  
+版本：v4.8  
+状态：补材料与精修阶段 PARTIAL PASS；主干无损 gap 迁移已完成；下一步进入 P0 ALL-GAP 确认  
 适用仓库：`prd-for-ai`  
 更新时间：2026-05-02
 
@@ -34,6 +34,7 @@
 13. 所有模块禁止单独维护 checklist / TODO / gaps 表；功能正文只允许写已确认事实，或引用 `ALL-GAP-XXX` 编号。
 14. Wallet 目录只承接钱包产品能力；KYC 主事实源在 `knowledge-base/kyc/`；交易历史主事实源在 `knowledge-base/transaction/`。
 15. 不接受“精简导致问题丢失”。历史模块级 gap / checklist / TODO 在清理时必须无损迁移到 ALL-GAP 总表，或建立明确的旧编号到 ALL-GAP 映射；不得仅用概括性文字替代原问题。
+16. 主干无损 gap 迁移已阶段性完成；后续发现新的分散待确认项，必须先写入 ALL-GAP，再更新对应模块引用。
 
 ---
 
@@ -75,13 +76,13 @@
 | 1 | Account 样板 | 已完成 | 固化知识库写法 | Login / Registration / Password Reset | 已完成 |
 | 2 | 基础规则沉淀 | 部分完成 | 建立长期规则 | Writing Standard / Source Rules | 持续完善 |
 | 3 | Security 标准化 | 已完成 | 统一认证事实源 | OTP / Email OTP / Passcode / BIO / Face Auth / API Reference | 已完成 |
-| 4 | Card 批量推进 | PARTIAL PASS | 转译卡模块 | Application / Status & Fields / Home / Manage / Transaction | 遗留资金追踪项已集中至 ALL-GAP |
-| 5 | Wallet 批量推进 | PARTIAL PASS | 转译钱包模块 | Balance / Deposit / Receive / Send | KYC 与 Transaction History 已迁出 |
-| 6 | Transaction 统一层 | PARTIAL PASS | 统一交易状态、历史、详情、对账 | Status / History / Detail / Reconciliation | P0 对账缺口继续进 ALL-GAP |
+| 4 | Card 批量推进 | PARTIAL PASS | 转译卡模块 | Application / Status & Fields / Home / Manage / Transaction | P0 资金追踪项继续按 ALL-GAP 确认 |
+| 5 | Wallet 批量推进 | PARTIAL PASS | 转译钱包模块 | Balance / Deposit / Receive / Send | KYC 与 Transaction History 已迁出；Wallet 待确认项进 ALL-GAP |
+| 6 | Transaction 统一层 | PARTIAL PASS | 统一交易状态、历史、详情、对账 | Status / History / Detail / Reconciliation | P0 对账缺口继续按 ALL-GAP 确认 |
 | 7 | KYC 独立层 | PARTIAL PASS | 沉淀 KYC / 准入边界 | wallet-kyc | 待补 Card KYC / Wallet KYC 关系 |
-| 8 | Common / Integration | PARTIAL PASS | 抽公共能力与外部依赖边界 | DTC / AAI / WC / Error / FAQ / Notification | DTC / AAI 已收窄为系统设计边界 |
-| 9 | 全仓库回扫 | PARTIAL PASS | 去重复、补引用、核对状态 | 字段 / 状态 / 来源 / gaps / index | 已生成最终回扫记录 |
-| 10 | 补材料与精修 | 阶段性 PARTIAL PASS | 按 P0/P1/P2 回填真实材料 | Deposit / WalletConnect / Errors / FAQ / ALL-GAP / 目录结构已阶段性回填 | 继续清理分散 gaps，并优先收敛 P0 ALL-GAP |
+| 8 | Common / Integration | PARTIAL PASS | 抽公共能力与外部依赖边界 | DTC / AAI / WC / Error / FAQ / Notification | DTC / AAI 已收窄为系统设计边界；待确认项进 ALL-GAP |
+| 9 | 全仓库回扫 | PARTIAL PASS | 去重复、补引用、核对状态 | 字段 / 状态 / 来源 / gaps / index | 主干无损 gap 迁移已完成 |
+| 10 | 补材料与精修 | PARTIAL PASS | 按 P0/P1/P2 回填真实材料 | Deposit / WalletConnect / Errors / FAQ / ALL-GAP / 目录结构 / 无损迁移已阶段性收口 | 下一步优先确认 P0 ALL-GAP |
 
 ---
 
@@ -100,8 +101,8 @@
 | ActivityType | 已完成阶段性回填 | `FIAT_DEPOSIT=6`、`CRYPTO_DEPOSIT=10`、`DTC_WALLET=13`、`CARD_PAYMENT_REFUND=20`，但不等同产品路径 | transaction/history、transaction/status-model、common/dtc |
 | FAQ / 客服口径 | 已完成基础回填 | 已按 FAQ Excel 原文落库，不自行编造新增 | common/faq |
 | ALL-GAP 总表 | 已完成阶段性收口 | 所有模块不确定项统一进入 `knowledge-base/changelog/knowledge-gaps.md`，已加 P0 / P1 / P2 优先级 | changelog/knowledge-gaps |
-| 历史 gap 无损迁移 | 当前执行 | 清理模块级 checklist / gaps 时，必须保留原问题并映射至 ALL-GAP；不得因精简丢失 | changelog/knowledge-gaps、stage-review |
-| 分散 gap 清理 | 当前执行 | 后续模块只引用 ALL-GAP 编号，不再维护独立 checklist | wallet、card、transaction、common、kyc |
+| 历史 gap 无损迁移 | 已完成主干回扫 | DEP-GAP、ERR-GAP、TXN-DETAIL-GAP、TXN-STATUS-GAP、BE/WALLET traceability、DTC-GAP、NOTIF-GAP、Balance / Receive 待补字段均已映射 | changelog/knowledge-gaps、wallet、card、transaction、common |
+| 分散 gap 清理 | 已完成主干回扫 | 主干模块正文改为引用 ALL-GAP，不再维护独立 checklist | wallet、card、transaction、common |
 | P0 gap 收敛 | 待执行 | 资金、对账、状态闭环、用户资产可见性优先确认 | changelog/knowledge-gaps |
 
 ---
@@ -121,7 +122,7 @@
 | Search Balance History endpoint 为 `[GET] /openapi/v1/wallet/balance/history/search` | DTC Wallet OpenAPI / 4.2.4 | 不维护完整接口说明书；只作为 AIX Wallet History 来源 |
 | `FIAT_DEPOSIT=6` | DTC Wallet OpenAPI / Appendix ActivityType | 不得写死为 GTR；见 ALL-GAP-001 |
 | `CRYPTO_DEPOSIT=10` | DTC Wallet OpenAPI / Appendix ActivityType | 不得写死为 WalletConnect；见 ALL-GAP-002 |
-| Deposit success 通知 | Notification PRD / Deposit row | 不代表所有 Deposit 子路径状态机闭环 |
+| Deposit success 通知 | Notification PRD / Deposit row | 不代表所有 Deposit 子路径状态机闭环；通知触发点见 ALL-GAP-065 |
 | Deposit under review / Risk Withheld 通知 | Notification PRD / Deposit row | 不代表 Declare / Travel Rule 流程闭环 |
 | AAI / KYC 外部依赖 | 用户确认 / common/aai | 只保留影响 AIX 准入、页面状态、通知、错误、人工处理的结果边界 |
 
@@ -135,12 +136,12 @@
 | Security | 已完成 | PASS | Security 阶段全部收口 |
 | Card / 页面与卡管能力 | 已完成 | PASS | Application / Home / Activation / PIN / Sensitive Info / Management 已完成 |
 | Card / Transaction Flow | 已完成但留 deferred gaps | PARTIAL PASS | 资金追踪部分集中至 ALL-GAP P0 |
-| Wallet | 已完成基础版 + Deposit 深度回填 + 目录边界调整 | PARTIAL PASS | Deposit active；Send / Swap deferred；KYC / History 已迁出 |
-| Transaction | 已完成基础版 + History 合并 + Reconciliation 新增 | PARTIAL PASS | Wallet History 主事实已合并，资金追踪边界进 reconciliation / ALL-GAP |
+| Wallet | 已完成基础版 + Deposit 深度回填 + 目录边界调整 + 无损 gap 迁移 | PARTIAL PASS | Deposit active；Send / Swap deferred；KYC / History 已迁出 |
+| Transaction | 已完成基础版 + History 合并 + Reconciliation 新增 + 无损 gap 迁移 | PARTIAL PASS | Wallet History 主事实已合并，资金追踪边界进 reconciliation / ALL-GAP |
 | KYC | 已独立 | PARTIAL PASS | Wallet KYC 已迁移；Card KYC / Wallet KYC 关系待 ALL-GAP 收敛 |
-| Common / Integration | 已完成基础版 + 部分真实材料回填 | PARTIAL PASS | DTC / AAI 已收窄为系统设计边界；Notification / Errors / WalletConnect 已补真实材料 |
-| 全仓库回扫 | 已完成基础版 | PARTIAL PASS | 状态一致，可继续补材料与精修 |
-| 补材料与精修 | 当前执行 | PARTIAL PASS | 当前重点：清理分散 gaps、无损迁移历史问题、统一引用 ALL-GAP、优先确认 P0 |
+| Common / Integration | 已完成基础版 + 真实材料回填 + 无损 gap 迁移 | PARTIAL PASS | DTC / AAI 已收窄为系统设计边界；Notification / Errors / WalletConnect 已补真实材料 |
+| 全仓库回扫 | 已完成主干无损迁移 | PARTIAL PASS | 主干模块级 gaps 已统一迁入 ALL-GAP |
+| 补材料与精修 | 当前收口 | PARTIAL PASS | 下一步进入 P0 ALL-GAP 确认 |
 
 ---
 
@@ -148,11 +149,11 @@
 
 当前执行点：
 
-1. 回扫重点模块文档，移除分散的待确认表 / TODO / gaps，仅保留 ALL-GAP 编号引用。
-2. 清理任何历史模块级 gap 前，必须先确认该问题已进入 ALL-GAP，或建立旧编号到 ALL-GAP 的映射。
-3. 优先清理：wallet/deposit、common/errors、common/walletconnect、transaction/detail、card/transaction-flow、stage-review 文件。
-4. 更新 final-repository-review，反映 KYC 独立、History 合并、Reconciliation 新增、历史 gap 无损迁移规则。
-5. 后续按 ALL-GAP 优先级收敛：先 P0，再 P1，最后 P2。
+1. 做关键词残留抽查：`待补项`、`checklist`、`TODO`、`GAP-`、`deferred`。
+2. 如果发现真实待确认项未进入 ALL-GAP，先迁入 ALL-GAP，再更新模块引用。
+3. 若仅是历史映射表或 moved notice 中的旧编号，不视为新的模块级 checklist。
+4. 进入 P0 ALL-GAP 确认：优先处理资金、对账、状态闭环、用户资产可见性。
+5. 用户确认 ALL-GAP 后，先更新 `knowledge-gaps.md` 状态，再同步回填相关功能文件。
 6. 外部依赖继续保持“只保留 AIX 系统设计相关内容”的原则。
 
 当前禁止事项：
