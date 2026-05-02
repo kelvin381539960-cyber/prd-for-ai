@@ -1,10 +1,10 @@
 ---
 module: changelog
 feature: knowledge-gaps
-version: "1.11"
+version: "1.12"
 status: active
-source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/wallet/deposit.md；knowledge-base/wallet/balance.md；knowledge-base/wallet/receive.md；knowledge-base/card/card-transaction-flow.md；knowledge-base/card/stage-review.md；knowledge-base/card/transaction-flow-traceability-checklist.md；knowledge-base/wallet/transaction-history.md；knowledge-base/wallet/kyc.md；knowledge-base/common/dtc.md；knowledge-base/common/aai.md；knowledge-base/common/errors.md；knowledge-base/common/stage-review.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/status-model.md；用户确认结论 2026-05-01；用户确认结论 2026-05-02
-source_section: source-policy；all-module centralized confirmation table；Card Transaction Flow；Wallet Deposit；Wallet Balance；Wallet Receive；Wallet KYC；Common DTC / AAI；Common Stage Review；Transaction Detail；Transaction Status Model；deferred gaps decision；single global checklist rule
+source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/wallet/deposit.md；knowledge-base/wallet/balance.md；knowledge-base/wallet/receive.md；knowledge-base/card/card-transaction-flow.md；knowledge-base/card/stage-review.md；knowledge-base/card/transaction-flow-traceability-checklist.md；knowledge-base/wallet/transaction-history.md；knowledge-base/wallet/kyc.md；knowledge-base/common/dtc.md；knowledge-base/common/aai.md；knowledge-base/common/errors.md；knowledge-base/common/stage-review.md；knowledge-base/common/notification.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/status-model.md；用户确认结论 2026-05-01；用户确认结论 2026-05-02
+source_section: source-policy；all-module centralized confirmation table；Card Transaction Flow；Wallet Deposit；Wallet Balance；Wallet Receive；Wallet KYC；Common DTC / AAI；Common Notification；Common Stage Review；Transaction Detail；Transaction Status Model；deferred gaps decision；single global checklist rule
 last_updated: 2026-05-02
 owner: 吴忆锋
 ---
@@ -87,6 +87,9 @@ owner: 吴忆锋
 | ALL-GAP-060 | P1 | Wallet / Receive | Receive 页面、地址与交互字段 | Wallet Receive 原待补字段清单包含：Receive 入口页面、收款地址字段、Memo / Tag 字段、二维码生成规则、复制地址交互、地址刷新 / 复用规则 | 产品 / 前端 / 后端 / DTC | 影响 Receive 页面设计、地址展示和用户操作 | deferred |
 | ALL-GAP-061 | P1 | Wallet / Receive | Receive 支持范围 | Wallet Receive 原待补字段清单包含：支持国家 / 用户范围、支持币种、支持链 / network | 产品 / 合规 / 后端 / DTC | 影响用户准入、链币选择和合规限制 | deferred |
 | ALL-GAP-062 | P1 | Wallet / Receive | Receive 入账状态、失败 / on-hold 与通知规则 | Wallet Receive 原待补字段清单包含：收款成功状态、收款失败 / on-hold 状态、通知规则；Receive 状态映射也关联 ALL-GAP-052 | 产品 / 后端 / Notification / 风控 / 合规 | 影响入账状态展示、异常闭环和通知触发 | deferred |
+| ALL-GAP-063 | P1 | Common / Notification | Wallet 入金失败通知规则 | Notification 原 NOTIF-GAP-003 提到 Wallet 入金失败通知未确认；当前只确认 Deposit success 与 under review 通知 | 产品 / 后端 / Notification / 风控 | 影响失败状态用户感知、跳转目标和客服处理 | deferred |
+| ALL-GAP-064 | P2 | Common / Notification | 站内信与 Push 是否完全一致 | Notification 原 NOTIF-GAP-005 提到站内信与 Push 是否完全一致未确认 | 产品 / Notification / 前端 | 影响通知渠道一致性和模板维护 | deferred |
+| ALL-GAP-065 | P1 | Common / Notification / Wallet | Deposit 通知是否以 Wallet 入账为触发点 | Notification 原 NOTIF-GAP-007 提到 Deposit 通知是否以 Wallet 入账为触发点未确认；当前不能把通知触发等同于余额已可用 | 后端 / Wallet / Notification / 产品 | 影响通知触发时点、余额可见性和用户预期 | deferred |
 
 ## 3. 优先级定义
 
