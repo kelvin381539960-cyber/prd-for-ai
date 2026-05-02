@@ -1,10 +1,10 @@
 ---
 module: changelog
 feature: knowledge-gaps
-version: "1.9"
+version: "1.10"
 status: active
-source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/wallet/deposit.md；knowledge-base/card/card-transaction-flow.md；knowledge-base/card/stage-review.md；knowledge-base/card/transaction-flow-traceability-checklist.md；knowledge-base/wallet/transaction-history.md；knowledge-base/wallet/kyc.md；knowledge-base/common/dtc.md；knowledge-base/common/aai.md；knowledge-base/common/errors.md；knowledge-base/common/stage-review.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/status-model.md；用户确认结论 2026-05-01；用户确认结论 2026-05-02
-source_section: source-policy；all-module centralized confirmation table；Card Transaction Flow；Wallet Deposit；Wallet KYC；Common DTC / AAI；Common Stage Review；Transaction Detail；Transaction Status Model；deferred gaps decision；single global checklist rule
+source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/wallet/deposit.md；knowledge-base/wallet/balance.md；knowledge-base/card/card-transaction-flow.md；knowledge-base/card/stage-review.md；knowledge-base/card/transaction-flow-traceability-checklist.md；knowledge-base/wallet/transaction-history.md；knowledge-base/wallet/kyc.md；knowledge-base/common/dtc.md；knowledge-base/common/aai.md；knowledge-base/common/errors.md；knowledge-base/common/stage-review.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/status-model.md；用户确认结论 2026-05-01；用户确认结论 2026-05-02
+source_section: source-policy；all-module centralized confirmation table；Card Transaction Flow；Wallet Deposit；Wallet Balance；Wallet KYC；Common DTC / AAI；Common Stage Review；Transaction Detail；Transaction Status Model；deferred gaps decision；single global checklist rule
 last_updated: 2026-05-02
 owner: 吴忆锋
 ---
@@ -79,6 +79,10 @@ owner: 吴忆锋
 | ALL-GAP-052 | P1 | Wallet / Receive / Transaction | Receive 是否独立上线及状态映射 | Transaction Status Model 原 TXN-STATUS-GAP-006 提到 Receive 状态映射未确认 | 产品 / 后端 / 前端 | 影响 Receive 是否进入 active 交易状态模型 | deferred |
 | ALL-GAP-053 | P1 | Card / Transaction | Card DTC 状态与 AIX 前端展示状态映射 | Transaction Status Model 原 TXN-STATUS-GAP-007 提到 Card DTC 状态与 AIX 前端展示状态映射待补 | 产品 / 前端 / 后端 | 影响 Card 交易历史和详情页状态展示 | deferred |
 | ALL-GAP-054 | P2 | Transaction / UX | 跨模块最终展示状态是否需要统一文案 | Transaction Status Model 原 TXN-STATUS-GAP-008 提到跨模块最终展示状态是否需要统一文案 | 产品 / UX | 影响 Card / Wallet / Deposit 统一体验 | deferred |
+| ALL-GAP-055 | P1 | Wallet / Balance | Wallet 当前余额查询接口和字段边界 | Wallet Balance 原待补字段清单包含：当前余额查询接口路径、请求字段、响应字段、可用余额 / 冻结余额 / 总余额字段、余额币种字段 | 后端 / Wallet / DTC | 影响钱包首页余额、资产展示、余额可用性判断 | deferred |
+| ALL-GAP-056 | P2 | Wallet / Balance | Wallet 余额展示规则 | Wallet Balance 原待补字段清单包含：余额展示排序、小额余额 / 零余额展示规则 | 产品 / 前端 / UX | 影响 Wallet 资产列表展示体验 | deferred |
+| ALL-GAP-057 | P1 | Wallet / Balance | Wallet 余额查询失败处理 | Wallet Balance 原待补字段清单包含：余额查询失败处理 | 后端 / 前端 / 产品 | 影响页面错误处理和用户资产可见性 | deferred |
+| ALL-GAP-058 | P1 | Wallet / Balance / History | Search Balance History 完整字段表 | Wallet Balance 原待补字段清单包含：Search Balance History 完整字段表 | 后端 / Wallet / DTC | 影响余额历史、交易历史展示和对账字段 | deferred |
 
 ## 3. 优先级定义
 
