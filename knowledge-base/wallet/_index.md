@@ -1,10 +1,10 @@
 ---
 module: wallet
 feature: wallet-index
-version: "1.2"
+version: "1.3"
 status: active
 source_doc: IMPLEMENTATION_PLAN.md；DTC Wallet OpenAPI Documentation；DTC接口文档/DTC Card Issuing API Document_20260310 (1).pdf；knowledge-base/card/card-transaction-flow.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-01
-source_section: IMPLEMENTATION_PLAN v3.7 / 12.5；DTC Wallet 钱包交易记录 / 钱包交易详情 / Search Balance History；Card Transaction Flow v1.2；Card deferred gaps；compliance launch decision
+source_section: IMPLEMENTATION_PLAN v3.8 / 12.5；DTC Wallet 钱包交易记录 / 钱包交易详情 / Search Balance History；Card Transaction Flow v1.2；Card deferred gaps；deposit scope correction
 last_updated: 2026-05-01
 owner: 吴忆锋
 depends_on:
@@ -17,9 +17,11 @@ depends_on:
 
 ## 1. 模块定位
 
-Wallet 模块用于沉淀 AIX 钱包相关能力，包括钱包开户 / KYC 前置、余额展示、收款、钱包交易记录与交易详情。
+Wallet 模块用于沉淀 AIX 钱包相关能力，包括钱包开户 / KYC 前置、余额展示、入金、收款、钱包交易记录与交易详情。
 
-Deposit、Send、Swap 因合规原因未上线或需重做，不进入当前 active 功能归档。相关旧方案不得作为当前正式功能事实源。
+Deposit 能力存在，包含 GTR 和 WalletConnect 两类入金路径，进入当前 Wallet active 转译范围。
+
+Send 和 Swap 因合规原因未上线或需重做，不进入当前 active 功能归档。相关旧方案不得作为当前正式功能事实源。
 
 本阶段从 Wallet 已确认事实源开始转译，不回填 Card Transaction Flow 的 deferred gaps。
 
@@ -42,7 +44,7 @@ Deposit、Send、Swap 因合规原因未上线或需重做，不进入当前 act
 | `wallet/_index.md` | active | 建立 Wallet 模块边界、能力清单与依赖关系 | 当前文件 |
 | `wallet/kyc.md` | Todo | 转译 Wallet KYC / DTC 钱包开户与前置条件 | 后续执行 |
 | `wallet/balance.md` | active | 转译钱包余额、币种、余额展示与查询接口 | 已建立基础文件，字段待补 |
-| `wallet/deposit.md` | deferred | Deposit 因合规原因未上线且需重做 | 不作为 active 功能事实源 |
+| `wallet/deposit.md` | active | 转译 GTR / WalletConnect 入金能力 | 已恢复 active，需继续补细节 |
 | `wallet/receive.md` | active | 转译 Receive / 收款地址相关能力 | 已建立基础文件；不得默认等同 Deposit |
 | `wallet/send.md` | deferred | Send 因合规原因未上线 | 不作为 active 功能事实源 |
 | `wallet/swap.md` | deferred | Swap 因合规原因未上线且需重做 | 不创建 active 功能正文；新方案确认后再转译 |
@@ -55,14 +57,22 @@ Deposit、Send、Swap 因合规原因未上线或需重做，不进入当前 act
 |---|---|---|---|
 | Wallet KYC / 开户 | 后续转译 | Card 申卡 KYC 细节 | 需引用 Account / Security / KYC 事实源 |
 | Balance | 已建立基础文件 | Card balance | Card balance 仅在 Card Transaction Flow 中作为归集金额依据 |
+| Deposit | active | Send / Swap | 包含 GTR 和 WalletConnect；需按子路径拆分 |
 | Receive | 已建立基础文件 | Deposit 旧方案 | Receive 是否独立上线需按来源确认 |
-| Deposit | deferred | 当前 active 功能正文 | 因合规原因未上线且需重做 |
 | Send / Withdraw | deferred | 当前 active 功能正文 | 因合规原因未上线 |
 | Swap | deferred | 当前 active 功能正文 | 因合规原因未上线且需重做 |
 | Transaction History | 已建立基础文件 | Card History 交易展示 | 后续 Transaction 统一层再做跨模块状态统一 |
 | Notification | 后续按来源引用 | Card 通知正文 | 需引用 Notification PRD，不补文案 |
 
-## 4. 已确认 Wallet 基础字段
+## 4. Deposit 子路径
+
+| 子路径 | 当前状态 | 说明 |
+|---|---|---|
+| GTR Deposit | active / 待补细节 | 用户确认 Deposit 包含 GTR |
+| WalletConnect Deposit | active / 待补细节 | 用户确认 Deposit 包含 WalletConnect |
+| 其他 Deposit 旧方案 | 未确认 | 不得默认归档为 active |
+
+## 5. 已确认 Wallet 基础字段
 
 | 字段 / 能力 | 结论 | 来源 | 备注 |
 |---|---|---|---|
@@ -71,7 +81,7 @@ Deposit、Send、Swap 因合规原因未上线或需重做，不进入当前 act
 | Wallet 交易 `state` | 枚举为 `PENDING`、`PROCESSING`、`AUTHORIZED`、`COMPLETED`、`REJECTED`、`CLOSED` | DTC Wallet OpenAPI；用户确认 2026-05-01 | 可用于 Wallet 交易记录与详情 |
 | Wallet Search Balance History | 可查询钱包交易历史，返回 `activityType`、`relatedId`、`time`、`state` 等字段 | DTC Wallet OpenAPI / 4.2.4 | `relatedId` 在卡余额转 Wallet 场景下仍是 deferred gap |
 
-## 5. 与 Card deferred gaps 的关系
+## 6. 与 Card deferred gaps 的关系
 
 以下内容不得在 Wallet 阶段补写为事实：
 
@@ -85,41 +95,42 @@ Deposit、Send、Swap 因合规原因未上线或需重做，不进入当前 act
 | Card balance 转 Wallet 入账币种是否完全等同于 card currency | 继续保留在 `knowledge-gaps.md` |
 | 最终对账字段组合 | 继续保留在 `knowledge-gaps.md` |
 
-## 6. 转译顺序建议
+## 7. 转译顺序建议
 
 | 顺序 | 文件 | 原因 |
 |---|---|---|
 | 1 | `wallet/transaction-history.md` | 已有 Wallet `id`、`transactionId`、`state` 等接口字段，可优先形成 Wallet 状态与交易事实源 |
-| 2 | `wallet/balance.md` | 余额是 Receive 的共用基础 |
-| 3 | `wallet/receive.md` | 收款地址能力需与 Deposit 旧方案隔离确认 |
-| 4 | `wallet/kyc.md` | 如 Wallet 开户 / KYC 资料已在其他模块前置，可在 Wallet 阶段中后段收口 |
-| 5 | `wallet/stage-review.md` | 完成 Wallet 阶段 Gate Review |
+| 2 | `wallet/balance.md` | 余额是 Deposit / Receive 的共用基础 |
+| 3 | `wallet/deposit.md` | Deposit 已确认存在，需拆 GTR / WalletConnect |
+| 4 | `wallet/receive.md` | 收款地址能力需与 Deposit 子路径边界确认 |
+| 5 | `wallet/kyc.md` | Wallet 开户 / KYC 资料前置 |
+| 6 | `wallet/stage-review.md` | 完成 Wallet 阶段 Gate Review |
 
 暂不推进：
 
 | 文件 | 原因 |
 |---|---|
-| `wallet/deposit.md` | 因合规原因未上线且需重做，只保留 deferred 占位 |
 | `wallet/send.md` | 因合规原因未上线，只保留 deferred 占位 |
 | `wallet/swap.md` | 因合规原因未上线且需重做，新方案确认后再转译 |
 
-## 7. Stage Review 关注点
+## 8. Stage Review 关注点
 
 Wallet 阶段完成后必须检查：
 
 1. Wallet 状态是否闭环。
-2. Receive、交易历史的接口路径和字段来源是否明确。
-3. amount、currency、chain、address、status、transactionId 等关键字段是否有来源。
-4. 失败分支是否有明确状态、告警、人工处理或用户提示。
-5. Deposit / Send / Swap 是否保持 deferred，没有被写成 active 功能事实。
-6. 与 Card Transaction Flow 的 deferred gaps 是否保持隔离，未被写成事实。
-7. 与后续 Transaction 统一层的边界是否清晰。
+2. Deposit、Receive、交易历史的接口路径和字段来源是否明确。
+3. GTR / WalletConnect 是否拆分清楚。
+4. amount、currency、chain、address、status、transactionId 等关键字段是否有来源。
+5. 失败分支是否有明确状态、告警、人工处理或用户提示。
+6. Send / Swap 是否保持 deferred，没有被写成 active 功能事实。
+7. 与 Card Transaction Flow 的 deferred gaps 是否保持隔离，未被写成事实。
+8. 与后续 Transaction 统一层的边界是否清晰。
 
-## 8. 来源引用
+## 9. 来源引用
 
-- (Ref: IMPLEMENTATION_PLAN.md / v3.7 / 12.5 阶段 5：Wallet 批量推进)
+- (Ref: IMPLEMENTATION_PLAN.md / v3.8 / 12.5 阶段 5：Wallet 批量推进)
 - (Ref: DTC Wallet OpenAPI Documentation / Wallet 交易记录 / 钱包交易详情 / Search Balance History)
 - (Ref: DTC Card Issuing API Document_20260310 (1).pdf / 3.3.3 transfer to wallet)
 - (Ref: knowledge-base/card/card-transaction-flow.md / v1.2)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / Card Transaction Flow deferred gaps)
-- (Ref: 用户确认结论 / 2026-05-01 / Deposit、Send、Swap 合规状态)
+- (Ref: 用户确认结论 / 2026-05-01 / Deposit 包含 GTR 和 WalletConnect，Send / Swap 合规状态)
