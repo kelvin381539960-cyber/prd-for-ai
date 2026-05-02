@@ -1,16 +1,16 @@
 ---
 module: wallet
 feature: deposit
-version: "1.5"
+version: "1.6"
 status: active
-source_doc: 历史prd/AIX Wallet V1.0【Deposit & Send & Swap 】.docx；DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx；DTC Wallet OpenAPI Documentation；[2025-11-25] AIX+Notification（push及站内信）.docx；knowledge-base/wallet/_index.md；knowledge-base/wallet/balance.md；knowledge-base/wallet/transaction-history.md；knowledge-base/common/walletconnect.md；knowledge-base/common/notification.md；knowledge-base/common/errors.md；knowledge-base/common/dtc.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-01；用户确认结论 2026-05-02
-source_section: AIX Wallet V1.0 / 3.1 交易说明；3.2 接口范围；6.3 钱包地址充值 Deposit（GTR's Wallet）；6.4 钱包链接充值 Deposit（WalletConnect）；7.4 钱包充值 Wallet Connect；Documentation dtc-nodejs-wallet-connect / 1 Request Wallet Connect Token；3 Server-Emitted Events；4 Client-Emitted Events；5 sequence diagram；6 Enum Reference
+source_doc: 历史prd/AIX Wallet V1.0【Deposit & Send & Swap 】.docx；DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx；DTC Wallet OpenAPI Documentation；[2025-11-25] AIX+Notification（push及站内信）.docx；knowledge-base/wallet/_index.md；knowledge-base/wallet/balance.md；knowledge-base/transaction/history.md；knowledge-base/common/walletconnect.md；knowledge-base/common/notification.md；knowledge-base/common/errors.md；knowledge-base/common/dtc.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-01；用户确认结论 2026-05-02
+source_section: AIX Wallet V1.0 / 3.1 交易说明；3.2 接口范围；6.3 钱包地址充值 Deposit（GTR's Wallet）；6.4 钱包链接充值 Deposit（WalletConnect）；7.4 钱包充值 Wallet Connect；Documentation dtc-nodejs-wallet-connect / 1 Request Wallet Connect Token；3 Server-Emitted Events；4 Client-Emitted Events；5 sequence diagram；6 Enum Reference；ALL-GAP 总表
 last_updated: 2026-05-02
 owner: 吴忆锋
 depends_on:
   - wallet/_index
   - wallet/balance
-  - wallet/transaction-history
+  - transaction/history
   - common/walletconnect
   - common/notification
   - common/errors
@@ -40,7 +40,7 @@ Wallet Deposit 用于沉淀 AIX Wallet 入金相关能力，包括：
 1. Deposit 入口与充值方式分流。
 2. GTR / Exchange 地址充值用户路径。
 3. WalletConnect 充值用户路径、自动加白、支付与异常分流。
-4. Deposit 状态展示、通知、错误处理和待确认边界。
+4. Deposit 状态展示、通知、错误处理和 ALL-GAP 引用边界。
 
 DTC / WalletConnect 只作为外部依赖边界记录，不维护供应商完整接口说明书；只沉淀影响 AIX 页面、状态、通知、错误处理和用户路径的必要事实。
 
@@ -285,9 +285,9 @@ sequenceDiagram
 | 自动加白 | 用户 WalletConnect Approved 后，DTC 自动添加地址到白名单 | AIX Wallet PRD / 6.4.5；DTC WalletConnect / sequence diagram | 必须在主流程内体现 |
 | connected 触发 | add whitelist 成功后，DTC 返回 `connected` | DTC WalletConnect / 5 sequence diagram | connected 之后才 `send_payment` |
 | add_whitelist_failed | add whitelist 失败时返回 `add_whitelist_failed` | DTC WalletConnect / 3.2.13 | 会自动断开 WebSocket |
-| 二次充值 | PRD 口径：当天使用同一发送地址二次充值无需再次 Approved | AIX Wallet PRD / 6.4.5 | 与 DTC 7 天规则需统一 |
-| 7 天免连接 | DTC 口径：如 `userId` 与 `walletAddress` 存在，下一次 `create_payment_intent` 7 天内不需要再次连接钱包 | DTC WalletConnect / 4.1 | 与 PRD“当天 / 1 天授权”待统一 |
-| 授权有效期 | PRD 口径：WalletConnect 授权有效期 1 天 | AIX Wallet PRD / 6.4 知识点 | 与 7 天规则待统一 |
+| 二次充值 | PRD 口径：当天使用同一发送地址二次充值无需再次 Approved | AIX Wallet PRD / 6.4.5 | AIX 对客授权有效期已确认按 1 天 |
+| 7 天免连接 | DTC 文档存在 `userId + walletAddress` 下 7 天内不需要再次连接钱包的内部逻辑 | DTC WalletConnect / 4.1；用户确认 2026-05-02 | 用户确认 DTC 7 天是内部逻辑，不作为 AIX 对客有效期 |
+| 授权有效期 | AIX 对客 WalletConnect 授权有效期按 1 天 | AIX Wallet PRD / 6.4 知识点；用户确认 2026-05-02 | 不再作为待确认项 |
 
 ### 5.5 WalletConnect 平台差异
 
@@ -347,7 +347,7 @@ flowchart TD
 | 白名单 | `add_whitelist_failed` | 自动断开 WebSocket，提示 `Connection failed，Unable to send connect request, Please try again.` | AIX Wallet PRD / 6.4.5；DTC WalletConnect / 3.2.13、3.3 |
 | 支付 | `request_payment_error`、`payment_rejected`、`payment_failed` | 充值失败结果页，用户不可重试 | AIX Wallet PRD / 6.4.5；DTC WalletConnect / 3.2.2、3.2.6、3.2.7 |
 | 支付后长连接断开 | send_payment 后长连接断开 | `Payment Confirmation` 页 | AIX Wallet PRD / 6.4.5 |
-| 付款结果查询 | `payment_info` false / `Transaction not found` | 待异常处理 | DTC WalletConnect / 3.2.1 |
+| 付款结果查询 | `payment_info` false / `Transaction not found` | 待异常处理 | DTC WalletConnect / 3.2.1；见 ALL-GAP-012 |
 
 ## 7. WalletConnect 结果状态
 
@@ -375,6 +375,10 @@ flowchart TD
 | `success=false` | `Deposit failed` | `Back to Wallet` | AIX Wallet PRD / 6.4.5 |
 | `REJECTED / CLOSED` | `Deposit failed` | `Back to Wallet` | AIX Wallet PRD / 6.4.5 |
 
+Risk Withheld 是异步返回，不触发充值结果页；用户查询交易详情时状态为 under review。该结论来自用户确认，后续与 Wallet `state` / 余额关系仍见 ALL-GAP-008。
+
+Refunded 没有 AIX 对客结果页。该结论来自用户确认。
+
 ## 8. GTR 与 WalletConnect 差异表
 
 | 维度 | GTR / Exchange 地址充值 | WalletConnect 充值 |
@@ -390,27 +394,27 @@ flowchart TD
 | 最小金额 | USDT / USDC：1.5；WUSD / FDUSD：0.01 | 默认 0.01 |
 | 网络默认 | Select Network 默认未选 | 默认 BSC；币种不支持 BSC 时默认 ETH |
 | 主要异常 | 非 Binance / 非本人账户 / 网络错误 / 地址错误 / 低于最小充值 | 无可用钱包 / 授权失败 / 加白失败 / 支付失败 / 长连接断开 / payment_info 未查到 |
-| 结果页 | PRD 未像 WalletConnect 一样定义明确结果页 | PRD 明确 success / progressing / failed 结果页 |
+| 结果页 | PRD 未像 WalletConnect 一样定义明确结果页 | PRD 明确 success / progressing / failed 结果页；Risk Withheld 不触发结果页 |
 
 ## 9. Deposit 与 Balance / History 的关系
 
-| 能力 | 当前可引用 | 当前待补 |
+| 能力 | 当前可引用 | ALL-GAP 边界 |
 |---|---|---|
-| Deposit 收款地址 | GTR 路径通过 `/openapi/v1/crypto-account/deposit-address/search-obj` 获取 | 交易记录生成时机 |
-| WalletConnect 支付 | 通过 WalletConnect token、WebSocket、create_payment_intent、send_payment、payment_info | WalletConnect 与 Wallet `transactionId` / `relatedId` 关联 |
-| Deposit 记录 ID | Wallet 交易 `id` 存在 | GTR / WC 记录生成时机 |
-| Deposit 详情查询 | Wallet 详情入参 `transactionId` 存在；PRD 另有 `Get Crypto Transaction`、`Get Crypto Transaction By ReferenceNo` | GTR / WC transactionId 来源 |
-| Deposit 状态 | WC 结果页使用 Completed / PENDING / PROCESSING / AUTHORIZED / REJECTED / CLOSED | 与 Wallet `state`、ActivityType 的映射 |
-| Deposit 余额历史 | Search Balance History 存在，ActivityType 包含 `CRYPTO_DEPOSIT=10`、`FIAT_DEPOSIT=6` | GTR / WC `relatedId` 取值 |
+| Deposit 收款地址 | GTR 路径通过 `/openapi/v1/crypto-account/deposit-address/search-obj` 获取 | 交易记录生成时机仍需以后端事实补齐 |
+| WalletConnect 支付 | 通过 WalletConnect token、WebSocket、create_payment_intent、send_payment、payment_info | WalletConnect 与 Wallet `transactionId` / `relatedId` 关联见 ALL-GAP-007、ALL-GAP-014 |
+| Deposit 记录 ID | Wallet 交易 `id` 存在 | GTR / WC 记录生成时机见 ALL-GAP-007 |
+| Deposit 详情查询 | Wallet 详情入参 `transactionId` 存在；PRD 另有 `Get Crypto Transaction`、`Get Crypto Transaction By ReferenceNo` | GTR / WC transactionId 来源见 ALL-GAP-007 |
+| Deposit 状态 | WC 结果页使用 Completed / PENDING / PROCESSING / AUTHORIZED / REJECTED / CLOSED；Risk Withheld 详情展示 under review | 与 Wallet `state`、ActivityType 的映射见 ALL-GAP-008、ALL-GAP-016 |
+| Deposit 余额历史 | Search Balance History 存在，ActivityType 包含 `CRYPTO_DEPOSIT=10`、`FIAT_DEPOSIT=6` | GTR / WC `relatedId` 取值见 ALL-GAP-001、ALL-GAP-002、ALL-GAP-014 |
 
 ## 10. Deposit 通知边界
 
 | 通知 | GTR | WalletConnect | 当前处理 |
 |---|---|---|---|
-| 入金成功通知 | Notification 表有 Deposit success 通用事实 | Notification 表有 Deposit success 通用事实 | 不写成覆盖所有子路径和所有状态恢复场景 |
-| 入金冻结 / review 通知 | FAQ / Notification 有 under review 口径 | DTC Crypto Deposit / Notification 有 Risk Withheld 口径 | 不等同 Wallet `REJECTED / PENDING / PROCESSING` |
-| 入金失败通知 | 待补 | PRD 有结果页，不代表已有通知 | 不写新通知 |
-| Declare / Travel Rule 通知 | GTR 自动交易报备，不需要交易声明 | PRD 口径为自动交易报备，不需要交易声明 | 不新增 Declare 通知 |
+| 入金成功通知 | Notification 表有 Deposit success 通用事实 | Notification 表有 Deposit success 通用事实 | 不写成覆盖所有子路径和所有状态恢复场景；见 ALL-GAP-010 |
+| 入金冻结 / review 通知 | FAQ / Notification 有 under review 口径 | DTC Crypto Deposit / Notification 有 Risk Withheld 口径 | 不等同 Wallet `REJECTED / PENDING / PROCESSING`；见 ALL-GAP-008 |
+| 入金失败通知 | 待来源确认 | PRD 有结果页，不代表已有通知 | 不写新通知；通知覆盖见 ALL-GAP-010 |
+| Declare / Travel Rule 通知 | GTR 自动交易报备，不需要交易声明 | PRD 口径为自动交易报备，不需要交易声明 | 不新增 Declare 通知；合规边界见 ALL-GAP-044 |
 
 ## 11. 不写入事实的内容
 
@@ -421,26 +425,47 @@ flowchart TD
 3. WalletConnect 等同 `CRYPTO_DEPOSIT=10`。
 4. Deposit success 等同 Wallet `COMPLETED`。
 5. Risk Withheld 等同 Wallet `REJECTED / PENDING / PROCESSING`。
-6. payment_info success 等同 Wallet balance 立即可用。
-7. WalletConnect 7 天免连接规则与 PRD 1 天授权规则已经统一。
-8. WalletConnect 的 `transactionId`、`id`、`relatedId` 关联规则已确认。
-9. GTR 地址充值一定有与 WalletConnect 相同的结果页。
-10. Card balance 自动归集属于 Wallet Deposit。
-11. Send / Withdrawal 或 Swap 属于当前 active Deposit 能力。
+6. payment_info success 等同 Wallet balance 永远同步无延迟。
+7. WalletConnect 的 `transactionId`、`id`、`relatedId` 关联规则已确认。
+8. GTR 地址充值一定有与 WalletConnect 相同的结果页。
+9. Card balance 自动归集属于 Wallet Deposit。
+10. Send / Withdrawal 或 Swap 属于当前 active Deposit 能力。
+11. DTC 的 7 天免连接内部逻辑是 AIX 对客授权有效期。
 
-## 12. 待确认项
+## 12. ALL-GAP 引用
 
-| 编号 | 待确认项 | 当前处理 |
+本文件不维护独立待确认表。Deposit 相关不确定项统一引用 ALL-GAP：
+
+| 编号 | 主题 |
+|---|---|
+| ALL-GAP-001 | GTR 是否使用 `FIAT_DEPOSIT=6` |
+| ALL-GAP-002 | WalletConnect 是否使用 `CRYPTO_DEPOSIT=10` |
+| ALL-GAP-007 | `relatedId / transactionId / id` 如何串联 GTR / WalletConnect 入金 |
+| ALL-GAP-008 | Risk Withheld 与 Wallet `state` / 余额关系 |
+| ALL-GAP-009 | GTR 地址充值是否有与 WalletConnect 相同的结果页 |
+| ALL-GAP-010 | GTR / WalletConnect 是否复用 Deposit success / under review 通知 |
+| ALL-GAP-011 | GTR 异常处理和客服口径 |
+| ALL-GAP-012 | WalletConnect `payment_info false / Transaction not found` 的后续处理 |
+| ALL-GAP-013 | WalletConnect 失败是否需要告警 |
+| ALL-GAP-014 | Wallet `relatedId` 在 Card / GTR / WC 场景取值 |
+| ALL-GAP-016 | Deposit success 与 Wallet `state=COMPLETED` 的映射 |
+| ALL-GAP-044 | WalletConnect Declare / Travel Rule / 白名单规则边界 |
+
+## 13. 历史 DEP-GAP 到 ALL-GAP 映射
+
+本表用于无损迁移历史问题，不作为新的模块级 checklist。后续只维护 ALL-GAP。
+
+| 原编号 | 原问题 | 当前 ALL-GAP / 处理 |
 |---|---|---|
-| DEP-GAP-001 | WalletConnect 授权有效期：PRD 1 天 vs DTC `userId + walletAddress` 7 天免连接规则 | 两个口径均记录，待统一 |
-| DEP-GAP-002 | GTR 是否等同 `FIAT_DEPOSIT=6` | 不写死 |
-| DEP-GAP-003 | WalletConnect 是否等同 `CRYPTO_DEPOSIT=10` | 不写死 |
-| DEP-GAP-004 | Risk Withheld 在 AIX 结果页中如何展示 | 暂不强行并入 success / progressing / failed |
-| DEP-GAP-005 | Refunded 状态是否有 AIX 对客结果页 | DTC 枚举存在，PRD 未明确 |
-| DEP-GAP-006 | payment_info success 与 Wallet balance 可用时点 | 不写死 |
-| DEP-GAP-007 | relatedId / transactionId / 对账字段 | 继续 deferred |
+| DEP-GAP-001 | WalletConnect 授权有效期：PRD 1 天 vs DTC 7 天免连接规则 | 用户已确认 AIX 按 1 天；对应 ALL-GAP-006 resolved-by-user |
+| DEP-GAP-002 | GTR 是否等同 `FIAT_DEPOSIT=6` | ALL-GAP-001 |
+| DEP-GAP-003 | WalletConnect 是否等同 `CRYPTO_DEPOSIT=10` | ALL-GAP-002 |
+| DEP-GAP-004 | Risk Withheld 在 AIX 结果页中如何展示 | 用户已确认不触发结果页；详情 under review；对应 ALL-GAP-003 resolved-by-user，余额 / state 关系见 ALL-GAP-008 |
+| DEP-GAP-005 | Refunded 状态是否有 AIX 对客结果页 | 用户已确认没有；对应 ALL-GAP-004 resolved-by-user |
+| DEP-GAP-006 | payment_info success 与 Wallet balance 可用时点 | 用户已确认理论立即可用但实际可能短延迟；对应 ALL-GAP-005 resolved-by-user |
+| DEP-GAP-007 | relatedId / transactionId / 对账字段 | ALL-GAP-007、ALL-GAP-014 |
 
-## 13. 来源引用
+## 14. 来源引用
 
 - (Ref: 历史prd/AIX Wallet V1.0【Deposit & Send & Swap 】.docx / 3.1 交易说明)
 - (Ref: 历史prd/AIX Wallet V1.0【Deposit & Send & Swap 】.docx / 6.3 钱包地址充值 Deposit（GTR's Wallet）)
@@ -451,4 +476,6 @@ flowchart TD
 - (Ref: DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 4 Client-Emitted Events)
 - (Ref: DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 5 sequence diagram)
 - (Ref: [2025-11-25] AIX+Notification / Deposit rows)
+- (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP 总表)
 - (Ref: 用户确认结论 / 2026-05-02 / Deposit 流程图去掉单币种页入口)
+- (Ref: 用户确认结论 / 2026-05-02 / WalletConnect 有效期、Risk Withheld、Refunded、payment_info success)
