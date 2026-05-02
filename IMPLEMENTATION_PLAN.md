@@ -1,7 +1,7 @@
 # prd-for-ai 实施计划
 
-版本：v3.9  
-状态：Wallet 阶段 PARTIAL PASS，Transaction 统一层当前执行  
+版本：v4.0  
+状态：Transaction 阶段 PARTIAL PASS，Common / Integration 当前执行  
 适用仓库：`prd-for-ai`  
 更新时间：2026-05-01
 
@@ -11,7 +11,7 @@
 
 后续每次开始执行前，必须先读取本文件，确认当前阶段、当前模块、待办任务和验收标准，再继续执行。
 
-本文件优先级高于临时对话结论。若临时任务与本实施计划冲突，必须先更新本文件，再执行具体任务。
+本文件优先级高于临时对话结论。若临时任务与本实施计划冲突，必须先更新本实施计划，再执行具体任务。
 
 ## 2. 强制执行原则
 
@@ -98,8 +98,8 @@
 | 3 | Security 标准化 | 已完成 | 统一认证事实源 | OTP / Email OTP / Passcode / BIO / Face Auth / API Reference | 已完成 |
 | 4 | Card 批量推进 | PARTIAL PASS | 转译卡模块 | Application / Status & Fields / Home / Manage / Transaction | 遗留资金追踪项 deferred，继续后续阶段 |
 | 5 | Wallet 批量推进 | PARTIAL PASS | 转译钱包模块 | KYC / Balance / Deposit / Receive / Transaction History | Wallet 基础事实已沉淀；细节继续待补 |
-| 6 | Transaction 统一层 | 当前执行 | 统一交易状态 | Card / Wallet / History | 创建 Transaction 索引与统一状态边界 |
-| 7 | Common / Integration | 未开始 | 抽公共能力 | DTC / AAI / WC / Error / FAQ | Transaction 后执行 |
+| 6 | Transaction 统一层 | PARTIAL PASS | 统一交易状态 | Card / Wallet / History / Detail | 进入 Common / Integration |
+| 7 | Common / Integration | 当前执行 | 抽公共能力 | DTC / AAI / WC / Error / FAQ | 创建 Common / Integration 索引 |
 | 8 | 全仓库回扫 | 未开始 | 去重复、补引用 | 字段 / 状态 / 来源 / gaps | 最后执行 |
 
 ---
@@ -136,15 +136,27 @@
 | wallet/swap.md | deferred | 因合规原因未上线且需重做；新方案确认后再转译 |
 | wallet/stage-review.md | 已完成 | Wallet 阶段回扫已更新，结论为 `PARTIAL PASS` |
 
-### 12.6 阶段 6：Transaction 统一层（当前执行）
+### 12.6 阶段 6：Transaction 统一层（PARTIAL PASS）
 
 | 子任务 | 状态 | 说明 |
 |---|---|---|
-| transaction/_index.md | Todo | 建立 Transaction 统一层边界、状态来源和引用规则 |
-| transaction/status-model.md | Todo | 汇总 Card / Wallet 已确认状态，不脑补完整状态机 |
-| transaction/history.md | Todo | 汇总 Card History / Wallet Transaction History 的边界 |
-| transaction/detail.md | Todo | 汇总 Card / Wallet 交易详情字段边界 |
-| transaction/stage-review.md | Todo | Transaction 阶段完成后执行 Stage Review |
+| transaction/_index.md | 已完成 | 已建立 Transaction 统一层边界、状态来源和引用规则 |
+| transaction/status-model.md | 已完成 | 已汇总 Card / Wallet 已确认状态，未脑补完整状态机 |
+| transaction/history.md | 已完成 | 已汇总 Card History / Wallet Transaction History 的边界 |
+| transaction/detail.md | 已完成 | 已汇总 Card / Wallet 交易详情字段边界 |
+| transaction/stage-review.md | 已完成 | Transaction 阶段回扫已更新，结论为 `PARTIAL PASS` |
+
+### 12.7 阶段 7：Common / Integration（当前执行）
+
+| 子任务 | 状态 | 说明 |
+|---|---|---|
+| common/_index.md | Todo | 建立公共能力索引与边界 |
+| common/dtc.md | Todo | 汇总 DTC 接口、状态、错误码、请求头、Webhook 边界 |
+| common/aai.md | Todo | 汇总 AAI / KYC / 身份认证相关公共能力边界 |
+| common/walletconnect.md | Todo | 汇总 WalletConnect 入金相关公共能力边界 |
+| common/errors.md | Todo | 汇总错误码、失败处理、告警、用户提示边界 |
+| common/notification.md | Todo | 汇总 push / 站内信通知规则边界 |
+| common/stage-review.md | Todo | Common / Integration 阶段完成后执行 Stage Review |
 
 ---
 
@@ -157,7 +169,8 @@
 | Card / 页面与卡管能力 | 已完成 | PASS | Application / Home / Activation / PIN / Sensitive Info / Management 已完成 |
 | Card / Transaction Flow | 已完成但留 deferred gaps | PARTIAL PASS | DTC 通知字段、交易 ID、触发类型、transfer-to-wallet 字段、失败不重试、Wallet 交易 id 和 Wallet state 已确认；AIX 内部追踪、Wallet 关联规则和对账链路 deferred |
 | Wallet | 已完成基础版 | PARTIAL PASS | Wallet 基础文件已建立；Deposit active；Send / Swap deferred；细节待补 |
-| Transaction | 当前执行 | 未评审 | 开始统一 Card / Wallet 交易状态与历史边界 |
+| Transaction | 已完成基础版 | PARTIAL PASS | 已建立状态、历史、详情边界；待补项继续保留 |
+| Common / Integration | 当前执行 | 未评审 | 开始抽公共能力与集成边界 |
 
 ---
 
@@ -165,12 +178,11 @@
 
 当前执行点：
 
-1. 创建 `knowledge-base/transaction/_index.md`，建立 Transaction 统一层边界。
-2. Transaction 阶段只能引用 Card / Wallet 已确认事实，不能补写 deferred gaps。
-3. Card Transaction Flow 遗留资金追踪项继续保持 deferred。
-4. Wallet 中 GTR / WalletConnect 的细节待补，不得在 Transaction 阶段脑补状态机。
-5. Send / Swap 仍为 deferred，不进入当前 Transaction active 状态统一。
-6. Transaction 阶段完成后执行 Transaction Stage Review。
+1. 创建 `knowledge-base/common/_index.md`，建立 Common / Integration 公共能力边界。
+2. Common 阶段可引用 Card / Wallet / Transaction 已确认事实，不能补写 deferred gaps。
+3. DTC、AAI、WalletConnect、错误码、通知等应作为公共能力拆分。
+4. Send / Swap 仍为 deferred，不进入当前 active 公共流程。
+5. Common / Integration 阶段完成后执行 Stage Review。
 
 当前禁止事项：
 
