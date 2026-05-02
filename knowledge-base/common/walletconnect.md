@@ -1,11 +1,11 @@
 ---
 module: common
 feature: walletconnect-integration
-version: "1.2"
+version: "1.3"
 status: active
-source_doc: IMPLEMENTATION_PLAN.md；DTC接口文档/DTC Wallet OpenAPI Document20260126 (1).docx；knowledge-base/wallet/deposit.md；knowledge-base/common/dtc.md；knowledge-base/common/notification.md；knowledge-base/common/errors.md
-source_section: DTC Wallet OpenAPI / 3.4 Crypto Deposit；4.2.4 Search Balance History；Appendix ActivityType；Wallet Deposit v1.4；DTC Dependency v1.2
-last_updated: 2026-05-01
+source_doc: IMPLEMENTATION_PLAN.md；历史prd/AIX Wallet V1.0【Deposit & Send & Swap 】.docx；DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx；knowledge-base/wallet/deposit.md；knowledge-base/common/dtc.md；knowledge-base/common/notification.md；knowledge-base/common/errors.md
+source_section: AIX Wallet PRD / 6.4 钱包链接充值 Deposit（WalletConnect）；7.4 钱包充值 Wallet Connect；DTC WalletConnect / 1 Request Wallet Connect Token；3 Server-Emitted Events；4 Client-Emitted Events；5 sequence diagram；Wallet Deposit v1.5
+last_updated: 2026-05-02
 owner: 吴忆锋
 depends_on:
   - common/_index
@@ -20,123 +20,181 @@ depends_on:
 
 ## 1. 功能定位
 
-WalletConnect Integration 用于沉淀 AIX WalletConnect 入金相关的公共集成边界，包括第三方钱包连接、入金路径、DTC Crypto Deposit 外部依赖、状态、风控、白名单、通知和错误处理。
+WalletConnect Integration 用于沉淀 AIX WalletConnect 充值相关的公共集成边界，包括 WalletConnect token、WebSocket、create_payment_intent、qr_ready、connected、自动加白、send_payment、payment_broadcasted、payment_info 和异常事件。
 
-本文只确认 WalletConnect 属于 Deposit 的一条入金路径，并引用 DTC Crypto Deposit 已确认的外部依赖规则。不补写未确认的 WalletConnect 页面流程、SDK 交互、Declare / Travel Rule 规则或 AIX 内部处理。
+本文只记录影响 AIX 页面、状态、按钮、异常处理和用户路径的集成事实，不维护 DTC WalletConnect 的完整 SDK 文档或供应商内部实现。
 
 ## 2. 当前已确认事实
 
 | 项目 | 结论 | 来源 | 备注 |
 |---|---|---|---|
-| Deposit 能力存在 | Deposit 包含 GTR 和 WalletConnect | Wallet Deposit / 用户确认 | WalletConnect 属于 Deposit 子路径 |
-| WalletConnect 当前归属 | Wallet Deposit 子路径 | Wallet Deposit | 不属于 Send / Swap |
-| WalletConnect 与 GTR 关系 | 二者并列，不能默认共用流程、字段、状态、风控、通知 | Wallet Deposit v1.4 | 需拆分处理 |
-| DTC Crypto Deposit | Crypto business includes whitelisting、deposit、withdrawal | DTC Wallet OpenAPI / 3.4 | 可作为 WC 外部依赖边界 |
-| Deposit 地址 | DTC 自动分配 destinationAddress，接口 `[POST] /openapi/v1/crypto-account/deposit-address/search-obj` 返回 deposit recipient address | DTC Wallet OpenAPI / 3.4 | AIX 页面展示待补 |
-| 白名单 | senderAddress 需要加入 whitelist 并 enable | DTC Wallet OpenAPI / 3.4 | WC 如何获取 senderAddress 待补 |
-| Risk Withheld | 未加 senderAddress 白名单时，交易进入 `status=102 Risk Withheld` | DTC Wallet OpenAPI / 3.4 | AIX 展示 / 通知 / 人工处理待补 |
-| 加白后状态 | add whitelist successful 后，交易自动变为 success | DTC Wallet OpenAPI / 3.4 | AIX 是否监听 / 刷新待补 |
-| Send | deferred，未上线 | Wallet Stage Review | 不纳入 WalletConnect active 能力 |
-| Swap | deferred，未上线且需重做 | Wallet Stage Review | 不纳入 WalletConnect active 能力 |
+| WalletConnect 当前归属 | Wallet Deposit 子路径 | Wallet Deposit v1.5 | 不属于 Send / Swap |
+| 充值方式 | `From a Self-custodial Wallet` | AIX Wallet PRD / 6.4 | 适用于用户自己掌握私钥的钱包 |
+| 页面主链路 | Deposit → Deposit confirmation → Result | AIX Wallet PRD / 6.4.5 | 与 GTR 地址充值不同 |
+| Token | 进入 Deposit 页面获取 walletConnectToken | AIX Wallet PRD / 6.4.5；DTC / 1.2 | token response 包含 expireTime |
+| WebSocket | 使用 walletConnectToken 连接 WalletConnect WebSocket | AIX Wallet PRD / 6.4.5；DTC / 2 | 使用 socket.io |
+| create_payment_intent | 创建支付意图；传 amount 时为支付 / top-up；不传 amount 时仅连接并加白 | DTC / 4.1 | AIX Deposit 场景传 amount |
+| qr_ready | create_payment_intent 后返回 uri | DTC / 3.2.3 | 用于生成 QR / deeplink |
+| connected | 用户连接成功，且 add whitelist 成功后返回 | DTC / 3.2.4；5 | 下一步 send_payment |
+| add whitelist | 用户 Approved 后，DTC 自动 add whitelist | AIX Wallet PRD / 6.4.5；DTC / 5 | WalletConnect 核心逻辑 |
+| send_payment | connected 后 AIX emit send_payment | DTC / 4.2 | 无需 data |
+| payment_broadcasted | 交易已提交到区块链，返回 txnHash | DTC / 3.2.5 | 代表链上广播，不等同最终到账 |
+| payment_info | payment_broadcasted 后每 5 秒检查一次，最多 5 分钟 | DTC / 3.2.1 | success 后 WebSocket disconnect |
+| 自动断开 | 多类错误事件会导致 WebSocket 自动断开 | DTC / 3.3 | 见异常表 |
 
-## 3. WalletConnect 入金链路结构
+## 3. WalletConnect 主流程时序图
 
-| 阶段 | 当前处理 | 来源 / 待补 |
+```mermaid
+sequenceDiagram
+    autonumber
+
+    participant User as 用户
+    participant App as AIX App
+    participant BE as AIX Backend
+    participant DTCAPI as DTC OpenAPI
+    participant WC as dtc-nodejs-wallet-connect
+    participant Wallet as 第三方钱包
+    participant Chain as 区块链网络
+    participant DTCBE as DTC Backend
+
+    User->>App: 选择 From a Self-custodial Wallet
+    App-->>User: 进入 Deposit 页面并展示 Quick Deposit Check
+    User->>App: 输入 Amount / 选择 Crypto / 选择 Network
+    User->>App: 点击 Deposit
+
+    App->>BE: get wallet connect token
+    BE->>DTCAPI: request-wallet-connect-token
+    DTCAPI->>DTCBE: 获取 walletConnectToken
+    DTCBE-->>DTCAPI: 返回 walletConnectToken
+    DTCAPI-->>BE: 返回 walletConnectToken + expireTime
+    BE-->>App: 返回 walletConnectToken
+
+    App->>WC: Connect to WebSocket(walletConnectToken)
+    WC->>DTCAPI: check token and get contract address
+    DTCAPI->>DTCBE: check token and get contract address
+    DTCBE-->>DTCAPI: return contract address
+    DTCAPI-->>WC: return contract address
+    WC-->>App: websocket connected
+
+    App->>WC: create_payment_intent(amount, mainNet, currency, userId?, walletAddress?)
+    WC-->>App: qr_ready(uri)
+    App-->>User: 展示 QR Code / Deeplink / 倒计时
+
+    alt 扫码
+        User->>Wallet: 使用第三方钱包扫描 QR
+    else Connect Wallet
+        User->>App: 点击 Connect Wallet
+        App->>Wallet: 唤起第三方钱包
+    end
+
+    Wallet-->>User: 用户 Approved
+    WC->>WC: 接收 wallet connected success webhook
+    WC->>DTCAPI: add whitelist
+    DTCAPI->>DTCBE: add whitelist
+    DTCBE-->>DTCAPI: add whitelist success / failed
+    DTCAPI-->>WC: add whitelist success / failed
+
+    alt add whitelist failed
+        WC-->>App: add_whitelist_failed
+        App-->>User: Connection failed 弹窗
+    else add whitelist success
+        WC-->>App: connected
+        App->>WC: send_payment
+        WC-->>Wallet: 请求用户支付
+        Wallet->>Chain: 用户确认后广播交易
+        WC-->>App: payment_broadcasted(txnHash)
+
+        loop 每 5 秒，最多 5 分钟
+            WC->>DTCBE: payment_info 查询付款结果
+            DTCBE-->>WC: payment_info
+        end
+
+        alt payment_info success
+            WC-->>App: payment_info success
+            App-->>User: 进入充值结果页
+        else Transaction not found / timeout
+            WC-->>App: payment_info failed
+            App-->>User: 进入异常或待确认处理
+        end
+    end
+```
+
+## 4. 页面与交互边界
+
+| 节点 | 已确认规则 | 来源 |
 |---|---|---|
-| 入口展示 | 待补 | WalletConnect PRD / 截图 |
-| 三方钱包连接 | 待补 | WalletConnect PRD / SDK / 接口文档 |
-| 钱包授权 / 用户确认 | 待补 | WalletConnect PRD / 钱包交互说明 |
-| 入金发起 | DTC Crypto Deposit 涉及 senderAddress / destinationAddress | DTC Wallet OpenAPI / 3.4 |
-| 收款地址 | DTC 自动分配 destinationAddress | DTC Wallet OpenAPI / 3.4 |
-| 发送地址 | senderAddress 需加白并 enable | DTC Wallet OpenAPI / 3.4 |
-| Risk Withheld | 未加白会进入 `status=102 Risk Withheld` | DTC Wallet OpenAPI / 3.4 |
-| Success | 加白成功后自动变为 success | DTC Wallet OpenAPI / 3.4 |
-| Wallet 余额可见 | 待补 | 产品 / 后端 / DTC Wallet OpenAPI |
-| 交易记录生成 | 待补 | DTC Wallet OpenAPI / 后端确认 |
-| 通知触发 | Deposit success / Risk Withheld 有 Notification 记录；具体逻辑待定义 | Notification PRD / sheet4 |
+| Deposit 页面 | 进入页面调用 get wallet connect token，并连接 WebSocket | AIX Wallet PRD / 6.4.5 |
+| Quick Deposit Check | 设备维度弹窗，提示链、币种和 Gas | AIX Wallet PRD / 6.4.5 |
+| Amount | 必填，最小值 ≥ 0.01，最大值按币种配置 | AIX Wallet PRD / 6.4.5 |
+| Crypto | USDT、USDC、WUSD、FDUSD；默认 USDC | AIX Wallet PRD / 6.4.5 |
+| Network | 按币种筛选；默认 BSC；币种不支持 BSC 时默认 ETH | AIX Wallet PRD / 6.4.5 |
+| Deposit confirmation | create_payment_intent 后生成 QR / deeplink | AIX Wallet PRD / 6.4.5；DTC / 3.2.3 |
+| Connect Wallet | 无可用钱包时提示 `No wallets available. Please install a supported wallet app.` | AIX Wallet PRD / 6.4.5 |
+| Complete Payment | 已授权未付款回到 AIX，按钮从 `Connect a Wallet` 更新为 `Complete Payment` | AIX Wallet PRD / 6.4.5 |
+| iOS | 默认唤起支持 WC 的第一个已安装 App | AIX Wallet PRD / 6.4.5 |
+| Android | Native 唤起系统应用选择器 | AIX Wallet PRD / 6.4.5 |
 
-## 4. 合规 / 风控 / 白名单边界
+## 5. 白名单与授权边界
 
-| 问题 | 当前处理 |
-|---|---|
-| WalletConnect 是否必须 Declare | 待补，不写成事实 |
-| WalletConnect 什么情况下必须 Declare | 待补，不写成事实 |
-| WalletConnect 什么情况下不需要 Declare | 待补，不写成事实 |
-| WalletConnect 是否需要地址白名单 | DTC Crypto Deposit 已确认 senderAddress 需要 whitelist；是否作为 WC 产品前置仍待确认 |
-| WalletConnect 加白发生在入金前还是入金后 | DTC 说明未加白会 Risk Withheld，用户后续加白成功后交易自动 success；AIX 产品路径待补 |
-| WalletConnect 是否存在 on-hold | 可引用 `Risk Withheld` 作为 DTC 外部状态来源 |
-| WalletConnect 是否存在 risk rejected | DTC 文档确认 Risk Withheld，不等同所有 rejected 场景 |
-| WalletConnect 风控拦截后是否入 Wallet balance | 待补，不写成事实 |
-| WalletConnect 风控拦截后用户是否可见资金 | 待补，不写成事实 |
-
-## 5. 与 DTC 的关系
-
-| 项目 | 当前处理 |
-|---|---|
-| WalletConnect 是否使用 DTC Wallet 接口 | 可引用 DTC Crypto Deposit / Deposit Address / Crypto Transaction / Balance History 相关能力；AIX 具体调用链待补 |
-| WalletConnect 入金交易 ID | CryptoTransaction 中 `id` 为 Transaction ID；与 AIX / Wallet `transactionId` 映射待补 |
-| WalletConnect 与 Wallet `transactionId` 的关系 | 待补 |
-| WalletConnect 与 Wallet `id` 的关系 | 待补 |
-| WalletConnect 与 Wallet `relatedId` 的关系 | 待补 |
-| WalletConnect 与 Search Balance History `activityType` 的关系 | ActivityType 有 `CRYPTO_DEPOSIT=10 Stablecoin Deposit`；具体 WC 分类待补 |
-| WalletConnect 失败错误码 | 待补 |
-| WalletConnect Webhook / 回调 | Notification 记录 Deposit success / Risk Withheld 来自 Webhook→notify，但具体逻辑待定义 |
-
-## 6. 与 Notification 的关系
-
-| 通知 | 当前处理 |
-|---|---|
-| WalletConnect 入金成功通知 | Notification 记录 Deposit success：event=`CRYPTO_TXN`、type=`DEPOSIT`、state=`success`；是否专属于 WC 待补 |
-| WalletConnect Risk Withheld / under review 通知 | Notification 记录 Deposit under review：event=`CRYPTO_TXN`、type=`DEPOSIT`、state=`RISK_WITHHELD`；是否专属于 WC 待补 |
-| WalletConnect 入金失败通知 | 待补 |
-| WalletConnect Declare 待处理通知 | 待补 |
-| WalletConnect 钱包连接失败通知 | 待补，不能默认存在 |
-| WalletConnect 通知跳转 | Notification 记录跳转交易详情页；具体 WC 跳转目标待确认 |
-
-## 7. 与 Errors 的关系
-
-| 错误 / 异常 | 当前处理 |
-|---|---|
-| 用户取消连接 / 拒绝授权 | 待补 |
-| 第三方钱包连接失败 | 待补 |
-| 未加白 | DTC Crypto Deposit 确认为 Risk Withheld |
-| 加白后状态恢复 | DTC Crypto Deposit 确认为自动变 success |
-| 入金失败 | 待补 |
-| 钱包余额未更新 | 待补 |
-| 人工处理 / 客服口径 | 待补 |
-
-## 8. 不写入事实的内容
-
-以下内容当前不得写成事实：
-
-1. WalletConnect 与 GTR 使用同一套流程、字段、状态机、风控规则或通知规则。
-2. DTC Crypto Deposit 规则自动等同于所有 WalletConnect 产品交互。
-3. WalletConnect 一定需要 Declare。
-4. WalletConnect 一定不需要 Declare。
-5. WalletConnect 入金成功一定立即增加可用余额。
-6. WalletConnect 成功 / 失败通知已完整确认。
-7. WalletConnect 属于 Send 或 Swap。
-8. WalletConnect 的 `transactionId`、`id`、`relatedId` 关联规则已确认。
-9. `Risk Withheld` 等同所有 risk rejected / on-hold 场景。
-
-## 9. 待补项
-
-| 编号 | 待补项 | 来源建议 | 当前处理 |
+| 规则 | 已确认事实 | 来源 | 边界 |
 |---|---|---|---|
-| WC-GAP-001 | WalletConnect 完整页面与 SDK 流程 | WalletConnect PRD / 截图 / SDK 文档 | 待补 |
-| WC-GAP-002 | WalletConnect 支持钱包范围 | PRD / 产品确认 | 待补 |
-| WC-GAP-003 | WalletConnect 支持币种 / 链 | PRD / DTC Wallet OpenAPI | 待补 |
-| WC-GAP-004 | WalletConnect Declare / Travel Rule 规则 | 合规 PRD / 产品确认 | 待补 |
-| WC-GAP-005 | WalletConnect senderAddress 获取和加白路径 | PRD / 后端确认 | 待补 |
-| WC-GAP-006 | WalletConnect 钱包交易字段映射 | DTC Wallet OpenAPI / 后端确认 | 待补 |
-| WC-GAP-007 | WalletConnect 失败原因和用户提示 | PRD / 错误码 / 客服口径 | 待补 |
-| WC-GAP-008 | WalletConnect 与 GTR 的差异表 | GTR / WC PRD | 待补 |
+| Deeplink 有效期 | 5 分钟 | AIX Wallet PRD / 6.4 知识点 | UI 倒计时为 `Awaiting payment... 4:00 Min` 可配置 |
+| WalletConnect 授权有效期 | 1 天 | AIX Wallet PRD / 6.4 知识点 | 与 DTC 7 天免连接规则待统一 |
+| userId + walletAddress 免重新连接 | 如两者存在，下一次 create_payment_intent 7 天内不需要再次连接钱包 | DTC / 4.1 | 与 PRD 1 天授权口径待统一 |
+| 自动加白 | Approved 后 DTC 自动 add whitelist | AIX Wallet PRD / 6.4.5；DTC / 5 | WalletConnect 与 GTR 的关键差异 |
+| add whitelist 成功 | 返回 connected，下一步 send_payment | DTC / 3.2.4；5 | connected 不等同付款完成 |
+| add whitelist 失败 | 返回 add_whitelist_failed，WebSocket 自动断开 | DTC / 3.2.13；3.3 | AIX 弹窗提示连接失败 |
+
+## 6. 异常事件与页面处理
+
+| 分组 | 事件 | 页面处理 | 来源 |
+|---|---|---|---|
+| Token | `invalid_auth_credentials` | 自动重取 token；超过上限进入授权失败 | AIX Wallet PRD / 6.4.5；DTC / 3.2.11 |
+| 下单 | `create_payment_error`、`invalid_arguments` | 下单失败页，可重试 | AIX Wallet PRD / 6.4.5；DTC / 3.2.12、3.2.14 |
+| 连接 / 授权 | `connection_failed`、`connection_rejected`、`disconnected`、`send_connect_request_error` | 授权失败页，不可重试 | AIX Wallet PRD / 6.4.5；DTC / 3.2.8-3.2.10、3.2.15 |
+| 白名单 | `add_whitelist_failed` | 自动断开 WebSocket，提示 Connection failed | AIX Wallet PRD / 6.4.5；DTC / 3.2.13、3.3 |
+| 支付 | `request_payment_error`、`payment_rejected`、`payment_failed` | 充值失败结果页，用户不可重试 | AIX Wallet PRD / 6.4.5；DTC / 3.2.2、3.2.6、3.2.7 |
+| 支付后长连接断开 | send_payment 后长连接断开 | Payment Confirmation 页 | AIX Wallet PRD / 6.4.5 |
+| 付款结果查询 | `payment_info` false / Transaction not found | 待异常处理 | DTC / 3.2.1 |
+
+## 7. 结果状态边界
+
+| 条件 | AIX 展示 | 操作 | 来源 |
+|---|---|---|---|
+| `success=true` + `Completed` | `Deposit successful!` | `View Order Details` | AIX Wallet PRD / 6.4.5 |
+| `success=true` + `PENDING / PROCESSING / AUTHORIZED` | `Deposit progressing` | `View Order Details` | AIX Wallet PRD / 6.4.5 |
+| `success=false` | `Deposit failed` | `Back to Wallet` | AIX Wallet PRD / 6.4.5 |
+| `REJECTED / CLOSED` | `Deposit failed` | `Back to Wallet` | AIX Wallet PRD / 6.4.5 |
+
+## 8. 与 GTR 的差异
+
+| 维度 | WalletConnect | GTR / Exchange |
+|---|---|---|
+| 钱包类型 | 自托管钱包 | 托管钱包 / 交易所 |
+| 入口 | From a Self-custodial Wallet | From an Exchange |
+| 地址 / 支付生成 | create_payment_intent → qr_ready / deeplink | Get Deposit Address |
+| 白名单 | Approved 后自动 add whitelist | 不校验地址白名单 |
+| 金额 | Deposit 页面输入 amount | 地址充值页主要选择币种 / 网络 / 地址 |
+| 结果页 | PRD 明确 success / progressing / failed | PRD 未像 WC 一样明确结果页 |
+
+## 9. 不写入事实的内容
+
+以下内容不得写成事实：
+
+1. WalletConnect 等同 `CRYPTO_DEPOSIT=10`。
+2. WalletConnect 入金成功一定立即增加可用余额。
+3. payment_info success 等同 Wallet `COMPLETED`。
+4. WalletConnect 的 `transactionId`、`id`、`relatedId` 关联规则已确认。
+5. PRD 1 天授权与 DTC 7 天免连接规则已统一。
+6. WalletConnect 与 GTR 使用同一套错误码和结果页。
+7. WalletConnect 属于 Send 或 Swap。
 
 ## 10. 来源引用
 
-- (Ref: DTC Wallet OpenAPI Document20260126 / 3.4 Crypto Deposit)
-- (Ref: DTC Wallet OpenAPI Document20260126 / 4.2.4 Search Balance History)
-- (Ref: DTC Wallet OpenAPI Document20260126 / Appendix ActivityType)
-- (Ref: [2025-11-25] AIX+Notification / Deposit rows)
-- (Ref: knowledge-base/wallet/deposit.md / v1.4)
-- (Ref: knowledge-base/common/dtc.md / v1.2)
+- (Ref: 历史prd/AIX Wallet V1.0【Deposit & Send & Swap 】.docx / 6.4 钱包链接充值 Deposit（WalletConnect）)
+- (Ref: 历史prd/AIX Wallet V1.0【Deposit & Send & Swap 】.docx / 7.4 钱包充值 Wallet Connect)
+- (Ref: DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 1 Request Wallet Connect Token)
+- (Ref: DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 3 Server-Emitted Events)
+- (Ref: DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 4 Client-Emitted Events)
+- (Ref: DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 5 sequence diagram)
+- (Ref: knowledge-base/wallet/deposit.md / v1.5)
