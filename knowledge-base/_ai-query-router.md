@@ -3,9 +3,9 @@ module: knowledge-base
 feature: ai-query-router
 version: "2.1"
 status: active
-source_doc: knowledge-base/_system-boundary.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/wallet/_index.md；knowledge-base/card/_index.md；knowledge-base/transaction/_index.md；knowledge-base/kyc/_index.md；knowledge-base/common/_index.md；knowledge-base/kyc/account-opening.md；用户确认结论 2026-05-02
-source_section: runtime AI usage；query routing；fact source rules；system boundary usage；ALL-GAP usage；Account Opening / KYC routing
-last_updated: 2026-05-02
+source_doc: knowledge-base/_system-boundary.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/_kb-ingestion-process.md；knowledge-base/wallet/_index.md；knowledge-base/card/_index.md；knowledge-base/transaction/_index.md；knowledge-base/kyc/_index.md；knowledge-base/common/_index.md；knowledge-base/kyc/account-opening.md；用户确认结论 2026-05-02；用户确认结论 2026-05-03
+source_section: runtime AI usage；query routing；fact source rules；system boundary usage；ALL-GAP usage；Account Opening / KYC routing；cross-module dependency routing；PRD and KB fact rules
+last_updated: 2026-05-03
 owner: 吴忆锋
 ---
 
@@ -42,6 +42,33 @@ changelog/final-repository-review.md
 changelog/refinement-stage-review.md
 kyc/wallet-kyc.md
 ```
+
+### 2.1 跨模块依赖提示
+
+AI 查询时，应先按用户问题定位主模块，但不得把跨模块问题简化成单文件问题。
+
+以下问题必须联动读取多个模块：
+
+| 问题类型 | 主事实文件 | 必须联动读取 |
+|---|---|---|
+| Deposit / 到账 / 风险拦截 / WalletConnect | `wallet/deposit.md` | `common/dtc.md`、`common/walletconnect.md`、`common/notification.md`、`common/errors.md`、`transaction/status-model.md`、`knowledge-gaps.md`、`_system-boundary.md` |
+| KYC / Account Opening / Sub Account / 准入 | `kyc/account-opening.md` | `common/aai.md`、`common/dtc.md`、`common/notification.md`、`knowledge-gaps.md`、`_system-boundary.md` |
+| Card 交易 / refund / reversal / 对账 | `card/card-transaction-flow.md` | `transaction/history.md`、`transaction/detail.md`、`transaction/reconciliation.md`、`common/errors.md`、`common/notification.md`、`knowledge-gaps.md`、`_system-boundary.md` |
+| Transaction 状态 / ID 串联 / 资金追踪 | `transaction/status-model.md` 或 `transaction/reconciliation.md` | `transaction/history.md`、`transaction/detail.md`、`card/card-transaction-flow.md`、`wallet/deposit.md`、`knowledge-gaps.md`、`_system-boundary.md` |
+| PRD 写作 / 知识库修改 | 对应模块事实文件 | `prd-template/standard-prd-template.md`、`knowledge-base/_kb-ingestion-process.md`、`knowledge-gaps.md`、必要时读 `_system-boundary.md` |
+
+遇到以下问题时，必须额外读取 `knowledge-gaps.md` 与 `_system-boundary.md`：
+
+- 状态是否等价
+- 外部系统是否负责
+- 通知是否代表成功
+- 到账是否完成
+- 风控拦截如何展示
+- ID 是否能串联
+- 能力是否 active
+- 是否能写入 PRD / 知识库
+
+禁止只读单一模块后直接得出跨系统结论。
 
 ## 3. 当前产品范围
 
