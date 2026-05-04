@@ -1,11 +1,11 @@
 ---
 module: card
 feature: application
-version: "1.0"
+version: "1.1"
 status: active
 source_doc: 历史prd/AIX Card V1.0【Application】.pdf
 source_section: 2.1 申卡说明；2.2 接口范围；4 Card数据字典；5.1 申请开卡；6.1 申请开卡Card Application；6.5-6.7 钱包余额与汇率接口
-last_updated: 2026-05-01
+last_updated: 2026-05-04
 owner: 吴忆锋
 depends_on:
   - card/_index
@@ -19,6 +19,17 @@ depends_on:
 ---
 
 # Card Application 申卡流程
+
+## 0. 文档信息
+
+| 项 | 内容 |
+|---|---|
+| 文档类型 | Card Application 标准 PRD / 知识库事实文件 |
+| 当前版本 | 1.1 |
+| 文档状态 | active |
+| 目标读者 | Product、Design、FE、BE、QA、Risk、Compliance |
+| 本次修订 | 收拢评审意见：修正 Billing 页面标题、姓名与手机号规则、卡面颜色命名、Mailing 字段 DTC 限制、DTC Card Application 请求字段、autoDebit 与 currency 待确认事项、错误码与验收标准 |
+| 维护原则 | 本文只处理申卡流程；状态、字段和操作限制统一引用 `card-status-and-fields.md` |
 
 ## 1. 功能定位
 
@@ -35,7 +46,7 @@ Card Application 用于 AIX 用户申请 Virtual Card 或 Physical Card。
 | 支持币种 | USDT / USDC / WUSD / FDUSD | AIX Card V1.0【Application】 / 2.1 / 5.1.4 | 后续需配置化 |
 | 卡类型 | Virtual Card / Physical Card | AIX Card V1.0【Application】 / 2.2 / 5.1.4 | Physical Card 需单独激活 |
 | 费用类型 | application fee / delivery fee | AIX Card V1.0【Application】 / 4.4 | 申请费 / 邮寄费 |
-| 自动扣款 | OFF / ON | AIX Card V1.0【Application】 / 4.5 | 默认开启；开启后卡消费从同币种钱包扣款 |
+| 自动扣款 | OFF / ON | AIX Card V1.0【Application】 / 4.5；DTC Card Issuing / Card Application | 产品口径写 `0/OFF`、`2/ON`；DTC API 写 `0/OFF`、`1/ON` 且默认 `0`，映射关系需后端确认，不得直接混用 |
 | 卡品牌 | VISA / MASTER | AIX Card V1.0【Application】 / 4.1 | AIX Card 对应 Brand |
 
 ## 3. 前置条件
@@ -211,8 +222,8 @@ flowchart LR
 
 | 卡类型 | 可选卡色 | 交互规则 | 来源 |
 |---|---|---|---|
-| Virtual Card | Orange white / Obsidian Black / Pure white | 用户选择颜色后切换对应卡面示例图 | 5.1.4 |
-| Physical Card | Orange white / Orange black / Pure white | 用户选择颜色后切换对应卡面示例图；点击实体卡卡面可切换正反面 | 5.1.4 |
+| Virtual Card | Coral Orange / Obsidian Black / Clear blue sky | 用户选择颜色后切换对应卡面示例图 | 5.1.4 |
+| Physical Card | Coral Orange / Obsidian Black / Clear blue sky | 用户选择颜色后切换对应卡面示例图；点击实体卡卡面可切换正反面 | 5.1.4 |
 | 下一步 | `Next` | 跳转选择币种页面 | 5.1.4 |
 
 ### 6.4 Pick your card - Select Crypto
@@ -244,13 +255,13 @@ flowchart LR
 
 | 字段 | 规则 | 来源 |
 |---|---|---|
-| 页面标题 | `Mailing information` | 5.1.4 |
+| 页面标题 | `Billing information` | 5.1.4 |
 | 缓存 | 若用户提交过账单地址，进入页面自动反显最近一次缓存数据，支持修改；删除应用缓存丢失 | 5.1.4 |
-| First name | 必填；字符串；25 字节；正则 `^[#.0-9a-zA-Z\s,\/\-_:+?')(@#!&]+$`；失败提示 `Text format error. ` | 5.1.4 |
-| Last name | 必填；字符串；25 字节；同 First name 正则；失败提示 `Text format error. ` | 5.1.4 |
+| First name | 必填；25 字节；仅允许英文字母与空格；不允许数字和特殊字符；失败提示 `Text format error. ` | 5.1.4 |
+| Last name | 必填；25 字节；仅允许英文字母与空格；不允许数字和特殊字符；失败提示 `Text format error. ` | 5.1.4 |
 | Email | 必填；自动反显注册 AIX 填写的邮箱，不可修改 | 5.1.4 |
-| Mobile | 必填；纯数字；20 字节；CountryNo 显示全部国家及地区电话区号 | 5.1.4 |
-| Save | 用 `First name + Last name` 拼接后与 KYC Full name 比对 | 5.1.4 |
+| Mobile | 必填；手机号纯数字，产品页至少 4 位、最长 12 字节；CountryNo 至少 1 位、最长 4 字节；上送 DTC 时需映射到 `mobile.countryCode` 与 `mobile.number` | 5.1.4；DTC Card Issuing / Card Application |
+| Save | 用 `First name + Last name` 与 `Last name + First name` 两种组合与 KYC Full name 比对，大小写不敏感；任一匹配即通过 | 5.1.4 |
 | 姓名不一致 | 提示 `Please fill in your name correctly.` | 5.1.4 |
 | 姓名一致 | 保存账单信息并返回 `Card applicant order` | 5.1.4 |
 
@@ -268,12 +279,12 @@ flowchart LR
 | Province / State | 四级联动 | 5.1.4 |
 | City | 四级联动 | 5.1.4 |
 | District | 四级联动 | 5.1.4 |
-| Postcode | 必填；字符串；40 字节；同地址正则；失败提示 `Text format error. ` | 5.1.4 |
-| Recipient name | 字符串；10 字节；默认读取 Billing information 的 `Last name + First name`，支持修改 | 5.1.4 |
-| Recipient mobile | 默认读取 Billing information 的 Mobile，支持修改；纯数字；20 字节 | 5.1.4 |
+| Postcode | 必填；产品页按地址规则校验；上送 DTC `deliveryAddress.postal` 最大 10 字节，超过时不得提交或需明确截断策略 | 5.1.4；DTC Card Issuing / Card Application |
+| Recipient name | 默认读取 Billing information 的 `Last name + First name`，支持修改；上送 DTC `deliveryAddress.fullName` 最大 60 字节 | 5.1.4；DTC Card Issuing / Card Application |
+| Recipient mobile | 默认读取 Billing information 的 Mobile，支持修改；纯数字；上送 DTC `deliveryAddress.phoneNumber` 最大 16 字节 | 5.1.4；DTC Card Issuing / Card Application |
 | Save | 保存邮寄地址并返回 `Card applicant order` | 5.1.4 |
 
-地址类字段正则：`^[#.0-9a-zA-Z\s,\/\-_:+?')(@#!&]+$`。
+地址类字段正则：`^[#.0-9a-zA-Z\s,\/\-_:+?')(@#!&]+$`。DTC 邮寄地址字段限制为：`country` 3、`state` 20、`city` 20、`district` 40、`address1-3` 各 40、`postal` 10、`fullName` 60、`phoneNumber` 16；页面允许值不得超过接口可接受范围，若存在差异需由前后端明确拦截或映射策略。
 
 ### 6.8 Payment Checkout
 
@@ -323,7 +334,7 @@ flowchart LR
 
 | 接口 / 字段 / 能力 | 用途 | 来源 | 备注 |
 |---|---|---|---|
-| `Card Application` | 提交实体卡或虚拟卡申请 | 2.2 / 6.1 | `[POST] /openapi/v1/card/request-card` |
+| `Card Application` | 提交实体卡或虚拟卡申请 | 2.2 / 6.1；DTC Card Issuing / Card Application | `[POST] /openapi/v1/card/request-card` |
 | `Get Wallet Account Balance` | 查询全量钱包余额，用于钱包余额不能为 0 校验 | 2.2 / 6.5 | `[GET] /openapi/v1/wallet/balances` |
 | `Get Balance` | 查询单币种钱包余额 | 2.2 | `[GET] /openapi/v1/wallet/balance/{currency}` |
 | `Get OTC Rate` | 查询实时汇率并试算 Card Fee | 2.2 / 6.7 | `[POST] /openapi/v1/otc/get-otc-rate` |
@@ -335,7 +346,16 @@ flowchart LR
 | `Total` | 应付金额，`Subtotal - Discount` | 5.1.4 | USD |
 | `Rate` | 实时汇率 | 5.1.4 / 6.7 | 用于稳定币金额试算 |
 | `Card fee` | 稳定币付款金额，`Total * Rate` | 5.1.4 | 当前选择币种 |
-| `referenceNo` | 异常查询卡信息业务 ID | 2.2 / 6.3 | 原文未在正文展开字段来源 |
+| `referenceNo` | 异常查询卡信息业务 ID；DTC Card Application 请求字段 | 2.2 / 6.3；DTC Card Issuing / Card Application | 需由 AIX 生成并保证可追踪 |
+| `productCode` | DTC 卡产品编码 | DTC Card Issuing / Card Application | 必填，来源待产品 / 渠道配置 |
+| `cardMaterial` | 卡材质 / 卡类型 | DTC Card Issuing / Card Application | 必填，需映射 Virtual / Physical Card |
+| `currency` | DTC National Currency Code | DTC Card Issuing / Card Application | 与用户选择的 USDT / USDC / WUSD / FDUSD 不可默认等同，映射待确认 |
+| `firstName` / `lastName` / `preferredPrintedName` | 持卡人姓名与印卡名 | DTC Card Issuing / Card Application | 来自 Billing / Mailing 页面 |
+| `email` | 用户邮箱 | DTC Card Issuing / Card Application | 注册邮箱反显，不可修改 |
+| `mobile.countryCode` / `mobile.number` | 手机区号与手机号 | DTC Card Issuing / Card Application | 区号长度与产品页规则存在差异，需映射确认 |
+| `deliveryAddress.*` | 邮寄地址字段 | DTC Card Issuing / Card Application | Physical Card 必填，长度按 DTC 限制 |
+| `cardFeeDetails.type` / `amount` / `currency` | DTC 费用字段 | DTC Card Issuing / Card Application | 与 AIX `Total`、稳定币支付金额的关系需确认 |
+| `autoDebitEnabled` | 自动扣款开关 | DTC Card Issuing / Card Application | DTC 枚举 `0/OFF`、`1/ON`；产品枚举冲突见待确认 |
 
 ## 8. 异常与失败处理
 
@@ -353,6 +373,20 @@ flowchart LR
 | 申卡响应异常 | 网络或响应异常 | 可通过 referenceNo 查询卡基本信息 | 待查询确认 | 2.2 / 6.3 |
 | 未知 DTC 错误码 | DTC 返回当前错误码之外的其他错误 | 直接报警通知，以便产品和渠道确定后续错误处理 | 待人工确认 | 6.1.6 |
 
+### 8.1 DTC Card Application 错误码处理
+
+| 错误码 | 含义 | 建议页面处理 | 来源 |
+|---|---|---|---|
+| `00006` | Access denied | 展示 Application unsuccessful，记录渠道鉴权异常 | DTC Card Issuing / Card Application |
+| `31002` | Card processor error | 展示 Application unsuccessful，允许 Resubmit Now；同时告警 | DTC Card Issuing / Card Application |
+| `31006` | Parameters is invalid | 展示 DTC error message，允许 Resubmit Now | DTC Card Issuing / Card Application |
+| `31007` | have a pending card application | 返回申卡入口置灰 / 审核中状态 | DTC Card Issuing / Card Application |
+| `31024` | Failed to for virtual card | 展示 Application unsuccessful，允许 Resubmit Now | DTC Card Issuing / Card Application |
+| `31025` | Failed to apply for physical card | 展示 Application unsuccessful，允许 Resubmit Now | DTC Card Issuing / Card Application |
+| `31028` | have reached limit of application physical card | 提示达到申请上限，阻止继续申请实体卡 | DTC Card Issuing / Card Application |
+| `31047` | Virtual card holding limit | 提示达到虚拟卡持有限制，阻止继续申请虚拟卡 | DTC Card Issuing / Card Application |
+| `31055` | Insufficient wallet balance. Card application fee cannot be deducted | 引导充值或返回 Checkout | DTC Card Issuing / Card Application |
+
 ## 9. 风控 / 合规边界
 
 | 边界 | 规则 | 影响 | 来源 |
@@ -367,7 +401,32 @@ flowchart LR
 | 高风险与制裁地区过滤 | 修订记录写明申卡地区要过滤高风险及制裁地区 | 影响地区选择范围 | 1.2 修订记录 |
 | 名称一致性 | Billing `First name + Last name` 必须与 KYC Full name 一致 | 防止非本人申卡 | 1.2 修订记录 / 5.1.4 |
 
-## 10. 来源引用
+## 10. 待确认事项
+
+| 编号 | 问题 | 影响 | 优先级 |
+|---|---|---|---|
+| CARD-APP-Q001 | 产品 `autoDebitEnabled=2/ON` 与 DTC `autoDebitEnabled=1/ON` 如何映射？ | 自动扣款上送、Home 标签展示 | P0 |
+| CARD-APP-Q002 | 用户选择稳定币 USDT / USDC / WUSD / FDUSD 与 DTC `currency`、`cardFeeDetails.currency` 的关系 | 申卡请求、扣费与对账 | P0 |
+| CARD-APP-Q003 | DTC `productCode`、`cardMaterial`、`cardFeeDetails.type` 的配置来源 | 渠道接入 | P0 |
+| CARD-APP-Q004 | CountryNo 产品长度 4 与 DTC `mobile.countryCode` 长度 3 的映射 | 手机号上送 | P1 |
+| CARD-APP-Q005 | 页面字段长度若大于 DTC 限制时，是前端拦截、后端拦截还是截断 | 邮寄地址、手机号 | P1 |
+| CARD-APP-Q006 | Free / Paid 申卡结果页和 DTC 扣费、MGM 减免费状态是否存在异步补偿 | 资金与权益 | P1 |
+
+## 11. 验收标准 / 测试场景
+
+| 场景 | 验收标准 |
+|---|---|
+| 申卡入口 | 已激活 + 已冻结 + 待激活 + 审核中 >= 5 时不显示入口；有审核中卡时入口置灰；无审核中且未达上限时可点击 |
+| 选卡与卡面 | Virtual / Physical 可选；卡色使用 Coral Orange、Obsidian Black、Clear blue sky；Physical 卡面可切换正反面 |
+| Billing 信息 | 页面标题为 `Billing information`；First name / Last name 只允许英文字母和空格；KYC 比对支持 First+Last 与 Last+First 两种组合 |
+| Mailing 信息 | 仅 Physical Card 必填；字段长度不得超过 DTC 限制；保存后返回订单页反显脱敏信息 |
+| 余额与扣费 | Total=0 显示 Apply for free；Total>0 进入 Checkout；同币种余额不足时提示充值；余额足够时可 Slide to pay |
+| Face Token | Token 无效时展示安全提示并跳转刷脸；刷脸超限后当天不可提交申卡 |
+| DTC 提交 | 成功时根据返回状态展示 Approved / Under review；失败时展示 Application unsuccessful 和 DTC error message |
+| 错误码 | 31007、31028、31047、31055 等关键错误码必须有明确页面承接 |
+| Gap 阻塞 | autoDebit 和 currency 映射未确认前，不得把产品枚举直接透传给 DTC |
+
+## 12. 来源引用
 
 - (Ref: 历史prd/AIX Card V1.0【Application】.pdf / 1.2 修订记录 / V1.0)
 - (Ref: 历史prd/AIX Card V1.0【Application】.pdf / 2.1 申卡说明 / V1.0)
