@@ -111,7 +111,7 @@ sequenceDiagram
 
 | 阶段 | 触发条件 | 系统动作 | 成功结果 | 失败 / 拦截结果 |
 |---|---|---|---|---|
-| PIN 入口 | 用户点击 Set PIN / Change PIN | 判断卡类型、卡状态、PIN 设置状态 | 进入对应 PIN 流程 | 非实体卡或状态不允许时阻止 |
+| PIN 入口 | 用户点击 Set PIN / Change PIN | 判断卡类型、卡状态、PIN 设置状态；仅 `ACTIVE` 允许 PIN 操作 | 进入对应 PIN 流程 | 非实体卡、非 `ACTIVE`、首次/非首次不匹配时阻止 |
 | 获取公钥 | 进入 PIN 流程 | 调用 Generate Public Pin Key | 获得 PIN 加密公钥 | 接口失败则阻止提交 |
 | Set PIN | 未设置 PIN 的实体卡 | 用户输入 4 位 PIN，调用 Set Card PIN | PIN 设置成功 | 接口失败进入失败承接 |
 | Change / Reset PIN | 已设置 PIN 的实体卡 | 先进行 OTP For Reset PIN，再提交 Reset Card PIN | PIN 重置成功 | OTP 失败或接口失败进入失败承接 |
@@ -163,10 +163,11 @@ flowchart LR
 
 | 入口 | 展示条件 | 点击结果 | 来源 |
 |---|---|---|---|
-| Set PIN | 实体卡已激活且未设置 PIN | 跳转设置 PIN 页面 | Application / 5.2；Manage / 7.2 / 7.3 |
-| Change PIN | 实体卡已激活且已设置 PIN | 跳转重置 PIN 页面 | Application / 5.2；Manage / 7.3 |
-| 小红点 | 未设置 PIN 时访问当前卡页面展示 | 提醒用户设置 PIN | Application / 5.2 |
+| Set PIN | 实体卡状态为 `ACTIVE` 且未设置 PIN | 跳转设置 PIN 页面 | Manage / 6.4；Application / 5.2；Manage / 7.2 / 7.3 |
+| Change PIN | 实体卡状态为 `ACTIVE` 且已设置 PIN | 跳转重置 PIN 页面 | Manage / 6.4；Application / 5.2；Manage / 7.3 |
+| 小红点 | `ACTIVE` 实体卡未设置 PIN 时访问当前卡页面展示 | 提醒用户设置 PIN | Application / 5.2 |
 | 小红点消失 | PIN 已设置 | 不再展示 Set PIN 红点 | Application / 5.2 |
+| 不允许状态 | 待激活、`SUSPENDED`、`CANCELLED`、`BLOCKED`、`PENDING` | 不展示、禁用或拦截 PIN 操作 | Manage / 6.4；Card Status & Fields |
 
 ### 6.2 PIN 输入规则
 
@@ -204,6 +205,7 @@ flowchart LR
 | `cardType` | 判断是否 Physical Card | Card Status & Fields | Virtual Card 不适用 PIN |
 | `cardStatus` | 判断是否允许 PIN 操作 | Card Status & Fields | 具体状态允许范围受操作限制表缺口影响 |
 | `pinSetStatus` | 判断显示 Set PIN 或 Change PIN | Application / 5.2 | 字段名为产品占位，原文未给字段名 |
+| `encryptedPin` | Set / Reset PIN 请求中提交加密后的 PIN | DTC Card Issuing API | DTC 更新历史提到 `encryptPin` rename to `encryptedPin`，实现以 `encryptedPin` 为准 |
 | `Generate Public Pin Key` | 获取 PIN 公钥 | Manage / 8.1 | `POST /openapi/v1/card/pin/public-key` |
 | `publicKey` / PIN 公钥响应 | 用于加密 PIN | DTC Card Issuing API | 具体字段名以 DTC API 为准，前端不得明文提交 PIN |
 | `encryptedPin` | Set / Reset PIN 请求中的加密 PIN | DTC Card Issuing API 更新记录 | DTC 曾将 `encryptPin` 改名为 `encryptedPin`，实现需使用最新字段 |
