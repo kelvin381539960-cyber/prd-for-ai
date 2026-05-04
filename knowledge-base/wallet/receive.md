@@ -2,7 +2,8 @@
 module: wallet
 feature: receive
 version: "1.1"
-status: active
+status: deferred
+reason: no confirmed product existence
 source_doc: IMPLEMENTATION_PLAN.md；DTC Wallet OpenAPI Documentation；knowledge-base/wallet/_index.md；knowledge-base/wallet/balance.md；knowledge-base/transaction/history.md；knowledge-base/transaction/status-model.md；knowledge-base/wallet/deposit.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-01；用户确认结论 2026-05-02
 source_section: Wallet Receive；Wallet _index v1.4；Wallet Balance v1.2；Transaction History v1.3；Wallet Deposit v1.6；ALL-GAP 总表
 last_updated: 2026-05-02
@@ -16,17 +17,17 @@ depends_on:
   - changelog/knowledge-gaps
 ---
 
-# Wallet Receive 钱包收款
+# Wallet Receive 占位 钱包收款
 
 ## 1. 功能定位
 
-Wallet Receive 用于沉淀 AIX Wallet 收款地址相关能力，包括收款入口、地址展示、链 / 币种选择、二维码 / 复制能力、交易记录承接和与 Deposit 的边界。
+Wallet Receive 当前为占位模块，仅用于记录收款能力核验范围，不作为 active 产品事实源。，包括收款入口、地址展示、链 / 币种选择、二维码 / 复制能力、交易记录承接和与 Deposit 的边界。
 
 重要限制：Receive 是否独立上线、是否与 Deposit 同源、是否受 Deposit 规则影响，均未确认。当前本文仅作为 Receive 独立能力的基础占位；不得默认复用 Deposit 旧方案，也不得默认等同 GTR / WalletConnect Deposit。
 
 所有未确认问题统一引用 `knowledge-base/changelog/knowledge-gaps.md` 的 ALL-GAP 编号；本文不再维护本地待补字段清单。
 
-## 2. 当前状态
+## 2. 当前状态（占位）
 
 | 项目 | 当前判断 | 处理 |
 |---|---|---|
