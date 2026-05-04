@@ -47,56 +47,66 @@ tags: [login, account, biometric, email, phone, otp, country-selector]
 
 ## 3. 用户侧页面流程图
 
-本图是页面流程图，不是系统处理图。主节点只放用户可感知的页面或页面级能力；用户动作写在线条上；弹窗 / 错误处理 / 权限提示不抢主页面流程。
+本图按 `standard-prd-template.md` 的页面流程图规范绘制：主节点只放 Page；用户动作写在线条上；弹窗 / Toast / 权限提示用非 Page 形状；后端动作、认证细节、账户模型不混入页面主流程。
 
 ```mermaid
 flowchart TD
-  Start([Start: Open AIX App unauthenticated]) --> Navigation[Navigation Page]
+  Start([Open AIX App<br/>Unauthenticated]) --> Navigation[Navigation Page]
 
   Navigation -->|Tap I already have an account| Login[Login Page]
   Navigation -->|Tap Create account| Registration[Registration Page]
 
-  Login -->|Tap country code in Phone tab| Country[Select Country Page]
+  Login -->|Tap country code<br/>in Phone tab| Country[Select Country Page]
   Country -->|Select country / region| Login
 
   Login -->|Tap Forgot password| PasswordReset[Password Reset Page]
 
-  Login -->|Enter Email / Phone| InputValid{Input valid?}
-  InputValid -->|No| InputError([Input validation error])
-  InputError -->|Edit input| Login
-  InputValid -->|Yes, tap Next| AccountCheck{Account can login?}
+  Login -->|Enter Email / Phone<br/>and tap Next| Identity[Identity Verification Page]
+  Identity -->|Verification success| BioDecision{Show Enable BIO Page?}
+  BioDecision -->|No| Home[Home Page]
+  BioDecision -->|Yes| EnableBio[Enable BIO Page]
 
-  AccountCheck -->|No: not found / banned / locked / closed| LoginBlocked([Login error / account blocked])
-  LoginBlocked -->|User edits or exits| Login
-  AccountCheck -->|Yes| Identity[Identity Verification Page]
-
-  Identity -->|Verification failed / locked| SecurityHandling([Security / Biometric handling])
-  SecurityHandling -->|Retry or exit by Security rule| Login
-  Identity -->|Verification success| BioStatus{BIO enabled or eligible?}
-
-  BioStatus -->|BIO already enabled| Home[Home Page]
-  BioStatus -->|Device does not support / system BIO not enabled| Home
-  BioStatus -->|BIO not enabled + eligible| EnableBio[Enable BIO Page]
+  Login -->|Tap Quick Login| DeviceBio[Device Biometric Verification]
+  DeviceBio -->|Verification success| Home
 
   EnableBio -->|Tap Close| Home
-  EnableBio -->|Tap Enable now within 5 minutes after manual login| DeviceBio[Device Biometric Verification]
-  EnableBio -->|Tap Enable now after 5 minutes| Identity
+  EnableBio -->|Tap Enable now<br/>within 5 minutes after manual login| DeviceBio
+  EnableBio -->|Tap Enable now<br/>after 5 minutes| Identity
 
-  Login -->|Tap Quick Login if local BIO key exists| DeviceBio
-  DeviceBio -->|Device / backend verification success| Home
-  DeviceBio -->|Verification failed| SecurityHandling
+  Login -->|Input invalid| InputError([Input validation error])
+  InputError -->|Edit input| Login
+
+  Login -->|Account not found / blocked| LoginBlocked([Login error / account blocked])
+  LoginBlocked -->|Edit input or exit| Login
+
+  Identity -->|Verification failed / locked| SecurityHandling([Security handling])
+  SecurityHandling -->|Retry or exit by Security rule| Login
+
+  DeviceBio -->|Verification failed| BioHandling([Biometric handling])
+  BioHandling -->|Use other method / retry| Login
 
   classDef page fill:#e8f1ff,stroke:#3b82f6,color:#111827;
-  classDef external fill:#fff4e6,stroke:#f59e0b,color:#111827;
-  classDef popup fill:#f5e8ff,stroke:#a855f7,color:#111827;
-  classDef decision fill:#f3f4f6,stroke:#6b7280,color:#111827;
-  classDef success fill:#e7f8ef,stroke:#22c55e,color:#111827;
+  classDef popup fill:#fff7ed,stroke:#f97316,color:#111827;
+  classDef decision fill:#f8fafc,stroke:#64748b,color:#111827;
+  classDef success fill:#ecfdf3,stroke:#22c55e,color:#111827;
 
   class Navigation,Login,Country,PasswordReset,Identity,EnableBio,DeviceBio,Registration page;
-  class InputError,LoginBlocked,SecurityHandling popup;
-  class InputValid,AccountCheck,BioStatus decision;
+  class InputError,LoginBlocked,SecurityHandling,BioHandling popup;
+  class BioDecision decision;
   class Home success;
 ```
+
+页面流程边界：
+
+| 场景 | 页面表现 | 规则归属 |
+|---|---|---|
+| Login 输入不合法 | 停留 Login Page，展示输入错误或禁用 Next | Login Page 元素规则 |
+| 账号不存在 / 未注册 / 账户不可登录 | 停留 Login Page，展示登录错误或账户拦截提示 | Login Page / Account Status |
+| Identity Verification 失败 / 锁定 | 不进入 Home，按 Security 规则处理 | `security/*` |
+| Quick Login / Biometric 失败 | 不进入 Home，按 Biometric 规则处理；必要时引导用户使用其他登录方式 | `security/biometric-verification.md` |
+| Enable BIO Page 是否展示 | 登录成功后，只有用户未启用 BIO 且设备支持 BIO 时展示 | Enable BIO Page 规则 |
+| Enable now 超过 5 分钟 | 先回到 Identity Verification，验证成功后继续设置 BIO | Enable BIO Page 规则 |
+
 
 ## 4. 系统时序图
 
