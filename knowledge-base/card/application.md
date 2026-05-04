@@ -58,7 +58,7 @@ Card Application 用于 AIX 用户申请 Virtual Card 或 Physical Card。
 | 申卡数量 | 已激活、已冻结、待激活、审核中之和最多 5 张 | AIX Card V1.0【Application】 / 5.1.4 | 达上限时阻止申卡 |
 | 在途限制 | 一个用户可申请多张卡，但仅可一张在途 | AIX Card V1.0【Application】 / 2.1 | 有审核中卡时入口置灰 |
 | 费用支付 | 无减免费时需同币种钱包余额足够覆盖制卡费 | AIX Card V1.0【Application】 / 2.1 / 5.1.4 | 余额不足引导充值 |
-| 支持币种 | 申卡时选择 USDT / USDC / WUSD / FDUSD | AIX Card V1.0【Application】 / 2.1 / 5.1.4 | 不支持币种不可申请 |
+| 支持币种 | 申卡页面选择 USDT / USDC / WUSD / FDUSD | AIX Card V1.0【Application】 / 2.1 / 5.1.4 | 不支持币种不可申请；该选择不直接等同 DTC `currency`，见 CARD-APP-Q002 |
 | 支持地区 | 申卡地区一期支持 Philippines / Vietnam / Australia | AIX Card V1.0【Application】 / 2.1 | 其他地区不在一期范围 |
 
 ## 4. 业务流程
@@ -332,6 +332,37 @@ flowchart LR
 
 ## 7. 字段与接口依赖
 
+### 7.1 DTC Card Application 请求字段映射
+
+| AIX 页面字段 / 业务字段 | DTC 字段 | Required | DTC 限制 | 备注 |
+|---|---|---|---|---|
+| 申请业务号 | `referenceNo` | 是 | string | AIX 生成并用于异常查询；来源仍需后端确认 |
+| 产品配置 | `productCode` | 是 | string | 来自卡产品配置 |
+| 卡材质 / 卡类型 | `cardMaterial` | 是 | string | Virtual / Physical 映射规则待后端确认 |
+| DTC 卡币种 | `currency` | 是 | ISO 4217 National Currency Code | 不等同用户选择的 USDT / USDC / WUSD / FDUSD，见 CARD-APP-Q002 |
+| First name | `firstName` | 是 | string | 与 KYC 比对后上送 |
+| Last name | `lastName` | 是 | string | 与 KYC 比对后上送 |
+| 印卡名 | `preferredPrintedName` | 否 | string | Physical Card 可用；默认与注册 Full name 相关 |
+| Email | `email` | 是 | string | 注册邮箱，不可修改 |
+| CountryNo | `mobile.countryCode` | 是 | DTC 长度 3 | 产品页面最长 4 字节，映射待确认 |
+| Mobile | `mobile.number` | 是 | 长度 12 | 产品页面按 12 字节控制 |
+| 国家 / 地区 | `deliveryAddress.country` | Physical 必填 | 长度 3 | DTC 支持国家或地区代码 |
+| Province / State | `deliveryAddress.state` | Physical 必填 | 长度 20 | 与页面四级联动映射 |
+| City | `deliveryAddress.city` | Physical 必填 | 长度 20 | 与页面四级联动映射 |
+| District | `deliveryAddress.district` | Physical 必填 | 长度 40 | 与页面四级联动映射 |
+| Address Line1 | `deliveryAddress.address1` | Physical 必填 | 长度 40 | 页面必填 |
+| Address Line2 | `deliveryAddress.address2` | 否 | 长度 40 | 页面可选 |
+| Address Line3 | `deliveryAddress.address3` | 否 | 长度 40 | 页面可选 |
+| Postcode | `deliveryAddress.postal` | Physical 必填 | 长度 10 | 与页面原 PRD 40 字节冲突，见 CARD-APP-Q004 |
+| Recipient name | `deliveryAddress.fullName` | Physical 必填 | 长度 60 | 与页面原 PRD 10 字节冲突，见 CARD-APP-Q004 |
+| Recipient mobile | `deliveryAddress.phoneNumber` | Physical 必填 | 长度 16 | 与页面原 PRD 20 字节冲突，见 CARD-APP-Q004 |
+| 费用类型 | `cardFeeDetails.type` | 是 | enum | application fee / delivery fee 映射待确认 |
+| 费用金额 | `cardFeeDetails.amount` | 是 | amount | 以 DTC 要求币种上送，不能直接等同稳定币试算金额 |
+| 费用币种 | `cardFeeDetails.currency` | 是 | ISO 4217 | 与用户选择稳定币关系待确认 |
+| 自动扣款 | `autoDebitEnabled` | 否 | `0/OFF`、`1/ON`，默认 `0` | 与产品事实 `2/ON` 冲突，见 CARD-APP-Q001 |
+
+### 7.2 接口与内部字段
+
 | 接口 / 字段 / 能力 | 用途 | 来源 | 备注 |
 |---|---|---|---|
 | `Card Application` | 提交实体卡或虚拟卡申请 | 2.2 / 6.1；DTC Card Issuing / Card Application | `[POST] /openapi/v1/card/request-card` |
@@ -345,7 +376,7 @@ flowchart LR
 | `Discount` | MGM 减免费，USD | 5.1.4 | 默认 0 |
 | `Total` | 应付金额，`Subtotal - Discount` | 5.1.4 | USD |
 | `Rate` | 实时汇率 | 5.1.4 / 6.7 | 用于稳定币金额试算 |
-| `Card fee` | 稳定币付款金额，`Total * Rate` | 5.1.4 | 当前选择币种 |
+| `Card fee` | 稳定币付款金额，`Total * Rate` | 5.1.4 | 当前选择币种；不直接等同 DTC `cardFeeDetails.amount`，见 CARD-APP-Q002 |
 | `referenceNo` | 异常查询卡信息业务 ID；DTC Card Application 请求字段 | 2.2 / 6.3；DTC Card Issuing / Card Application | 需由 AIX 生成并保证可追踪 |
 | `productCode` | DTC 卡产品编码 | DTC Card Issuing / Card Application | 必填，来源待产品 / 渠道配置 |
 | `cardMaterial` | 卡材质 / 卡类型 | DTC Card Issuing / Card Application | 必填，需映射 Virtual / Physical Card |
@@ -372,6 +403,20 @@ flowchart LR
 | DTC 申卡失败 | Card Application 返回 `success = false` | 展示 `Application unsuccessful` 与 DTC error message | 可 Resubmit Now | 5.1.4 |
 | 申卡响应异常 | 网络或响应异常 | 可通过 referenceNo 查询卡基本信息 | 待查询确认 | 2.2 / 6.3 |
 | 未知 DTC 错误码 | DTC 返回当前错误码之外的其他错误 | 直接报警通知，以便产品和渠道确定后续错误处理 | 待人工确认 | 6.1.6 |
+
+### 8.1 DTC Card Application 错误码处理建议
+
+| 错误码 | DTC 含义 | 建议页面处理 |
+|---|---|---|
+| `00006` | Access denied | 展示 Application unsuccessful；记录告警 |
+| `31002` | Card processor error | 展示 Application unsuccessful；允许 Resubmit Now |
+| `31006` | Parameters is invalid | 展示 Application unsuccessful 和 DTC error message；提示检查参数 |
+| `31007` | have a pending card application | 返回订单 / 首页并提示已有审核中卡，不允许重复申请 |
+| `31024` | Failed to for virtual card | 展示虚拟卡申请失败，可 Resubmit Now |
+| `31025` | Failed to apply for physical card | 展示实体卡申请失败，可 Resubmit Now |
+| `31028` | have reached limit of application physical card | 提示达到申卡上限 |
+| `31047` | Virtual card holding limit | 提示虚拟卡持有数量上限 |
+| `31055` | Insufficient wallet balance. Card application fee cannot be deducted | 引导充值或返回 Payment Checkout |
 
 ### 8.1 DTC Card Application 错误码处理
 
