@@ -5,7 +5,7 @@ version: "1.0"
 status: active
 source_doc: 历史prd/AIX Card 注册登录需求V1.0 (2).docx
 source_section: 7.3 忘记密码流程页面
-last_updated: 2026-05-01
+last_updated: 2026-05-04
 owner: 吴忆锋
 depends_on:
   - account/_index
@@ -97,7 +97,7 @@ sequenceDiagram
 | 阶段 | 触发条件 | 前端校验 / 展示 | 后端 / 系统动作 | 成功结果 | 失败结果 |
 |---|---|---|---|---|---|
 | 进入忘记密码 | Login Page 点击 Forgot password | 展示 Reset Password Page | 无 | 进入重置密码页 | 无 |
-| Reset Password 输入 | 用户输入重置密码所需信息 | 输入合法且非空时 Next 高亮 | 无 | 可进入身份验证 | 输入不合法或为空时不可继续 |
+| Reset Password 输入 | 用户输入 Email 或 Phone | 输入合法且非空时 Next 高亮；Email / Phone 切换时保留原填写内容 | 无 | 可进入身份验证 | 输入不合法或为空时不可继续 |
 | 身份验证 | 点击 Next | 进入身份验证流程页面 | 按 Security 模块处理 | 进入 Set Password Page | 失败按 Security 规则处理 |
 | 设置新密码 | 身份验证成功 | 复用 Registration 的 Set Password 规则 | 提交密码重置 | 密码重置成功 | 密码规则失败或提交失败 |
 | BIO 清理 | 密码重置成功 | 无 | 清除 BIO 信息，关闭已开启 BIO | BIO 不可继续用于旧密码后的快捷登录 | 无 |
@@ -147,12 +147,15 @@ flowchart LR
 | 页面目的 | 用户发起忘记密码流程 |
 | 入口 | Login Page 点击 Forgot password |
 | 出口 | Next → 身份验证流程页面 |
-| 关键规则 | 输入合法且非空后 Next 高亮可点击 |
+| 关键规则 | Email / Phone 输入合法且非空后 Next 高亮可点击；切换时保留原填写内容 |
 
 | 元素 | 类型 | 展示条件 | 交互规则 | 异常 |
 |---|---|---|---|---|
 | Back | Button | 页面展示时 | 点击返回上一级页面 | 无 |
-| Input | TextInput | 页面展示时 | 当输入合法且非空时，Next 高亮可点击 | 输入字段类型、格式规则见 `knowledge-gaps.md` |
+| Email / Phone 切换 | Tab | 默认展示，默认选中 Email | 用户可切换重置密码账号类型；切换时保留原填写内容 | 无 |
+| Email 输入框 | TextInput | Email tab | 非空、邮箱格式校验；最长 254 字符 | `Email format is invalid`；`Email should not be empty` |
+| Country Code | Selector | Phone tab | 点击进入 Select Country Page | 国家 / 地区规则同 Login |
+| Phone 输入框 | TextInput | Phone tab | 仅允许输入数字；最长 20 位 | 具体错误文案按 Login / 文案表 |
 | Next | Button | 输入合法且非空 | 点击进入身份验证流程页面 | 身份验证失败按 Security 规则处理 |
 
 ### 6.2 Identity Verification
@@ -181,7 +184,10 @@ flowchart LR
 
 | 字段 / 能力 | 用途 | 读/写 | 来源 | 备注 |
 |---|---|---|---|---|
-| resetInput | Reset Password Page 输入 | 读 | Reset Password Page | 原文未明确字段名称与类型 |
+| resetInput | Reset Password Page 输入账号 | 读 | Reset Password Page | 支持 Email / Phone 两种类型；字段实现命名以接口为准 |
+| email | 重置密码账号 | 读 | Reset Password Page | 非空、邮箱格式校验；最长 254 字符 |
+| phone | 重置密码账号 | 读 | Reset Password Page | 仅允许输入数字；最长 20 位 |
+| countryCode | Phone 重置密码国家 / 地区区号 | 读 | Reset Password Page / Select Country Page | 规则同 Login |
 | authenticationResult | 身份验证结果 | 读 | Security Module | 详细规则引用 Security |
 | password | 新登录密码 | 写 | Registration / Set Password Page | 复用注册密码规则 |
 | bioEnabled | BIO 开关状态 | 写 | Password Reset 功能说明 | 密码重置成功后关闭已开启 BIO |
@@ -192,7 +198,8 @@ flowchart LR
 
 | 场景 | 触发条件 | 用户提示 | 系统动作 | 最终状态 | 来源 |
 |---|---|---|---|---|---|
-| 输入为空或不合法 | Reset Password Page 输入不满足要求 | 原文未明确具体文案 | Next 不可点击或阻止继续 | 留在 Reset Password Page | AIX Card 注册登录需求V1.0 / 7.3.3 |
+| Email 为空或格式不合法 | Reset Password Page Email 输入不满足要求 | `Email should not be empty` / `Email format is invalid` | Next 不可点击或阻止继续 | 留在 Reset Password Page | AIX Card 注册登录需求V1.0 / 7.3.3 |
+| Phone 为空或格式不合法 | Reset Password Page Phone 输入不满足要求 | 按 Login / 文案表规则 | Next 不可点击或阻止继续 | 留在 Reset Password Page | AIX Card 注册登录需求V1.0 / 7.3.3 |
 | 身份验证失败 | Security 认证失败 | 按 Security 模块规则处理 | 阻止进入 Set Password | Security / Error Handling | AIX Card 注册登录需求V1.0 / 7.3.4 |
 | 密码规则失败 | 新密码不满足规则 | 按 Registration Set Password 规则处理 | 阻止提交 | 留在 Set Password Page | AIX Card 注册登录需求V1.0 / 7.3.5 |
 | 密码重置成功 | 新密码设置成功 | 原文未明确成功提示 | 清除 BIO，关闭已开启 BIO，强制登出 | 用户需使用新密码重新登录 | AIX Card 注册登录需求V1.0 / 7.3.1 / 7.3.5 |
@@ -218,4 +225,5 @@ flowchart LR
 - (Ref: knowledge-base/security/global-rules.md)
 - (Ref: knowledge-base/security/otp-verification.md)
 - (Ref: knowledge-base/security/email-otp-verification.md)
+- (Ref: knowledge-base/account/login.md / Login Page 输入规则)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / Account Password Reset / 2026-05-01)
