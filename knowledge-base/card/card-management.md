@@ -1,1 +1,247 @@
-LS0tCm1vZHVsZTogY2FyZApmZWF0dXJlOiBjYXJkLW1hbmFnZW1lbnQKdmVyc2lvbjogIjEuMiIKc3RhdHVzOiBhY3RpdmUKc291cmNlX2RvYzog5Y6G5Y+ycHJkL0FJWCBDYXJkIG1hbmFnZeaooeWdl+mcgOaxglYxLjAuZG9jeO+8m0RUQyBDYXJkIElzc3VpbmcgQVBJIERvY3VtZW50XzIwMjYwMzEwICgxKS5wZGbvvJtwcmQtdGVtcGxhdGUvc3RhbmRhcmQtcHJkLXRlbXBsYXRlLm1kCnNvdXJjZV9zZWN0aW9uOiBNYW5hZ2UgNi40IC8gNi41IC8gNy40IC8gNy41IC8gOC4x77ybRFRDIEZyZWV6ZSAvIFVuZnJlZXplIC8gVGVybWluYXRlIENhcmTvvJtTdGFuZGFyZCBQUkQgVGVtcGxhdGUgdjEuMwpsYXN0X3VwZGF0ZWQ6IDIwMjYtMDUtMDQKb3duZXI6IOWQtOW/humUiwpyZWFkZXJzOiBbcHJvZHVjdCwgdWksIGRldiwgcWEsIGJ1c2luZXNzLCBhaV0KZGVwZW5kc19vbjoKICAtIGNhcmQvX2luZGV4CiAgLSBjYXJkL2NhcmQtc3RhdHVzLWFuZC1maWVsZHMKICAtIHNlY3VyaXR5L2ZhY2UtYXV0aGVudGljYXRpb24KICAtIGludGVncmF0aW9ucy9kdGMKICAtIF9tZXRhL3dyaXRpbmctc3RhbmRhcmQKICAtIGNoYW5nZWxvZy9rbm93bGVkZ2UtZ2FwcwotLS0KCiMgQ2FyZCBNYW5hZ2VtZW50IOWNoeeuoeeQhgoKIyMgMS4g5paH5qGj5L+h5oGvCgp8IOmhueebriB8IOWGheWuuSB8CnwtLS18LS0tfAp8IOWKn+iDveWQjeensCB8IENhcmQgTWFuYWdlbWVudCDljaHnrqHnkIYgfAp8IOaJgOWxnuaooeWdlyB8IENhcmQgfAp8IE93bmVyIHwg5ZC05b+G6ZSLIHwKfCDniYjmnKwgfCAxLjIgfAp8IOeKtuaAgSB8IFJldmlldyB8Cnwg5pu05paw5pe26Ze0IHwgMjAyNi0wNS0wNCB8Cnwg5p2l5rqQ5paH5qGjIHwgQUlYIENhcmQgTWFuYWdl44CBRFRDIENhcmQgSXNzdWluZyBBUEnjgIFTdGFuZGFyZCBQUkQgVGVtcGxhdGUgdjEuMyB8CgotLS0KCiMjIDIuIOmcgOaxguiDjOaZr+OAgeebruagh+S4juiMg+WbtAoKIyMjIDIuMSDpnIDmsYLog4zmma8KCueUqOaIt+mcgOimgeWvueW3sua/gOa0u+aIluW3suWGu+e7k+eahOWNoei/m+ihjCBMb2Nr44CBVW5sb2NrIOaIluazqOmUgOetieeuoeeQhuaTjeS9nOOAguWNoeeuoeeQhuaTjeS9nOebtOaOpeW9seWTjeS6pOaYk+iDveWKm+WSjOWNoeWuieWFqO+8jOW/hemhu+WPl+WNoeeKtuaAgemZkOWItuWSjOi6q+S7vemqjOivgeaOp+WItuOAggoKIyMjIDIuMiDnlKjmiLfpl67popggLyDkuJrliqHpl67popgKCuWmguaenCBMb2NrIC8gVW5sb2NrIOeKtuaAgemZkOWItuOAgeehruiupOa1geeoi+OAgei6q+S7vemqjOivgeOAgURUQyDmjqXlj6Plkozms6jplIDljaHog73lipvovrnnlYzkuI3mmI7noa7vvIzlj6/og73lh7rnjrDplJnor6/lhrvnu5PjgIHplJnor6/op6PlhrvjgIHnirbmgIHmmL7npLrkuI3kuIDoh7TmiJbms6jplIDog73lipvml6Dms5XokL3lnLDjgIIKCiMjIyAyLjMg6ZyA5rGC55uu5qCHCgrlrprkuYkgTG9jayBDYXJk44CBVW5sb2NrIENhcmQg5ZKMIFRlcm1pbmF0ZSBDYXJkIOiDveWKm+i+ueeVjO+8jOaYjuehruWFgeiuuOeKtuaAgeOAgemhtemdoua1geeoi+OAgeaOpeWPo+S+nei1luOAgeW8guW4uOWkhOeQhuOAgeW+heehruiupOS6i+mhueWSjOmqjOaUtuagh+WHhuOAggoKIyMjIDIuNCDmtonlj4rlip/og73muIXljZUKCnwg5Yqf6IO954K5IHwg5pys5pyf6IyD5Zu0IHwg5LyY5YWI57qnIHwg54q25oCBIHwg6K+05piOIHwKfC0tLXwtLS18LS0tfC0tLXwtLS18CnwgTG9jayBDYXJkIHwgSW4gU2NvcGUgfCBQMCB8IENvbmZpcm1lZCB8IEFDVElWRSDljaHlhYHorrggTG9jayB8CnwgVW5sb2NrIENhcmQgfCBJbiBTY29wZSB8IFAwIHwgQ29uZmlybWVkIHwgU1VTUEVOREVEIOWNoeWFgeiuuCBVbmxvY2sgfAp8IFRlcm1pbmF0ZSBDYXJkIC8g5rOo6ZSA5Y2hIHwgSW4gU2NvcGUgfCBQMCB8IE9wZW4gfCBNYW5hZ2UgNi40IOWFgeiuuCBBQ1RJVkUgLyBTVVNQRU5ERUQg5rOo6ZSA77yMQUlYIOmhtemdoua1geeoi+e8uuWksSB8Cnwg54q25oCB6ZmQ5Yi2IHwgSW4gU2NvcGUgfCBQMCB8IENvbmZpcm1lZCB8IOW8leeUqCBNYW5hZ2UgNi40IOaTjeS9nOefqemYtSB8CnwgRmFjZSBBdXRoZW50aWNhdGlvbiB8IEluIFNjb3BlIHwgUDAgfCBDb25maXJtZWQgfCBVbmxvY2sg5YmN6ZyA6Lqr5Lu96aqM6K+BIHwKfCBWaXJ0dWFsIC8gUGh5c2ljYWwg5paH5qGIIHwgRGVmZXJyZWQgfCBQMSB8IE9wZW4gfCDmiJDlip/mlofmoYjlhpkgcGh5c2ljYWwgY2FyZO+8jOaYr+WQpumAgueUqOS6juiZmuaLn+WNoeW+heehruiupCB8CgotLS0KCiMjIDMuIOS4muWKoea1geeoi+S4juinhOWImQoKIyMjIDMuMSDkuJrliqHkuLvmtYHnqIvor7TmmI4KCueUqOaIt+S7jiBDYXJkIEhvbWUg54K55Ye7IExvY2sg5oiWIFVubG9ja+OAguezu+e7n+aMieWNoeeKtuaAgeWIpOaWreaYr+WQpuWFgeiuuOaTjeS9nOOAgkxvY2sg6YCC55So5LqOIEFDVElWRSDljaHvvIznlKjmiLfnoa7orqTlkI7osIPnlKggRnJlZXplIENhcmTvvJtVbmxvY2sg6YCC55So5LqOIFNVU1BFTkRFRCDljaHvvIznlKjmiLfpgJrov4fouqvku73pqozor4HlkI7osIPnlKggVW5mcmVlemUgQ2FyZOOAguazqOmUgOWNoeWcqCBNYW5hZ2UgNi40IOS4reaYvuekuiBBQ1RJVkUgLyBTVVNQRU5ERUQg5Y+v55So77yM5LiUIERUQyBBUEkg5a2Y5ZyoIFRlcm1pbmF0ZSBDYXJk77yM5L2GIEFJWCDpobXpnaLmtYHnqIvmnKrmj5DkvpvvvIzlm6DmraTlj6rorrDlvZXog73lipvovrnnlYzlkozlvoXnoa7orqTpobnjgIIKCiMjIyAzLjIg5Lia5Yqh5pe25bqP5Zu+CgpgYGBtZXJtYWlkCnNlcXVlbmNlRGlhZ3JhbQogICAgYXV0b251bWJlcgogICAgYWN0b3Ig55So5oi3CiAgICBwYXJ0aWNpcGFudCBBcHAgYXMgQUlYIEFwcAogICAgcGFydGljaXBhbnQgQ2FyZCBhcyBDYXJkIOacjeWKoQogICAgcGFydGljaXBhbnQgU2VjdXJpdHkgYXMg6Lqr5Lu96aqM6K+B5pyN5YqhCiAgICBwYXJ0aWNpcGFudCBEVEMgYXMgRFRDIENhcmQgQVBJCgogICAg55So5oi3LT4+QXBwOiDngrnlh7sgTG9jayAvIFVubG9jayAvIFRlcm1pbmF0ZQogICAgQXBwLT4+Q2FyZDog5qCh6aqM5Y2h54q25oCB5ZKM5pON5L2c5p2D6ZmQCiAgICBhbHQg5pON5L2c5LiN5YWB6K64CiAgICAgICAgQ2FyZC0tPj5BcHA6IOi/lOWbnumZkOWItuWOn+WboAogICAgICAgIEFwcC0tPj7nlKjmiLc6IOmakOiXj+OAgeemgeeUqOaIluaLpuaIqgogICAgZWxzZSBMb2NrIENhcmQKICAgICAgICBBcHAtLT4+55So5oi3OiDlsZXnpLogTG9jayDnoa7orqTlvLnnqpcKICAgICAgICDnlKjmiLctPj5BcHA6IOehruiupCBMb2NrCiAgICAgICAgQXBwLT4+RFRDOiBGcmVlemUgQ2FyZAogICAgICAgIERUQy0tPj5BcHA6IOi/lOWbnuWGu+e7k+e7k+aenAogICAgICAgIEFwcC0tPj7nlKjmiLc6IOWxleekuuaIkOWKn+aIluWksei0pQogICAgZWxzZSBVbmxvY2sgQ2FyZAogICAgICAgIEFwcC0+PlNlY3VyaXR5OiDouqvku73pqozor4EKICAgICAgICBTZWN1cml0eS0tPj5BcHA6IOi/lOWbnuiupOivgee7k+aenAogICAgICAgIEFwcC0+PkRUQzogVW5mcmVlemUgQ2FyZAogICAgICAgIERUQy0tPj5BcHA6IOi/lOWbnuino+WGu+e7k+aenAogICAgICAgIEFwcC0tPj7nlKjmiLc6IOWxleekuuaIkOWKn+aIluWksei0pQogICAgZWxzZSBUZXJtaW5hdGUgQ2FyZAogICAgICAgIEFwcC0tPj7nlKjmiLc6IOa1geeoi+W+heehruiupO+8jOaaguS4jeiQveWunueOsAogICAgZW5kCmBgYAoKIyMjIDMuMyDmtYHnqIvmraXpqqTkuI7kuJrliqHop4TliJkKCnwg5q2l6aqkIHwg5Zy65pmvIC8g6KeE5YiZIHwg6Kem5Y+R5p2h5Lu2IHwg6LSj5Lu75pa5IHwg57O757uf5aSE55CGIHwg5oiQ5Yqf57uT5p6cIHwg5aSx6LSlIC8g5YiG5pSv57uT5p6cIHwg5p2l5rqQIHwKfC0tLXwtLS18LS0tfC0tLXwtLS18LS0tfC0tLXwtLS18CnwgMSB8IOWIpOaWreaTjeS9nOadg+mZkCB8IOeUqOaIt+eCueWHu+euoeeQhuaTjeS9nCB8IEFwcCAvIENhcmQgfCDlvJXnlKggTWFuYWdlIDYuNCB8IOWFgeiuuOi/m+WFpeWvueW6lOa1geeoiyB8IOS4jeWFgeiuuOWImemakOiXjyAvIOemgeeUqCAvIOaLpuaIqiB8IE1hbmFnZSAvIDYuNCB8CnwgMiB8IExvY2sg56Gu6K6kIHwgQUNUSVZFIOWNoeeCueWHuyBMb2NrIHwgQXBwIHwg5bGV56S656Gu6K6k5by556qXIHwg55So5oi356Gu6K6k5ZCO6LCD55SoIEZyZWV6ZSB8IOeUqOaIt+WPlua2iOWImeWFs+mXreW8ueeqlyB8IE1hbmFnZSAvIDcuNCB8CnwgMyB8IEZyZWV6ZSBDYXJkIHwg55So5oi356Gu6K6kIExvY2sgfCBBcHAgLyBEVEMgfCDosIPnlKggRnJlZXplIENhcmQgfCDljaHov5vlhaUgU1VTUEVOREVEIHwg5aSx6LSl5L+d5oyBIEFDVElWRSB8IE1hbmFnZSAvIDguMSB8CnwgNCB8IFVubG9jayDorqTor4EgfCBTVVNQRU5ERUQg5Y2h54K55Ye7IFVubG9jayB8IEFwcCAvIFNlY3VyaXR5IHwg5Y+R6LW36Lqr5Lu96aqM6K+BIHwg6K6k6K+B6YCa6L+H6LCD55SoIFVuZnJlZXplIHwg6K6k6K+B5aSx6LSl5oyJIFNlY3VyaXR5IOinhOWImSB8IE1hbmFnZSAvIDcuNSB8CnwgNSB8IFVuZnJlZXplIENhcmQgfCBVbmxvY2sg6K6k6K+B6YCa6L+HIHwgQXBwIC8gRFRDIHwg6LCD55SoIFVuZnJlZXplIENhcmQgfCDljaHmgaLlpI0gQWN0aXZlIHwg5aSx6LSl5L+d5oyBIFNVU1BFTkRFRCB8IE1hbmFnZSAvIDguMSB8CnwgNiB8IFRlcm1pbmF0ZSBDYXJkIHwgQUNUSVZFIC8gU1VTUEVOREVEIOeQhuiuuuWPr+azqOmUgCB8IEFwcCAvIERUQyB8IERUQyDmnIkgVGVybWluYXRlIENhcmQg6IO95YqbIHwg5pqC5LiN6JC96aG16Z2i5rWB56iLIHwg6L+b5YWl5b6F56Gu6K6kIHwgTWFuYWdlIC8gNi40IC8gRFRDIHwKCiMjIyAzLjQg54q25oCB6KeE5YiZCgp8IOeKtuaAgSB8IOWQq+S5iSB8IOinpuWPkeadoeS7tiB8IOeUqOaIt+WPr+ingeihqOeOsCB8IOezu+e7n+WkhOeQhiB8IOWPr+i/geenu+WIsCB8IOaYr+WQpue7iOaAgSB8IOadpea6kCB8CnwtLS18LS0tfC0tLXwtLS18LS0tfC0tLXwtLS18LS0tfAp8IEFDVElWRSB8IOWPr+eUqOWNoSB8IOWNoeW3sua/gOa0uyB8IOWPryBMb2Nr44CB5Y+v5rOo6ZSA44CB5Y+v5Lqk5piTIHwg5YWB6K64IEZyZWV6ZSBDYXJkIHwgU1VTUEVOREVEIC8gQ0FOQ0VMTEVEIHwg5ZCmIHwgTWFuYWdlIC8gNi40IHwKfCBTVVNQRU5ERUQgfCDlt7Llhrvnu5PljaEgfCBGcmVlemUg5oiQ5YqfIHwg5Y+vIFVubG9ja+OAgeWPr+azqOmUgO+8jOS4jeWPr+S6pOaYkyB8IOWFgeiuuCBVbmZyZWV6ZSBDYXJkIHwgQWN0aXZlIC8gQ0FOQ0VMTEVEIHwg5ZCmIHwgTWFuYWdlIC8gNi40IHwKfCBDQU5DRUxMRUQgfCDlt7Llj5bmtoggfCDms6jplIDmiJblj5bmtoggfCDkuI3lj6/mk43kvZwgfCDnu4jmgIEgfCDkuI3pgILnlKggfCDmmK8gfCBNYW5hZ2UgLyA2LjQgfAp8IEJMT0NLRUQgfCDpmLvmlq0gfCDpo47mjqfmiJblpJbpg6jpmLvmlq0gfCDkuI3lhYHorrggTG9jayAvIFVubG9jayAvIOazqOmUgCB8IOS7heWPr+afpeeci+WNoeS/oeaBryB8IOW+heehruiupCB8IOWQpiB8IE1hbmFnZSAvIDYuNCB8CnwgQWN0aXZhdGUgfCDnlpHkvLwgQWN0aXZlIHwgVW5mcmVlemUg5oiQ5Yqf5Y6f5paHIHwg5LiN5L2c5Li654us56uL5p6a5Li+IHwg6ZyA5b2S5LiA56Gu6K6kIHwgQWN0aXZlIHwg5ZCmIHwgTWFuYWdlIC8gNy41IHwKCiMjIyAzLjUg5Lia5Yqh57qn5byC5bi45LiO5aSx6LSl5aSE55CGCgp8IOW8guW4uOWcuuaZryB8IOinpuWPkeadoeS7tiB8IOmUmeivr+adpea6kCB8IOmUmeivr+eggSAvIOWOn+WboCB8IOeUqOaIt+ihqOeOsCB8IOezu+e7n+WkhOeQhiB8IOaYr+WQpuWPr+mHjeivlSB8IOacgOe7iOeKtuaAgSB8CnwtLS18LS0tfC0tLXwtLS18LS0tfC0tLXwtLS18LS0tfAp8IOeKtuaAgeS4jeWFgeiuuCB8IOmdnuWFgeiuuOeKtuaAgeeCueWHu+aTjeS9nCB8IEJhY2tlbmQgfCDnirbmgIHpmZDliLYgfCDpmpDol48gLyDnpoHnlKggLyDmi6bmiKogfCDkuI3osIPnlKjmjqXlj6MgfCDlkKYgfCDljp/nirbmgIEgfAp8IExvY2sg55So5oi35Y+W5raIIHwgTG9jayDlvLnnqpfngrnlh7sgTk8gfCBVc2VyIHwg5Y+W5raIIHwg5YWz6Zet5by556qXIHwg5LiN6LCD55So5o6l5Y+jIHwg5pivIHwgQUNUSVZFIHwKfCBGcmVlemUg5aSx6LSlIHwgRnJlZXplIENhcmQg5aSx6LSlIHwgRFRDIC8gTmV0d29yayB8IOaOpeWPo+Wksei0pSB8IEZyZWV6ZSBmYWlsZWQg5oiW5YWo5bGA5byC5bi4IHwg5L+d5oyBIEFDVElWRSB8IOaYryB8IEFDVElWRSB8CnwgVW5sb2NrIOiupOivgeWksei0pSB8IEZhY2UgQXV0aGVudGljYXRpb24g5aSx6LSlIHwgU2VjdXJpdHkgfCDorqTor4HlpLHotKUgfCDmjIkgU2VjdXJpdHkg6KeE5YiZIHwg5LiN6LCD55SoIFVuZnJlZXplIHwg5pivIC8g6KeG6KeE5YiZIHwgU1VTUEVOREVEIHwKfCBVbmZyZWV6ZSDlpLHotKUgfCBVbmZyZWV6ZSBDYXJkIOWksei0pSB8IERUQyAvIE5ldHdvcmsgfCDmjqXlj6PlpLHotKUgfCBVbmZyZWV6ZSBmYWlsZWQg5oiW5YWo5bGA5byC5bi4IHwg5L+d5oyBIFNVU1BFTkRFRCB8IOaYryB8IFNVU1BFTkRFRCB8Cnwg5rOo6ZSA5rWB56iL57y65aSxIHwg55So5oi36ZyA6KaB5rOo6ZSA5Y2hIHwg5Lqn5ZOB57y65Y+jIHwg5rWB56iL5pyq5a6a5LmJIHwg5pqC5LiN5bGV56S65oiW5LiN5a6e546wIHwg6L+b5YWl5b6F56Gu6K6kIHwg5ZCmIHwg5Y6f54q25oCBIHwKCi0tLQoKIyMgNC4g6aG16Z2i5LiO5Lqk5LqS6K+05piOCgojIyMgNC4xIOmhtemdouWFs+ezu+aAu+iniOWbvgoKYGBgbWVybWFpZApmbG93Y2hhcnQgTFIKICAgIEhvbWVbQ2FyZCBIb21lXQogICAgTG9ja1BvcHVwW0xvY2sgQ29uZmlybSBQb3B1cF0KICAgIFVubG9ja0F1dGhbRmFjZSBBdXRoZW50aWNhdGlvbl0KICAgIExvY2tSZXN1bHRbTG9jayBSZXN1bHQgVG9hc3RdCiAgICBVbmxvY2tSZXN1bHRbVW5sb2NrIFJlc3VsdCBUb2FzdF0KICAgIEVycm9yW0Vycm9yIFBvcHVwIC8gVG9hc3RdCgogICAgSG9tZSAtLT58TG9jayBDYXJkfCBMb2NrUG9wdXAKICAgIExvY2tQb3B1cCAtLT58WUVTfCBMb2NrUmVzdWx0CiAgICBMb2NrUG9wdXAgLS0+fE5PfCBIb21lCiAgICBIb21lIC0tPnxVbmxvY2sgQ2FyZHwgVW5sb2NrQXV0aAogICAgVW5sb2NrQXV0aCAtLT58VmVyaWZpZWR8IFVubG9ja1Jlc3VsdAogICAgTG9ja1BvcHVwIC0tPnxGYWlsZWR8IEVycm9yCiAgICBVbmxvY2tBdXRoIC0tPnxGYWlsZWR8IEVycm9yCmBgYAoKIyMjIDQuMiBMb2NrIENhcmQgQ29uZmlybSBQb3B1cAoKfCDljLrlnZcgfCDlhoXlrrkgfAp8LS0tfC0tLXwKfCDpobXpnaLnsbvlnosgfCBQb3B1cCB8Cnwg6aG16Z2i55uu5qCHIHwg6K6p55So5oi356Gu6K6k5piv5ZCm5Ya757uT5Y2hIHwKfCDlhaXlj6MgLyDop6blj5EgfCBBQ1RJVkUg5Y2h54K55Ye7IExvY2sgQ2FyZCB8Cnwg5bGV56S65YaF5a65IHwgTG9jayDnoa7orqTmlofmoYjjgIFZRVMgLyBOTyDmjInpkq4gfAp8IOeUqOaIt+WKqOS9nCB8IFlFUyDnoa7orqTlhrvnu5PvvJtOTyDlj5bmtoggfAp8IOezu+e7n+WkhOeQhiAvIOi0o+S7u+aWuSB8IFlFUyDosIPnlKggRnJlZXplIENhcmTvvJtOTyDlhbPpl63lvLnnqpcgfAp8IOWFg+e0oCAvIOeKtuaAgSAvIOaPkOekuuinhOWImSB8IOaIkOWKnyBUb2FzdO+8mmBZb3VyIHBoeXNpY2FsIGNhcmQgaGFzIGJlZW4gbG9ja2VkLmDvvJtWaXJ0dWFsIENhcmQg5paH5qGI5b6F56Gu6K6kIHwKfCDmiJDlip/mtYHovawgfCDov5Tlm54gQ2FyZCBIb21l77yM5Y2h54q25oCB5Yi35paw5Li6IFNVU1BFTkRFRCB8Cnwg5aSx6LSlIC8g5byC5bi45rWB6L2sIHwgRnJlZXplIGZhaWxlZCDmiJblhajlsYDlvILluLggfAp8IOWkh+azqCAvIOi+ueeVjCB8IOaYr+WQpuaUr+aMgeiZmuaLn+WNoSBMb2NrIOW+heehruiupCB8CgojIyMgNC4zIFVubG9jayBDYXJkIEZsb3cKCnwg5Yy65Z2XIHwg5YaF5a65IHwKfC0tLXwtLS18Cnwg6aG16Z2i57G75Z6LIHwg6Lqr5Lu96aqM6K+BICsg57uT5p6c5Y+N6aaIIHwKfCDpobXpnaLnm67moIcgfCDop6Plhrvlt7Llhrvnu5PljaEgfAp8IOWFpeWPoyAvIOinpuWPkSB8IFNVU1BFTkRFRCDljaHngrnlh7sgVW5sb2NrIENhcmQgfAp8IOWxleekuuWGheWuuSB8IOi6q+S7vemqjOivgea1geeoi+OAgUxvYWRpbmfjgIHmiJDlip8gLyDlpLHotKXlj43ppoggfAp8IOeUqOaIt+WKqOS9nCB8IOWujOaIkCBGYWNlIEF1dGhlbnRpY2F0aW9uIHwKfCDns7vnu5/lpITnkIYgLyDotKPku7vmlrkgfCDorqTor4HpgJrov4flkI7osIPnlKggVW5mcmVlemUgQ2FyZCB8Cnwg5YWD57SgIC8g54q25oCBIC8g5o+Q56S66KeE5YiZIHwg5o+Q5Lqk5Lit5oyJ6ZKu5pi+56S6IGBMb2FkaW5nLi4uYCDlubbnpoHmraLph43lpI3mj5DkuqQgfAp8IOaIkOWKn+a1gei9rCB8IFRvYXN077yaYFlvdXIgcGh5c2ljYWwgY2FyZCBoYXMgYmVlbiB1bmxvY2tlZC5g77yb54q25oCB5Yi35paw5Li6IEFjdGl2ZSB8Cnwg5aSx6LSlIC8g5byC5bi45rWB6L2sIHwg6K6k6K+B5aSx6LSl5oiWIFVuZnJlZXplIGZhaWxlZCB8Cnwg5aSH5rOoIC8g6L6555WMIHwg5Y6f5paHIGBBY3RpdmF0ZWAg5LiN5L2c5Li654us56uL54q25oCB5a6e546wIHwKCiMjIyA0LjQgVGVybWluYXRlIENhcmQgRmxvdwoKfCDljLrlnZcgfCDlhoXlrrkgfAp8LS0tfC0tLXwKfCDpobXpnaLnsbvlnosgfCDlvoXnoa7orqQgfAp8IOmhtemdouebruaghyB8IOazqOmUgOWNoSB8Cnwg5YWl5Y+jIC8g6Kem5Y+RIHwgTWFuYWdlIDYuNCDlhYHorrggQUNUSVZFIC8gU1VTUEVOREVEIOazqOmUgOWNoSB8Cnwg5bGV56S65YaF5a65IHwg5pyq5o+Q5L6bIHwKfCDnlKjmiLfliqjkvZwgfCDmnKrmj5DkvpsgfAp8IOezu+e7n+WkhOeQhiAvIOi0o+S7u+aWuSB8IERUQyDlrZjlnKggVGVybWluYXRlIENhcmTvvIxBSVgg5rWB56iL5pyq5a6a5LmJIHwKfCDlhYPntKAgLyDnirbmgIEgLyDmj5DnpLrop4TliJkgfCDlvoXnoa7orqQgfAp8IOaIkOWKn+a1gei9rCB8IOW+heehruiupCB8Cnwg5aSx6LSlIC8g5byC5bi45rWB6L2sIHwg5b6F56Gu6K6kIHwKfCDlpIfms6ggLyDovrnnlYwgfCDog73lipvlrZjlnKjkvYbkuI3ooaXpobXpnaLmtYHnqIsgfAoKLS0tCgojIyA1LiDlrZfmrrXjgIHmjqXlj6PkuI7mlbDmja4KCnwg57G75Z6LIHwg5ZCN56ewIHwg5omA5bGe57O757ufIHwg5p2l5rqQIHwg55So6YCUIHwg6KeE5YiZIC8g6L6T5YWl6L6T5Ye6IHwg5byC5bi45aSE55CGIHwKfC0tLXwtLS18LS0tfC0tLXwtLS18LS0tfC0tLXwKfCDlrZfmrrUgfCBjYXJkU3RhdHVzIHwgQUlYIC8gRFRDIHwgU3RhdHVzICYgRmllbGRzIHwg5Yik5pat5pON5L2c5p2D6ZmQIHwgQUNUSVZFIOWPryBMb2NrIC8g5rOo6ZSA77ybU1VTUEVOREVEIOWPryBVbmxvY2sgLyDms6jplIAgfCDnirbmgIHkuI3lhYHorrjliJnkuI3osIPnlKjmjqXlj6MgfAp8IOaOpeWPoyB8IEZyZWV6ZSBDYXJkIHwgRFRDIHwgTWFuYWdlIC8gRFRDIHwg6ZSB5Y2hIC8g5Ya757uTIHwgYFBPU1QgL29wZW5hcGkvdjEvY2FyZC9mcmVlemVgIHwg5aSx6LSl5L+d5oyBIEFDVElWRSB8Cnwg5o6l5Y+jIHwgVW5mcmVlemUgQ2FyZCB8IERUQyB8IE1hbmFnZSAvIERUQyB8IOino+mUgSAvIOino+WGuyB8IGBQT1NUIC9vcGVuYXBpL3YxL2NhcmQvdW5mcmVlemVgIHwg5aSx6LSl5L+d5oyBIFNVU1BFTkRFRCB8Cnwg5o6l5Y+jIHwgVGVybWluYXRlIENhcmQgfCBEVEMgfCBEVEMgQ2FyZCBJc3N1aW5nIEFQSSB8IOazqOmUgOWNoSB8IEFJWCDpobXpnaLmtYHnqIvlvoXnoa7orqQgfCDkuI3nm7TmjqXlrp7njrAgfAp8IOaVsOaNriB8IOaTjeS9nOmZkOWItuefqemYtSB8IENhcmQgfCBNYW5hZ2UgLyA2LjQgfCDmjqfliLblhaXlj6PlsZXnpLogfCDlvJXnlKggU3RhdHVzICYgRmllbGRzIHwg5LiN5YWB6K645YiZ6ZqQ6JePIC8g56aB55SoIC8g5oum5oiqIHwKCi0tLQoKIyMgNi4g6YCa55+l6KeE5YiZ77yI5aaC6YCC55So77yJCgrlvZPliY3kuovlrp7mlofku7bmnKrlrprkuYkgTG9jayAvIFVubG9jayAvIFRlcm1pbmF0ZSDnmoTnlKjmiLfpgJrnn6XjgIIKCnwg6Kem5Y+R5LqL5Lu2IHwg6YCa55+l5rig6YGTIHwg6YCa55+l5a+56LGhIHwg5paH5qGIIC8g5qih5p2/IHwg6Lez6L2s55uu5qCHIHwg5aSx6LSlIC8g6KGl5Y+R6KeE5YiZIHwKfC0tLXwtLS18LS0tfC0tLXwtLS18LS0tfAp8IExvY2sg5oiQ5YqfIHwg5LiN6YCC55SoIHwg5oyB5Y2h55So5oi3IHwg6aG16Z2iIFRvYXN077yM5LiN5piv6YCa55+lIHwgQ2FyZCBIb21lIHwg5LiN6YCC55SoIHwKfCBVbmxvY2sg5oiQ5YqfIHwg5LiN6YCC55SoIHwg5oyB5Y2h55So5oi3IHwg6aG16Z2iIFRvYXN077yM5LiN5piv6YCa55+lIHwgQ2FyZCBIb21lIHwg5LiN6YCC55SoIHwKfCBUZXJtaW5hdGUg5oiQ5YqfIHwg5b6F56Gu6K6kIHwg5oyB5Y2h55So5oi3IHwg5b6F56Gu6K6kIHwg5b6F56Gu6K6kIHwg5b6F56Gu6K6kIHwKCi0tLQoKIyMgNy4g5p2D6ZmQIC8g5ZCI6KeEIC8g6aOO5o6n77yI5aaC6YCC55So77yJCgp8IOexu+WeiyB8IOinhOWImSB8IOW9seWTjSB8IOadpea6kCB8CnwtLS18LS0tfC0tLXwtLS18Cnwg54q25oCB5p2D6ZmQIHwgQUNUSVZFIOWPryBMb2Nr77ybU1VTUEVOREVEIOWPryBVbmxvY2vvvJtBQ1RJVkUgLyBTVVNQRU5ERUQg5Y+v5rOo6ZSAIHwg6Ziy5q2i6ZSZ6K+v54q25oCB5pON5L2cIHwgTWFuYWdlIC8gNi40IHwKfCDouqvku73pqozor4EgfCBVbmxvY2sg6ZyA6Lqr5Lu96aqM6K+BIHwg6Ziy5q2i6Z2e5pys5Lq66Kej5Ya75Y2hIHwgTWFuYWdlIC8gNy41IHwKfCDpo47mjqcgfCBCTE9DS0VEIOS4jeWFgeiuuCBMb2NrIC8gVW5sb2NrIC8g5rOo6ZSAIHwg6Ziy5q2i6aOO5o6n5Y2h6KKr5oGi5aSN5L2/55SoIHwgTWFuYWdlIC8gNi40IHwKfCDkuqTmmJPlronlhaggfCBTVVNQRU5ERUQg5LiN5YWB6K645Lqk5piTIHwg6Ziy5q2i5Ya757uT5Y2h57un57ut5raI6LS5IHwgTWFuYWdlIC8gNi40IHwKCi0tLQoKIyMgOC4g5b6F56Gu6K6k5LqL6aG5Cgp8IOmXrumimCB8IOW9seWTjeiMg+WbtCB8IOW9k+WJjeWkhOeQhiB8IOaYr+WQpumYu+WhnumqjOaUtiB8IOW7uuiuruehruiupOS6uiB8CnwtLS18LS0tfC0tLXwtLS18LS0tfAp8IOazqOmUgOWNoSAvIFRlcm1pbmF0ZSBDYXJkIOeahCBBSVgg5YWl5Y+j44CB56Gu6K6k5by556qX44CB6K6k6K+B5pa55byP44CB6K+35rGC5a2X5q6144CB5oiQ5Yqf5aSx6LSl5paH5qGI44CB5rOo6ZSA5ZCO54q25oCBIHwgTWFuYWdlbWVudCAvIERUQyB8IOmYu+WhniB8IOaYryB8IFBNIC8gRGVzaWduIC8gQkUgfAp8IExvY2sgLyBVbmxvY2sg5piv5ZCm5pSv5oyBIFZpcnR1YWwgQ2FyZO+8m+iLpeaUr+aMge+8jOaWh+ahiOS4uuS9leWGmSBwaHlzaWNhbCBjYXJkIHwgSG9tZSAvIE1hbmFnZW1lbnQgfCDkuI3pmLvloZ4gLyBEZWZlcnJlZCB8IOWQpiB8IFBNIC8gRGVzaWduIHwKfCBVbmxvY2sg5oiQ5Yqf5ZCO5Y6f5paHIGBBY3RpdmF0ZWAg5piv5ZCm5bqU5b2S5LiA5Li6IGBBY3RpdmVgIHwgU3RhdHVzIC8gSG9tZSAvIE1hbmFnZW1lbnQgfCDkuI3pmLvloZ4gfCDlkKYgfCBQTSAvIEJFIHwKfCDnirbmgIHkuI3lhYHorrjmk43kvZzml7bnu5/kuIDpmpDol4/jgIHnpoHnlKjov5jmmK/ngrnlh7vmi6bmiKogfCBGRSAvIFFBIC8gRGVzaWduIHwg5LiN6Zi75aGeIHwg5ZCmIHwgUE0gLyBEZXNpZ24gfAp8IExvY2sgLyBVbmxvY2sg572R57uc5byC5bi45ZKM5ZCO56uv5byC5bi45piv5ZCm57uf5LiA5L2/55So5YWo5bGAIFBvcHVwIHwgRkUgLyBRQSB8IOS4jemYu+WhniB8IOWQpiB8IFBNIC8gUUEgfAoKLS0tCgojIyA5LiDpqozmlLbmoIflh4YgLyDmtYvor5XlnLrmma8KCiMjIyA5LjEg6aqM5pS25qCH5YeGCgp8IOmqjOaUtuWcuuaZryB8IOmqjOaUtuagh+WHhiB8CnwtLS18LS0tfAp8IOato+W4uOa1geeoiyB8IEFDVElWRSDlj68gTG9ja++8jFNVU1BFTkRFRCDlj68gVW5sb2NrIHwKfCDlvILluLjmtYHnqIsgfCDnirbmgIHkuI3lhYHorrjjgIHmjqXlj6PlpLHotKXjgIHorqTor4HlpLHotKXlnYfkv53mjIHljp/nirbmgIEgfAp8IOmhtemdouWxleekuiB8IExvY2sg5pyJ56Gu6K6k5by556qX77ybVW5sb2NrIOaciei6q+S7vemqjOivgeWSjCBMb2FkaW5nIHwKfCDns7vnu5/kuqTkupIgfCBGcmVlemUgLyBVbmZyZWV6ZSDmjqXlj6PmiJDlip/lkI7nirbmgIHliLfmlrAgfAp8IOmAmuefpSB8IExvY2sgLyBVbmxvY2sg5LuF6aG16Z2iIFRvYXN077yM5LiN5a6a5LmJ6YCa55+lIHwKfCDmlbDmja4gLyDln4vngrkgfCDmk43kvZzliY3lkI4gY2FyZFN0YXR1cyDlj6/ov73ouKogfAoKIyMjIDkuMiDmtYvor5XlnLrmma/nn6npmLUKCnwg5Zy65pmvIHwg5YmN572u5p2h5Lu2IHwg55So5oi35pON5L2cIHwg6aKE5pyf6aG16Z2i6KGo546wIHwg6aKE5pyf57O757uf57uT5p6cIHwg5piv5ZCm5b+F5rWLIHwKfC0tLXwtLS18LS0tfC0tLXwtLS18LS0tfAp8IEFDVElWRSBMb2NrIHwgQUNUSVZFIOWNoSB8IOeCueWHuyBMb2NrIOW5tiBZRVMgfCBUb2FzdCBsb2NrZWQgfCBGcmVlemUg5oiQ5Yqf77yM54q25oCBIFNVU1BFTkRFRCB8IOaYryB8CnwgTG9jayDlj5bmtoggfCBBQ1RJVkUg5Y2hIHwg54K55Ye7IExvY2sg5bm2IE5PIHwg5by556qX5YWz6ZetIHwg5LiN6LCD55SoIEZyZWV6ZSB8IOaYryB8CnwgU1VTUEVOREVEIFVubG9jayB8IFNVU1BFTkRFRCDljaEgfCDngrnlh7sgVW5sb2NrIOW5tuiupOivgemAmui/hyB8IFRvYXN0IHVubG9ja2VkIHwgVW5mcmVlemUg5oiQ5Yqf77yM54q25oCBIEFjdGl2ZSB8IOaYryB8CnwgVW5sb2NrIOiupOivgeWksei0pSB8IFNVU1BFTkRFRCDljaEgfCDorqTor4HlpLHotKUgfCDmjIkgU2VjdXJpdHkg5o+Q56S6IHwg5LiN6LCD55SoIFVuZnJlZXplIHwg5pivIHwKfCBQRU5ESU5HIOaTjeS9nCB8IFBFTkRJTkcg5Y2hIHwg5bCd6K+VIExvY2sgLyBVbmxvY2sgfCDkuI3lsZXnpLrmiJbnpoHnlKggfCDkuI3osIPnlKjmjqXlj6MgfCDmmK8gfAp8IFRlcm1pbmF0ZSDlhaXlj6MgfCBBQ1RJVkUgLyBTVVNQRU5ERUQgfCDmn6XnnIvms6jplIDljaEgfCDmtYHnqIvlvoXnoa7orqTvvIzkuI3okL3lrp7njrAgfCDkuI3osIPnlKggVGVybWluYXRlIHwg5pivIHwKCi0tLQoKIyMgMTAuIOadpea6kOW8leeUqAoKLSAoUmVmOiDljoblj7JwcmQvQUlYIENhcmQgbWFuYWdl5qih5Z2X6ZyA5rGCVjEuMC5kb2N4IC8gNi40IC8gNi41IC8gNy40IC8gNy41IC8gOC4xIC8gVjEuMCkKLSAoUmVmOiBEVEMgQ2FyZCBJc3N1aW5nIEFQSSBEb2N1bWVudF8yMDI2MDMxMCAoMSkucGRmIC8gRnJlZXplIENhcmQgLyBVbmZyZWV6ZSBDYXJkIC8gVGVybWluYXRlIENhcmQpCi0gKFJlZjoga25vd2xlZGdlLWJhc2UvY2FyZC9jYXJkLXN0YXR1cy1hbmQtZmllbGRzLm1kKQotIChSZWY6IGtub3dsZWRnZS1iYXNlL3NlY3VyaXR5L2ZhY2UtYXV0aGVudGljYXRpb24ubWQpCi0gKFJlZjogcHJkLXRlbXBsYXRlL3N0YW5kYXJkLXByZC10ZW1wbGF0ZS5tZCAvIHYxLjMpCg==
+---
+module: card
+feature: card-management
+version: "1.3"
+status: active
+source_doc: 历史prd/AIX Card manage模块需求V1.0.docx；DTC Card Issuing API Document_20260310 (1).pdf；prd-template/standard-prd-template.md
+source_section: Manage 6.4 / 6.5 / 7.4 / 7.5 / 8.1；DTC Freeze / Unfreeze / Terminate Card；Standard PRD Template v1.3
+last_updated: 2026-05-04
+owner: 吴忆锋
+readers: [product, ui, dev, qa, business, ai]
+---
+
+# Card Management 卡管理
+
+## 1. 文档信息
+
+| 项目 | 内容 |
+|---|---|
+| 功能名称 | Card Management 卡管理 |
+| 所属模块 | Card |
+| Owner | 吴忆锋 |
+| 版本 | 1.3 |
+| 状态 | Review |
+| 更新时间 | 2026-05-04 |
+| 来源文档 | AIX Card Manage、DTC Card Issuing API、Standard PRD Template v1.3 |
+
+---
+
+## 2. 需求背景、目标与范围
+
+### 2.1 需求背景
+
+用户需要对已激活或已冻结的卡进行 Lock、Unlock 或注销等管理操作。卡管理操作直接影响交易能力和卡安全，必须受卡状态限制和身份验证控制。
+
+### 2.2 用户问题 / 业务问题
+
+如果 Lock / Unlock 状态限制、确认流程、身份验证、DTC 接口和注销卡能力边界不明确，可能出现错误冻结、错误解冻、状态显示不一致或注销能力无法落地。
+
+### 2.3 需求目标
+
+定义 Lock Card、Unlock Card 和 Terminate Card 能力边界，明确允许状态、页面流程、接口依赖、异常处理、待确认事项和验收标准。
+
+### 2.4 涉及功能清单
+
+| 功能点 | 本期范围 | 优先级 | 状态 | 说明 |
+|---|---|---|---|---|
+| Lock Card | In Scope | P0 | Confirmed | ACTIVE 卡允许 Lock |
+| Unlock Card | In Scope | P0 | Confirmed | SUSPENDED 卡允许 Unlock |
+| Terminate Card / 注销卡 | In Scope | P0 | Open | Manage 6.4 允许 ACTIVE / SUSPENDED 注销，AIX 页面流程缺失 |
+| 状态限制 | In Scope | P0 | Confirmed | 引用 Manage 6.4 操作矩阵 |
+| Face Authentication | In Scope | P0 | Confirmed | Unlock 前需身份验证 |
+| Virtual / Physical 文案 | Deferred | P1 | Open | 成功文案写 physical card，是否适用于虚拟卡待确认 |
+
+---
+
+## 3. 业务流程与规则
+
+### 3.1 业务主流程说明
+
+用户从 Card Home 点击 Lock 或 Unlock。系统按卡状态判断是否允许操作。Lock 适用于 ACTIVE 卡，用户确认后调用 Freeze Card；Unlock 适用于 SUSPENDED 卡，用户通过身份验证后调用 Unfreeze Card。注销卡在 Manage 6.4 中显示 ACTIVE / SUSPENDED 可用，且 DTC API 存在 Terminate Card，但 AIX 页面流程未提供，因此只记录能力边界和待确认项。
+
+### 3.2 业务时序图
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor 用户
+    participant App as AIX App
+    participant Card as Card 服务
+    participant Security as 身份验证服务
+    participant DTC as DTC Card API
+
+    用户->>App: 点击 Lock / Unlock / Terminate
+    App->>Card: 校验卡状态和操作权限
+    alt 操作不允许
+        Card-->>App: 返回限制原因
+        App-->>用户: 隐藏、禁用或拦截
+    else Lock Card
+        App-->>用户: 展示 Lock 确认弹窗
+        用户->>App: 确认 Lock
+        App->>DTC: Freeze Card
+        DTC-->>App: 返回冻结结果
+        App-->>用户: 展示成功或失败
+    else Unlock Card
+        App->>Security: 身份验证
+        Security-->>App: 返回认证结果
+        App->>DTC: Unfreeze Card
+        DTC-->>App: 返回解冻结果
+        App-->>用户: 展示成功或失败
+    else Terminate Card
+        App-->>用户: 流程待确认，暂不落实现
+    end
+```
+
+### 3.3 流程步骤与业务规则
+
+| 步骤 | 场景 / 规则 | 触发条件 | 责任方 | 系统处理 | 成功结果 | 失败 / 分支结果 | 来源 |
+|---|---|---|---|---|---|---|---|
+| 1 | 判断操作权限 | 用户点击管理操作 | App / Card | 引用 Manage 6.4 | 允许进入对应流程 | 不允许则隐藏 / 禁用 / 拦截 | Manage / 6.4 |
+| 2 | Lock 确认 | ACTIVE 卡点击 Lock | App | 展示确认弹窗 | 用户确认后调用 Freeze | 用户取消则关闭弹窗 | Manage / 7.4 |
+| 3 | Freeze Card | 用户确认 Lock | App / DTC | 调用 Freeze Card | 卡进入 SUSPENDED | 失败保持 ACTIVE | Manage / 8.1 |
+| 4 | Unlock 认证 | SUSPENDED 卡点击 Unlock | App / Security | 发起身份验证 | 认证通过调用 Unfreeze | 认证失败按 Security 规则 | Manage / 7.5 |
+| 5 | Unfreeze Card | Unlock 认证通过 | App / DTC | 调用 Unfreeze Card | 卡恢复 Active | 失败保持 SUSPENDED | Manage / 8.1 |
+| 6 | Terminate Card | ACTIVE / SUSPENDED 理论可注销 | App / DTC | DTC 有 Terminate Card 能力 | 暂不落页面流程 | 进入待确认 | Manage / 6.4 / DTC |
+
+### 3.4 状态规则
+
+| 状态 | 含义 | 触发条件 | 用户可见表现 | 系统处理 | 可迁移到 | 是否终态 | 来源 |
+|---|---|---|---|---|---|---|---|
+| ACTIVE | 可用卡 | 卡已激活 | 可 Lock、可注销、可交易 | 允许 Freeze Card | SUSPENDED / CANCELLED | 否 | Manage / 6.4 |
+| SUSPENDED | 已冻结卡 | Freeze 成功 | 可 Unlock、可注销，不可交易 | 允许 Unfreeze Card | Active / CANCELLED | 否 | Manage / 6.4 |
+| CANCELLED | 已取消 | 注销或取消 | 不可操作 | 终态 | 不适用 | 是 | Manage / 6.4 |
+| BLOCKED | 阻断 | 风控或外部阻断 | 不允许 Lock / Unlock / 注销 | 仅可查看卡信息 | 待确认 | 否 | Manage / 6.4 |
+| Activate | 疑似 Active | Unfreeze 成功原文 | 不作为独立枚举 | 需归一确认 | Active | 否 | Manage / 7.5 |
+
+### 3.5 业务级异常与失败处理
+
+| 异常场景 | 触发条件 | 错误来源 | 错误码 / 原因 | 用户表现 | 系统处理 | 是否可重试 | 最终状态 |
+|---|---|---|---|---|---|---|---|
+| 状态不允许 | 非允许状态点击操作 | Backend | 状态限制 | 隐藏 / 禁用 / 拦截 | 不调用接口 | 否 | 原状态 |
+| Lock 用户取消 | Lock 弹窗点击 NO | User | 取消 | 关闭弹窗 | 不调用接口 | 是 | ACTIVE |
+| Freeze 失败 | Freeze Card 失败 | DTC / Network | 接口失败 | Freeze failed 或全局异常 | 保持 ACTIVE | 是 | ACTIVE |
+| Unlock 认证失败 | Face Authentication 失败 | Security | 认证失败 | 按 Security 规则 | 不调用 Unfreeze | 是 / 视规则 | SUSPENDED |
+| Unfreeze 失败 | Unfreeze Card 失败 | DTC / Network | 接口失败 | Unfreeze failed 或全局异常 | 保持 SUSPENDED | 是 | SUSPENDED |
+| 注销流程缺失 | 用户需要注销卡 | 产品缺口 | 流程未定义 | 暂不展示或不实现 | 进入待确认 | 否 | 原状态 |
+
+---
+
+## 4. 页面与交互说明
+
+### 4.1 页面关系总览图
+
+```mermaid
+flowchart LR
+    Home[Card Home]
+    LockPopup[Lock Confirm Popup]
+    UnlockAuth[Face Authentication]
+    LockResult[Lock Result Toast]
+    UnlockResult[Unlock Result Toast]
+    Error[Error Popup / Toast]
+
+    Home -->|Lock Card| LockPopup
+    LockPopup -->|YES| LockResult
+    LockPopup -->|NO| Home
+    Home -->|Unlock Card| UnlockAuth
+    UnlockAuth -->|Verified| UnlockResult
+    LockPopup -->|Failed| Error
+    UnlockAuth -->|Failed| Error
+```
+
+### 4.2 Lock / Unlock / Terminate 页面说明
+
+| 区块 | 内容 |
+|---|---|
+| 页面类型 | Popup / 身份验证 / 待确认流程 |
+| 页面目标 | 锁卡、解锁或注销卡 |
+| 入口 / 触发 | Card Home 点击 Lock / Unlock / Terminate |
+| 展示内容 | Lock 确认弹窗；Unlock 身份验证；Terminate 流程待确认 |
+| 用户动作 | YES / NO、完成 Face Authentication |
+| 系统处理 / 责任方 | Lock 调用 Freeze；Unlock 认证后调用 Unfreeze；Terminate 暂不落实现 |
+| 元素 / 状态 / 提示规则 | Lock 成功 Toast：`Your physical card has been locked.`；Unlock 成功 Toast：`Your physical card has been unlocked.`；Virtual 文案待确认 |
+| 成功流转 | 返回 Card Home 并刷新状态 |
+| 失败 / 异常流转 | Freeze / Unfreeze failed 或全局异常 |
+| 备注 / 边界 | 原文 `Activate` 不作为独立状态实现 |
+
+---
+
+## 5. 字段、接口与数据
+
+| 类型 | 名称 | 所属系统 | 来源 | 用途 | 规则 / 输入输出 | 异常处理 |
+|---|---|---|---|---|---|---|
+| 字段 | cardStatus | AIX / DTC | Status & Fields | 判断操作权限 | ACTIVE 可 Lock / 注销；SUSPENDED 可 Unlock / 注销 | 状态不允许则不调用接口 |
+| 接口 | Freeze Card | DTC | Manage / DTC | 锁卡 / 冻结 | `POST /openapi/v1/card/freeze` | 失败保持 ACTIVE |
+| 接口 | Unfreeze Card | DTC | Manage / DTC | 解锁 / 解冻 | `POST /openapi/v1/card/unfreeze` | 失败保持 SUSPENDED |
+| 接口 | Terminate Card | DTC | DTC Card Issuing API | 注销卡 | AIX 页面流程待确认 | 不直接实现 |
+| 数据 | 操作限制矩阵 | Card | Manage / 6.4 | 控制入口展示 | 引用 Status & Fields | 不允许则隐藏 / 禁用 / 拦截 |
+
+---
+
+## 6. 通知规则（如适用）
+
+当前事实文件未定义 Lock / Unlock / Terminate 的用户通知。
+
+| 触发事件 | 通知渠道 | 通知对象 | 文案 / 模板 | 跳转目标 | 失败 / 补发规则 |
+|---|---|---|---|---|---|
+| Lock 成功 | 不适用 | 持卡用户 | 页面 Toast，不是通知 | Card Home | 不适用 |
+| Unlock 成功 | 不适用 | 持卡用户 | 页面 Toast，不是通知 | Card Home | 不适用 |
+| Terminate 成功 | 待确认 | 持卡用户 | 待确认 | 待确认 | 待确认 |
+
+---
+
+## 7. 权限 / 合规 / 风控（如适用）
+
+| 类型 | 规则 | 影响 | 来源 |
+|---|---|---|---|
+| 状态权限 | ACTIVE 可 Lock；SUSPENDED 可 Unlock；ACTIVE / SUSPENDED 可注销 | 防止错误状态操作 | Manage / 6.4 |
+| 身份验证 | Unlock 需身份验证 | 防止非本人解冻卡 | Manage / 7.5 |
+| 风控 | BLOCKED 不允许 Lock / Unlock / 注销 | 防止风控卡被恢复使用 | Manage / 6.4 |
+| 交易安全 | SUSPENDED 不允许交易 | 防止冻结卡继续消费 | Manage / 6.4 |
+
+---
+
+## 8. 待确认事项
+
+| 问题 | 影响范围 | 当前处理 | 是否阻塞验收 | 建议确认人 |
+|---|---|---|---|---|
+| 注销卡 / Terminate Card 的 AIX 入口、确认弹窗、认证方式、请求字段、成功失败文案、注销后状态 | Management / DTC | 阻塞 | 是 | PM / Design / BE |
+| Lock / Unlock 是否支持 Virtual Card；若支持，文案为何写 physical card | Home / Management | 不阻塞 / Deferred | 否 | PM / Design |
+| Unlock 成功后原文 `Activate` 是否应归一为 `Active` | Status / Home / Management | 不阻塞 | 否 | PM / BE |
+| 状态不允许操作时统一隐藏、禁用还是点击拦截 | FE / QA / Design | 不阻塞 | 否 | PM / Design |
+| Lock / Unlock 网络异常和后端异常是否统一使用全局 Popup | FE / QA | 不阻塞 | 否 | PM / QA |
+
+---
+
+## 9. 验收标准 / 测试场景
+
+### 9.1 验收标准
+
+| 验收场景 | 验收标准 |
+|---|---|
+| 正常流程 | ACTIVE 可 Lock，SUSPENDED 可 Unlock |
+| 异常流程 | 状态不允许、接口失败、认证失败均保持原状态 |
+| 页面展示 | Lock 有确认弹窗；Unlock 有身份验证和 Loading |
+| 系统交互 | Freeze / Unfreeze 接口成功后状态刷新 |
+| 通知 | Lock / Unlock 仅页面 Toast，不定义通知 |
+| 数据 / 埋点 | 操作前后 cardStatus 可追踪 |
+
+### 9.2 测试场景矩阵
+
+| 场景 | 前置条件 | 用户操作 | 预期页面表现 | 预期系统结果 | 是否必测 |
+|---|---|---|---|---|---|
+| ACTIVE Lock | ACTIVE 卡 | 点击 Lock 并 YES | Toast locked | Freeze 成功，状态 SUSPENDED | 是 |
+| Lock 取消 | ACTIVE 卡 | 点击 Lock 并 NO | 弹窗关闭 | 不调用 Freeze | 是 |
+| SUSPENDED Unlock | SUSPENDED 卡 | 点击 Unlock 并认证通过 | Toast unlocked | Unfreeze 成功，状态 Active | 是 |
+| Unlock 认证失败 | SUSPENDED 卡 | 认证失败 | 按 Security 提示 | 不调用 Unfreeze | 是 |
+| PENDING 操作 | PENDING 卡 | 尝试 Lock / Unlock | 不展示或禁用 | 不调用接口 | 是 |
+| Terminate 入口 | ACTIVE / SUSPENDED | 查看注销卡 | 流程待确认，不落实现 | 不调用 Terminate | 是 |
+
+---
+
+## 10. 来源引用
+
+- (Ref: 历史prd/AIX Card manage模块需求V1.0.docx / 6.4 / 6.5 / 7.4 / 7.5 / 8.1 / V1.0)
+- (Ref: DTC Card Issuing API Document_20260310 (1).pdf / Freeze Card / Unfreeze Card / Terminate Card)
+- (Ref: knowledge-base/card/card-status-and-fields.md)
+- (Ref: knowledge-base/security/face-authentication.md)
+- (Ref: prd-template/standard-prd-template.md / v1.3)
