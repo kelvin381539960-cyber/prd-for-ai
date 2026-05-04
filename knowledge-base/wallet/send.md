@@ -3,17 +3,17 @@ module: wallet
 feature: send
 version: "1.0"
 status: deferred
-source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/wallet/_index.md；knowledge-base/wallet/balance.md；knowledge-base/wallet/transaction-history.md；用户确认结论 2026-05-01
-source_section: Wallet Send / Withdraw；compliance launch decision；Wallet _index v1.1
+source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/wallet/_index.md；knowledge-base/wallet/balance.md；knowledge-base/transaction/history.md；用户确认结论 2026-05-01
+source_section: Wallet Send / Withdraw 占位；compliance launch decision；Wallet _index v2.1；Transaction History
 last_updated: 2026-05-01
 owner: 吴忆锋
 depends_on:
   - wallet/_index
   - wallet/balance
-  - wallet/transaction-history
+  - transaction/history
 ---
 
-# Wallet Send 钱包发送 / 提现
+# Wallet Send / Withdraw 占位 钱包发送 / 提现
 
 ## 1. 当前状态
 
@@ -38,11 +38,11 @@ Wallet Send 当前状态为 `deferred`。
 | 模块 | 当前处理 |
 |---|---|
 | `wallet/balance.md` | 继续保留，作为钱包余额基础能力 |
-| `wallet/transaction-history.md` | 继续保留，作为钱包交易记录与状态基础事实源 |
+| `transaction/history.md` | 继续保留，作为钱包交易记录与状态基础事实源；Wallet 目录不再维护交易历史主事实 |
 | `wallet/receive.md` | 继续保持独立核验，不默认等同 Deposit |
-| `wallet/deposit.md` | deferred，因合规原因未上线且需重做 |
+| `wallet/deposit.md` | active，包含 GTR / Exchange 地址充值与 WalletConnect 充值；不受 Send / Withdraw deferred 状态影响 |
 | `wallet/swap.md` | deferred，因合规原因未上线且需重做 |
-| `wallet/stage-review.md` | Wallet Gate Review 时需检查 Send / Deposit / Swap 是否仍为 deferred |
+| Wallet Gate Review | 需检查 Send / Withdraw 与 Swap 是否仍为 deferred；Deposit 当前为 active，不应被 Send 状态传导 |
 
 ## 4. 已确认基础事实但不构成 Send 上线事实
 
@@ -92,4 +92,4 @@ Wallet Send 当前状态为 `deferred`。
 - (Ref: 用户确认结论 / 2026-05-01 / Send 因合规原因未上线)
 - (Ref: knowledge-base/wallet/_index.md / Wallet 模块边界)
 - (Ref: knowledge-base/wallet/balance.md / Wallet Balance v1.0)
-- (Ref: knowledge-base/wallet/transaction-history.md / Wallet Transaction History v1.0)
+- (Ref: knowledge-base/transaction/history.md / Wallet Transaction History 主事实源)
