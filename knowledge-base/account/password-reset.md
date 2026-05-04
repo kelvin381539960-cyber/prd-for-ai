@@ -54,41 +54,54 @@ Login Page → Reset Password Page → Identity Verification → Set Password Pa
 
 ### 4.2 业务流程与系统交互时序图
 
+> 本图是业务时序图，用 `sequenceDiagram` 表达泳道式业务流转。  
+> 重点说明用户、AIX App、账户服务、身份验证服务之间的业务责任、关键判断和阶段流转。  
+> 不承载具体交互细节、页面元素规则、错误文案或接口设计；这些内容以交互稿、页面卡片、异常表和相关模块文档为准。
+
 ```mermaid
 sequenceDiagram
     autonumber
-    actor User as User
-    participant Client as AIX App / Client
-    participant Security as Security Module
-    participant Backend as AIX Backend
+    actor 用户
+    participant App as AIX App
+    participant Account as 账户服务
+    participant Security as 身份验证服务
 
-    User->>Client: 在 Login Page 点击 Forgot password
-    Client-->>User: 展示 Reset Password Page
-    User->>Client: 输入重置密码所需信息
-    Client->>Client: 校验输入合法且非空
-    alt Input invalid / empty
-        Client-->>User: 留在 Reset Password Page，Next 保持不可点击或展示校验错误
-    else Input valid
-        Client-->>User: Next enabled
-        User->>Client: 点击 Next
-        Client->>Security: 进入身份验证流程
-        alt Verification failed
-            Security-->>Client: 身份验证失败
-            Client-->>User: 按 Security 模块规则处理
-        else Verification success
-            Security-->>Client: 身份验证成功
-            Client-->>User: 展示 Set Password Page
-            User->>Client: 设置新密码
-            Client->>Client: 按 Registration Set Password 规则校验
-            alt Password invalid
-                Client-->>User: 留在 Set Password Page，展示对应密码错误
-            else Password valid
-                Client->>Backend: 提交密码重置请求
-                Backend->>Backend: 更新登录密码，清除 BIO 信息并关闭已开启 BIO
-                Backend-->>Client: 密码重置成功
-                Client-->>User: 强制登出当前账户，用户需使用新密码重新登录
-            end
-        end
+    Note over 用户,Security: A. 发起密码重置
+    用户->>App: 进入忘记密码流程
+    App-->>用户: 展示密码重置页面
+
+    用户->>App: 提交密码重置账号信息
+    App->>App: 校验账号信息基础规则
+
+    alt 账号信息不满足基础规则
+        App-->>用户: 停留密码重置阶段，按页面规则提示
+    else 账号信息满足基础规则
+        App->>Security: 发起身份验证
+    end
+
+    Note over 用户,Security: B. 身份验证
+    用户->>Security: 完成身份验证
+
+    alt 身份验证不通过
+        Security-->>用户: 按 Security 规则处理
+    else 身份验证通过
+        Security-->>App: 通知验证通过
+        App-->>用户: 进入新密码设置
+    end
+
+    Note over 用户,Account: C. 设置新密码
+    用户->>App: 提交新登录密码
+    App->>App: 校验密码规则
+
+    alt 密码规则不通过
+        App-->>用户: 停留新密码设置阶段，按页面规则提示
+    else 密码规则通过
+        App->>Account: 发起密码重置
+        Account->>Account: 更新登录密码
+        Account->>Account: 清除 BIO 信息并关闭已开启 BIO
+        Account->>Account: 使当前登录态失效
+        Account-->>App: 密码重置成功
+        App-->>用户: 回到未登录状态，需使用新密码重新登录
     end
 ```
 
