@@ -5,7 +5,7 @@ version: "1.1"
 status: active
 source_doc: "历史prd/AIX Card 注册登录需求V1.0 (2).docx；历史prd/AIX Security 身份认证需求V1.0 (1).docx"
 source_section: "7.2 登录功能；7.2.3 Navigation Page；7.2.4 Login Page；7.2.4.1 Select Country Page；7.2.5 Biometric登录；7.2.7 Enable BIO Page"
-last_updated: 2026-05-03
+last_updated: 2026-05-04
 owner: 吴忆锋
 depends_on:
   - account/_index
@@ -248,10 +248,10 @@ sequenceDiagram
 
 | 元素 | 类型 | 展示条件 | 交互规则 | 异常 / 备注 |
 |---|---|---|---|---|
-| Email / Phone 切换 | Tab | 默认展示 | 用户可切换登录方式 | 切换是否保留输入内容需以后续 UI 实现为准 |
-| Email 输入框 | TextInput | Email tab | 非空、邮箱格式校验 | 最大长度以 PRD / 实现为准；旧结构中曾记录 254 字符，需以后续确认 |
+| Email / Phone 切换 | Tab | 默认展示，默认选中 Email | 用户可切换登录方式；切换时保留原填写内容 | 原始 PRD 已明确保留输入内容 |
+| Email 输入框 | TextInput | Email tab | 非空、邮箱格式校验；最长 254 字符 | `Email format is invalid`；`Email should not be empty` |
 | Country Code | Selector | Phone tab | 点击进入 Select Country Page | 中国和中国台湾选项后端隐藏 |
-| Phone 输入框 | TextInput | Phone tab | 手机号少于 6 位提示错误 | `Phone number must be at least 6 digits` |
+| Phone 输入框 | TextInput | Phone tab | 仅允许输入数字；最长 20 位；手机号少于 6 位提示错误 | `Phone number must be at least 6 digits` |
 | Next | Button | 输入框不为空且格式校验通过后可用 | 点击后校验账号与账户状态，正常进入身份验证 | 账号不存在 / 未注册 / Banned 等展示错误 |
 | Quick Login | Button | App 本地检测到可用 Biometric 密钥 | 点击触发生物识别快捷登录 | 无本地 BIO 密钥不展示 |
 | Forgot password | Link / Button | Login Page 展示 | 点击进入 Password Reset Page | 详见 `password-reset.md` |
@@ -382,8 +382,8 @@ sequenceDiagram
 
 | 字段 / 能力 | 用途 | 来源 | 备注 |
 |---|---|---|---|
-| email | Email 登录账号 | Login Page | 非空、格式校验 |
-| phone | Phone 登录账号 | Login Page | Phone 少于 6 位提示错误 |
+| email | Email 登录账号 | Login Page | 非空、格式校验；最长 254 字符 |
+| phone | Phone 登录账号 | Login Page | 仅允许输入数字；最长 20 位；Phone 少于 6 位提示错误 |
 | countryCode | Phone 登录国家 / 地区区号 | Select Country Page | 国家列表隐藏中国和中国台湾 |
 | accountStatus | 登录拦截 | Backend / Account | Banned / Closed / Locked 等不可登录 |
 | biometricLocalKey | 判断是否展示 Quick Login | App 本地 | 本地存在可用 BIO 密钥才展示 Quick Login |
@@ -401,7 +401,8 @@ sequenceDiagram
 | 账号 Banned | 账户被限制登录 | `Account locked. Please contact customer support.` | 阻止登录 | 留在 Login Page |
 | Security 认证失败 / 锁定 | 登录身份验证失败或达到锁定条件 | 按 Security 模块规则 | 阻止进入 Home | Security Handling |
 | Biometric 设备失败 | 设备端验证失败 | 按 Biometric 规则提示 | 不进入 Home | Security / Biometric Handling |
-| Biometric 后端验证失败 | 后端验证不通过 | 弹窗提示 | 不进入 Home | Security / Biometric Handling |
+| Biometric 后端验证失败 | 后端验证不通过 | 弹窗提示错误信息，引导跳转至输入手机号 / 登录页 | 清除本地 BIO 信息，后端关闭该账户 BIO 开关 | Security / Biometric Handling |
+| Android Biometric 超过设备限制次数 | Android 设备验证失败次数超过设备限制 | 弹窗提示错误信息，用户可选择 Use another method | 前端清除本地 BIO 信息并隐藏 Quick Login 按钮 | Login Page |
 | Enable BIO 超过 5 分钟 | 手动登录后超过 5 分钟再点击 Enable now | 进入身份验证 | Security 认证通过后继续设置 | Identity Verification |
 | 设备未开启系统生物识别 | 登录成功后检测到设备未开启人脸 / 指纹 | 不展示 Enable BIO Page | 直接进入 Home | Home |
 
@@ -412,9 +413,9 @@ sequenceDiagram
 | Login 页面 | 展示 Email / Phone / Quick Login / Forgot password / Country Code 等入口 | 无 |
 | 输入校验 | 控制 Next 是否可用，展示基础输入错误 | 无 |
 | 账户校验 | 调用 Backend 判断账号是否存在、状态是否允许登录 | Backend 提供账户状态与校验结果 |
-| 身份认证 | 进入 Security 认证流程，承接认证结果 | Security 维护 OTP、Email OTP、Login Passcode、BIO 等规则 |
+| 身份认证 | 进入 Security 认证流程，承接认证结果 | Security 维护 OTP、Email OTP、Login Passcode、BIO 等规则；登录场景支持 OTP、EMAIL_OTP、Login Passcode、Biometric，Bio 登录场景可跳过后续认证 |
 | Device Biometric | 拉起系统生物识别，承接设备端结果 | OS / Device 控制 Face ID / Touch ID / 指纹 / 人脸识别 |
-| Quick Login | 根据本地 BIO 密钥展示入口；设备端通过后发起后端验证 | Backend 处理 biometric 签名和身份认证 |
+| Quick Login | 根据本地 BIO 密钥展示入口；设备端通过后发起后端验证；后端验证失败时清除本地 BIO、关闭后端 BIO 开关并引导回登录方式；Android 超过设备限制时隐藏 Quick Login | Backend 处理 biometric 签名和身份认证 |
 | Enable BIO | 登录后展示引导，控制 5 分钟免重认证规则 | Security / Device 处理认证与生物识别权限 |
 | Password Reset | 从 Login 跳转到 Password Reset | Password Reset 文件维护具体规则 |
 
@@ -434,7 +435,6 @@ sequenceDiagram
 
 | 问题 | 影响范围 | 当前处理 |
 |---|---|---|
-| Login Page 原 PRD Description 第 1-3 项未在历史文字中完整展开 | Login Page | 以截图和现有规则为准，不补无来源细节 |
 | Phone 少于 6 位错误提示是否为最终英文文案 | Login Page | 保留历史文档记录，后续以文案表 / UI 为准 |
 | 账号 Banned 提示文案是否覆盖 Closed / Locked 等其他状态 | Login / Account Status | 不合并推导，其他状态按 Account / Security 规则确认 |
 | 中国和中国台湾隐藏规则由前端还是后端最终实现 | Select Country Page | 当前记录为后端隐藏，不扩展实现细节 |
