@@ -129,27 +129,21 @@ flowchart LR
 </td>
 <td width="62%" valign="top">
 
-#### 页面摘要
+#### 读者需要知道
 
-- **页面类型**：AIX App 主页面
-- **入口 / 触发**：Navigation Page 点击 `I already have an account`
-- **页面目标**：让已注册用户发起登录
-- **主要能力**：Email 登录、Phone 登录、Quick Login、Forgot password、Sign up
-- **可去向页面**：Identity Verification Page、Device Biometric Verification、Password Reset Page、Select Country Page、Registration Page
-
-#### 页面内容
-
-- 顶部返回按钮
-- 页面标题：`Log in`
-- AIX Logo
-- 主标题：`Log in to AIX`
-- Email / Phone 登录方式切换
-- Email 或 Phone 输入框
-- Country Code 选择入口，仅 Phone tab 展示
-- `Next` 按钮
-- `Forgot password`
-- `Quick Login`，仅本地存在可用 BIO 密钥时展示
-- `Sign up`
+- **入口**：Navigation Page 点击 `I already have an account`
+- **主路径**：输入 Email / Phone → 点击 `Next` → Identity Verification Page
+- **其他路径**：
+  - 点击 Country Code → Select Country Page
+  - 点击 `Forgot password` → Password Reset Page
+  - 点击 `Quick Login` → Device Biometric Verification
+  - 点击 `Sign up` → Registration Page
+- **关键规则**：
+  - Email / Phone 切换时保留已输入内容
+  - Email 最长 254 字符
+  - Phone 仅数字，最长 20 位；少于 6 位提示错误
+  - Quick Login 仅本地存在可用 BIO 密钥时展示
+- **边界**：Security 认证细节不在本页维护，以 `security/*` 为准
 
 </td>
 </tr>
