@@ -166,7 +166,7 @@ flowchart LR
 | 认证方式 | Face Authentication | Security / 7.2；Manage / 7.1 |
 | 认证通过 | 调用敏感信息查询接口 | Manage / 8.1；Application / 2.2 |
 | 认证失败 | 按 Security Face Authentication 失败规则承接 | Security / Face Authentication |
-| 接口失败 | 展示失败承接或错误提示 | Manage / 8.1 |
+| 接口失败 | Toast：`Failed to get card info. Please try again later` | Manage / 7.1 / 8.1 |
 
 ### 6.3 复制规则
 
@@ -205,7 +205,7 @@ flowchart LR
 | Face Authentication 失败 | 活体认证失败或锁定 | 按 Security 规则处理 | 阻止查看 | Security / Face Authentication |
 | Face Authentication 过期 | 认证结果失效 | 重新发起认证 | 阻止查看直到认证通过 | Security / Global Rules |
 | Sensitive Info 查询失败 | DTC 查询接口失败 | Toast `Failed to get card info. Please try again later`；不展示敏感信息 | 不展示敏感信息 | Manage / 7.1 / 8.1 |
-| 接口路径冲突 | Application 与 Manage 路径不一致 | 保留缺口，不强行统一 | 待确认 | Card Status & Fields / KG-CARD-STATUS-009 |
+| 接口路径冲突 | Application 与 Manage 路径不一致 | 当前实现优先使用 POST 路径；旧 GET 路径保留为待确认 | 待确认 | Card Status & Fields / CARD-STATUS-Q003 |
 | 页面停留超时 | 原文未明确 | 不补规则，记录缺口 | 待确认 | 文档缺口 |
 
 ## 9. 风控 / 合规边界
