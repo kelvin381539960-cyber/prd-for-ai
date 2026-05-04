@@ -1,11 +1,11 @@
 ---
 type: prd-template
 feature: standard-prd-template
-version: "1.1"
+version: "1.2"
 status: active
 source_doc: IMPLEMENTATION_PLAN.md
 source_section: "3.4 PRD Template"
-last_updated: 2026-05-03
+last_updated: 2026-05-04
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
 ---
@@ -109,15 +109,22 @@ sequenceDiagram
 > 每个 Page 下面聚合：截图、页面目标、展示内容、用户动作、系统处理、元素规则、状态、提示、异常分支。  
 > 不单独做页面截图索引。
 
-### 4.1 页面流程图
+### 4.1 页面关系总览图
 
-> 主节点必须是 Page；用户动作写在线条上；弹窗 / Toast / 权限提示用非 Page 形状；后端动作、通知、外部账户模型不混入页面主流程。
+> 本图只表达页面之间的主关系，用于快速理解页面跳转。  
+> 主节点必须是 Page；用户动作写在线条上。  
+> 输入校验、账户拦截、认证失败、Toast、弹窗、权限提示、后端动作、通知、外部账户模型等细节不放入总览图，应放到对应 Page 的页面说明、元素明细或异常分支中。
 
 ```mermaid
-flowchart TD
-  A[Page A] -->|User action| B[Page B]
-  B -->|Success| C[Page C]
-  B -->|Fail| D([Error Toast / Popup])
+flowchart LR
+  PageA[Page A]
+  PageB[Page B]
+  PageC[Page C]
+  PageD[Page D]
+
+  PageA -->|User action| PageB
+  PageB -->|Success / next action| PageC
+  PageB -->|Alternative action| PageD
 ```
 
 ### 4.2 Page Name
