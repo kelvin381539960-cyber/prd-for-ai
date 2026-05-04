@@ -45,7 +45,7 @@ Card Status & Fields 用于统一 Card Application、Card Home、Card Manage、C
 | 卡类型 | Virtual Card / Physical Card | Application / 5.1.4；Manage / 7.1 | 实体卡需单独激活 |
 | 卡品牌 | VISA / MASTER | Application / 4.1 | AIX Card 对应 Brand |
 | 费用类型 | application fee / delivery fee | Application / 4.4 | 申卡费 / 邮寄费 |
-| 自动扣款 | OFF / ON | Application / 4.5；Home / 1.2 | 申卡时上送，开启后展示 Auto Debit 标签 |
+| 自动扣款 | 产品口径 OFF / ON；DTC Card Application 口径 `0 / OFF`、`1 / ON` | Application / 4.5；DTC Card Issuing / Card Application | Application 事实文件曾出现 `2 / ON`，与 DTC API 冲突，见待确认事项 CARD-STATUS-Q001 |
 | 敏感认证 | Face Authentication | Security / 7.2；Manage / 7.1-7.3 | 不在本文重复定义认证规则 |
 
 ## 3. 前置条件
@@ -104,7 +104,7 @@ sequenceDiagram
 | 状态接收 | 申卡响应或状态通知 | 接收 DTC 状态 | 进入状态归一 | DTC 原始状态表不可读 |
 | 状态归一 | 进入 Card Home / Manage 前 | 将已知状态映射到产品展示组 | 页面可按组渲染 | Pending / Processing、Inactive / Pending activation 存在口径差异 |
 | 字段读取 | Card Home / Manage 展示 | 调用 Basic / Sensitive / Delivery 等接口读取字段 | 页面展示对应卡信息 | 部分接口字段表缺失 |
-| 操作限制 | 用户触发激活、PIN、Lock、Unlock 等 | 按卡状态判断是否允许操作 | 放行或阻止 | Manage 6.4 操作限制表不可读 |
+| 操作限制 | 用户触发激活、PIN、Lock、Unlock、注销卡、交易等 | 按 Manage 6.4 状态操作矩阵判断是否允许操作 | 放行、隐藏、禁用或阻止 | 注销卡缺少 AIX 独立页面流程，DTC 存在 Terminate Card 能力，见 CARD-STATUS-Q004 |
 | 资金追踪 | 申卡扣费、退款、卡余额回退 | 使用已知字段记录费用与查询依据 | 可记录部分链路 | 申卡扣费流水、退款流水、discount id 缺失 |
 
 ## 5. 页面关系总览
@@ -186,17 +186,31 @@ flowchart LR
 
 ### 6.4 操作限制归纳
 
+#### 6.4.1 Manage 6.4 状态与操作限制矩阵
+
+| 卡状态 | 查看卡信息 | 查看敏感信息 | 卡激活 | Set PIN | Change PIN | Lock Card | Unlock Card | 注销卡 | 交易功能 |
+|---|---|---|---|---|---|---|---|---|---|
+| 待激活 | 否 | 否 | 是 | 否 | 否 | 否 | 否 | 否 | 否 |
+| `ACTIVE` | 是 | 是 | 否 | 是，仅限首次 | 是 | 是 | 否 | 是 | 是 |
+| `SUSPENDED` | 否 | 否 | 否 | 否 | 否 | 否 | 是 | 是 | 否 |
+| `CANCELLED` | 否 | 否 | 否 | 否 | 否 | 否 | 否 | 否 | 否 |
+| `BLOCKED` | 是 | 否 | 否 | 否 | 否 | 否 | 否 | 否 | 否 |
+| `PENDING` | 否 | 否 | 否 | 否 | 否 | 否 | 否 | 否 | 否 |
+
+#### 6.4.2 操作能力说明
+
 | 操作 | 已知允许条件 | 系统动作 | 来源 | 备注 |
 |---|---|---|---|---|
 | Apply Card | 已激活、已冻结、待激活、审核中之和 < 5，且无审核中卡 | 进入 Select Plan | Application / 5.1.4；Home / 6.1 | 达上限或有审核中卡时限制 |
 | Activate Card | 实体卡待激活 | 进入 Active Card Page | Home / 6.1；Manage / 7.2 | 具体接口见 Activation 文件 |
-| View Card Basic Info | 已有卡片 | 查询脱敏卡片信息 | Application / 2.2；Manage / 7.1 | 具体页面见 Card Home / Sensitive Info |
-| View Sensitive Info | 需完成 Face Authentication | 查询 PAN / CVC / expiryDate | Application / 2.2；Manage / 7.1 | Security 规则不在本文重复定义 |
-| Set PIN | 激活流程或 PIN 设置入口 | 设置 4 位 PIN | Manage / 7.2 / 7.3 | 状态允许范围待 6.4 表补齐 |
-| Change PIN | 卡管理入口 | 重置 4 位 PIN | Manage / 7.3 | 状态允许范围待 6.4 表补齐 |
-| Lock Card | Card Home 点击 Lock Card | 调用 Freeze Card | Manage / 7.4 | 成功后 Toast 提示 locked |
-| Unlock Card | Locked / Suspended 卡片 | 调用 Unfreeze Card | Manage / 7.5 | 成功后状态写为 `Activate`，需确认 |
-| Card Transaction Flow | DTC 交易通知 | refund / reversal / topup / deposit 时触发余额处理 | Card Transaction / 7 | 资金回退见单独文件 |
+| View Card Basic Info | `ACTIVE` / `BLOCKED` | 查询脱敏卡片信息 | Manage / 6.4；Application / 2.2；Manage / 7.1 | Card Home 脱敏展示规则与 Card Detail 查询规则需分层处理 |
+| View Sensitive Info | `ACTIVE` 且完成 Face Authentication | 查询 PAN / CVC / expiryDate | Manage / 6.4；Application / 2.2；Manage / 7.1 | Security 规则不在本文重复定义 |
+| Set PIN | `ACTIVE` 且首次设置 | 设置 4 位 PIN | Manage / 6.4；Manage / 7.2 / 7.3 | 待激活与 SUSPENDED 不允许 Set PIN |
+| Change PIN | `ACTIVE` 且已设置 PIN | 重置 4 位 PIN | Manage / 6.4；Manage / 7.3 | 使用 Reset PIN 接口承接 |
+| Lock Card | `ACTIVE` | 调用 Freeze Card | Manage / 6.4；Manage / 7.4 | 成功后 Toast 提示 locked |
+| Unlock Card | `SUSPENDED` | 调用 Unfreeze Card | Manage / 6.4；Manage / 7.5 | 成功后状态写为 `Activate`，按疑似 `Active` 处理并记录待确认 |
+| Terminate Card / 注销卡 | `ACTIVE` / `SUSPENDED` | DTC 存在 Terminate Card 能力 | Manage / 6.4；DTC Card Issuing API | AIX 页面流程、认证、文案、失败处理未提供，见 CARD-STATUS-Q004 |
+| Card Transaction Flow | `ACTIVE` | DTC 交易通知与交易查询 | Manage / 6.4；Card Transaction / 7 | 资金回退见单独文件 |
 
 ## 7. 字段与接口依赖
 
