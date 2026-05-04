@@ -1,7 +1,7 @@
 ---
 type: prd-template
 feature: standard-prd-template
-version: "1.2"
+version: "1.3"
 status: active
 source_doc: IMPLEMENTATION_PLAN.md
 source_section: "3.4 PRD Template"
@@ -60,17 +60,32 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 3.2 业务时序图
 
+> 本图是业务时序图，用 `sequenceDiagram` 表达泳道式业务流转。  
+> 重点说明用户、产品前端、业务服务、外部能力之间的业务责任、关键判断和阶段流转。  
+> 不承载具体交互细节、页面元素规则、错误文案或接口设计；这些内容以交互稿、页面章节、异常表和相关模块文档为准。  
+> 参与方命名应使用业务语义，例如“用户 / AIX App / 账户服务 / 身份验证服务”，避免写成纯技术角色或接口名。  
+> 图中只保留关键业务节点，不展开输入框实时校验、按钮禁用、Toast、Popup 具体文案、接口字段、接口返回码等细节。
+
 ```mermaid
 sequenceDiagram
-  participant User
-  participant App as AIX App
-  participant Backend as AIX Backend
-  participant External as External System
+    autonumber
+    actor 用户
+    participant App as AIX App
+    participant Service as 业务服务
+    participant External as 外部能力 / 外部系统
 
-  User->>App: User action
-  App->>Backend: Request
-  Backend-->>App: Response
-  App-->>User: Show result
+    Note over 用户,External: A. 业务阶段名称
+    用户->>App: 发起业务动作
+    App->>Service: 发起业务校验或业务处理
+    Service->>Service: 执行业务判断
+
+    alt 业务判断不通过
+        Service-->>App: 返回不通过原因
+        App-->>用户: 停留当前阶段，按页面规则提示
+    else 业务判断通过
+        Service->>External: 发起外部能力或下一阶段处理
+        External-->>用户: 进入下一业务阶段
+    end
 ```
 
 ### 3.3 流程步骤与业务规则
