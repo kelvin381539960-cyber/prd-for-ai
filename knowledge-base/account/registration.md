@@ -5,7 +5,7 @@ version: "1.0"
 status: active
 source_doc: 历史prd/AIX Card 注册登录需求V1.0.docx
 source_section: 7.1 注册功能
-last_updated: 2026-05-01
+last_updated: 2026-05-04
 owner: 吴忆锋
 depends_on:
   - account/_index
@@ -115,7 +115,7 @@ sequenceDiagram
             Client-->>User: 留在 Re-enter Password Page，展示 Passwords do not match. Please try again.
         else Backend server error
             Backend-->>Client: 返回服务器错误
-            Client-->>User: 弹出错误提示弹窗
+            Client-->>User: 弹出 Submission failed 错误提示弹窗
         else Password set success
             Backend-->>Client: 完成账户注册，自动登录
             Client-->>User: 展示 Set Tag Page
@@ -348,7 +348,7 @@ Confirm Exit Popup：
 | 页面目的 | 用户再次输入密码并完成密码设置 |
 | 入口 | Set Password Page 点击 Next |
 | 出口 | 创建成功 → Set Tag Page；Back → Confirm Exit Popup |
-| 关键校验 | 与 Set Password 相同的密码规则；两次密码一致性 |
+| 关键校验 | 与 Set Password 相同的密码规则；两次密码一致性；符号错误提示文案按 Re-enter Password 原文 |
 
 | 元素 | 类型 | 展示条件 | 交互规则 | 异常 |
 |---|---|---|---|---|
@@ -357,12 +357,22 @@ Confirm Exit Popup：
 | Password 输入框 | TextInput | 页面展示时 | 最长 32 字符；默认密文；眼睛图标切换明/密文；实时动态校验 | 见密码校验错误 |
 | Next | Button | 错误提示消失后可点击 | 点击后系统完成密码设置 | 密码不一致 / 服务器错误 |
 
+Re-enter Password 校验错误：
+
+| 场景 | 用户提示 | 来源 |
+|---|---|---|
+| 长度不足 8 位或超过 32 位 | `Password must be between 8-32 characters` | AIX Card 注册登录需求V1.0 / 7.1.7 Re-enter Password Page |
+| 不包含小写字母 | `Password must include a lowercase letter` | AIX Card 注册登录需求V1.0 / 7.1.7 Re-enter Password Page |
+| 不包含大写字母 | `Password must include an uppercase letter` | AIX Card 注册登录需求V1.0 / 7.1.7 Re-enter Password Page |
+| 不包含数字 | `Password must include a number` | AIX Card 注册登录需求V1.0 / 7.1.7 Re-enter Password Page |
+| 不包含符号 | `Password must include a symbol` | AIX Card 注册登录需求V1.0 / 7.1.7 Re-enter Password Page |
+
 提交结果：
 
 | 场景 | 用户提示 / 动作 | 来源 |
 |---|---|---|
 | 两次密码不一致 | `Passwords do not match. Please try again.` | AIX Card 注册登录需求V1.0 / 7.1.7 Re-enter Password Page |
-| 创建失败 | 后端返回服务器错误，系统弹出错误提示弹窗 | AIX Card 注册登录需求V1.0 / 7.1.7 Re-enter Password Page |
+| 创建失败 | 弹窗：Title `Submission failed`；Content `Something went wrong. Please try again.`；`Try again` 重新提交；`Leave` 关闭弹窗、退出当前流程并返回业务流程入口页面 | AIX Card 注册登录需求V1.0 / 7.1.7 Re-enter Password Page |
 | 创建成功 | 完成账户注册流程，用户自动登录，并跳转至 Set Tag Page | AIX Card 注册登录需求V1.0 / 7.1.7 Re-enter Password Page |
 
 ### 6.6 Set Tag Page
@@ -459,7 +469,7 @@ Tag 创建结果：
 | Email OTP 失败 | Security 校验失败 | 按 Security 模块规则处理 | 阻止进入 Set Password | Email OTP Page / Security Handling | AIX Card 注册登录需求V1.0 / 7.1.5 |
 | 密码规则不满足 | 密码长度或字符组成不满足 | 对应密码错误提示 | 阻止 Next | 留在 Set Password / Re-enter Password | AIX Card 注册登录需求V1.0 / 7.1.6 / 7.1.7 |
 | 两次密码不一致 | Re-enter Password 与首次密码不同 | `Passwords do not match. Please try again.` | 阻止创建 | 留在 Re-enter Password Page | AIX Card 注册登录需求V1.0 / 7.1.7 |
-| 密码创建失败 | 后端返回服务器错误 | 系统弹出错误提示弹窗 | 阻止进入 Set Tag | Re-enter Password Page | AIX Card 注册登录需求V1.0 / 7.1.7 |
+| 密码创建失败 | 后端返回服务器错误 | 弹窗：Title `Submission failed`；Content `Something went wrong. Please try again.`；`Try again` 重新提交；`Leave` 关闭弹窗、退出当前流程并返回业务流程入口页面 | 阻止进入 Set Tag | Re-enter Password Page | AIX Card 注册登录需求V1.0 / 7.1.7 |
 | AIX Tag 格式错误 | 不满足格式 / 保留字规则 | 展示 Requirements | 阻止 Confirm | 留在 Set Tag Page | AIX Card 注册登录需求V1.0 / 7.1.8 |
 | AIX Tag 已被占用 | 唯一性校验不通过 | `This tag is already taken. Try another one.` | 阻止创建 | 留在 Set Tag Page | AIX Card 注册登录需求V1.0 / 7.1.8 |
 | AIX Tag 创建失败 | 后端返回服务器错误 | `Something went wrong. Please try again later.` | 阻止完成创建 | 留在 Set Tag Page | AIX Card 注册登录需求V1.0 / 7.1.8 |
