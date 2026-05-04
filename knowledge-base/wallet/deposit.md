@@ -1,11 +1,11 @@
 ---
 module: wallet
 feature: deposit
-version: "1.6"
+version: "1.7"
 status: active
 source_doc: 历史prd/AIX Wallet V1.0【Deposit & Send & Swap 】.docx；DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx；DTC Wallet OpenAPI Documentation；[2025-11-25] AIX+Notification（push及站内信）.docx；knowledge-base/wallet/_index.md；knowledge-base/wallet/balance.md；knowledge-base/transaction/history.md；knowledge-base/common/walletconnect.md；knowledge-base/common/notification.md；knowledge-base/common/errors.md；knowledge-base/common/dtc.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-01；用户确认结论 2026-05-02
 source_section: AIX Wallet V1.0 / 3.1 交易说明；3.2 接口范围；6.3 钱包地址充值 Deposit（GTR's Wallet）；6.4 钱包链接充值 Deposit（WalletConnect）；7.4 钱包充值 Wallet Connect；Documentation dtc-nodejs-wallet-connect / 1 Request Wallet Connect Token；3 Server-Emitted Events；4 Client-Emitted Events；5 sequence diagram；6 Enum Reference；ALL-GAP 总表
-last_updated: 2026-05-02
+last_updated: 2026-05-04
 owner: 吴忆锋
 depends_on:
   - wallet/_index
@@ -78,7 +78,7 @@ flowchart TD
 |---|---|---|---|
 | Deposit 入口 | AIX Home 点击 Deposit；Wallet 首页点击 Deposit | AIX Wallet PRD / 6.3.5、6.4.5 | 本次按用户确认去掉“单币种页”作为落库流程图入口 |
 | 充值方式弹窗 | `Select deposit method` | AIX Wallet PRD / 6.3.5、6.4.5 | 不补未出现方式 |
-| From an Exchange | 进入地址充值 / GTR 路径 | AIX Wallet PRD / 6.3 | 当前支持 Binance，列表可配置 |
+| From an Exchange | 进入地址充值 / GTR 路径 | AIX Wallet PRD / 6.3 | 按当前 PRD 口径：仅 Binance；实际支持范围以 DTC / GTR 配置为准，列表可配置 |
 | From a Self-custodial Wallet | 进入 WalletConnect 路径 | AIX Wallet PRD / 6.4 | 适用于用户自己掌握私钥的钱包 |
 
 ## 4. GTR / Exchange 地址充值
