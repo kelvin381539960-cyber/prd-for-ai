@@ -1,1 +1,242 @@
-LS0tCm1vZHVsZTogY2FyZApmZWF0dXJlOiBwaW4KdmVyc2lvbjogIjEuMiIKc3RhdHVzOiBhY3RpdmUKc291cmNlX2RvYzog5Y6G5Y+ycHJkL0FJWCBDYXJkIG1hbmFnZeaooeWdl+mcgOaxglYxLjAuZG9jeO+8m0RUQyBDYXJkIElzc3VpbmcgQVBJIERvY3VtZW50XzIwMjYwMzEwICgxKS5wZGbvvJtwcmQtdGVtcGxhdGUvc3RhbmRhcmQtcHJkLXRlbXBsYXRlLm1kCnNvdXJjZV9zZWN0aW9uOiBNYW5hZ2UgNi40IC8gNy4zIC8gOC4x77ybRFRDIEdlbmVyYXRlIFB1YmxpYyBQaW4gS2V5IC8gU2V0IENhcmQgUElOIC8gT1RQIEZvciBSZXNldCBQSU4gLyBSZXNldCBDYXJkIFBJTu+8m1N0YW5kYXJkIFBSRCBUZW1wbGF0ZSB2MS4zCmxhc3RfdXBkYXRlZDogMjAyNi0wNS0wNApvd25lcjog5ZC05b+G6ZSLCnJlYWRlcnM6IFtwcm9kdWN0LCB1aSwgZGV2LCBxYSwgYnVzaW5lc3MsIGFpXQpkZXBlbmRzX29uOgogIC0gY2FyZC9faW5kZXgKICAtIGNhcmQvY2FyZC1zdGF0dXMtYW5kLWZpZWxkcwogIC0gY2FyZC9hY3RpdmF0aW9uCiAgLSBzZWN1cml0eS9mYWNlLWF1dGhlbnRpY2F0aW9uCiAgLSBpbnRlZ3JhdGlvbnMvZHRjCiAgLSBfbWV0YS93cml0aW5nLXN0YW5kYXJkCiAgLSBjaGFuZ2Vsb2cva25vd2xlZGdlLWdhcHMKLS0tCgojIENhcmQgUElOIOiuvue9ruS4jumHjee9rgoKIyMgMS4g5paH5qGj5L+h5oGvCgp8IOmhueebriB8IOWGheWuuSB8CnwtLS18LS0tfAp8IOWKn+iDveWQjeensCB8IENhcmQgUElOIOiuvue9ruS4jumHjee9riB8Cnwg5omA5bGe5qih5Z2XIHwgQ2FyZCB8CnwgT3duZXIgfCDlkLTlv4bplIsgfAp8IOeJiOacrCB8IDEuMiB8Cnwg54q25oCBIHwgUmV2aWV3IHwKfCDmm7TmlrDml7bpl7QgfCAyMDI2LTA1LTA0IHwKfCDmnaXmupDmlofmoaMgfCBBSVggQ2FyZCBNYW5hZ2XjgIFEVEMgQ2FyZCBJc3N1aW5nIEFQSeOAgVN0YW5kYXJkIFBSRCBUZW1wbGF0ZSB2MS4zIHwKCi0tLQoKIyMgMi4g6ZyA5rGC6IOM5pmv44CB55uu5qCH5LiO6IyD5Zu0CgojIyMgMi4xIOmcgOaxguiDjOaZrwoKUGh5c2ljYWwgQ2FyZCDmv4DmtLvlkI7vvIznlKjmiLfpnIDopoHorr7nva7miJbkv67mlLkgNCDkvY0gUElO77yM55So5LqO5a6e5L2T5Y2h57q/5LiL5Lqk5piT5oiW55u45YWz5a6J5YWo5Zy65pmv44CCUElOIOaTjeS9nOS+nei1luWNoeeKtuaAgeOAgVBJTiDmmK/lkKblt7Lorr7nva7jgIFEVEMgUElOIOWFrOmSpeS4jiBSZXNldCBQSU4gT1RQIOiDveWKm+OAggoKIyMjIDIuMiDnlKjmiLfpl67popggLyDkuJrliqHpl67popgKCuWmguaenCBQSU4g5pON5L2c54q25oCB6ZmQ5Yi244CB5Yqg5a+G5a2X5q6144CBU2V0IC8gQ2hhbmdlIC8gUmVzZXQg55qE5ZG95ZCN5YWz57O75ZKMIE9UUCDop4TliJnkuI3mmI7noa7vvIzlj6/og73lr7zoh7TnlKjmiLflnKjplJnor6/ljaHnirbmgIHkuIvorr7nva4gUElO44CB5o6l5Y+j5a2X5q616ZSZ6K+v5oiWIFBJTiDkv67mlLnmtYHnqIvml6Dms5XpqozmlLbjgIIKCiMjIyAyLjMg6ZyA5rGC55uu5qCHCgrmmI7noa4gU2V0IFBJTuOAgUNoYW5nZSBQSU7jgIFSZXNldCBQSU4g55qE5YWl5Y+j5p2h5Lu244CB5Lia5Yqh5rWB56iL44CB6aG16Z2i6KeE5YiZ44CBRFRDIOaOpeWPo+Wtl+auteOAgeW8guW4uOWkhOeQhuOAgeW+heehruiupOS6i+mhueWSjOmqjOaUtuagh+WHhuOAggoKIyMjIDIuNCDmtonlj4rlip/og73muIXljZUKCnwg5Yqf6IO954K5IHwg5pys5pyf6IyD5Zu0IHwg5LyY5YWI57qnIHwg54q25oCBIHwg6K+05piOIHwKfC0tLXwtLS18LS0tfC0tLXwtLS18CnwgU2V0IFBJTiDlhaXlj6MgfCBJbiBTY29wZSB8IFAwIHwgQ29uZmlybWVkIHwgQUNUSVZFIOWunuS9k+WNoeS4lOacquiuvue9riBQSU4gfAp8IENoYW5nZSBQSU4g5YWl5Y+jIHwgSW4gU2NvcGUgfCBQMCB8IENvbmZpcm1lZCB8IEFDVElWRSDlrp7kvZPljaHkuJTlt7Lorr7nva4gUElOIHwKfCBQSU4g54q25oCB6ZmQ5Yi2IHwgSW4gU2NvcGUgfCBQMCB8IENvbmZpcm1lZCB8IOW8leeUqCBNYW5hZ2UgNi40IOaTjeS9nOefqemYtSB8CnwgR2VuZXJhdGUgUHVibGljIFBpbiBLZXkgfCBJbiBTY29wZSB8IFAwIHwgT3BlbiB8IOiOt+WPliBQSU4g5Yqg5a+G5YWs6ZKl77yM5a2X5q6157uG6IqC5b6F56Gu6K6kIHwKfCBTZXQgQ2FyZCBQSU4gfCBJbiBTY29wZSB8IFAwIHwgT3BlbiB8IOS9v+eUqCBgZW5jcnlwdGVkUGluYCDmj5DkuqTpppbmrKEgUElOIHwKfCBPVFAgRm9yIFJlc2V0IFBJTiB8IEluIFNjb3BlIHwgUDAgfCBPcGVuIHwg5L+u5pS5IFBJTiDliY0gT1RQIOinhOWImeW8leeUqCBTZWN1cml0eSB8CnwgUmVzZXQgQ2FyZCBQSU4gfCBJbiBTY29wZSB8IFAwIHwgT3BlbiB8IOWJjeerr+aYvuekuiBDaGFuZ2UgUElO77yM5o6l5Y+j5ZG95ZCN5Li6IFJlc2V0IHwKfCDml6cgUElOIOagoemqjCB8IERlZmVycmVkIHwgUDEgfCBPcGVuIHwg5b2T5YmN5LqL5a6e5pyq6K+05piO5piv5ZCm6ZyA6KaB5penIFBJTiB8CgotLS0KCiMjIDMuIOS4muWKoea1geeoi+S4juinhOWImQoKIyMjIDMuMSDkuJrliqHkuLvmtYHnqIvor7TmmI4KCuezu+e7n+agueaNruWNoeeKtuaAgeWSjCBQSU4g6K6+572u54q25oCB5Yaz5a6a5bGV56S6IFNldCBQSU4g5oiWIENoYW5nZSBQSU7jgILpppbmrKHorr7nva4gUElOIOaXtu+8jOeUqOaIt+i/m+WFpSBTZXQgUElOIOa1geeoi++8jOezu+e7n+iOt+WPliBQdWJsaWMgUGluIEtlee+8jOWKoOWvhiA0IOS9jSBQSU4g5ZCO6LCD55SoIFNldCBDYXJkIFBJTuOAguS/ruaUuSBQSU4g5pe277yM55So5oi35LuOIENoYW5nZSBQSU4g5YWl5Y+j6L+b5YWl77yM57O757uf5YWI6Kem5Y+RIE9UUCBGb3IgUmVzZXQgUElO77yM5YaN55So5paw55qEIGBlbmNyeXB0ZWRQaW5gIOiwg+eUqCBSZXNldCBDYXJkIFBJTuOAggoKIyMjIDMuMiDkuJrliqHml7bluo/lm74KCmBgYG1lcm1haWQKc2VxdWVuY2VEaWFncmFtCiAgICBhdXRvbnVtYmVyCiAgICBhY3RvciDnlKjmiLcKICAgIHBhcnRpY2lwYW50IEFwcCBhcyBBSVggQXBwCiAgICBwYXJ0aWNpcGFudCBDYXJkIGFzIENhcmQg5pyN5YqhCiAgICBwYXJ0aWNpcGFudCBTZWN1cml0eSBhcyBPVFAgLyBTZWN1cml0eSDmnI3liqEKICAgIHBhcnRpY2lwYW50IERUQyBhcyBEVEMgQ2FyZCBBUEkKCiAgICDnlKjmiLctPj5BcHA6IOeCueWHuyBTZXQgUElOIC8gQ2hhbmdlIFBJTgogICAgQXBwLT4+Q2FyZDog5qCh6aqM5Y2h54q25oCB5ZKMIFBJTiDorr7nva7nirbmgIEKICAgIGFsdCDnirbmgIHkuI3lhYHorrgKICAgICAgICBDYXJkLS0+PkFwcDog6L+U5Zue5LiN5Y+v5pON5L2cCiAgICAgICAgQXBwLS0+PueUqOaItzog5LiN5bGV56S644CB56aB55So5oiW5oum5oiq5YWl5Y+jCiAgICBlbHNlIFNldCBQSU4KICAgICAgICBBcHAtPj5EVEM6IEdlbmVyYXRlIFB1YmxpYyBQaW4gS2V5CiAgICAgICAgRFRDLS0+PkFwcDog6L+U5Zue5YWs6ZKlCiAgICAgICAg55So5oi3LT4+QXBwOiDovpPlhaUgNCDkvY0gUElOCiAgICAgICAgQXBwLT4+RFRDOiBTZXQgQ2FyZCBQSU4oZW5jcnlwdGVkUGluKQogICAgICAgIERUQy0tPj5BcHA6IOi/lOWbnuiuvue9rue7k+aenAogICAgICAgIEFwcC0tPj7nlKjmiLc6IOWxleekuuaIkOWKn+aIluWksei0pQogICAgZWxzZSBDaGFuZ2UgUElOCiAgICAgICAgQXBwLT4+U2VjdXJpdHk6IE9UUCBGb3IgUmVzZXQgUElOCiAgICAgICAgU2VjdXJpdHktLT4+QXBwOiDov5Tlm54gT1RQIOagoemqjOe7k+aenAogICAgICAgIEFwcC0+PkRUQzogR2VuZXJhdGUgUHVibGljIFBpbiBLZXkKICAgICAgICBEVEMtLT4+QXBwOiDov5Tlm57lhazpkqUKICAgICAgICDnlKjmiLctPj5BcHA6IOi+k+WFpeaWsCA0IOS9jSBQSU4KICAgICAgICBBcHAtPj5EVEM6IFJlc2V0IENhcmQgUElOKGVuY3J5cHRlZFBpbikKICAgICAgICBEVEMtLT4+QXBwOiDov5Tlm57ph43nva7nu5PmnpwKICAgICAgICBBcHAtLT4+55So5oi3OiDlsZXnpLrmiJDlip/miJblpLHotKUKICAgIGVuZApgYGAKCiMjIyAzLjMg5rWB56iL5q2l6aqk5LiO5Lia5Yqh6KeE5YiZCgp8IOatpemqpCB8IOWcuuaZryAvIOinhOWImSB8IOinpuWPkeadoeS7tiB8IOi0o+S7u+aWuSB8IOezu+e7n+WkhOeQhiB8IOaIkOWKn+e7k+aenCB8IOWksei0pSAvIOWIhuaUr+e7k+aenCB8IOadpea6kCB8CnwtLS18LS0tfC0tLXwtLS18LS0tfC0tLXwtLS18LS0tfAp8IDEgfCDliKTmlq3lhaXlj6MgfCDnlKjmiLfov5vlhaUgQ2FyZCBIb21lIHwgQXBwIC8gQ2FyZCB8IOaMiSBBQ1RJVkUgKyBwaW5TZXRTdGF0dXMg5Yik5patIHwg5bGV56S6IFNldCAvIENoYW5nZSBQSU4gfCDlhbbku5bnirbmgIHkuI3lsZXnpLrmiJbnpoHnlKggfCBNYW5hZ2UgLyA2LjQgfAp8IDIgfCDojrflj5blhazpkqUgfCDov5vlhaUgUElOIOaPkOS6pOa1geeoiyB8IEFwcCAvIERUQyB8IOiwg+eUqCBHZW5lcmF0ZSBQdWJsaWMgUGluIEtleSB8IOi/lOWbnuWFrOmSpSB8IOWksei0peS4jeWPr+aPkOS6pCBQSU4gfCBEVEMgQVBJIHwKfCAzIHwg6L6T5YWlIFBJTiB8IOeUqOaIt+i+k+WFpSBQSU4gfCBBcHAgfCDmoKHpqowgNCDkvY3mlbDlrZcgfCDlj6/mj5DkuqQgfCDmoLzlvI/plJnor6/kuI3lj6/mj5DkuqQgfCBNYW5hZ2UgLyA3LjMgfAp8IDQgfCBTZXQgUElOIHwg6aaW5qyh6K6+572uIHwgQXBwIC8gRFRDIHwg5Yqg5a+G5ZCO5o+Q5LqkIGBlbmNyeXB0ZWRQaW5gIHwg6K6+572u5oiQ5Yqf77yM5bCP57qi54K55raI5aSxIHwg5L+d5oyB5pyq6K6+572uIHwgRFRDIEFQSSB8CnwgNSB8IE9UUCDmoKHpqowgfCBDaGFuZ2UgUElOIHwgQXBwIC8gU2VjdXJpdHkgfCDlj5HpgIHlubbmoKHpqowgT1RQIHwg5Y+vIFJlc2V0IFBJTiB8IE9UUCDlpLHotKXmjIkgU2VjdXJpdHkg6KeE5YiZIHwgTWFuYWdlIC8gNy4zIHwKfCA2IHwgUmVzZXQgUElOIHwgT1RQIOmAmui/hyB8IEFwcCAvIERUQyB8IOWKoOWvhuWQjuaPkOS6pCBgZW5jcnlwdGVkUGluYCB8IOmHjee9ruaIkOWKnyB8IOS/neaMgeWOnyBQSU4g54q25oCBIHwgRFRDIEFQSSB8CgojIyMgMy40IOeKtuaAgeinhOWImQoKfCDnirbmgIEgfCDlkKvkuYkgfCDop6blj5HmnaHku7YgfCDnlKjmiLflj6/op4HooajnjrAgfCDns7vnu5/lpITnkIYgfCDlj6/ov4Hnp7vliLAgfCDmmK/lkKbnu4jmgIEgfCDmnaXmupAgfAp8LS0tfC0tLXwtLS18LS0tfC0tLXwtLS18LS0tfC0tLXwKfCBBQ1RJVkUgKyDmnKrorr7nva4gUElOIHwg5Y+v6aaW5qyh6K6+572uIHwg5a6e5L2T5Y2h5bey5r+A5rS75LiU5pyq6K6+572uIFBJTiB8IOWxleekuiBTZXQgUElOIOWSjOWwj+e6oueCuSB8IOWFgeiuuCBTZXQgQ2FyZCBQSU4gfCBBQ1RJVkUgKyDlt7Lorr7nva4gUElOIHwg5ZCmIHwgTWFuYWdlIC8gNi40IC8gQXBwbGljYXRpb24gfAp8IEFDVElWRSArIOW3suiuvue9riBQSU4gfCDlj6/kv67mlLkgUElOIHwg5a6e5L2T5Y2h5bey6K6+572uIFBJTiB8IOWxleekuiBDaGFuZ2UgUElOIHwg5YWB6K64IFJlc2V0IENhcmQgUElOIHwgQUNUSVZFICsg5bey6K6+572uIFBJTiB8IOWQpiB8IE1hbmFnZSAvIDYuNCB8Cnwg6Z2eIEFDVElWRSB8IOS4jeWFgeiuuCBQSU4g5pON5L2cIHwg5b6F5r+A5rS744CBU1VTUEVOREVE44CBQ0FOQ0VMTEVE44CBQkxPQ0tFROOAgVBFTkRJTkcgfCDkuI3lsZXnpLrmiJbnpoHnlKggUElOIOWFpeWPoyB8IOS4jeiwg+eUqCBQSU4g5o6l5Y+jIHwg5LiN6YCC55SoIHwg5ZCmIHwgTWFuYWdlIC8gNi40IHwKCiMjIyAzLjUg5Lia5Yqh57qn5byC5bi45LiO5aSx6LSl5aSE55CGCgp8IOW8guW4uOWcuuaZryB8IOinpuWPkeadoeS7tiB8IOmUmeivr+adpea6kCB8IOmUmeivr+eggSAvIOWOn+WboCB8IOeUqOaIt+ihqOeOsCB8IOezu+e7n+WkhOeQhiB8IOaYr+WQpuWPr+mHjeivlSB8IOacgOe7iOeKtuaAgSB8CnwtLS18LS0tfC0tLXwtLS18LS0tfC0tLXwtLS18LS0tfAp8IOeKtuaAgeS4jeWFgeiuuCBQSU4gfCDpnZ4gQUNUSVZFIOaIliBQSU4g54q25oCB5LiN5Yy56YWNIHwgQmFja2VuZCB8IOeKtuaAgemZkOWItiB8IOS4jeWxleekuuaIluemgeeUqOWFpeWPoyB8IOS4jeiwg+eUqOaOpeWPoyB8IOWQpiB8IOWOn+eKtuaAgSB8CnwgUHVibGljIEtleSDojrflj5blpLHotKUgfCBEVEMg6L+U5Zue5aSx6LSl5oiW572R57uc5byC5bi4IHwgRFRDIC8gTmV0d29yayB8IOaOpeWPo+Wksei0pSB8IOWxleekuuWksei0peaPkOekuiB8IOS4jeWFgeiuuOaPkOS6pCBQSU4gfCDmmK8gfCDljp/nirbmgIEgfAp8IFBJTiDmoLzlvI/plJnor68gfCDpnZ4gNCDkvY3mlbDlrZcgfCBBcHAgfCDmoKHpqozlpLHotKUgfCDmjInpobXpnaLmj5DnpLogfCDkuI3mj5DkuqQgfCDmmK8gfCDlvZPliY3pobUgfAp8IFNldCBQSU4g5aSx6LSlIHwgRFRDIOi/lOWbnuWksei0pSB8IERUQyB8IOaOpeWPo+Wksei0pSB8IOWxleekuuWksei0peaJv+aOpSB8IOS/neaMgeacquiuvue9riB8IOaYryB8IOacquiuvue9riB8CnwgT1RQIOWksei0pSB8IFJlc2V0IFBJTiBPVFAg5aSx6LSl5oiW6ZSB5a6aIHwgU2VjdXJpdHkgfCBPVFAgZXJyb3IgfCDmjIkgU2VjdXJpdHkg6KeE5YiZIHwg5LiN5o+Q5LqkIFJlc2V0IFBJTiB8IOinhuinhOWImSB8IOWOn+eKtuaAgSB8CnwgUmVzZXQgUElOIOWksei0pSB8IERUQyDov5Tlm57lpLHotKUgfCBEVEMgfCDmjqXlj6PlpLHotKUgfCDlsZXnpLrlpLHotKXmib/mjqUgfCDkv53mjIHljp8gUElOIHwg5pivIHwg5bey6K6+572uIHwKCi0tLQoKIyMgNC4g6aG16Z2i5LiO5Lqk5LqS6K+05piOCgojIyMgNC4xIOmhtemdouWFs+ezu+aAu+iniOWbvgoKYGBgbWVybWFpZApmbG93Y2hhcnQgTFIKICAgIEhvbWVbQ2FyZCBIb21lXQogICAgU2V0UElOW1NldCBQSU4gUGFnZV0KICAgIENoYW5nZVBJTltDaGFuZ2UgUElOIFBhZ2VdCiAgICBPVFBbT1RQIFZlcmlmaWNhdGlvbl0KICAgIFN1Y2Nlc3NbUElOIFN1Y2Nlc3NdCiAgICBFcnJvcltQSU4gRXJyb3JdCgogICAgSG9tZSAtLT58U2V0IFBJTnwgU2V0UElOCiAgICBIb21lIC0tPnxDaGFuZ2UgUElOfCBPVFAKICAgIE9UUCAtLT58VmVyaWZpZWR8IENoYW5nZVBJTgogICAgU2V0UElOIC0tPnxTdWJtaXR8IFN1Y2Nlc3MKICAgIENoYW5nZVBJTiAtLT58U3VibWl0fCBTdWNjZXNzCiAgICBTZXRQSU4gLS0+fEZhaWxlZHwgRXJyb3IKICAgIENoYW5nZVBJTiAtLT58RmFpbGVkfCBFcnJvcgpgYGAKCiMjIyA0LjIgU2V0IFBJTiBQYWdlCgp8IOWMuuWdlyB8IOWGheWuuSB8CnwtLS18LS0tfAp8IOmhtemdouexu+WeiyB8IOS4u+mhtemdoiAvIOihqOWNlemhtemdoiB8Cnwg6aG16Z2i55uu5qCHIHwg6K6+572u5a6e5L2T5Y2h6aaW5qyhIFBJTiB8Cnwg5YWl5Y+jIC8g6Kem5Y+RIHwgQUNUSVZFIOWunuS9k+WNoeacquiuvue9riBQSU7vvIzngrnlh7sgU2V0IFBJTiB8Cnwg5bGV56S65YaF5a65IHwgUElOIOi+k+WFpeahhuOAgeaPkOS6pOaMiemSruOAgeW/heimgeWuieWFqOaPkOekuiB8Cnwg55So5oi35Yqo5L2cIHwg6L6T5YWlIDQg5L2NIFBJTiDlubbmj5DkuqQgfAp8IOezu+e7n+WkhOeQhiAvIOi0o+S7u+aWuSB8IOiOt+WPliBQdWJsaWMgUGluIEtlee+8jOWKoOWvhuWQjuiwg+eUqCBTZXQgQ2FyZCBQSU4gfAp8IOWFg+e0oCAvIOeKtuaAgSAvIOaPkOekuuinhOWImSB8IOS7hSA0IOS9jeaVsOWtl+WPr+aPkOS6pO+8m+aPkOS6pOS4reemgeatoumHjeWkjeaPkOS6pCB8Cnwg5oiQ5Yqf5rWB6L2sIHwg6L+U5ZueIENhcmQgSG9tZe+8jOWwj+e6oueCuea2iOWksSB8Cnwg5aSx6LSlIC8g5byC5bi45rWB6L2sIHwg5YWs6ZKl5oiWIFNldCBQSU4g5aSx6LSl5pe25YGc55WZ5b2T5YmN5rWB56iLIHwKfCDlpIfms6ggLyDovrnnlYwgfCBQSU4g5Yqg5a+G57uG6IqC5b6FIERUQyBBUEkg56Gu6K6kIHwKCiMjIyA0LjMgQ2hhbmdlIFBJTiBQYWdlCgp8IOWMuuWdlyB8IOWGheWuuSB8CnwtLS18LS0tfAp8IOmhtemdouexu+WeiyB8IOS4u+mhtemdoiAvIOihqOWNlemhtemdoiB8Cnwg6aG16Z2i55uu5qCHIHwg5L+u5pS55bey6K6+572u55qE5a6e5L2T5Y2hIFBJTiB8Cnwg5YWl5Y+jIC8g6Kem5Y+RIHwgQUNUSVZFIOWunuS9k+WNoeW3suiuvue9riBQSU7vvIzngrnlh7sgQ2hhbmdlIFBJTiB8Cnwg5bGV56S65YaF5a65IHwgT1RQIOa1geeoi+OAgeaWsCBQSU4g6L6T5YWl5qGG44CB5o+Q5Lqk5oyJ6ZKuIHwKfCDnlKjmiLfliqjkvZwgfCDpgJrov4cgT1RQIOWQjui+k+WFpeaWsCBQSU4g5bm25o+Q5LqkIHwKfCDns7vnu5/lpITnkIYgLyDotKPku7vmlrkgfCBPVFAgRm9yIFJlc2V0IFBJTiAtPiBHZW5lcmF0ZSBQdWJsaWMgUGluIEtleSAtPiBSZXNldCBDYXJkIFBJTiB8Cnwg5YWD57SgIC8g54q25oCBIC8g5o+Q56S66KeE5YiZIHwg5YmN56uv5pi+56S6IENoYW5nZSBQSU7vvIzmjqXlj6Plkb3lkI3kuLogUmVzZXQgQ2FyZCBQSU4gfAp8IOaIkOWKn+a1gei9rCB8IOi/lOWbniBDYXJkIEhvbWXvvIzkv53mjIHlt7Lorr7nva4gUElOIOeKtuaAgSB8Cnwg5aSx6LSlIC8g5byC5bi45rWB6L2sIHwgT1RQIC8g5YWs6ZKlIC8gUmVzZXQg5o6l5Y+j5aSx6LSl5pe25YGc55WZ5oiW5oyJIFNlY3VyaXR5IOinhOWImeWkhOeQhiB8Cnwg5aSH5rOoIC8g6L6555WMIHwg5b2T5YmN5LqL5a6e5pyq6K+05piO5piv5ZCm6ZyA6KaB5penIFBJTu+8jOS4jeW+l+ihpeWGmSB8CgotLS0KCiMjIDUuIOWtl+auteOAgeaOpeWPo+S4juaVsOaNrgoKfCDnsbvlnosgfCDlkI3np7AgfCDmiYDlsZ7ns7vnu58gfCDmnaXmupAgfCDnlKjpgJQgfCDop4TliJkgLyDovpPlhaXovpPlh7ogfCDlvILluLjlpITnkIYgfAp8LS0tfC0tLXwtLS18LS0tfC0tLXwtLS18LS0tfAp8IOWtl+autSB8IHBpblNldFN0YXR1cyB8IEFJWCB8IEFwcGxpY2F0aW9uIC8gSG9tZSB8IOWIpOaWrSBTZXQg5oiWIENoYW5nZSBQSU4gfCDlrZfmrrXlkI3kuLrkuqflk4HljaDkvY3vvIznnJ/lrp7lrZfmrrXlvoXnoa7orqQgfCDlrZfmrrXnvLrlpLHml7bov5vlhaXlvoXnoa7orqQgfAp8IOWtl+autSB8IGVuY3J5cHRlZFBpbiB8IERUQyB8IERUQyBBUEkgfCDmj5DkuqTliqDlr4YgUElOIHwg5L2/55SoIGBlbmNyeXB0ZWRQaW5g77yM5LiN5b6X5L2/55So5pen5a2X5q61IGBlbmNyeXB0UGluYCB8IOWtl+autemUmeivr+S8muWvvOiHtOaOpeWPo+Wksei0pSB8Cnwg5o6l5Y+jIHwgR2VuZXJhdGUgUHVibGljIFBpbiBLZXkgfCBEVEMgfCBEVEMgQVBJIHwg6I635Y+WIFBJTiDliqDlr4blhazpkqUgfCDov5vlhaUgU2V0IC8gUmVzZXQg5YmN6LCD55SoIHwg5aSx6LSl5LiN5Y+v5o+Q5LqkIHwKfCDmjqXlj6MgfCBTZXQgQ2FyZCBQSU4gfCBEVEMgfCBEVEMgQVBJIHwg6aaW5qyh6K6+572uIFBJTiB8IOaPkOS6pCBgZW5jcnlwdGVkUGluYCB8IOWksei0peS/neaMgeacquiuvue9riB8Cnwg5o6l5Y+jIHwgT1RQIEZvciBSZXNldCBQSU4gfCBEVEMgLyBTZWN1cml0eSB8IERUQyBBUEkgLyBNYW5hZ2UgfCBSZXNldCBQSU4g5YmNIE9UUCB8IOaMiSBTZWN1cml0eSBPVFAg6KeE5YiZIHwg5aSx6LSl5LiN57un57utIHwKfCDmjqXlj6MgfCBSZXNldCBDYXJkIFBJTiB8IERUQyB8IERUQyBBUEkgfCDph43nva4gUElOIHwg5o+Q5LqkIGBlbmNyeXB0ZWRQaW5gIHwg5aSx6LSl5L+d5oyB5Y6fIFBJTiB8Cnwg5pWw5o2uIHwgUElOIOeKtuaAgSB8IEFJWCB8IEhvbWUgLyBNYW5hZ2UgfCDmjqfliLblhaXlj6PlkozlsI/nuqLngrkgfCDmnKrorr7nva7lsZXnpLogU2V0IFBJTu+8m+W3suiuvue9ruWxleekuiBDaGFuZ2UgUElOIHwg5Yi35paw5aSx6LSl5pe25L+d5oyB5Y6f54q25oCBIHwKCi0tLQoKIyMgNi4g6YCa55+l6KeE5YiZ77yI5aaC6YCC55So77yJCgrkuI3pgILnlKjjgILlvZPliY3kuovlrp7mlofku7bmnKrlrprkuYkgUElOIOiuvue9ruaIlumHjee9rueahCBQdXNoIC8gSW4tYXBwIOmAmuefpeOAggoKfCDop6blj5Hkuovku7YgfCDpgJrnn6XmuKDpgZMgfCDpgJrnn6Xlr7nosaEgfCDmlofmoYggLyDmqKHmnb8gfCDot7Povaznm67moIcgfCDlpLHotKUgLyDooaXlj5Hop4TliJkgfAp8LS0tfC0tLXwtLS18LS0tfC0tLXwtLS18Cnwg5LiN6YCC55SoIHwg5LiN6YCC55SoIHwg5LiN6YCC55SoIHwg5LiN6YCC55SoIHwg5LiN6YCC55SoIHwg5LiN6YCC55SoIHwKCi0tLQoKIyMgNy4g5p2D6ZmQIC8g5ZCI6KeEIC8g6aOO5o6n77yI5aaC6YCC55So77yJCgp8IOexu+WeiyB8IOinhOWImSB8IOW9seWTjSB8IOadpea6kCB8CnwtLS18LS0tfC0tLXwtLS18Cnwg54q25oCB5p2D6ZmQIHwg5LuFIEFDVElWRSDlrp7kvZPljaHlhYHorrggU2V0IC8gQ2hhbmdlIFBJTiB8IOmYsuatoumdnuWPr+eUqOWNoeaTjeS9nCBQSU4gfCBNYW5hZ2UgLyA2LjQgfAp8IOWuieWFqCB8IFBJTiDlv4XpobvliqDlr4blkI7mj5DkuqQgfCDpmLLmraIgUElOIOaYjuaWh+azhOmcsiB8IERUQyBBUEkgfAp8IOiupOivgSB8IENoYW5nZSBQSU4g6ZyAIE9UUCBGb3IgUmVzZXQgUElOIHwg6Ziy5q2i6Z2e5pys5Lq66YeN572uIHwgTWFuYWdlIC8gNy4zIHwKfCDpmpDnp4EgfCBQSU4g5LiN5b6X5Zyo5YmN56uv5oyB5LmF5YyW5piO5paHIHwg6Ziy5q2i5pWP5oSf5L+h5oGv5rOE6ZyyIHwgU2VjdXJpdHkgLyBEVEMgfAoKLS0tCgojIyA4LiDlvoXnoa7orqTkuovpobkKCnwg6Zeu6aKYIHwg5b2x5ZON6IyD5Zu0IHwg5b2T5YmN5aSE55CGIHwg5piv5ZCm6Zi75aGe6aqM5pS2IHwg5bu66K6u56Gu6K6k5Lq6IHwKfC0tLXwtLS18LS0tfC0tLXwtLS18Cnwg5r+A5rS75oiQ5Yqf5ZCOIFNldCBQSU4g5piv5ZCm5by65Yi277yM55So5oi35piv5ZCm5Y+v6Lez6L+HIHwgQWN0aXZhdGlvbiAvIFBJTiAvIEhvbWUgfCDpmLvloZ4gfCDmmK8gfCBQTSAvIERlc2lnbiAvIEJFIHwKfCBgcGluU2V0U3RhdHVzYCDnmoTnnJ/lrp7lkI7nq6/lrZfmrrXlkI3lkozliLfmlrDmnLrliLYgfCBIb21lIC8gUElOIHwg5LiN6Zi75aGeIC8gRGVmZXJyZWQgfCDlkKYgfCBCRSAvIFFBIHwKfCBQdWJsaWMgUGluIEtleSDlk43lupTlrZfmrrXjgIHliqDlr4bnrpfms5XjgIFgZW5jcnlwdGVkUGluYCDnu5PmnoQgfCBGRSAvIEJFIC8gRFRDIHwg6Zi75aGeIHwg5pivIHwgQkUgLyBEVEMgLyBTZWN1cml0eSB8CnwgUElOIOWksei0peaPkOekuuaWh+ahiOOAgeWwneivleasoeaVsOOAgemUgeWumuinhOWImSB8IFBJTiAvIFNlY3VyaXR5IHwg5LiN6Zi75aGeIC8gRGVmZXJyZWQgfCDlkKYgfCBQTSAvIFNlY3VyaXR5IHwKfCBDaGFuZ2UgUElOIOaYr+WQpumcgOimgeaXpyBQSU4gfCBQSU4gfCDkuI3pmLvloZ4gLyBEZWZlcnJlZCB8IOWQpiB8IFBNIC8gQkUgfAoKLS0tCgojIyA5LiDpqozmlLbmoIflh4YgLyDmtYvor5XlnLrmma8KCiMjIyA5LjEg6aqM5pS25qCH5YeGCgp8IOmqjOaUtuWcuuaZryB8IOmqjOaUtuagh+WHhiB8CnwtLS18LS0tfAp8IOato+W4uOa1geeoiyB8IEFDVElWRSDlrp7kvZPljaHlj6/mjIkgUElOIOeKtuaAgei/m+WFpSBTZXQg5oiWIENoYW5nZSBQSU7vvIzlubbmiJDlip/mj5DkuqQgfAp8IOW8guW4uOa1geeoiyB8IOmdniBBQ1RJVkXjgIHmoLzlvI/plJnor6/jgIHlhazpkqXlpLHotKXjgIFPVFAg5aSx6LSl44CB5o6l5Y+j5aSx6LSl5Z2H5LiN5Y+v6ZSZ6K+v5pu05pawIFBJTiDnirbmgIEgfAp8IOmhtemdouWxleekuiB8IOacquiuvue9riBQSU4g5bGV56S6IFNldCBQSU4g5ZKM5bCP57qi54K577yb5bey6K6+572u5bGV56S6IENoYW5nZSBQSU4gfAp8IOezu+e7n+S6pOS6kiB8IFNldCAvIFJlc2V0IOWdh+S9v+eUqCBgZW5jcnlwdGVkUGluYO+8jFJlc2V0IOWJjemcgOimgSBPVFAgfAp8IOmAmuefpSB8IOS4jemAgueUqCB8Cnwg5pWw5o2uIC8g5Z+L54K5IHwgUElOIOeKtuaAgeWIt+aWsOWQjiBIb21lIOWFpeWPo+ato+ehruWPmOWMliB8CgojIyMgOS4yIOa1i+ivleWcuuaZr+efqemYtQoKfCDlnLrmma8gfCDliY3nva7mnaHku7YgfCDnlKjmiLfmk43kvZwgfCDpooTmnJ/pobXpnaLooajnjrAgfCDpooTmnJ/ns7vnu5/nu5PmnpwgfCDmmK/lkKblv4XmtYsgfAp8LS0tfC0tLXwtLS18LS0tfC0tLXwtLS18Cnwg6aaW5qyhIFNldCBQSU4gfCBBQ1RJVkUg5LiU5pyq6K6+572uIFBJTiB8IOeCueWHuyBTZXQgUElOIOW5tuaPkOS6pCA0IOS9jeaVsOWtlyB8IOiuvue9ruaIkOWKn++8jOWwj+e6oueCuea2iOWksSB8IFNldCBDYXJkIFBJTiDmiJDlip8gfCDmmK8gfAp8IENoYW5nZSBQSU4gfCBBQ1RJVkUg5LiU5bey6K6+572uIFBJTiB8IOeCueWHuyBDaGFuZ2UgUElO77yM6YCa6L+HIE9UUO+8jOaPkOS6pOaWsCBQSU4gfCDkv67mlLnmiJDlip8gfCBSZXNldCBDYXJkIFBJTiDmiJDlip8gfCDmmK8gfAp8IOmdniBBQ1RJVkUg5Y2hIHwgU1VTUEVOREVEIC8gUEVORElORyB8IOafpeeciyBQSU4g5YWl5Y+jIHwg5LiN5bGV56S65oiW56aB55SoIHwg5LiN6LCD55SoIFBJTiDmjqXlj6MgfCDmmK8gfAp8IFBJTiDmoLzlvI/plJnor68gfCBBQ1RJVkUgfCDovpPlhaXpnZ4gNCDkvY3mlbDlrZcgfCDkuI3lj6/mj5DkuqQgfCDkuI3osIPnlKjmjqXlj6MgfCDmmK8gfAp8IOWFrOmSpeWksei0pSB8IEFDVElWRSB8IOi/m+WFpSBQSU4g6aG16Z2iIHwg5bGV56S65aSx6LSl5o+Q56S6IHwg5LiN5o+Q5LqkIFBJTiB8IOaYryB8CnwgT1RQIOWksei0pSB8IOW3suiuvue9riBQSU4gfCBDaGFuZ2UgUElOIE9UUCDlpLHotKUgfCDmjIkgU2VjdXJpdHkg6KeE5YiZ5o+Q56S6IHwg5LiN6LCD55SoIFJlc2V0IFBJTiB8IOaYryB8CgotLS0KCiMjIDEwLiDmnaXmupDlvJXnlKgKCi0gKFJlZjog5Y6G5Y+ycHJkL0FJWCBDYXJkIG1hbmFnZeaooeWdl+mcgOaxglYxLjAuZG9jeCAvIDYuNCAvIDcuMyAvIDguMSAvIFYxLjApCi0gKFJlZjogRFRDIENhcmQgSXNzdWluZyBBUEkgRG9jdW1lbnRfMjAyNjAzMTAgKDEpLnBkZiAvIEdlbmVyYXRlIFB1YmxpYyBQaW4gS2V5IC8gU2V0IENhcmQgUElOIC8gT1RQIEZvciBSZXNldCBQSU4gLyBSZXNldCBDYXJkIFBJTikKLSAoUmVmOiBrbm93bGVkZ2UtYmFzZS9jYXJkL2NhcmQtc3RhdHVzLWFuZC1maWVsZHMubWQpCi0gKFJlZjoga25vd2xlZGdlLWJhc2UvY2FyZC9hY3RpdmF0aW9uLm1kKQotIChSZWY6IHByZC10ZW1wbGF0ZS9zdGFuZGFyZC1wcmQtdGVtcGxhdGUubWQgLyB2MS4zKQo=
+---
+module: card
+feature: pin
+version: "1.3"
+status: active
+source_doc: 历史prd/AIX Card manage模块需求V1.0.docx；DTC Card Issuing API Document_20260310 (1).pdf；prd-template/standard-prd-template.md
+source_section: Manage 6.4 / 7.3 / 8.1；DTC PIN APIs；Standard PRD Template v1.3
+last_updated: 2026-05-04
+owner: 吴忆锋
+readers: [product, ui, dev, qa, business, ai]
+---
+
+# Card PIN 设置与重置
+
+## 1. 文档信息
+
+| 项目 | 内容 |
+|---|---|
+| 功能名称 | Card PIN 设置与重置 |
+| 所属模块 | Card |
+| Owner | 吴忆锋 |
+| 版本 | 1.3 |
+| 状态 | Review |
+| 更新时间 | 2026-05-04 |
+| 来源文档 | AIX Card Manage、DTC Card Issuing API、Standard PRD Template v1.3 |
+
+---
+
+## 2. 需求背景、目标与范围
+
+### 2.1 需求背景
+
+Physical Card 激活后，用户需要设置或修改 4 位 PIN。PIN 操作依赖卡状态、PIN 是否已设置、DTC PIN 公钥与 Reset PIN OTP 能力。
+
+### 2.2 用户问题 / 业务问题
+
+如果 PIN 操作状态限制、加密字段、Set / Change / Reset 的命名关系和 OTP 规则不明确，可能导致错误状态下设置 PIN、接口字段错误或 PIN 修改流程无法验收。
+
+### 2.3 需求目标
+
+明确 Set PIN、Change PIN、Reset PIN 的入口条件、业务流程、页面规则、DTC 接口字段、异常处理、待确认事项和验收标准。
+
+### 2.4 涉及功能清单
+
+| 功能点 | 本期范围 | 优先级 | 状态 | 说明 |
+|---|---|---|---|---|
+| Set PIN 入口 | In Scope | P0 | Confirmed | ACTIVE 实体卡且未设置 PIN |
+| Change PIN 入口 | In Scope | P0 | Confirmed | ACTIVE 实体卡且已设置 PIN |
+| PIN 状态限制 | In Scope | P0 | Confirmed | 引用 Manage 6.4 操作矩阵 |
+| Generate Public Pin Key | In Scope | P0 | Open | 获取 PIN 加密公钥，字段细节待确认 |
+| Set Card PIN | In Scope | P0 | Open | 使用 `encryptedPin` 提交首次 PIN |
+| OTP For Reset PIN | In Scope | P0 | Open | 修改 PIN 前 OTP 规则引用 Security |
+| Reset Card PIN | In Scope | P0 | Open | 前端显示 Change PIN，接口命名为 Reset |
+
+---
+
+## 3. 业务流程与规则
+
+### 3.1 业务主流程说明
+
+系统根据卡状态和 PIN 设置状态决定展示 Set PIN 或 Change PIN。首次设置 PIN 时，用户进入 Set PIN 流程，系统获取 Public Pin Key，加密 4 位 PIN 后调用 Set Card PIN。修改 PIN 时，用户从 Change PIN 入口进入，系统先触发 OTP For Reset PIN，再用新的 `encryptedPin` 调用 Reset Card PIN。
+
+### 3.2 业务时序图
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor 用户
+    participant App as AIX App
+    participant Card as Card 服务
+    participant Security as OTP / Security 服务
+    participant DTC as DTC Card API
+
+    用户->>App: 点击 Set PIN / Change PIN
+    App->>Card: 校验卡状态和 PIN 设置状态
+    alt 状态不允许
+        Card-->>App: 返回不可操作
+        App-->>用户: 不展示、禁用或拦截入口
+    else Set PIN
+        App->>DTC: Generate Public Pin Key
+        用户->>App: 输入 4 位 PIN
+        App->>DTC: Set Card PIN(encryptedPin)
+        App-->>用户: 展示成功或失败
+    else Change PIN
+        App->>Security: OTP For Reset PIN
+        App->>DTC: Generate Public Pin Key
+        用户->>App: 输入新 4 位 PIN
+        App->>DTC: Reset Card PIN(encryptedPin)
+        App-->>用户: 展示成功或失败
+    end
+```
+
+### 3.3 流程步骤与业务规则
+
+| 步骤 | 场景 / 规则 | 触发条件 | 责任方 | 系统处理 | 成功结果 | 失败 / 分支结果 | 来源 |
+|---|---|---|---|---|---|---|---|
+| 1 | 判断入口 | 用户进入 Card Home | App / Card | 按 ACTIVE + pinSetStatus 判断 | 展示 Set / Change PIN | 其他状态不展示或禁用 | Manage / 6.4 |
+| 2 | 获取公钥 | 进入 PIN 提交流程 | App / DTC | 调用 Generate Public Pin Key | 返回公钥 | 失败不可提交 PIN | DTC API |
+| 3 | 输入 PIN | 用户输入 PIN | App | 校验 4 位数字 | 可提交 | 格式错误不可提交 | Manage / 7.3 |
+| 4 | Set PIN | 首次设置 | App / DTC | 加密后提交 `encryptedPin` | 设置成功，小红点消失 | 保持未设置 | DTC API |
+| 5 | OTP 校验 | Change PIN | App / Security | 发送并校验 OTP | 可 Reset PIN | OTP 失败按 Security 规则 | Manage / 7.3 |
+| 6 | Reset PIN | OTP 通过 | App / DTC | 加密后提交 `encryptedPin` | 重置成功 | 保持原 PIN 状态 | DTC API |
+
+### 3.4 状态规则
+
+| 状态 | 含义 | 触发条件 | 用户可见表现 | 系统处理 | 可迁移到 | 是否终态 | 来源 |
+|---|---|---|---|---|---|---|---|
+| ACTIVE + 未设置 PIN | 可首次设置 | 实体卡已激活且未设置 PIN | 展示 Set PIN 和小红点 | 允许 Set Card PIN | ACTIVE + 已设置 PIN | 否 | Manage / 6.4 |
+| ACTIVE + 已设置 PIN | 可修改 PIN | 实体卡已设置 PIN | 展示 Change PIN | 允许 Reset Card PIN | ACTIVE + 已设置 PIN | 否 | Manage / 6.4 |
+| 非 ACTIVE | 不允许 PIN 操作 | 待激活、SUSPENDED、CANCELLED、BLOCKED、PENDING | 不展示或禁用 PIN 入口 | 不调用 PIN 接口 | 不适用 | 否 | Manage / 6.4 |
+
+### 3.5 业务级异常与失败处理
+
+| 异常场景 | 触发条件 | 错误来源 | 错误码 / 原因 | 用户表现 | 系统处理 | 是否可重试 | 最终状态 |
+|---|---|---|---|---|---|---|---|
+| 状态不允许 PIN | 非 ACTIVE 或 PIN 状态不匹配 | Backend | 状态限制 | 不展示或禁用入口 | 不调用接口 | 否 | 原状态 |
+| Public Key 获取失败 | DTC 返回失败或网络异常 | DTC / Network | 接口失败 | 展示失败提示 | 不允许提交 PIN | 是 | 原状态 |
+| PIN 格式错误 | 非 4 位数字 | App | 校验失败 | 按页面提示 | 不提交 | 是 | 当前页 |
+| Set PIN 失败 | DTC 返回失败 | DTC | 接口失败 | 展示失败承接 | 保持未设置 | 是 | 未设置 |
+| OTP 失败 | Reset PIN OTP 失败或锁定 | Security | OTP error | 按 Security 规则 | 不提交 Reset PIN | 视规则 | 原状态 |
+| Reset PIN 失败 | DTC 返回失败 | DTC | 接口失败 | 展示失败承接 | 保持原 PIN | 是 | 已设置 |
+
+---
+
+## 4. 页面与交互说明
+
+### 4.1 页面关系总览图
+
+```mermaid
+flowchart LR
+    Home[Card Home]
+    SetPIN[Set PIN Page]
+    ChangePIN[Change PIN Page]
+    OTP[OTP Verification]
+    Success[PIN Success]
+    Error[PIN Error]
+
+    Home -->|Set PIN| SetPIN
+    Home -->|Change PIN| OTP
+    OTP -->|Verified| ChangePIN
+    SetPIN -->|Submit| Success
+    ChangePIN -->|Submit| Success
+    SetPIN -->|Failed| Error
+    ChangePIN -->|Failed| Error
+```
+
+### 4.2 Set / Change PIN Page
+
+| 区块 | 内容 |
+|---|---|
+| 页面类型 | 主页面 / 表单页面 |
+| 页面目标 | 设置或修改实体卡 PIN |
+| 入口 / 触发 | ACTIVE 实体卡点击 Set PIN 或 Change PIN |
+| 展示内容 | PIN 输入框、提交按钮、必要安全提示；Change PIN 前需 OTP |
+| 用户动作 | 输入 4 位 PIN 并提交 |
+| 系统处理 / 责任方 | 获取 Public Pin Key，加密后调用 Set / Reset Card PIN |
+| 元素 / 状态 / 提示规则 | 仅 4 位数字可提交；提交中禁止重复提交 |
+| 成功流转 | 返回 Card Home，PIN 状态更新 |
+| 失败 / 异常流转 | 公钥、OTP、Set / Reset 失败时停留当前流程 |
+| 备注 / 边界 | 当前事实未说明是否需要旧 PIN，不得补写 |
+
+---
+
+## 5. 字段、接口与数据
+
+| 类型 | 名称 | 所属系统 | 来源 | 用途 | 规则 / 输入输出 | 异常处理 |
+|---|---|---|---|---|---|---|
+| 字段 | pinSetStatus | AIX | Application / Home | 判断 Set 或 Change PIN | 字段名为产品占位，真实字段待确认 | 字段缺失时进入待确认 |
+| 字段 | encryptedPin | DTC | DTC API | 提交加密 PIN | 使用 `encryptedPin`，不得使用旧字段 `encryptPin` | 字段错误会导致接口失败 |
+| 接口 | Generate Public Pin Key | DTC | DTC API | 获取 PIN 加密公钥 | 进入 Set / Reset 前调用 | 失败不可提交 |
+| 接口 | Set Card PIN | DTC | DTC API | 首次设置 PIN | 提交 `encryptedPin` | 失败保持未设置 |
+| 接口 | OTP For Reset PIN | DTC / Security | DTC API / Manage | Reset PIN 前 OTP | 按 Security OTP 规则 | 失败不继续 |
+| 接口 | Reset Card PIN | DTC | DTC API | 重置 PIN | 提交 `encryptedPin` | 失败保持原 PIN |
+
+---
+
+## 6. 通知规则（如适用）
+
+不适用。当前事实文件未定义 PIN 设置或重置的 Push / In-app 通知。
+
+| 触发事件 | 通知渠道 | 通知对象 | 文案 / 模板 | 跳转目标 | 失败 / 补发规则 |
+|---|---|---|---|---|---|
+| 不适用 | 不适用 | 不适用 | 不适用 | 不适用 | 不适用 |
+
+---
+
+## 7. 权限 / 合规 / 风控（如适用）
+
+| 类型 | 规则 | 影响 | 来源 |
+|---|---|---|---|
+| 状态权限 | 仅 ACTIVE 实体卡允许 Set / Change PIN | 防止非可用卡操作 PIN | Manage / 6.4 |
+| 安全 | PIN 必须加密后提交 | 防止 PIN 明文泄露 | DTC API |
+| 认证 | Change PIN 需 OTP For Reset PIN | 防止非本人重置 | Manage / 7.3 |
+| 隐私 | PIN 不得在前端持久化明文 | 防止敏感信息泄露 | Security / DTC |
+
+---
+
+## 8. 待确认事项
+
+| 问题 | 影响范围 | 当前处理 | 是否阻塞验收 | 建议确认人 |
+|---|---|---|---|---|
+| 激活成功后 Set PIN 是否强制，用户是否可跳过 | Activation / PIN / Home | 阻塞 | 是 | PM / Design / BE |
+| `pinSetStatus` 的真实后端字段名和刷新机制 | Home / PIN | 不阻塞 / Deferred | 否 | BE / QA |
+| Public Pin Key 响应字段、加密算法、`encryptedPin` 结构 | FE / BE / DTC | 阻塞 | 是 | BE / DTC / Security |
+| PIN 失败提示文案、尝试次数、锁定规则 | PIN / Security | 不阻塞 / Deferred | 否 | PM / Security |
+| Change PIN 是否需要旧 PIN | PIN | 不阻塞 / Deferred | 否 | PM / BE |
+
+---
+
+## 9. 验收标准 / 测试场景
+
+### 9.1 验收标准
+
+| 验收场景 | 验收标准 |
+|---|---|
+| 正常流程 | ACTIVE 实体卡可按 PIN 状态进入 Set 或 Change PIN，并成功提交 |
+| 异常流程 | 非 ACTIVE、格式错误、公钥失败、OTP 失败、接口失败均不可错误更新 PIN 状态 |
+| 页面展示 | 未设置 PIN 展示 Set PIN 和小红点；已设置展示 Change PIN |
+| 系统交互 | Set / Reset 均使用 `encryptedPin`，Reset 前需要 OTP |
+| 通知 | 不适用 |
+| 数据 / 埋点 | PIN 状态刷新后 Home 入口正确变化 |
+
+### 9.2 测试场景矩阵
+
+| 场景 | 前置条件 | 用户操作 | 预期页面表现 | 预期系统结果 | 是否必测 |
+|---|---|---|---|---|---|
+| 首次 Set PIN | ACTIVE 且未设置 PIN | 点击 Set PIN 并提交 4 位数字 | 设置成功，小红点消失 | Set Card PIN 成功 | 是 |
+| Change PIN | ACTIVE 且已设置 PIN | 点击 Change PIN，通过 OTP，提交新 PIN | 修改成功 | Reset Card PIN 成功 | 是 |
+| 非 ACTIVE 卡 | SUSPENDED / PENDING | 查看 PIN 入口 | 不展示或禁用 | 不调用 PIN 接口 | 是 |
+| PIN 格式错误 | ACTIVE | 输入非 4 位数字 | 不可提交 | 不调用接口 | 是 |
+| 公钥失败 | ACTIVE | 进入 PIN 页面 | 展示失败提示 | 不提交 PIN | 是 |
+| OTP 失败 | 已设置 PIN | Change PIN OTP 失败 | 按 Security 规则提示 | 不调用 Reset PIN | 是 |
+
+---
+
+## 10. 来源引用
+
+- (Ref: 历史prd/AIX Card manage模块需求V1.0.docx / 6.4 / 7.3 / 8.1 / V1.0)
+- (Ref: DTC Card Issuing API Document_20260310 (1).pdf / Generate Public Pin Key / Set Card PIN / OTP For Reset PIN / Reset Card PIN)
+- (Ref: knowledge-base/card/card-status-and-fields.md)
+- (Ref: knowledge-base/card/activation.md)
+- (Ref: prd-template/standard-prd-template.md / v1.3)
