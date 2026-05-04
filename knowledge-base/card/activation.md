@@ -116,7 +116,7 @@ sequenceDiagram
 | 阶段 | 触发条件 | 系统动作 | 成功结果 | 失败 / 拦截结果 |
 |---|---|---|---|---|
 | 入口 | 用户点击待激活实体卡的激活入口 | 进入 Active Card Page | 展示激活页面 | 非实体卡或状态不符时阻止 |
-| 卡号校验 | 用户输入卡号后四位 | 与 `truncatedCardNumber` 比对 | 进入 Face Authentication | 不一致则停留当前页或提示失败 |
+| 卡号校验 | 用户完整输入卡号后四位 | 调用 Inquiry Card Basic Info 并与返回的 `truncatedCardNumber` 比对 | 进入下一步认证 / 激活 / PIN 流程 | 不一致展示 `The last 4 digits entered are invalid` 并停留当前页 |
 | 活体认证 | 卡号后四位校验通过 | 调用 Security Face Authentication | 进入激活接口调用 | 失败 / 锁定按 Security 处理 |
 | 激活提交 | Face Authentication 通过 | 调用 Card Activation 接口 | 激活成功，进入已激活展示组 | 激活失败，展示失败承接 |
 | 后续引导 | 激活成功 | 提供 Set PIN 入口 | 用户可继续设置 PIN | PIN 规则由 `pin.md` 承接 |
@@ -200,6 +200,8 @@ flowchart LR
 | `truncatedCardNumber` | 与用户输入卡号后四位比对 | Manage / 7.2；Card Status & Fields；DTC Card Issuing / 3.2.15 | 输入满 4 位后调用 Inquiry Card Basic Info 返回该字段再校验 |
 | `Face Authentication` | 激活前高强度认证 | Security / 7.2；Manage / 7.2 | 具体规则见 Security |
 | `Card Activation` | 实体卡激活接口 | Manage / 8.1 | `POST /openapi/v1/card/activate` |
+| `autoDebit` | Card Activation 入参；为 `ON` 时激活同时开启自动扣款 | Manage / 7.2 | 与 Application `autoDebitEnabled` 关系待确认 |
+| `Sent OTP For Card Activation` | DTC 存在激活 OTP 能力 | DTC Card Issuing API | AIX 是否使用待确认，不得默认补写 |
 | `autoDebit` | Card Activation 入参 | Manage / 7.2 | 当值为 `ON` 时，激活同时开启自动扣款；与申卡 `autoDebitEnabled` 的关系待确认 |
 | `Sent OTP For Card Activation` | DTC 激活 OTP 能力 | DTC Card Issuing API | AIX 是否使用待确认；当前产品流程以 Face Authentication 为认证事实 |
 | `Set PIN` | 激活成功后的后续入口 | Manage / 7.2 / 7.3 | 具体规则见 `pin.md` |
