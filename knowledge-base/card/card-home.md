@@ -1,11 +1,11 @@
 ---
 module: card
 feature: card-home
-version: "1.0"
+version: "1.1"
 status: active
 source_doc: 历史prd/AIX Card V1.0【Application】.pdf；历史prd/AIX APP V1.0【Home】.pdf；历史prd/AIX APP V1.0【Transaction & History】.pdf
 source_section: Application 5.2 卡片首页；Home 6.1 APP主页；Transaction & History 卡交易列表与详情
-last_updated: 2026-05-01
+last_updated: 2026-05-04
 owner: 吴忆锋
 depends_on:
   - card/_index
@@ -22,11 +22,24 @@ depends_on:
 
 # Card Home 卡首页
 
+## 0. 文档信息
+
+| 项 | 内容 |
+|---|---|
+| 文档类型 | Card Home 标准 PRD / 知识库事实文件 |
+| 当前版本 | 1.1 |
+| 文档状态 | active |
+| 目标读者 | Product、Design、FE、BE、QA、Risk、Compliance |
+| 本次修订 | 收拢评审意见：标记 Home / Transaction & History 来源为本次未验证附件、补齐操作入口状态限制引用、修正品牌文案风险、明确 Recent Transactions 与交易状态机边界、增加验收标准 |
+| 维护原则 | Card Home 只负责页面展示和入口；状态与操作限制引用 `card-status-and-fields.md`，具体功能规则由 Activation / PIN / Sensitive Info / Card Management / Transaction Flow 承接 |
+
 ## 1. 功能定位
 
 Card Home 用于已申卡用户查看卡片展示、卡片详情入口、卡片操作入口、Recent Transactions、实体卡物流信息和 FAQ 入口。
 
 本文件只沉淀 Card Home 页面层规则。申卡全流程见 `application.md`，卡状态和字段字典见 `card-status-and-fields.md`，激活、PIN、锁卡 / 解锁、查看敏感信息和交易回退不在本文展开。
+
+> 来源边界：本文引用的 Home、Transaction & History 历史资料未随 2026-05-04 本次评审附件提供，相关内容保留为内部历史来源；已由本次附件确认的状态和操作限制，以 `card-status-and-fields.md` 和 Manage 6.4 为准。
 
 ## 2. 适用范围
 
@@ -153,7 +166,7 @@ flowchart LR
 
 | 元素 | 文案 / 规则 | 来源 |
 |---|---|---|
-| Text | `Apply for a AlX card` | Home / 6.1 |
+| Text | `Apply for an AIX card` | Home / 6.1 |
 | Describe | `Start your spending brand new journey today!` | Home / 6.1 |
 | Slider | `Just 2 steps needed` | Home / 6.1 |
 | Apply Now | 点击跳转选择卡页面 `Choose Card` / `Select Plan` | Home / 6.1；Application / 5.1.4 |
@@ -211,6 +224,19 @@ flowchart LR
 
 ### 6.6 功能操作区
 
+#### 6.6.0 操作入口状态限制
+
+| 状态 / 展示组 | Card detail | Sensitive info | Set PIN | Change PIN | Lock | Unlock | 注销卡 | 交易 | 来源 |
+|---|---|---|---|---|---|---|---|---|---|
+| 待激活 | 否 | 否 | 否 | 否 | 否 | 否 | 否 | 否 | Manage / 6.4 |
+| ACTIVE / Active | 是 | 是 | 是，仅限首次 | 是 | 是 | 否 | 是，流程待补 | 是 | Manage / 6.4 |
+| SUSPENDED / Suspended | 否 | 否 | 否 | 否 | 否 | 是 | 是，流程待补 | 否 | Manage / 6.4 |
+| BLOCKED | 是 | 否 | 否 | 否 | 否 | 否 | 否 | 否 | Manage / 6.4 |
+| PENDING / Pending / Processing | 否 | 否 | 否 | 否 | 否 | 否 | 否 | 否 | Manage / 6.4 |
+| CANCELLED / Cancelled | 否 | 否 | 否 | 否 | 否 | 否 | 否 | 否 | Manage / 6.4 |
+
+> 页面层需按上表决定入口隐藏、置灰或拦截；具体交互由对应功能文件承接。
+
 #### 虚拟卡
 
 | 操作 | 展示条件 | 点击结果 | 来源 |
@@ -237,7 +263,7 @@ flowchart LR
 |---|---|---|
 | Title | `Recent Transactions` | Application / 5.2 |
 | More | 点击 `···` 跳转交易记录页面 `Card History` | Application / 5.2 |
-| 数据接口 | 进入页面时调用 `/openapi/v1/card/inquiry-card-transaction` 获取最新交易记录 | Application / 5.2 |
+| 数据接口 | 进入页面时调用 `/openapi/v1/card/inquiry-card-transaction` 获取最新交易记录；接口请求字段、分页和错误处理由 Card Transaction Flow 承接 | Application / 5.2；DTC Card Issuing / Transaction History Of Card |
 | 空态 | 没有交易数据时用占位符表示 | Application / 5.2 |
 | 排序 | 有交易数据时按交易时间降序排列 | Application / 5.2 |
 | 展示数量 | 最近 3 条卡交易记录 | Application / 5.2 |
@@ -246,7 +272,7 @@ flowchart LR
 | Created Date | 交易时间 | Application / 5.2 |
 | Indicator | Debit / Credit；Credit 对应 `+` 与 `↙`，Debit 对应 `-` 与 `↗` | Application / 5.2 |
 
-交易状态只作为首页展示，不作为交易状态机事实源：
+交易状态只作为首页展示，不作为交易状态机事实源；全量交易状态机、DTC 状态到前端展示状态映射由 `card-transaction-flow.md` 和交易模块承接：
 
 | 首页展示状态 | 页面含义 | 来源 |
 |---|---|---|
@@ -292,7 +318,7 @@ flowchart LR
 | Tracking no 有值 | DTC Delivery Notification 返回物流单号 | 展示 Carrier / Tracking no，可复制 | Shipping | Home / 6.1 |
 | 无交易数据 | Recent Transactions 无数据 | 展示占位符 | 空态 | Application / 5.2 |
 | Google Wallet 方案待定 | Android 显示 Add to Google Wallet | 点击跳转绑卡页面，具体方案待定 | 待确认 | Application / 5.2 |
-| 操作限制不完整 | 状态操作矩阵不可读 | 本文只展示入口，具体限制引用后续功能与 gaps | 待确认 | Card Status & Fields |
+| 操作限制冲突 | Home 入口展示与 Manage 6.4 操作矩阵不一致 | 以 `card-status-and-fields.md` 的操作矩阵为准修正入口展示 | 待确认 | Card Status & Fields；Manage / 6.4 |
 
 ## 9. 风控 / 合规边界
 
@@ -305,7 +331,30 @@ flowchart LR
 | Recent Transactions 非状态机 | 首页交易状态仅用于列表展示，统一交易状态机需由 Transaction 阶段收口 | 防止交易状态被首页覆盖 | Application / 5.2；IMPLEMENTATION_PLAN.md |
 | Google Wallet 待定 | Add to Google Wallet 方案未确认 | 不作为最终绑卡能力事实 | Application / 5.2；knowledge-gaps.md |
 
-## 10. 来源引用
+## 10. 待确认事项
+
+| 编号 | 问题 | 影响 | 优先级 |
+|---|---|---|---|
+| CARD-HOME-Q001 | Home / Transaction & History 历史资料是否为最新版本，是否需重新提供附件复核 | Home 展示、Recent Transactions、FAQ | P1 |
+| CARD-HOME-Q002 | 不允许操作在 Home 上是隐藏、置灰还是点击拦截 | 首页入口体验 | P0 |
+| CARD-HOME-Q003 | BLOCKED 状态仅可查看脱敏卡信息时，Card detail 入口展示方式 | Card Detail / Sensitive Info | P1 |
+| CARD-HOME-Q004 | Google Wallet 方案是否可作为上线能力 | Android 绑卡 | P1 |
+| CARD-HOME-Q005 | Recent Transactions 查询失败时是展示空态、隐藏模块还是 Toast | 交易展示体验 | P1 |
+
+## 11. 验收标准 / 测试场景
+
+| 场景 | 验收标准 |
+|---|---|
+| 无卡 / 失败 | 展示默认申卡卡片，文案品牌为 AIX；点击 Apply Now 进入申卡流程 |
+| 审核中 | Pending / Processing 归入审核中展示组，不展示卡操作入口 |
+| 待激活 | 仅展示物流和 Activate card 入口；不展示 Card detail、PIN、Lock、Unlock、交易入口 |
+| ACTIVE | 展示卡面、脱敏卡号、Card detail、PIN、Lock、Recent Transactions、FAQ；不展示 Unlock |
+| SUSPENDED | 按 Manage 6.4 不展示敏感信息、PIN、交易；仅展示 Unlock 和注销卡待补入口策略 |
+| BLOCKED | 仅允许脱敏 Card detail，不能查看敏感信息和操作卡 |
+| Recent Transactions | 首页最多展示最近 3 条；交易状态仅为展示，不作为状态机事实源 |
+| 来源边界 | 未随本次附件提供的 Home / Transaction 资料内容不得覆盖已确认的 Manage 6.4 状态操作矩阵 |
+
+## 12. 来源引用
 
 - (Ref: 历史prd/AIX Card V1.0【Application】.pdf / 5.2 卡片首页（已申卡） / V1.0)
 - (Ref: 历史prd/AIX Card V1.0【Application】.pdf / 6.2 卡ID获取卡基本信息 / V1.0)
