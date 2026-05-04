@@ -118,27 +118,24 @@ flowchart LR
 
 > 用户通过 Email / Phone / Quick Login 发起登录。
 
+<table>
+<tr>
+<td width="38%" valign="top">
+
+#### 页面截图
+
+<img src="../assets/account/image30.png" width="300" />
+
+</td>
+<td width="62%" valign="top">
+
 #### 页面摘要
 
 - **页面类型**：AIX App 主页面
 - **入口 / 触发**：Navigation Page 点击 `I already have an account`
 - **页面目标**：让已注册用户发起登录
-- **主要能力**：
-  - Email 登录
-  - Phone 登录
-  - Quick Login
-  - Forgot password
-  - Sign up
-- **可去向页面**：
-  - Identity Verification Page
-  - Device Biometric Verification
-  - Password Reset Page
-  - Select Country Page
-  - Registration Page
-
-#### 页面截图
-
-<img src="../assets/account/image30.png" width="320" />
+- **主要能力**：Email 登录、Phone 登录、Quick Login、Forgot password、Sign up
+- **可去向页面**：Identity Verification Page、Device Biometric Verification、Password Reset Page、Select Country Page、Registration Page
 
 #### 页面内容
 
@@ -153,6 +150,10 @@ flowchart LR
 - `Forgot password`
 - `Quick Login`，仅本地存在可用 BIO 密钥时展示
 - `Sign up`
+
+</td>
+</tr>
+</table>
 
 #### 用户动作与页面去向
 
