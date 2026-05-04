@@ -131,19 +131,14 @@ flowchart LR
 
 #### 读者需要知道
 
-- **入口**：Navigation Page 点击 `I already have an account`
-- **主路径**：输入 Email / Phone → 点击 `Next` → Identity Verification Page
-- **其他路径**：
-  - 点击 Country Code → Select Country Page
-  - 点击 `Forgot password` → Password Reset Page
-  - 点击 `Quick Login` → Device Biometric Verification
-  - 点击 `Sign up` → Registration Page
-- **关键规则**：
-  - Email / Phone 切换时保留已输入内容
-  - Email 最长 254 字符
-  - Phone 仅数字，最长 20 位；少于 6 位提示错误
-  - Quick Login 仅本地存在可用 BIO 密钥时展示
-- **边界**：Security 认证细节不在本页维护，以 `security/*` 为准
+- **登录方式**：支持 Email、Phone、Quick Login。
+- **输入切换**：Email / Phone 切换时保留已输入内容。
+- **Email 规则**：非空、邮箱格式校验，最长 254 字符。
+- **Phone 规则**：仅允许数字，最长 20 位；少于 6 位提示错误。
+- **Next 规则**：输入合法且非空后可继续；继续前需校验账号存在性和账户状态。
+- **Quick Login 规则**：仅本地存在可用 BIO 密钥时展示；设备端通过后仍需后端验证。
+- **账户拦截**：账号不存在、未注册或账户状态不可登录时，不进入身份验证流程。
+- **规则边界**：Security 认证细节不在本页维护，以 `security/*` 为准。
 
 </td>
 </tr>
