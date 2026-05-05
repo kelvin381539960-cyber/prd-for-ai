@@ -1,10 +1,10 @@
 ---
 type: prd-template
 feature: standard-prd-template
-version: "1.7"
+version: "1.8"
 status: active
-source_doc: prd-template/README.md；prd-template/prd-writing-workflow.md；用户确认结论 2026-05-05；用户确认结论 2026-05-06
-source_section: "standard PRD template；engineering execution PRD rules；optional sections；reuse page rules"
+source_doc: prd-template/README.md；prd-template/prd-writing-workflow.md；prd-template/prd-writing-preferences.md；用户确认结论 2026-05-05；用户确认结论 2026-05-06；用户确认结论 2026-05-06 Canvas 草稿协作、文件最小化与落地评审
+source_section: "standard PRD template；engineering execution PRD rules；optional sections；reuse page rules；lightweight artifact rules；landing review rules"
 last_updated: 2026-05-06
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -12,8 +12,40 @@ readers: [product, ui, dev, qa, business, ai]
 
 # Standard PRD Template 标准 PRD 模板
 
-> 适用对象：前端、后端、测试、设计。  
-> 写作原则：页面能看出来的不写；公共能力已有的不重复写；不能开发和测试的不写；每条规则都要能判断对错；章节按需保留，不为模板完整而补废话。
+> 适用对象：前端、后端、测试、设计、产品。  
+> 写作原则：页面能看出来的不写；公共能力已有的不重复写；不能开发和测试的不写；每条规则都要能判断对错；章节按需保留，不为模板完整而补废话。  
+> 使用方式：先在 Canvas 中生成 PRD 草稿并完成用户修改与落地评审；用户确认后，再写入 Git。
+
+---
+
+## PRD 文件建议 front matter
+
+```yaml
+---
+type: prd
+feature: <feature>
+module: <module>
+status: draft
+version: "0.1"
+brief_path:
+brief_status:
+source_files:
+  - knowledge-base/...
+external_sources: []
+user_confirmation_refs: []
+open_gap_refs: []
+last_updated: YYYY-MM-DD
+owner: TBD
+readers: [product, ui, dev, qa, business, ai]
+---
+```
+
+说明：
+
+- `brief_path` 可以为空；brief 不强制写入 Git。
+- 新 PRD 优先使用 `source_files` 记录仓库内来源；旧字段 `source_doc` 仅作兼容。
+- 外部网页、竞品、安全参考放入 `external_sources` 或正文来源引用，不要伪装成仓库路径。
+- 关键用户确认可以放入 `user_confirmation_refs` 或正文来源引用。
 
 ---
 
@@ -24,12 +56,12 @@ readers: [product, ui, dev, qa, business, ai]
 | 功能名称 |  |
 | 所属模块 |  |
 | PRD 版本 | v1.0 |
-| 状态 | Draft / Confirmed / In Development / Done |
+| 状态 | Draft / Review / Approved / Deprecated |
 | Owner |  |
 | 创建时间 |  |
 | 更新时间 |  |
-| 关联 Brief |  |
-| 关联原型 |  |
+| 关联 Brief | 无 / `requirements/YYYY-MM/<module>/_brief-<feature>.md` |
+| 关联原型 | 无 / `requirements/YYYY-MM/<module>/assets/<feature>/` |
 | 依赖公共能力 | 例如：Email OTP Verification、Login Passcode、Notification；没有则写“无” |
 
 ---
@@ -63,12 +95,13 @@ readers: [product, ui, dev, qa, business, ai]
 
 ## 2. 主流程
 
+> 如本需求没有复杂业务链路，本章可以简化，但必须能让开发、测试和产品理解用户从入口到业务结果的主链路。
+
 ### 2.1 业务时序图
 
-> 必须使用 Mermaid `sequenceDiagram`。  
+> 推荐使用 Mermaid `sequenceDiagram`。  
 > 本图关注业务流程、责任边界和业务结果，不是技术时序图。  
 > 不写接口名、请求参数、Header、返回码、幂等 key、技术实现细节。  
-> 不承载页面元素、普通文案、输入框实时校验、按钮禁用、Toast / Popup 具体文案。  
 > 如果流程中调用公共能力，只表达“请求 / 复用某公共能力”和成功失败后的业务流转，不展开公共能力内部规则。
 
 ```mermaid
@@ -111,9 +144,11 @@ sequenceDiagram
 
 ## 3. 页面与交互
 
+> 页面相关需求保留本章；纯后端、配置、数据或非页面型需求可删除或改为“入口与操作方式”。
+
 ### 3.1 页面关系图
 
-> 必须使用 Mermaid `flowchart`。  
+> 推荐使用 Mermaid `flowchart`。  
 > 本图只表达页面之间的跳转关系。  
 > 页面节点必须是页面，不要把接口、校验、Toast、通知、外部系统放进页面关系图。
 
@@ -135,11 +170,16 @@ flowchart LR
 
 ![低保真原型](./assets/path/page-name.svg)
 
-> 每个新增或改造页面都必须有低保真原型。  
-> 原型用于表达页面结构、关键控件、状态入口和主按钮，不要求最终 UI 视觉。
+> 每个新增或改造页面建议有低保真原型。原型用于表达页面结构、关键控件、状态入口和主按钮，不要求最终 UI 视觉。  
+> 如果暂时没有原型，应在页面目的和交互规则中写清关键结构，不要编造已存在的图片路径。
 
 **页面目的**  
 一句话说明页面用途。不要写用户教育型描述。
+
+**用户体验要点**
+- 用户是否能理解当前步骤、为什么要做这一步、下一步会发生什么。
+- 关键操作是否有明确反馈，例如发送成功、验证失败、保存成功、处理中、失败可重试。
+- 失败、锁定、过期、不可用等场景是否给用户可理解的下一步。
 
 **展示规则**
 - 只写开发和测试需要验证、且不能仅从原型看出来的规则。
@@ -177,7 +217,7 @@ flowchart LR
 
 ![低保真原型](./assets/path/success.svg)
 
-> 每个成功页都必须有低保真原型。
+> 每个成功页建议有低保真原型，或至少写清成功结果、返回路径和数据影响。
 
 **页面目的**  
 展示最终处理结果。
@@ -219,7 +259,6 @@ flowchart LR
 ## 5. 通知、权限、风控（如有）
 
 > 本章按需保留。没有新增规则的小节直接删除。  
-> 有通知写通知；有新增权限写权限；有新增风控写风控。  
 > 已有公共能力只引用，不重复定义。
 
 ### 5.1 通知（如有）
@@ -277,7 +316,7 @@ flowchart LR
 
 ## 8. 来源引用
 
-- Brief：
+- Brief：无 / `requirements/YYYY-MM/<module>/_brief-<feature>.md`
 - 原型：
 - 知识库引用：
 - 用户确认：
@@ -285,17 +324,19 @@ flowchart LR
 
 ---
 
-## 附录：写作检查清单
+## 附录：写作与落地评审检查清单
 
 提交 PRD 前逐项检查：
 
-- [ ] 文档标题仍为 `Standard PRD Template 标准 PRD 模板`，避免破坏已有引用。
-- [ ] 页面关系图使用 Mermaid `flowchart`。
-- [ ] 业务时序图使用 Mermaid `sequenceDiagram`，且关注业务流程和结果，不写技术时序。
-- [ ] 每个新增 / 改造页面都有低保真原型。
-- [ ] 复用页面只写流转，不写场景参数和公共规则。
+- [ ] 文档信息完整，PRD 状态值合法。
+- [ ] 本期做什么、不做什么清楚，没有混入另一个独立功能。
+- [ ] 主流程能从入口跑到业务结果，失败、取消、返回、重试有合理结果。
+- [ ] 页面关系图使用 Mermaid `flowchart`（如适用）。
+- [ ] 业务时序图使用 Mermaid `sequenceDiagram`（如适用），且关注业务流程和结果，不写技术时序。
+- [ ] 每个新增 / 改造页面有低保真原型或明确页面结构。
+- [ ] 用户体验顺畅：用户知道当前步骤、操作反馈、失败下一步、成功结果和后续影响。
 - [ ] 页面能看出来的内容，没有重复写成规则。
-- [ ] 公共能力已有规则，只引用，不重复定义。
+- [ ] 公共能力已有规则只引用，不重复定义。
 - [ ] 每条规则都能被开发实现、被测试验证。
 - [ ] 输入页已写校验规则、错误结果和成功流转。
 - [ ] 成功页已写数据变化、会话刷新、返回后展示。
@@ -303,3 +344,4 @@ flowchart LR
 - [ ] 通知、权限、风控只保留本需求新增或差异内容。
 - [ ] 验收点 / 测试场景只在确有需要时保留。
 - [ ] 待确认项只保留真正阻塞或影响实现的问题，不放内部技术实现细节。
+- [ ] 来源引用覆盖关键事实，调研 / 竞品 / 推测未被写成确认事实。
