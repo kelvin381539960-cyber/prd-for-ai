@@ -7,7 +7,7 @@ created: 2026-05-05
 last_updated: 2026-05-05
 owner: TBD
 target_prd: requirements/2026-05/account/change-email.md
-source_doc: 用户需求 2026-05-05；用户补充确认 2026-05-05；Atome SG Help - How do I change the email address for my account；Atome MY Help - How do I change the email address for my account；Atome SG Help - How do I change the mobile number for my account；Atome PH Help - How do I update my account details；prd-template/prd-writing-workflow.md；prd-template/standard-prd-template.md；requirements/_index.md；knowledge-base/_ai-query-router.md；knowledge-base/account/_index.md；knowledge-base/security/_index.md；knowledge-base/security/global-rules.md；knowledge-base/security/email-otp-verification.md；knowledge-base/_system-boundary.md；knowledge-base/changelog/knowledge-gaps.md；OWASP Email Validation and Verification Cheat Sheet；OWASP Changing A User's Registered Email Address；OWASP API Security API2:2023 Broken Authentication；OWASP Multifactor Authentication Cheat Sheet；RedotPay Help - Changing your phone number or email；Binance Help - Change account email / forgot account appeal；OKX Help - Update email；Bybit Help - Change or unlink registered email；Coinbase Help - Change email / account recovery；Crypto.com Help - Update email address；Kraken Support - Updating account information / lost email access；Gemini Support - Change email address；Bitget Help - Change email / account recovery；KuCoin Help - Change email / reset security settings；Gate.io Help - Link / update email address
+source_doc: 用户需求 2026-05-05；用户补充确认 2026-05-05；用户补充确认 2026-05-05 入口调整到 Security 区域；Atome SG Help - How do I change the email address for my account；Atome MY Help - How do I change the email address for my account；Atome SG Help - How do I change the mobile number for my account；Atome PH Help - How do I update my account details；prd-template/prd-writing-workflow.md；prd-template/standard-prd-template.md；requirements/_index.md；knowledge-base/_ai-query-router.md；knowledge-base/account/_index.md；knowledge-base/security/_index.md；knowledge-base/security/global-rules.md；knowledge-base/security/email-otp-verification.md；knowledge-base/_system-boundary.md；knowledge-base/changelog/knowledge-gaps.md；OWASP Email Validation and Verification Cheat Sheet；OWASP Changing A User's Registered Email Address；OWASP API Security API2:2023 Broken Authentication；OWASP Multifactor Authentication Cheat Sheet；RedotPay Help - Changing your phone number or email；Binance Help - Change account email / forgot account appeal；OKX Help - Update email；Bybit Help - Change or unlink registered email；Coinbase Help - Change email / account recovery；Crypto.com Help - Update email address；Kraken Support - Updating account information / lost email access；Gemini Support - Change email address；Bitget Help - Change email / account recovery；KuCoin Help - Change email / reset security settings；Gate.io Help - Link / update email address
 ---
 
 # 更换邮箱 PRD Brief
@@ -25,9 +25,10 @@ source_doc: 用户需求 2026-05-05；用户补充确认 2026-05-05；Atome SG H
 | 项目 | 判断 |
 |---|---|
 | 主模块 | Account |
+| 入口位置 | Profile / Personal Center 的 Security 区域 |
 | 依赖模块 | Security / Email OTP Verification / Notification |
 | 功能粒度 | 独立功能 |
-| 原因 | 更换邮箱有独立入口、独立安全校验、独立数据更新结果和独立异常处理，不应混入注册、登录或密码重置 PRD。Security 作为认证公共能力被引用，不在本 PRD 重复定义认证失败次数、锁定规则、验证码有效期等公共规则。 |
+| 原因 | 更换邮箱有独立入口、独立安全校验、独立数据更新结果和独立异常处理，不应混入注册、登录或密码重置 PRD。邮箱数据归属 Account；入口放在 Profile / Personal Center 的 Security 区域；Security 作为认证公共能力被引用，不在本 PRD 重复定义认证失败次数、锁定规则、验证码有效期等公共规则。 |
 
 ## 3. 已确认事实
 
@@ -80,7 +81,7 @@ source_doc: 用户需求 2026-05-05；用户补充确认 2026-05-05；Atome SG H
 
 | 编号 | 事项 | 结论 / 建议 | 状态 |
 |---|---|---|---|
-| CE-DECISION-001 | 更换邮箱入口 | 推荐放在个人中心已有邮箱地址展示位置。当前邮箱展示行增加可点击区域、右箭头或 Change 入口；点击后进入 Change Email 流程。 | 用户认可方向 + Atome 参考 |
+| CE-DECISION-001 | 更换邮箱入口 | 入口调整到 Profile / Personal Center 的 Security 区域，不再放在 Account 区。建议在 Security 卡片内新增 `Email` 行，右侧展示掩码邮箱和 chevron；点击后进入 Change Email 流程。Account 区不保留更换邮箱入口。 | 用户确认 |
 | CE-DECISION-002 | 是否验证旧邮箱 | 需要验证旧邮箱。 | 用户确认 |
 | CE-DECISION-003 | 旧邮箱验证方式 | 建议在当前账户身份验证通过后，向旧邮箱发送 Email OTP；用户输入旧邮箱 OTP 通过后，才允许进入新邮箱验证。若旧邮箱不可用，V1 不提供“跳过旧邮箱验证”的自助入口，页面提示用户联系客服 / 人工处理。 | 产品建议 |
 | CE-DECISION-004 | 当前账户身份验证 | 建议新增 Security 业务场景 `Change Email`。更换邮箱属于敏感操作，需先完成当前账户身份验证，再进行旧邮箱 / 新邮箱 OTP。认证方式建议复用 AIX 自有认证能力；Email OTP 不应作为唯一当前账户身份验证，因为旧邮箱已作为单独控制权验证。 | 产品建议 |
@@ -95,8 +96,8 @@ source_doc: 用户需求 2026-05-05；用户补充确认 2026-05-05；Atome SG H
 
 | 功能点 | 是否纳入 | 说明 | 当前状态 |
 |---|---:|---|---|
-| 更换邮箱入口 | 是 | 放在个人中心已有邮箱地址展示位置，邮箱展示行可点击进入更换邮箱流程。 | 用户认可方向 |
-| 当前邮箱展示 | 是 | 个人中心按当前展示策略展示；更换邮箱流程内建议展示当前邮箱掩码。 | 待正式 PRD 固化 |
+| 更换邮箱入口 | 是 | 放在 Profile / Personal Center 的 Security 区域；Security 卡片新增 `Email` 行，右侧展示掩码邮箱和 chevron，点击进入更换邮箱流程。 | 用户确认 |
+| 当前邮箱展示 | 是 | Account 区不再作为邮箱入口；Security `Email` 行展示当前邮箱掩码；更换邮箱流程内继续展示当前邮箱掩码。 | 用户确认 |
 | 当前账户身份验证 | 是 | 更换邮箱前先完成当前账户身份验证；建议新增 Security `Change Email` 场景。 | 产品建议 |
 | 旧邮箱 Email OTP 验证 | 是 | 当前账户身份验证后，向旧邮箱发送 Email OTP，验证旧邮箱控制权。 | 用户确认 + 产品建议 |
 | 旧邮箱不可用处理 | 是 | 不提供自助跳过旧邮箱验证；提示用户联系客服 / 人工处理。 | 产品建议 |
@@ -113,8 +114,8 @@ source_doc: 用户需求 2026-05-05；用户补充确认 2026-05-05；Atome SG H
 ## 8. 建议主流程
 
 ```text
-用户进入个人中心邮箱展示行
-→ 用户点击邮箱行 / Change 入口
+用户进入 Profile / Personal Center 的 Security 区域
+→ 用户点击 Security 卡片内的 Email 行
 → AIX 展示当前邮箱与更换说明
 → 用户发起更换邮箱
 → AIX 调用 Security 完成当前账户身份验证
@@ -138,7 +139,7 @@ source_doc: 用户需求 2026-05-05；用户补充确认 2026-05-05；Atome SG H
 
 | 页面 / 节点 | 目的 | 关键规则 |
 |---|---|---|
-| Personal Center Email Row | 承载入口和当前邮箱信息 | 复用当前个人中心邮箱展示位置；增加可点击区域、右箭头或 Change 入口 |
+| Profile / Personal Center - Security Email Row | 承载更换邮箱入口和当前邮箱信息 | 在 Security 卡片内新增 `Email` 行，右侧展示当前邮箱掩码和 chevron；Account 区不保留更换邮箱入口 |
 | Change Email Intro | 告知用户将进行邮箱更换 | 展示当前邮箱，建议掩码；说明需完成当前身份验证、旧邮箱验证和新邮箱验证 |
 | Current Account Verification | 验证当前账户操作者身份 | 引用 Security；建议新增 `Change Email` 场景，不重复定义认证公共规则 |
 | Old Email OTP Verify Page | 验证旧邮箱控制权 | 复用 Email OTP 4 位验证码、5 分钟有效、自动提交、重发与锁定规则；接收邮箱为当前账户旧邮箱 |
@@ -150,7 +151,7 @@ source_doc: 用户需求 2026-05-05；用户补充确认 2026-05-05；Atome SG H
 
 ## 10. 初版验收标准建议
 
-1. 用户可以从个人中心已有邮箱地址展示位置发起更换邮箱流程。
+1. 用户可以从 Profile / Personal Center 的 Security 区域 `Email` 行发起更换邮箱流程，Account 区不保留更换邮箱入口。
 2. 用户在完成当前账户身份验证前，不能进入旧邮箱 OTP 或最终邮箱更新动作。
 3. 系统向旧邮箱发送 Email OTP，并按 Email OTP 规则完成验证。
 4. 旧邮箱 OTP 未验证通过时，用户不能继续更新新邮箱。
@@ -173,7 +174,7 @@ source_doc: 用户需求 2026-05-05；用户补充确认 2026-05-05；Atome SG H
 
 | 编号 | 问题 | 建议确认对象 | 影响 | 当前建议 |
 |---|---|---|---|---|
-| CE-GAP-001 | 个人中心邮箱展示行具体交互形态：整行可点、右箭头、Change 文案按钮，还是进入二级安全设置页？ | 产品 / UX | 页面结构与导航路径 | 推荐整行可点 + 右箭头；如页面已有编辑样式，则跟随当前个人中心规范 |
+| CE-GAP-001 | Security 区域 `Email` 行的具体位置与展示样式：放在 `Change password` 下方、`Phone number` 上方，还是放在 `Phone number` 下方？右侧仅展示掩码邮箱 + chevron，还是增加 `Change` 文案？ | 产品 / UX | 页面结构与导航路径 | 入口已确认放在 Security 区域；推荐与 `Phone number` 相邻展示，右侧展示掩码邮箱 + chevron |
 | CE-GAP-002 | Security 场景矩阵如何正式新增 `Change Email`？认证方式具体枚举如何写入 Security？ | 产品 / Security / 后端 | 当前身份验证规则 | 推荐新增敏感操作场景，先完成当前账户身份验证，再进行旧邮箱 / 新邮箱 OTP |
 | CE-GAP-003 | 旧邮箱不可用时客服 / 人工处理入口如何展示？ | 产品 / Security / 客服 | 用户无法接收旧邮箱时的闭环 | 推荐 V1 不开放自助绕过，只提示联系客服 |
 | CE-GAP-004 | 新邮箱已被使用时，是否复用注册文案 `This email has been used`？ | 产品 / UX / Security | 文案一致性与防枚举 | 推荐在已完成当前账户身份验证后可复用；若风控要求更强防枚举，可改为 `This email is unavailable` |
@@ -202,7 +203,7 @@ source_doc: 用户需求 2026-05-05；用户补充确认 2026-05-05；Atome SG H
 ## 13. 来源引用
 
 - (Ref: 用户需求 / 2026-05-05 / “我希望增加一个更换邮箱的功能”)
-- (Ref: 用户补充确认 / 2026-05-05 / 入口放在个人中心邮箱展示位置；需要验证旧邮箱；外部账户上下文不影响)
+- (Ref: 用户补充确认 / 2026-05-05 / 入口从 Account 区调整到 Security 区域；需要验证旧邮箱；外部账户上下文不影响)
 - (Ref: Atome SG Help / How do I change the email address for my account)
 - (Ref: Atome MY Help / How do I change the email address for my account)
 - (Ref: Atome SG Help / How do I change the mobile number for my account)
