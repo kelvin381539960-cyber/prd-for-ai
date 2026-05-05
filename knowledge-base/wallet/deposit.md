@@ -6,12 +6,12 @@ status: active
 doc_type: ai-readable-prd-translation
 source_doc: 历史prd/AIX Wallet V1.0【Deposit & Send & Swap 】.docx；DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx；DTC Wallet OpenAPI Documentation；[2025-11-25] AIX+Notification（push及站内信）.docx；knowledge-base/changelog/knowledge-gaps.md
 source_section: AIX Wallet V1.0 / 3.1 交易说明；3.2 接口范围；6.3 钱包地址充值 Deposit（GTR's Wallet）；6.4 钱包链接充值 Deposit（WalletConnect）；7.4 钱包充值 Wallet Connect；Documentation dtc-nodejs-wallet-connect / 1 Request Wallet Connect Token；3 Server-Emitted Events；4 Client-Emitted Events；5 sequence diagram；ALL-GAP 总表
-last_updated: 2026-05-04
+last_updated: 2026-05-05
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
 depends_on:
   - wallet/_index
-  - wallet/balance
+  - wallet/assets
   - transaction/history
   - integrations/walletconnect
   - common/notification
