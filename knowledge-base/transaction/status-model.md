@@ -4,7 +4,7 @@ feature: status-model
 version: "2.1"
 status: active
 doc_type: ai-readable-prd-translation
-source_doc: IMPLEMENTATION_PLAN.md；DTC接口文档/DTC Wallet OpenAPI Document20260126 (1).docx；DTC接口文档/卡交易&钱包交易状态梳理 (1).docx；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/card/transaction.md；knowledge-base/wallet/deposit.md；knowledge-base/changelog/knowledge-gaps.md
+source_doc: knowledge-base/_kb-ingestion-process.md；external-docs/dtc/DTC Wallet OpenAPI Document20260126 (1).docx；reference-data/transaction/card-wallet-transaction-status-mapping.docx；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/card/transaction.md；knowledge-base/wallet/deposit.md；knowledge-base/changelog/knowledge-gaps.md
 source_section: Transaction History；Transaction Detail；Wallet Deposit；DTC Wallet OpenAPI / 3.4 Crypto Deposit；Appendix ActivityType；Card Transaction Flow；ALL-GAP 总表
 last_updated: 2026-05-05
 owner: 吴忆锋
@@ -124,7 +124,7 @@ Wallet 当前已确认状态字段为 `state`。
 
 #### 3.4.3 Card 交易状态
 
-Card 交易状态与类型优先引用 `card/transaction-detail.md` 和 DTC `卡交易&钱包交易状态梳理 (1).docx` 嵌入 Excel。
+Card 交易状态与类型优先引用 `card/transaction-detail.md` 和 DTC `reference-data/transaction/card-wallet-transaction-status-mapping.docx` 嵌入 Excel。
 
 | AIX 交易类型 | DTC 交易类型 | AIX 展示状态 | DTC 状态 | 是否有详情页 | 说明 | 来源 |
 |---|---|---|---|---|---|---|
@@ -358,5 +358,5 @@ ActivityType 是 Wallet balance / transaction history 的交易分类，不是�
 - (Ref: knowledge-base/wallet/deposit.md / Wallet Deposit)
 - (Ref: knowledge-base/card/transaction.md / Card Transaction)
 - (Ref: knowledge-base/card/transaction-detail.md / Card Transaction Detail)
-- (Ref: DTC接口文档/卡交易&钱包交易状态梳理 (1).docx / 嵌入 Excel hFgXns)
+- (Ref: reference-data/transaction/card-wallet-transaction-status-mapping.docx / 嵌入 Excel hFgXns)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP 总表)
