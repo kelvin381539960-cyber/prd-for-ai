@@ -14,7 +14,6 @@ depends_on:
   - integrations/aai
   - _meta/status-dictionary
   - _meta/limits-and-rules
-  - _meta/writing-standard
 ---
 
 # Security Global Rules 全局认证规则
