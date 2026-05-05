@@ -3,7 +3,7 @@ module: changelog
 feature: knowledge-gaps
 version: "1.13"
 status: active
-source_doc: knowledge-base/_ai-query-router.md；knowledge-base/_system-boundary.md；knowledge-base/kyc/account-opening.md；knowledge-base/integrations/aai/_index.md；knowledge-base/integrations/dtc/_index.md；knowledge-base/wallet/deposit.md；knowledge-base/wallet/balance.md；knowledge-base/wallet/deposit.md；knowledge-base/card/card-management.md；knowledge-base/common/errors.md；knowledge-base/common/notification.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/status-model.md；用户确认结论 2026-05-01；用户确认结论 2026-05-02
+source_doc: knowledge-base/_ai-query-router.md；knowledge-base/_system-boundary.md；knowledge-base/kyc/account-opening.md；knowledge-base/integrations/aai/_index.md；knowledge-base/integrations/dtc/_index.md；knowledge-base/wallet/deposit.md；knowledge-base/wallet/balance.md；knowledge-base/wallet/deposit.md；knowledge-base/card/transaction.md；knowledge-base/common/errors.md；knowledge-base/common/notification.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/status-model.md；用户确认结论 2026-05-01；用户确认结论 2026-05-02
 source_section: all-module centralized confirmation table；Account Opening / KYC；AAI Dependency；DTC Master / Sub Account；D-SUB-ACCOUNT-ID；WalletAccount；Card Transaction Flow；Wallet Deposit；Wallet Balance；Wallet Receive；Common Notification；Transaction Detail；Transaction Status Model；single global checklist rule
 last_updated: 2026-05-02
 owner: 吴忆锋
