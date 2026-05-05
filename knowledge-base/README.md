@@ -50,7 +50,7 @@ It is not a build-phase plan, not a draft area, and not the place to maintain te
 
 Website / Web / Marketing site PRDs are not included in this runtime knowledge base for now.
 
-Wallet Send and Wallet Swap are not maintained as current capabilities because they are not actual active product capabilities.
+Non-existent wallet capabilities are not maintained in this runtime knowledge base.
 
 ## Deprecated usage
 
