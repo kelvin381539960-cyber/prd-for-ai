@@ -1,10 +1,10 @@
 ---
 module: card
 feature: card-transaction
-version: "1.0"
+version: "1.1"
 status: active
 source_doc: 历史prd/AIX Card交易【transaction】.docx；DTC Card Issuing API Document_20260310；DTC Wallet OpenAPI Documentation；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/reconciliation.md；knowledge-base/changelog/knowledge-gaps.md；prd-template/standard-prd-template.md
-source_section: Card Transaction；DTC Card Transaction Notify；Transfer Balance to Wallet；Transaction & History boundary；Standard PRD Template v1.3
+source_section: Card Transaction；7.1 功能概述；7.2 业务流程；7.3 流程说明；8.1 外部接口清单；Transaction & History boundary；Standard PRD Template v1.3
 last_updated: 2026-05-05
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,7 +19,7 @@ readers: [product, ui, dev, qa, business, ai]
 | 功能名称 | Card Transaction 卡交易 |
 | 所属模块 | Card |
 | Owner | 吴忆锋 |
-| 版本 | 1.0 |
+| 版本 | 1.1 |
 | 状态 | Review |
 | 更新时间 | 2026-05-05 |
 | 来源文档 | AIX Card交易【transaction】、DTC Card Issuing API、DTC Wallet OpenAPI、Standard PRD Template v1.3 |
@@ -30,29 +30,35 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 2.1 需求背景
 
-DTC 卡交易发生后，AIX 需要接收 Card Transaction Notify，并根据交易类型判断是否触发卡余额归集到 Wallet。同时，Card Home 需要展示 Card 最近交易入口，交易历史、交易详情、状态模型和对账需要由 Transaction 模块统一承接。
+原始 PRD 目标是：当卡收到特定类型资金时，AIX 自动将卡余额回退 / 归集到用户 Wallet 账户。
+
+原文背景中的 DTC 知识点说明：退款交易会退回到卡余额；退款时会根据交易发生时汇率将 USD 金额转换为 USDT 等值金额后退回；退款仅退还净商品金额，不包含 FX 费用和 Transaction Fee；退款过程中不收取额外手续费。
 
 ### 2.2 用户问题 / 业务问题
 
-如果卡交易通知、自动归集、交易展示和全局交易模块边界不清，可能造成重复归集、资金悬挂、用户资金不可见、交易展示和账务状态不一致。
+如果卡收到退款、冲正、Top-up 或 deposit 后资金停留在卡余额中，用户在 AIX 对外展示的 Wallet 账户中可能无法看到对应资金。因此 AIX 需要在收到 DTC 卡交易通知后，按原文规则判断是否需要将卡余额回退到 Wallet。
 
 ### 2.3 需求目标
 
-定义 Card 侧交易通知、去重、目标类型判断、查询卡余额、Transfer Balance to Wallet、Card Home 最近交易入口和 Transaction 模块边界。
+本文定义 Card 侧交易通知后的资金回退流程，包括：DTC 卡交易通知、交易类型判断、主动查询卡余额、余额大于 0 时回退到 Wallet、回退结果校验、失败告警和人工介入。
+
+本文不定义全局交易历史、交易详情、统一状态模型和对账规则；这些由 `transaction/` 模块承接。
 
 ### 2.4 涉及功能清单
 
 | 功能点 | 本期范围 | 优先级 | 状态 | 说明 |
 |---|---|---|---|---|
-| Card Transaction Notify | In Scope | P0 | Open | DTC 通知 AIX 卡交易发生，原始报文落库待确认 |
-| 通知去重 | In Scope | P0 | Open | 可按 event + data.id，具体实现待确认 |
-| 归集触发类型 | In Scope | P0 | Confirmed | refund / reversal / deposit |
-| 查询卡余额 | In Scope | P0 | Confirmed | Inquiry Card Basic Info 获取 balance |
-| Transfer Balance to Wallet | In Scope | P0 | Confirmed | balance > 0 时归集 |
-| 失败告警 | In Scope | P0 | Open | 不自动重试，告警和补偿入口待确认 |
-| Card Home Recent Transactions | In Scope | P1 | Confirmed | 首页最近 3 条展示，页面规则在 card-home.md |
+| Card Transaction Notification | In Scope | P0 | Confirmed | DTC 检测发生交易后向 AIX 发送交易通知 |
+| 交易类型判断 | In Scope | P0 | Confirmed | AIX 校验 type 是否为 refund / reversal / Top-up / deposit |
+| 主动查询卡余额 | In Scope | P0 | Confirmed | 命中目标类型后调用 Inquiry Card Basic Info 查询当前卡 balance |
+| 余额判断 | In Scope | P0 | Confirmed | balance > 0 时回退钱包；balance = 0 时终止流程 |
+| Transfer Balance to Wallet | In Scope | P0 | Confirmed | 请求将卡内余额归集到用户 Wallet，amount = balance |
+| 回退结果校验 | In Scope | P0 | Confirmed | 成功则资金已转入用户 Wallet；失败则告警并人工介入 |
+| 异常告警 | In Scope | P0 | Confirmed | 失败发送异常告警至监控群，人工介入处理 |
+| Card Home Recent Transactions | In Scope | P1 | Confirmed | Card Home 展示最近交易入口；页面规则在 `card-home.md` |
 | Card History / Details | Out of Scope | P1 | Open | 由 Transaction 模块维护 |
-| 对账字段 | Out of Scope | P0 | Open | 由 transaction/reconciliation.md 与 ALL-GAP 承接 |
+| 对账字段 | Out of Scope | P0 | Open | 由 `transaction/reconciliation.md` 与 ALL-GAP 承接 |
+| 幂等 / 去重机制 | Out of Scope | P1 | Open | 原文未说明，不写入主流程；如需实现，需技术方案确认 |
 
 ---
 
@@ -60,84 +66,82 @@ DTC 卡交易发生后，AIX 需要接收 Card Transaction Notify，并根据交
 
 ### 3.1 业务主流程说明
 
-DTC 通过 Card Transaction Notify 通知 AIX。AIX 接收通知后按 event + data.id 去重，再判断交易类型是否为 refund / reversal / deposit。若不是目标类型，则流程终止；若命中目标类型，AIX 查询当前卡 balance。balance=0 时终止；balance>0 时调用 Transfer Balance to Wallet，amount=balance。归集失败不自动重试，需要告警和人工处理。
+DTC 检测发生卡交易后，通过 Card Transaction Notification 向 AIX 发送交易通知。AIX 收到交易通知后，校验交易类型是否为 refund / reversal / Top-up / deposit。
+
+若不是目标类型，则终止流程。若命中目标类型，AIX 主动查询当前卡余额，DTC 返回最新卡 balance。若 balance = 0，则终止流程；若 balance > 0，则 AIX 调用 Transfer Balance to Wallet，请求将卡内余额归集到用户 Wallet，入参 amount = balance。
+
+AIX 校验回退接口返回结果。若成功，资金已转入用户 Wallet，流程结束；若失败，则发送异常告警至监控群，人工介入处理。
 
 ### 3.2 业务时序图
 
 ```mermaid
 sequenceDiagram
     autonumber
-    participant External as 外部发卡能力
+    participant DTC as DTC
     participant Card as AIX Card 服务
     participant Wallet as Wallet 服务
-    participant Monitor as 监控 / 告警
-    participant App as AIX App
+    participant Monitor as 监控群
 
-    External-->>Card: 通知 AIX 发生卡交易
-    Card->>Card: 判断该通知是否已经处理过
-    alt 已处理过
-        Card->>Card: 结束流程，不重复处理
-    else 未处理过
-        Card->>Card: 判断该交易是否属于需要归集的交易类型
-        alt 不需要归集
-            Card->>Card: 结束流程，不归集
-        else 需要归集
-            Card->>External: 确认可归集的卡余额
-            External-->>Card: 返回可归集余额结果
-            alt 无可归集余额
-                Card->>Card: 结束流程，不归集
-            else 有可归集余额
-                Card->>Wallet: 发起卡余额归集到 Wallet
-                alt 归集成功
-                    Wallet-->>Card: 返回归集成功结果
-                    Card->>Card: 记录处理完成，后续由交易和对账模块承接
-                else 归集失败
-                    Card->>Monitor: 记录异常并触发告警
-                end
+    DTC-->>Card: 通知 AIX 发生卡交易
+    Card->>Card: 判断交易类型是否需要回退到 Wallet
+    alt 非目标交易类型
+        Card->>Card: 终止流程
+    else 目标交易类型
+        Card->>DTC: 查询当前卡余额
+        DTC-->>Card: 返回当前卡余额
+        alt 卡余额为 0
+            Card->>Card: 终止流程
+        else 卡余额大于 0
+            Card->>Wallet: 发起卡余额回退到用户 Wallet
+            alt 回退成功
+                Wallet-->>Card: 返回回退成功结果
+                Card->>Card: 流程结束
+            else 回退失败
+                Card->>Monitor: 发送异常告警
+                Monitor->>Card: 人工介入处理
             end
         end
     end
-    App->>Card: 查询 Card Home 最近交易
-    Card-->>App: 返回可展示的最近交易结果
 ```
 
 ### 3.3 流程步骤与业务规则
 
 | 步骤 | 场景 / 规则 | 触发条件 | 责任方 | 系统处理 | 成功结果 | 失败 / 分支结果 | 来源 |
 |---|---|---|---|---|---|---|---|
-| 1 | 接收通知 | DTC 发生卡交易 | DTC / Card | 接收 Card Transaction Notify | 进入去重 | 原始报文落库待确认 | DTC / ALL-GAP |
-| 2 | 通知去重 | 收到 Webhook | Card | 按 event + data.id 判断 | 非重复进入类型判断 | 重复通知不重复处理 | 用户确认 / ALL-GAP |
-| 3 | 类型判断 | 非重复通知 | Card | 判断 type 是否 refund / reversal / deposit | 命中则查询余额 | 未命中终止，不归集 | 用户确认 |
-| 4 | 查询余额 | 命中目标类型 | Card / DTC | Inquiry Card Basic Info | 返回 balance | 查询失败处理待确认 | DTC / ALL-GAP |
-| 5 | 金额判断 | 拿到 balance | Card | 判断 balance 是否大于 0 | 大于 0 归集 | 等于 0 终止 | AIX Card Transaction |
-| 6 | 归集钱包 | balance > 0 | Card / DTC / Wallet | Transfer Balance to Wallet，amount=balance | 归集成功 | 失败不自动重试，告警 | 用户确认 |
-| 7 | Card Home 展示 | 用户进入 Card Home | App / Card | 查询最近卡交易 | 展示最近 3 条 | 查询失败处理待确认 | Card Transaction / Card Home |
-| 8 | 历史与详情 | 用户进入交易历史 / 详情 | Transaction | 由 Transaction 模块承接 | 展示历史 / 详情 | 按 Transaction 规则处理 | Transaction & History |
+| 1 | 触发通知 | DTC 检测发生卡交易 | DTC | 通过 Card Transaction Notification 向 AIX 发送交易通知 | AIX 收到交易通知 | 通知字段取值待 DTC 确认 | 原文 7.3 |
+| 2 | 类型判断 | AIX 收到交易通知 | AIX Card | 校验 type 是否为 refund / reversal / Top-up / deposit | 命中则查询卡余额 | 未命中则终止流程 | 原文 7.3 |
+| 3 | 主动查询卡余额 | 命中目标交易类型 | AIX Card / DTC | 调用 Inquiry Card Basic Info 主动查询当前卡余额 | DTC 返回最新 balance | 查询失败处理待确认 | 原文 7.3 |
+| 4 | 余额判断 | 获取 balance | AIX Card | 判断 balance 是否大于 0 | balance > 0 时回退 Wallet | balance = 0 时终止流程 | 原文 7.3 |
+| 5 | 请求资金回退 Wallet | balance > 0 | AIX Card / Wallet | 调用 Transfer Balance to Wallet，amount = balance | 回退请求成功提交 | 回退失败进入告警 | 原文 7.3 |
+| 6 | 回退结果校验 | 回退接口返回 | AIX Card | 校验回退接口返回结果 | 成功则资金转入用户 Wallet，流程结束 | 失败则发送告警并人工介入 | 原文 7.3 |
+| 7 | 失败人工处理 | 回退失败 | AIX / 监控群 / 人工处理人 | 发送异常告警至监控群 | 人工介入跟进 | 系统原因由开发跟进；交易金额大于卡余额由 PM 跟进 | 原文 7.3 |
+| 8 | Card Home 交易展示 | 用户进入 Card Home | App / Card | 展示最近卡交易入口和数据 | 展示最近交易 | 查询失败处理待确认 | Card Home / Transaction 边界 |
+| 9 | 历史与详情 | 用户进入交易历史 / 详情 | Transaction | 由 Transaction 模块承接 | 展示历史 / 详情 | 按 Transaction 规则处理 | Transaction & History |
 
 ### 3.4 状态规则
 
 | 状态 | 含义 | 触发条件 | 用户可见表现 | 系统处理 | 可迁移到 | 是否终态 | 来源 |
 |---|---|---|---|---|---|---|---|
-| 通知已接收 | 收到 DTC 通知 | Card Transaction Notify | 用户不可见 | 落库 / 去重 | 已去重 / 已忽略 | 否 | DTC / ALL-GAP |
-| 重复通知 | event + data.id 已处理 | 重复推送 | 用户不可见 | 忽略，不重复归集 | 已忽略 | 是 | 用户确认 |
-| 非目标类型 | type 不在目标范围 | 通知类型判断 | 用户不可见 | 不归集 | 终止 | 是 | 用户确认 |
-| balance=0 | 卡余额为 0 | 查询 Basic Info | 用户不可见 | 不归集 | 终止 | 是 | AIX Card Transaction |
-| 待归集 | balance > 0 | 查询余额成功 | 用户不可见 | 调用 Transfer | 归集成功 / 失败 | 否 | AIX Card Transaction |
-| 归集成功 | Transfer 成功 | DTC 返回成功 | 用户看 Wallet 资金 | 结束流程 | 对账 | 是 | 用户确认 |
-| 归集失败 | Transfer 失败 | DTC 返回失败 | 用户可能不可见资金 | 告警，不自动重试 | 人工处理 | 否 | 用户确认 |
+| 已收到交易通知 | DTC 已通知 AIX 发生卡交易 | Card Transaction Notification | 用户不可见 | 进入交易类型判断 | 目标类型 / 非目标类型 | 否 | 原文 7.3 |
+| 非目标交易类型 | type 不是 refund / reversal / Top-up / deposit | 交易类型判断 | 用户不可见 | 终止流程，不回退 Wallet | 不适用 | 是 | 原文 7.3 |
+| 目标交易类型 | type 是 refund / reversal / Top-up / deposit | 交易类型判断 | 用户不可见 | 主动查询当前卡余额 | balance = 0 / balance > 0 | 否 | 原文 7.3 |
+| balance = 0 | 当前卡余额为 0 | 查询卡余额后 | 用户不可见 | 终止流程，不回退 Wallet | 不适用 | 是 | 原文 7.3 |
+| balance > 0 | 当前卡余额大于 0 | 查询卡余额后 | 用户不可见 | 发起资金回退 Wallet | 回退成功 / 回退失败 | 否 | 原文 7.3 |
+| 回退成功 | Transfer Balance to Wallet 成功 | 回退接口成功返回 | 用户 Wallet 资金更新 | 流程结束 | 对账 | 是 | 原文 7.3 |
+| 回退失败 | Transfer Balance to Wallet 失败 | 回退接口失败返回 | 用户可能不可见资金 | 告警并人工介入 | 人工处理 | 否 | 原文 7.3 |
 
 ### 3.5 业务级异常与失败处理
 
 | 异常场景 | 触发条件 | 错误来源 | 错误码 / 原因 | 用户表现 | 系统处理 | 是否可重试 | 最终状态 |
 |---|---|---|---|---|---|---|---|
-| 重复通知 | DTC 重复推送 | DTC | event + data.id 相同 | 用户不可见 | 不重复归集 | 否 | 已忽略 |
-| 非目标交易类型 | type 非 refund / reversal / deposit | DTC | type 不匹配 | 用户不可见 | 终止 | 否 | 不归集 |
-| 查询余额失败 | Inquiry Basic Info 失败 | DTC / Network | 接口失败 | 用户不可见 | 待确认 | 待确认 | 待处理 |
-| balance=0 | 查询余额为 0 | DTC | 余额为 0 | 用户不可见 | 终止 | 否 | 不归集 |
-| Transfer 失败 | Transfer Balance to Wallet 失败 | DTC | 接口失败 | 极端情况下用户不可见资金 | 告警，不自动重试 | 人工 | 待人工处理 |
-| DTC transfer 成功但 Wallet 未到账 | 极端异常 | Wallet / DTC | 对账缺失 | 用户可能反馈 | 当前自动发现和关联规则待确认 | 待确认 | 待人工处理 |
-| 交易查询无数据 | Card Home 无交易数据 | Card / Transaction | 空数据 | `No transaction data` | 展示空态 | 是 | 空态 |
-| 详情查询失败 | Transaction Detail 查询失败 | Transaction / DTC | 接口失败 | 待确认 | 由 Transaction 模块处理 | 是 | 待确认 |
+| 非目标交易类型 | type 非 refund / reversal / Top-up / deposit | DTC | type 不匹配 | 用户不可见 | 终止流程，不回退 Wallet | 否 | 不回退 |
+| 查询余额失败 | Inquiry Card Basic Info 失败 | DTC / Network | 接口失败 | 用户不可见 | 原文未说明，待确认 | 待确认 | 待处理 |
+| balance = 0 | 查询卡余额为 0 | DTC | 余额为 0 | 用户不可见 | 终止流程，不回退 Wallet | 否 | 不回退 |
+| 回退失败：系统原因 | Transfer Balance to Wallet 失败 | AIX / DTC / Wallet | 系统原因 | 用户可能不可见资金 | 发送告警，开发跟进处理 | 人工 | 待人工处理 |
+| 回退失败：交易金额大于卡余额 | Transfer Balance to Wallet 失败 | AIX / DTC / Wallet | 金额大于卡余额 | 用户可能不可见资金 | 发送告警，由 PM 跟进处理 | 人工 | 待人工处理 |
+| 回退成功但交易 / 对账不可见 | 回退成功后关联记录不可追踪 | Transaction / Reconciliation | 关联规则缺失 | 用户可能咨询 | 由 Transaction / Reconciliation 模块承接 | 待确认 | 待确认 |
+| Card Home 无交易数据 | Card Home 查询无数据 | Card / Transaction | 空数据 | `No transaction data` | 展示空态 | 是 | 空态 |
+| Card History / Details 查询失败 | 交易历史或详情接口失败 | Transaction / DTC | 接口失败 | 待确认 | 由 Transaction 模块处理 | 是 | 待确认 |
 
 ---
 
@@ -167,7 +171,7 @@ flowchart LR
 | 入口 / 触发 | 用户进入 Card Home |
 | 展示内容 | 最近 3 条交易、Merchant name、Crypto & Amount、Status、Created Date、Indicator |
 | 用户动作 | 点击 More 或交易记录 |
-| 系统处理 / 责任方 | 调用 Card Transaction Inquiry 或交易模块接口 |
+| 系统处理 / 责任方 | 查询 Card 最近交易展示数据；具体接口字段由 Transaction / Card 接口承接 |
 | 元素 / 状态 / 提示规则 | 无交易数据展示占位；按交易时间降序 |
 | 成功流转 | Card History 或 Transaction Details |
 | 失败 / 异常流转 | 查询失败处理待确认 |
@@ -186,7 +190,7 @@ flowchart LR
 | 元素 / 状态 / 提示规则 | 详见 `transaction/history.md`、`transaction/detail.md`、`transaction/status-model.md` |
 | 成功流转 | 留在 Transaction 页面 |
 | 失败 / 异常流转 | 按 Transaction 模块规则处理 |
-| 备注 / 边界 | 本文只维护 Card 侧入口和 Card 交易触发边界 |
+| 备注 / 边界 | 本文只维护 Card 侧交易通知、卡余额回退和 Card Home 交易入口边界 |
 
 ---
 
@@ -194,17 +198,14 @@ flowchart LR
 
 | 类型 | 名称 | 所属系统 | 来源 | 用途 | 规则 / 输入输出 | 异常处理 |
 |---|---|---|---|---|---|---|
-| 接口 | Card Transaction Notify | DTC | DTC Card Issuing | 接收卡交易通知 | event、data.id、type 等 | 原始报文落库待确认 |
-| 字段 | event | DTC | DTC API | 通知事件类型 | 如 CARD_TRANSACTION | 缺失待确认 |
-| 字段 | data.id | DTC | DTC API | DTC Transaction ID | 与 event 组合去重 | 与 Wallet ID 关系待确认 |
-| 字段 | type | DTC | DTC API / 用户确认 | 判断是否归集 | refund / reversal / deposit | 非目标类型终止 |
-| 字段 | balance | DTC | Inquiry Card Basic Info | 归集金额依据 | amount = balance | 查询失败待确认 |
-| 接口 | Inquiry Card Basic Info | DTC | DTC API | 查询 card balance | `[POST] /openapi/v1/card/inquiry-card-info` | 查询失败待确认 |
-| 接口 | Transfer Balance to Wallet | DTC | DTC Wallet API | 归集卡余额到 Wallet | amount=balance | 失败告警，不自动重试 |
-| Header | D-REQUEST-ID | DTC | DTC API | 请求唯一标识 | 幂等语义待确认 | ALL-GAP |
-| 接口 | Transaction History of Card | DTC / Transaction | DTC API / Transaction | 查询卡交易列表 | 由 Transaction 模块承接 | 查询失败待确认 |
-| 接口 | Card Transaction Detail Inquiry | DTC / Transaction | DTC API / Transaction | 查询卡交易详情 | 由 Transaction 模块承接 | 失败页待确认 |
-| 字段 | Wallet transactionId / relatedId | Wallet | DTC Wallet OpenAPI | 对账关联 | 与 Card data.id 关系待确认 | ALL-GAP |
+| 接口 | Card Transaction Notification | DTC | 原文 7.3 / 8.1 | DTC 通知 AIX 发生卡交易 | 通知字段、取值和落库规则待 DTC 确认 | 通知失败处理待确认 |
+| 字段 | type | DTC | 原文 7.3 | 判断是否需要回退 Wallet | refund / reversal / Top-up / deposit 触发后续查询余额 | 非目标类型终止流程 |
+| 接口 | Inquiry Card Basic Info | DTC | 原文 7.3 | 主动查询当前卡余额 | 返回最新卡 balance | 查询失败处理待确认 |
+| 字段 | balance | DTC | 原文 7.3 | 判断是否需要回退 Wallet，也作为回退金额来源 | balance > 0 时回退；balance = 0 时终止；amount = balance | 缺失或异常待确认 |
+| 接口 | Transfer Balance to Wallet | DTC / Wallet | 原文 7.3 / 8.1 | 将卡内余额回退到用户 Wallet | 入参 amount = balance | 失败发送异常告警并人工介入 |
+| 接口 | Card Balance History Inquiry | DTC / Transaction | 原文 8.1 | 卡余额历史查询 | 与 Card History / Transaction 模块边界待确认 | 查询失败待确认 |
+| 接口 | Card Transaction History / Detail | DTC / Transaction | Transaction 边界来源 | 查询卡交易列表或详情 | 由 Transaction 模块承接 | 失败页待确认 |
+| 字段 | Wallet transactionId / relatedId | Wallet | DTC Wallet OpenAPI / ALL-GAP | 对账关联 | 与 Card 交易或回退记录的关联规则待确认 | ALL-GAP |
 
 ---
 
@@ -214,7 +215,7 @@ flowchart LR
 |---|---|---|---|---|---|
 | 卡交易成功 | Push / In-app | 持卡用户 | Notification 模块维护 | Card Transaction Details | 本文不定义 |
 | 卡退款成功 | Push / In-app | 持卡用户 | Notification 模块维护 | Card Transaction Details | 本文不定义 |
-| 归集失败告警 | Monitor / 内部群 | 内部运营 / 技术 | 告警模板待确认 | 内部处理台 | 不自动重试，人工处理 |
+| 回退失败告警 | Monitor / 内部群 | 内部运营 / 技术 / PM | 告警模板待确认 | 内部处理台 | 原文要求人工介入；补发规则待确认 |
 
 ---
 
@@ -222,11 +223,11 @@ flowchart LR
 
 | 类型 | 规则 | 影响 | 来源 |
 |---|---|---|---|
-| 资金风控 | 仅 refund / reversal / deposit 触发自动归集 | 防止非目标交易误归集 | 用户确认 |
-| 金额来源 | 归集金额只取查询得到的 card balance | 防止按通知金额错误归集 | AIX Card Transaction |
-| 失败可观测 | 归集失败必须告警并人工介入 | 防止资金悬挂 | 用户确认 / ALL-GAP |
-| 用户展示边界 | AIX 对外只展示 Wallet 资金，不展示卡资金 | 钱包未到账时用户不可见卡内资金 | 用户确认 |
-| 可追溯性 | 交易 ID、请求 ID、Wallet 关联字段需明确 | 影响对账和故障追踪 | ALL-GAP |
+| 资金回退范围 | 仅 refund / reversal / Top-up / deposit 触发余额查询与 Wallet 回退 | 防止非目标交易误回退 | 原文 7.3 |
+| 金额来源 | 回退金额取查询得到的卡 balance，amount = balance | 防止按通知金额错误回退 | 原文 7.3 |
+| 失败可观测 | 回退失败必须发送异常告警并人工介入 | 防止资金悬挂 | 原文 7.3 |
+| 用户展示边界 | 全局交易历史、详情、状态和对账由 Transaction 模块维护 | 防止 Card 侧覆盖全局交易模型 | Transaction 边界 |
+| 退款费用规则 | 退款仅退还净商品金额，不含 FX 费用和 Transaction Fee；退款过程不额外收费 | 明确用户退款金额预期 | 原文 DTC 知识点 |
 
 ---
 
@@ -234,9 +235,14 @@ flowchart LR
 
 | 问题 | 影响范围 | 当前处理 | 是否阻塞验收 | 建议确认人 |
 |---|---|---|---|---|
-| Card Transaction Notify 原始报文落库、去重、重放规则 | BE / Audit | 阻塞 | 是 | BE / Audit |
-| 自动归集失败告警监控群、告警字段、责任分派和人工补偿入口 | Ops / Finance / BE | 阻塞 | 是 | PM / Ops / BE |
-| Card data.id、D-REQUEST-ID、Wallet transactionId、Wallet relatedId 的最终关联规则 | 对账 / 故障追踪 | 阻塞 | 是 | BE / Finance |
+| Card Transaction Notification 的完整字段、type 枚举和取值大小写 | BE / DTC / QA | 阻塞 | 是 | BE / DTC |
+| 原文 `Top-up` 与 DTC 实际 type 枚举如何拼写和映射 | BE / DTC / QA | 阻塞 | 是 | BE / DTC / PM |
+| Inquiry Card Basic Info 查询失败时是否告警、是否重试、是否人工介入 | BE / Ops | 阻塞 | 是 | BE / Ops / PM |
+| 回退失败告警监控群、告警字段、责任分派和人工补偿入口 | Ops / Finance / BE | 阻塞 | 是 | PM / Ops / BE |
+| 失败原因为系统原因和交易金额大于卡余额时的判断来源 | Ops / BE / PM | 阻塞 | 是 | BE / Ops / PM |
+| Card Balance History Inquiry 与 Card History / Transaction 模块的关系 | FE / BE / QA / Transaction | 不阻塞 | 否 | PM / BE |
+| Card 交易、Wallet 回退记录和全局 Transaction 记录之间的关联字段 | 对账 / 故障追踪 | 阻塞 | 是 | BE / Finance |
+| Card Transaction Notification 是否需要幂等 / 去重机制，以及去重字段是什么 | BE / Audit | 不阻塞 / 技术方案待定 | 否 | BE / Audit |
 | Card Home / Card History / Details 的交易状态映射是否统一由交易模块收口 | FE / QA / Transaction | 不阻塞 | 否 | PM / BE |
 | 详情查询失败页文案与错误码映射 | FE / QA | 不阻塞 | 否 | PM / QA |
 
@@ -248,21 +254,25 @@ flowchart LR
 
 | 验收场景 | 验收标准 |
 |---|---|
-| 正常流程 | refund / reversal / deposit 且 balance>0 时发起 Transfer Balance to Wallet |
-| 异常流程 | 重复通知、非目标类型、balance=0、查询失败、Transfer 失败均有明确处理 |
+| 正常流程 | DTC 通知目标交易类型且 balance > 0 时，AIX 发起 Transfer Balance to Wallet，amount = balance |
+| 异常流程 | 非目标类型、balance = 0、查询余额失败、回退失败均有明确处理或待确认边界 |
 | 页面展示 | Card Home 展示最近 3 条，Card History / Details 入口可用 |
-| 系统交互 | 通知去重、查询余额、归集接口、交易查询接口边界明确 |
-| 通知 | 用户通知由 Notification 模块维护，内部告警规则待确认 |
-| 数据 / 埋点 | 交易 ID、请求 ID、Wallet 关联字段缺口进入 ALL-GAP |
+| 系统交互 | Card Transaction Notification、Inquiry Card Basic Info、Transfer Balance to Wallet 的边界明确 |
+| 通知 | 用户交易通知由 Notification 模块维护；回退失败走内部告警和人工介入 |
+| 数据 / 埋点 | type、balance、回退结果、告警原因和交易关联字段可追踪或进入待确认 |
 
 ### 9.2 测试场景矩阵
 
 | 场景 | 前置条件 | 用户操作 | 预期页面表现 | 预期系统结果 | 是否必测 |
 |---|---|---|---|---|---|
-| 目标类型归集 | 收到 refund / reversal / deposit，balance>0 | 无用户操作 | 用户不可见 | 调用 Transfer amount=balance | 是 |
-| 非目标类型 | 收到非目标 type | 无用户操作 | 用户不可见 | 不查询余额或不归集 | 是 |
-| balance=0 | 目标类型，余额为 0 | 无用户操作 | 用户不可见 | 不调用 Transfer | 是 |
-| Transfer 失败 | 目标类型，balance>0 | 无用户操作 | 用户可能不可见资金 | 告警，不自动重试 | 是 |
+| refund 回退成功 | 收到 refund，balance > 0 | 无用户操作 | 用户 Wallet 资金更新 | 调用 Transfer Balance to Wallet，amount = balance | 是 |
+| reversal 回退成功 | 收到 reversal，balance > 0 | 无用户操作 | 用户 Wallet 资金更新 | 调用 Transfer Balance to Wallet，amount = balance | 是 |
+| Top-up 回退成功 | 收到 Top-up，balance > 0 | 无用户操作 | 用户 Wallet 资金更新 | 调用 Transfer Balance to Wallet，amount = balance | 是 |
+| deposit 回退成功 | 收到 deposit，balance > 0 | 无用户操作 | 用户 Wallet 资金更新 | 调用 Transfer Balance to Wallet，amount = balance | 是 |
+| 非目标类型 | 收到非目标 type | 无用户操作 | 用户不可见 | 终止流程，不查询或不回退 | 是 |
+| balance = 0 | 目标类型，卡余额为 0 | 无用户操作 | 用户不可见 | 终止流程，不调用 Transfer | 是 |
+| 查询余额失败 | 目标类型，查询余额失败 | 无用户操作 | 用户不可见 | 处理方式待确认 | 是 |
+| 回退失败 | 目标类型，balance > 0，Transfer 失败 | 无用户操作 | 用户可能不可见资金 | 发送异常告警，人工介入 | 是 |
 | Home 交易展示 | 有 3 条以上卡交易 | 进入 Card Home | 展示最近 3 条 | 查询交易列表 | 是 |
 | History 无数据 | 无交易 | 进入 Card History | 展示 No transaction data | 不报错 | 是 |
 | Details 查询失败 | 交易详情接口失败 | 点击交易 | 错误页待确认 | 不展示错误详情 | 是 |
@@ -271,9 +281,9 @@ flowchart LR
 
 ## 10. 来源引用
 
-- (Ref: 历史prd/AIX Card交易【transaction】.docx / V1.0)
+- (Ref: 历史prd/AIX Card交易【transaction】.docx / 7.1 / 7.2 / 7.3 / 8.1 / 9)
 - (Ref: 历史prd/AIX APP V1.0【Transaction & History】 (1).docx / 5.2 / 5.3 / V1.1，仅作为 Transaction 模块边界来源)
-- (Ref: DTC Card Issuing API Document_20260310 / Card Transaction Notify / Inquiry Card Basic Info)
+- (Ref: DTC Card Issuing API Document_20260310 / Card Transaction Notification / Inquiry Card Basic Info)
 - (Ref: DTC Wallet OpenAPI Documentation / Transfer Balance to Wallet)
 - (Ref: knowledge-base/transaction/history.md)
 - (Ref: knowledge-base/transaction/detail.md)
