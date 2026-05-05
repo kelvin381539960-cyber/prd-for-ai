@@ -3,7 +3,7 @@ module: _meta
 feature: error-code-dictionary
 version: "1.0"
 status: draft
-source_doc: IMPLEMENTATION_PLAN.md
+source_doc: knowledge-base/common/errors.md；knowledge-base/_kb-ingestion-process.md
 source_section: "4. 推荐目录结构"
 last_updated: 2026-05-01
 owner: 吴忆锋
