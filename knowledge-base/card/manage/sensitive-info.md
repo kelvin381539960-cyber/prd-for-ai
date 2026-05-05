@@ -3,7 +3,7 @@ module: card
 feature: sensitive-info
 version: "1.0"
 status: active
-source_doc: 历史prd/AIX Card 【manage】模块需求V1.0 .docx；DTC Card Issuing API Document_20260310；knowledge-base/security/face-authentication.md；prd-template/standard-prd-template.md
+source_doc: archive/historical-prd/card/AIX Card 【manage】模块需求V1.0 .docx；external-docs/dtc/DTC Card Issuing API Document_20260310 (1).docx；knowledge-base/security/face-authentication.md；prd-template/standard-prd-template.md
 source_section: Manage 6.4 / 7.1 / 8.1；DTC Card Basic Info / Sensitive Info；Standard PRD Template v1.3
 last_updated: 2026-05-05
 owner: 吴忆锋
@@ -230,8 +230,8 @@ flowchart LR
 
 ## 10. 来源引用
 
-- (Ref: 历史prd/AIX Card 【manage】模块需求V1.0 .docx / 6.4 / 7.1 / 8.1 / V1.0)
-- (Ref: DTC Card Issuing API Document_20260310 / Inquiry Card Basic Info / Inquiry Card Sensitive Info)
+- (Ref: archive/historical-prd/card/AIX Card 【manage】模块需求V1.0 .docx / 6.4 / 7.1 / 8.1 / V1.0)
+- (Ref: external-docs/dtc/DTC Card Issuing API Document_20260310 (1).docx / Inquiry Card Basic Info / Inquiry Card Sensitive Info)
 - (Ref: knowledge-base/card/manage/status-and-operations.md)
 - (Ref: knowledge-base/security/face-authentication.md)
 - (Ref: prd-template/standard-prd-template.md / v1.3)
