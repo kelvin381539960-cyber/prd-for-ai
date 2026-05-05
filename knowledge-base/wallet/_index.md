@@ -3,7 +3,7 @@ module: wallet
 feature: wallet-index
 version: "2.1"
 status: active
-source_doc: knowledge-base/wallet/deposit.md；knowledge-base/wallet/balance.md；knowledge-base/wallet/receive.md；knowledge-base/transaction/history.md；knowledge-base/kyc/account-opening.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/_system-boundary.md；decision-log/2026-05-02-deposit-active.md
+source_doc: knowledge-base/wallet/deposit.md；knowledge-base/wallet/balance.md；knowledge-base/wallet/receive.md；knowledge-base/transaction/history.md；knowledge-base/kyc/account-opening.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/_system-boundary.md
 source_section: Wallet 模块使用态结构；KYC / Account Opening 独立；Wallet Transaction History 合并至 Transaction History；ALL-GAP 总表
 last_updated: 2026-05-02
 owner: 吴忆锋
