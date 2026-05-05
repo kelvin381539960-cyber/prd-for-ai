@@ -76,11 +76,12 @@ AIX 当前知识库覆盖：
 
 | 模块 | 范围 |
 |---|---|
-| Wallet | Balance、Deposit、Receive、Send 占位 |
+| Wallet | Balance、Deposit、Receive |
 | Card | Card Application、Card Home、Activation、PIN、Sensitive Info、Card Management、Card Transaction Flow |
 | Transaction | History、Detail、Status Model、Reconciliation |
 | KYC | Account Opening / KYC 开户、身份认证、Sub Account、业务准入边界 |
-| Common | DTC、AAI、WalletConnect、Notification、Errors、FAQ |
+| Common | Notification、Errors、FAQ |
+| Integrations | DTC、AAI、WalletConnect 外部依赖边界 |
 
 ## 4. Active / Deferred 能力
 
@@ -89,8 +90,6 @@ AIX 当前知识库覆盖：
 | Wallet Balance | active | 读取 `wallet/balance.md` |
 | Wallet Deposit | active | 读取 `wallet/deposit.md`；包含 GTR / Exchange 与 WalletConnect / Self-custodial Wallet |
 | Wallet Receive | active / 基础版 | 读取 `wallet/receive.md`；未确认边界查 ALL-GAP |
-| Wallet Send | deferred | 不写成当前 active 能力 |
-| Wallet Swap | deferred | 不写成当前 active 能力 |
 | Account Opening / KYC | active | 主事实源为 `kyc/account-opening.md` |
 | Wallet Transaction History | active | 主事实源为 `transaction/history.md` |
 | Card Transaction Flow | active / partial | 资金追踪与对账缺口查 `transaction/reconciliation.md` 与 ALL-GAP |
@@ -110,7 +109,6 @@ AIX 当前知识库覆盖：
 | Risk Withheld / under review | `wallet/deposit.md`、`integrations/dtc/_index.md`、`common/notification.md` | `transaction/status-model.md`、`knowledge-gaps.md`、`_system-boundary.md` | 直接映射 Wallet state |
 | Wallet Balance | `wallet/balance.md` | `transaction/history.md`、`transaction/status-model.md`、`knowledge-gaps.md` | Card 文件 |
 | Receive | `wallet/receive.md` | `wallet/deposit.md`、`wallet/balance.md`、`knowledge-gaps.md`、`_system-boundary.md` | 直接复用 Deposit 规则 |
-| Send / Swap | `wallet/send.md`、`knowledge-gaps.md` | 历史 PRD 原文 | 写成 active 功能 |
 | Wallet 交易历史 | `transaction/history.md` | `wallet/balance.md`、`transaction/status-model.md`、`knowledge-gaps.md` | `wallet/transaction-history.md` |
 | Wallet 交易详情 | `transaction/detail.md` | `transaction/history.md`、`transaction/status-model.md`、`knowledge-gaps.md` | Card Detail 规则直接套用 |
 | Card 交易展示 | `card/card-transaction-flow.md` | `transaction/detail.md`、`transaction/history.md`、`common/notification.md` | Wallet History 规则直接套用 |
@@ -180,7 +178,6 @@ AI 使用本知识库时不得：
 9. 把 Deposit success 写死为 Wallet `COMPLETED`。
 10. 把 Risk Withheld 写死为 Wallet `REJECTED` / `PENDING` / `PROCESSING`。
 11. 把通知写成必然到账。
-12. 把 Send / Swap 写成 active。
 13. 为了回答问题自行补页面、接口、字段、状态、文案。
 14. 将外部系统内部逻辑写成 AIX 需求。
 15. 把 `D-SUB-ACCOUNT-ID` 与 WalletAccount.clientId 写死为完全等价。
