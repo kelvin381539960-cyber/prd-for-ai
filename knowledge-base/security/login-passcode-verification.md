@@ -13,7 +13,6 @@ depends_on:
   - account/_index
   - _meta/limits-and-rules
   - _meta/error-code-dictionary
-  - _meta/writing-standard
 ---
 
 # Login Passcode Verification 登录密码认证
