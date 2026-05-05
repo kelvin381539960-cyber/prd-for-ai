@@ -1,7 +1,7 @@
 ---
 module: card
 feature: card-index
-version: "3.1"
+version: "3.2"
 status: active
 source_doc: knowledge-base/card/application.md；knowledge-base/card/card-home.md；knowledge-base/card/manage/_index.md；knowledge-base/card/transaction.md；knowledge-base/card/transaction-detail.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/_system-boundary.md
 source_section: Card runtime structure；Card Application；Card Home；Card Manage；Card Transaction；Card Transaction Detail；ALL-GAP；system boundary
@@ -77,7 +77,7 @@ Card 目录不再把 Manage、Transaction、Transaction Detail 和全局 Transac
 4. 不把 KYC Approved 写成一定可申卡。
 5. 不把 DTC Sub Account、WalletAccount、Card Account 的关系写死为一一对应。
 6. 不把 Terminate Card 单独写成完整 PRD；当前只作为 Manage 操作边界和待确认项。
-7. 不把旧 `card/card-management.md` 当作运行态入口。
+7. 不把旧的合并式 Card Management 文件当作运行态入口。
 
 ## 7. 来源引用
 
