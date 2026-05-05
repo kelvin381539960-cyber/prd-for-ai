@@ -1,8 +1,8 @@
 ---
 type: prd-writing-workflow
-version: "1.2"
+version: "1.3"
 status: active
-source_doc: AGENTS.md；prd-template/standard-prd-template.md；requirements/_index.md；knowledge-base/_ai-query-router.md；knowledge-base/_system-boundary.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-05
+source_doc: AGENTS.md；prd-template/standard-prd-template.md；requirements/_index.md；knowledge-base/_ai-query-router.md；knowledge-base/_system-boundary.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-05；用户补充确认 2026-05-05 Canvas 优先确认后再写入 Git
 source_section: AI PRD 写作流程；标准 PRD 模板；requirements 使用规则；知识库路由；系统边界；ALL-GAP 使用规则；调研记录规则
 last_updated: 2026-05-05
 owner: 吴忆锋
@@ -14,6 +14,45 @@ readers: [product, ui, dev, qa, business, ai]
 本文定义 AI Agent、定制 GPT、Cursor、Claude Code 等工具在本仓库中写 PRD 时应遵守的流程。
 
 本文是工作流说明，不是 PRD 模板，也不是业务事实来源。PRD 正文仍必须使用 `prd-template/standard-prd-template.md`。
+
+## 0. Canvas 优先确认规则
+
+生成或修改 PRD 相关交付物时，默认必须先在 Canvas 中生成可读草稿，供用户逐段查看和局部修改。
+
+适用交付物包括但不限于：
+
+- research；
+- brief；
+- PRD 正文；
+- review；
+- 模块 `_index.md`；
+- 其他与 PRD 写作直接相关、准备写入 `requirements/` 或 `prd-template/` 的文档。
+
+在用户明确确认 Canvas 草稿通过之前，AI 不得把上述交付物创建、更新、删除或移动到 Git。
+
+以下表达可视为明确确认：
+
+```text
+确认
+通过
+确认这个版本
+按这个版本写入 Git
+同步到 Git
+可以更新仓库
+生成正式 PRD 并写入 Git
+```
+
+以下表达不视为写入 Git 的确认：
+
+```text
+继续改
+先看看
+再调整一下
+这个方向不错
+帮我补一段
+```
+
+用户在 Canvas 中提出局部修改意见，只代表继续修改 Canvas 草稿，不代表授权写入 Git。Canvas 草稿确认通过后，再按本文的 Git 写入确认规则同步到仓库。
 
 ## 1. 适用范围
 
@@ -76,11 +115,11 @@ requirements/YYYY-MM/<module>/<feature-b>.md
 
 ## 4. Git 写入确认规则
 
-在用户确认方案 / brief 之前，AI 只能读取仓库文件并在聊天中输出方案草稿、brief 草稿或待确认问题，不得创建、更新、删除、移动任何 Git 文件。
+在用户确认 Canvas 草稿之前，AI 只能读取仓库文件，并在 Canvas 中生成或修改 research、brief、PRD、review、模块 `_index.md` 等草稿；不得创建、更新、删除、移动任何 Git 文件。
 
-只有当用户明确确认方案 / brief 后，才允许将 research、brief、PRD、review 或模块 `_index.md` 写入 Git。
+只有当用户明确确认 Canvas 草稿通过，并明确授权写入 Git 后，才允许将 research、brief、PRD、review 或模块 `_index.md` 写入 Git。
 
-如果用户只输入原始需求，默认先输出待确认方案，不直接写入 Git。用户确认的表达可以是“确认方案”“按这个方案继续”“可以写入 Git”“生成正式 PRD”等明确授权。
+如果用户只输入原始需求，默认先在 Canvas 中输出待确认方案 / brief 草稿，不直接写入 Git。用户确认的表达可以是“确认”“通过”“确认这个版本”“按这个版本写入 Git”“同步到 Git”“可以更新仓库”“生成正式 PRD 并写入 Git”等明确授权。
 
 ## 5. 工作流阶段
 
@@ -100,7 +139,7 @@ requirements/YYYY-MM/<module>/<feature-b>.md
 
 ### Phase 2 — 可选调研记录
 
-如果写 PRD 前进行了调研、竞品观察、资料核验或方案比较，应先在聊天中输出调研摘要；用户确认方案 / brief 前，不得将调研内容写入 Git。
+如果写 PRD 前进行了调研、竞品观察、资料核验或方案比较，应先在聊天中输出调研摘要，并在需要沉淀时将 research 草稿生成到 Canvas；用户确认 Canvas 草稿前，不得将调研内容写入 Git。
 
 Research 路径：
 
@@ -137,11 +176,11 @@ Research 正文建议包含：
 
 Research 是过程材料，不是确认后的需求方案，也不是 PRD 事实来源。brief 只允许保留 `research_path` 和不超过 5 条调研结论摘要；PRD 读取应以 brief、source_files、用户确认和知识库事实为准，只有需要核验调研背景时才读取完整 research。
 
-用户确认方案 / brief 后，才允许将 research 写入 Git；如果没有实际调研，可不创建 research 文件。
+用户明确确认 Canvas 中的 research 草稿通过，并授权写入 Git 后，才允许将 research 写入 Git；如果没有实际调研，可不创建 research 文件。
 
 ### Phase 3 — 先写 Brief
 
-写 PRD 正文前，必须先在聊天中提出 brief 草稿。用户确认方案 / brief 前，不得将 brief 写入 Git。
+写 PRD 正文前，必须先在 Canvas 中生成 brief 草稿。用户确认 Canvas 中的方案 / brief 前，不得将 brief 写入 Git。
 
 Brief 路径：
 
@@ -174,10 +213,12 @@ Brief 正文应包含：
 4. 未确认边界。
 5. 调研摘要（如适用，不超过 5 条）。
 6. 建议的功能拆分结论。
-7. 目标 PRD 路径。
-8. 需要用户确认的问题。
+7. 核心主流程：只写用户从触发到达成业务结果的主链路，不展开接口、异常分支和边缘状态。
+8. 主页面流程（低保真原型）：用页面节点、跳转箭头、关键动作和关键校验表达核心页面流转，目的是让用户快速确认方向是否正确；不要求视觉稿、完整文案或详细交互规格。
+9. 目标 PRD 路径。
+10. 需要用户确认的问题。
 
-用户确认方案 / brief 后，才允许将 brief 写入 Git，并更新为：
+用户明确确认 Canvas 中的方案 / brief 通过，并授权写入 Git 后，才允许将 brief 写入 Git，并更新为：
 
 ```yaml
 brief_status: confirmed
@@ -200,6 +241,8 @@ brief_status: skipped_questions_confirmed
 不得因为多个功能来自同一份原始文档或同一模块，就强行合并进同一个 PRD。
 
 ### Phase 5 — 写 PRD 正文
+
+写 PRD 正文时，必须先在 Canvas 中生成完整 PRD 草稿，供用户逐章确认和局部修改。用户明确确认 Canvas 中的 PRD 草稿通过，并授权写入 Git 后，才允许创建或更新 Git 中的 PRD 文件。
 
 PRD 路径：
 
@@ -242,7 +285,7 @@ PRD 写作规则：
 
 ### Phase 6 — 生成评审记录
 
-在 PRD 同级目录创建或更新评审记录：
+评审记录也必须先在 Canvas 中生成草稿。用户明确确认 Canvas 中的评审记录通过，并授权写入 Git 后，才允许在 PRD 同级目录创建或更新评审记录：
 
 ```text
 requirements/YYYY-MM/<module>/_review-<feature>.md
@@ -270,9 +313,9 @@ blocked_by_confirmation
 
 ### Phase 7 — 修订与确认
 
-当用户修改范围、成功标准、业务规则、合规边界或功能拆分时，应先回到 brief 或拆分判断，再重写 PRD。
+当用户修改范围、成功标准、业务规则、合规边界或功能拆分时，应先回到 Canvas 中的 brief 或拆分判断，再重写 PRD 草稿。
 
-当用户只要求修改措辞、格式或轻量澄清时，可以直接更新 PRD，并保持来源引用不变。
+当用户只要求修改措辞、格式或轻量澄清时，可以直接更新 Canvas 中的 PRD 草稿，并保持来源引用不变；同步到 Git 仍需用户明确确认。
 
 允许的 PRD 状态值：
 
