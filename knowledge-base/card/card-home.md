@@ -30,7 +30,7 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 2.1 需求背景
 
-Card Home 是已申卡用户查看卡片、卡状态、卡操作入口、Recent Transactions、实体卡物流和 FAQ 的主页面，也是 Activation、Card Manage / PIN、Card Manage / Sensitive Info、Card Management、Card Card Transaction 的入口承接页。
+Card Home 是已申卡用户查看卡片、卡状态、卡操作入口、Recent Transactions、实体卡物流和 FAQ 的主页面，也是 Activation、Card Manage / PIN、Card Manage / Sensitive Info、Card Management、Card Transaction Detail Detail 的入口承接页。
 
 ### 2.2 用户问题 / 业务问题
 
@@ -240,7 +240,7 @@ flowchart LR
 | 元素 / 状态 / 提示规则 | 无数据时展示占位符；有数据按交易时间降序 |
 | 成功流转 | Card History |
 | 失败 / 异常流转 | 查询失败处理待确认 |
-| 备注 / 边界 | Home 只展示，不作为交易状态机事实源；交易归集和交易展示边界见 `card/transaction.md` |
+| 备注 / 边界 | Home 只展示，不作为交易状态机事实源；交易展示边界见 `card/transaction-detail.md`；交易资金回退见 `card/transaction.md` |
 
 ---
 
@@ -254,7 +254,7 @@ flowchart LR
 | 字段 | autoDebitEnabled | AIX / DTC | Application | 展示 Auto Debit Tag | 枚举冲突待确认 | 不写死 |
 | 字段 | trackingNo | DTC / Logistics | Application / Home | 展示物流单号 | 有值展示并可复制 | 空则 Preparing |
 | 字段 | cardOrderNumber | AIX / DTC | Application | 展示申请单号 | 可复制 | 缺失待确认 |
-| 接口 | Card Transaction Inquiry | DTC | Application / Transaction | 查询 Recent Transactions | `/openapi/v1/card/inquiry-card-transaction` | 查询失败处理待确认 |
+| 接口 | Card Transaction Detail Inquiry | DTC | Application / Transaction | 查询 Recent Transactions | `/openapi/v1/card/inquiry-card-transaction` | 查询失败处理待确认 |
 | 接口 | FAQ Config | AIX | Application / Home | 查询 FAQ | 按场景和类型筛选 | 缺失不影响主卡展示 |
 
 ---
@@ -265,7 +265,7 @@ flowchart LR
 |---|---|---|---|---|---|
 | 申请状态更新 | Push / In-app | 申卡用户 | Notification 模块维护 | Card Home / Application Details | 本文不定义 |
 | 物流更新 | Push / In-app / DTC 通知 | 实体卡用户 | Notification 模块维护 | Card Home | 待确认 |
-| 卡交易成功 / 退款成功 | Push / In-app | 持卡用户 | Notification 模块维护 | Card Transaction Details | 本文不定义 |
+| 卡交易成功 / 退款成功 | Push / In-app | 持卡用户 | Notification 模块维护 | Card Transaction Detail Details | 本文不定义 |
 
 ---
 
@@ -276,7 +276,7 @@ flowchart LR
 | 状态权限 | 所有操作入口受 Manage 6.4 矩阵约束 | 防止错误操作 | Manage / 6.4 |
 | 隐私 | Home 只展示截断卡号，不展示完整 PAN / CVC / EXP | 防止敏感信息泄露 | Manage / 7.1 |
 | 敏感信息 | Card detail 需走 Card Manage / Sensitive Info 认证流程 | 防止未认证查看敏感信息 | Manage / 7.1 |
-| 交易状态 | Home 的交易状态仅用于展示，不作为状态机事实源 | 防止交易状态被 Home 覆盖 | Card Transaction |
+| 交易状态 | Home 的交易状态仅用于展示，不作为状态机事实源 | 防止交易状态被 Home 覆盖 | Card Transaction Detail |
 | Google Wallet | 方案待定，不作为最终绑卡能力事实 | 防止提前承诺能力 | Application / gaps |
 
 ---
