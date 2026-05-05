@@ -214,103 +214,109 @@ flowchart LR
 
 ![Personal Center - Security Email Row](./assets/change-email/personal-center-security-email-row.svg)
 
-| 区块 | 内容 |
-|---|---|
-| 页面类型 | 入口节点 |
-| 页面目标 | 在个人中心 Security 区域承载 Email 更换入口 |
-| 入口 / 触发 | 用户进入个人中心 |
-| 展示内容 | Account 区域展示 Display name、X-Tag；Security 区域展示 Change password、Phone number、Email |
-| 用户动作 | 点击 Security 区域的 Email 行 |
-| 系统处理 / 责任方 | AIX App 进入 Change Email Intro |
-| 元素 / 状态 / 提示规则 | Email 行展示当前邮箱掩码；Email 行必须有向右箭头，表示可点击 |
-| 成功流转 | 进入 Change Email Intro |
-| 失败 / 异常流转 | 不适用 |
-| 备注 / 边界 | Email 不放在 Account 区域，放在 Security 区域 |
+**页面目的**  
+在个人中心 Security 区域提供更换邮箱入口。
+
+**必要展示规则**
+- Email 行位于 Security 区域，不放在 Account 区域。
+- Email 行展示当前邮箱掩码。
+- Email 行右侧展示向右箭头，表示可点击。
+
+**交互规则**
+- 用户点击 Email 行后，进入 Change Email Intro。
 
 ### 5.3 Change Email Intro
 
 ![Change Email Intro](./assets/change-email/change-email-intro.svg)
 
-| 区块 | 内容 |
-|---|---|
-| 页面类型 | 主页面 / 说明页 |
-| 页面目标 | 告知用户将进行邮箱更换及需要完成的验证步骤 |
-| 入口 / 触发 | 用户点击 Security 区域 Email 行 |
-| 展示内容 | 当前邮箱掩码；更换影响说明；三步流程：验证旧邮箱、输入新邮箱、验证新邮箱 |
-| 用户动作 | 点击“开始更换”；点击返回 |
-| 系统处理 / 责任方 | 点击开始更换后，AIX App 请求 Security 发送旧邮箱 Email OTP |
-| 元素 / 状态 / 提示规则 | 文案需说明：更换邮箱会影响登录、找回密码和 Email OTP 接收 |
-| 成功流转 | 进入 Old Email OTP Verify Page |
-| 失败 / 异常流转 | 用户返回个人中心 |
-| 备注 / 边界 | 本页不展示密码 / BIO 验证入口，不展示旧邮箱不可用入口 |
+**页面目的**  
+告知用户更换邮箱的影响范围与后续验证步骤。
+
+**必要展示规则**
+- 展示当前邮箱掩码。
+- 说明更换邮箱会影响登录、找回密码和 Email OTP 接收。
+- 流程说明只展示三步：验证旧邮箱、输入新邮箱、验证新邮箱。
+
+**交互规则**
+- 用户点击“开始更换”后，AIX App 请求 Security 发送旧邮箱 Email OTP，并进入 Old Email OTP Verify Page。
+- 用户点击返回，回到个人中心。
+
+**边界**
+- 本页不展示密码 / BIO 验证入口。
+- 本页不展示旧邮箱不可用入口。
 
 ### 5.4 Old Email OTP Verify Page
 
 ![Old Email OTP Verify Page](./assets/change-email/old-email-otp-verify.svg)
 
-| 区块 | 内容 |
-|---|---|
-| 页面类型 | 认证页 |
-| 页面目标 | 验证用户仍可访问当前旧邮箱 |
-| 入口 / 触发 | 用户在 Change Email Intro 点击“开始更换” |
-| 展示内容 | 旧邮箱掩码、4 位 Email OTP 输入框、重发倒计时、返回入口 |
-| 用户动作 | 输入旧邮箱收到的 4 位 OTP；重发 OTP；返回 |
-| 系统处理 / 责任方 | Security 负责旧邮箱 Email OTP 的生成、发送请求处理与校验；邮件投递由 Security 对接通知通道完成 |
-| 元素 / 状态 / 提示规则 | 复用 Email OTP 规则：4 位数字、5 分钟有效、输入满 4 位自动提交、重发后旧 OTP 立即失效、仅最新一次 OTP 有效、仅发起请求设备可用 |
-| 成功流转 | 进入 New Email Input |
-| 失败 / 异常流转 | 按 Email OTP 失败、锁定、过期、重发超限规则处理 |
-| 备注 / 边界 | 页面内不提供“无法访问旧邮箱”或“联系客服”入口 |
+**页面目的**  
+验证用户仍可访问当前旧邮箱。
+
+**必要展示规则**
+- 展示旧邮箱掩码。
+- 复用 Email OTP 页面规则，不在本 PRD 重复定义验证码有效期、重发、锁定等公共规则。
+
+**交互规则**
+- 用户输入旧邮箱收到的 4 位 OTP。
+- 旧邮箱 OTP 验证成功后，进入 New Email Input。
+- 旧邮箱 OTP 验证失败、锁定、过期或重发超限时，按 Email OTP 既有规则处理。
+
+**边界**
+- 页面内不提供“无法访问旧邮箱”或“联系客服”入口。
 
 ### 5.5 New Email Input
 
 ![New Email Input](./assets/change-email/new-email-input.svg)
 
-| 区块 | 内容 |
-|---|---|
-| 页面类型 | 主页面 / 表单页 |
-| 页面目标 | 收集并校验新邮箱地址 |
-| 入口 / 触发 | 旧邮箱 OTP 验证成功 |
-| 展示内容 | 新邮箱输入框、校验提示、发送验证码按钮、返回入口 |
-| 用户动作 | 输入新邮箱并点击发送验证码 |
-| 系统处理 / 责任方 | AIX App / Account 服务校验邮箱格式、非当前邮箱、全局唯一性 |
-| 元素 / 状态 / 提示规则 | 发送新邮箱 OTP 前完成唯一性校验，避免向不可用邮箱发送验证码 |
-| 成功流转 | 新邮箱可用后进入 New Email OTP Verify Page |
-| 失败 / 异常流转 | 格式错误、与当前邮箱相同、已存在邮箱冲突时停留当前页并提示 |
-| 备注 / 边界 | 新邮箱已被使用的具体文案待 UX / Security 确认 |
+**页面目的**  
+收集并校验新邮箱地址。
+
+**必要展示规则**
+- 新邮箱需满足格式正确、与当前邮箱不同、未被其他账户使用。
+
+**交互规则**
+- 用户输入新邮箱并点击“发送验证码”。
+- AIX 在发送新邮箱 OTP 前完成邮箱可用性校验。
+- 新邮箱可用后，AIX App 请求 Security 发送新邮箱 Email OTP，并进入 New Email OTP Verify Page。
+- 新邮箱不可用时，停留当前页并展示对应错误。
 
 ### 5.6 New Email OTP Verify Page
 
 ![New Email OTP Verify Page](./assets/change-email/new-email-otp-verify.svg)
 
-| 区块 | 内容 |
-|---|---|
-| 页面类型 | 认证页 |
-| 页面目标 | 验证新邮箱可接收邮件 |
-| 入口 / 触发 | 新邮箱格式与唯一性校验通过 |
-| 展示内容 | 新邮箱掩码、4 位 Email OTP 输入框、重发倒计时、返回入口 |
-| 用户动作 | 输入新邮箱收到的 4 位 OTP；重发 OTP；返回 |
-| 系统处理 / 责任方 | Security 负责新邮箱 Email OTP 的生成、发送请求处理与校验；邮件投递由 Security 对接通知通道完成 |
-| 元素 / 状态 / 提示规则 | 复用 Email OTP 规则：4 位数字、5 分钟有效、输入满 4 位自动提交、重发后旧 OTP 立即失效、仅最新一次 OTP 有效、仅发起请求设备可用 |
-| 成功流转 | Account 服务更新账户邮箱 |
-| 失败 / 异常流转 | 按 Email OTP 失败、锁定、过期、重发超限规则处理 |
-| 备注 / 边界 | 新邮箱 OTP 未验证成功前不得更新账户邮箱 |
+**页面目的**  
+验证新邮箱可接收邮件。
+
+**必要展示规则**
+- 展示新邮箱掩码。
+- 复用 Email OTP 页面规则，不在本 PRD 重复定义验证码有效期、重发、锁定等公共规则。
+
+**交互规则**
+- 用户输入新邮箱收到的 4 位 OTP。
+- 新邮箱 OTP 验证成功后，Account 服务更新账户邮箱。
+- 新邮箱 OTP 验证失败、锁定、过期或重发超限时，按 Email OTP 既有规则处理。
+
+**边界**
+- 新邮箱 OTP 未验证成功前，不得更新账户邮箱。
 
 ### 5.7 Change Email Success
 
 ![Change Email Success](./assets/change-email/change-email-success.svg)
 
-| 区块 | 内容 |
-|---|---|
-| 页面类型 | 成功页 / 成功提示 |
-| 页面目标 | 告知用户邮箱已更换成功 |
-| 入口 / 触发 | 旧邮箱 OTP 与新邮箱 OTP 均验证成功，账户邮箱更新成功 |
-| 展示内容 | 更换成功提示；新邮箱展示；返回个人中心入口 |
-| 用户动作 | 点击返回个人中心 |
-| 系统处理 / 责任方 | AIX App 刷新当前会话 email 信息；Account 服务保留更新结果 |
-| 元素 / 状态 / 提示规则 | 不强制登出当前设备；不清除 BIO |
-| 成功流转 | 返回个人中心，Security 区域 Email 行展示新邮箱 |
-| 失败 / 异常流转 | 如页面刷新失败，重新拉取账户信息 |
-| 备注 / 边界 | 更换成功后后续登录账号、找回密码邮箱、Email OTP 接收邮箱使用新邮箱 |
+**页面目的**  
+告知用户邮箱已更换成功。
+
+**必要展示规则**
+- 展示新邮箱掩码。
+- 说明后续登录、找回密码和 Email OTP 将使用新邮箱。
+
+**交互规则**
+- 用户点击“返回个人中心”后，回到个人中心。
+- 个人中心 Security 区域的 Email 行展示新邮箱。
+
+**边界**
+- 更换成功后不强制登出当前设备。
+- 更换成功后不清除 BIO。
 
 ---
 
