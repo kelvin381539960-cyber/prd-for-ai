@@ -3,7 +3,7 @@ module: security
 feature: security-index
 version: "1.0"
 status: active
-source_doc: 历史prd/AIX Security 身份认证需求V1.0 (1).docx
+source_doc: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx
 source_section: 6 客户端对接方式；7 全局规则；8 需求描述
 last_updated: 2026-05-01
 owner: 吴忆锋
@@ -158,7 +158,7 @@ sequenceDiagram
 
 | 边界 | 规则 | 影响 | 来源 |
 |---|---|---|---|
-| 认证方式不可重复定义 | 业务模块只能引用 Security，不得自行定义认证方式 | 防止规则分裂 | IMPLEMENTATION_PLAN.md / 阶段 3 |
+| 认证方式不可重复定义 | 业务模块只能引用 Security，不得自行定义认证方式 | 防止规则分裂 | knowledge-base/_kb-ingestion-process.md / fact ingestion rules |
 | 失败锁定 | OTP / Email OTP / Login Passcode / Face Authentication 均有失败次数和锁定规则 | 防暴力破解与风险控制 | 7.1 认证方式&限制 |
 | 场景矩阵 | 不同业务场景使用不同认证方式 | 决定 Card / Wallet / Account 的认证入口 | 7.2 不同场景的验证方式 |
 | DTC 活体有效期 | AIX 按 5 分钟窗口校验 DTC Token | 影响申卡、提现、卡敏感信息、PIN 等场景免重认证 | 7.4 验证有效期说明 |
@@ -168,14 +168,14 @@ sequenceDiagram
 
 ## 10. 来源引用
 
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 6 客户端对接方式 / V1.0)
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 7.1 认证方式&限制 / V1.0)
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 7.2 不同场景的验证方式 / V1.0)
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 7.3 验证优先级 / V1.0)
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 7.4 验证有效期说明 / V1.0)
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 7.5 身份认证状态机 / V1.0)
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 7.6 通用页面 / V1.0)
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 9-10 外部接口依赖与错误码映射 / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 6 客户端对接方式 / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 7.1 认证方式&限制 / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 7.2 不同场景的验证方式 / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 7.3 验证优先级 / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 7.4 验证有效期说明 / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 7.5 身份认证状态机 / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 7.6 通用页面 / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 9-10 外部接口依赖与错误码映射 / V1.0)
 - (Ref: knowledge-base/security/global-rules.md)
 - (Ref: knowledge-base/security/otp-verification.md)
 - (Ref: knowledge-base/security/email-otp-verification.md)
