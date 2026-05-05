@@ -1,4 +1,4 @@
-# prd-for-ai
+# prd
 
 AIX AI-readable PRD and product knowledge repository.
 
