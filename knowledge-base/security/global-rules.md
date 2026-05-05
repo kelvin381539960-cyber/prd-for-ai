@@ -3,7 +3,7 @@ module: security
 feature: global-rules
 version: "1.0"
 status: active
-source_doc: 历史prd/AIX Security 身份认证需求V1.0 (1).docx
+source_doc: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx
 source_section: 6 客户端对接方式；7 全局规则
 last_updated: 2026-05-01
 owner: 吴忆锋
@@ -247,13 +247,13 @@ flowchart LR
 
 ## 10. 来源引用
 
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 6 客户端对接方式 / V1.0)
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 7.1 认证方式&限制 / V1.0)
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 7.2 不同场景的验证方式 / V1.0)
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 7.3 验证优先级 / V1.0)
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 7.4 验证有效期说明 / V1.0)
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 7.5 身份认证状态机 / V1.0)
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 7.6 通用页面 / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 6 客户端对接方式 / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 7.1 认证方式&限制 / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 7.2 不同场景的验证方式 / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 7.3 验证优先级 / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 7.4 验证有效期说明 / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 7.5 身份认证状态机 / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 7.6 通用页面 / V1.0)
 - (Ref: knowledge-base/security/_index.md)
 - (Ref: knowledge-base/security/otp-verification.md)
 - (Ref: knowledge-base/security/email-otp-verification.md)
