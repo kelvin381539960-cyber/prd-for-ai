@@ -26,10 +26,9 @@ FAQ 用于沉淀 AIX App 面向用户的问答口径。
 ## 2. 使用限制
 
 1. 本文件记录的是 FAQ 原文口径，不等同于功能上线状态确认。
-2. 涉及 Send / Withdrawal / Swap 的 FAQ 原文存在，但当前实施计划中 Send / Swap 仍为 `deferred`，不得作为当前 active 能力发布依据。
-3. 涉及 Deposit / WalletConnect / Risk Withheld 的内容，只能按 FAQ 原文引用，不得扩展为完整状态机、完整错误码、完整合规规则。
-4. 不得把 FAQ 中的用户表达反推为 DTC / AAI / 后端实现事实。
-5. 后续如 FAQ 原文更新，应以新版 FAQ 文件覆盖，不自行改写。
+2. 涉及 Deposit / WalletConnect / Risk Withheld 的内容，只能按 FAQ 原文引用，不得扩展为完整状态机、完整错误码、完整合规规则。
+3. 不得把 FAQ 中的用户表达反推为 DTC / AAI / 后端实现事实。
+4. 后续如 FAQ 原文更新，应以新版 FAQ 文件覆盖，不自行改写。
 
 ## 3. FAQ 原文清单
 
@@ -297,24 +296,6 @@ Please note:
 - This limit applies only to card transactions.
 - Your AIX Pay wallet balance limit is also USD $5,000.
 - Cash withdrawal limits depend on the ATM and may be lower than your card spending limit.
-
-#### Q13. Can I transfer funds from AIX account to another AIX account?
-
-Source row: `35`
-
-Yes, you can easily transfer funds instantly between AIX accounts. Here's how:
-1. Open the AIX Pay App and go to the "Transfer" section.
-2. Choose "Transfer to AIX account".
-3. Enter the recipient's AIX account details and the amount you’d like to send.
-4. Review and confirm the transaction.
-
-Funds will move instantly between AIX accounts, and you'll see the update in your account right away.
-
-#### Q14. Will there be any fees when converting one stablecoin to another, for example USDT to USDC?
-
-Source row: `36`
-
-SwApping between stablecoins is instant with zero fees, and it uses the real-time exchange rate available at the time of the swAp.
 
 #### Q15. Can I use the AIX Pay Card internationally?
 
@@ -655,80 +636,6 @@ For your protection and to meet compliance requirements, deposits must come from
 
 To resolve this, check the deposit details in your AIX Pay App and follow the instructions to verify or link the sending account.
 
-#### Q19. What stablecoins are supported for stablecoins withdrawal?
-
-Source row: `79`
-
-We support the following stablecoins across multiple blockchain networks:
-1. USDC: Base, BSC, Ethereum, Solana
-2. USDT: BSC, Ethereum, Solana
-3. FDUSD: BSC, Ethereum, Solana
-4. WUSD: Ethereum
-
-Make sure to select the correct network when withdrawing.
-
-#### Q20. How can I withdraw stablecoins from AIX app?
-
-Source row: `80`
-
-Withdrawing stablecoins is easy! Just follow these steps:
-
-1. Choose which stablecoin you want to withdraw
-2. Enter or select your wallet address
-3. Select the correct blockchain network
-4. Enter the amount you want to withdraw
-5. Check the details carefully and confirm
-
-Your withdrawal will be processed on the blockchain.
-
-#### Q21. What are the withdrawal fees for stablecoins?
-
-Source row: `81`
-
-Withdrawal fees vary based on the blockchain network you choose and current network conditions. You’ll see the exact fee in the App before confirming your withdrawal.
-
-#### Q22. What is the minimum stablecoins withdrawal?
-
-Source row: `82`
-
-The minimum withdrawal amount for all stablecoins is 0.01
-
-#### Q23. How can I cancel my stablecoin withdrawal?
-
-Source row: `83`
-
-Unfortunately, once you've initiated a withdrawal, we're unable to cancel it. Please make sure to double-check all the details before confirming.
-
-#### Q24. How long does a stablecoin withdrawal usually take to complete?
-
-Source row: `84`
-
-Most stablecoin withdrawals complete within a few minutes, though timing depends on the blockchain network and congestion.
-
-#### Q25. Why is my crypto withdrawal marked as successful but not showing in my destination wallet?
-
-Source row: `85`
-
-First, make sure the account address and blockchain network you entered match your destination wallet.
-
-If everything looks correct, use the transaction hash shown in your AIX Pay App to check the transfer status on a blockchain explorer.
-
-#### Q26. What happens if I enter the wrong account address?
-
-Source row: `86`
-
-We know this can be stressful, so here's what you need to know: If your withdrawal has been completed, we can’t reverse or recover it.
-
-Crypto transactions are usually final, so please always double-check your account address before confirming.
-
-#### Q27. What if I choose the wrong blockchain network for my withdrawal?
-
-Source row: `87`
-
-If you select a network that isn't supported by your destination account or exchange, your funds may be lost permanently.
-
-To keep your funds safe, please always make sure the network you choose matches the one supported by your destination.
-
 ### 3.7 Transaction Issues （新增加）
 
 #### Q1. Why was my transaction declined?
@@ -767,8 +674,6 @@ You must submit a dispute within [X] days (e.g., 60 or 120 days) of the transact
 | Deposit / stablecoin deposit | 可引用 FAQ 原文，但不得补写完整状态机 |
 | WalletConnect / self-custody wallet | 可引用 FAQ 原文，但不得补写 senderAddress 获取、Declare、Travel Rule |
 | Exchange / Binance deposit | 可引用 FAQ 原文，但 GTR / Exchange 产品路径仍需独立确认 |
-| Withdrawal / Send | FAQ 原文存在，但 Send / Withdrawal 当前仍按实施计划标记 `deferred` |
-| Swap | FAQ 原文存在，但 Swap 当前仍按实施计划标记 `deferred` |
 | Risk Withheld / Under Review | 可引用 FAQ 原文，不得等同 Wallet `REJECTED` / `PENDING` / `PROCESSING` |
 | Chargeback / dispute | 可引用 FAQ 原文，但 `[X] days` 占位仍需业务确认 |
 
@@ -776,15 +681,13 @@ You must submit a dispute within [X] days (e.g., 60 or 120 days) of the transact
 
 以下内容不得由 FAQ 反推出系统事实：
 
-1. Send / Withdrawal 当前已上线。
-2. Swap 当前已上线。
-3. GTR 必然等同 `FIAT_DEPOSIT=6`。
-4. WalletConnect 必然等同 `CRYPTO_DEPOSIT=10`。
-5. Deposit success 必然等同 Wallet `COMPLETED`。
-6. Risk Withheld 必然等同 Wallet `REJECTED` / `PENDING` / `PROCESSING`。
-7. WalletConnect senderAddress 获取方式已确认。
-8. Declare / Travel Rule 触发条件已确认。
-9. FAQ 中未出现的问题或答案。
+1. GTR 必然等同 `FIAT_DEPOSIT=6`。
+2. WalletConnect 必然等同 `CRYPTO_DEPOSIT=10`。
+3. Deposit success 必然等同 Wallet `COMPLETED`。
+4. Risk Withheld 必然等同 Wallet `REJECTED` / `PENDING` / `PROCESSING`。
+5. WalletConnect senderAddress 获取方式已确认。
+6. Declare / Travel Rule 触发条件已确认。
+7. FAQ 中未出现的问题或答案。
 
 ## 7. 来源引用
 
