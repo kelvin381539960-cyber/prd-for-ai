@@ -283,6 +283,6 @@ flowchart LR
 
 - (Ref: 历史prd/AIX Card V1.0【Application】.pdf / 1.2 / 2.1 / 2.2 / 4.1 / 4.4 / 4.5 / 5.1 / 5.1.4 / 6.1 / 6.3 / 6.5 / V1.0)
 - (Ref: DTC Card Issuing API Document_20260310 (1).pdf / Card Application / Request Signature / V1.0)
-- (Ref: knowledge-base/card/card-status-and-fields.md)
+- (Ref: knowledge-base/card/card-management.md)
 - (Ref: knowledge-base/security/face-authentication.md)
 - (Ref: prd-template/standard-prd-template.md / v1.3)
