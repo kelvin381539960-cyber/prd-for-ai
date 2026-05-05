@@ -65,33 +65,32 @@ sequenceDiagram
     autonumber
     actor 用户
     participant App as AIX App
-    participant Card as Card 服务
-    participant Security as OTP / 身份验证服务
-    participant DTC as DTC Card API
+    participant Card as 卡管理服务
+    participant Security as 身份验证服务
+    participant External as 外部发卡能力
 
-    用户->>App: 点击 Set PIN / Change PIN
-    App->>Card: 校验卡状态和 PIN 状态
+    用户->>App: 选择设置或修改卡 PIN
+    App->>Card: 判断当前卡是否允许 PIN 操作
     alt 不允许操作
         Card-->>App: 返回限制原因
-        App-->>用户: 隐藏、禁用或拦截
-    else Set PIN
-        App->>DTC: Generate Public Pin Key
-        DTC-->>App: 返回公钥
-        用户->>App: 输入 4 位 PIN
-        App->>DTC: Set Card PIN(encryptedPin)
-        DTC-->>App: 返回设置结果
-        App-->>用户: 展示成功或失败
-    else Change PIN
-        App->>Security: OTP For Reset PIN
-        Security-->>App: 返回 OTP 验证结果
-        alt OTP 通过
-            App->>DTC: Generate Public Pin Key
-            用户->>App: 输入新 4 位 PIN
-            App->>DTC: Reset Card PIN(encryptedPin)
-            DTC-->>App: 返回修改结果
-            App-->>用户: 展示成功或失败
-        else OTP 失败
-            App-->>用户: 按 Security 规则提示
+        App-->>用户: 隐藏、禁用或拦截入口
+    else 首次设置 PIN
+        Card->>External: 准备 PIN 安全提交环境
+        用户->>App: 输入新 PIN 并提交
+        Card->>External: 提交 PIN 设置请求
+        External-->>Card: 返回设置结果
+        App-->>用户: 展示设置成功或失败
+    else 修改 PIN
+        App->>Security: 先完成必要的身份验证
+        Security-->>App: 返回验证结果
+        alt 验证失败
+            App-->>用户: 按身份验证规则提示
+        else 验证通过
+            Card->>External: 准备 PIN 安全提交环境
+            用户->>App: 输入新 PIN 并提交
+            Card->>External: 提交 PIN 修改请求
+            External-->>Card: 返回修改结果
+            App-->>用户: 展示修改成功或失败
         end
     end
 ```
