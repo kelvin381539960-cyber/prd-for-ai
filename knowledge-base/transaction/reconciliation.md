@@ -3,7 +3,7 @@ module: transaction
 feature: reconciliation
 version: "1.1"
 status: active
-source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/card/card-management.md；knowledge-base/card/transaction-flow-traceability-checklist.md；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/wallet/deposit.md；knowledge-base/integrations/dtc/_index.md；用户确认结论 2026-05-01；用户确认结论 2026-05-02
+source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/card/transaction.md；knowledge-base/card/transaction-flow-traceability-checklist.md；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/wallet/deposit.md；knowledge-base/integrations/dtc/_index.md；用户确认结论 2026-05-01；用户确认结论 2026-05-02
 source_section: ALL-GAP P0；Card Transaction Flow v1.3；Traceability Checklist migrated-reference；Wallet Transaction History merged；Deposit / GTR / WalletConnect；资金追踪链路
 last_updated: 2026-05-02
 owner: 吴忆锋
@@ -113,7 +113,7 @@ flowchart LR
 
 - (Ref: IMPLEMENTATION_PLAN.md / v4.7)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP 总表)
-- (Ref: knowledge-base/card/card-management.md / v1.3)
+- (Ref: knowledge-base/card/transaction.md / v1.3)
 - (Ref: knowledge-base/card/transaction-flow-traceability-checklist.md / v1.6 migrated-reference)
 - (Ref: knowledge-base/transaction/history.md / v1.3)
 - (Ref: knowledge-base/transaction/detail.md / v1.2)
