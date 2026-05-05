@@ -3,7 +3,7 @@ module: _meta
 feature: compliance-boundaries
 version: "1.0"
 status: draft
-source_doc: IMPLEMENTATION_PLAN.md
+source_doc: knowledge-base/_kb-ingestion-process.md；knowledge-base/_system-boundary.md
 source_section: "4. 推荐目录结构"
 last_updated: 2026-05-01
 owner: 吴忆锋
