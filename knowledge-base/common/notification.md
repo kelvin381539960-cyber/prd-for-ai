@@ -3,8 +3,8 @@ module: common
 feature: notification
 version: "1.3"
 status: active
-source_doc: knowledge-base/_kb-ingestion-process.md；archive/historical-prd/notification/[2025-11-25] AIX+Notification（push及站内信）.docx；external-docs/dtc/DTC Wallet OpenAPI Document20260126 (1).docx；knowledge-base/wallet/deposit.md；knowledge-base/wallet/deposit.md；knowledge-base/integrations/walletconnect/_index.md；knowledge-base/common/errors.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-02
-source_section: Notification PRD / Deposit rows；DTC Wallet OpenAPI / 4.6 Webhook Service；Wallet Deposit v1.6；WalletConnect v1.4；ALL-GAP 总表
+source_doc: reference-data/notification/system-notification-content.xlsx；knowledge-base/_kb-ingestion-process.md；archive/historical-prd/notification/[2025-11-25] AIX+Notification（push及站内信）.docx；external-docs/dtc/DTC Wallet OpenAPI Document20260126 (1).docx；knowledge-base/wallet/deposit.md；knowledge-base/integrations/walletconnect/_index.md；knowledge-base/common/errors.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-02
+source_section: reference-data/notification/system-notification-content.xlsx / 钱包相关 / 卡相关；DTC Wallet OpenAPI / 4.6 Webhook Service；Wallet Deposit；WalletConnect；ALL-GAP 总表
 last_updated: 2026-05-02
 owner: 吴忆锋
 depends_on:
@@ -12,9 +12,6 @@ depends_on:
   - integrations/walletconnect
   - common/errors
   - wallet/deposit
-  - wallet/receive
-  - wallet/stage-review
-  - transaction/stage-review
   - changelog/knowledge-gaps
 ---
 
