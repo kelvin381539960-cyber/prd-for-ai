@@ -3,7 +3,7 @@ module: account
 feature: password-reset
 version: "1.0"
 status: active
-source_doc: 历史prd/AIX Card 注册登录需求V1.0 (2).docx
+source_doc: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx
 source_section: 7.3 忘记密码流程页面
 last_updated: 2026-05-04
 owner: 吴忆锋
@@ -229,11 +229,11 @@ flowchart LR
 
 ## 10. 来源引用
 
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0 (2).docx / 7.3.1 功能说明 / V1.0)
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0 (2).docx / 7.3.2 页面概览 / V1.0)
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0 (2).docx / 7.3.3 Reset Password Page / V1.0)
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0 (2).docx / 7.3.4 身份验证流程页面 / V1.0)
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0 (2).docx / 7.3.5 设置密码页 / V1.0)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.3.1 功能说明 / V1.0)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.3.2 页面概览 / V1.0)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.3.3 Reset Password Page / V1.0)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.3.4 身份验证流程页面 / V1.0)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.3.5 设置密码页 / V1.0)
 - (Ref: knowledge-base/account/registration.md / Set Password Page)
 - (Ref: knowledge-base/security/global-rules.md)
 - (Ref: knowledge-base/security/otp-verification.md)
