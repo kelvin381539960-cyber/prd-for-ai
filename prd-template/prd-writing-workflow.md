@@ -1,10 +1,10 @@
 ---
 type: prd-writing-workflow
-version: "1.3"
+version: "1.4"
 status: active
-source_doc: AGENTS.md；prd-template/standard-prd-template.md；requirements/_index.md；knowledge-base/_ai-query-router.md；knowledge-base/_system-boundary.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-05；用户补充确认 2026-05-05 Canvas 优先确认后再写入 Git
-source_section: AI PRD 写作流程；标准 PRD 模板；requirements 使用规则；知识库路由；系统边界；ALL-GAP 使用规则；调研记录规则
-last_updated: 2026-05-05
+source_doc: AGENTS.md；prd-template/standard-prd-template.md；prd-template/prd-writing-preferences.md；requirements/_index.md；knowledge-base/_ai-query-router.md；knowledge-base/_system-boundary.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-05；用户补充确认 2026-05-05 Canvas 优先确认后再写入 Git；用户确认结论 2026-05-06 长期经验沉淀机制
+source_section: AI PRD 写作流程；标准 PRD 模板；PRD 写作长期偏好；requirements 使用规则；知识库路由；系统边界；ALL-GAP 使用规则；调研记录规则；经验教训沉淀规则
+last_updated: 2026-05-06
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
 ---
@@ -13,7 +13,7 @@ readers: [product, ui, dev, qa, business, ai]
 
 本文定义 AI Agent、定制 GPT、Cursor、Claude Code 等工具在本仓库中写 PRD 时应遵守的流程。
 
-本文是工作流说明，不是 PRD 模板，也不是业务事实来源。PRD 正文仍必须使用 `prd-template/standard-prd-template.md`。
+本文是工作流说明，不是 PRD 模板，也不是业务事实来源。PRD 正文仍必须使用 `prd-template/standard-prd-template.md`，写作偏好必须参考 `prd-template/prd-writing-preferences.md`。
 
 ## 0. Canvas 优先确认规则
 
@@ -73,12 +73,13 @@ readers: [product, ui, dev, qa, business, ai]
 ```text
 1. 如果尚未读取，先读 AGENTS.md
 2. prd-template/prd-writing-workflow.md
-3. prd-template/standard-prd-template.md
-4. requirements/_index.md
-5. knowledge-base/_ai-query-router.md
-6. 与需求主题相关的 knowledge-base 模块索引和事实文件
-7. knowledge-base/changelog/knowledge-gaps.md
-8. 如涉及责任归属、外部依赖或系统边界，再读 knowledge-base/_system-boundary.md
+3. prd-template/prd-writing-preferences.md
+4. prd-template/standard-prd-template.md
+5. requirements/_index.md
+6. knowledge-base/_ai-query-router.md
+7. 与需求主题相关的 knowledge-base 模块索引和事实文件
+8. knowledge-base/changelog/knowledge-gaps.md
+9. 如涉及责任归属、外部依赖或系统边界，再读 knowledge-base/_system-boundary.md
 ```
 
 只有在需要核验来源时，才读取 `reference-data/` 或 `external-docs/`。
@@ -234,7 +235,7 @@ brief_status: skipped_questions_confirmed
 
 ### Phase 4 — 功能粒度检查
 
-使用 `prd-template/standard-prd-template.md` 第 0 章判断：当前请求是一个独立功能，还是多个独立功能。
+使用 `prd-template/standard-prd-template.md` 第 1 章判断：当前请求是一个独立功能，还是多个独立功能。
 
 当目标、触发条件、用户、页面、业务结果、责任方、状态模型或验收标准不同时，应拆成多个 PRD。
 
@@ -271,7 +272,7 @@ readers: [product, ui, dev, qa, business, ai]
 ---
 ```
 
-PRD 正文必须遵循 `prd-template/standard-prd-template.md`，并保留第 0–10 章，除非用户明确要求只写局部草稿。
+PRD 正文必须遵循 `prd-template/standard-prd-template.md`，并参考 `prd-template/prd-writing-preferences.md`。章节按需保留，不为了模板完整而补内容。
 
 PRD 写作规则：
 
@@ -280,8 +281,9 @@ PRD 写作规则：
 - 不确定内容必须标记为待确认。
 - 对 open 或 deferred 项，使用 `knowledge-base/changelog/knowledge-gaps.md`。
 - 对 AIX 与外部系统责任边界，使用 `knowledge-base/_system-boundary.md`。
-- 不要把接口字段、Header、参数、返回码、幂等细节写进业务主流程；这些内容应放在字段、接口与数据章节。
+- 不要把接口字段、Header、参数、返回码、幂等细节写进业务主流程。
 - 不要在当前 PRD 中展开另一个独立功能；应引用它或拆分它。
+- 不要把内部技术实现细节、内部幂等方案、内部接口设计放入 PRD 待确认项。
 
 ### Phase 6 — 生成评审记录
 
@@ -293,7 +295,7 @@ requirements/YYYY-MM/<module>/_review-<feature>.md
 
 评审记录应检查：
 
-1. 模板完整性。
+1. 是否遵循 `standard-prd-template.md` 与 `prd-writing-preferences.md`。
 2. 功能粒度和拆分是否正确。
 3. 来源引用是否覆盖关键内容。
 4. 是否与知识库事实一致。
@@ -325,6 +327,31 @@ review
 approved
 deprecated
 ```
+
+### Phase 8 — 经验教训总结与长期偏好沉淀
+
+每次 PRD 完成或一次明显评审闭环结束后，AI 必须输出简短经验教训总结，格式如下：
+
+```text
+经验教训总结
+
+1. 本次新增或强化的写作偏好
+- ...
+
+2. 建议沉淀到长期偏好
+- ...
+
+3. 是否需要更新标准 PRD 模板
+- 是 / 否
+- 原因：...
+```
+
+长期沉淀规则：
+
+- 明确、稳定、可复用的 PRD 写作偏好，可以直接写入 `prd-template/prd-writing-preferences.md`。
+- 不确定是否长期适用的偏好，需要先询问用户。
+- 单个业务需求结论只写入对应 PRD，不写入长期偏好文件。
+- 模板结构变化写入 `prd-template/standard-prd-template.md`；写作偏好和经验教训写入 `prd-template/prd-writing-preferences.md`。
 
 ## 6. 来源与边界规则
 
