@@ -1,11 +1,11 @@
 ---
 module: card
 feature: card-home
-version: "1.3"
+version: "1.4"
 status: active
 source_doc: 历史prd/AIX Card V1.0【Application】.pdf；历史prd/AIX APP V1.0【Home】.pdf；历史prd/AIX APP V1.0【Transaction & History】.pdf；历史prd/AIX Card manage模块需求V1.0.docx；prd-template/standard-prd-template.md
 source_section: Application 5.2；Home 6.1；Transaction & History 卡交易列表与详情；Manage 6.4 / 7.1；Standard PRD Template v1.3
-last_updated: 2026-05-04
+last_updated: 2026-05-05
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
 ---
@@ -114,7 +114,7 @@ sequenceDiagram
 | 无卡 / 申请失败 | 未申请或申请失败 | 无有效卡或失败记录 | 默认申卡卡片 | 引导申卡 | Pending / Active | 否 | Home / Application |
 | Pending / Processing | 审核中 | 申卡处理中 | Under review | 禁止重复申请 | Active / Pending activation / Cancelled | 否 | Application |
 | Pending activation / Inactive | 待激活实体卡 | 实体卡未激活 | 物流进度 + Activate card | 允许激活 | Active | 否 | Application / Home |
-| Active / ACTIVE | 已激活 | 卡可用 | 卡面、Card detail、Card Manage / PIN、Lock、交易 | 允许操作矩阵中操作 | Suspended / Cancelled | 否 | Manage / 6.4 |
+| Active / ACTIVE | 已激活 | 卡可用 | 卡面、Card detail、PIN、Lock、交易 | 允许操作矩阵中操作 | Suspended / Cancelled | 否 | Manage / 6.4 |
 | Suspended / SUSPENDED | 已冻结 | Freeze 成功 | 展示冻结状态、Unlock | 交易不可用 | Active / Cancelled | 否 | Manage / 6.4 |
 | BLOCKED | 阻断 | 风控或外部状态 | 仅部分卡信息 | 禁止敏感信息和交易 | 待确认 | 否 | Manage / 6.4 |
 
@@ -220,7 +220,7 @@ flowchart LR
 | 页面目标 | 展示已激活 / 已冻结卡的卡面、字段、操作和交易 |
 | 入口 / 触发 | cardStatus 为 Active / Suspended |
 | 展示内容 | 顶部标题 Card、FAQ、卡面、Type、Lock Tag、Auto Debit Tag、Holder name、Brand、截断卡号、操作入口、Recent Transactions |
-| 用户动作 | Card detail、Set / Change Card Manage / PIN、Lock / Unlock、Add to Google Wallet、More transactions、FAQ |
+| 用户动作 | Card detail、Set / Change PIN、Lock / Unlock、Add to Google Wallet、More transactions、FAQ |
 | 系统处理 / 责任方 | 按 Manage 6.4 操作矩阵展示入口 |
 | 元素 / 状态 / 提示规则 | Card Home 不展示完整 PAN / CVC / EXP；Card Manage / Sensitive Info 由认证后 popup 承接 |
 | 成功流转 | 对应功能页 |
@@ -248,7 +248,7 @@ flowchart LR
 
 | 类型 | 名称 | 所属系统 | 来源 | 用途 | 规则 / 输入输出 | 异常处理 |
 |---|---|---|---|---|---|---|
-| 字段 | cardStatus | Card | Card Management | 决定展示组 | 引用状态事实源 | 未知状态进入待确认 |
+| 字段 | cardStatus | Card | `card/manage/status-and-operations.md` | 决定展示组 | 引用状态事实源 | 未知状态进入待确认 |
 | 字段 | cardType | Card / DTC | Application | 展示 Virtual / Physical | Type Tag | 查询失败不展示 |
 | 字段 | cardFace | AIX | Application | 展示用户选择卡面 | 可配置 | 缺失时默认图待确认 |
 | 字段 | autoDebitEnabled | AIX / DTC | Application | 展示 Auto Debit Tag | 枚举冲突待确认 | 不写死 |
@@ -303,7 +303,7 @@ flowchart LR
 | 正常流程 | 不同卡状态进入 Home 后展示对应卡片和操作入口 |
 | 异常流程 | Tracking 缺失、无交易、状态未知、操作不允许均有处理 |
 | 页面展示 | Home 不展示完整敏感信息，Recent Transactions 展示最近 3 条 |
-| 系统交互 | 状态和操作均引用 Card Manage，不重复定义状态 |
+| 系统交互 | 状态和操作均引用 `card/manage/status-and-operations.md`，不重复定义状态 |
 | 通知 | Home 只定义通知入口边界，模板由 Notification 维护 |
 | 数据 / 埋点 | cardStatus、trackingNo、cardOrderNumber、Recent Transactions 可追踪 |
 
@@ -314,7 +314,7 @@ flowchart LR
 | 无卡用户 | 无有效卡 | 进入 Home | 展示默认申卡卡片 | 可跳 Select Plan | 是 |
 | 审核中卡 | Pending / Processing | 进入 Home | 展示 Under review | 可 View Details | 是 |
 | 待激活实体卡 | Pending activation | 进入 Home | 展示物流与 Activate card | 可进入 Activation | 是 |
-| ACTIVE 卡 | ACTIVE | 进入 Home | 展示 Card detail、Card Manage / PIN、Lock、交易 | 操作入口按矩阵展示 | 是 |
+| ACTIVE 卡 | ACTIVE | 进入 Home | 展示 Card detail、PIN、Lock、交易 | 操作入口按矩阵展示 | 是 |
 | SUSPENDED 卡 | SUSPENDED | 进入 Home | 展示 Unlock，不允许交易 | 操作入口按矩阵展示 | 是 |
 | 无交易 | Active 卡无交易 | 查看 Recent Transactions | 展示空态 | 不影响其他模块 | 是 |
 | Tracking no 空 | 待激活卡无 Tracking | 查看物流 | 进度 Preparing，不展示 Carrier | 不报错 | 是 |
