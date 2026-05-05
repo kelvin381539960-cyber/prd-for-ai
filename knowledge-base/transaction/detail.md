@@ -4,7 +4,7 @@ feature: detail
 version: "2.0"
 status: active
 doc_type: ai-readable-prd-translation
-source_doc: IMPLEMENTATION_PLAN.md；DTC接口文档/DTC Wallet OpenAPI Document20260126 (1).docx；knowledge-base/transaction/status-model.md；knowledge-base/transaction/history.md；knowledge-base/card/card-management.md；knowledge-base/wallet/deposit.md；knowledge-base/changelog/knowledge-gaps.md
+source_doc: IMPLEMENTATION_PLAN.md；DTC接口文档/DTC Wallet OpenAPI Document20260126 (1).docx；knowledge-base/transaction/status-model.md；knowledge-base/transaction/history.md；knowledge-base/card/transaction.md；knowledge-base/wallet/deposit.md；knowledge-base/changelog/knowledge-gaps.md
 source_section: Transaction History；Transaction Status Model；Wallet Deposit；Search Balance History / 4.2.4；Appendix ActivityType；Crypto Deposit / 3.4；ALL-GAP 总表
 last_updated: 2026-05-04
 owner: 吴忆锋
@@ -357,5 +357,5 @@ Transaction Detail 本身不新增通知规则，只引用 Deposit / Card / Wall
 - (Ref: knowledge-base/transaction/status-model.md / Wallet state)
 - (Ref: knowledge-base/transaction/history.md / Transaction History)
 - (Ref: knowledge-base/wallet/deposit.md / Wallet Deposit)
-- (Ref: knowledge-base/card/card-management.md / Card Transaction Detail)
+- (Ref: knowledge-base/card/transaction.md / Card Transaction Detail)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP 总表)
