@@ -1,10 +1,10 @@
 ---
 type: prd-template
 feature: standard-prd-template
-version: "1.4"
+version: "1.5"
 status: active
-source_doc: prd-template/README.md；knowledge-base/_kb-ingestion-process.md；用户确认结论 2026-05-05
-source_section: "standard PRD template；PRD fact rules；功能粒度与拆分规则"
+source_doc: prd-template/README.md；prd-template/prd-writing-workflow.md；knowledge-base/_kb-ingestion-process.md；用户确认结论 2026-05-05
+source_section: "standard PRD template；PRD fact rules；功能粒度与拆分规则；research companion file rules"
 last_updated: 2026-05-05
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -87,6 +87,8 @@ module/
 | 状态 | Draft / Review / Approved |
 | 更新时间 | TBD |
 | 来源文档 | TBD |
+| Brief | TBD |
+| Research | 不适用 / `_research-<feature>.md` |
 
 ---
 
@@ -336,6 +338,9 @@ flowchart LR
 ## 10. 来源引用
 
 > 如果一个原始文档拆成多个 PRD，来源引用必须标明本文使用的原文章节。  
-> 不得因为引用了同一原始文档，就把该原始文档中的所有功能都写进本文。
+> 不得因为引用了同一原始文档，就把该原始文档中的所有功能都写进本文。  
+> 如存在 `_research-<feature>.md`，本节可以引用其路径作为调研过程材料，但 research 不能单独作为确认事实来源。PRD 中被采纳为事实的内容必须引用原始来源文件或用户确认结论。
 
+- Brief: `_brief-<feature>.md`
+- Research: 不适用 / `_research-<feature>.md`
 - (Ref: TBD)
