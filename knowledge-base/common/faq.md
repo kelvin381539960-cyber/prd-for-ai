@@ -4,13 +4,12 @@ feature: faq
 version: "1.1"
 status: active
 source_doc: reference-data/faq/phase-1-faq.xlsx；knowledge-base/_kb-ingestion-process.md；knowledge-base/common/_index.md；knowledge-base/changelog/knowledge-gaps.md
-source_section: reference-data/faq/phase-1-faq.xlsx / sheet `(v4) AIX FAQs - Isaac` / column C final answers；IMPLEMENTATION_PLAN v4.4；外部依赖收窄原则
+source_section: reference-data/faq/phase-1-faq.xlsx / sheet `(v4) AIX FAQs - Isaac` / final answer column；外部依赖收窄原则
 last_updated: 2026-05-02
 owner: 吴忆锋
 depends_on:
   - common/_index
-  - wallet/stage-review
-  - changelog/final-repository-review
+  - changelog/knowledge-gaps
 ---
 
 # FAQ 公共问答
