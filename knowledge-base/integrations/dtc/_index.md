@@ -1,9 +1,9 @@
 ---
-module: common
+module: integrations
 feature: dtc-dependency
 version: "1.6"
 status: active
-source_doc: DTC接口文档/Master sub account 设计方案 (2).docx；DTC接口文档/DTC Wallet OpenAPI Document20260126 (1).docx；DTC接口文档/卡交易&钱包交易状态梳理 (1).docx；knowledge-base/kyc/account-opening.md；knowledge-base/wallet/deposit.md；knowledge-base/wallet/balance.md；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/reconciliation.md；knowledge-base/common/walletconnect.md；knowledge-base/common/notification.md；knowledge-base/common/errors.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/_system-boundary.md；用户确认结论 2026-05-02
+source_doc: DTC接口文档/Master sub account 设计方案 (2).docx；DTC接口文档/DTC Wallet OpenAPI Document20260126 (1).docx；DTC接口文档/卡交易&钱包交易状态梳理 (1).docx；knowledge-base/kyc/account-opening.md；knowledge-base/wallet/deposit.md；knowledge-base/wallet/balance.md；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/reconciliation.md；knowledge-base/integrations/walletconnect/_index.md；knowledge-base/common/notification.md；knowledge-base/common/errors.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/_system-boundary.md；用户确认结论 2026-05-02
 source_section: Master / Sub Account；D-SUB-ACCOUNT-ID；WalletAccount；DTC Wallet OpenAPI / 3.4 Crypto Deposit；4.2.4 Search Balance History；Appendix ActivityType；ALL-GAP 总表
 last_updated: 2026-05-02
 owner: 吴忆锋
@@ -14,7 +14,7 @@ depends_on:
   - transaction/history
   - transaction/detail
   - transaction/reconciliation
-  - common/walletconnect
+  - integrations/walletconnect
   - common/notification
   - common/errors
   - changelog/knowledge-gaps
