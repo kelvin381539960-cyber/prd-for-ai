@@ -3,7 +3,7 @@ module: common
 feature: notification
 version: "1.3"
 status: active
-source_doc: IMPLEMENTATION_PLAN.md；[2025-11-25] AIX+Notification（push及站内信）.docx；DTC接口文档/DTC Wallet OpenAPI Document20260126 (1).docx；knowledge-base/wallet/deposit.md；knowledge-base/wallet/deposit.md；knowledge-base/integrations/walletconnect/_index.md；knowledge-base/common/errors.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-02
+source_doc: knowledge-base/_kb-ingestion-process.md；archive/historical-prd/notification/[2025-11-25] AIX+Notification（push及站内信）.docx；external-docs/dtc/DTC Wallet OpenAPI Document20260126 (1).docx；knowledge-base/wallet/deposit.md；knowledge-base/wallet/deposit.md；knowledge-base/integrations/walletconnect/_index.md；knowledge-base/common/errors.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-02
 source_section: Notification PRD / Deposit rows；DTC Wallet OpenAPI / 4.6 Webhook Service；Wallet Deposit v1.6；WalletConnect v1.4；ALL-GAP 总表
 last_updated: 2026-05-02
 owner: 吴忆锋
