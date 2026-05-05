@@ -92,7 +92,7 @@ AIX 当前知识库覆盖：
 | Wallet Deposit | active | 读取 `wallet/deposit.md`；包含 GTR / Exchange 与 WalletConnect / Self-custodial Wallet |
 | Account Opening / KYC | active | 主事实源为 `kyc/account-opening.md` |
 | Wallet Transaction History | active | 主事实源为 `transaction/history.md` |
-| Card Transaction Flow | active / partial | 资金追踪与对账缺口查 `transaction/reconciliation.md` 与 ALL-GAP |
+| Card Management / Card Transaction Boundary | active / partial | 卡交易触发与归集在 `card/card-management.md`；资金追踪与对账缺口查 `transaction/reconciliation.md` 与 ALL-GAP |
 | DTC / AAI / WalletConnect | external dependency | 只记录 AIX 设计相关依赖边界，不维护供应商内部逻辑 |
 
 ## 5. 快速路由表
