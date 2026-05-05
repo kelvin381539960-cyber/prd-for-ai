@@ -3,7 +3,7 @@ module: home
 feature: app-home
 version: "1.0"
 status: active
-source_doc: 历史prd/AIX APP V1.0【Home】.docx；knowledge-base/card/card-home.md；knowledge-base/wallet/_index.md；knowledge-base/changelog/knowledge-gaps.md
+source_doc: archive/historical-prd/app/AIX APP V1.0【Home】.docx；knowledge-base/card/card-home.md；knowledge-base/wallet/_index.md；knowledge-base/changelog/knowledge-gaps.md
 source_section: AIX APP Home；Card Home entry；Wallet entry；runtime scope
 last_updated: 2026-05-05
 owner: 吴忆锋
@@ -79,7 +79,7 @@ AIX APP Home 原始文档中存在 Card 相关首页内容。当前处理如下�
 
 ## 8. 来源引用
 
-- (Ref: 历史prd/AIX APP V1.0【Home】.docx)
+- (Ref: archive/historical-prd/app/AIX APP V1.0【Home】.docx)
 - (Ref: knowledge-base/card/card-home.md)
 - (Ref: knowledge-base/card/manage/_index.md)
 - (Ref: knowledge-base/wallet/_index.md)
