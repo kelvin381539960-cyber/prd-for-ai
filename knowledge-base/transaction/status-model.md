@@ -4,7 +4,7 @@ feature: status-model
 version: "2.0"
 status: active
 doc_type: ai-readable-prd-translation
-source_doc: IMPLEMENTATION_PLAN.md；DTC接口文档/DTC Wallet OpenAPI Document20260126 (1).docx；DTC接口文档/卡交易&钱包交易状态梳理 (1).docx；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/card/card-transaction-flow.md；knowledge-base/wallet/deposit.md；knowledge-base/changelog/knowledge-gaps.md
+source_doc: IMPLEMENTATION_PLAN.md；DTC接口文档/DTC Wallet OpenAPI Document20260126 (1).docx；DTC接口文档/卡交易&钱包交易状态梳理 (1).docx；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/card/card-management.md；knowledge-base/wallet/deposit.md；knowledge-base/changelog/knowledge-gaps.md
 source_section: Transaction History；Transaction Detail；Wallet Deposit；DTC Wallet OpenAPI / 3.4 Crypto Deposit；Appendix ActivityType；Card Transaction Flow；ALL-GAP 总表
 last_updated: 2026-05-04
 owner: 吴忆锋
@@ -124,7 +124,7 @@ Wallet 当前已确认状态字段为 `state`。
 
 #### 3.4.3 Card 交易状态
 
-Card 交易状态与类型优先引用 `card/card-transaction-flow.md` 和 `card/card-status-and-fields.md`。
+Card 交易状态与类型优先引用 `card/card-management.md` 和 `card/card-management.md`。
 
 | 状态 | 含义 | 触发条件 | 用户可见表现 | 系统处理 | 可迁移到 | 是否终态 | 来源 |
 |---|---|---|---|---|---|---|---|
@@ -338,6 +338,6 @@ ActivityType 是 Wallet balance / transaction history 的交易分类，不是�
 - (Ref: knowledge-base/transaction/history.md / Transaction History)
 - (Ref: knowledge-base/transaction/detail.md / Transaction Detail)
 - (Ref: knowledge-base/wallet/deposit.md / Wallet Deposit)
-- (Ref: knowledge-base/card/card-transaction-flow.md / Card Transaction Flow)
-- (Ref: knowledge-base/card/card-status-and-fields.md / Card status and fields)
+- (Ref: knowledge-base/card/card-management.md / Card Transaction Flow)
+- (Ref: knowledge-base/card/card-management.md / Card status and fields)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP 总表)
