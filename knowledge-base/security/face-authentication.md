@@ -16,7 +16,6 @@ depends_on:
   - common/common-error-pages
   - _meta/limits-and-rules
   - _meta/error-code-dictionary
-  - _meta/writing-standard
 ---
 
 # Face Authentication 活体识别认证
