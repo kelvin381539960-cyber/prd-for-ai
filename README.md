@@ -2,7 +2,19 @@
 
 AIX AI-readable PRD and product knowledge repository.
 
-This repository is used to maintain structured, source-based product facts for AIX Wallet, Card, KYC, Deposit, GTR, WalletConnect, and related external dependencies.
+This repository is used to maintain structured, source-based product facts, new iteration PRDs, reference data, historical PRDs, and external dependency documents for AIX Wallet, Card, KYC, Deposit, GTR, WalletConnect, and related product areas.
+
+## Directory map
+
+| Directory | Purpose |
+|---|---|
+| `prd-template/` | Active PRD writing templates |
+| `requirements/` | New and in-progress iteration PRDs |
+| `knowledge-base/` | Confirmed AI-readable runtime product facts |
+| `reference-data/` | Current reusable configuration, mapping, dictionary, FAQ, country/region, and notification source tables |
+| `external-docs/` | Original external dependency documents such as DTC documents |
+| `archive/` | Historical or deprecated source materials, including historical PRDs |
+| `tools/` | Helper scripts for maintaining this repository |
 
 ## Runtime entry points
 
@@ -16,6 +28,12 @@ This repository is used to maintain structured, source-based product facts for A
 
 ## Operating rules
 
+- New PRDs go to `requirements/`.
+- Confirmed reusable product facts go to `knowledge-base/`.
+- Current configuration and mapping source tables go to `reference-data/`.
+- External supplier source documents go to `external-docs/`.
+- Historical PRDs and deprecated materials go to `archive/`.
+- Helper scripts go to `tools/`.
 - Do not treat README files as business fact sources.
 - Do not write inferred fields, states, UI text, flows, or external-system behavior as facts.
 - Unconfirmed items must go through `knowledge-base/changelog/knowledge-gaps.md`.
