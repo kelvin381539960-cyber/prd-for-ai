@@ -119,7 +119,7 @@ source_doc: 用户需求 2026-05-05；用户补充确认 2026-05-05；Atome SG H
 
 ### 4.1 业务主流程说明
 
-用户从个人中心已有邮箱展示位置进入更换邮箱流程。AIX 先展示当前邮箱与更换说明，用户发起更换后，系统先调用 Security 完成当前账户身份验证。当前账户身份验证通过后，系统向旧邮箱发送 Email OTP，用户完成旧邮箱 OTP 验证后，才允许输入新邮箱。AIX 校验新邮箱格式、非当前邮箱、全局唯一性后，向新邮箱发送 Email OTP。新邮箱 OTP 验证成功后，AIX 更新账户邮箱，并展示更换成功结果。
+用户从个人中心已有邮箱展示位置进入更换邮箱流程。AIX 先展示当前邮箱与更换说明，用户发起更换后，系统先调用 Security 完成当前账户身份验证。当前账户身份验证通过后，AIX App 请求 Security 发送旧邮箱 Email OTP；Security 负责 OTP 生成、有效期、重发失效、锁定等认证规则，并由其对接通知通道完成邮件投递。用户完成旧邮箱 OTP 验证后，才允许输入新邮箱。AIX 校验新邮箱格式、非当前邮箱、全局唯一性后，请求发送新邮箱 Email OTP。新邮箱 OTP 验证成功后，AIX 更新账户邮箱，并展示更换成功结果。
 
 验证码相关规则不在本文重复定义，直接引用 `knowledge-base/security/email-otp-verification.md`。
 
@@ -143,8 +143,8 @@ sequenceDiagram
     alt 当前账户身份验证失败 / 取消 / 锁定 / 过期
         App-->>User: 按 Security 规则展示失败、锁定或过期状态
     else 当前账户身份验证成功
-        App->>Security: 向旧邮箱发送 Email OTP
-        Security-->>App: 返回旧邮箱 OTP 发送结果
+        App->>Security: 请求发送旧邮箱 Email OTP
+        Security-->>App: 返回旧邮箱 OTP 请求处理结果
         User->>App: 输入旧邮箱 4 位 Email OTP
         App->>Security: 校验旧邮箱 Email OTP
         Security-->>App: 返回旧邮箱 OTP 校验结果
@@ -159,8 +159,8 @@ sequenceDiagram
             alt 新邮箱不可用
                 App-->>User: 展示对应错误提示，停留新邮箱输入页
             else 新邮箱可用
-                App->>Security: 向新邮箱发送 Email OTP
-                Security-->>App: 返回新邮箱 OTP 发送结果
+                App->>Security: 请求发送新邮箱 Email OTP
+                Security-->>App: 返回新邮箱 OTP 请求处理结果
                 User->>App: 输入新邮箱 4 位 Email OTP
                 App->>Security: 校验新邮箱 Email OTP
                 Security-->>App: 返回新邮箱 OTP 校验结果
@@ -190,7 +190,7 @@ sequenceDiagram
 | 6 | 旧邮箱不可用 | 用户无法接收旧邮箱 OTP | AIX App / 客服 | V1 不提供自助跳过旧邮箱验证；提示联系客服 / 人工处理 | 进入客服 / 人工处理路径 | 用户不能在自助流程内继续更换邮箱 | 用户确认方向；Atome 手机号参考；OWASP |
 | 7 | 新邮箱输入 | 旧邮箱 OTP 验证成功 | 用户 / AIX App | 用户输入新邮箱 | 触发新邮箱校验 | 用户取消则返回上一步或退出流程 | brief |
 | 8 | 新邮箱校验 | 用户提交新邮箱 | Account 服务 | 校验邮箱格式、非当前邮箱、全局唯一性 | 允许发送新邮箱 OTP | 格式错误、与当前邮箱相同、已存在邮箱冲突时提示错误 | Account 知识库；brief |
-| 9 | 新邮箱 OTP 发送 | 新邮箱可用 | Security | 向新邮箱发送 Email OTP | 用户收到新邮箱 OTP | 发送失败时停留当前阶段并提示 | Email OTP Verification |
+| 9 | 新邮箱 OTP 发送 | 新邮箱可用 | Security | 请求发送新邮箱 Email OTP | 用户收到新邮箱 OTP | 发送失败时停留当前阶段并提示 | Email OTP Verification |
 | 10 | 新邮箱 OTP 校验 | 用户输入新邮箱 4 位 OTP | Security | 校验新邮箱 OTP | 允许更新账户邮箱 | OTP 失败、锁定、过期、重发超限按 Email OTP 规则处理 | Email OTP Verification |
 | 11 | 更新账户邮箱 | 旧邮箱 OTP 与新邮箱 OTP 均验证成功 | Account 服务 | 将账户邮箱更新为新邮箱 | 邮箱更新成功 | 更新失败时不得变更邮箱，提示用户重试或稍后再试 | brief |
 | 12 | 成功后处理 | 邮箱更新成功 | AIX App / Account 服务 | 刷新当前会话 email 信息；不强制登出当前设备；不清除 BIO | 展示成功结果，后续邮箱链路使用新邮箱 | 刷新失败时以后端邮箱更新结果为准，页面需重新拉取账户信息 | 用户补充确认；brief |
@@ -305,7 +305,7 @@ flowchart LR
 | 入口 / 触发 | 当前账户身份验证成功后 |
 | 展示内容 | 旧邮箱掩码、4 位 Email OTP 输入框、重发入口、返回入口 |
 | 用户动作 | 输入旧邮箱收到的 4 位 OTP；重发 OTP；返回；点击旧邮箱不可用入口 |
-| 系统处理 / 责任方 | Security 发送并校验旧邮箱 Email OTP |
+| 系统处理 / 责任方 | Security 负责旧邮箱 Email OTP 的生成、发送请求处理与校验；邮件投递由 Security 对接通知通道完成 |
 | 元素 / 状态 / 提示规则 | 复用 Email OTP 规则：4 位数字、5 分钟有效、输入满 4 位自动提交、重发后旧 OTP 立即失效、仅最新一次 OTP 有效、仅发起请求设备可用 |
 | 成功流转 | 进入 New Email Input |
 | 失败 / 异常流转 | 按 Email OTP 失败、锁定、过期、重发超限规则处理 |
@@ -335,7 +335,7 @@ flowchart LR
 | 入口 / 触发 | 新邮箱格式与唯一性校验通过 |
 | 展示内容 | 新邮箱掩码、4 位 Email OTP 输入框、重发入口、返回入口 |
 | 用户动作 | 输入新邮箱收到的 4 位 OTP；重发 OTP；返回 |
-| 系统处理 / 责任方 | Security 发送并校验新邮箱 Email OTP |
+| 系统处理 / 责任方 | Security 负责新邮箱 Email OTP 的生成、发送请求处理与校验；邮件投递由 Security 对接通知通道完成 |
 | 元素 / 状态 / 提示规则 | 复用 Email OTP 规则：4 位数字、5 分钟有效、输入满 4 位自动提交、重发后旧 OTP 立即失效、仅最新一次 OTP 有效、仅发起请求设备可用 |
 | 成功流转 | Account 服务更新账户邮箱 |
 | 失败 / 异常流转 | 按 Email OTP 失败、锁定、过期、重发超限规则处理 |
@@ -436,12 +436,12 @@ flowchart LR
 |---|---|
 | 正常流程 | 用户可从个人中心已有邮箱展示位置发起更换邮箱流程 |
 | 正常流程 | 用户在完成当前账户身份验证前，不能进入旧邮箱 OTP 或最终邮箱更新动作 |
-| 正常流程 | 系统向旧邮箱发送 Email OTP，并按 Email OTP 规则完成验证 |
+| 正常流程 | 系统请求发送旧邮箱 Email OTP，并按 Email OTP 规则完成验证 |
 | 正常流程 | 旧邮箱 OTP 未验证通过时，用户不能继续更新新邮箱 |
 | 正常流程 | 新邮箱必须满足邮箱格式要求，且不能与当前账户邮箱相同 |
 | 正常流程 | 新邮箱不能与其他账户已注册 / 已绑定邮箱冲突 |
 | 正常流程 | 系统在发送新邮箱 OTP 前完成新邮箱可用性校验 |
-| 正常流程 | 系统向新邮箱发送 Email OTP，并按 Email OTP 规则完成验证 |
+| 正常流程 | 系统请求发送新邮箱 Email OTP，并按 Email OTP 规则完成验证 |
 | 正常流程 | 旧邮箱 OTP 与新邮箱 OTP 均验证成功后，账户邮箱更新为新邮箱 |
 | 成功处理 | 更换成功后，当前会话中的 email 信息刷新为新邮箱 |
 | 成功处理 | 更换成功后，不强制登出当前设备，不清除 BIO |
