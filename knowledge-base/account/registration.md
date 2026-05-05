@@ -3,7 +3,7 @@ module: account
 feature: registration
 version: "1.0"
 status: active
-source_doc: 历史prd/AIX Card 注册登录需求V1.0.docx
+source_doc: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx
 source_section: 7.1 注册功能
 last_updated: 2026-05-04
 owner: 吴忆锋
@@ -463,14 +463,14 @@ Tag 创建结果：
 
 ## 10. 来源引用
 
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0.docx / 5.2.2 账户状态 / V1.0)
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0.docx / 5.2.5 手机号/邮箱唯一性规则 / V1.0)
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0.docx / 5.2.6 设备绑定策略 / V1.0)
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0.docx / 7.1.3 Navigation Page / V1.0)
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0.docx / 7.1.4 Registration Page / V1.0)
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0.docx / 7.1.5 邮箱OTP验证页 / V1.0)
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0.docx / 7.1.6 Set Password Page / V1.0)
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0.docx / 7.1.7 Re-enter Password Page / V1.0)
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0.docx / 7.1.8 Set Tag Page / V1.0)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 5.2.2 账户状态 / V1.0)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 5.2.5 手机号/邮箱唯一性规则 / V1.0)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 5.2.6 设备绑定策略 / V1.0)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.1.3 Navigation Page / V1.0)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.1.4 Registration Page / V1.0)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.1.5 邮箱OTP验证页 / V1.0)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.1.6 Set Password Page / V1.0)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.1.7 Re-enter Password Page / V1.0)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.1.8 Set Tag Page / V1.0)
 - (Ref: knowledge-base/security/email-otp-verification.md)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / Account Registration / 2026-05-01)
