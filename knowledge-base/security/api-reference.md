@@ -3,7 +3,7 @@ module: security
 feature: api-reference
 version: "1.0"
 status: active
-source_doc: 历史prd/AIX Security 身份认证需求V1.0 (1).docx
+source_doc: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx
 source_section: 9 外部接口依赖；10 接口错误码映射
 last_updated: 2026-05-01
 owner: 吴忆锋
@@ -204,7 +204,7 @@ flowchart LR
 | token 仅成功返回 | `token` 仅在验证成功时返回 | 防止失败或未完成场景继续业务 | 9.1.2 |
 | FAIL 需重新生成 URL | `FAIL` 状态说明需要重新生成 URL | 防止复用失败会话 | 9.1.2 |
 | 错误码映射 | 已知错误码必须映射为前端提示文案 | 提升失败可解释性 | 10.1 |
-| 接口缺口不可补写 | 原文未明确的字段、错误码、接口地址不得作为事实写入 | 防止工程实现误导 | IMPLEMENTATION_PLAN.md / writing-standard.md |
+| 接口缺口不可补写 | 原文未明确的字段、错误码、接口地址不得作为事实写入 | 防止工程实现误导 | knowledge-base/_kb-ingestion-process.md / fact ingestion rules |
 
 ### 9.1 错误码映射
 
@@ -222,11 +222,11 @@ flowchart LR
 
 ## 10. 来源引用
 
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 9.1 外部接口清单 / V1.0)
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 9.1.1 生成url / V1.0)
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 9.1.2 查询验证结果 / V1.0)
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 9.2 外部接口地址 / V1.0)
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 10.1 passport error code / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 9.1 外部接口清单 / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 9.1.1 生成url / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 9.1.2 查询验证结果 / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 9.2 外部接口地址 / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 10.1 passport error code / V1.0)
 - (Ref: knowledge-base/security/_index.md)
 - (Ref: knowledge-base/security/face-authentication.md)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / Security API Reference / 2026-05-01)
