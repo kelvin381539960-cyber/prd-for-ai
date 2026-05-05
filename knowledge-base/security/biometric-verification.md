@@ -3,7 +3,7 @@ module: security
 feature: biometric-verification
 version: "1.0"
 status: active
-source_doc: 历史prd/AIX Security 身份认证需求V1.0 (1).docx
+source_doc: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx
 source_section: 8.5 Biometric认证
 last_updated: 2026-05-01
 owner: 吴忆锋
@@ -191,8 +191,8 @@ flowchart LR
 
 ## 10. 来源引用
 
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 7.1 认证方式&限制 / V1.0)
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 7.3 验证优先级 / V1.0)
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx / 8.5 Biometric认证 / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 7.1 认证方式&限制 / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 7.3 验证优先级 / V1.0)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx / 8.5 Biometric认证 / V1.0)
 - (Ref: knowledge-base/security/_index.md)
 - (Ref: knowledge-base/security/global-rules.md)
