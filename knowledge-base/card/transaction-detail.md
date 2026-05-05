@@ -3,7 +3,7 @@ module: card
 feature: card-transaction-detail
 version: "1.3"
 status: active
-source_doc: 历史prd/AIX APP V1.0【Transaction & History】 (1).docx；DTC接口文档/卡交易&钱包交易状态梳理 (1).docx；knowledge-base/card/card-home.md；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/status-model.md；knowledge-base/changelog/knowledge-gaps.md；prd-template/standard-prd-template.md
+source_doc: archive/historical-prd/app/AIX APP V1.0【Transaction & History】 (1).docx；reference-data/transaction/card-wallet-transaction-status-mapping.docx；knowledge-base/card/card-home.md；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/status-model.md；knowledge-base/changelog/knowledge-gaps.md；prd-template/standard-prd-template.md
 source_section: 7.1 全量交易记录 Transaction；7.2 卡交易列表 Card History；7.3 卡交易详情 Card Transaction Details；8.1 Transaction History of Card；8.2 Card Transaction Detail Inquiry；卡交易&钱包交易状态梳理 / 嵌入 Excel hFgXns；Standard PRD Template v1.3
 last_updated: 2026-05-05
 owner: 吴忆锋
@@ -65,7 +65,7 @@ readers: [product, ui, dev, qa, business, ai]
 | FAQ 入口 | In Scope | P2 | Confirmed | 根据 Transactions / Transaction Details 场景读取 FAQ |
 | 全量交易聚合 | Out of Scope | P0 | Confirmed | 由 `transaction/history.md` 维护 |
 | Card 资金回退 Wallet | Out of Scope | P0 | Confirmed | 由 `card/transaction.md` 维护 |
-| DTC 状态映射核表 | In Scope | P0 | Confirmed | 已补充 `卡交易&钱包交易状态梳理 (1).docx` 嵌入 Excel 中的 Card Type / Status 映射 |
+| DTC 状态映射核表 | In Scope | P0 | Confirmed | 已补充 `reference-data/transaction/card-wallet-transaction-status-mapping.docx` 嵌入 Excel 中的 Card Type / Status 映射 |
 | 接口请求 / 响应与错误码核表 | In Scope | P0 | Open | Transaction History of Card、Card Transaction Detail Inquiry 的请求 / 响应字段、错误码仍需从原始 PRD 图片 / 表格补齐 |
 
 ### 2.5 功能边界与拆分结论
@@ -79,7 +79,7 @@ readers: [product, ui, dev, qa, business, ai]
 | 全量交易历史 / 全局 Transaction 聚合 | 全局交易能力 | Out of Scope，只引用 | `transaction/history.md` |
 | 全局交易状态模型 | 公共状态能力 | Out of Scope，只引用；本文只写 Card 场景展示状态 | `transaction/status-model.md` |
 | 交易对账 / ID 关联 | 对账能力 | Out of Scope，只引用 | `transaction/reconciliation.md`、`knowledge-gaps.md` |
-| DTC 状态映射核表 | 本文事实依据 | 已补齐 Card Type / Status 映射 | `DTC接口文档/卡交易&钱包交易状态梳理 (1).docx` 嵌入 Excel |
+| DTC 状态映射核表 | 本文事实依据 | 已补齐 Card Type / Status 映射 | `reference-data/transaction/card-wallet-transaction-status-mapping.docx` 嵌入 Excel |
 | 接口请求 / 响应与错误码核表 | 本文验收前置 | 阻塞 Approved；未补齐前不得宣称接口字段、错误码完整 | 原始 PRD 图片 / 电子表格 |
 
 ---
@@ -355,7 +355,7 @@ flowchart LR
 
 ### 9.1 验收前置
 
-本 PRD 当前为 Review 状态。DTC Card Type / Status 映射已根据 `卡交易&钱包交易状态梳理 (1).docx` 嵌入 Excel 补齐。进入 Approved 前，仍必须补齐并核对以下内容：
+本 PRD 当前为 Review 状态。DTC Card Type / Status 映射已根据 `reference-data/transaction/card-wallet-transaction-status-mapping.docx` 嵌入 Excel 补齐。进入 Approved 前，仍必须补齐并核对以下内容：
 
 1. Transaction History of Card 请求 / 响应字段。
 2. Card Transaction Detail Inquiry 请求 / 响应字段。
@@ -397,8 +397,8 @@ flowchart LR
 
 ## 10. 来源引用
 
-- (Ref: 历史prd/AIX APP V1.0【Transaction & History】 (1).docx / 1.2 / 2.1 / 3 / 4.2 / 5 / 7.1 / 7.2 / 7.3 / 8.1 / 8.2)
-- (Ref: DTC接口文档/卡交易&钱包交易状态梳理 (1).docx / 嵌入 Excel hFgXns / 卡交易状态映射)
+- (Ref: archive/historical-prd/app/AIX APP V1.0【Transaction & History】 (1).docx / 1.2 / 2.1 / 3 / 4.2 / 5 / 7.1 / 7.2 / 7.3 / 8.1 / 8.2)
+- (Ref: reference-data/transaction/card-wallet-transaction-status-mapping.docx / 嵌入 Excel hFgXns / 卡交易状态映射)
 - (Ref: knowledge-base/card/card-home.md)
 - (Ref: knowledge-base/card/transaction.md)
 - (Ref: knowledge-base/transaction/history.md)
