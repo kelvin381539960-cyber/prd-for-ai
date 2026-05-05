@@ -3,7 +3,7 @@ module: card
 feature: card-activation
 version: "1.0"
 status: active
-source_doc: 历史prd/AIX Card 【manage】模块需求V1.0 .docx；DTC Card Issuing API Document_20260310；prd-template/standard-prd-template.md
+source_doc: archive/historical-prd/card/AIX Card 【manage】模块需求V1.0 .docx；external-docs/dtc/DTC Card Issuing API Document_20260310 (1).docx；prd-template/standard-prd-template.md
 source_section: Manage 7.2；DTC Inquiry Card Basic Info；DTC Card Activation；Standard PRD Template v1.3
 last_updated: 2026-05-05
 owner: 吴忆锋
@@ -217,7 +217,7 @@ flowchart LR
 
 ## 10. 来源引用
 
-- (Ref: 历史prd/AIX Card 【manage】模块需求V1.0 .docx / 7.2 / V1.0)
-- (Ref: DTC Card Issuing API Document_20260310 / Inquiry Card Basic Info / Card Activation / Sent OTP For Card Activation)
+- (Ref: archive/historical-prd/card/AIX Card 【manage】模块需求V1.0 .docx / 7.2 / V1.0)
+- (Ref: external-docs/dtc/DTC Card Issuing API Document_20260310 (1).docx / Inquiry Card Basic Info / Card Activation / Sent OTP For Card Activation)
 - (Ref: knowledge-base/card/manage/status-and-operations.md)
 - (Ref: prd-template/standard-prd-template.md / v1.3)
