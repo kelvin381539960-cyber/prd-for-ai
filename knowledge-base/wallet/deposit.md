@@ -37,7 +37,7 @@ depends_on:
 | Owner | 吴忆锋 |
 | 版本 | 2.0 |
 | 状态 | active |
-| 更新时间 | 2026-05-04 |
+| 更新时间 | 2026-05-05 |
 | 文档类型 | AI-readable PRD translation |
 | 来源文档 | AIX Wallet V1.0【Deposit & Send & Swap】；Documentation dtc-nodejs-wallet-connect；DTC Wallet OpenAPI Documentation；AIX Notification |
 
