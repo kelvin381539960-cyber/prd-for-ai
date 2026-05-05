@@ -67,38 +67,38 @@ DTC 通过 Card Transaction Notify 通知 AIX。AIX 接收通知后按 event + d
 ```mermaid
 sequenceDiagram
     autonumber
-    participant DTC as DTC Card API
+    participant External as 外部发卡能力
     participant Card as AIX Card 服务
     participant Wallet as Wallet 服务
     participant Monitor as 监控 / 告警
     participant App as AIX App
 
-    DTC-->>Card: Card Transaction Notify(event, data.id, type)
-    Card->>Card: 按 event + data.id 去重
-    alt 重复通知
-        Card->>Card: 忽略，不重复处理
-    else 非重复通知
-        Card->>Card: 判断 type 是否为 refund / reversal / deposit
-        alt 非目标类型
-            Card->>Card: 终止流程，不归集
-        else 目标类型
-            Card->>DTC: Inquiry Card Basic Info / 查询 balance
-            DTC-->>Card: 返回 balance
-            alt balance = 0
-                Card->>Card: 终止流程
-            else balance > 0
-                Card->>DTC: Transfer Balance to Wallet(amount=balance)
-                alt Transfer 成功
-                    DTC-->>Wallet: 产生 Wallet 相关记录（关联规则待确认）
-                    Card->>Card: 结束流程，等待交易 / 对账模块承接
-                else Transfer 失败
-                    Card->>Monitor: 告警，不自动重试
+    External-->>Card: 通知 AIX 发生卡交易
+    Card->>Card: 判断该通知是否已经处理过
+    alt 已处理过
+        Card->>Card: 结束流程，不重复处理
+    else 未处理过
+        Card->>Card: 判断该交易是否属于需要归集的交易类型
+        alt 不需要归集
+            Card->>Card: 结束流程，不归集
+        else 需要归集
+            Card->>External: 确认可归集的卡余额
+            External-->>Card: 返回可归集余额结果
+            alt 无可归集余额
+                Card->>Card: 结束流程，不归集
+            else 有可归集余额
+                Card->>Wallet: 发起卡余额归集到 Wallet
+                alt 归集成功
+                    Wallet-->>Card: 返回归集成功结果
+                    Card->>Card: 记录处理完成，后续由交易和对账模块承接
+                else 归集失败
+                    Card->>Monitor: 记录异常并触发告警
                 end
             end
         end
     end
-    App->>Card: 查询 Card Home Recent Transactions
-    Card-->>App: 返回最近卡交易展示数据
+    App->>Card: 查询 Card Home 最近交易
+    Card-->>App: 返回可展示的最近交易结果
 ```
 
 ### 3.3 流程步骤与业务规则
