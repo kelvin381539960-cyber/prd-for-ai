@@ -30,7 +30,7 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 2.1 需求背景
 
-Card Home 是已申卡用户查看卡片、卡状态、卡操作入口、Recent Transactions、实体卡物流和 FAQ 的主页面，也是 Activation、Card Manage / PIN、Card Manage / Sensitive Info、Card Management、Card Transaction Detail Detail 的入口承接页。
+Card Home 是已申卡用户查看卡片、卡状态、卡操作入口、Recent Transactions、实体卡物流和 FAQ 的主页面，也是 Activation、Card Manage / PIN、Card Manage / Sensitive Info、Card Manage、Card Transaction Detail 的入口承接页。
 
 ### 2.2 用户问题 / 业务问题
 
@@ -254,7 +254,7 @@ flowchart LR
 | 字段 | autoDebitEnabled | AIX / DTC | Application | 展示 Auto Debit Tag | 枚举冲突待确认 | 不写死 |
 | 字段 | trackingNo | DTC / Logistics | Application / Home | 展示物流单号 | 有值展示并可复制 | 空则 Preparing |
 | 字段 | cardOrderNumber | AIX / DTC | Application | 展示申请单号 | 可复制 | 缺失待确认 |
-| 接口 | Card Transaction Detail Inquiry | DTC | Application / Transaction | 查询 Recent Transactions | `/openapi/v1/card/inquiry-card-transaction` | 查询失败处理待确认 |
+| 接口 | Card Transaction Inquiry | DTC | Application / Transaction | 查询 Recent Transactions | `/openapi/v1/card/inquiry-card-transaction` | 查询失败处理待确认 |
 | 接口 | FAQ Config | AIX | Application / Home | 查询 FAQ | 按场景和类型筛选 | 缺失不影响主卡展示 |
 
 ---
@@ -265,7 +265,7 @@ flowchart LR
 |---|---|---|---|---|---|
 | 申请状态更新 | Push / In-app | 申卡用户 | Notification 模块维护 | Card Home / Application Details | 本文不定义 |
 | 物流更新 | Push / In-app / DTC 通知 | 实体卡用户 | Notification 模块维护 | Card Home | 待确认 |
-| 卡交易成功 / 退款成功 | Push / In-app | 持卡用户 | Notification 模块维护 | Card Transaction Detail Details | 本文不定义 |
+| 卡交易成功 / 退款成功 | Push / In-app | 持卡用户 | Notification 模块维护 | Card Transaction Details | 本文不定义 |
 
 ---
 
@@ -303,7 +303,7 @@ flowchart LR
 | 正常流程 | 不同卡状态进入 Home 后展示对应卡片和操作入口 |
 | 异常流程 | Tracking 缺失、无交易、状态未知、操作不允许均有处理 |
 | 页面展示 | Home 不展示完整敏感信息，Recent Transactions 展示最近 3 条 |
-| 系统交互 | 状态和操作均引用 Card Management，不重复定义状态 |
+| 系统交互 | 状态和操作均引用 Card Manage，不重复定义状态 |
 | 通知 | Home 只定义通知入口边界，模板由 Notification 维护 |
 | 数据 / 埋点 | cardStatus、trackingNo、cardOrderNumber、Recent Transactions 可追踪 |
 
@@ -328,4 +328,5 @@ flowchart LR
 - (Ref: 历史prd/AIX APP V1.0【Transaction & History】.pdf / 卡交易列表与详情，未随本次附件完整提供)
 - (Ref: 历史prd/AIX Card manage模块需求V1.0.docx / 6.4 / 7.1 / V1.0)
 - (Ref: knowledge-base/card/manage/_index.md)
+- (Ref: knowledge-base/card/transaction-detail.md)
 - (Ref: prd-template/standard-prd-template.md / v1.3)
