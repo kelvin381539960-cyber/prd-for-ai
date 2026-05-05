@@ -3,8 +3,8 @@ module: common
 feature: faq
 version: "1.1"
 status: active
-source_doc: 用户上传/AIX Phase 1 FAQ.xlsx；IMPLEMENTATION_PLAN.md；knowledge-base/common/_index.md；knowledge-base/wallet/stage-review.md；knowledge-base/changelog/final-repository-review.md
-source_section: AIX Phase 1 FAQ.xlsx / sheet `(v4) AIX FAQs - Isaac` / column C final answers；IMPLEMENTATION_PLAN v4.4；外部依赖收窄原则
+source_doc: reference-data/faq/phase-1-faq.xlsx；knowledge-base/_kb-ingestion-process.md；knowledge-base/common/_index.md；knowledge-base/changelog/knowledge-gaps.md
+source_section: reference-data/faq/phase-1-faq.xlsx / sheet `(v4) AIX FAQs - Isaac` / column C final answers；IMPLEMENTATION_PLAN v4.4；外部依赖收窄原则
 last_updated: 2026-05-02
 owner: 吴忆锋
 depends_on:
@@ -21,7 +21,7 @@ FAQ 用于沉淀 AIX App 面向用户的问答口径。
 
 本文件仅转写已有 FAQ 原文，不新增问题，不扩展答案，不根据接口文档或模型推理补充客服口径。
 
-本次来源为用户上传的 `AIX Phase 1 FAQ.xlsx`，sheet 为 `(v4) AIX FAQs - Isaac`。优先采用 C 列最终答案；若 C 列为空且 B 列有答案，才采用 B 列。无答案的问题不写入 FAQ 正文，只进入缺口清单。
+本次来源为用户上传的 `reference-data/faq/phase-1-faq.xlsx`，sheet 为 `(v4) AIX FAQs - Isaac`。优先采用 C 列最终答案；若 C 列为空且 B 列有答案，才采用 B 列。无答案的问题不写入 FAQ 正文，只进入缺口清单。
 
 ## 2. 使用限制
 
@@ -691,6 +691,6 @@ You must submit a dispute within [X] days (e.g., 60 or 120 days) of the transact
 
 ## 7. 来源引用
 
-- (Ref: 用户上传 / AIX Phase 1 FAQ.xlsx / `(v4) AIX FAQs - Isaac`)
-- (Ref: IMPLEMENTATION_PLAN.md / v4.4)
-- (Ref: knowledge-base/changelog/final-repository-review.md / v1.3)
+- (Ref: 用户上传 / reference-data/faq/phase-1-faq.xlsx / `(v4) AIX FAQs - Isaac`)
+- (Ref: knowledge-base/_kb-ingestion-process.md / v4.4)
+- (Ref: knowledge-base/changelog/knowledge-gaps.md / v1.3)
