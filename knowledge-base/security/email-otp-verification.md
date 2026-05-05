@@ -13,7 +13,6 @@ depends_on:
   - account/_index
   - _meta/limits-and-rules
   - _meta/error-code-dictionary
-  - _meta/writing-standard
 ---
 
 # Email OTP Verification 邮箱验证码认证
