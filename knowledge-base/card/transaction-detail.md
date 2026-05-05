@@ -1,7 +1,7 @@
 ---
 module: card
 feature: card-transaction-detail
-version: "1.2"
+version: "1.3"
 status: active
 source_doc: 历史prd/AIX APP V1.0【Transaction & History】 (1).docx；DTC接口文档/卡交易&钱包交易状态梳理 (1).docx；knowledge-base/card/card-home.md；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/status-model.md；knowledge-base/changelog/knowledge-gaps.md；prd-template/standard-prd-template.md
 source_section: 7.1 全量交易记录 Transaction；7.2 卡交易列表 Card History；7.3 卡交易详情 Card Transaction Details；8.1 Transaction History of Card；8.2 Card Transaction Detail Inquiry；卡交易&钱包交易状态梳理 / 嵌入 Excel hFgXns；Standard PRD Template v1.3
@@ -19,7 +19,7 @@ readers: [product, ui, dev, qa, business, ai]
 | 功能名称 | Card Transaction Detail 卡交易列表与详情 |
 | 所属模块 | Card |
 | Owner | 吴忆锋 |
-| 版本 | 1.2 |
+| 版本 | 1.3 |
 | 状态 | Review |
 | 更新时间 | 2026-05-05 |
 | 来源文档 | AIX APP V1.0【Transaction & History】、DTC 卡交易&钱包交易状态梳理、Standard PRD Template v1.3 |
@@ -299,8 +299,8 @@ flowchart LR
 | 字段 | Indicator | DTC / Card | 原文 7.1 / 7.2 / 7.3 | 交易方向 | Credit【+】；Debit【-】 | 缺失待确认 |
 | 字段 | requestAmount & requestCurrency | DTC / Card | 原文 7.1 / 7.2 / 7.3 | 法币交易金额 | 展示交易金额和币种 | 缺失待确认 |
 | 字段 | Transaction time | DTC / Card | 原文 7.1 / 7.2 | 交易时间 | 月份缩写-日期-年份，如 `Feb-25-2026 10:23:30` | 缺失待确认 |
-| 字段 | State / Status | DTC / Card | 原文 7.1 / 7.2 / 7.3 | 交易状态展示 | Pending / Success / Refunded / Declined / Cancelled；详情页出现 Denied | 映射待确认 |
-| 字段 | Type | DTC / Card | 原文 7.3 | 详情页交易类型 | Payment / Cash withdrawal / Refund | REVERSAL 前端与 REFUND 一样显示 |
+| 字段 | State / Status | DTC / Card | 原文 7.1 / 7.2 / 7.3；DTC 状态梳理 | 交易状态展示 | Pending / Success / Refunded / Declined / Cancelled；详情页出现 Denied | DTC 状态映射已补齐；Declined / Denied 文案待 PM / UI 确认 |
+| 字段 | Type | DTC / Card | 原文 7.3；DTC 状态梳理 | 详情页交易类型 | Payment / Cash withdrawal / Refund；DTC 类型包括 PURCHASE / INCREMENTAL AUTH / CASH_WITHDRAWAL / REFUND 等 | REVERSAL / REVERSED 的展示边界按退款类处理；最终文案仍需 PM / UI 确认 |
 | 字段 | Crypto | DTC / Card | 原文 7.3 | 加密币类型 | USDT / USDC / WUSD / FDUSD | 缺失待确认 |
 | 字段 | Amount | DTC / Card | 原文 7.3 | 加密币金额 | 展示具体金额 | 缺失待确认 |
 | 字段 | Exchange rate | DTC / Card | 原文 v2.1 / 7.3 | 交易汇率 | 半弹层；小数点后 6 位，向上取整；详情页收起 | 计算来源待确认 |
@@ -339,8 +339,8 @@ flowchart LR
 
 | 问题 | 影响范围 | 当前处理 | 是否阻塞验收 | 建议确认人 |
 |---|---|---|---|---|
-| 原文图片 / 电子表格中的完整 Type 映射、Status 映射、接口请求 / 响应字段、错误码表尚未展开 | FE / BE / QA | 阻塞；未补齐前不得进入 Approved | 是 | PM / BE / QA |
-| 详情页 `Denied` 与列表页 `Declined` 是否同一状态展示 | FE / QA | 阻塞 | 是 | PM / BE |
+| 原文图片 / 电子表格中的接口请求 / 响应字段、错误码表尚未展开 | FE / BE / QA | 阻塞；未补齐前不得进入 Approved | 是 | PM / BE / QA |
+| 详情页 `Denied` 与列表页 `Declined` 是否同一前端文案 | FE / QA | DTC 状态为 DENIED、AIX 状态为 Declined；最终展示文案待确认 | 是 | PM / UI / BE |
 | Card Transaction Detail Inquiry 的错误码和失败页展示 | FE / BE / QA | 阻塞；需从原文图片 / 表格补齐 | 是 | PM / BE / QA |
 | Card Home Recent Transactions 查询失败时隐藏模块、展示空态还是 Toast | Card Home / QA | 不阻塞 | 否 | PM / QA |
 | 单卡时 Card Selector 是否展示下拉箭头 | FE / Design | 不阻塞 | 否 | PM / Design |
