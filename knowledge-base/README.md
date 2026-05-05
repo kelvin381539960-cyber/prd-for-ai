@@ -37,8 +37,9 @@ It is not a build-phase plan, not a draft area, and not the place to maintain te
 | Directory | Purpose |
 |---|---|
 | `account/` | Account and login-related facts |
-| `wallet/` | Wallet, balance, deposit, receive, and related wallet facts |
-| `card/` | Card application, activation, management, and card transaction facts |
+| `home/` | App Home runtime facts and cross-module entry boundaries |
+| `wallet/` | Wallet, balance, deposit, and related wallet facts |
+| `card/` | Card application, Card Home, and Card Management runtime facts |
 | `transaction/` | Transaction history, detail, status, and reconciliation facts |
 | `kyc/` | Account Opening / KYC and related access facts |
 | `common/` | Common runtime facts such as notification, errors, and FAQ |
