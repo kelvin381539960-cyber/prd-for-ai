@@ -1,5 +1,5 @@
 ---
-module: common
+module: integrations
 feature: aai-dependency
 version: "1.3"
 status: active
