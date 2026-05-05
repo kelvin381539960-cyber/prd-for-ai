@@ -71,7 +71,6 @@ AIX Wallet 需要展示和查询用户钱包余额，并支持查询钱包余额
 | ActivityType | In Scope | P1 | Confirmed / Referenced | 引用 DTC Appendix ActivityType；业务映射见 ALL-GAP |
 | Deposit 余额关系 | In Scope | P1 | Partial | 仅记录可引用事实；GTR / WC 映射和资金可用时点进 ALL-GAP |
 | Card balance | Out of Scope | - | Out of Scope | Card balance 属于 Card Transaction Flow，不在本文定义 |
-| Send / Swap 余额规则 | Out of Scope | - | Deferred | Send / Swap 当前 deferred，不纳入 active Balance 规则 |
 
 ---
 
