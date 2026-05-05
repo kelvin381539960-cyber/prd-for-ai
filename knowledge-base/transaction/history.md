@@ -4,7 +4,7 @@ feature: history
 version: "2.0"
 status: active
 doc_type: ai-readable-prd-translation
-source_doc: IMPLEMENTATION_PLAN.md；DTC接口文档/DTC Wallet OpenAPI Document20260126 (1).docx；knowledge-base/transaction/status-model.md；knowledge-base/transaction/detail.md；knowledge-base/card/transaction.md；knowledge-base/wallet/assets.md；knowledge-base/wallet/deposit.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-02
+source_doc: knowledge-base/_kb-ingestion-process.md；external-docs/dtc/DTC Wallet OpenAPI Document20260126 (1).docx；knowledge-base/transaction/status-model.md；knowledge-base/transaction/detail.md；knowledge-base/card/transaction.md；knowledge-base/wallet/assets.md；knowledge-base/wallet/deposit.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-02
 source_section: Wallet Transaction History merged into Transaction History；Wallet Assets；Wallet Deposit；Search Balance History / 4.2.4；Appendix ActivityType；Card Transaction Flow；ALL-GAP 总表
 last_updated: 2026-05-05
 owner: 吴忆锋
@@ -23,7 +23,7 @@ depends_on:
 
 > 本文件是对 Card History、Wallet Transaction History、Deposit History 相关历史 PRD / DTC 文档内容的 AI-readable 结构化转译稿。  
 > 本文件定位为交易历史事实载体，不是新的全局交易流水设计，不合并 Card / Wallet 字段来源，不补写未确认状态机。  
-> 原 `wallet/transaction-history.md` 已合并至本文件；Wallet 交易历史主事实源以本文为准。
+> 原 Wallet 交易历史分散内容已合并至本文件；Wallet 交易历史主事实源以本文为准。
 
 ---
 
