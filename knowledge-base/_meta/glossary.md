@@ -3,7 +3,7 @@ module: _meta
 feature: glossary
 version: "1.0"
 status: draft
-source_doc: IMPLEMENTATION_PLAN.md
+source_doc: knowledge-base/_ai-query-router.md；knowledge-base/_kb-ingestion-process.md
 source_section: "Phase 1"
 last_updated: 2026-05-01
 owner: 吴忆锋
