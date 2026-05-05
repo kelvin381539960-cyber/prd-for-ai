@@ -3,14 +3,14 @@ module: common
 feature: errors
 version: "1.4"
 status: active
-source_doc: IMPLEMENTATION_PLAN.md；历史prd/AIX Wallet V1.0【Deposit & Send & Swap 】.docx；DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx；DTC接口文档/DTC Wallet OpenAPI Document20260126 (1).docx；[2025-11-25] AIX+Notification（push及站内信）.docx；knowledge-base/common/dtc.md；knowledge-base/common/walletconnect.md；knowledge-base/common/notification.md；knowledge-base/wallet/deposit.md；knowledge-base/changelog/knowledge-gaps.md
+source_doc: IMPLEMENTATION_PLAN.md；历史prd/AIX Wallet V1.0【Deposit & Send & Swap 】.docx；DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx；DTC接口文档/DTC Wallet OpenAPI Document20260126 (1).docx；[2025-11-25] AIX+Notification（push及站内信）.docx；knowledge-base/integrations/dtc/_index.md；knowledge-base/integrations/walletconnect/_index.md；knowledge-base/common/notification.md；knowledge-base/wallet/deposit.md；knowledge-base/changelog/knowledge-gaps.md
 source_section: AIX Wallet PRD / 6.4.5 异常处理；DTC WalletConnect / 3 Server-Emitted Events；3.3 Websocket disconnect；Wallet Deposit v1.6；WalletConnect v1.3；ALL-GAP 总表
 last_updated: 2026-05-02
 owner: 吴忆锋
 depends_on:
   - common/_index
-  - common/dtc
-  - common/walletconnect
+  - integrations/dtc
+  - integrations/walletconnect
   - common/notification
   - wallet/deposit
   - changelog/knowledge-gaps
@@ -206,8 +206,8 @@ flowchart TD
 - (Ref: DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 3.3 Websocket disconnect)
 - (Ref: DTC Wallet OpenAPI Document20260126 / 3.4 Crypto Deposit)
 - (Ref: [2025-11-25] AIX+Notification / Deposit under review row)
-- (Ref: knowledge-base/common/dtc.md / v1.4)
-- (Ref: knowledge-base/common/walletconnect.md / v1.3)
+- (Ref: knowledge-base/integrations/dtc/_index.md / v1.4)
+- (Ref: knowledge-base/integrations/walletconnect/_index.md / v1.3)
 - (Ref: knowledge-base/common/notification.md)
 - (Ref: knowledge-base/wallet/deposit.md / v1.6)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP 总表)
