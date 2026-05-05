@@ -3,7 +3,7 @@ module: card
 feature: card-transaction
 version: "1.2"
 status: active
-source_doc: 历史prd/AIX Card交易【transaction】.docx；DTC Card Issuing API Document_20260310；DTC Wallet OpenAPI Documentation；knowledge-base/changelog/knowledge-gaps.md；prd-template/standard-prd-template.md
+source_doc: archive/historical-prd/card/AIX Card交易【transaction】.docx；external-docs/dtc/DTC Card Issuing API Document_20260310 (1).docx；external-docs/dtc/DTC Wallet OpenAPI Document20260126 (1).docx；knowledge-base/changelog/knowledge-gaps.md；prd-template/standard-prd-template.md
 source_section: Card Transaction；7.1 功能概述；7.2 业务流程；7.3 流程说明；8.1 外部接口清单；Standard PRD Template v1.3
 last_updated: 2026-05-05
 owner: 吴忆锋
@@ -238,8 +238,8 @@ sequenceDiagram
 
 ## 10. 来源引用
 
-- (Ref: 历史prd/AIX Card交易【transaction】.docx / 7.1 / 7.2 / 7.3 / 8.1 / 9)
-- (Ref: DTC Card Issuing API Document_20260310 / Card Transaction Notification / Inquiry Card Basic Info)
-- (Ref: DTC Wallet OpenAPI Documentation / Transfer Balance to Wallet)
+- (Ref: archive/historical-prd/card/AIX Card交易【transaction】.docx / 7.1 / 7.2 / 7.3 / 8.1 / 9)
+- (Ref: external-docs/dtc/DTC Card Issuing API Document_20260310 (1).docx / Card Transaction Notification / Inquiry Card Basic Info)
+- (Ref: external-docs/dtc/DTC Wallet OpenAPI Document20260126 (1).docx / Transfer Balance to Wallet)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md)
 - (Ref: prd-template/standard-prd-template.md / v1.3)
