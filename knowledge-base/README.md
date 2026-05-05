@@ -42,8 +42,15 @@ It is not a build-phase plan, not a draft area, and not the place to maintain te
 | `card/` | Card application, activation, management, and card transaction facts |
 | `transaction/` | Transaction history, detail, status, and reconciliation facts |
 | `kyc/` | Account Opening / KYC and related access facts |
-| `common/` | Common dependencies such as DTC, AAI, WalletConnect, notification, errors, and FAQ |
+| `common/` | Common runtime facts such as notification, errors, and FAQ |
+| `integrations/` | External dependency boundaries such as DTC, AAI, and WalletConnect |
 | `changelog/` | Global knowledge gaps and change records |
+
+## Current scope exclusions
+
+Website / Web / Marketing site PRDs are not included in this runtime knowledge base for now.
+
+Wallet Send and Wallet Swap are not maintained as current capabilities because they are not actual active product capabilities.
 
 ## Deprecated usage
 
