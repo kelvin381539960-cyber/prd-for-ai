@@ -112,6 +112,7 @@ Wallet 当前已确认状态字段为 `state`。
 | `PROCESSING` | Wallet 交易状态值 | 原文未提供 | 前端文案见 ALL-GAP-051 | 只作为 Wallet 状态值记录 | 进入 / 退出条件见 ALL-GAP-050 | 未确认 | Transaction History / Detail |
 | `AUTHORIZED` | Wallet 交易状态值 | 原文未提供 | 前端文案见 ALL-GAP-051 | 只作为 Wallet 状态值记录 | 进入 / 退出条件见 ALL-GAP-050 | 未确认 | Transaction History / Detail |
 | `COMPLETED` | Wallet 交易状态值 | 原文未提供 | 前端文案见 ALL-GAP-051 | 只作为 Wallet 状态值记录 | 与 Deposit success 映射见 ALL-GAP-016 | 未确认 | Transaction History / Detail |
+| `REFUNDED` | Wallet 交易状态值 | DTC CryptoTransactionState；Deposit Refunded 映射 | 前端文案见 ALL-GAP-051 | 只作为 Wallet 状态值记录，不等同 Card Refunded | 退款进入 / 退出条件需以业务场景核验 | 未确认 | DTC Wallet OpenAPI Appendix C；reference-data/transaction/card-wallet-transaction-status-mapping.docx |
 | `REJECTED` | Wallet 交易状态值 | 原文未提供 | 前端文案见 ALL-GAP-051 | 只作为 Wallet 状态值记录 | 失败原因和责任边界见 ALL-GAP-038、ALL-GAP-039 | 未确认 | Transaction History / Detail |
 | `CLOSED` | Wallet 交易状态值 | 原文未提供 | 前端文案见 ALL-GAP-051 | 只作为 Wallet 状态值记录 | 关闭条件见 ALL-GAP-050 | 未确认 | Transaction History / Detail |
 
