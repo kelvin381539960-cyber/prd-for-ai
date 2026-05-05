@@ -7,7 +7,7 @@ created: 2026-05-05
 last_updated: 2026-05-05
 owner: TBD
 target_prd: requirements/2026-05/account/change-email.md
-source_doc: 用户需求 2026-05-05；用户补充确认 2026-05-05；Atome SG Help - How do I change the email address for my account；Atome MY Help - How do I change the email address for my account；Atome SG Help - How do I change the mobile number for my account；Atome PH Help - How do I update my account details；prd-template/prd-writing-workflow.md；prd-template/standard-prd-template.md；requirements/_index.md；knowledge-base/_ai-query-router.md；knowledge-base/account/_index.md；knowledge-base/security/_index.md；knowledge-base/security/global-rules.md；knowledge-base/security/email-otp-verification.md；knowledge-base/_system-boundary.md；knowledge-base/changelog/knowledge-gaps.md；OWASP Email Validation and Verification Cheat Sheet；OWASP Changing A User's Registered Email Address；OWASP API Security API2:2023 Broken Authentication；OWASP Multifactor Authentication Cheat Sheet
+source_doc: 用户需求 2026-05-05；用户补充确认 2026-05-05；Atome SG Help - How do I change the email address for my account；Atome MY Help - How do I change the email address for my account；Atome SG Help - How do I change the mobile number for my account；Atome PH Help - How do I update my account details；prd-template/prd-writing-workflow.md；prd-template/standard-prd-template.md；requirements/_index.md；knowledge-base/_ai-query-router.md；knowledge-base/account/_index.md；knowledge-base/security/_index.md；knowledge-base/security/global-rules.md；knowledge-base/security/email-otp-verification.md；knowledge-base/_system-boundary.md；knowledge-base/changelog/knowledge-gaps.md；OWASP Email Validation and Verification Cheat Sheet；OWASP Changing A User's Registered Email Address；OWASP API Security API2:2023 Broken Authentication；OWASP Multifactor Authentication Cheat Sheet；RedotPay Help - Changing your phone number or email；Binance Help - Change account email / forgot account appeal；OKX Help - Update email；Bybit Help - Change or unlink registered email；Coinbase Help - Change email / account recovery；Crypto.com Help - Update email address；Kraken Support - Updating account information / lost email access；Gemini Support - Change email address；Bitget Help - Change email / account recovery；KuCoin Help - Change email / reset security settings；Gate.io Help - Link / update email address
 ---
 
 # 更换邮箱 PRD Brief
@@ -50,6 +50,24 @@ source_doc: 用户需求 2026-05-05；用户补充确认 2026-05-05；Atome SG H
 | Atome MY - 更换邮箱 | 用户从 `Me` tab 进入右上角箭头，点击邮箱编辑图标，保存后更新邮箱；更新后的邮箱会立即在 App 内反映。公开文档未提到 OTP 校验。 | 支持“邮箱展示行 / 编辑图标”作为入口参考。 |
 | Atome SG - 更换手机号 | 如果用户仍可访问已注册手机号，可在 `Me` → `Account & Security` → `Update Mobile Number` 发起，并验证是否仍可访问旧手机号；如果已登出或不能访问旧手机号，走 `No longer using this number?` 旁的 `Update now`，验证当前号码后选择 recovery option。 | 对敏感联系方式变更，Atome 手机号流程区分“仍可访问旧联系方式”和“不可访问旧联系方式”。AIX 更换邮箱 V1 可沿用更安全思路：旧邮箱可访问则验证旧邮箱；旧邮箱不可访问则不自助绕过，转客服 / 人工处理。 |
 | Atome PH - 账户资料更新 | Atome PH 对部分申请资料出于安全原因不允许直接修改；手机号更新可在 App 修改，或联系客户支持并提供手机号所有权证明等材料。 | 旧邮箱不可用时，客服 / 人工处理路径是合理兜底，不建议 V1 做无验证自助绕过。 |
+
+## 4.1 横向竞品调研结论
+
+| 平台 | 正常更换邮箱处理 | 旧邮箱不记得 / 不可用处理 | 更换后安全限制 | 对 AIX 的启发 |
+|---|---|---|---|---|
+| RedotPay | Profile / Security 内更换邮箱，按页面验证步骤完成。 | 建议先查历史邮件 / SMS；无法访问旧联系方式则联系支持团队。 | 邮箱或手机号更换后 24 小时限制提现、内部转账、币种兑换，卡日消费限额临时降为 1,000 USD。 | V1 可参考：旧邮箱不可用走客服；更换后增加资金敏感操作限制。 |
+| Binance | 通过 Security 修改邮箱，需 passkey 或 2FA，并验证新邮箱。 | 忘记注册邮箱 / 手机号时走 Forgot Account Appeal，提交身份材料、自拍视频、存款记录等。 | 更换邮箱后提现、内部转账、P2P 最多禁用 48 小时。 | 高风险场景建议引入身份申诉和资金冷却。 |
+| OKX | 更换邮箱时验证当前邮箱、新邮箱和 2FA。 | 提供 `Unable to verify` 恢复入口，公开资料未展开审核细节。 | 更换邮箱后 24 小时不能提现。 | 正常链路可参考“旧邮箱 + 新邮箱 + 2FA”。 |
+| Bybit | 更换邮箱需 Google 2FA，并验证旧邮箱、新邮箱及已绑定手机号。 | 丢失邮箱 / 手机号 / Google Authenticator 时进入验证问题处理，审核后由客服协助。 | 更换后提现和 P2P 禁用 24 小时；7 天内不能再次更换 / 解绑邮箱；App 和 Web 自动断开登录。 | 可参考多因子验证、冷却期和强制重新登录策略。 |
+| Coinbase | Web 端修改邮箱，需要 2-step verification，并验证新邮箱。 | 丢失邮箱或 2FA 时走 account recovery，可能需要 ID 或 trusted contacts。 | 恢复后可能 24 小时不能转出资金。 | 邮箱不可用应走账户恢复，不建议直接跳过。 |
+| Crypto.com | App 内修改邮箱，需要当前注册邮箱可访问、App passcode、旧邮箱确认和新邮箱验证。 | 丢失注册邮箱访问权限时联系 Customer Support。 | 公开文档未明确邮箱更换后提现限制。 | 支持 AIX V1 的旧邮箱必验、不可用走客服方案。 |
+| Kraken | 修改邮箱需旧邮箱 authorization code 和新邮箱 confirmation code。 | 旧邮箱丢失时提交支持工单，选择 lost access to email address，并提供可访问的新邮箱及账户问题回答。 | 公开文档未明确邮箱更换后提现锁。 | 双邮箱验证码 + 支持工单是稳妥方案。 |
+| Gemini | 修改邮箱需当前密码、2FA 和新邮箱 activation code。 | 注册邮箱错误、忘记邮箱或无法访问账户邮箱时联系 Customer Support。 | 更换邮箱后 crypto withdrawals 持有 72 小时。 | 邮箱更换后可考虑更长的资金冷却窗口。 |
+| Bitget | 绑定新邮箱，并验证当前邮箱 / 手机号、SMS 或 Google Authenticator。 | 丢失验证方式时走 Account Recovery，可能需要活体 / 视频、ID、自拍、存款记录。 | 更换邮箱后提现和 P2P 禁用 24 小时。 | 后续可做二期自助恢复，但 V1 可先走人工。 |
+| KuCoin | 更换邮箱需当前邮箱验证码和新邮箱验证码。 | 旧邮箱不可用时走 Reset Security settings，提交照片材料，审核约 48 小时。 | 安全项更新后提现暂停 24 小时。 | 旧邮箱不可用不应自助跳过，应走审核。 |
+| Gate.io | 可在 Security 内修改邮箱；旧邮箱可用时可即时完成。 | 旧邮箱不可用时通过 Security Reset / Unable to verify / Reset verification method 等恢复入口处理。 | 公开文档未明确邮箱更换后提现锁。 | 恢复路径拆分细，适合后续二期设计。 |
+
+调研归纳：Web3 / 金融类平台普遍不会只依赖新邮箱验证；正常更换通常要求旧邮箱、当前账户认证、2FA、新邮箱验证中的多项组合。旧邮箱不记得或不可用时，主流做法是客服 / 人工审核 / 账户恢复，而不是自助跳过。多数平台会在邮箱变更后对提现、转账、P2P 等资金敏感操作设置 24–72 小时限制。
 
 ## 5. 安全参考结论
 
