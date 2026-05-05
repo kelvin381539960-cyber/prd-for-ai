@@ -15,7 +15,6 @@ depends_on:
   - account/_index
   - integrations/dtc
   - integrations/aai
-  - _meta/writing-standard
 ---
 
 # Security 身份认证模块
