@@ -3,14 +3,14 @@ module: common
 feature: common-index
 version: "3.0"
 status: active
-source_doc: knowledge-base/common/dtc.md；knowledge-base/common/aai.md；knowledge-base/common/walletconnect.md；knowledge-base/common/errors.md；knowledge-base/common/notification.md；knowledge-base/common/faq.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/_system-boundary.md
+source_doc: knowledge-base/integrations/dtc/_index.md；knowledge-base/integrations/aai/_index.md；knowledge-base/integrations/walletconnect/_index.md；knowledge-base/common/errors.md；knowledge-base/common/notification.md；knowledge-base/common/faq.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/_system-boundary.md
 source_section: runtime common integration boundary；external dependency boundary；ALL-GAP usage
 last_updated: 2026-05-02
 owner: 吴忆锋
 depends_on:
-  - common/dtc
-  - common/aai
-  - common/walletconnect
+  - integrations/dtc
+  - integrations/aai
+  - integrations/walletconnect
   - common/errors
   - common/notification
   - common/faq
@@ -38,9 +38,9 @@ Common 只沉淀：
 | 文件 | 状态 | 目标 | 备注 |
 |---|---|---|---|
 | `common/_index.md` | active | 建立公共能力索引与边界 | 当前文件 |
-| `common/dtc.md` | active | 记录 AIX 对 DTC 的外部依赖边界 | DTC 是供应商系统，不维护其内部逻辑 |
-| `common/aai.md` | active | 记录 AIX 对 AAI 的外部依赖边界 | AAI 是供应商能力，不维护其内部逻辑 |
-| `common/walletconnect.md` | active | 汇总 WalletConnect 入金相关公共能力边界 | 与 Wallet Deposit 配合读取 |
+| `integrations/dtc/_index.md` | active | 记录 AIX 对 DTC 的外部依赖边界 | DTC 是供应商系统，不维护其内部逻辑 |
+| `integrations/aai/_index.md` | active | 记录 AIX 对 AAI 的外部依赖边界 | AAI 是供应商能力，不维护其内部逻辑 |
+| `integrations/walletconnect/_index.md` | active | 汇总 WalletConnect 入金相关公共能力边界 | 与 Wallet Deposit 配合读取 |
 | `common/errors.md` | active | 汇总错误码、失败处理、告警、用户提示边界 | 不自行补完整错误码表 |
 | `common/notification.md` | active | 汇总 push / 站内信通知规则边界 | 不把通知写成必然到账 |
 | `common/faq.md` | active | 汇总 APP 通用 FAQ 与场景 FAQ | 只使用原文或已确认口径 |
@@ -60,11 +60,11 @@ Common 只沉淀：
 
 | 事实 | 来源 | Common 处理 |
 |---|---|---|
-| Card Transaction Notify 已明确 | Card Transaction Flow | 可在 `common/dtc.md` 中作为 DTC Webhook 依赖引用 |
-| `D-REQUEST-ID` 是 DTC API 请求唯一标识 Header | DTC Card Issuing / Card Transaction Flow | 可在 `common/dtc.md` 中记录；不得写成幂等键 |
+| Card Transaction Notify 已明确 | Card Transaction Flow | 可在 `integrations/dtc/_index.md` 中作为 DTC Webhook 依赖引用 |
+| `D-REQUEST-ID` 是 DTC API 请求唯一标识 Header | DTC Card Issuing / Card Transaction Flow | 可在 `integrations/dtc/_index.md` 中记录；不得写成幂等键 |
 | Transfer Balance to Wallet 请求字段为 `cardId` / `amount` | DTC Card Issuing / Card Transaction Flow | 仅作为 AIX 依赖的 DTC Card 能力，不重写业务流程 |
 | Wallet 交易 `id`、`transactionId`、`state` 已确认 | DTC Wallet OpenAPI / Transaction History | 可作为 AIX 依赖的 DTC Wallet 字段 |
-| Deposit 包含 GTR / WalletConnect | Wallet Deposit | 可在 `common/walletconnect.md` 中聚焦 WC 边界 |
+| Deposit 包含 GTR / WalletConnect | Wallet Deposit | 可在 `integrations/walletconnect/_index.md` 中聚焦 WC 边界 |
 | Send / Swap deferred | Wallet / Transaction 模块事实 | Common 中不得把其写成 active 能力 |
 
 ## 5. Deferred gaps 隔离
@@ -93,9 +93,9 @@ Common 只沉淀：
 
 ## 7. 来源引用
 
-- (Ref: knowledge-base/common/dtc.md)
-- (Ref: knowledge-base/common/aai.md)
-- (Ref: knowledge-base/common/walletconnect.md)
+- (Ref: knowledge-base/integrations/dtc/_index.md)
+- (Ref: knowledge-base/integrations/aai/_index.md)
+- (Ref: knowledge-base/integrations/walletconnect/_index.md)
 - (Ref: knowledge-base/common/errors.md)
 - (Ref: knowledge-base/common/notification.md)
 - (Ref: knowledge-base/common/faq.md)
