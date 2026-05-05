@@ -13,10 +13,10 @@ depends_on:
   - wallet/_index
   - wallet/balance
   - transaction/history
-  - common/walletconnect
+  - integrations/walletconnect
   - common/notification
   - common/errors
-  - common/dtc
+  - integrations/dtc
   - changelog/knowledge-gaps
 ---
 
