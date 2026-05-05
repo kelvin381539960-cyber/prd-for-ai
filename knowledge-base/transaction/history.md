@@ -4,7 +4,7 @@ feature: history
 version: "2.0"
 status: active
 doc_type: ai-readable-prd-translation
-source_doc: IMPLEMENTATION_PLAN.md；DTC接口文档/DTC Wallet OpenAPI Document20260126 (1).docx；knowledge-base/transaction/status-model.md；knowledge-base/transaction/detail.md；knowledge-base/card/card-transaction-flow.md；knowledge-base/wallet/balance.md；knowledge-base/wallet/deposit.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-02
+source_doc: IMPLEMENTATION_PLAN.md；DTC接口文档/DTC Wallet OpenAPI Document20260126 (1).docx；knowledge-base/transaction/status-model.md；knowledge-base/transaction/detail.md；knowledge-base/card/card-management.md；knowledge-base/wallet/balance.md；knowledge-base/wallet/deposit.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-02
 source_section: Wallet Transaction History merged into Transaction History；Wallet Balance；Wallet Deposit；Search Balance History / 4.2.4；Appendix ActivityType；Card Transaction Flow；ALL-GAP 总表
 last_updated: 2026-05-04
 owner: 吴忆锋
@@ -386,6 +386,6 @@ Transaction History 本身不新增通知规则，只引用 Deposit / Notificati
 - (Ref: knowledge-base/transaction/detail.md / Transaction Detail)
 - (Ref: knowledge-base/wallet/balance.md / Wallet Balance)
 - (Ref: knowledge-base/wallet/deposit.md / Wallet Deposit)
-- (Ref: knowledge-base/card/card-transaction-flow.md / Card History)
+- (Ref: knowledge-base/card/card-management.md / Card History)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP 总表)
 - (Ref: 用户确认结论 / 2026-05-02 / Wallet Transaction History 合并进 Transaction History)
