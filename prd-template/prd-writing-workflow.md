@@ -1,6 +1,6 @@
 ---
 type: prd-writing-workflow
-version: "1.0"
+version: "1.1"
 status: active
 source_doc: AGENTS.md；prd-template/standard-prd-template.md；requirements/_index.md；knowledge-base/_ai-query-router.md；knowledge-base/_system-boundary.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-05
 source_section: AI PRD 写作流程；标准 PRD 模板；requirements 使用规则；知识库路由；系统边界；ALL-GAP 使用规则
@@ -71,7 +71,15 @@ requirements/YYYY-MM/<module>/<feature-b>.md
 
 模块 `_index.md` 只描述 PRD 边界、文件映射和相互引用关系，不得写成一个合并版 PRD。
 
-## 4. 工作流阶段
+## 4. Git 写入确认规则
+
+在用户确认方案 / brief 之前，AI 只能读取仓库文件并在聊天中输出方案草稿、brief 草稿或待确认问题，不得创建、更新、删除、移动任何 Git 文件。
+
+只有当用户明确确认方案 / brief 后，才允许将 brief、PRD、review 或模块 `_index.md` 写入 Git。
+
+如果用户只输入原始需求，默认先输出待确认方案，不直接写入 Git。用户确认的表达可以是“确认方案”“按这个方案继续”“可以写入 Git”“生成正式 PRD”等明确授权。
+
+## 5. 工作流阶段
 
 ### Phase 1 — 需求接收与来源路由
 
@@ -88,7 +96,7 @@ requirements/YYYY-MM/<module>/<feature-b>.md
 
 ### Phase 2 — 先写 Brief
 
-写 PRD 正文前，必须先创建或提出 brief。
+写 PRD 正文前，必须先在聊天中提出 brief 草稿。用户确认方案 / brief 前，不得将 brief 写入 Git。
 
 Brief 路径：
 
@@ -122,7 +130,7 @@ Brief 正文应包含：
 6. 目标 PRD 路径。
 7. 需要用户确认的问题。
 
-用户确认 brief 后，更新为：
+用户确认方案 / brief 后，才允许将 brief 写入 Git，并更新为：
 
 ```yaml
 brief_status: confirmed
@@ -225,7 +233,7 @@ approved
 deprecated
 ```
 
-## 5. 来源与边界规则
+## 6. 来源与边界规则
 
 除非有来源文件支持或用户明确确认，PRD 不得把以下内容写成确认事实：
 
@@ -244,7 +252,7 @@ deprecated
 
 或放入 PRD 的待确认事项章节。
 
-## 6. 写入后的最小回复
+## 7. 写入后的最小回复
 
 创建或更新文件后，最终回复只摘要说明：
 
