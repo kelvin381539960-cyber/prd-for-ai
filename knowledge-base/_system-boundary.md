@@ -3,7 +3,7 @@ module: knowledge-base
 feature: system-boundary
 version: "2.1"
 status: active
-source_doc: knowledge-base/_ai-query-router.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/kyc/account-opening.md；knowledge-base/common/dtc.md；knowledge-base/common/aai.md；knowledge-base/common/walletconnect.md；knowledge-base/common/notification.md；knowledge-base/common/errors.md；knowledge-base/transaction/reconciliation.md；knowledge-base/wallet/deposit.md；knowledge-base/card/card-transaction-flow.md；用户确认结论 2026-05-02
+source_doc: knowledge-base/_ai-query-router.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/kyc/account-opening.md；knowledge-base/integrations/dtc/_index.md；knowledge-base/integrations/aai/_index.md；knowledge-base/integrations/walletconnect/_index.md；knowledge-base/common/notification.md；knowledge-base/common/errors.md；knowledge-base/transaction/reconciliation.md；knowledge-base/wallet/deposit.md；knowledge-base/card/card-transaction-flow.md；用户确认结论 2026-05-02
 source_section: runtime system responsibility boundary；Account Opening / KYC；AIX / KUN / AAI / DTC Master Sub Account / WalletAccount；external dependency boundary；ALL-GAP usage rules
 last_updated: 2026-05-02
 owner: 吴忆锋
@@ -77,7 +77,7 @@ AIX 不维护：
 - DTC Master / Sub Account 内部实现。
 - 与 AIX 页面、状态、通知、错误、对账、开户准入无关的 DTC 字段。
 
-主事实源：`knowledge-base/common/dtc.md`
+主事实源：`knowledge-base/integrations/dtc/_index.md`
 
 ### 5.2 AAI
 
@@ -100,7 +100,7 @@ AIX 不维护：
 
 主事实源：
 
-- `knowledge-base/common/aai.md`
+- `knowledge-base/integrations/aai/_index.md`
 - `knowledge-base/kyc/account-opening.md`
 
 ### 5.3 KUN
@@ -145,7 +145,7 @@ AIX 不控制：
 
 主事实源：
 
-- `knowledge-base/common/walletconnect.md`
+- `knowledge-base/integrations/walletconnect/_index.md`
 - `knowledge-base/wallet/deposit.md`
 - `knowledge-base/kyc/account-opening.md`
 
@@ -356,9 +356,9 @@ AIX 不得默认：
 | `knowledge-base/_system-boundary.md` | 系统边界，决定哪些内容属于 AIX 责任 |
 | `knowledge-base/changelog/knowledge-gaps.md` | 唯一待确认表 |
 | `knowledge-base/kyc/account-opening.md` | Account Opening / KYC 主事实源 |
-| `knowledge-base/common/dtc.md` | DTC 外部依赖边界细化 |
-| `knowledge-base/common/aai.md` | AAI 外部依赖边界细化 |
-| `knowledge-base/common/walletconnect.md` | WalletConnect 集成边界细化 |
+| `knowledge-base/integrations/dtc/_index.md` | DTC 外部依赖边界细化 |
+| `knowledge-base/integrations/aai/_index.md` | AAI 外部依赖边界细化 |
+| `knowledge-base/integrations/walletconnect/_index.md` | WalletConnect 集成边界细化 |
 | `knowledge-base/common/notification.md` | 通知边界细化 |
 | `knowledge-base/transaction/reconciliation.md` | 资金追踪与对账边界细化 |
 
@@ -377,9 +377,9 @@ AIX 不得默认：
 - (Ref: knowledge-base/_ai-query-router.md / runtime query router)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP 总表)
 - (Ref: knowledge-base/kyc/account-opening.md)
-- (Ref: knowledge-base/common/dtc.md)
-- (Ref: knowledge-base/common/aai.md)
-- (Ref: knowledge-base/common/walletconnect.md)
+- (Ref: knowledge-base/integrations/dtc/_index.md)
+- (Ref: knowledge-base/integrations/aai/_index.md)
+- (Ref: knowledge-base/integrations/walletconnect/_index.md)
 - (Ref: knowledge-base/common/notification.md)
 - (Ref: knowledge-base/common/errors.md)
 - (Ref: knowledge-base/transaction/reconciliation.md)
