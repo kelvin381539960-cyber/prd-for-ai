@@ -70,29 +70,27 @@ sequenceDiagram
     autonumber
     actor 用户
     participant App as AIX App
-    participant Card as Card 服务
-    participant Status as Card Card Management
-    participant Txn as Transaction 服务
-    participant FAQ as FAQ 配置
+    participant Card as 卡服务
+    participant Manage as 卡管理规则
+    participant Transaction as 交易服务
+    participant Content as 内容配置
 
-    用户->>App: 进入 AIX Main / Card Home
-    App->>Card: 查询用户卡片列表和卡基本信息
-    Card->>Status: 按状态归入展示组并判断操作权限
+    用户->>App: 进入 AIX Main 或 Card Home
+    App->>Card: 获取用户卡片与首页展示信息
+    Card->>Manage: 按卡状态判断展示分组和可用操作
     alt 无卡或申请失败
-        Card-->>App: 返回默认申卡卡片
+        Card-->>App: 返回申卡引导结果
         App-->>用户: 展示 Apply Now
-    else 审核中
-        Card-->>App: 返回 Under review 卡片
-        App-->>用户: 展示 View Details
-    else 待激活实体卡
-        Card-->>App: 返回物流与激活字段
-        App-->>用户: 展示 Activate card
-    else Active / Suspended
-        Card-->>App: 返回卡面和操作入口
-        App->>Txn: 查询 Recent Transactions
-        Txn-->>App: 返回最近交易或空态
-        App->>FAQ: 查询 Card home FAQ
-        FAQ-->>App: 返回 FAQ
+    else 申卡审核中
+        Card-->>App: 返回审核中展示结果
+        App-->>用户: 展示 Under review 和详情入口
+    else 实体卡待激活
+        Card-->>App: 返回物流和激活入口展示结果
+        App-->>用户: 展示物流进度和 Activate card
+    else 已激活或已冻结
+        Card-->>App: 返回卡面、状态和可用操作
+        App->>Transaction: 获取最近卡交易展示结果
+        App->>Content: 获取 Card Home 帮助内容
         App-->>用户: 展示 Card Home
     end
 ```
@@ -148,7 +146,7 @@ flowchart LR
     Details[Card Details]
     Activation[Activation]
     Sensitive[Card Detail Popup]
-    Card Manage / PIN[Card Manage / PIN Page]
+    CardManagePIN[Card Manage / PIN Page]
     Lock[Lock / Unlock]
     Google[Add to Google Wallet]
     Txn[Card History]
@@ -162,7 +160,7 @@ flowchart LR
     PendingAct -->|Activate card| Activation
     Main -->|Active / Suspended| Active
     Active -->|Card detail| Sensitive
-    Active -->|Set / Change Card Manage / PIN| Card Manage / PIN
+    Active -->|Set / Change PIN| CardManagePIN
     Active -->|Lock / Unlock| Lock
     Active -->|Android only| Google
     Active -->|More Recent Transactions| Txn
