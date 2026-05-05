@@ -3,7 +3,7 @@ module: card
 feature: status-and-operations
 version: "1.0"
 status: active
-source_doc: 历史prd/AIX Card 【manage】模块需求V1.0 .docx；DTC Card Issuing API Document_20260310；knowledge-base/changelog/knowledge-gaps.md；prd-template/standard-prd-template.md
+source_doc: archive/historical-prd/card/AIX Card 【manage】模块需求V1.0 .docx；external-docs/dtc/DTC Card Issuing API Document_20260310 (1).docx；knowledge-base/changelog/knowledge-gaps.md；prd-template/standard-prd-template.md
 source_section: Manage 6.4 / 7.4 / 7.5；DTC Freeze / Unfreeze / Terminate；Standard PRD Template v1.3
 last_updated: 2026-05-05
 owner: 吴忆锋
@@ -248,7 +248,7 @@ flowchart LR
 
 ## 10. 来源引用
 
-- (Ref: 历史prd/AIX Card 【manage】模块需求V1.0 .docx / 6.4 / 7.4 / 7.5 / V1.0)
-- (Ref: DTC Card Issuing API Document_20260310 / Freeze / Unfreeze / Terminate)
+- (Ref: archive/historical-prd/card/AIX Card 【manage】模块需求V1.0 .docx / 6.4 / 7.4 / 7.5 / V1.0)
+- (Ref: external-docs/dtc/DTC Card Issuing API Document_20260310 (1).docx / Freeze / Unfreeze / Terminate)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md)
 - (Ref: prd-template/standard-prd-template.md / v1.3)
