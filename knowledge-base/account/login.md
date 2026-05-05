@@ -3,7 +3,7 @@ module: account
 feature: login
 version: "1.1"
 status: active
-source_doc: "历史prd/AIX Card 注册登录需求V1.0 (2).docx；历史prd/AIX Security 身份认证需求V1.0 (1).docx"
+source_doc: "archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx；archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx"
 source_section: "7.2 登录功能；7.2.3 Navigation Page；7.2.4 Login Page；7.2.4.1 Select Country Page；7.2.5 Biometric登录；7.2.7 Enable BIO Page"
 last_updated: 2026-05-04
 owner: 吴忆锋
@@ -426,13 +426,13 @@ sequenceDiagram
 
 ## 12. 来源引用
 
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0 (2).docx / 7.2 登录功能)
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0 (2).docx / 7.2.3 Navigation Page)
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0 (2).docx / 7.2.4 Login Page)
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0 (2).docx / 7.2.4.1 Select Country Page)
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0 (2).docx / 7.2.5 Biometric登录)
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0 (2).docx / 7.2.7 Enable BIO Page)
-- (Ref: 历史prd/AIX Security 身份认证需求V1.0 (1).docx)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.2 登录功能)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.2.3 Navigation Page)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.2.4 Login Page)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.2.4.1 Select Country Page)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.2.5 Biometric登录)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.2.7 Enable BIO Page)
+- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx)
 - (Ref: knowledge-base/security/global-rules.md)
 - (Ref: knowledge-base/security/biometric-verification.md)
 - (Ref: 用户确认 / 2026-05-03 / Login 文档需要 Mermaid 页面流程图和 sequenceDiagram 时序图；补回 SecurityError label、Enable BIO 到 Identity、失败按 Security / Biometric 规则处理)
