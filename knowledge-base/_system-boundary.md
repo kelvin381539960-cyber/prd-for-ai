@@ -3,7 +3,7 @@ module: knowledge-base
 feature: system-boundary
 version: "2.1"
 status: active
-source_doc: knowledge-base/_ai-query-router.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/kyc/account-opening.md；knowledge-base/integrations/dtc/_index.md；knowledge-base/integrations/aai/_index.md；knowledge-base/integrations/walletconnect/_index.md；knowledge-base/common/notification.md；knowledge-base/common/errors.md；knowledge-base/transaction/reconciliation.md；knowledge-base/wallet/deposit.md；knowledge-base/card/card-management.md；用户确认结论 2026-05-02
+source_doc: knowledge-base/_ai-query-router.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/kyc/account-opening.md；knowledge-base/integrations/dtc/_index.md；knowledge-base/integrations/aai/_index.md；knowledge-base/integrations/walletconnect/_index.md；knowledge-base/common/notification.md；knowledge-base/common/errors.md；knowledge-base/transaction/reconciliation.md；knowledge-base/wallet/deposit.md；knowledge-base/card/transaction.md；用户确认结论 2026-05-02
 source_section: runtime system responsibility boundary；Account Opening / KYC；AIX / KUN / AAI / DTC Master Sub Account / WalletAccount；external dependency boundary；ALL-GAP usage rules
 last_updated: 2026-05-02
 owner: 吴忆锋
@@ -384,5 +384,5 @@ AIX 不得默认：
 - (Ref: knowledge-base/common/errors.md)
 - (Ref: knowledge-base/transaction/reconciliation.md)
 - (Ref: knowledge-base/wallet/deposit.md)
-- (Ref: knowledge-base/card/card-management.md)
+- (Ref: knowledge-base/card/transaction.md)
 - (Ref: 用户确认结论 / 2026-05-02 / 知识库切换为使用态；外部依赖只保留与 AIX 系统设计有关内容；KYC 文件名不应带 wallet)
