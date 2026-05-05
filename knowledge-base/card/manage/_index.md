@@ -3,7 +3,7 @@ module: card
 feature: card-manage-index
 version: "1.0"
 status: active
-source_doc: 历史prd/AIX Card 【manage】模块需求V1.0 .docx；DTC Card Issuing API Document_20260310；knowledge-base/changelog/knowledge-gaps.md
+source_doc: archive/historical-prd/card/AIX Card 【manage】模块需求V1.0 .docx；external-docs/dtc/DTC Card Issuing API Document_20260310 (1).docx；knowledge-base/changelog/knowledge-gaps.md
 source_section: Card Manage module；Manage 6.4 / 7.1 / 7.2 / 7.3 / 7.4 / 7.5 / 8.1
 last_updated: 2026-05-05
 owner: 吴忆锋
@@ -52,12 +52,12 @@ Card Manage 只维护卡管理相关事实，不承接申卡、Card Home、Card 
 1. 不把 Card Transaction 写进 Manage。
 2. 不把全局 Transaction & History 写进 Manage。
 3. 不把 Terminate Card 写成独立 PRD 文件；只作为操作矩阵和待确认边界维护。
-4. 不把旧 `card-management.md` 当作运行态入口。
+4. 不把旧 Card Manage 合并文件 当作运行态入口。
 
 ## 6. 来源引用
 
-- (Ref: 历史prd/AIX Card 【manage】模块需求V1.0 .docx)
-- (Ref: DTC Card Issuing API Document_20260310)
+- (Ref: archive/historical-prd/card/AIX Card 【manage】模块需求V1.0 .docx)
+- (Ref: external-docs/dtc/DTC Card Issuing API Document_20260310 (1).docx)
 - (Ref: knowledge-base/card/manage/status-and-operations.md)
 - (Ref: knowledge-base/card/manage/activation.md)
 - (Ref: knowledge-base/card/manage/sensitive-info.md)
