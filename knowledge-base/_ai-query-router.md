@@ -3,7 +3,7 @@ module: knowledge-base
 feature: ai-query-router
 version: "2.1"
 status: active
-source_doc: knowledge-base/_system-boundary.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/wallet/_index.md；knowledge-base/card/_index.md；knowledge-base/transaction/_index.md；knowledge-base/kyc/_index.md；knowledge-base/common/_index.md；knowledge-base/kyc/account-opening.md；用户确认结论 2026-05-02；用户确认结论 2026-05-03
+source_doc: knowledge-base/_system-boundary.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/wallet/_index.md；knowledge-base/home/_index.md；knowledge-base/card/_index.md；knowledge-base/transaction/_index.md；knowledge-base/kyc/_index.md；knowledge-base/common/_index.md；knowledge-base/kyc/account-opening.md；用户确认结论 2026-05-02；用户确认结论 2026-05-03
 source_section: runtime AI usage；query routing；fact source rules；system boundary usage；ALL-GAP usage；Account Opening / KYC routing；cross-module dependency routing
 last_updated: 2026-05-03
 owner: 吴忆锋
@@ -76,6 +76,7 @@ AIX 当前知识库覆盖：
 
 | 模块 | 范围 |
 |---|---|
+| Home | App Home 首页与跨模块入口 |
 | Wallet | Balance、Deposit |
 | Card | Card Application、Card Home、Card Management |
 | Transaction | History、Detail、Status Model、Reconciliation |
@@ -99,15 +100,15 @@ AIX 当前知识库覆盖：
 | 用户问题类型 | 必读文件 | 需要时再读 | 不应默认读 |
 |---|---|---|---|
 | 当前知识库如何使用 | `_ai-query-router.md` | 模块 `_index.md` | `IMPLEMENTATION_PLAN.md` |
+| App Home / 首页入口 | `home/app-home.md` | `card/card-home.md`、`wallet/_index.md`、`transaction/_index.md` | 官网 / Marketing Home |
 | 系统责任 / 外部边界 | `_system-boundary.md` | 对应业务事实文件、`knowledge-gaps.md` | 供应商完整原文 |
 | 待确认项 / 缺口 | `changelog/knowledge-gaps.md` | 对应模块事实文件 | 模块旧 checklist |
-| Deposit 总逻辑 | `wallet/deposit.md` | `integrations/dtc/_index.md`、`integrations/walletconnect/_index.md`、`common/notification.md`、`common/errors.md`、`_system-boundary.md` | `wallet/deposit.md` |
+| Deposit 总逻辑 | `wallet/deposit.md` | `integrations/dtc/_index.md`、`integrations/walletconnect/_index.md`、`common/notification.md`、`common/errors.md`、`_system-boundary.md` | 旧 Receive / Send / Swap 文件 |
 | GTR / Exchange 地址充值 | `wallet/deposit.md` | `transaction/history.md`、`integrations/dtc/_index.md`、`knowledge-gaps.md`、`_system-boundary.md` | `integrations/walletconnect/_index.md` |
 | WalletConnect 充值 | `wallet/deposit.md`、`integrations/walletconnect/_index.md` | `integrations/dtc/_index.md`、`common/errors.md`、`common/notification.md`、`knowledge-gaps.md`、`_system-boundary.md` | DTC 完整接口说明书 |
 | WalletConnect 白名单 / 授权 | `integrations/walletconnect/_index.md`、`wallet/deposit.md` | `integrations/dtc/_index.md`、`knowledge-gaps.md`、`_system-boundary.md` | migrated-reference 文件 |
 | Risk Withheld / under review | `wallet/deposit.md`、`integrations/dtc/_index.md`、`common/notification.md` | `transaction/status-model.md`、`knowledge-gaps.md`、`_system-boundary.md` | 直接映射 Wallet state |
 | Wallet Balance | `wallet/balance.md` | `transaction/history.md`、`transaction/status-model.md`、`knowledge-gaps.md` | Card 文件 |
-| Receive | `wallet/deposit.md` | `wallet/deposit.md`、`wallet/balance.md`、`knowledge-gaps.md`、`_system-boundary.md` | 直接复用 Deposit 规则 |
 | Wallet 交易历史 | `transaction/history.md` | `wallet/balance.md`、`transaction/status-model.md`、`knowledge-gaps.md` | `wallet/transaction-history.md` |
 | Wallet 交易详情 | `transaction/detail.md` | `transaction/history.md`、`transaction/status-model.md`、`knowledge-gaps.md` | Card Detail 规则直接套用 |
 | Card 交易展示 | `card/card-management.md` | `transaction/detail.md`、`transaction/history.md`、`common/notification.md` | Wallet History 规则直接套用 |
@@ -180,7 +181,7 @@ AI 使用本知识库时不得：
 13. 为了回答问题自行补页面、接口、字段、状态、文案。
 14. 将外部系统内部逻辑写成 AIX 需求。
 15. 把 `D-SUB-ACCOUNT-ID` 与 WalletAccount.clientId 写死为完全等价。
-16. 把 KYC Approved 写成 Wallet / Deposit / WalletConnect / Receive 全部可用。
+16. 把 KYC Approved 写成 Wallet / Deposit / WalletConnect 全部可用。
 17. 把 `kyc/wallet-kyc.md` 当作当前 KYC 主事实源。
 
 ## 9. 标准回答结构
@@ -210,6 +211,7 @@ AI 使用本知识库时不得：
 - (Ref: knowledge-base/_system-boundary.md / system-boundary)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP 总表)
 - (Ref: knowledge-base/wallet/_index.md)
+- (Ref: knowledge-base/home/_index.md)
 - (Ref: knowledge-base/card/_index.md)
 - (Ref: knowledge-base/transaction/_index.md)
 - (Ref: knowledge-base/kyc/_index.md)
