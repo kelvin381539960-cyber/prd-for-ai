@@ -3,7 +3,7 @@ module: kyc
 feature: account-opening
 version: "1.2"
 status: active
-source_doc: 历史prd/AIX WALLET 钱包开户KYC需求V1.0 (1).docx；DTC接口文档/Master sub account 设计方案 (2).docx；DTC Wallet OpenAPI Document20260126（本轮未核验，仅保留历史来源提示）；knowledge-base/integrations/aai/_index.md；knowledge-base/integrations/dtc/_index.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-02
+source_doc: archive/historical-prd/kyc/AIX WALLET 钱包开户KYC需求V1.0 (1).docx；external-docs/dtc/Master sub account 设计方案 (2).docx；external-docs/dtc/DTC Wallet OpenAPI Document20260126 (1).docx（本轮未核验，仅保留历史来源提示）；knowledge-base/integrations/aai/_index.md；knowledge-base/integrations/dtc/_index.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-02
 source_section: AIX Wallet Account Opening & KYC；KYC 状态机；开户页面逻辑；DTC KYC API；Master / Sub Account；D-SUB-ACCOUNT-ID；POA Upload；错误码映射；标准 PRD 模板
 last_updated: 2026-05-04
 owner: 吴忆锋
@@ -844,8 +844,8 @@ poa success
 
 ## 12. 来源引用
 
-- (Ref: 历史prd/AIX WALLET 钱包开户KYC需求V1.0 (1).docx / 需求变更日志 / 国家线 / 6.2 KYC 状态机 / 7.2 开户页面逻辑 / 8 外部接口依赖 / 9 接口错误码映射 / 10 待确认事项)
-- (Ref: DTC接口文档/Master sub account 设计方案 (2).docx / KYC 流程 / DTC API / Master Account / Sub Account / D-SUB-ACCOUNT-ID / POA 文件上传流程 / 失败原因)
+- (Ref: archive/historical-prd/kyc/AIX WALLET 钱包开户KYC需求V1.0 (1).docx / 需求变更日志 / 国家线 / 6.2 KYC 状态机 / 7.2 开户页面逻辑 / 8 外部接口依赖 / 9 接口错误码映射 / 10 待确认事项)
+- (Ref: external-docs/dtc/Master sub account 设计方案 (2).docx / KYC 流程 / DTC API / Master Account / Sub Account / D-SUB-ACCOUNT-ID / POA 文件上传流程 / 失败原因)
 - (Ref: DTC Wallet OpenAPI Document20260126 / WalletConnect Token / D-SUB-ACCOUNT-ID / WalletAccount：本轮未上传，相关内容仅保留历史来源提示，不作为本轮核验事实)
 - (Ref: prd-template/standard-prd-template.md / 标准 PRD 模板)
 - (Ref: knowledge-base/integrations/aai/_index.md)
