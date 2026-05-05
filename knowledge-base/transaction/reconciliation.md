@@ -3,7 +3,7 @@ module: transaction
 feature: reconciliation
 version: "1.1"
 status: active
-source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/card/card-transaction-flow.md；knowledge-base/card/transaction-flow-traceability-checklist.md；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/wallet/deposit.md；knowledge-base/common/dtc.md；用户确认结论 2026-05-01；用户确认结论 2026-05-02
+source_doc: IMPLEMENTATION_PLAN.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/card/card-transaction-flow.md；knowledge-base/card/transaction-flow-traceability-checklist.md；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/wallet/deposit.md；knowledge-base/integrations/dtc/_index.md；用户确认结论 2026-05-01；用户确认结论 2026-05-02
 source_section: ALL-GAP P0；Card Transaction Flow v1.3；Traceability Checklist migrated-reference；Wallet Transaction History merged；Deposit / GTR / WalletConnect；资金追踪链路
 last_updated: 2026-05-02
 owner: 吴忆锋
@@ -13,7 +13,7 @@ depends_on:
   - card/card-transaction-flow
   - card/transaction-flow-traceability-checklist
   - wallet/deposit
-  - common/dtc
+  - integrations/dtc
   - changelog/knowledge-gaps
 ---
 
@@ -118,6 +118,6 @@ flowchart LR
 - (Ref: knowledge-base/transaction/history.md / v1.3)
 - (Ref: knowledge-base/transaction/detail.md / v1.2)
 - (Ref: knowledge-base/wallet/deposit.md / v1.6)
-- (Ref: knowledge-base/common/dtc.md)
+- (Ref: knowledge-base/integrations/dtc/_index.md)
 - (Ref: 用户确认结论 / 2026-05-01 / Card 归集相关事实)
 - (Ref: 用户确认结论 / 2026-05-02 / ALL-GAP 唯一总表与无损迁移规则)
