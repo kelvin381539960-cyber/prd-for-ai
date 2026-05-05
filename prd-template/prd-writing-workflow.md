@@ -235,7 +235,7 @@ brief_status: skipped_questions_confirmed
 
 ### Phase 4 — 功能粒度检查
 
-使用 `prd-template/standard-prd-template.md` 第 1 章判断：当前请求是一个独立功能，还是多个独立功能。
+根据目标、触发条件、用户、页面、业务结果、责任方、状态模型或验收标准判断：当前请求是一个独立功能，还是多个独立功能。
 
 当目标、触发条件、用户、页面、业务结果、责任方、状态模型或验收标准不同时，应拆成多个 PRD。
 
@@ -351,6 +351,8 @@ deprecated
 - 明确、稳定、可复用的 PRD 写作偏好，可以直接写入 `prd-template/prd-writing-preferences.md`。
 - 不确定是否长期适用的偏好，需要先询问用户。
 - 单个业务需求结论只写入对应 PRD，不写入长期偏好文件。
+- 如果经验教训总结出需要调整 PRD 模板，AI 必须主动询问用户是否修改 `prd-template/standard-prd-template.md`。
+- 用户明确确认后，才允许修改 `prd-template/standard-prd-template.md`。
 - 模板结构变化写入 `prd-template/standard-prd-template.md`；写作偏好和经验教训写入 `prd-template/prd-writing-preferences.md`。
 
 ## 6. 来源与边界规则
