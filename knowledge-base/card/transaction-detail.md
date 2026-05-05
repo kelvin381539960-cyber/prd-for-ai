@@ -1,7 +1,7 @@
 ---
 module: card
 feature: card-transaction-detail
-version: "1.0"
+version: "1.1"
 status: active
 source_doc: 历史prd/AIX APP V1.0【Transaction & History】 (1).docx；knowledge-base/card/card-home.md；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/status-model.md；knowledge-base/changelog/knowledge-gaps.md；prd-template/standard-prd-template.md
 source_section: 7.1 全量交易记录 Transaction；7.2 卡交易列表 Card History；7.3 卡交易详情 Card Transaction Details；8.1 Transaction History of Card；8.2 Card Transaction Detail Inquiry；Standard PRD Template v1.3
@@ -19,7 +19,7 @@ readers: [product, ui, dev, qa, business, ai]
 | 功能名称 | Card Transaction Detail 卡交易列表与详情 |
 | 所属模块 | Card |
 | Owner | 吴忆锋 |
-| 版本 | 1.0 |
+| 版本 | 1.1 |
 | 状态 | Review |
 | 更新时间 | 2026-05-05 |
 | 来源文档 | AIX APP V1.0【Transaction & History】、Standard PRD Template v1.3 |
@@ -65,7 +65,20 @@ readers: [product, ui, dev, qa, business, ai]
 | FAQ 入口 | In Scope | P2 | Confirmed | 根据 Transactions / Transaction Details 场景读取 FAQ |
 | 全量交易聚合 | Out of Scope | P0 | Confirmed | 由 `transaction/history.md` 维护 |
 | Card 资金回退 Wallet | Out of Scope | P0 | Confirmed | 由 `card/transaction.md` 维护 |
-| 状态和类型映射图片表格 | Partial | P0 | Open | 原文为图片 / 电子表格，当前文本提取未展开，需后续核表 |
+| 原文图片 / 电子表格核表 | In Scope | P0 | Open | Type 映射、Status 映射、接口请求 / 响应字段、错误码表属于本文验收前置；当前未展开完整表格，不得视为 Approved |
+
+### 2.5 功能边界与拆分结论
+
+| 相关能力 | 与本文关系 | 当前处理 | 对应文件 / 位置 |
+|---|---|---|---|
+| Card 交易列表 / Card History | 主功能 | 本文展开 | `card/transaction-detail.md` |
+| Card 交易详情 / Transaction Details | 主功能 | 本文展开 | `card/transaction-detail.md` |
+| Card Home Recent Transactions | 前置入口 | 只写入口和展示边界，Home 页面本体不在本文展开 | `card/card-home.md` |
+| Card 交易资金回退 Wallet | 独立后台处理流程 | Out of Scope，只引用 | `card/transaction.md` |
+| 全量交易历史 / 全局 Transaction 聚合 | 全局交易能力 | Out of Scope，只引用 | `transaction/history.md` |
+| 全局交易状态模型 | 公共状态能力 | Out of Scope，只引用；本文只写 Card 场景展示状态 | `transaction/status-model.md` |
+| 交易对账 / ID 关联 | 对账能力 | Out of Scope，只引用 | `transaction/reconciliation.md`、`knowledge-gaps.md` |
+| 原文图片 / 电子表格核表 | 本文验收前置 | 阻塞 Approved；未补齐前不得宣称字段、状态、错误码完整 | 原始 PRD 图片 / 电子表格 |
 
 ---
 
@@ -324,9 +337,9 @@ flowchart LR
 
 | 问题 | 影响范围 | 当前处理 | 是否阻塞验收 | 建议确认人 |
 |---|---|---|---|---|
-| 原文图片 / 电子表格中的完整 Type 映射、Status 映射、接口请求 / 响应字段尚未展开 | FE / BE / QA | 阻塞 | 是 | PM / BE / QA |
+| 原文图片 / 电子表格中的完整 Type 映射、Status 映射、接口请求 / 响应字段、错误码表尚未展开 | FE / BE / QA | 阻塞；未补齐前不得进入 Approved | 是 | PM / BE / QA |
 | 详情页 `Denied` 与列表页 `Declined` 是否同一状态展示 | FE / QA | 阻塞 | 是 | PM / BE |
-| Card Transaction Detail Inquiry 的错误码和失败页展示 | FE / BE / QA | 阻塞 | 是 | PM / BE / QA |
+| Card Transaction Detail Inquiry 的错误码和失败页展示 | FE / BE / QA | 阻塞；需从原文图片 / 表格补齐 | 是 | PM / BE / QA |
 | Card Home Recent Transactions 查询失败时隐藏模块、展示空态还是 Toast | Card Home / QA | 不阻塞 | 否 | PM / QA |
 | 单卡时 Card Selector 是否展示下拉箭头 | FE / Design | 不阻塞 | 否 | PM / Design |
 | Merchant name 缺失时列表 / 详情页展示规则 | FE / QA | 不阻塞 | 否 | PM / QA |
@@ -338,7 +351,19 @@ flowchart LR
 
 ## 9. 验收标准 / 测试场景
 
-### 9.1 验收标准
+### 9.1 验收前置
+
+本 PRD 当前为 Review 状态。进入 Approved 前，必须补齐并核对原文图片 / 电子表格中的以下内容：
+
+1. Card 交易 Type 完整映射。
+2. Card 交易 Status 完整映射。
+3. Transaction History of Card 请求 / 响应字段。
+4. Card Transaction Detail Inquiry 请求 / 响应字段。
+5. Card Transaction Detail Inquiry 错误码与失败页展示。
+
+未补齐前，本文只能作为 Card 交易列表与详情的结构化草案，不得作为完整验收基线。
+
+### 9.2 验收标准
 
 | 验收场景 | 验收标准 |
 |---|---|
@@ -349,7 +374,7 @@ flowchart LR
 | 通知 | 不新增通知模板；交易通知由 Notification 模块维护 |
 | 数据 / 埋点 | 交易类型、状态、金额、时间、Transaction ID、Exchange rate 等字段可追踪 |
 
-### 9.2 测试场景矩阵
+### 9.3 测试场景矩阵
 
 | 场景 | 前置条件 | 用户操作 | 预期页面表现 | 预期系统结果 | 是否必测 |
 |---|---|---|---|---|---|
