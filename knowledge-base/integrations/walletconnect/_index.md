@@ -3,7 +3,7 @@ module: integrations
 feature: walletconnect-integration
 version: "1.4"
 status: active
-source_doc: IMPLEMENTATION_PLAN.md；历史prd/AIX Wallet V1.0【Deposit & Send & Swap 】.docx；DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx；knowledge-base/wallet/deposit.md；knowledge-base/integrations/dtc/_index.md；knowledge-base/common/notification.md；knowledge-base/common/errors.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-02
+source_doc: knowledge-base/_kb-ingestion-process.md；archive/historical-prd/wallet/AIX Wallet V1.0【Deposit & Send & Swap 】.docx；external-docs/dtc/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx；knowledge-base/wallet/deposit.md；knowledge-base/integrations/dtc/_index.md；knowledge-base/common/notification.md；knowledge-base/common/errors.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-02
 source_section: AIX Wallet PRD / 6.4 钱包链接充值 Deposit（WalletConnect）；7.4 钱包充值 Wallet Connect；DTC WalletConnect / 1 Request Wallet Connect Token；3 Server-Emitted Events；4 Client-Emitted Events；5 sequence diagram；Wallet Deposit v1.6；ALL-GAP 总表
 last_updated: 2026-05-02
 owner: 吴忆锋
@@ -210,12 +210,12 @@ Risk Withheld 是异步返回，不触发充值结果页；用户查询交易详
 
 ## 11. 来源引用
 
-- (Ref: 历史prd/AIX Wallet V1.0【Deposit & Send & Swap 】.docx / 6.4 钱包链接充值 Deposit（WalletConnect）)
-- (Ref: 历史prd/AIX Wallet V1.0【Deposit & Send & Swap 】.docx / 7.4 钱包充值 Wallet Connect)
-- (Ref: DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 1 Request Wallet Connect Token)
-- (Ref: DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 3 Server-Emitted Events)
-- (Ref: DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 4 Client-Emitted Events)
-- (Ref: DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 5 sequence diagram)
+- (Ref: archive/historical-prd/wallet/AIX Wallet V1.0【Deposit & Send & Swap 】.docx / 6.4 钱包链接充值 Deposit（WalletConnect）)
+- (Ref: archive/historical-prd/wallet/AIX Wallet V1.0【Deposit & Send & Swap 】.docx / 7.4 钱包充值 Wallet Connect)
+- (Ref: external-docs/dtc/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 1 Request Wallet Connect Token)
+- (Ref: external-docs/dtc/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 3 Server-Emitted Events)
+- (Ref: external-docs/dtc/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 4 Client-Emitted Events)
+- (Ref: external-docs/dtc/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 5 sequence diagram)
 - (Ref: knowledge-base/wallet/deposit.md / v1.6)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP 总表)
 - (Ref: 用户确认结论 / 2026-05-02 / WalletConnect 授权有效期、Risk Withheld 结果页边界)
