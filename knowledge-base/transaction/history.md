@@ -73,7 +73,6 @@ AIX 中存在多类交易历史能力，包括 Card History、Card Home Recent T
 | Wallet Transaction History | In Scope | P0 | Confirmed / Partial | Wallet 交易记录与详情能力存在；完整字段见 ALL-GAP |
 | Wallet Search Balance History | In Scope | P0 | Confirmed / Partial | `[GET] /openapi/v1/wallet/balance/history/search` 已确认 |
 | Deposit History | In Scope | P1 | Partial | 只记录可引用事实，不补完整状态机 |
-| Send / Swap History | Out of Scope | - | Deferred | 当前不纳入 active Transaction History |
 | Reconciliation / 对账 | Out of Scope | - | Referenced | 进入 `transaction/reconciliation.md` 与 ALL-GAP |
 
 ---
@@ -370,12 +369,11 @@ Transaction History 本身不新增通知规则，只引用 Deposit / Notificati
 4. Wallet History 也支持 Card History 的 Type / Crypto / Date 筛选规则。
 5. Wallet History 也限制最近 1 年、单次 6 个月。
 6. Wallet History 展示字段与 Card History 完全一致。
-7. Send / Swap History 是当前 active 交易历史。
-8. Deposit / Receive 完整状态机已经闭环。
-9. `FIAT_DEPOSIT` 必然等同 GTR。
-10. `CRYPTO_DEPOSIT` 必然等同 WalletConnect。
-11. Deposit success 必然等同 Wallet `COMPLETED`。
-12. Risk Withheld 必然等同 Wallet `REJECTED`。
+7. Deposit / Receive 完整状态机已经闭环。
+8. `FIAT_DEPOSIT` 必然等同 GTR。
+9. `CRYPTO_DEPOSIT` 必然等同 WalletConnect。
+10. Deposit success 必然等同 Wallet `COMPLETED`。
+11. Risk Withheld 必然等同 Wallet `REJECTED`。
 
 ---
 
