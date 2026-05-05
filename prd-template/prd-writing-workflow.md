@@ -1,9 +1,9 @@
 ---
 type: prd-writing-workflow
-version: "1.4"
+version: "1.5"
 status: active
-source_doc: AGENTS.md；prd-template/standard-prd-template.md；prd-template/prd-writing-preferences.md；requirements/_index.md；knowledge-base/_ai-query-router.md；knowledge-base/_system-boundary.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-05；用户补充确认 2026-05-05 Canvas 优先确认后再写入 Git；用户确认结论 2026-05-06 长期经验沉淀机制
-source_section: AI PRD 写作流程；标准 PRD 模板；PRD 写作长期偏好；requirements 使用规则；知识库路由；系统边界；ALL-GAP 使用规则；调研记录规则；经验教训沉淀规则
+source_doc: AGENTS.md；prd-template/standard-prd-template.md；prd-template/prd-writing-preferences.md；requirements/_index.md；knowledge-base/_ai-query-router.md；knowledge-base/_system-boundary.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-05；用户补充确认 2026-05-05 Canvas 优先确认后再写入 Git；用户确认结论 2026-05-06 长期经验沉淀机制；用户确认结论 2026-05-06 PRD 流程必须先生成 Canvas
+source_section: AI PRD 写作流程；标准 PRD 模板；PRD 写作长期偏好；requirements 使用规则；知识库路由；系统边界；ALL-GAP 使用规则；调研记录规则；经验教训沉淀规则；Canvas 强制入口规则
 last_updated: 2026-05-06
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -15,9 +15,11 @@ readers: [product, ui, dev, qa, business, ai]
 
 本文是工作流说明，不是 PRD 模板，也不是业务事实来源。PRD 正文仍必须使用 `prd-template/standard-prd-template.md`，写作偏好必须参考 `prd-template/prd-writing-preferences.md`。
 
-## 0. Canvas 优先确认规则
+## 0. Canvas 强制入口规则
 
-生成或修改 PRD 相关交付物时，默认必须先在 Canvas 中生成可读草稿，供用户逐段查看和局部修改。
+当用户以「PRD流程：」开头，或提出写新 PRD、修改已有 PRD、拆分 PRD、整理原始需求为 PRD、评审 PRD 等适用本文流程的请求时，AI 的第一步必须是创建 Canvas 草稿承载区。
+
+Canvas 是强制入口，不是优先级、偏好或可替代项。未创建 Canvas 前，AI 不得输出 research、brief、PRD 正文、review、模块 `_index.md` 或其他 PRD 相关交付物草稿。
 
 适用交付物包括但不限于：
 
@@ -27,6 +29,22 @@ readers: [product, ui, dev, qa, business, ai]
 - review；
 - 模块 `_index.md`；
 - 其他与 PRD 写作直接相关、准备写入 `requirements/` 或 `prd-template/` 的文档。
+
+Canvas 创建后的首版内容至少应包含：
+
+1. 标题；
+2. 用户原始需求摘要；
+3. 预计模块与功能名；
+4. 预计输出路径；
+5. 待读取来源清单；
+6. 后续将补充 research / brief / PRD 的占位结构。
+
+在 Canvas 创建成功之前，AI 只能做两件事：
+
+1. 告知用户正在创建 Canvas；
+2. 如果当前环境不支持创建 Canvas，明确说明无法继续执行 PRD 流程。
+
+如果当前环境没有 Canvas 能力，AI 必须中止 PRD 流程，不得用聊天正文、Markdown 文件、DOCX、飞书文档或 GitHub 文件替代 Canvas；除非用户明确修改流程要求，允许使用其他交付物替代。
 
 在用户明确确认 Canvas 草稿通过之前，AI 不得把上述交付物创建、更新、删除或移动到 Git。
 
