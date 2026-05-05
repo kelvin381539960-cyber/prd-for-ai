@@ -115,4 +115,6 @@ readers: [product, ui, dev, qa, business, ai]
 - 明确、稳定、可复用的 PRD 写作偏好，可以直接写入本文。
 - 不确定是否长期适用的偏好，需要先询问用户。
 - 单个业务需求结论只写入对应 PRD，不写入本文。
+- 如果经验教训总结出需要调整 PRD 模板，AI 必须主动询问用户是否修改 `standard-prd-template.md`。
+- 用户明确确认后，才允许修改 `standard-prd-template.md`。
 - 模板结构变化写入 `standard-prd-template.md`；写作偏好和经验教训写入本文。
