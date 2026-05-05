@@ -3,7 +3,7 @@ module: card
 feature: card-home
 version: "1.4"
 status: active
-source_doc: 历史prd/AIX Card V1.0【Application】.pdf；历史prd/AIX APP V1.0【Home】.pdf；历史prd/AIX APP V1.0【Transaction & History】.pdf；历史prd/AIX Card manage模块需求V1.0.docx；prd-template/standard-prd-template.md
+source_doc: archive/historical-prd/card/AIX Card V1.0【Application】.docx；archive/historical-prd/app/AIX APP V1.0【Home】.docx；archive/historical-prd/app/AIX APP V1.0【Transaction & History】 (1).docx；archive/historical-prd/card/AIX Card 【manage】模块需求V1.0 .docx；prd-template/standard-prd-template.md
 source_section: Application 5.2；Home 6.1；Transaction & History 卡交易列表与详情；Manage 6.4 / 7.1；Standard PRD Template v1.3
 last_updated: 2026-05-05
 owner: 吴忆锋
@@ -323,10 +323,10 @@ flowchart LR
 
 ## 10. 来源引用
 
-- (Ref: 历史prd/AIX Card V1.0【Application】.pdf / 5.2 / 6.2 / V1.0)
-- (Ref: 历史prd/AIX APP V1.0【Home】.pdf / 6.1 / V1.0，未随本次附件完整提供)
-- (Ref: 历史prd/AIX APP V1.0【Transaction & History】.pdf / 卡交易列表与详情，未随本次附件完整提供)
-- (Ref: 历史prd/AIX Card manage模块需求V1.0.docx / 6.4 / 7.1 / V1.0)
+- (Ref: archive/historical-prd/card/AIX Card V1.0【Application】.docx / 5.2 / 6.2 / V1.0)
+- (Ref: archive/historical-prd/app/AIX APP V1.0【Home】.docx / 6.1 / V1.0，未随本次附件完整提供)
+- (Ref: archive/historical-prd/app/AIX APP V1.0【Transaction & History】 (1).docx / 卡交易列表与详情，未随本次附件完整提供)
+- (Ref: archive/historical-prd/card/AIX Card 【manage】模块需求V1.0 .docx / 6.4 / 7.1 / V1.0)
 - (Ref: knowledge-base/card/manage/_index.md)
 - (Ref: knowledge-base/card/transaction-detail.md)
 - (Ref: prd-template/standard-prd-template.md / v1.3)
