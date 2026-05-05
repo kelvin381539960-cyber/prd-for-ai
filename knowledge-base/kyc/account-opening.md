@@ -3,15 +3,15 @@ module: kyc
 feature: account-opening
 version: "1.2"
 status: active
-source_doc: 历史prd/AIX WALLET 钱包开户KYC需求V1.0 (1).docx；DTC接口文档/Master sub account 设计方案 (2).docx；DTC Wallet OpenAPI Document20260126（本轮未核验，仅保留历史来源提示）；knowledge-base/common/aai.md；knowledge-base/common/dtc.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-02
+source_doc: 历史prd/AIX WALLET 钱包开户KYC需求V1.0 (1).docx；DTC接口文档/Master sub account 设计方案 (2).docx；DTC Wallet OpenAPI Document20260126（本轮未核验，仅保留历史来源提示）；knowledge-base/integrations/aai/_index.md；knowledge-base/integrations/dtc/_index.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-02
 source_section: AIX Wallet Account Opening & KYC；KYC 状态机；开户页面逻辑；DTC KYC API；Master / Sub Account；D-SUB-ACCOUNT-ID；POA Upload；错误码映射；标准 PRD 模板
 last_updated: 2026-05-04
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
 depends_on:
   - kyc/_index
-  - common/aai
-  - common/dtc
+  - integrations/aai
+  - integrations/dtc
   - common/notification
   - wallet/deposit
   - wallet/balance
@@ -848,8 +848,8 @@ poa success
 - (Ref: DTC接口文档/Master sub account 设计方案 (2).docx / KYC 流程 / DTC API / Master Account / Sub Account / D-SUB-ACCOUNT-ID / POA 文件上传流程 / 失败原因)
 - (Ref: DTC Wallet OpenAPI Document20260126 / WalletConnect Token / D-SUB-ACCOUNT-ID / WalletAccount：本轮未上传，相关内容仅保留历史来源提示，不作为本轮核验事实)
 - (Ref: prd-template/standard-prd-template.md / 标准 PRD 模板)
-- (Ref: knowledge-base/common/aai.md)
-- (Ref: knowledge-base/common/dtc.md)
+- (Ref: knowledge-base/integrations/aai/_index.md)
+- (Ref: knowledge-base/integrations/dtc/_index.md)
 - (Ref: knowledge-base/common/notification.md：Notification 规则待核验)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP-030 ~ ALL-GAP-035 / ALL-GAP-045 / ALL-GAP-046)
 - (Ref: 用户确认结论 / 2026-05-02 / KYC 文件名不应带 wallet；新主事实源改为 account-opening.md)
