@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="0 0 390 844">
+  <style>.bg{fill:#fff}.txt{font:500 15px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#111}.muted{font:500 14px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#9ca3af}.title{font:700 18px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#111}.input{fill:#fff;stroke:#d9dde7;stroke-width:1.4}.btn{fill:#6f46e8}.white{fill:#fff}.ok{fill:#16a34a}</style>
+  <rect class="bg" width="390" height="844" rx="32"/>
+  <text class="txt" x="28" y="42">9:41</text><text class="txt" x="304" y="42">▮▮ Wi‑Fi</text><text class="title" x="28" y="92">‹</text><text class="title" x="195" y="92" text-anchor="middle">输入新邮箱</text>
+  <text class="txt" x="28" y="148">请输入新的邮箱地址</text><rect class="input" x="28" y="168" width="334" height="46" rx="9"/><text class="muted" x="48" y="196">请输入新的邮箱地址</text>
+  <circle class="ok" cx="46" cy="270" r="11"/><text class="white" x="46" y="275" text-anchor="middle" font-size="13">✓</text><text class="txt" x="70" y="275">格式正确（如：xxx@xxx.com）</text>
+  <circle class="ok" cx="46" cy="318" r="11"/><text class="white" x="46" y="323" text-anchor="middle" font-size="13">✓</text><text class="txt" x="70" y="323">与当前邮箱不同</text>
+  <circle class="ok" cx="46" cy="366" r="11"/><text class="white" x="46" y="371" text-anchor="middle" font-size="13">✓</text><text class="txt" x="70" y="371">未被其他账户使用</text>
+  <rect class="btn" x="28" y="730" width="334" height="48" rx="10"/><text class="white" x="195" y="760" text-anchor="middle" font-size="18" font-weight="700">发送验证码</text>
+</svg>

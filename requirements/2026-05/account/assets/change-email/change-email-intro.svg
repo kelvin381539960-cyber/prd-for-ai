@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="0 0 390 844">
+  <style>.bg{fill:#fff}.txt{font:500 15px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#111}.muted{font:500 13px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#6b7280}.title{font:700 18px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#111}.card{fill:#f7f7fa;stroke:#e6e7ee}.info{fill:#eef0ff}.purple{fill:#6f46e8}.btn{fill:#6f46e8}.white{fill:#fff}</style>
+  <rect class="bg" width="390" height="844" rx="32"/>
+  <text class="txt" x="28" y="42">9:41</text><text class="txt" x="304" y="42">▮▮ Wi‑Fi</text><text class="title" x="28" y="92">‹</text><text class="title" x="195" y="92" text-anchor="middle">更换邮箱</text>
+  <rect class="info" x="28" y="128" width="334" height="76" rx="10"/><circle class="purple" cx="52" cy="156" r="11"/><text class="white" x="52" y="161" text-anchor="middle" font-size="14">i</text><text class="txt" x="72" y="154">更换邮箱后，将影响账号登录、找回密码</text><text class="txt" x="72" y="178">以及 Email OTP 验证，请确保新邮箱可用。</text>
+  <rect class="card" x="28" y="230" width="334" height="48" rx="9"/><text class="txt" x="48" y="260">当前邮箱</text><text class="txt" x="205" y="260">2********8@qq.com</text>
+  <text class="txt" x="28" y="326">更换流程共分为以下 3 步：</text>
+  <circle class="purple" cx="52" cy="366" r="13"/><text class="white" x="52" y="371" text-anchor="middle" font-size="13" font-weight="700">1</text><text class="txt" x="82" y="371">验证旧邮箱</text><text class="muted" x="82" y="393">通过旧邮箱接收验证码</text>
+  <circle class="purple" cx="52" cy="436" r="13"/><text class="white" x="52" y="441" text-anchor="middle" font-size="13" font-weight="700">2</text><text class="txt" x="82" y="441">输入新邮箱</text><text class="muted" x="82" y="463">输入并校验新的邮箱地址</text>
+  <circle class="purple" cx="52" cy="506" r="13"/><text class="white" x="52" y="511" text-anchor="middle" font-size="13" font-weight="700">3</text><text class="txt" x="82" y="511">验证新邮箱</text><text class="muted" x="82" y="533">通过新邮箱接收验证码</text>
+  <rect class="btn" x="28" y="730" width="334" height="48" rx="10"/><text class="white" x="195" y="760" text-anchor="middle" font-size="18" font-weight="700">开始更换</text>
+</svg>
