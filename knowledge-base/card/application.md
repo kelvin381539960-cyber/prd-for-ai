@@ -3,7 +3,7 @@ module: card
 feature: application
 version: "1.3"
 status: active
-source_doc: 历史prd/AIX Card V1.0【Application】.pdf；DTC Card Issuing API Document_20260310 (1).pdf；prd-template/standard-prd-template.md
+source_doc: archive/historical-prd/card/AIX Card V1.0【Application】.docx；external-docs/dtc/external-docs/dtc/DTC Card Issuing API Document_20260310 (1).docx (1).docx；prd-template/standard-prd-template.md
 source_section: Application 2.1 / 2.2 / 4 / 5.1 / 6.1 / 6.5-6.7；DTC Card Application；Standard PRD Template v1.3
 last_updated: 2026-05-04
 owner: 吴忆锋
@@ -279,8 +279,8 @@ flowchart LR
 
 ## 10. 来源引用
 
-- (Ref: 历史prd/AIX Card V1.0【Application】.pdf / 1.2 / 2.1 / 2.2 / 4.1 / 4.4 / 4.5 / 5.1 / 5.1.4 / 6.1 / 6.3 / 6.5 / V1.0)
-- (Ref: DTC Card Issuing API Document_20260310 (1).pdf / Card Application / Request Signature / V1.0)
+- (Ref: archive/historical-prd/card/AIX Card V1.0【Application】.docx / 1.2 / 2.1 / 2.2 / 4.1 / 4.4 / 4.5 / 5.1 / 5.1.4 / 6.1 / 6.3 / 6.5 / V1.0)
+- (Ref: external-docs/dtc/external-docs/dtc/DTC Card Issuing API Document_20260310 (1).docx (1).docx / Card Application / Request Signature / V1.0)
 - (Ref: knowledge-base/card/manage/_index.md)
 - (Ref: knowledge-base/security/face-authentication.md)
 - (Ref: prd-template/standard-prd-template.md / v1.3)
