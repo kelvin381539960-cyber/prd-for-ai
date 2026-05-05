@@ -67,24 +67,24 @@ sequenceDiagram
     autonumber
     actor 用户
     participant App as AIX App
-    participant Card as Card 服务
+    participant Card as 卡管理服务
     participant Security as 身份验证服务
-    participant DTC as DTC Card API
+    participant External as 外部发卡能力
 
-    用户->>App: 点击 Card detail
-    App->>Card: 校验卡状态和查看权限
-    alt 不允许查看敏感信息
-        Card-->>App: 返回不允许
-        App-->>用户: 不展示敏感信息入口或提示不可用
-    else 允许查看敏感信息
-        App->>Security: 发起 Face Authentication
-        Security-->>App: 返回认证结果
-        alt 认证失败
-            App-->>用户: 按 Security 规则提示
-        else 认证通过
-            App->>DTC: Get Card Basic Info
-            App->>DTC: Get Card Sensitive Info
-            DTC-->>App: 返回卡基础字段和敏感字段
+    用户->>App: 选择查看卡详情
+    App->>Card: 判断当前卡是否允许查看敏感信息
+    alt 不允许查看
+        Card-->>App: 返回不可查看原因
+        App-->>用户: 不展示入口或提示不可用
+    else 允许查看
+        App->>Security: 发起本人身份验证
+        Security-->>App: 返回验证结果
+        alt 验证失败
+            App-->>用户: 按身份验证规则提示
+        else 验证通过
+            Card->>External: 获取卡片基础信息和敏感信息
+            External-->>Card: 返回可展示的卡片信息
+            Card-->>App: 返回展示结果
             App-->>用户: 展示 Card detail popup
         end
     end
