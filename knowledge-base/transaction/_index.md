@@ -3,7 +3,7 @@ module: transaction
 feature: transaction-index
 version: "2.0"
 status: active
-source_doc: knowledge-base/card/card-management.md；knowledge-base/card/card-management.md；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/status-model.md；knowledge-base/transaction/reconciliation.md；knowledge-base/wallet/balance.md；knowledge-base/wallet/deposit.md；knowledge-base/wallet/deposit.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/_system-boundary.md；用户确认结论 2026-05-02
+source_doc: knowledge-base/card/transaction.md；knowledge-base/card/transaction.md；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/status-model.md；knowledge-base/transaction/reconciliation.md；knowledge-base/wallet/balance.md；knowledge-base/wallet/deposit.md；knowledge-base/wallet/deposit.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/_system-boundary.md；用户确认结论 2026-05-02
 source_section: Transaction 使用态统一层；Wallet Transaction History 合并；Transaction Reconciliation；ALL-GAP 总表
 last_updated: 2026-05-02
 owner: 吴忆锋
@@ -74,8 +74,8 @@ Wallet 当前已确认交易状态字段为 `state`，枚举为：
 
 Card Transaction 相关状态、类型、交易详情字段应优先引用：
 
-- `knowledge-base/card/card-management.md`
-- `knowledge-base/card/card-management.md`
+- `knowledge-base/card/transaction.md`
+- `knowledge-base/card/transaction.md`
 
 Transaction 阶段不得将 Card 状态与 Wallet 状态强行合并为同一枚举。
 
@@ -126,8 +126,8 @@ Transaction 模块不维护独立 checklist。以下问题统一引用 `knowledg
 
 ## 9. 来源引用
 
-- (Ref: knowledge-base/card/card-management.md)
-- (Ref: knowledge-base/card/card-management.md)
+- (Ref: knowledge-base/card/transaction.md)
+- (Ref: knowledge-base/card/transaction.md)
 - (Ref: knowledge-base/transaction/history.md)
 - (Ref: knowledge-base/transaction/detail.md)
 - (Ref: knowledge-base/transaction/status-model.md)
