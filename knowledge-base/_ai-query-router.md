@@ -1,11 +1,11 @@
 ---
 module: knowledge-base
 feature: ai-query-router
-version: "2.1"
+version: "2.2"
 status: active
 source_doc: knowledge-base/_system-boundary.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/wallet/_index.md；knowledge-base/home/_index.md；knowledge-base/card/_index.md；knowledge-base/transaction/_index.md；knowledge-base/kyc/_index.md；knowledge-base/common/_index.md；knowledge-base/kyc/account-opening.md；用户确认结论 2026-05-02；用户确认结论 2026-05-03
 source_section: runtime AI usage；query routing；fact source rules；system boundary usage；ALL-GAP usage；Account Opening / KYC routing；cross-module dependency routing
-last_updated: 2026-05-03
+last_updated: 2026-05-05
 owner: 吴忆锋
 ---
 
@@ -78,7 +78,7 @@ AIX 当前知识库覆盖：
 | 模块 | 范围 |
 |---|---|
 | Home | App Home 首页与跨模块入口 |
-| Wallet | Balance、Deposit |
+| Wallet | Assets、Deposit |
 | Card | Card Application、Card Home、Card Manage、Card Transaction、Card Transaction Detail |
 | Transaction | History、Detail、Status Model、Reconciliation |
 | KYC | Account Opening / KYC 开户、身份认证、Sub Account、业务准入边界 |
@@ -89,7 +89,7 @@ AIX 当前知识库覆盖：
 
 | 能力 | 当前状态 | 使用规则 |
 |---|---|---|
-| Wallet Balance | active | 读取 `wallet/balance.md` |
+| Wallet Assets / My Assets | active | 读取 `wallet/assets.md` |
 | Wallet Deposit | active | 读取 `wallet/deposit.md`；包含 GTR / Exchange 与 WalletConnect / Self-custodial Wallet |
 | Account Opening / KYC | active | 主事实源为 `kyc/account-opening.md` |
 | Wallet Transaction History | active | 主事实源为 `transaction/history.md` |
@@ -111,15 +111,15 @@ AIX 当前知识库覆盖：
 | WalletConnect 充值 | `wallet/deposit.md`、`integrations/walletconnect/_index.md` | `integrations/dtc/_index.md`、`common/errors.md`、`common/notification.md`、`knowledge-gaps.md`、`_system-boundary.md` | DTC 完整接口说明书 |
 | WalletConnect 白名单 / 授权 | `integrations/walletconnect/_index.md`、`wallet/deposit.md` | `integrations/dtc/_index.md`、`knowledge-gaps.md`、`_system-boundary.md` | migrated-reference 文件 |
 | Risk Withheld / under review | `wallet/deposit.md`、`integrations/dtc/_index.md`、`common/notification.md` | `transaction/status-model.md`、`knowledge-gaps.md`、`_system-boundary.md` | 直接映射 Wallet state |
-| Wallet Balance | `wallet/balance.md` | `transaction/history.md`、`transaction/status-model.md`、`knowledge-gaps.md` | Card 文件 |
-| Wallet 交易历史 | `transaction/history.md` | `wallet/balance.md`、`transaction/status-model.md`、`knowledge-gaps.md` | `wallet/transaction-history.md` |
+| Wallet Assets / My Assets | `wallet/assets.md` | `transaction/history.md`、`transaction/status-model.md`、`knowledge-gaps.md` | Card 文件 |
+| Wallet 交易历史 | `transaction/history.md` | `wallet/assets.md`、`transaction/status-model.md`、`knowledge-gaps.md` | `wallet/transaction-history.md` |
 | Wallet 交易详情 | `transaction/detail.md` | `transaction/history.md`、`transaction/status-model.md`、`knowledge-gaps.md` | Card Detail 规则直接套用 |
 | Card 交易展示 | `card/transaction-detail.md` | `transaction/detail.md`、`transaction/history.md`、`common/notification.md` | Wallet History 规则直接套用 |
 | Card refund / reversal / Top-up / deposit 资金回退 | `card/transaction.md` | `transaction/reconciliation.md`、`common/errors.md`、`knowledge-gaps.md`、`_system-boundary.md` | `wallet/deposit.md` |
 | 资金追踪 / 对账 / ID 串联 | `transaction/reconciliation.md` | `card/transaction-detail.md`、`transaction/history.md`、`transaction/detail.md`、`knowledge-gaps.md`、`_system-boundary.md` | 旧 checklist |
 | Transaction 状态模型 | `transaction/status-model.md` | `transaction/history.md`、`transaction/detail.md`、`knowledge-gaps.md` | 强行合并 Card / Wallet 状态 |
 | Account Opening / KYC / 开户准入 | `kyc/account-opening.md` | `integrations/aai/_index.md`、`integrations/dtc/_index.md`、`common/notification.md`、`knowledge-gaps.md`、`_system-boundary.md` | `kyc/wallet-kyc.md` |
-| DTC Master / Sub Account / D-SUB-ACCOUNT-ID | `kyc/account-opening.md`、`integrations/dtc/_index.md` | `wallet/deposit.md`、`integrations/walletconnect/_index.md`、`wallet/balance.md`、`knowledge-gaps.md`、`_system-boundary.md` | DTC 完整供应商说明书 |
+| DTC Master / Sub Account / D-SUB-ACCOUNT-ID | `kyc/account-opening.md`、`integrations/dtc/_index.md` | `wallet/deposit.md`、`integrations/walletconnect/_index.md`、`wallet/assets.md`、`knowledge-gaps.md`、`_system-boundary.md` | DTC 完整供应商说明书 |
 | AAI 外部依赖 | `integrations/aai/_index.md` | `kyc/account-opening.md`、`knowledge-gaps.md`、`_system-boundary.md` | AAI 完整供应商说明 |
 | DTC 外部依赖 | `integrations/dtc/_index.md` | 对应业务事实文件、`knowledge-gaps.md`、`_system-boundary.md` | DTC 完整接口说明书 |
 | Notification / Push / 站内信 | `common/notification.md` | `wallet/deposit.md`、`card/transaction.md`、`kyc/account-opening.md`、`knowledge-gaps.md`、`_system-boundary.md` | 用业务流程文件替代通知文件 |
