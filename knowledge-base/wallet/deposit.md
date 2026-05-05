@@ -4,7 +4,7 @@ feature: deposit
 version: "2.0"
 status: active
 doc_type: ai-readable-prd-translation
-source_doc: 历史prd/AIX Wallet V1.0【Deposit & Send & Swap 】.docx；DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx；DTC Wallet OpenAPI Documentation；[2025-11-25] AIX+Notification（push及站内信）.docx；knowledge-base/changelog/knowledge-gaps.md
+source_doc: archive/historical-prd/wallet/AIX Wallet V1.0【Deposit & Send & Swap 】.docx；external-docs/dtc/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx；external-docs/dtc/DTC Wallet OpenAPI Document20260126 (1).docx；archive/historical-prd/notification/[2025-11-25] AIX+Notification（push及站内信）.docx；knowledge-base/changelog/knowledge-gaps.md
 source_section: AIX Wallet V1.0 / 3.1 交易说明；3.2 接口范围；6.3 钱包地址充值 Deposit（GTR's Wallet）；6.4 钱包链接充值 Deposit（WalletConnect）；7.4 钱包充值 Wallet Connect；Documentation dtc-nodejs-wallet-connect / 1 Request Wallet Connect Token；3 Server-Emitted Events；4 Client-Emitted Events；5 sequence diagram；ALL-GAP 总表
 last_updated: 2026-05-05
 owner: 吴忆锋
@@ -39,7 +39,7 @@ depends_on:
 | 状态 | active |
 | 更新时间 | 2026-05-05 |
 | 文档类型 | AI-readable PRD translation |
-| 来源文档 | AIX Wallet V1.0【Deposit & Send & Swap】；Documentation dtc-nodejs-wallet-connect；DTC Wallet OpenAPI Documentation；AIX Notification |
+| 来源文档 | AIX Wallet V1.0【Deposit & Send & Swap】；Documentation dtc-nodejs-wallet-connect；external-docs/dtc/DTC Wallet OpenAPI Document20260126 (1).docx；AIX Notification |
 
 ---
 
@@ -468,16 +468,16 @@ flowchart LR
 
 ## 10. 来源引用
 
-- (Ref: 历史prd/AIX Wallet V1.0【Deposit & Send & Swap 】.docx / 3.1 交易说明)
-- (Ref: 历史prd/AIX Wallet V1.0【Deposit & Send & Swap 】.docx / 3.2 接口范围)
-- (Ref: 历史prd/AIX Wallet V1.0【Deposit & Send & Swap 】.docx / 6.3 钱包地址充值 Deposit（GTR's Wallet）)
-- (Ref: 历史prd/AIX Wallet V1.0【Deposit & Send & Swap 】.docx / 6.4 钱包链接充值 Deposit（WalletConnect）)
-- (Ref: 历史prd/AIX Wallet V1.0【Deposit & Send & Swap 】.docx / 7.4 钱包充值 Wallet Connect)
-- (Ref: DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 1 Request Access Token & Wallet Connect Token)
-- (Ref: DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 3 Server-Emitted Events)
-- (Ref: DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 4 Client-Emitted Events)
-- (Ref: DTC接口文档/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 5 sequence diagram)
-- (Ref: DTC Wallet OpenAPI Documentation / 3.4 Crypto Deposit)
+- (Ref: archive/historical-prd/wallet/AIX Wallet V1.0【Deposit & Send & Swap 】.docx / 3.1 交易说明)
+- (Ref: archive/historical-prd/wallet/AIX Wallet V1.0【Deposit & Send & Swap 】.docx / 3.2 接口范围)
+- (Ref: archive/historical-prd/wallet/AIX Wallet V1.0【Deposit & Send & Swap 】.docx / 6.3 钱包地址充值 Deposit（GTR's Wallet）)
+- (Ref: archive/historical-prd/wallet/AIX Wallet V1.0【Deposit & Send & Swap 】.docx / 6.4 钱包链接充值 Deposit（WalletConnect）)
+- (Ref: archive/historical-prd/wallet/AIX Wallet V1.0【Deposit & Send & Swap 】.docx / 7.4 钱包充值 Wallet Connect)
+- (Ref: external-docs/dtc/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 1 Request Access Token & Wallet Connect Token)
+- (Ref: external-docs/dtc/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 3 Server-Emitted Events)
+- (Ref: external-docs/dtc/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 4 Client-Emitted Events)
+- (Ref: external-docs/dtc/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 5 sequence diagram)
+- (Ref: external-docs/dtc/DTC Wallet OpenAPI Document20260126 (1).docx / 3.4 Crypto Deposit)
 - (Ref: [2025-11-25] AIX+Notification / Deposit rows)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP 总表)
 - (Ref: 用户确认结论 / 2026-05-02 / Deposit 流程图去掉单币种页入口)
