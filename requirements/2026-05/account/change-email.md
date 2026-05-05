@@ -175,18 +175,21 @@ sequenceDiagram
     end
 ```
 
-### 4.3 关键异常处理
+### 4.3 关键校验与失败处理
 
-| 异常场景 | 处理规则 |
-|---|---|
-| 旧邮箱 OTP 失败 / 锁定 / 过期 / 重发超限 | 直接引用 Email OTP 既有规则；账户邮箱不得更新 |
-| 用户无法接收旧邮箱 OTP | 页面内不提供“无法访问旧邮箱”入口，不提供自助跳过旧邮箱验证；用户无法继续自助更换 |
-| 新邮箱格式错误 | 停留新邮箱输入页，提示格式错误，不发送新邮箱 OTP |
-| 新邮箱与当前邮箱相同 | 停留新邮箱输入页，提示不可与当前邮箱相同，不发送新邮箱 OTP |
-| 新邮箱已被其他账户使用 | 停留新邮箱输入页，提示邮箱不可用，不发送新邮箱 OTP |
-| 新邮箱 OTP 失败 / 锁定 / 过期 / 重发超限 | 直接引用 Email OTP 既有规则；账户邮箱不得更新 |
-| 账户邮箱更新失败 | 提示稍后重试；账户邮箱不得产生半更新状态 |
-| 通知发送失败 | 不影响邮箱更换成功结果；补发 / 重试规则待 Notification 确认 |
+| 场景 | 前端处理 | 后端 / 系统处理 | 用户提示 / 结果 |
+|---|---|---|---|
+| 旧邮箱 OTP 失败 / 锁定 / 过期 / 重发超限 | 不在本 PRD 定义，复用 Email OTP Verification | 按 `knowledge-base/security/email-otp-verification.md` 处理 | 账户邮箱不得更新 |
+| 新邮箱为空 | 阻止发送新邮箱 OTP | 不调用新邮箱可用性校验 | `Email should not be empty` |
+| 新邮箱格式错误 | 阻止发送新邮箱 OTP | 不调用新邮箱可用性校验 | `Email format is invalid` |
+| 新邮箱超过长度限制 | 最长 103 字符，超出不可继续输入 | 不调用新邮箱可用性校验 | 前端限制输入；如后端收到超长值，返回格式错误 |
+| 新邮箱与当前邮箱相同 | 阻止发送新邮箱 OTP | 后端需兜底校验 | `This is already your current email` |
+| 新邮箱已被其他账户使用 | 前端提交后等待后端校验 | 后端按邮箱全局唯一性校验 | `This email has been used` |
+| 新邮箱可用性校验通过 | 请求发送新邮箱 OTP | 不更新账户邮箱，仅进入新邮箱 OTP 验证 | 进入 New Email OTP Verify Page |
+| 新邮箱 OTP 失败 / 锁定 / 过期 / 重发超限 | 不在本 PRD 定义，复用 Email OTP Verification | 按 `knowledge-base/security/email-otp-verification.md` 处理 | 账户邮箱不得更新 |
+| 邮箱更新时发现新邮箱已不可用 | 不适用 | 更新前再次校验邮箱全局唯一性，避免并发占用 | 不更新账户邮箱，提示 `This email has been used` |
+| 账户邮箱更新失败 | 不适用 | 保持原邮箱，不产生半更新状态 | `Something went wrong. Please try again later` |
+| 通知发送失败 | 不影响成功页展示 | 补发 / 重试规则待 Notification 确认 | 邮箱更换结果保持成功 |
 
 ---
 
@@ -215,88 +218,81 @@ flowchart LR
 ![Personal Center - Security Email Row](./assets/change-email/personal-center-security-email-row.svg)
 
 **页面目的**  
-在个人中心 Security 区域提供更换邮箱入口。
+提供更换邮箱入口。
 
-**必要展示规则**
+**展示规则**
 - Email 行位于 Security 区域，不放在 Account 区域。
-- Email 行展示当前邮箱掩码。
-- Email 行右侧展示向右箭头，表示可点击。
+- Email 行展示当前邮箱掩码，掩码规则同 Email OTP Verification：`@` 前首位和末位明文，邮箱后缀明文，中间字符按同位数展示 `*`。例如：`test43500@gmail.com` → `t*******0@gmail.com`。
+- Email 行右侧展示向右箭头。
 
 **交互规则**
-- 用户点击 Email 行后，进入 Change Email Intro。
+- 点击 Email 行，进入 Change Email Intro。
 
 ### 5.3 Change Email Intro
 
 ![Change Email Intro](./assets/change-email/change-email-intro.svg)
 
 **页面目的**  
-告知用户更换邮箱的影响范围与后续验证步骤。
+展示当前邮箱并发起更换流程。
 
-**必要展示规则**
-- 展示当前邮箱掩码。
-- 说明更换邮箱会影响登录、找回密码和 Email OTP 接收。
-- 流程说明只展示三步：验证旧邮箱、输入新邮箱、验证新邮箱。
+**展示规则**
+- 当前邮箱按 Email OTP Verification 掩码规则展示。
 
 **交互规则**
-- 用户点击“开始更换”后，AIX App 请求 Security 发送旧邮箱 Email OTP，并进入 Old Email OTP Verify Page。
-- 用户点击返回，回到个人中心。
-
-**边界**
-- 本页不展示密码 / BIO 验证入口。
-- 本页不展示旧邮箱不可用入口。
+- 点击“开始更换”后，请求发送旧邮箱 Email OTP，并进入 Old Email OTP Verify Page。
+- 点击返回，回到个人中心。
 
 ### 5.4 Old Email OTP Verify Page
 
 ![Old Email OTP Verify Page](./assets/change-email/old-email-otp-verify.svg)
 
-**页面目的**  
-验证用户仍可访问当前旧邮箱。
+> 该页面复用 `knowledge-base/security/email-otp-verification.md`，本文只定义 Change Email 场景差异。
 
-**必要展示规则**
-- 展示旧邮箱掩码。
-- 复用 Email OTP 页面规则，不在本 PRD 重复定义验证码有效期、重发、锁定等公共规则。
+**场景参数**
+- OTP 接收邮箱：当前账户旧邮箱 `currentEmail`。
+- 邮箱展示：按 Email OTP Verification 掩码规则展示。
 
-**交互规则**
-- 用户输入旧邮箱收到的 4 位 OTP。
-- 旧邮箱 OTP 验证成功后，进入 New Email Input。
-- 旧邮箱 OTP 验证失败、锁定、过期或重发超限时，按 Email OTP 既有规则处理。
-
-**边界**
-- 页面内不提供“无法访问旧邮箱”或“联系客服”入口。
+**流转规则**
+- 验证成功：进入 New Email Input。
+- 验证失败 / 锁定 / 过期 / 重发超限：按 Email OTP Verification 处理。
 
 ### 5.5 New Email Input
 
 ![New Email Input](./assets/change-email/new-email-input.svg)
 
 **页面目的**  
-收集并校验新邮箱地址。
+收集新邮箱，并在发送新邮箱 OTP 前完成必要校验。
 
-**必要展示规则**
-- 新邮箱需满足格式正确、与当前邮箱不同、未被其他账户使用。
+**前端校验**
+- 必填：为空时提示 `Email should not be empty`。
+- 长度：最长 103 字符，超出不可继续输入；与 Registration Email 输入规则保持一致。
+- 格式：邮箱格式不合法时提示 `Email format is invalid`；与 Registration Email 输入规则保持一致。
+- 不可与当前邮箱相同：相同时提示 `This is already your current email`。
+- “发送验证码”按钮仅在前端校验通过后可点击。
 
-**交互规则**
-- 用户输入新邮箱并点击“发送验证码”。
-- AIX 在发送新邮箱 OTP 前完成邮箱可用性校验。
-- 新邮箱可用后，AIX App 请求 Security 发送新邮箱 Email OTP，并进入 New Email OTP Verify Page。
-- 新邮箱不可用时，停留当前页并展示对应错误。
+**后端校验**
+- 校验新邮箱全局唯一性。
+- 新邮箱已被其他账户使用时，提示 `This email has been used`；与 Registration 已注册邮箱文案保持一致。
+- 新邮箱与当前邮箱相同时，后端需兜底拦截。
+- 后端校验通过后，只发送新邮箱 OTP，不更新账户邮箱。
+
+**流转规则**
+- 校验通过：请求发送新邮箱 Email OTP，进入 New Email OTP Verify Page。
+- 校验失败：停留当前页，不发送新邮箱 OTP。
 
 ### 5.6 New Email OTP Verify Page
 
 ![New Email OTP Verify Page](./assets/change-email/new-email-otp-verify.svg)
 
-**页面目的**  
-验证新邮箱可接收邮件。
+> 该页面复用 `knowledge-base/security/email-otp-verification.md`，本文只定义 Change Email 场景差异。
 
-**必要展示规则**
-- 展示新邮箱掩码。
-- 复用 Email OTP 页面规则，不在本 PRD 重复定义验证码有效期、重发、锁定等公共规则。
+**场景参数**
+- OTP 接收邮箱：用户输入且通过可用性校验的新邮箱 `newEmail`。
+- 邮箱展示：按 Email OTP Verification 掩码规则展示。
 
-**交互规则**
-- 用户输入新邮箱收到的 4 位 OTP。
-- 新邮箱 OTP 验证成功后，Account 服务更新账户邮箱。
-- 新邮箱 OTP 验证失败、锁定、过期或重发超限时，按 Email OTP 既有规则处理。
-
-**边界**
+**流转规则**
+- 验证成功：Account 服务更新账户邮箱。
+- 验证失败 / 锁定 / 过期 / 重发超限：按 Email OTP Verification 处理。
 - 新邮箱 OTP 未验证成功前，不得更新账户邮箱。
 
 ### 5.7 Change Email Success
@@ -304,19 +300,19 @@ flowchart LR
 ![Change Email Success](./assets/change-email/change-email-success.svg)
 
 **页面目的**  
-告知用户邮箱已更换成功。
+展示邮箱更换结果。
 
-**必要展示规则**
-- 展示新邮箱掩码。
-- 说明后续登录、找回密码和 Email OTP 将使用新邮箱。
+**展示规则**
+- 新邮箱按 Email OTP Verification 掩码规则展示。
 
 **交互规则**
-- 用户点击“返回个人中心”后，回到个人中心。
+- 点击“返回个人中心”后，回到个人中心。
 - 个人中心 Security 区域的 Email 行展示新邮箱。
 
-**边界**
-- 更换成功后不强制登出当前设备。
-- 更换成功后不清除 BIO。
+**成功后处理**
+- 当前会话中的 email 信息刷新为新邮箱。
+- 不强制登出当前设备。
+- 不清除 BIO。
 
 ---
 
@@ -324,8 +320,8 @@ flowchart LR
 
 | 类型 | 名称 | 所属系统 | 来源 | 用途 | 规则 / 输入输出 | 异常处理 |
 |---|---|---|---|---|---|---|
-| 字段 | currentEmail | Account | 账户信息 | 展示当前邮箱、发送旧邮箱 OTP、判断新邮箱是否相同 | 只读；页面展示时建议掩码 | 获取失败时无法进入更换邮箱流程 |
-| 字段 | newEmail | Account | 用户输入 | 新邮箱地址 | 需满足邮箱格式；不得等于 currentEmail；不得与其他账户邮箱冲突 | 格式错误 / 冲突时停留输入页 |
+| 字段 | currentEmail | Account | 账户信息 | 展示当前邮箱、发送旧邮箱 OTP、判断新邮箱是否相同 | 只读；页面展示时按 Email OTP Verification 掩码规则展示 | 获取失败时无法进入更换邮箱流程 |
+| 字段 | newEmail | Account | 用户输入 | 新邮箱地址 | 最长 103 字符；需满足邮箱格式；不得等于 currentEmail；不得与其他账户邮箱冲突 | 格式错误 / 冲突时停留输入页 |
 | 能力 | Old Email OTP | Security | Email OTP Verification | 验证旧邮箱控制权 | 4 位数字；5 分钟有效；重发后旧 OTP 失效；仅最新 OTP 有效；仅发起请求设备可用 | 按 Email OTP 规则处理 |
 | 能力 | New Email OTP | Security | Email OTP Verification | 验证新邮箱可接收邮件 | 同 Email OTP 规则 | 按 Email OTP 规则处理 |
 | 接口 / 能力 | Check email availability | Account | Account 知识库 / 本 PRD | 校验新邮箱是否可用 | 发送新邮箱 OTP 前完成 | 不可用时不发送 OTP |
@@ -378,13 +374,16 @@ flowchart LR
 |---|---|
 | 页面入口 | 用户可从个人中心 Security 区域的 Email 行发起更换邮箱流程 |
 | 页面入口 | Email 行展示当前邮箱掩码，并带向右箭头 |
-| 流程说明 | 更换说明页展示当前邮箱、影响说明，以及 3 步流程：验证旧邮箱、输入新邮箱、验证新邮箱 |
-| 旧邮箱验证 | AIX App 请求 Security 发送旧邮箱 Email OTP，并按 Email OTP 规则完成验证 |
+| 掩码规则 | 当前邮箱、新邮箱展示均按 Email OTP Verification 掩码规则处理：`@` 前首位和末位明文，邮箱后缀明文，中间字符按同位数展示 `*` |
+| 旧邮箱验证 | 旧邮箱 OTP 页复用 Email OTP Verification；OTP 接收邮箱为当前账户旧邮箱 |
 | 旧邮箱验证 | 旧邮箱 OTP 未验证通过时，用户不能继续输入新邮箱 |
-| 新邮箱输入 | 新邮箱必须满足邮箱格式要求，且不能与当前账户邮箱相同 |
-| 新邮箱输入 | 新邮箱不能与其他账户已注册 / 已绑定邮箱冲突 |
-| 新邮箱输入 | 系统在发送新邮箱 OTP 前完成新邮箱可用性校验 |
-| 新邮箱验证 | AIX App 请求 Security 发送新邮箱 Email OTP，并按 Email OTP 规则完成验证 |
+| 新邮箱输入 | 新邮箱为空时提示 `Email should not be empty` |
+| 新邮箱输入 | 新邮箱超过 103 字符时，前端不可继续输入 |
+| 新邮箱输入 | 新邮箱格式错误时提示 `Email format is invalid` |
+| 新邮箱输入 | 新邮箱与当前账户邮箱相同时，提示 `This is already your current email` |
+| 新邮箱输入 | 新邮箱已被其他账户使用时，提示 `This email has been used` |
+| 新邮箱输入 | 系统在发送新邮箱 OTP 前完成新邮箱可用性校验，校验失败不得发送新邮箱 OTP |
+| 新邮箱验证 | 新邮箱 OTP 页复用 Email OTP Verification；OTP 接收邮箱为通过可用性校验的新邮箱 |
 | 邮箱更新 | 旧邮箱 OTP 与新邮箱 OTP 均验证成功后，账户邮箱更新为新邮箱 |
 | 成功处理 | 更换成功后，当前会话中的 email 信息刷新为新邮箱 |
 | 成功处理 | 更换成功后，不强制登出当前设备，不清除 BIO |
@@ -402,10 +401,11 @@ flowchart LR
 | 正常更换邮箱 | 用户已登录，旧邮箱可接收邮件，新邮箱未被使用 | 完成旧邮箱 OTP、新邮箱输入、新邮箱 OTP | 展示更换成功 | 账户邮箱更新为新邮箱，当前会话 email 刷新 | 是 |
 | 入口位置 | 用户进入个人中心 | 查看 Security 区域 | Security 区域存在 Email 行，且有右箭头 | 点击 Email 行进入更换说明页 | 是 |
 | 旧邮箱 OTP 错误 | 用户进入旧邮箱 OTP 页 | 输入错误旧邮箱 OTP | 展示 Invalid OTP / 剩余次数提示 | 不进入新邮箱输入页，不更新邮箱 | 是 |
-| 旧邮箱不可用入口 | 用户进入更换说明页或旧邮箱 OTP 页 | 查找旧邮箱不可用 / 联系客服入口 | 页面不展示该入口 | 自助流程不允许跳过旧邮箱 OTP | 是 |
-| 新邮箱格式错误 | 旧邮箱 OTP 已通过 | 输入非法邮箱 | 输入页展示错误 | 不发送新邮箱 OTP | 是 |
-| 新邮箱与当前邮箱相同 | 旧邮箱 OTP 已通过 | 输入当前邮箱 | 输入页展示错误 | 不发送新邮箱 OTP | 是 |
-| 新邮箱已被使用 | 旧邮箱 OTP 已通过 | 输入已存在邮箱 | 输入页展示邮箱不可用提示 | 不发送新邮箱 OTP | 是 |
+| 新邮箱为空 | 旧邮箱 OTP 已通过 | 不输入邮箱并尝试发送验证码 | 展示 `Email should not be empty` | 不发送新邮箱 OTP | 是 |
+| 新邮箱超长 | 旧邮箱 OTP 已通过 | 输入超过 103 字符邮箱 | 超出部分不可继续输入 | 不发送新邮箱 OTP | 是 |
+| 新邮箱格式错误 | 旧邮箱 OTP 已通过 | 输入非法邮箱 | 展示 `Email format is invalid` | 不发送新邮箱 OTP | 是 |
+| 新邮箱与当前邮箱相同 | 旧邮箱 OTP 已通过 | 输入当前邮箱 | 展示 `This is already your current email` | 不发送新邮箱 OTP | 是 |
+| 新邮箱已被使用 | 旧邮箱 OTP 已通过 | 输入已存在邮箱 | 展示 `This email has been used` | 不发送新邮箱 OTP | 是 |
 | 新邮箱 OTP 错误 | 新邮箱可用且已发送 OTP | 输入错误新邮箱 OTP | 展示 Invalid OTP / 剩余次数提示 | 不更新邮箱 | 是 |
 | OTP 过期 | 旧邮箱或新邮箱 OTP 超过有效期 | 输入过期 OTP | 展示过期 / 重试提示 | 不更新邮箱，需重新发送 OTP | 是 |
 | 重发 OTP | OTP 页面倒计时结束 | 点击重新发送 | 展示新 OTP 已发送状态 | 旧 OTP 立即失效，仅最新 OTP 有效 | 是 |
