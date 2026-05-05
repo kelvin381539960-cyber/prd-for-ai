@@ -2,7 +2,7 @@
 type: prd-brief
 module: account
 feature: change-email
-status: reviewed-awaiting-prd-confirmation
+status: confirmed
 created: 2026-05-05
 last_updated: 2026-05-05
 owner: TBD
