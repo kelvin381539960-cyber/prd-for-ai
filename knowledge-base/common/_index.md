@@ -18,43 +18,39 @@ depends_on:
   - _system-boundary
 ---
 
-# Common / Integration 公共能力索引
+# Common 公共能力索引
 
 ## 1. 模块定位
 
-Common / Integration 用于沉淀跨模块复用的公共能力和外部依赖边界，包括 DTC、AAI、WalletConnect、错误处理、通知、FAQ、通用弹窗等。
+Common 用于沉淀跨模块复用的公共运行态能力，包括错误处理、通知、FAQ、通用弹窗等。DTC、AAI、WalletConnect 等外部依赖边界统一在 `integrations/` 中维护。
 
 本模块不是业务流程的再次归档，也不是供应商系统说明书。Account、Security、Card、Wallet、Transaction 中已经确认的业务事实，不在 Common 中重复定义。
 
 Common 只沉淀：
 
 1. AIX 侧实际使用到的公共能力。
-2. AIX 对外部供应商的依赖边界。
-3. AIX 依赖的外部字段、状态、回调、错误和通知规则。
-4. AIX 侧已确认或待确认的处理边界。
+2. AIX 依赖的错误、通知、FAQ 和通用交互规则。
+3. AIX 侧已确认或待确认的公共处理边界。
 
 ## 2. 当前文件
 
 | 文件 | 状态 | 目标 | 备注 |
 |---|---|---|---|
 | `common/_index.md` | active | 建立公共能力索引与边界 | 当前文件 |
-| `integrations/dtc/_index.md` | active | 记录 AIX 对 DTC 的外部依赖边界 | DTC 是供应商系统，不维护其内部逻辑 |
-| `integrations/aai/_index.md` | active | 记录 AIX 对 AAI 的外部依赖边界 | AAI 是供应商能力，不维护其内部逻辑 |
-| `integrations/walletconnect/_index.md` | active | 汇总 WalletConnect 入金相关公共能力边界 | 与 Wallet Deposit 配合读取 |
 | `common/errors.md` | active | 汇总错误码、失败处理、告警、用户提示边界 | 不自行补完整错误码表 |
 | `common/notification.md` | active | 汇总 push / 站内信通知规则边界 | 不把通知写成必然到账 |
 | `common/faq.md` | active | 汇总 APP 通用 FAQ 与场景 FAQ | 只使用原文或已确认口径 |
 
-## 3. 公共能力与外部依赖边界
+## 3. Common 与 Integrations 分工
 
-| 能力域 | Common 中沉淀 | 不在 Common 中维护 |
+| 能力域 | 主维护位置 | 不在 Common 中维护 |
 |---|---|---|
-| DTC | AIX 调用的 DTC 能力、AIX 依赖的 DTC 字段 / 状态 / Webhook / 响应边界 | DTC 内部系统逻辑、DTC 完整产品说明、DTC 未提供字段 |
-| AAI | AIX 使用的 AAI OCR / Liveness / KYC / Face Auth 外部依赖边界 | AAI 内部审核逻辑、AAI 完整系统说明、AAI 未提供字段 |
-| WalletConnect | WC 入金、连接、失败原因、第三方钱包交互边界 | GTR / Card 自动归集 / Send |
-| Error | 通用错误码、系统失败、网络失败、告警、人工处理边界 | 单业务特有错误流程 |
-| Notification | Push、站内信、通知触发源、模板参数、跳转目标 | 业务流程正文 |
-| FAQ | 通用 FAQ 与跨模块 FAQ | 单页面业务文案 |
+| DTC | `integrations/dtc/_index.md` | DTC 内部系统逻辑、DTC 完整产品说明、DTC 未提供字段 |
+| AAI | `integrations/aai/_index.md` | AAI 内部审核逻辑、AAI 完整系统说明、AAI 未提供字段 |
+| WalletConnect | `integrations/walletconnect/_index.md` | GTR / Card 自动归集 / Send |
+| Error | `common/errors.md` | 单业务特有错误流程 |
+| Notification | `common/notification.md` | 业务流程正文 |
+| FAQ | `common/faq.md` | 单页面业务文案 |
 
 ## 4. 已确认可引用事实
 
@@ -65,7 +61,6 @@ Common 只沉淀：
 | Transfer Balance to Wallet 请求字段为 `cardId` / `amount` | DTC Card Issuing / Card Transaction Flow | 仅作为 AIX 依赖的 DTC Card 能力，不重写业务流程 |
 | Wallet 交易 `id`、`transactionId`、`state` 已确认 | DTC Wallet OpenAPI / Transaction History | 可作为 AIX 依赖的 DTC Wallet 字段 |
 | Deposit 包含 GTR / WalletConnect | Wallet Deposit | 可在 `integrations/walletconnect/_index.md` 中聚焦 WC 边界 |
-| Send / Swap deferred | Wallet / Transaction 模块事实 | Common 中不得把其写成 active 能力 |
 
 ## 5. Deferred gaps 隔离
 
@@ -81,7 +76,6 @@ Common 只沉淀：
 | GTR / WalletConnect 完整状态机 | 待确认，不写成事实 |
 | Receive 是否独立上线 | 待确认，不写成事实 |
 | Wallet KYC 完整流程 | 待确认，不写成事实 |
-| Send / Swap 当前上线能力 | deferred，不写成事实 |
 
 ## 6. 使用规则
 
