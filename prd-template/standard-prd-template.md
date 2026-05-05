@@ -3,8 +3,8 @@ type: prd-template
 feature: standard-prd-template
 version: "1.4"
 status: active
-source_doc: IMPLEMENTATION_PLAN.md；用户确认结论 2026-05-05
-source_section: "3.4 PRD Template；功能粒度与拆分规则"
+source_doc: prd-template/README.md；knowledge-base/_kb-ingestion-process.md；用户确认结论 2026-05-05
+source_section: "standard PRD template；PRD fact rules；功能粒度与拆分规则"
 last_updated: 2026-05-05
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]

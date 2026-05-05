@@ -1,17 +1,17 @@
 ---
 module: knowledge-base
 feature: runtime-readme
-version: "2.1"
+version: "2.2"
 status: active
-source_doc: knowledge-base/_ai-query-router.md；knowledge-base/_system-boundary.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-03
-source_section: runtime entry；system boundary；ALL-GAP
+source_doc: knowledge-base/_ai-query-router.md；knowledge-base/_kb-ingestion-process.md；knowledge-base/_system-boundary.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-03；用户确认结论 2026-05-05
+source_section: runtime entry；fact ingestion；system boundary；ALL-GAP；repository directory rules
 last_updated: 2026-05-05
 owner: 吴忆锋
 ---
 
 # Knowledge Base Runtime Entry
 
-This directory is the runtime knowledge base for AIX product facts.
+This directory is the runtime knowledge base for confirmed AIX product facts.
 
 It is not a build-phase plan, not a draft area, and not the place to maintain temporary implementation notes, review comments, correction plans, or implementation logs.
 
@@ -20,6 +20,7 @@ It is not a build-phase plan, not a draft area, and not the place to maintain te
 | Purpose | File |
 |---|---|
 | AI daily query route | `_ai-query-router.md` |
+| Knowledge-base ingestion and fact writing process | `_kb-ingestion-process.md` |
 | System responsibility boundary | `_system-boundary.md` |
 | Global confirmation gap table | `changelog/knowledge-gaps.md` |
 
@@ -29,8 +30,9 @@ It is not a build-phase plan, not a draft area, and not the place to maintain te
 2. For module facts, read the corresponding module `_index.md`, then read the main fact file.
 3. For AIX / DTC / AAI / KUN / WalletConnect responsibility questions, read `_system-boundary.md`.
 4. For unresolved or conflicting items, use `changelog/knowledge-gaps.md`.
-5. Do not add module-level TODO, checklist, review notes, correction plans, local gap tables, or implementation logs.
-6. Do not treat README files as business fact sources.
+5. For converting PRDs, reference data, or external docs into confirmed facts, follow `_kb-ingestion-process.md`.
+6. Do not add module-level TODO, checklist, review notes, correction plans, local gap tables, or implementation logs.
+7. Do not treat README files as business fact sources.
 
 ## Current module directories
 
@@ -42,9 +44,23 @@ It is not a build-phase plan, not a draft area, and not the place to maintain te
 | `card/` | Card application, Card Home, Card Manage, and Card Transaction runtime facts |
 | `transaction/` | Transaction history, detail, status, and reconciliation facts |
 | `kyc/` | Account Opening / KYC and related access facts |
+| `security/` | Security, OTP, biometric, passcode, face authentication, and password policy facts |
 | `common/` | Common runtime facts such as notification, errors, and FAQ |
 | `integrations/` | External dependency boundaries such as DTC, AAI, and WalletConnect |
+| `_meta/` | Global dictionaries, glossary, status, field, limit, compliance, country, and region references |
+| `assets/` | Image assets referenced by knowledge-base files |
 | `changelog/` | Global knowledge gaps only |
+
+## Relationship with other repository directories
+
+| Directory | Relationship with knowledge-base |
+|---|---|
+| `requirements/` | New and in-progress PRDs; not a confirmed fact source by default |
+| `reference-data/` | Current configuration, mapping, dictionary, FAQ, country/region, and notification source tables |
+| `external-docs/` | Original external dependency documents used for source verification |
+| `archive/` | Historical or deprecated source materials used for traceability |
+| `prd-template/` | PRD writing templates |
+| `tools/` | Helper scripts; not a business fact source |
 
 ## Current scope exclusions
 
