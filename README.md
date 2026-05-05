@@ -21,6 +21,7 @@ This repository is used to maintain structured, source-based product facts, new 
 | Purpose | File |
 |---|---|
 | AI query entry and reading route | `knowledge-base/_ai-query-router.md` |
+| PRD writing workflow | `prd-template/prd-writing-workflow.md` |
 | PRD and knowledge-base fact writing rules | `knowledge-base/_kb-ingestion-process.md` |
 | System responsibility boundaries | `knowledge-base/_system-boundary.md` |
 | Global confirmation gap table | `knowledge-base/changelog/knowledge-gaps.md` |

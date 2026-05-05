@@ -32,7 +32,7 @@ readers: [product, ui, dev, qa, business, ai]
 写 PRD 前，按以下顺序读取文件：
 
 ```text
-1. AGENTS.md
+1. 如果尚未读取，先读 AGENTS.md
 2. prd-template/prd-writing-workflow.md
 3. prd-template/standard-prd-template.md
 4. requirements/_index.md
