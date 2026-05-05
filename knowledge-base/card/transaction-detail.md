@@ -1,10 +1,10 @@
 ---
 module: card
 feature: card-transaction-detail
-version: "1.1"
+version: "1.2"
 status: active
-source_doc: 历史prd/AIX APP V1.0【Transaction & History】 (1).docx；knowledge-base/card/card-home.md；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/status-model.md；knowledge-base/changelog/knowledge-gaps.md；prd-template/standard-prd-template.md
-source_section: 7.1 全量交易记录 Transaction；7.2 卡交易列表 Card History；7.3 卡交易详情 Card Transaction Details；8.1 Transaction History of Card；8.2 Card Transaction Detail Inquiry；Standard PRD Template v1.3
+source_doc: 历史prd/AIX APP V1.0【Transaction & History】 (1).docx；DTC接口文档/卡交易&钱包交易状态梳理 (1).docx；knowledge-base/card/card-home.md；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/status-model.md；knowledge-base/changelog/knowledge-gaps.md；prd-template/standard-prd-template.md
+source_section: 7.1 全量交易记录 Transaction；7.2 卡交易列表 Card History；7.3 卡交易详情 Card Transaction Details；8.1 Transaction History of Card；8.2 Card Transaction Detail Inquiry；卡交易&钱包交易状态梳理 / 嵌入 Excel hFgXns；Standard PRD Template v1.3
 last_updated: 2026-05-05
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,10 +19,10 @@ readers: [product, ui, dev, qa, business, ai]
 | 功能名称 | Card Transaction Detail 卡交易列表与详情 |
 | 所属模块 | Card |
 | Owner | 吴忆锋 |
-| 版本 | 1.1 |
+| 版本 | 1.2 |
 | 状态 | Review |
 | 更新时间 | 2026-05-05 |
-| 来源文档 | AIX APP V1.0【Transaction & History】、Standard PRD Template v1.3 |
+| 来源文档 | AIX APP V1.0【Transaction & History】、DTC 卡交易&钱包交易状态梳理、Standard PRD Template v1.3 |
 
 ---
 
@@ -65,7 +65,8 @@ readers: [product, ui, dev, qa, business, ai]
 | FAQ 入口 | In Scope | P2 | Confirmed | 根据 Transactions / Transaction Details 场景读取 FAQ |
 | 全量交易聚合 | Out of Scope | P0 | Confirmed | 由 `transaction/history.md` 维护 |
 | Card 资金回退 Wallet | Out of Scope | P0 | Confirmed | 由 `card/transaction.md` 维护 |
-| 原文图片 / 电子表格核表 | In Scope | P0 | Open | Type 映射、Status 映射、接口请求 / 响应字段、错误码表属于本文验收前置；当前未展开完整表格，不得视为 Approved |
+| DTC 状态映射核表 | In Scope | P0 | Confirmed | 已补充 `卡交易&钱包交易状态梳理 (1).docx` 嵌入 Excel 中的 Card Type / Status 映射 |
+| 接口请求 / 响应与错误码核表 | In Scope | P0 | Open | Transaction History of Card、Card Transaction Detail Inquiry 的请求 / 响应字段、错误码仍需从原始 PRD 图片 / 表格补齐 |
 
 ### 2.5 功能边界与拆分结论
 
@@ -78,7 +79,8 @@ readers: [product, ui, dev, qa, business, ai]
 | 全量交易历史 / 全局 Transaction 聚合 | 全局交易能力 | Out of Scope，只引用 | `transaction/history.md` |
 | 全局交易状态模型 | 公共状态能力 | Out of Scope，只引用；本文只写 Card 场景展示状态 | `transaction/status-model.md` |
 | 交易对账 / ID 关联 | 对账能力 | Out of Scope，只引用 | `transaction/reconciliation.md`、`knowledge-gaps.md` |
-| 原文图片 / 电子表格核表 | 本文验收前置 | 阻塞 Approved；未补齐前不得宣称字段、状态、错误码完整 | 原始 PRD 图片 / 电子表格 |
+| DTC 状态映射核表 | 本文事实依据 | 已补齐 Card Type / Status 映射 | `DTC接口文档/卡交易&钱包交易状态梳理 (1).docx` 嵌入 Excel |
+| 接口请求 / 响应与错误码核表 | 本文验收前置 | 阻塞 Approved；未补齐前不得宣称接口字段、错误码完整 | 原始 PRD 图片 / 电子表格 |
 
 ---
 
@@ -88,7 +90,7 @@ readers: [product, ui, dev, qa, business, ai]
 
 用户可从 Card Home 的 Recent Transactions 区域点击 More 进入 Card History，也可点击单条卡交易进入 Transaction Details。Card History 页面展示当前用户所有状态为 Active、Suspended 的卡片，用户可切换不同卡片并查看对应卡交易列表。
 
-用户进入 Card History 时，系统静默刷新获取近 1 年交易数据。单次最多查询 6 个月。列表只展示原始交易类型为 PURCHASE、CASH_WITHDRAWAL、REFUND、INCREMENTAL_AUTH 的记录；DTC 反馈部分退款会使用 REVERSAL，因此 REVERSAL 类型也需要展示，前端与 REFUND 一样显示为 `{refund-商户名称}`。
+用户进入 Card History 时，系统静默刷新获取近 1 年交易数据。单次最多查询 6 个月。列表只展示原始交易类型为 PURCHASE、CASH_WITHDRAWAL、REFUND、INCREMENTAL AUTH 的记录；DTC 状态梳理中还说明 CASH_WITHDRAWAL 场景可能出现 REVERSED，原文反馈前端原为 cancelled、现为 Refunded。Transaction & History v2.2 说明 REVERSAL 类型也需要展示，前端与 REFUND 一样显示为 `{refund-商户名称}`。
 
 用户点击任意一条交易记录后进入 Transaction Details。详情页根据 Transaction ID 获取最新卡交易记录，展示交易概览区、状态说明和交易详情区。
 
@@ -135,7 +137,7 @@ sequenceDiagram
 | 3 | 卡片选择区 | 用户有 Active / Suspended 卡 | App / Card | 显示脱敏卡号和币种，例如 `****2053 (USDT)` | 用户可切换卡片 | 单卡时是否展示下拉待确认 | 7.2.4 |
 | 4 | 多卡切换 | 用户持有多张卡 | App / Card | 按申请时间降序展示，点击下拉箭头切换 | 列表加载所选卡交易 | 查询失败显示缺省页 | 7.2.4 |
 | 5 | 交易列表查询 | 用户进入 Card History | App / Card | 静默刷新获取近 1 年交易数据；单次最多 6 个月 | 展示列表 | 无数据展示 `No transaction data` | 7.2.1 / 7.2.4 |
-| 6 | 交易类型过滤 | 获取卡交易记录 | App / Card | 仅展示 PURCHASE / CASH_WITHDRAWAL / REFUND / INCREMENTAL_AUTH / REVERSAL | 展示符合规则的卡交易 | 其他类型不展示 | 7.2.4 / v2.2 |
+| 6 | 交易类型过滤 | 获取卡交易记录 | App / Card | 展示 PURCHASE / CASH_WITHDRAWAL / REFUND / INCREMENTAL AUTH；REVERSAL / REVERSED 按退款类展示边界处理 | 展示符合规则的卡交易 | 其他类型不展示 | 7.2.4 / v2.2 / DTC 状态梳理 |
 | 7 | 列表排序 | 有交易数据 | App | 按分区和时间降序展示 | 用户看到按时间分组列表 | 无数据为空态 | 7.1.4 / 7.2.4 |
 | 8 | 点击交易详情 | 用户点击任意卡交易 | App / Card | 根据 Transaction ID 获取最新交易详情 | 展示 Transaction Details | 查询失败处理待确认 | 7.3.4 |
 | 9 | 状态说明 | 用户点击状态说明问号 | App | 展示状态说明弹窗 | 点击 Got it 关闭 | 状态文案缺失待确认 | 7.3.4 |
@@ -146,13 +148,13 @@ sequenceDiagram
 
 | 状态 | 含义 | 触发条件 | 用户可见表现 | 系统处理 | 可迁移到 | 是否终态 | 来源 |
 |---|---|---|---|---|---|---|---|
-| Pending | 处理中 | 卡交易状态映射 | Pending / 处理中 | 展示状态 | Success / Declined / Cancelled / Refunded | 否 | 7.2.4 / 7.3.4 |
-| Success | 交易成功 | 卡交易完成 | Success / 交易成功 | 展示状态 | 不适用 | 是 | 7.2.4 / 7.3.4 |
-| Refunded | 已退款 | 商户退款或退款类交易 | Refunded / 已退款 | 展示状态 | 不适用 | 是 | 7.2.4 / 7.3.4 |
-| Declined / Denied | 拒绝 / 已拒绝 | 交易被拒绝 | Declined / Denied | 展示状态 | 不适用 | 是 | 7.2.4 / 7.3.4 |
-| Cancelled | 已取消 | 订单取消 | Cancelled / 已取消 | 展示状态 | 不适用 | 是 | 7.2.4 / 7.3.4 |
+| Pending | 处理中 | DTC 状态为 PENDING / AUTHORIZED | Pending / 处理中 | 展示状态 | Success / Declined / Cancelled / Refunded | 否 | 7.2.4 / 7.3.4 / DTC 状态梳理 |
+| Success | 交易成功 | DTC 状态为 SUCCESS / CAPTURED | Success / 交易成功 | 展示状态 | 不适用 | 是 | 7.2.4 / 7.3.4 / DTC 状态梳理 |
+| Refunded | 已退款 | DTC 状态为 REFUNDED；CASH_WITHDRAWAL 的 REVERSED 原 cancelled、现 Refunded | Refunded / 已退款 | 展示状态 | 不适用 | 是 | 7.2.4 / 7.3.4 / DTC 状态梳理 |
+| Declined / Denied | 拒绝 / 已拒绝 | DTC 状态为 DENIED | Declined / Denied | 展示状态 | 不适用 | 是 | 7.2.4 / 7.3.4 / DTC 状态梳理 |
+| Cancelled | 已取消 | DTC 状态为 CANCELLED；EXPIRED 是否同口径展示需确认 | Cancelled / 已取消 | 展示状态 | 不适用 | 是 | 7.2.4 / 7.3.4 / DTC 状态梳理 |
 
-备注：原文同时出现 `Declined` 与详情页 `Denied`，二者展示口径是否统一需确认。
+备注：原文同时出现 `Declined` 与详情页 `Denied`，DTC 状态梳理中 DTC 状态为 `DENIED`，AIX 交易状态为 `Declined`。前端最终文案使用 `Declined` 还是 `Denied` 仍需 PM / UI 确认。
 
 ### 3.5 业务级异常与失败处理
 
@@ -353,15 +355,14 @@ flowchart LR
 
 ### 9.1 验收前置
 
-本 PRD 当前为 Review 状态。进入 Approved 前，必须补齐并核对原文图片 / 电子表格中的以下内容：
+本 PRD 当前为 Review 状态。DTC Card Type / Status 映射已根据 `卡交易&钱包交易状态梳理 (1).docx` 嵌入 Excel 补齐。进入 Approved 前，仍必须补齐并核对以下内容：
 
-1. Card 交易 Type 完整映射。
-2. Card 交易 Status 完整映射。
-3. Transaction History of Card 请求 / 响应字段。
-4. Card Transaction Detail Inquiry 请求 / 响应字段。
-5. Card Transaction Detail Inquiry 错误码与失败页展示。
+1. Transaction History of Card 请求 / 响应字段。
+2. Card Transaction Detail Inquiry 请求 / 响应字段。
+3. Card Transaction Detail Inquiry 错误码与失败页展示。
+4. Exchange rate 具体计算来源和前后端责任边界。
 
-未补齐前，本文只能作为 Card 交易列表与详情的结构化草案，不得作为完整验收基线。
+未补齐前，本文可作为 Card 交易展示与状态映射的 Review 版依据，但不得作为完整接口验收基线。
 
 ### 9.2 验收标准
 
@@ -397,6 +398,7 @@ flowchart LR
 ## 10. 来源引用
 
 - (Ref: 历史prd/AIX APP V1.0【Transaction & History】 (1).docx / 1.2 / 2.1 / 3 / 4.2 / 5 / 7.1 / 7.2 / 7.3 / 8.1 / 8.2)
+- (Ref: DTC接口文档/卡交易&钱包交易状态梳理 (1).docx / 嵌入 Excel hFgXns / 卡交易状态映射)
 - (Ref: knowledge-base/card/card-home.md)
 - (Ref: knowledge-base/card/transaction.md)
 - (Ref: knowledge-base/transaction/history.md)
