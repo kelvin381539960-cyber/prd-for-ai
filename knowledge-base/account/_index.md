@@ -3,7 +3,7 @@ module: account
 feature: account-index
 version: "1.0"
 status: active
-source_doc: 历史prd/AIX Card 注册登录需求V1.0 (2).docx
+source_doc: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx
 source_section: 5.2 账户说明；7 注册 / 登录 / 忘记密码
 last_updated: 2026-05-04
 owner: 吴忆锋
@@ -126,10 +126,10 @@ flowchart LR
 
 ## 10. 来源引用
 
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0 (2).docx / 5.2 账户说明 / V1.0)
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0 (2).docx / 7.1 注册功能 / V1.0)
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0 (2).docx / 7.2 登录功能 / V1.0)
-- (Ref: 历史prd/AIX Card 注册登录需求V1.0 (2).docx / 7.3 忘记密码流程页面 / V1.0)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 5.2 账户说明 / V1.0)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.1 注册功能 / V1.0)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.2 登录功能 / V1.0)
+- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.3 忘记密码流程页面 / V1.0)
 - (Ref: knowledge-base/account/registration.md)
 - (Ref: knowledge-base/account/login.md)
 - (Ref: knowledge-base/account/password-reset.md)
