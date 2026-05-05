@@ -65,25 +65,24 @@ sequenceDiagram
     autonumber
     actor 用户
     participant App as AIX App
-    participant Card as Card 服务
-    participant DTC as DTC Card API
+    participant Card as 卡管理服务
+    participant External as 外部发卡能力
     participant Security as 身份验证服务
 
-    用户->>App: 点击 Activate card
-    App-->>用户: 展示 Active Card Page
+    用户->>App: 选择激活实体卡
+    App-->>用户: 展示实体卡校验页面
     用户->>App: 输入实体卡后四位
-    App->>DTC: Inquiry Card Basic Info
-    DTC-->>App: 返回 truncatedCardNumber
-    App->>Card: 比对用户输入与 truncatedCardNumber
-    alt 后四位不匹配
-        App-->>用户: 展示错误提示，停留本页
-    else 后四位匹配
-        alt 后续顺序待确认
-            App->>Security: 身份验证（是否需要待确认）
-            App->>DTC: Card Activation
-            App->>DTC: Set Card PIN（是否强制待确认）
-        end
-        App-->>用户: 进入后续页面或返回 Card Home
+    App->>Card: 校验用户输入是否匹配实体卡信息
+    Card->>External: 获取实体卡校验所需信息
+    External-->>Card: 返回校验结果依据
+    alt 校验不通过
+        Card-->>App: 返回校验失败
+        App-->>用户: 停留当前页面并提示后四位无效
+    else 校验通过
+        Card->>Security: 进入必要的身份验证或安全步骤（顺序待确认）
+        Card->>External: 发起实体卡激活处理
+        External-->>Card: 返回激活处理结果
+        App-->>用户: 进入后续 PIN 设置或返回 Card Home
     end
 ```
 
