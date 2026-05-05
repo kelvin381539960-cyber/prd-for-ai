@@ -3,7 +3,7 @@ module: card
 feature: card-pin
 version: "1.0"
 status: active
-source_doc: 历史prd/AIX Card 【manage】模块需求V1.0 .docx；DTC Card Issuing API Document_20260310；knowledge-base/security/otp-verification.md；prd-template/standard-prd-template.md
+source_doc: archive/historical-prd/card/AIX Card 【manage】模块需求V1.0 .docx；external-docs/dtc/DTC Card Issuing API Document_20260310 (1).docx；knowledge-base/security/otp-verification.md；prd-template/standard-prd-template.md
 source_section: Manage 7.3；DTC PIN APIs；OTP For Reset PIN；Standard PRD Template v1.3
 last_updated: 2026-05-05
 owner: 吴忆锋
@@ -245,8 +245,8 @@ flowchart LR
 
 ## 10. 来源引用
 
-- (Ref: 历史prd/AIX Card 【manage】模块需求V1.0 .docx / 7.3 / V1.0)
-- (Ref: DTC Card Issuing API Document_20260310 / Generate Public Pin Key / Set Card PIN / Reset Card PIN / OTP For Reset PIN)
+- (Ref: archive/historical-prd/card/AIX Card 【manage】模块需求V1.0 .docx / 7.3 / V1.0)
+- (Ref: external-docs/dtc/DTC Card Issuing API Document_20260310 (1).docx / Generate Public Pin Key / Set Card PIN / Reset Card PIN / OTP For Reset PIN)
 - (Ref: knowledge-base/security/otp-verification.md)
 - (Ref: knowledge-base/card/manage/status-and-operations.md)
 - (Ref: prd-template/standard-prd-template.md / v1.3)
