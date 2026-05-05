@@ -69,32 +69,30 @@ sequenceDiagram
     autonumber
     actor 用户
     participant App as AIX App
-    participant Card as Card 服务
+    participant Card as 卡申请服务
     participant Wallet as 钱包服务
     participant Security as 身份验证服务
-    participant DTC as DTC Card API
-    participant MGM as MGM / Discount
+    participant External as 外部发卡能力
+    participant Benefit as 减免费服务
 
-    用户->>App: 点击 Apply Now / Get Card / Add Card
-    App->>Card: 校验申卡资格
-    alt 不满足资格
-        Card-->>App: 返回限制原因
-        App-->>用户: 禁用入口或展示提示
-    else 满足资格
-        App-->>用户: 展示 Select Plan / Pick Card / Select Crypto / Order
-        用户->>App: 填写 Billing / Mailing 与确认费用
-        App->>MGM: 查询减免费
-        MGM-->>App: 返回 Discount
-        App->>Wallet: 校验余额或试算费用
+    用户->>App: 发起申卡
+    App->>Card: 校验用户是否具备申卡资格
+    alt 不满足申卡资格
+        Card-->>App: 返回业务限制原因
+        App-->>用户: 禁用入口或展示限制提示
+    else 满足申卡资格
+        App-->>用户: 展示选卡、选币种和订单信息
+        用户->>App: 完成申请信息并确认订单
+        App->>Benefit: 确认是否可使用减免费权益
+        App->>Wallet: 确认是否需要支付及余额是否足够
         alt 余额不足
-            App-->>用户: 引导充值
-        else 可支付或免费
-            App->>Security: 校验 Face Authentication Token
-            Security-->>App: 返回认证结果
-            Card->>DTC: 提交 Card Application
-            DTC-->>Card: 返回申请结果
-            Card->>MGM: 同步冻结 / 核销 / 解冻
-            App-->>用户: 展示 Application Result
+            App-->>用户: 引导用户充值后再申请
+        else 可免费申请或余额足够
+            App->>Security: 完成本人身份验证
+            Card->>External: 提交申卡申请
+            External-->>Card: 返回申请处理结果
+            Card->>Benefit: 按申请结果处理减免费权益
+            App-->>用户: 展示申请成功、审核中或失败结果
         end
     end
 ```
