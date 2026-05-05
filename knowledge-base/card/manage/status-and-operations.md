@@ -65,34 +65,35 @@ sequenceDiagram
     autonumber
     actor 用户
     participant App as AIX App
-    participant Card as Card 服务
+    participant Card as 卡管理服务
     participant Security as 身份验证服务
-    participant DTC as DTC Card API
+    participant External as 外部发卡能力
 
-    用户->>App: 进入 Card Home 或点击管理操作
-    App->>Card: 查询 cardStatus 和可用操作
-    Card->>Card: 按状态与操作矩阵判断
+    用户->>App: 进入 Card Home 或选择卡管理操作
+    App->>Card: 请求当前卡状态与可用操作
+    Card->>Card: 按状态和操作矩阵判断
     alt 操作不允许
-        Card-->>App: 返回限制原因
+        Card-->>App: 返回业务限制原因
         App-->>用户: 隐藏、禁用或拦截入口
-    else Lock Card
-        App-->>用户: 展示 Lock Confirm Popup
-        用户->>App: 确认 Lock
-        App->>DTC: Freeze Card
-        DTC-->>App: 返回 Freeze 结果
-        App-->>用户: 展示结果并刷新 Card Home
-    else Unlock Card
-        App->>Security: Face Authentication
-        Security-->>App: 返回认证结果
-        alt 认证通过
-            App->>DTC: Unfreeze Card
-            DTC-->>App: 返回 Unfreeze 结果
-            App-->>用户: 展示结果并刷新 Card Home
-        else 认证失败
-            App-->>用户: 按 Security 规则提示
+    else 锁卡
+        App-->>用户: 展示锁卡确认
+        用户->>App: 确认锁卡
+        Card->>External: 发起锁卡处理
+        External-->>Card: 返回处理结果
+        App-->>用户: 展示锁卡结果并刷新卡状态
+    else 解锁
+        App->>Security: 完成本人身份验证
+        Security-->>App: 返回验证结果
+        alt 验证失败
+            App-->>用户: 按身份验证规则提示
+        else 验证通过
+            Card->>External: 发起解锁处理
+            External-->>Card: 返回处理结果
+            App-->>用户: 展示解锁结果并刷新卡状态
         end
-    else Terminate Card
-        App-->>用户: 当前 AIX 页面流程待确认
+    else 注销卡
+        Card-->>App: 返回当前页面流程待确认
+        App-->>用户: 不落地完整注销流程
     end
 ```
 
