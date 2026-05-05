@@ -4,7 +4,7 @@ feature: assets
 version: "3.1"
 status: active
 doc_type: ai-readable-prd-translation
-source_doc: 历史prd/AIX Wallet V1.0【Asset】.docx；DTC接口文档/DTC Wallet OpenAPI Document20260126 (1).docx；knowledge-base/wallet/deposit.md；knowledge-base/transaction/history.md；knowledge-base/transaction/status-model.md；knowledge-base/changelog/knowledge-gaps.md
+source_doc: archive/historical-prd/wallet/AIX Wallet V1.0【Asset】.docx；external-docs/dtc/DTC Wallet OpenAPI Document20260126 (1).docx；knowledge-base/wallet/deposit.md；knowledge-base/transaction/history.md；knowledge-base/transaction/status-model.md；knowledge-base/changelog/knowledge-gaps.md
 source_section: AIX Wallet V1.0【Asset】 / 4.1 钱包首页 My Assets；DTC Wallet OpenAPI / Wallet balance；OTC rate；Crypto transaction search；OTC search；ALL-GAP
 last_updated: 2026-05-05
 owner: 吴忆锋
@@ -32,7 +32,7 @@ depends_on:
 |---|---|
 | 功能名称 | Wallet Assets 钱包资产首页 |
 | 所属模块 | Wallet |
-| 原始 PRD | `历史prd/AIX Wallet V1.0【Asset】.docx` |
+| 原始 PRD | `archive/historical-prd/wallet/AIX Wallet V1.0【Asset】.docx` |
 | 页面名称 | My Assets |
 | 版本 | 3.1 |
 | 状态 | active |
@@ -512,9 +512,9 @@ My Assets 页面是资产展示页。原始 Asset PRD 未定义 My Assets 页面
 
 ## 10. 来源引用
 
-- (Ref: 历史prd/AIX Wallet V1.0【Asset】.docx / 4.1 钱包首页 My Assets)
-- (Ref: 历史prd/AIX Wallet V1.0【Asset】.docx / 2.1 交易说明)
-- (Ref: 历史prd/AIX Wallet V1.0【Asset】.docx / 2.2 接口范围)
+- (Ref: archive/historical-prd/wallet/AIX Wallet V1.0【Asset】.docx / 4.1 钱包首页 My Assets)
+- (Ref: archive/historical-prd/wallet/AIX Wallet V1.0【Asset】.docx / 2.1 交易说明)
+- (Ref: archive/historical-prd/wallet/AIX Wallet V1.0【Asset】.docx / 2.2 接口范围)
 - (Ref: DTC Wallet OpenAPI Document20260126 / Wallet balance)
 - (Ref: knowledge-base/wallet/deposit.md / Wallet Deposit)
 - (Ref: knowledge-base/transaction/history.md / Wallet Transaction History)
