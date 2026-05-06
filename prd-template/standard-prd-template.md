@@ -1,10 +1,10 @@
 ---
 type: prd-template
 feature: standard-prd-template
-version: "1.8"
+version: "1.9"
 status: active
-source_doc: prd-template/README.md；prd-template/prd-writing-workflow.md；prd-template/prd-writing-preferences.md；用户确认结论 2026-05-05；用户确认结论 2026-05-06；用户确认结论 2026-05-06 Canvas 草稿协作、文件最小化与落地评审
-source_section: "standard PRD template；engineering execution PRD rules；optional sections；reuse page rules；lightweight artifact rules；landing review rules"
+source_doc: workflow/prd-workflow.md；prd-template/README.md；prd-template/prd-writing-workflow.md；prd-template/prd-writing-preferences.md；用户确认结论 2026-05-05；用户确认结论 2026-05-06；用户确认结论 2026-05-06 Canvas 草稿协作、文件最小化与落地评审
+source_section: "multi-agent workflow；canvas-first；review gates；engineering execution PRD rules；optional sections；reuse page rules；lightweight artifact rules；landing review rules"
 last_updated: 2026-05-06
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -14,7 +14,25 @@ readers: [product, ui, dev, qa, business, ai]
 
 > 适用对象：前端、后端、测试、设计、产品。  
 > 写作原则：页面能看出来的不写；公共能力已有的不重复写；不能开发和测试的不写；每条规则都要能判断对错；章节按需保留，不为模板完整而补废话。  
-> 使用方式：先在 Canvas 中生成 PRD 草稿并完成用户修改与落地评审；用户确认后，再写入 Git。
+> 使用方式：先在 Canvas 中生成 PRD 草稿并完成用户修改与落地评审；用户确认后，再写入 Git。  
+> 流程规则：PRD 写作必须遵守 `workflow/prd-workflow.md` 中定义的多 Agent 闸门式流程。
+
+---
+
+## Workflow v2.0 对齐规则
+
+所有 PRD 必须遵守以下规则：
+
+- 新 PRD / 迭代 PRD 必须先生成 Canvas Brief。
+- Brief 未经用户确认，不得生成正式 PRD 文件。
+- 用户未明确确认“更新到 Git”，不得修改仓库。
+- PRD 写完后必须经过 Fact Review、Template Review、UX Review、Tech Review。
+- Fact Review 不通过，不得提交 Git。
+- Template Review 不通过，不得标记完成。
+- UX Review 存在 P0 / P1 问题，必须修正后再进入最终确认。
+- 调研资料不得直接混入 Brief 主体。
+- 默认不新增一级目录。
+- 模板或流程修改必须先询问用户确认。
 
 ---
 
@@ -31,9 +49,15 @@ brief_path:
 brief_status:
 source_files:
   - knowledge-base/...
+research_refs: []
 external_sources: []
 user_confirmation_refs: []
 open_gap_refs: []
+review_status:
+  fact_review:
+  template_review:
+  ux_review:
+  tech_review:
 last_updated: YYYY-MM-DD
 owner: TBD
 readers: [product, ui, dev, qa, business, ai]
@@ -42,10 +66,12 @@ readers: [product, ui, dev, qa, business, ai]
 
 说明：
 
-- `brief_path` 可以为空；brief 不强制写入 Git。
+- `brief_path` 可以为空；Brief 不强制写入 Git。
+- `research_refs` 用于记录调研资料，不应把原始调研过程直接塞入 PRD 正文。
 - 新 PRD 优先使用 `source_files` 记录仓库内来源；旧字段 `source_doc` 仅作兼容。
 - 外部网页、竞品、安全参考放入 `external_sources` 或正文来源引用，不要伪装成仓库路径。
 - 关键用户确认可以放入 `user_confirmation_refs` 或正文来源引用。
+- `review_status` 用于记录当前评审状态，可按需保留。
 
 ---
 
@@ -62,6 +88,7 @@ readers: [product, ui, dev, qa, business, ai]
 | 更新时间 |  |
 | 关联 Brief | 无 / `requirements/YYYY-MM/<module>/_brief-<feature>.md` |
 | 关联原型 | 无 / `requirements/YYYY-MM/<module>/assets/<feature>/` |
+| 调研资料 | 无 / `references/research-notes/...` / `_research-<feature>.md` |
 | 依赖公共能力 | 例如：Email OTP Verification、Login Passcode、Notification；没有则写“无” |
 
 ---
@@ -180,6 +207,8 @@ flowchart LR
 - 用户是否能理解当前步骤、为什么要做这一步、下一步会发生什么。
 - 关键操作是否有明确反馈，例如发送成功、验证失败、保存成功、处理中、失败可重试。
 - 失败、锁定、过期、不可用等场景是否给用户可理解的下一步。
+- 用户是否知道当前状态、是否还能继续、失败后如何恢复。
+- 是否存在重复提交、误操作、返回后状态丢失等体验风险。
 
 **展示规则**
 - 只写开发和测试需要验证、且不能仅从原型看出来的规则。
@@ -320,6 +349,7 @@ flowchart LR
 - 原型：
 - 知识库引用：
 - 用户确认：
+- 调研资料：
 - 竞品 / 安全参考：
 
 ---
@@ -345,3 +375,5 @@ flowchart LR
 - [ ] 验收点 / 测试场景只在确有需要时保留。
 - [ ] 待确认项只保留真正阻塞或影响实现的问题，不放内部技术实现细节。
 - [ ] 来源引用覆盖关键事实，调研 / 竞品 / 推测未被写成确认事实。
+- [ ] PRD 已经过 Fact Review、Template Review、UX Review、Tech Review。
+- [ ] 用户已明确确认允许更新 Git。
