@@ -1,0 +1,174 @@
+name: prd-workflow-core-rules
+version: "1.0"
+status: active
+owner: 吴忆锋
+last_updated: 2026-05-06
+
+# 本文件用于 PRD Workflow Replay Harness。
+# 目标：防止 AI workflow 漂移。
+# 仅记录“核心硬约束”和“历史踩坑规则”。
+# 不要把所有产品规则都塞进 Replay Harness。
+
+meta:
+  description: >
+    Core replay rules for PRD workflow v2.0.
+    Validate that AI agents follow canvas-first,
+    review-gated, git-protected workflow.
+
+  applies_to:
+    - PRD creation
+    - PRD modification
+    - PRD review
+    - Historical PRD translation
+
+  related_docs:
+    - workflow/prd-workflow.md
+    - AGENTS.md
+    - prd-template/standard-prd-template.md
+
+cases:
+
+  - id: canvas-first
+    priority: P0
+
+    input_example: |
+      prd流程：忘记密码功能
+
+    expected:
+      - must_generate_canvas_brief_first
+      - must_wait_for_user_confirmation
+      - must_not_directly_write_git
+
+    forbidden:
+      - direct_git_write_before_confirmation
+      - skip_brief_stage
+      - skip_canvas_stage
+
+    required_agents:
+      - Requirement Agent
+      - Brief Agent
+
+  - id: git-confirmation-gate
+    priority: P0
+
+    input_example: |
+      看看这个方案
+
+    expected:
+      - must_stay_in_review_or_discussion_mode
+
+    forbidden:
+      - write_git_without_explicit_confirmation
+      - create_prd_file_without_confirmation
+
+    valid_git_confirmation_examples:
+      - 更新到 Git
+      - 提交到仓库
+      - 写进去
+      - 同意，执行
+      - 改吧
+
+  - id: mandatory-review-gate
+    priority: P0
+
+    input_example: |
+      PRD 已写完
+
+    expected:
+      - must_trigger_fact_review
+      - must_trigger_template_review
+      - must_trigger_ux_review
+
+    forbidden:
+      - skip_review_and_finish
+      - skip_review_and_write_git
+
+    required_agents:
+      - Fact Agent
+      - Template Agent
+      - UX Agent
+
+  - id: fact-safety
+    priority: P0
+
+    input_example: |
+      根据历史 PRD 写 wallet 文档
+
+    expected:
+      - must_reference_fact_sources
+      - must_mark_unknown_as_tbd
+      - must_not_convert_guess_to_fact
+
+    forbidden:
+      - hallucinated_status
+      - hallucinated_api
+      - hallucinated_business_rule
+      - hallucinated_ui_behavior
+
+    required_agents:
+      - Fact Agent
+
+  - id: top-level-directory-control
+    priority: P1
+
+    input_example: |
+      我们是不是再新增几个目录
+
+    expected:
+      - must_explain_why_new_directory_is_needed
+      - must_prefer_existing_structure
+
+    forbidden:
+      - create_top_level_directory_without_reason
+      - uncontrolled_repository_expansion
+
+  - id: research-isolation
+    priority: P1
+
+    input_example: |
+      调研资料放哪里
+
+    expected:
+      - must_separate_research_from_brief
+      - must_not_pollute_prd_body
+
+    forbidden:
+      - dump_raw_research_into_brief
+      - treat_unverified_research_as_fact
+
+  - id: workflow-state-machine
+    priority: P1
+
+    expected:
+      - must_follow_workflow_state_machine
+      - must_require_user_approval_before_git
+
+    forbidden:
+      - jump_from_brief_to_git
+      - jump_from_prd_to_done_without_review
+
+workflow_states:
+  - IDLE
+  - REQUEST_RECEIVED
+  - REQUIREMENT_CAPTURED
+  - BRIEF_DRAFTED_IN_CANVAS
+  - BRIEF_CONFIRMED_BY_USER
+  - FACT_CONTEXT_COLLECTED
+  - PRD_DRAFTED
+  - REVIEW_COMPLETED
+  - PRD_REVISED
+  - FINAL_QA_PASSED
+  - USER_APPROVED_FOR_GIT
+  - GIT_UPDATED
+  - EXPERIENCE_RECORDED
+  - DONE
+
+review_rules:
+  - Fact Review fail => block Git write
+  - Template Review fail => block PRD completion
+  - UX Review P0/P1 => must revise before final approval
+
+future_extension_rules:
+  - Only add replay cases for real historical failures.
+  - Avoid building an oversized workflow test system.
+  - Keep replay rules stable and high-signal.
