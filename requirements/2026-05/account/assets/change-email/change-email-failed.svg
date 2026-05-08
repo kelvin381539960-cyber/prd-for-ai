@@ -1,0 +1,25 @@
+<svg width="390" height="844" viewBox="0 0 390 844" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="390" height="844" fill="#F8F8F8"/>
+  <rect x="0" y="0" width="390" height="88" fill="white"/>
+  <text x="195" y="56" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="600" fill="#111111">Change email</text>
+  <path d="M28 52 L20 44 L28 36" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <circle cx="195" cy="188" r="42" fill="#F1F1F1" stroke="#D8D8D8" stroke-width="1"/>
+  <path d="M180 173 L210 203" stroke="#555555" stroke-width="4" stroke-linecap="round"/>
+  <path d="M210 173 L180 203" stroke="#555555" stroke-width="4" stroke-linecap="round"/>
+
+  <text x="195" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#111111">Email change failed</text>
+  <text x="195" y="304" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#666666">Your email was not changed.</text>
+  <text x="195" y="328" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#666666">Please try again later.</text>
+
+  <rect x="24" y="376" width="342" height="120" rx="16" fill="white" stroke="#E5E5E5"/>
+  <text x="44" y="414" font-family="Arial, sans-serif" font-size="13" fill="#777777">Current email</text>
+  <text x="44" y="440" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#111111">t*******0@gmail.com</text>
+  <text x="44" y="470" font-family="Arial, sans-serif" font-size="13" fill="#777777">New email was not saved</text>
+
+  <rect x="24" y="654" width="342" height="52" rx="26" fill="#111111"/>
+  <text x="195" y="686" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="white">Try again</text>
+
+  <rect x="24" y="722" width="342" height="52" rx="26" fill="white" stroke="#D8D8D8"/>
+  <text x="195" y="754" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#111111">Back to Personal Center</text>
+</svg>
