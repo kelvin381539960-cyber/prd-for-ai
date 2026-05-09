@@ -45,7 +45,7 @@
 | 17 | DONE | `archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx` | `archive/converted-prd/security/identity-verification/` | 已完成；图片引用 19，图片文件 19，缺失 0；HTML 表格 38 |
 | 18 | DONE | `archive/historical-prd/wallet/AIX Wallet V1.0【Asset】.docx` | `archive/converted-prd/wallet/asset/` | 已完成；图片引用 7，图片文件 7，缺失 0；HTML 表格 2 |
 | 19 | DONE | `archive/historical-prd/wallet/AIX Wallet V1.0【Deposit & Send & Swap 】.docx` | `archive/converted-prd/wallet/deposit-send-swap/` | 已完成；图片引用 74，图片文件 73，缺失 0；HTML 表格 17 |
-| 20 | BLOCKED | `archive/historical-prd/website/[2025-11-05]AIX-官网需求一期.docx` | `archive/converted-prd/website/phase-1/` | 失败：Error: apply 413: {"error":"request entity too large"}
+| 20 | DONE | `archive/historical-prd/website/[2025-11-05]AIX-官网需求一期.docx` | `archive/converted-prd/website/phase-1/` | 已完成；图片引用 65，图片文件 60，缺失 0；HTML 表格 11；4 张超大图片已转 JPEG 压缩版 |
     at apply (file:///tmp/convert_one_prd.mjs:11:276)
     at process.processTicksAndRejections (node:inte |
 | 21 | DONE | `archive/historical-prd/website/[2025-11-20]AIX-外部投放waitlist.docx` | `archive/converted-prd/website/waitlist-campaign/` | 已完成；图片引用 3，图片文件 3，缺失 0；HTML 表格 3；图片因单文件过大已转 JPEG 压缩版 |
@@ -69,6 +69,6 @@
 | 指标 | 数量 |
 |---|---:|
 | 历史 docx 总数 | 23 |
-| 已完成 | 22 |
+| 已完成 | 23 |
 | 待转换 | 0 |
-| 受阻 | 1 |
+| 受阻 | 0 |
