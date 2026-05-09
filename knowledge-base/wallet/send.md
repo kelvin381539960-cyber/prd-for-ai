@@ -91,3 +91,25 @@ Send 结果页和列表记录应进入 Transaction Details；全量交易中 Sen
 - (Ref: archive/converted-prd/wallet/deposit-send-swap/README.md / 6.1 钱包转账 Send Crypto)
 - (Ref: archive/converted-prd/security/identity-verification/README.md / Face Auth)
 - (Ref: archive/converted-prd/app/transaction-history/README.md / Transaction Details)
+
+## Page Visuals 页面图索引
+
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+
+### Send Crypto
+
+![Send Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image9.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:321_
+
+![Send Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image10.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:322_
+
+![Send Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image11.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:323_
+
+![Send Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image12.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:324_

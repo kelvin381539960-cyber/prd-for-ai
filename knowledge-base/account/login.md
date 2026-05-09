@@ -442,3 +442,107 @@ sequenceDiagram
 ## Deleted-source rule update
 
 - 2026-05-09：删除线内容按已删除处理。Forgot Password / Password Reset 不再作为 Login active 入口或待确认项。
+
+## Page Visuals 页面图索引
+
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+
+### 1. 需求变更日志
+
+![1. 需求变更日志](../../archive/converted-prd/app/registration-login/assets/media/image7.png)
+
+_Source: archive/converted-prd/app/registration-login/README.md:71_
+
+![1. 需求变更日志](../../archive/converted-prd/app/registration-login/assets/media/image8.png)
+
+_Source: archive/converted-prd/app/registration-login/README.md:74_
+
+![1. 需求变更日志](../../archive/converted-prd/app/registration-login/assets/media/image9.png)
+
+_Source: archive/converted-prd/app/registration-login/README.md:84_
+
+![1. 需求变更日志](../../archive/converted-prd/app/registration-login/assets/media/image12.png)
+
+_Source: archive/converted-prd/app/registration-login/README.md:136_
+
+![1. 需求变更日志](../../archive/converted-prd/app/registration-login/assets/media/image13.png)
+
+_Source: archive/converted-prd/app/registration-login/README.md:144_
+
+### Enable BIO Page
+
+![Enable BIO Page](../../archive/converted-prd/app/registration-login/assets/media/image10.png)
+
+_Source: archive/converted-prd/app/registration-login/README.md:122_
+
+### 6. 全局规则
+
+![6. 全局规则](../../archive/converted-prd/app/registration-login/assets/media/image15.jpeg)
+
+_Source: archive/converted-prd/app/registration-login/README.md:335_
+
+### 7. 需求描述
+
+![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image16.jpeg)
+
+_Source: archive/converted-prd/app/registration-login/README.md:357_
+
+![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image17.jpeg)
+
+_Source: archive/converted-prd/app/registration-login/README.md:361_
+
+![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image21.png)
+
+_Source: archive/converted-prd/app/registration-login/README.md:418_
+
+![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image22.png)
+
+_Source: archive/converted-prd/app/registration-login/README.md:467_
+
+![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image23.png)
+
+_Source: archive/converted-prd/app/registration-login/README.md:478_
+
+![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image24.png)
+
+_Source: archive/converted-prd/app/registration-login/README.md:523_
+
+![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image25.png)
+
+_Source: archive/converted-prd/app/registration-login/README.md:599_
+
+![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image26.png)
+
+_Source: archive/converted-prd/app/registration-login/README.md:604_
+
+![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image27.png)
+
+_Source: archive/converted-prd/app/registration-login/README.md:634_
+
+![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image30.png)
+
+_Source: archive/converted-prd/app/registration-login/README.md:682_
+
+![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image32.png)
+
+_Source: archive/converted-prd/app/registration-login/README.md:748_
+
+![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image33.jpeg)
+
+_Source: archive/converted-prd/app/registration-login/README.md:802_
+
+### Login Page
+
+![Login Page](../../archive/converted-prd/app/registration-login/assets/media/image28.jpeg)
+
+_Source: archive/converted-prd/app/registration-login/README.md:659_
+
+![Login Page](../../archive/converted-prd/app/registration-login/assets/media/image29.jpeg)
+
+_Source: archive/converted-prd/app/registration-login/README.md:663_
+
+### Select Country Page
+
+![Select Country Page](../../archive/converted-prd/app/registration-login/assets/media/image31.png)
+
+_Source: archive/converted-prd/app/registration-login/README.md:702_

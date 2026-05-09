@@ -81,3 +81,101 @@ Card Manage 只维护卡管理相关事实，不承接申卡、Card Home、Card 
 - (Ref: knowledge-base/card/manage/sensitive-info.md)
 - (Ref: knowledge-base/card/manage/pin.md)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md)
+
+## Page Visuals 页面图索引
+
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+
+### 1. 需求变更日志
+
+![1. 需求变更日志](../../../archive/converted-prd/card/manage/assets/media/image3.png)
+
+_Source: archive/converted-prd/card/manage/README.md:58_
+
+### 6. 全局规则
+
+![6. 全局规则](../../../archive/converted-prd/card/manage/assets/media/image8.png)
+
+_Source: archive/converted-prd/card/manage/README.md:354_
+
+![6. 全局规则](../../../archive/converted-prd/card/manage/assets/media/image9.png)
+
+_Source: archive/converted-prd/card/manage/README.md:406_
+
+![6. 全局规则](../../../archive/converted-prd/card/manage/assets/media/image10.png)
+
+_Source: archive/converted-prd/card/manage/README.md:448_
+
+![6. 全局规则](../../../archive/converted-prd/card/manage/assets/media/image11.png)
+
+_Source: archive/converted-prd/card/manage/README.md:485_
+
+### Card home
+
+![Card home](../../../archive/converted-prd/card/manage/assets/media/image12.jpeg)
+
+_Source: archive/converted-prd/card/manage/README.md:545_
+
+![Card home](../../../archive/converted-prd/card/manage/assets/media/image13.jpeg)
+
+_Source: archive/converted-prd/card/manage/README.md:551_
+
+### 7. 需求描述
+
+![7. 需求描述](../../../archive/converted-prd/card/manage/assets/media/image14.png)
+
+_Source: archive/converted-prd/card/manage/README.md:566_
+
+![7. 需求描述](../../../archive/converted-prd/card/manage/assets/media/image15.png)
+
+_Source: archive/converted-prd/card/manage/README.md:586_
+
+![7. 需求描述](../../../archive/converted-prd/card/manage/assets/media/image16.png)
+
+_Source: archive/converted-prd/card/manage/README.md:645_
+
+![7. 需求描述](../../../archive/converted-prd/card/manage/assets/media/image17.jpeg)
+
+_Source: archive/converted-prd/card/manage/README.md:651_
+
+![7. 需求描述](../../../archive/converted-prd/card/manage/assets/media/image18.png)
+
+_Source: archive/converted-prd/card/manage/README.md:666_
+
+![7. 需求描述](../../../archive/converted-prd/card/manage/assets/media/image28.png)
+
+_Source: archive/converted-prd/card/manage/README.md:1168_
+
+![7. 需求描述](../../../archive/converted-prd/card/manage/assets/media/image29.jpeg)
+
+_Source: archive/converted-prd/card/manage/README.md:1214_
+
+![7. 需求描述](../../../archive/converted-prd/card/manage/assets/media/image30.jpeg)
+
+_Source: archive/converted-prd/card/manage/README.md:1218_
+
+![7. 需求描述](../../../archive/converted-prd/card/manage/assets/media/image32.jpeg)
+
+_Source: archive/converted-prd/card/manage/README.md:1279_
+
+![7. 需求描述](../../../archive/converted-prd/card/manage/assets/media/image33.jpeg)
+
+_Source: archive/converted-prd/card/manage/README.md:1283_
+
+### Card Home
+
+![Card Home](../../../archive/converted-prd/card/manage/assets/media/image19.png)
+
+_Source: archive/converted-prd/card/manage/README.md:761_
+
+![Card Home](../../../archive/converted-prd/card/manage/assets/media/image20.png)
+
+_Source: archive/converted-prd/card/manage/README.md:804_
+
+![Card Home](../../../archive/converted-prd/card/manage/assets/media/image21.png)
+
+_Source: archive/converted-prd/card/manage/README.md:835_
+
+![Card Home](../../../archive/converted-prd/card/manage/assets/media/image31.png)
+
+_Source: archive/converted-prd/card/manage/README.md:1233_

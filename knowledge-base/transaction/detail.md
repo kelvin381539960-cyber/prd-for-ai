@@ -396,3 +396,57 @@ Transaction Detail 本身不新增通知规则，只引用 Deposit / Card / Wall
 - (Ref: knowledge-base/wallet/deposit.md / Wallet Deposit)
 - (Ref: knowledge-base/card/transaction.md / Card Transaction Detail)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP 总表)
+
+## Page Visuals 页面图索引
+
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+
+### Transaction Details
+
+![Transaction Details](../../archive/converted-prd/app/transaction-history/assets/media/image26.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:555_
+
+![Transaction Details](../../archive/converted-prd/app/transaction-history/assets/media/image27.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:575_
+
+![Transaction Details](../../archive/converted-prd/app/transaction-history/assets/media/image28.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:576_
+
+![Transaction Details](../../archive/converted-prd/app/transaction-history/assets/media/image29.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:577_
+
+![Transaction Details](../../archive/converted-prd/app/transaction-history/assets/media/image30.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:578_
+
+![Transaction Details](../../archive/converted-prd/app/transaction-history/assets/media/image31.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:630_
+
+![Transaction Details](../../archive/converted-prd/app/transaction-history/assets/media/image32.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:651_
+
+![Transaction Details](../../archive/converted-prd/app/transaction-history/assets/media/image33.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:671_
+
+![Transaction Details](../../archive/converted-prd/app/transaction-history/assets/media/image34.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:672_
+
+![Transaction Details](../../archive/converted-prd/app/transaction-history/assets/media/image35.jpeg)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:673_
+
+![Transaction Details](../../archive/converted-prd/app/transaction-history/assets/media/image36.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:674_
+
+![Transaction Details](../../archive/converted-prd/app/transaction-history/assets/media/image37.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:675_

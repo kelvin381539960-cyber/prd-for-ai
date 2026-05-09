@@ -897,3 +897,93 @@ poa success
 - (Ref: knowledge-base/common/notification.md：Notification 规则待核验)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP-030 ~ ALL-GAP-035 / ALL-GAP-045 / ALL-GAP-046)
 - (Ref: 用户确认结论 / 2026-05-02 / KYC 文件名不应带 wallet；新主事实源改为 account-opening.md)
+
+## Page Visuals 页面图索引
+
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+
+### 7. 需求描述
+
+![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image4.jpeg)
+
+_Source: archive/converted-prd/kyc/wallet-opening/README.md:224_
+
+![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image5.jpeg)
+
+_Source: archive/converted-prd/kyc/wallet-opening/README.md:230_
+
+![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image7.png)
+
+_Source: archive/converted-prd/kyc/wallet-opening/README.md:292_
+
+![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image8.png)
+
+_Source: archive/converted-prd/kyc/wallet-opening/README.md:309_
+
+![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image9.png)
+
+_Source: archive/converted-prd/kyc/wallet-opening/README.md:320_
+
+![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image11.png)
+
+_Source: archive/converted-prd/kyc/wallet-opening/README.md:367_
+
+![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image12.png)
+
+_Source: archive/converted-prd/kyc/wallet-opening/README.md:376_
+
+![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image13.png)
+
+_Source: archive/converted-prd/kyc/wallet-opening/README.md:406_
+
+![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image14.png)
+
+_Source: archive/converted-prd/kyc/wallet-opening/README.md:447_
+
+![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image15.png)
+
+_Source: archive/converted-prd/kyc/wallet-opening/README.md:464_
+
+![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image18.png)
+
+_Source: archive/converted-prd/kyc/wallet-opening/README.md:551_
+
+![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image22.png)
+
+_Source: archive/converted-prd/kyc/wallet-opening/README.md:751_
+
+### Waitlist
+
+![Waitlist](../../archive/converted-prd/kyc/wallet-opening/assets/media/image10.png)
+
+_Source: archive/converted-prd/kyc/wallet-opening/README.md:341_
+
+![Waitlist](../../archive/converted-prd/kyc/wallet-opening/assets/media/image26.png)
+
+_Source: archive/converted-prd/kyc/wallet-opening/README.md:794_
+
+### Verify Page
+
+![Verify Page](../../archive/converted-prd/kyc/wallet-opening/assets/media/image16.png)
+
+_Source: archive/converted-prd/kyc/wallet-opening/README.md:493_
+
+![Verify Page](../../archive/converted-prd/kyc/wallet-opening/assets/media/image25.png)
+
+_Source: archive/converted-prd/kyc/wallet-opening/README.md:782_
+
+### Failed Page
+
+![Failed Page](../../archive/converted-prd/kyc/wallet-opening/assets/media/image17.png)
+
+_Source: archive/converted-prd/kyc/wallet-opening/README.md:520_
+
+### Face Loading
+
+![Face Loading](../../archive/converted-prd/kyc/wallet-opening/assets/media/image19.png)
+
+_Source: archive/converted-prd/kyc/wallet-opening/README.md:592_
+
+![Face Loading](../../archive/converted-prd/kyc/wallet-opening/assets/media/image20.png)
+
+_Source: archive/converted-prd/kyc/wallet-opening/README.md:660_

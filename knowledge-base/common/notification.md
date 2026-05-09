@@ -160,3 +160,73 @@ depends_on:
 - (Ref: knowledge-base/wallet/deposit.md)
 - (Ref: knowledge-base/wallet/send.md)
 - (Ref: knowledge-base/wallet/swap.md)
+
+## Page Visuals 页面图索引
+
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+
+### 1. 修订记录
+
+![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image11.png)
+
+_Source: archive/converted-prd/notification/push-inbox/README.md:561_
+
+![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image12.png)
+
+_Source: archive/converted-prd/notification/push-inbox/README.md:583_
+
+![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image13.png)
+
+_Source: archive/converted-prd/notification/push-inbox/README.md:604_
+
+![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image20.png)
+
+_Source: archive/converted-prd/notification/push-inbox/README.md:828_
+
+![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image21.png)
+
+_Source: archive/converted-prd/notification/push-inbox/README.md:865_
+
+![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image22.png)
+
+_Source: archive/converted-prd/notification/push-inbox/README.md:866_
+
+![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image23.png)
+
+_Source: archive/converted-prd/notification/push-inbox/README.md:876_
+
+![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image26.png)
+
+_Source: archive/converted-prd/notification/push-inbox/README.md:970_
+
+![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image38.png)
+
+_Source: archive/converted-prd/notification/push-inbox/README.md:1081_
+
+![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image40.png)
+
+_Source: archive/converted-prd/notification/push-inbox/README.md:1157_
+
+![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image44.png)
+
+_Source: archive/converted-prd/notification/push-inbox/README.md:1347_
+
+![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image48.png)
+
+_Source: archive/converted-prd/notification/push-inbox/README.md:1532_
+
+### 4. 其他可见
+
+![4. 其他可见](../../archive/converted-prd/notification/push-inbox/assets/media/image75.png)
+
+_Source: archive/converted-prd/notification/push-inbox/README.md:2301_
+
+![4. 其他可见](../../archive/converted-prd/notification/push-inbox/assets/media/image38.png)
+
+_Source: archive/converted-prd/notification/push-inbox/README.md:2436_
+
+### 3. demo
+
+![3. demo](../../archive/converted-prd/notification/system-email/assets/media/image1.jpeg)
+
+_Source: archive/converted-prd/notification/system-email/README.md:37_

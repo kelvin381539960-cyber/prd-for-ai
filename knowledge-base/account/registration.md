@@ -476,3 +476,13 @@ Tag 创建结果：
 - (Ref: archive/converted-prd/app/registration-login/README.md / 7.1.8 Set Tag Page / V1.0)
 - (Ref: archive/converted-prd/security/identity-verification/README.md / 8.3 Email OTP认证)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / Account Registration / 2026-05-01)
+
+## Page Visuals 页面图索引
+
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+
+### set Password Page
+
+![set Password Page](../../archive/converted-prd/app/registration-login/assets/media/image40.jpeg)
+
+_Source: archive/converted-prd/app/registration-login/README.md:926_

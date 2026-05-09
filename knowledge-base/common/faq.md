@@ -172,3 +172,137 @@ Once the card is approved, the delivery address cannot be changed. The user shou
 - (Ref: archive/converted-prd/app/faq/README.md / 3 功能需求)
 - (Ref: archive/converted-prd/app/faq/README.md / 4 Chat with us，删除线)
 - (Ref: archive/converted-prd/app/home/README.md / FAQ 首页展示)
+
+## Page Visuals 页面图索引
+
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+
+### 3. 功能需求
+
+![3. 功能需求](../../archive/converted-prd/app/faq/assets/media/image1.png)
+
+_Source: archive/converted-prd/app/faq/README.md:91_
+
+![3. 功能需求](../../archive/converted-prd/app/faq/assets/media/image2.png)
+
+_Source: archive/converted-prd/app/faq/README.md:92_
+
+![3. 功能需求](../../archive/converted-prd/app/faq/assets/media/image3.png)
+
+_Source: archive/converted-prd/app/faq/README.md:142_
+
+### Virtual Card
+
+![Virtual Card](../../archive/converted-prd/app/faq/assets/media/image4.png)
+
+_Source: archive/converted-prd/app/faq/README.md:175_
+
+### Physical Card
+
+![Physical Card](../../archive/converted-prd/app/faq/assets/media/image5.png)
+
+_Source: archive/converted-prd/app/faq/README.md:209_
+
+![Physical Card](../../archive/converted-prd/app/faq/assets/media/image2.png)
+
+_Source: archive/converted-prd/app/faq/README.md:211_
+
+![Physical Card](../../archive/converted-prd/app/faq/assets/media/image6.png)
+
+_Source: archive/converted-prd/app/faq/README.md:212_
+
+### Select Crypto
+
+![Select Crypto](../../archive/converted-prd/app/faq/assets/media/image7.png)
+
+_Source: archive/converted-prd/app/faq/README.md:231_
+
+![Select Crypto](../../archive/converted-prd/app/faq/assets/media/image2.png)
+
+_Source: archive/converted-prd/app/faq/README.md:232_
+
+### Card home
+
+![Card home](../../archive/converted-prd/app/faq/assets/media/image7.png)
+
+_Source: archive/converted-prd/app/faq/README.md:251_
+
+![Card home](../../archive/converted-prd/app/faq/assets/media/image2.png)
+
+_Source: archive/converted-prd/app/faq/README.md:252_
+
+### Bind Google Wallet
+
+![Bind Google Wallet](../../archive/converted-prd/app/faq/assets/media/image8.png)
+
+_Source: archive/converted-prd/app/faq/README.md:272_
+
+![Bind Google Wallet](../../archive/converted-prd/app/faq/assets/media/image2.png)
+
+_Source: archive/converted-prd/app/faq/README.md:273_
+
+### Update Phone
+
+![Update Phone](../../archive/converted-prd/app/faq/assets/media/image9.png)
+
+_Source: archive/converted-prd/app/faq/README.md:291_
+
+![Update Phone](../../archive/converted-prd/app/faq/assets/media/image2.png)
+
+_Source: archive/converted-prd/app/faq/README.md:292_
+
+### All Transactions
+
+![All Transactions](../../archive/converted-prd/app/faq/assets/media/image10.png)
+
+_Source: archive/converted-prd/app/faq/README.md:310_
+
+![All Transactions](../../archive/converted-prd/app/faq/assets/media/image2.png)
+
+_Source: archive/converted-prd/app/faq/README.md:311_
+
+### Transaction Details
+
+![Transaction Details](../../archive/converted-prd/app/faq/assets/media/image11.png)
+
+_Source: archive/converted-prd/app/faq/README.md:329_
+
+![Transaction Details](../../archive/converted-prd/app/faq/assets/media/image2.png)
+
+_Source: archive/converted-prd/app/faq/README.md:330_
+
+### Crypto Send
+
+![Crypto Send](../../archive/converted-prd/app/faq/assets/media/image12.png)
+
+_Source: archive/converted-prd/app/faq/README.md:348_
+
+![Crypto Send](../../archive/converted-prd/app/faq/assets/media/image2.png)
+
+_Source: archive/converted-prd/app/faq/README.md:349_
+
+### Crypto Swap
+
+![Crypto Swap](../../archive/converted-prd/app/faq/assets/media/image13.png)
+
+_Source: archive/converted-prd/app/faq/README.md:367_
+
+![Crypto Swap](../../archive/converted-prd/app/faq/assets/media/image2.png)
+
+_Source: archive/converted-prd/app/faq/README.md:368_
+
+### Deposit method
+
+![Deposit method](../../archive/converted-prd/app/faq/assets/media/image14.png)
+
+_Source: archive/converted-prd/app/faq/README.md:387_
+
+![Deposit method](../../archive/converted-prd/app/faq/assets/media/image2.png)
+
+_Source: archive/converted-prd/app/faq/README.md:388_
+
+### Receive Crypto
+
+![Receive Crypto](../../archive/converted-prd/app/faq/assets/media/image15.png)
+
+_Source: archive/converted-prd/app/faq/README.md:406_

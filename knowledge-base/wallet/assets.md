@@ -538,3 +538,29 @@ My Assets 页面是资产展示页。原始 Asset PRD 未定义 My Assets 页面
 - (Ref: knowledge-base/transaction/history.md / Wallet Transaction History)
 - (Ref: knowledge-base/transaction/status-model.md / Wallet state)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP 总表)
+
+## Page Visuals 页面图索引
+
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+
+### 4. AIX前端功能需求
+
+![4. AIX前端功能需求](../../archive/converted-prd/wallet/asset/assets/media/image1.png)
+
+_Source: archive/converted-prd/wallet/asset/README.md:56_
+
+![4. AIX前端功能需求](../../archive/converted-prd/wallet/asset/assets/media/image2.png)
+
+_Source: archive/converted-prd/wallet/asset/README.md:76_
+
+![4. AIX前端功能需求](../../archive/converted-prd/wallet/asset/assets/media/image3.png)
+
+_Source: archive/converted-prd/wallet/asset/README.md:77_
+
+![4. AIX前端功能需求](../../archive/converted-prd/wallet/asset/assets/media/image4.png)
+
+_Source: archive/converted-prd/wallet/asset/README.md:78_
+
+![4. AIX前端功能需求](../../archive/converted-prd/wallet/asset/assets/media/image5.png)
+
+_Source: archive/converted-prd/wallet/asset/README.md:79_

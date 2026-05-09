@@ -516,3 +516,149 @@ flowchart LR
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP 总表)
 - (Ref: 用户确认结论 / 2026-05-02 / Deposit 流程图去掉单币种页入口)
 - (Ref: 用户确认结论 / 2026-05-02 / WalletConnect 有效期、Risk Withheld、Refunded、payment_info success)
+
+## Page Visuals 页面图索引
+
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+
+### 1. 引言
+
+![1. 引言](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image1.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:36_
+
+![1. 引言](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image2.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:38_
+
+![1. 引言](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image3.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:42_
+
+![1. 引言](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image4.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:45_
+
+![1. 引言](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image5.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:47_
+
+![1. 引言](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image6.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:50_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image7.jpeg)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:297_
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image8.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:301_
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image13.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:360_
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image14.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:361_
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image15.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:362_
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image21.jpeg)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:479_
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image22.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:483_
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image33.jpeg)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:642_
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image34.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:646_
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image35.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:666_
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image36.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:667_
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image37.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:668_
+
+### Deposit Crypto
+
+![Deposit Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image16.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:400_
+
+![Deposit Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image17.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:401_
+
+![Deposit Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image32.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:573_
+
+![Deposit Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image38.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:677_
+
+![Deposit Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image39.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:697_
+
+![Deposit Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image49.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:888_
+
+![Deposit Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image50.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:908_
+
+![Deposit Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image51.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:909_
+
+![Deposit Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image52.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:910_
+
+### Transaction Details
+
+![Transaction Details](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image18.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:424_
+
+![Transaction Details](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image19.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:425_
+
+![Transaction Details](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image20.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:426_
+
+![Transaction Details](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image62.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:1070_
+
+### Receive Crypto
+
+![Receive Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image41.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:741_
+
+![Receive Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image42.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:742_

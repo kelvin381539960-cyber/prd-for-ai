@@ -269,3 +269,13 @@ sequenceDiagram
 - (Ref: external-docs/dtc/DTC Wallet OpenAPI Document20260126 (1).docx / Transfer Balance to Wallet)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md)
 - (Ref: prd-template/standard-prd-template.md / v1.3)
+
+## Page Visuals 页面图索引
+
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+
+### 7. 需求描述
+
+![7. 需求描述](../../archive/converted-prd/card/transaction/assets/media/image2.jpeg)
+
+_Source: archive/converted-prd/card/transaction/README.md:171_

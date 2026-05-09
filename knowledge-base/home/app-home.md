@@ -185,3 +185,103 @@ Home 读取最近一笔钱包开通记录判断钱包区域展示。
 - (Ref: archive/converted-prd/app/home/README.md / 6.1 AIX Home)
 - (Ref: archive/converted-prd/app/faq/README.md / FAQ 首页展示与 Zendesk more 规则)
 - (Ref: archive/converted-prd/common/popup-banner/README.md / 首页 Banner / Popup 配置能力，待后续 common 审计)
+
+## Page Visuals 页面图索引
+
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+
+### 4. 整体流程
+
+![4. 整体流程](../../archive/converted-prd/app/home/assets/media/image5.jpeg)
+
+_Source: archive/converted-prd/app/home/README.md:167_
+
+![4. 整体流程](../../archive/converted-prd/app/home/assets/media/image6.jpeg)
+
+_Source: archive/converted-prd/app/home/README.md:171_
+
+![4. 整体流程](../../archive/converted-prd/app/home/assets/media/image7.jpeg)
+
+_Source: archive/converted-prd/app/home/README.md:175_
+
+### Set Pin
+
+![Set Pin](../../archive/converted-prd/app/home/assets/media/image14.jpeg)
+
+_Source: archive/converted-prd/app/home/README.md:205_
+
+### 申卡入口
+
+![申卡入口](../../archive/converted-prd/app/home/assets/media/image21.png)
+
+_Source: archive/converted-prd/app/home/README.md:260_
+
+![申卡入口](../../archive/converted-prd/app/home/assets/media/image31.png)
+
+_Source: archive/converted-prd/app/home/README.md:397_
+
+![申卡入口](../../archive/converted-prd/app/home/assets/media/image35.png)
+
+_Source: archive/converted-prd/app/home/README.md:408_
+
+![申卡入口](../../archive/converted-prd/app/home/assets/media/image36.png)
+
+_Source: archive/converted-prd/app/home/README.md:439_
+
+![申卡入口](../../archive/converted-prd/app/home/assets/media/image37.png)
+
+_Source: archive/converted-prd/app/home/README.md:441_
+
+![申卡入口](../../archive/converted-prd/app/home/assets/media/image38.png)
+
+_Source: archive/converted-prd/app/home/README.md:443_
+
+![申卡入口](../../archive/converted-prd/app/home/assets/media/image41.png)
+
+_Source: archive/converted-prd/app/home/README.md:471_
+
+![申卡入口](../../archive/converted-prd/app/home/assets/media/image42.png)
+
+_Source: archive/converted-prd/app/home/README.md:477_
+
+### 未申请开通钱包
+
+![未申请开通钱包](../../archive/converted-prd/app/home/assets/media/image27.png)
+
+_Source: archive/converted-prd/app/home/README.md:321_
+
+![未申请开通钱包](../../archive/converted-prd/app/home/assets/media/image28.png)
+
+_Source: archive/converted-prd/app/home/README.md:323_
+
+![未申请开通钱包](../../archive/converted-prd/app/home/assets/media/image29.png)
+
+_Source: archive/converted-prd/app/home/README.md:325_
+
+![未申请开通钱包](../../archive/converted-prd/app/home/assets/media/image30.png)
+
+_Source: archive/converted-prd/app/home/README.md:326_
+
+### 当前卡片展示
+
+![当前卡片展示](../../archive/converted-prd/app/home/assets/media/image39.png)
+
+_Source: archive/converted-prd/app/home/README.md:445_
+
+![当前卡片展示](../../archive/converted-prd/app/home/assets/media/image40.png)
+
+_Source: archive/converted-prd/app/home/README.md:447_
+
+### Select Wallet
+
+![Select Wallet](../../archive/converted-prd/app/home/assets/media/image43.png)
+
+_Source: archive/converted-prd/app/home/README.md:512_
+
+![Select Wallet](../../archive/converted-prd/app/home/assets/media/image44.png)
+
+_Source: archive/converted-prd/app/home/README.md:513_
+
+![Select Wallet](../../archive/converted-prd/app/home/assets/media/image45.png)
+
+_Source: archive/converted-prd/app/home/README.md:528_

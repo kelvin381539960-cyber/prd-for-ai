@@ -272,3 +272,39 @@ flowchart LR
 - (Ref: knowledge-base/security/otp-verification.md)
 - (Ref: knowledge-base/card/manage/status-and-operations.md)
 - (Ref: prd-template/standard-prd-template.md / v1.3)
+
+## Page Visuals 页面图索引
+
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+
+### set pin
+
+![set pin](../../../archive/converted-prd/card/manage/assets/media/image2.png)
+
+_Source: archive/converted-prd/card/manage/README.md:30_
+
+### Set PIN
+
+![Set PIN](../../../archive/converted-prd/card/manage/assets/media/image22.jpeg)
+
+_Source: archive/converted-prd/card/manage/README.md:857_
+
+![Set PIN](../../../archive/converted-prd/card/manage/assets/media/image23.jpeg)
+
+_Source: archive/converted-prd/card/manage/README.md:863_
+
+![Set PIN](../../../archive/converted-prd/card/manage/assets/media/image25.png)
+
+_Source: archive/converted-prd/card/manage/README.md:923_
+
+![Set PIN](../../../archive/converted-prd/card/manage/assets/media/image26.png)
+
+_Source: archive/converted-prd/card/manage/README.md:974_
+
+![Set PIN](../../../archive/converted-prd/card/manage/assets/media/image27.png)
+
+_Source: archive/converted-prd/card/manage/README.md:1003_
+
+![Set PIN](../../../archive/converted-prd/card/manage/assets/media/image19.png)
+
+_Source: archive/converted-prd/card/manage/README.md:1089_

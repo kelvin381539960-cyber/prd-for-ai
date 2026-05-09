@@ -350,3 +350,161 @@ flowchart LR
 - (Ref: knowledge-base/card/manage/_index.md)
 - (Ref: knowledge-base/security/face-authentication.md)
 - (Ref: prd-template/standard-prd-template.md / v1.3)
+
+## Page Visuals 页面图索引
+
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+
+### 申卡入口
+
+![申卡入口](../../archive/converted-prd/card/application/assets/media/image2.jpeg)
+
+_Source: archive/converted-prd/card/application/README.md:186_
+
+![申卡入口](../../archive/converted-prd/card/application/assets/media/image3.png)
+
+_Source: archive/converted-prd/card/application/README.md:190_
+
+![申卡入口](../../archive/converted-prd/card/application/assets/media/image4.png)
+
+_Source: archive/converted-prd/card/application/README.md:192_
+
+![申卡入口](../../archive/converted-prd/card/application/assets/media/image5.png)
+
+_Source: archive/converted-prd/card/application/README.md:216_
+
+![申卡入口](../../archive/converted-prd/card/application/assets/media/image6.png)
+
+_Source: archive/converted-prd/card/application/README.md:217_
+
+![申卡入口](../../archive/converted-prd/card/application/assets/media/image7.png)
+
+_Source: archive/converted-prd/card/application/README.md:218_
+
+![申卡入口](../../archive/converted-prd/card/application/assets/media/image8.png)
+
+_Source: archive/converted-prd/card/application/README.md:220_
+
+![申卡入口](../../archive/converted-prd/card/application/assets/media/image9.png)
+
+_Source: archive/converted-prd/card/application/README.md:247_
+
+![申卡入口](../../archive/converted-prd/card/application/assets/media/image10.png)
+
+_Source: archive/converted-prd/card/application/README.md:248_
+
+![申卡入口](../../archive/converted-prd/card/application/assets/media/image11.png)
+
+_Source: archive/converted-prd/card/application/README.md:249_
+
+![申卡入口](../../archive/converted-prd/card/application/assets/media/image47.png)
+
+_Source: archive/converted-prd/card/application/README.md:835_
+
+![申卡入口](../../archive/converted-prd/card/application/assets/media/image48.png)
+
+_Source: archive/converted-prd/card/application/README.md:836_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image12.png)
+
+_Source: archive/converted-prd/card/application/README.md:251_
+
+![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image13.png)
+
+_Source: archive/converted-prd/card/application/README.md:252_
+
+![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image14.png)
+
+_Source: archive/converted-prd/card/application/README.md:318_
+
+![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image15.png)
+
+_Source: archive/converted-prd/card/application/README.md:319_
+
+![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image16.png)
+
+_Source: archive/converted-prd/card/application/README.md:320_
+
+![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image20.png)
+
+_Source: archive/converted-prd/card/application/README.md:381_
+
+![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image21.png)
+
+_Source: archive/converted-prd/card/application/README.md:382_
+
+![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image22.png)
+
+_Source: archive/converted-prd/card/application/README.md:383_
+
+![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image23.png)
+
+_Source: archive/converted-prd/card/application/README.md:384_
+
+![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image24.png)
+
+_Source: archive/converted-prd/card/application/README.md:431_
+
+![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image25.png)
+
+_Source: archive/converted-prd/card/application/README.md:432_
+
+![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image26.png)
+
+_Source: archive/converted-prd/card/application/README.md:454_
+
+### Select Crypto
+
+![Select Crypto](../../archive/converted-prd/card/application/assets/media/image17.png)
+
+_Source: archive/converted-prd/card/application/README.md:348_
+
+![Select Crypto](../../archive/converted-prd/card/application/assets/media/image18.png)
+
+_Source: archive/converted-prd/card/application/README.md:349_
+
+![Select Crypto](../../archive/converted-prd/card/application/assets/media/image19.png)
+
+_Source: archive/converted-prd/card/application/README.md:350_
+
+### 当前卡片展示
+
+![当前卡片展示](../../archive/converted-prd/card/application/assets/media/image40.png)
+
+_Source: archive/converted-prd/card/application/README.md:647_
+
+![当前卡片展示](../../archive/converted-prd/card/application/assets/media/image41.png)
+
+_Source: archive/converted-prd/card/application/README.md:649_
+
+![当前卡片展示](../../archive/converted-prd/card/application/assets/media/image42.png)
+
+_Source: archive/converted-prd/card/application/README.md:807_
+
+![当前卡片展示](../../archive/converted-prd/card/application/assets/media/image52.png)
+
+_Source: archive/converted-prd/card/application/README.md:922_
+
+![当前卡片展示](../../archive/converted-prd/card/application/assets/media/image53.png)
+
+_Source: archive/converted-prd/card/application/README.md:923_
+
+### Activate Card
+
+![Activate Card](../../archive/converted-prd/card/application/assets/media/image43.png)
+
+_Source: archive/converted-prd/card/application/README.md:809_
+
+![Activate Card](../../archive/converted-prd/card/application/assets/media/image44.png)
+
+_Source: archive/converted-prd/card/application/README.md:811_
+
+![Activate Card](../../archive/converted-prd/card/application/assets/media/image45.png)
+
+_Source: archive/converted-prd/card/application/README.md:813_
+
+![Activate Card](../../archive/converted-prd/card/application/assets/media/image46.png)
+
+_Source: archive/converted-prd/card/application/README.md:815_

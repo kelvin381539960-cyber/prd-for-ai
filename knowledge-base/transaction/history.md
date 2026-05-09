@@ -425,3 +425,85 @@ Transaction History 本身不新增通知规则，只引用 Deposit / Notificati
 - (Ref: knowledge-base/card/transaction.md / Card History)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP 总表)
 - (Ref: 用户确认结论 / 2026-05-02 / Wallet Transaction History 合并进 Transaction History)
+
+## Page Visuals 页面图索引
+
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+
+### 5. 映射关系（交易记录）
+
+![5. 映射关系（交易记录）](../../archive/converted-prd/app/transaction-history/assets/media/image11.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:282_
+
+### 6. 时区显示
+
+![6. 时区显示](../../archive/converted-prd/app/transaction-history/assets/media/image12.jpeg)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:288_
+
+### 7. AIX前端功能需求
+
+![7. AIX前端功能需求](../../archive/converted-prd/app/transaction-history/assets/media/image13.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:312_
+
+![7. AIX前端功能需求](../../archive/converted-prd/app/transaction-history/assets/media/image14.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:332_
+
+![7. AIX前端功能需求](../../archive/converted-prd/app/transaction-history/assets/media/image15.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:333_
+
+![7. AIX前端功能需求](../../archive/converted-prd/app/transaction-history/assets/media/image16.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:341_
+
+![7. AIX前端功能需求](../../archive/converted-prd/app/transaction-history/assets/media/image17.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:342_
+
+![7. AIX前端功能需求](../../archive/converted-prd/app/transaction-history/assets/media/image19.jpeg)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:471_
+
+![7. AIX前端功能需求](../../archive/converted-prd/app/transaction-history/assets/media/image20.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:475_
+
+### Card History
+
+![Card History](../../archive/converted-prd/app/transaction-history/assets/media/image18.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:441_
+
+![Card History](../../archive/converted-prd/app/transaction-history/assets/media/image21.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:495_
+
+![Card History](../../archive/converted-prd/app/transaction-history/assets/media/image22.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:502_
+
+![Card History](../../archive/converted-prd/app/transaction-history/assets/media/image23.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:503_
+
+![Card History](../../archive/converted-prd/app/transaction-history/assets/media/image24.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:504_
+
+![Card History](../../archive/converted-prd/app/transaction-history/assets/media/image25.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:505_
+
+### Swap
+
+![Swap](../../archive/converted-prd/app/transaction-history/assets/media/image38.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:753_
+
+![Swap](../../archive/converted-prd/app/transaction-history/assets/media/image39.png)
+
+_Source: archive/converted-prd/app/transaction-history/README.md:773_
