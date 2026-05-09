@@ -137,7 +137,7 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 21 | ALIGNED | `knowledge-base/card/transaction-detail.md` | `archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/app/transaction-history/README.md` | card/transaction-detail.md 已补齐 Card History/Details、去搜索、状态说明、Exchange rate、可选字段隐藏和 DTC 未知错误处理 |
 | 22 | ALIGNED | `knowledge-base/wallet/_index.md` | `archive/converted-prd/wallet/asset/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/security/identity-verification/README.md` | wallet/_index.md 已更新 Wallet Asset + Deposit/Send/Swap + KYC/Security/Transaction 证据边界，并登记 Send/Swap 缺口 |
 | 23 | ALIGNED | `knowledge-base/wallet/assets.md` | `archive/converted-prd/wallet/asset/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md` | assets.md 已补齐稳定币范围、Total Asset、汇率异常、排序、隐藏余额、Recent transaction、Withdraw隐藏 |
-| 24 | SOURCE_GAP | `knowledge-base/wallet/deposit.md` | `archive/converted-prd/wallet/deposit-send-swap/README.md`；`archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/transaction-history/README.md` | deposit.md 已补齐 Deposit/GTR/WalletConnect 关键规则；Send/Swap 完整流程尚未沉淀，需后续拆分或补齐 |
+| 24 | ALIGNED | `knowledge-base/wallet/deposit.md` | `archive/converted-prd/wallet/deposit-send-swap/README.md`；`archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/transaction-history/README.md` | deposit.md 只承接 Deposit/GTR/WalletConnect；已新增 wallet/send.md 和 wallet/swap.md 收口 Send/Swap SOURCE_GAP |
 | 25 | ALIGNED | `knowledge-base/kyc/_index.md` | `archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/home/README.md` | kyc/_index.md 已按 KYC + Home + Card Application + Security converted-prd 更新证据边界 |
 | 26 | ALIGNED | `knowledge-base/kyc/account-opening.md` | `archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/home/README.md`；`archive/converted-prd/card/application/README.md` | account-opening.md 已补齐 Waitlist页面级拦截、Face 30秒超时、长期有效、Face锁定、Home钱包面板映射、申卡前置 |
 | 27 | ALIGNED | `knowledge-base/security/_index.md` | `archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/app/registration-login/README.md` | security/_index.md 已按 Security + Registration + Card Manage + Wallet converted-prd 更新证据边界和缺口索引 |
@@ -152,14 +152,16 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 指标 | 数量 |
 |---|---:|
 | 总任务 | 32 |
-| ALIGNED | 22 |
+| ALIGNED | 23 |
 | NEED_CONFIRMATION | 3 |
 | CONFLICT | 1 |
-| SOURCE_GAP | 5 |
+| SOURCE_GAP | 4 |
 | TODO | 0 |
 | OUT_OF_SCOPE | 1 |
 
 ## Batch Notes
+
+- 2026-05-09：收口 Wallet SOURCE_GAP。新增 wallet/send.md 和 wallet/swap.md；wallet/deposit.md 改为只承接 Deposit/GTR/WalletConnect，任务 24 改为 ALIGNED。
 
 - 2026-05-09：完成最终 TODO 批次。common/errors 和 _meta/*.md 标 SOURCE_GAP；已补本轮审计发现的高频错误、状态、字段、限制、国家/地区、合规边界、术语，但全量字典化仍需后续专项结构化。至此原 32 项任务无 TODO。
 

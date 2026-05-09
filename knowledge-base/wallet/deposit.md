@@ -2,7 +2,7 @@
 module: wallet
 feature: deposit
 version: "1.1"
-status: source_gap
+status: active
 doc_type: ai-readable-prd-translation
 source_doc: archive/converted-prd/wallet/asset/README.md；archive/converted-prd/wallet/deposit-send-swap/README.md；archive/converted-prd/kyc/wallet-opening/README.md；archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/app/transaction-history/README.md
 source_section: Wallet Deposit/Send/Swap / 6.1 Send；6.2 Swap；6.3 GTR Deposit；6.4 WalletConnect Deposit；Security / Face Auth；Transaction History
@@ -22,7 +22,7 @@ depends_on:
 
 # Wallet Deposit 钱包充值
 
-> Source alignment note: 本文件已按 Wallet Deposit/Send/Swap converted-prd 做双向覆盖校验。Deposit 规则已补齐关键缺口；但源 PRD 中的 Send Crypto 与 Swap Crypto 尚未完整沉淀到独立 KB，本文状态暂标 SOURCE_GAP。
+> Source alignment note: 本文件已按 Wallet Deposit/Send/Swap converted-prd 做双向覆盖校验。本文件只承接 Deposit / GTR / WalletConnect 相关规则；Send Crypto 与 Swap Crypto 已拆分至 `wallet/send.md` 和 `wallet/swap.md`。
 
 
 > 本文件是对历史 PRD / DTC 文档中 Wallet Deposit 相关内容的 AI-readable 结构化转译稿。  
@@ -488,17 +488,17 @@ flowchart LR
 | QR 过期 | 二维码过期后置灰，分享按钮不可点击，提示 The QR code has expired / If you have not completed the deposit, please resubmit.，点击 Come back Wallet 返回钱包首页 | Wallet DSS / 6.4 |
 | Quick Deposit Check | WalletConnect Deposit 页面包含 Right Coin 和 Got Gas 提示；私有钱包必须有网络原生币支付 gas | Wallet DSS / 6.4 |
 
-### B. Source gaps for Send / Swap
+### B. Cross-file boundaries
 
-| 缺口 | 源文档规则 | 当前处理 |
-|---|---|---|
-| Send Crypto | 支持手机号、Email、Tag 等收款人，选择 USDC/USDT/WUSD/FDUSD，余额不足提示 Insufficient balance，Send Now 触发刷脸 Token 校验，结果页有 Send successful / processing / failure | SOURCE_GAP，需后续补 `wallet/send.md` 或扩展本文件 |
-| Swap Crypto | 支持稳定币间兑换，Sell/Buy 币种互斥，Rate 由 get-otc-rate 获取，Swap Order Confirm 校验报价有效期和余额，结果页有 Swap completed / processing / failed | SOURCE_GAP，需后续补 `wallet/swap.md` 或扩展本文件 |
-| OTC Quote | dtcQuoteId 是一次性报价标识符，使用后失效，需重新调用 get-otc-rate 获取 | SOURCE_GAP，需落入 Swap 文档 |
+| 范围 | 承接文件 |
+|---|---|
+| Deposit / GTR / WalletConnect | `wallet/deposit.md` |
+| Send Crypto | `wallet/send.md` |
+| Swap Crypto / OTC Quote / dtcQuoteId | `wallet/swap.md` |
 
 ### C. Runtime usage rule
 
-在 Send / Swap 专项文档补齐前，AI 回答转账或兑换细节时必须回查 `archive/converted-prd/wallet/deposit-send-swap/README.md`，不得只依赖本文件。
+回答 Send / Swap 细节时应读取 `wallet/send.md` 或 `wallet/swap.md`，不要从 Deposit 文档推导。
 
 ## 10. 来源引用
 

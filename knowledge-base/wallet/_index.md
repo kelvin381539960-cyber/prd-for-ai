@@ -10,6 +10,8 @@ owner: 吴忆锋
 depends_on:
   - wallet/assets
   - wallet/deposit
+  - wallet/send
+  - wallet/swap
   - transaction/history
   - transaction/detail
   - transaction/reconciliation
@@ -20,7 +22,7 @@ depends_on:
 
 # Wallet 模块索引
 
-> Source alignment note: Wallet 已按 converted-prd 做双向覆盖校验。本批将 wallet/assets 标 ALIGNED；wallet/deposit 因源文档同时包含 Deposit / Send / Swap，而现有 KB 尚未完整沉淀 Send / Swap，标 SOURCE_GAP。
+> Source alignment note: Wallet 已按 converted-prd 做双向覆盖校验。本批将 wallet/assets 标 ALIGNED；wallet/deposit 只承接 Deposit/GTR/WalletConnect；Send 和 Swap 已拆分为 wallet/send.md、wallet/swap.md。
 
 
 > 本文件是模块索引，不是功能 PRD；PRD 模板检查仅做弱校验，重点检查模块边界、读取规则和依赖关系。
@@ -185,15 +187,17 @@ flowchart TD
 |---|---|---|
 | wallet/_index.md | ALIGNED | 已登记 Wallet Asset、Deposit/Send/Swap、KYC、Security、Transaction 的证据边界 |
 | wallet/assets.md | ALIGNED | My Assets 资产、稳定币、Total Asset、Recent transaction、隐藏提现入口等已覆盖 |
-| wallet/deposit.md | SOURCE_GAP | Deposit 已覆盖较多，但 Send / Swap 仅部分出现，需后续拆分或补齐 `wallet/send.md`、`wallet/swap.md` |
+| wallet/deposit.md | ALIGNED | 只承接 Deposit/GTR/WalletConnect；Send / Swap 已拆分 |
+| wallet/send.md | ALIGNED | 承接 Send Crypto 完整流程、收款人校验、余额校验、Face Token、结果页 |
+| wallet/swap.md | ALIGNED | 承接 Swap Crypto、OTC Rate、dtcQuoteId、汇率过期、结果页 |
 
 ## Wallet source gap register
 
 | 缺口 | 来源 | 处理 |
 |---|---|---|
-| Send Crypto 完整流程 | wallet/deposit-send-swap / 6.1 | 当前 deposit.md 未完整沉淀，登记 SOURCE_GAP |
-| Swap Crypto 完整流程 | wallet/deposit-send-swap / 6.2 | 当前 deposit.md 未完整沉淀，登记 SOURCE_GAP |
-| WalletConnect QR 过期 / Quick Deposit Check 细节 | wallet/deposit-send-swap / 6.4 | 补入 deposit.md source alignment additions |
+| Send Crypto 完整流程 | wallet/deposit-send-swap / 6.1 | 已新增 wallet/send.md 承接 |
+| Swap Crypto 完整流程 | wallet/deposit-send-swap / 6.2 | 已新增 wallet/swap.md 承接 |
+| WalletConnect QR 过期 / Quick Deposit Check 细节 | wallet/deposit-send-swap / 6.4 | 已补入 deposit.md source alignment additions |
 
 ## 10. 来源引用
 
