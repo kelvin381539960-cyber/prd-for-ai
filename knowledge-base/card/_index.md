@@ -1,16 +1,19 @@
 ---
 module: card
 feature: card-index
-version: "3.3"
+version: "3.4"
 status: active
-source_doc: knowledge-base/card/application.md；knowledge-base/card/card-home.md；knowledge-base/card/manage/_index.md；knowledge-base/card/transaction.md；knowledge-base/card/transaction-detail.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/_system-boundary.md
-source_section: Card runtime structure；Card Application；Card Home；Card Manage；Card Transaction；Card Transaction Detail；ALL-GAP；system boundary
-last_updated: 2026-05-05
+source_doc: archive/converted-prd/card/application/README.md；archive/converted-prd/app/home/README.md；archive/converted-prd/kyc/wallet-opening/README.md；archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/card/manage/README.md
+source_section: Card Application；Home Card entry；KYC wallet opening；Security verification；Card Manage
+last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
 ---
 
 # Card 模块索引
+
+> Source alignment note: 本模块已开始按 converted-prd 做双向覆盖校验。Card Application 已补齐核心 Evidence→KB 缺口；Card Home 发现 Home PRD 与 Card Application PRD 对部分首页卡片跳转存在冲突，已在 `card/card-home.md` 标记 `CONFLICT`，不得自行裁决。
+
 
 ## 1. 模块定位
 
@@ -78,6 +81,22 @@ Card 目录不再把 Manage、Transaction、Transaction Detail 和全局 Transac
 5. 不把 DTC Sub Account、WalletAccount、Card Account 的关系写死为一一对应。
 6. 不把 Terminate Card 单独写成完整 PRD；当前只作为 Manage 操作边界和待确认项。
 7. 不把旧的合并式管理文件当作运行态入口。
+
+## Source alignment additions
+
+| 项目 | 状态 | 说明 |
+|---|---|---|
+| Card Application | ALIGNED | 已补齐申卡资格、入口、费用、币种、Face Auth、Billing、Mailing、MGM 减免费、结果页等 converted-prd 规则 |
+| Card Home | CONFLICT | Home PRD 与 Card Application PRD 对 Active 未设置 PIN、Pending activation、Frozen 等首页点击跳转存在差异 |
+| Supporting evidence | 已登记 | 申卡同时依赖 Home、KYC、Security、Card Manage 证据 |
+
+## Cross-document conflict register
+
+| 冲突点 | Home PRD | Card Application PRD | 处理 |
+|---|---|---|---|
+| Active 且未设置 PIN 的首页卡片点击 | 跳转当前卡片首页 `My Card` | 跳转设置 PIN 页面 `Set PIN` | 标 `CONFLICT`，待产品确认 |
+| Pending activation / 待激活点击 | Home 写跳转当前卡片待激活页面 `My Card` | Application 写跳转激活卡页面 `Activate Card` | 标 `CONFLICT`，待产品确认 |
+| Frozen / 已冻结点击 | Home 写跳转当前卡片首页 `Card` | Application 写跳转触发解冻卡的身份认证页面 | 标 `CONFLICT`，待产品确认 |
 
 ## 7. 来源引用
 

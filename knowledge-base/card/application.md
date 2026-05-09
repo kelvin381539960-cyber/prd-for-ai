@@ -1,16 +1,19 @@
 ---
 module: card
 feature: application
-version: "1.3"
+version: "1.4"
 status: active
-source_doc: archive/historical-prd/card/AIX Card V1.0【Application】.docx；external-docs/dtc/external-docs/dtc/DTC Card Issuing API Document_20260310 (1).docx (1).docx；prd-template/standard-prd-template.md
-source_section: Application 2.1 / 2.2 / 4 / 5.1 / 6.1 / 6.5-6.7；DTC Card Application；Standard PRD Template v1.3
-last_updated: 2026-05-04
+source_doc: archive/converted-prd/card/application/README.md；archive/converted-prd/app/home/README.md；archive/converted-prd/kyc/wallet-opening/README.md；archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/card/manage/README.md
+source_section: Card Application / 2.1 申卡说明；6.1 申请开卡；Home / 申卡入口；Security / Face Auth；KYC / wallet opening
+last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
 ---
 
 # Card Application 申卡流程
+
+> Source alignment note: 本文件已按 `archive/converted-prd/card/application/README.md` 进行 Evidence→KB 补齐，并同步核对 Home、KYC、Security 支撑证据。补齐重点包括多币种制卡费支付、Fee waiver、余额校验、Face Auth token、Billing/Mailing 字段限制、实体卡打印名、MGM 减免费状态和结果页规则。
+
 
 ## 1. 文档信息
 
@@ -276,6 +279,69 @@ flowchart LR
 | DTC 申卡失败 | request-card 返回失败 | 提交申卡 | Application unsuccessful | 记录失败 | 是 |
 
 ---
+
+## Source alignment additions
+
+### A. 申卡资格与入口
+
+| 规则 | 结论 | 来源 |
+|---|---|---|
+| 申卡资格 | 仅完成钱包开通、DTC 渠道开户、KYC 验证通过、刷脸 Token 有效、申卡 5 张以内的用户才能申请卡 | Card Application / 2.1 |
+| 一人在途限制 | 一个用户可申请多张卡，5 张可配置，但仅可一张在途；DTC 可配置是否限制 | Card Application / 2.1 |
+| 支持卡类型 | Virtual Card、Physical Card | Card Application / 6.1 |
+| 支持币种 | USDT、USDC、WUSD、FDUSD；后续可配置 | Card Application / 2.1 / Select Crypto |
+| 支持地区 | Phase 1：Philippines、Vietnam、Australia；后续可配置 | Card Application / 2.1 |
+| 入口展示 | 统计待激活、已激活、审核中、已冻结之和；≥5 不显示，<5 且有审核中置灰，<5 且无审核中高亮 | Card Application / Home |
+
+### B. 选卡、余额和制卡费
+
+| 规则 | 结论 |
+|---|---|
+| 首次用户 | 无申请记录定义为首次，进入 `Select plan`；非首次进入 `Pick your card` |
+| Fee waiver 弹窗 | 当前用户有可减免制卡费时，进入选择卡类型页显示弹窗；点击 `Got it` 关闭 |
+| 钱包余额不能为 0 校验 | 如配置开启，调用 `[GET] /openapi/v1/wallet/balances`，任一加密币账户余额 > 0 才可继续 |
+| 余额为 0 | 显示 `Top up & Get started`，点击跳转 Deposit |
+| 选择币种默认值 | 默认 USDT，用户选择后卡面显示对应币种 |
+| 制卡费 | 当前虚拟卡 5 USD、实体卡 10 USD，后台可配置；若 X=0 只显示 `Apply Card` |
+| 订单页费用 | `Payable card fee = Card fee - Fee waiver`，按 USD 计价 |
+| 加密币应付金额 | `Card Application Fee = Payable card fee × Exchange rate` |
+
+### C. Checkout 支付规则
+
+| 规则 | 结论 |
+|---|---|
+| 多币种支付 | 申卡付费已放开多币种支付；用户可切换支付币种，系统实时重算应付金额 |
+| 汇率接口 | 用户切换币种时调用 `/openapi/v1/otc/get-otc-rate` 获取实时汇率 |
+| 汇率失败提示 | `The exchange rate has not been updated in real time. Please try again.`，并切回之前选中币种 |
+| 支付币种列表 | 调用 `/openapi/v1/wallet/balances` 获取全量币种余额，并筛选支持付款的稳定币 |
+| 币种排序 | 优先展示当前申卡所选币种，其他币种按余额从高到低排序 |
+| 余额不足 | 显示 `top up [Crypto] >`，点击跳转 Select a deposit method；`Slide to pay` 置灰或禁止滑动 |
+| 扣费方式 | 扣制卡费不用单独调接口；上送费用字段，DTC 在申请响应成功时实时扣；审核失败会退款 |
+
+### D. Billing / Mailing 字段规则
+
+| 页面 | 规则 |
+|---|---|
+| Billing information | First name / Last name 字符串长度 25 字节 |
+| Billing name 校验 | 点击 Save 时，用 Last+First 或 First+Last 与 KYC Full name 比对；不校验大小写 |
+| Billing 缓存 | 前端设备缓存最近一次 Save 数据；Email 进入页面时实时读取；删除应用后缓存丢失 |
+| Mailing address | 仅 Physical Card 展示且必填 |
+| Print Name on Card | 自动反显 KYC fullname；≤25 字节显示完整；>25 字节按 1–25 位截断 |
+| Address selection | 地址未选择完成点击返回，提示 `Address selection isnot completed.`；可 Stay 或 Leave |
+| Mailing 缓存 | 前端设备缓存最近一次 Save 数据；Print Name on Card 进入页面时实时读取 |
+
+### E. Face Auth、提交申卡和结果页
+
+| 规则 | 结论 |
+|---|---|
+| 免费申请 | Total 为 0 时显示 `Apply for free`，点击后先校验刷脸 token |
+| 付费申请 | Total 不为 0 时显示 `Checkout`，支付后校验刷脸 token |
+| Face token 无效提示 | `To ensure the security and rights of your application card, please complete the facial recognition verification as per the instructions.`，点击 `Verify Now` 跳转身份认证刷脸页 |
+| 提交申卡 | token 有效后请求 `/openapi/v1/card/request-card` |
+| 成功页 | response success=true 且返回 `Pending activation` 或 `Active`，展示开卡成功，`View my card` 返回 Card |
+| 审核中页 | response success=true 且返回 `Processing`，展示开卡审核中，`Back to Home` 返回 AIX Home |
+| 失败页 | response success=false，展示 `Application unsuccessful`，返回 Home |
+| MGM 减免费 | 响应失败不通知；审核中冻结；审核通过核销；审核失败 Terminated / Cancelled 解冻 |
 
 ## 10. 来源引用
 

@@ -1,16 +1,19 @@
 ---
 module: card
 feature: card-home
-version: "1.4"
-status: active
-source_doc: archive/historical-prd/card/AIX Card V1.0【Application】.docx；archive/historical-prd/app/AIX APP V1.0【Home】.docx；archive/historical-prd/app/AIX APP V1.0【Transaction & History】 (1).docx；archive/historical-prd/card/AIX Card 【manage】模块需求V1.0 .docx；prd-template/standard-prd-template.md
-source_section: Application 5.2；Home 6.1；Transaction & History 卡交易列表与详情；Manage 6.4 / 7.1；Standard PRD Template v1.3
-last_updated: 2026-05-05
+version: "1.5"
+status: conflict
+source_doc: archive/converted-prd/card/application/README.md；archive/converted-prd/app/home/README.md；archive/converted-prd/card/manage/README.md；archive/converted-prd/security/identity-verification/README.md
+source_section: Application / 6.2 卡片首页；Home / 当前卡片展示逻辑；Manage / Card operations；Security / identity verification
+last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
 ---
 
 # Card Home 卡首页
+
+> Source alignment note: 本文件已按 converted-prd 做双向覆盖校验，并发现 Home PRD 与 Card Application PRD 对部分首页卡片点击跳转存在冲突。本文件状态暂标 `conflict`；在产品确认前，不得把冲突项写成唯一事实。
+
 
 ## 1. 文档信息
 
@@ -320,6 +323,42 @@ flowchart LR
 | Tracking no 空 | 待激活卡无 Tracking | 查看物流 | 进度 Preparing，不展示 Carrier | 不报错 | 是 |
 
 ---
+
+## Source alignment additions
+
+### A. 首页卡片展示与已确认规则
+
+| 项目 | 结论 | 来源 |
+|---|---|---|
+| 展示卡片范围 | 对于有开卡成功或在途的用户，页面展示所有已激活、已冻结、待激活、审核中的卡片 | Application / 6.2；Home / 6.1 |
+| 无卡 / 申请失败 | 展示默认申卡卡片或申卡入口 | Application / 6.2；Home / 6.1 |
+| 多张卡排序 | 按申请时间降序展示所有卡片 | Application / 6.2；Home / 6.1 |
+| 卡数 < 5 | 最右侧显示申卡入口 `+` | Application / 6.2；Home / 6.1 |
+| 卡数 = 5 | 屏蔽申卡入口 `+` | Application / 6.2；Home / 6.1 |
+| 审核中 / 待激活卡 | 卡片区域需要局部静默刷新以获取最新状态 | Home / 6.1 |
+
+### B. Card Home 页面规则
+
+| 场景 | 规则 |
+|---|---|
+| Active / Suspended 卡 | 显示 Card detail、Lock / Unlock、Recent Transactions、FAQ 等入口 |
+| Google Wallet | 是否开启入口可配置；开启时，卡状态为 Active 且当前申请设备为 Android 才显示 `Add to Google Wallet`；点击后先统一跳转 FAQ 页面 |
+| 实体卡 PIN | 仅实体卡有；Active 且未设置 PIN 显示 `Set PIN`，Active 且已设置 PIN 显示 `Change PIN` |
+| Pending activation 实体卡 | DTC 当前不支持查看卡邮寄地址，按卡状态和物流单映射 Preparing / Shipping / Delivered |
+| Card Order Number | 申请单号可复制，复制后提示 `The information has been copied.` |
+
+### C. Conflict register
+
+| 冲突点 | Home PRD | Card Application PRD | 当前处理 |
+|---|---|---|---|
+| Processing / 审核中点击 | 跳转当前卡片（审核中）页面 `My Card` | 跳转当前卡片首页 `Card（审核中）` | CONFLICT，待产品确认 |
+| Pending activation / 待激活点击 | 跳转当前卡片（待激活）页面 `My Card` | 跳转激活卡页面 `Activate Card` | CONFLICT，待产品确认 |
+| Active 未设置 PIN 点击 | 跳转当前卡片首页 `My Card` | 跳转设置 PIN 页面 `Set PIN` | CONFLICT，待产品确认 |
+| Frozen / 已冻结点击 | 跳转当前卡片首页 `Card` | 跳转触发解冻卡的身份认证页面 | CONFLICT，待产品确认 |
+
+### D. Runtime usage rule for conflicts
+
+在冲突确认前，AI 或知识库使用者回答相关跳转问题时，必须说明来源冲突，不得只引用其中一份 PRD 作为最终规则。
 
 ## 10. 来源引用
 

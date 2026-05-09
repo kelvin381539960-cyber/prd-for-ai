@@ -125,9 +125,9 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 9 | ALIGNED | `knowledge-base/transaction/history.md` | `archive/converted-prd/app/transaction-history/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | history.md 已补齐全量交易聚合、去搜索、过滤类型、REVERSAL退款、异常文案、时间分组 |
 | 10 | ALIGNED | `knowledge-base/transaction/detail.md` | `archive/converted-prd/app/transaction-history/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | detail.md 已补齐 Card/Crypto/Swap 详情差异、Gas fee隐藏、Exchange rate展示和可选字段隐藏 |
 | 11 | ALIGNED | `knowledge-base/transaction/status-model.md` | `archive/converted-prd/app/transaction-history/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | status-model.md 已补齐全量交易类型/状态、原始类型展示范围和 REVERSAL 退款处理 |
-| 12 | TODO | `knowledge-base/card/_index.md` | `archive/converted-prd/card/application/README.md`；`archive/converted-prd/card/manage/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/security/identity-verification/README.md` | Card 索引 |
-| 13 | TODO | `knowledge-base/card/application.md` | `archive/converted-prd/card/application/README.md`；`archive/converted-prd/app/home/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/security/identity-verification/README.md` | 申卡；入口/KYC/Face Auth 都要核对 |
-| 14 | TODO | `knowledge-base/card/card-home.md` | `archive/converted-prd/app/home/README.md`；`archive/converted-prd/card/application/README.md`；`archive/converted-prd/card/manage/README.md` | 卡入口 / 卡首页 |
+| 12 | ALIGNED | `knowledge-base/card/_index.md` | `archive/converted-prd/card/application/README.md`；`archive/converted-prd/card/manage/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/security/identity-verification/README.md` | card/_index.md 已更新 converted-prd 证据范围，并登记 Card Home 跨文档冲突 |
+| 13 | ALIGNED | `knowledge-base/card/application.md` | `archive/converted-prd/card/application/README.md`；`archive/converted-prd/app/home/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/security/identity-verification/README.md` | application.md 已补齐申卡资格、入口、费用、多币种支付、Face Auth、Billing/Mailing、MGM减免费、结果页等规则 |
+| 14 | CONFLICT | `knowledge-base/card/card-home.md` | `archive/converted-prd/app/home/README.md`；`archive/converted-prd/card/application/README.md`；`archive/converted-prd/card/manage/README.md` | card-home.md 已补齐展示规则，但 Home PRD 与 Card Application PRD 对部分首页卡片点击跳转存在冲突，待产品确认 |
 | 15 | TODO | `knowledge-base/card/manage/_index.md` | `archive/converted-prd/card/manage/README.md`；`archive/converted-prd/security/identity-verification/README.md` | 卡管索引 |
 | 16 | TODO | `knowledge-base/card/manage/activation.md` | `archive/converted-prd/card/manage/README.md`；`archive/converted-prd/security/identity-verification/README.md` | 激活；如涉及 OTP/Face/BIO 需看 Security |
 | 17 | TODO | `knowledge-base/card/manage/pin.md` | `archive/converted-prd/card/manage/README.md`；`archive/converted-prd/security/identity-verification/README.md` | PIN；如涉及验证需看 Security |
@@ -152,14 +152,16 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 指标 | 数量 |
 |---|---:|
 | 总任务 | 32 |
-| ALIGNED | 7 |
+| ALIGNED | 9 |
 | NEED_CONFIRMATION | 3 |
-| CONFLICT | 0 |
+| CONFLICT | 1 |
 | SOURCE_GAP | 1 |
-| TODO | 20 |
+| TODO | 17 |
 | OUT_OF_SCOPE | 1 |
 
 ## Batch Notes
+
+- 2026-05-09：完成 Card Application / Card Home 第一段。card index 和 application 标 ALIGNED；card-home 标 CONFLICT，原因是 Home PRD 与 Card Application PRD 对 Processing、Pending activation、Active 未设置 PIN、Frozen 的首页点击跳转存在冲突。
 
 - 2026-05-09：完成 Transaction 批次。transaction index/history/detail/status-model 标 ALIGNED；补齐全量交易去搜索、REVERSAL 退款、Gas fee 隐藏、Exchange rate、异常文案、原始类型展示范围等 Evidence→KB 缺口。
 
