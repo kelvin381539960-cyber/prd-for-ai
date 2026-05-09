@@ -131,7 +131,7 @@
 
 # 4. 功能结构
 
-<img src="/tmp/prd-one-card-transaction/assets/media/image1.jpeg" style="width:5.75in;height:5.6875in" />
+<img src="assets/media/image1.jpeg" style="width:5.75in;height:5.6875in" />
 
 # 5. 国家线
 
@@ -168,7 +168,7 @@
 
 7.2 **业务流程**
 
-<img src="/tmp/prd-one-card-transaction/assets/media/image2.jpeg" style="width:5.75in;height:5.75in" />
+<img src="assets/media/image2.jpeg" style="width:5.75in;height:5.75in" />
 
 7.3 **流程说明**
 
