@@ -1,11 +1,11 @@
 ---
 module: security
 feature: global-rules
-version: "1.0"
+version: "1.1"
 status: active
-source_doc: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx
-source_section: 6 客户端对接方式；7 全局规则
-last_updated: 2026-05-01
+source_doc: archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/app/registration-login/README.md；archive/converted-prd/card/manage/README.md；archive/converted-prd/wallet/deposit-send-swap/README.md
+source_section: Security / 7 全局规则、8 需求描述、9 外部接口、10 错误码；Registration BIO / Password；Card Manage PIN / Sensitive operations；Wallet Send/Swap auth
+last_updated: 2026-05-09
 owner: 吴忆锋
 depends_on:
   - security/_index
@@ -244,6 +244,40 @@ flowchart LR
 | VALIDATING | 验证中 | 否 | 7.5 |
 | DONE | 验证成功完成 | 是 | 7.5 |
 | EXPIRED | 已过期，流程终止 | 是 | 7.5 |
+
+## Source alignment additions
+
+### A. 认证方式与锁定矩阵
+
+| 认证方式 | 源文档规则 | 锁定方式 |
+|---|---|---|
+| OTP | 4 位数字密码，通过短信发送至当前用户账户绑定手机号；失败 5 次锁 20 分钟，失败 10 次锁 24 小时 | 全局共享锁定：已登录按 UID，未登录按手机号；所有业务场景共享累计 |
+| Email OTP | 4 位数字密码，通过邮件发送；失败 5 次锁 20 分钟，失败 10 次锁 24 小时 | 场景隔离锁定：已登录按 UID，未登录按邮箱地址；单个场景独立计数 |
+| Login Passcode | 登录密码认证；失败 5 次锁 20 分钟，失败 10 次锁 24 小时 | 同场景隔离锁定 |
+| BIOMETRICS | 设备人脸 / 指纹验证；无失败次数限制 | 设备本地验证失败后，禁用至用户重新授权；设备端失败会清除本地凭证并关闭后端 Bio 开关 |
+| Face Auth | 活体识别认证；失败 5 次锁 20 分钟，失败 10 次锁 24 小时，接口连续发起 20 次锁 20 分钟 | 同场景隔离锁定 |
+
+### B. 认证优先级与跳过
+
+| 规则 | 结论 |
+|---|---|
+| 多选一认证优先级 | Biometric → Login Passcode → OTP → Email OTP |
+| 自动跳过 | 若当前认证方式不满足使用条件，系统自动跳过并进入下一优先级认证方式 |
+| BIO 登录跳过认证 | 如果是 BIO 登录场景，可以跳过认证，避免重复身份验证 |
+| DeviceID | 用于唯一识别用户客户端设备，用于设备绑定、可信设备判断及风险控制 |
+
+### C. 有效期
+
+| 项目 | 规则 |
+|---|---|
+| DTC token 实际有效期 | DTC 后端实际有效期为 10 分钟 |
+| AIX 校验窗口 | DTC 返回给 AIX 的有效期标记为 5 分钟，AIX 按 5 分钟校验以形成缓冲 |
+| 验证挑战中有效期 | 用户发起身份验证请求后，Challenge 会话 10 分钟内有效，超时需重新发起 |
+| 验证成功后有效期 | 身份验证成功后生成短期认证凭证，10 分钟内用于后续业务提交 |
+
+### D. 删除线 / 待确认边界
+
+- 注册登录 PRD 的忘记密码章节整体为删除线；其中“重置密码后清除 BIO / 关闭 BIO”不在 Security 中沉淀为 confirmed fact，只能在 account/password-reset.md 中保留为 NEED_CONFIRMATION。
 
 ## 10. 来源引用
 

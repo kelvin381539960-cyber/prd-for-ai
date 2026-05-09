@@ -1,11 +1,11 @@
 ---
 module: security
 feature: login-passcode-verification
-version: "1.0"
+version: "1.1"
 status: active
-source_doc: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx
-source_section: 8.4 Login Passcode认证
-last_updated: 2026-05-01
+source_doc: archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/app/registration-login/README.md；archive/converted-prd/card/manage/README.md；archive/converted-prd/wallet/deposit-send-swap/README.md
+source_section: Security / 7 全局规则、8 需求描述、9 外部接口、10 错误码；Registration BIO / Password；Card Manage PIN / Sensitive operations；Wallet Send/Swap auth
+last_updated: 2026-05-09
 owner: 吴忆锋
 depends_on:
   - security/_index
@@ -215,6 +215,15 @@ flowchart LR
 | 显示控制 | 默认密文，可切换明文 | 保护用户输入 | 8.4.2 |
 | 失败锁定 | 24 小时内失败 5 次锁定 20 分钟；10 次锁定 24 小时 | 防暴力破解 | 7.1 / 8.4.2 |
 | 场景隔离锁定 | Login Passcode 使用场景隔离锁定 | 避免全局手机号类锁定混用 | 7.1 |
+
+## Source alignment additions
+
+| 规则 | 结论 | 来源 |
+|---|---|---|
+| 登录密码输入 | 最长 32 个字符，低于 8 位或不满足复杂度时不可继续 | Security / Login Passcode Verify Page |
+| 失败 5 次 | 24 小时内连续失败达到 5 次，锁 20 分钟，弹窗 Too Many Attempts | Security / Login Passcode Verify Page |
+| 失败 10 次 | 24 小时内连续失败达到 10 次，锁 24 小时，弹窗 Too Many Attempts | Security / Login Passcode Verify Page |
+| 锁定方式 | 同场景隔离锁定方式 | Security / 7.1 |
 
 ## 10. 来源引用
 

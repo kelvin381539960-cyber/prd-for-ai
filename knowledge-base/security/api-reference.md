@@ -1,11 +1,11 @@
 ---
 module: security
 feature: api-reference
-version: "1.0"
+version: "1.1"
 status: active
-source_doc: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx
-source_section: 9 外部接口依赖；10 接口错误码映射
-last_updated: 2026-05-01
+source_doc: archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/app/registration-login/README.md；archive/converted-prd/card/manage/README.md；archive/converted-prd/wallet/deposit-send-swap/README.md
+source_section: Security / 7 全局规则、8 需求描述、9 外部接口、10 错误码；Registration BIO / Password；Card Manage PIN / Sensitive operations；Wallet Send/Swap auth
+last_updated: 2026-05-09
 owner: 吴忆锋
 depends_on:
   - security/_index
@@ -219,6 +219,14 @@ flowchart LR
 | `FACE_QUALITY_TOO_POOR` | 人脸图片质量过低 | `Face image quality is too poor. Please try again in better lighting.` | 10.1 |
 | `ERROR` | 通用错误 | `Face verification could not be completed at this time. Please try again later.` | 10.1 |
 | `DEFAULT` | 兜底文案 | `The identity document could not be verified. Please ensure it is valid and try again.` | 10.1 |
+
+## Source alignment additions
+
+| 接口 | 规则 | 来源 |
+|---|---|---|
+| Generate Verification URL | POST /openapi/v1/ekyc/get-verification-url；请求包含 successRedirectUrl / failureRedirectUrl | Security / 9.1 |
+| Query Auth Result | GET /openapi/v1/ekyc/get-auth-result/{requestId} | Security / 9.2 |
+| 错误码映射 | Passport / Face Comparison 等错误码以 Security converted-prd 10 接口错误码映射为准 | Security / 10 |
 
 ## 10. 来源引用
 

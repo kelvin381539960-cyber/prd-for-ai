@@ -140,8 +140,8 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 24 | SOURCE_GAP | `knowledge-base/wallet/deposit.md` | `archive/converted-prd/wallet/deposit-send-swap/README.md`；`archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/transaction-history/README.md` | deposit.md 已补齐 Deposit/GTR/WalletConnect 关键规则；Send/Swap 完整流程尚未沉淀，需后续拆分或补齐 |
 | 25 | ALIGNED | `knowledge-base/kyc/_index.md` | `archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/home/README.md` | kyc/_index.md 已按 KYC + Home + Card Application + Security converted-prd 更新证据边界 |
 | 26 | ALIGNED | `knowledge-base/kyc/account-opening.md` | `archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/home/README.md`；`archive/converted-prd/card/application/README.md` | account-opening.md 已补齐 Waitlist页面级拦截、Face 30秒超时、长期有效、Face锁定、Home钱包面板映射、申卡前置 |
-| 27 | TODO | `knowledge-base/security/_index.md` | `archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/app/registration-login/README.md` | Security 索引 |
-| 28 | TODO | `knowledge-base/security/*.md` | `archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/card/manage/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | OTP / BIO / Face / Password；需看调用场景 |
+| 27 | ALIGNED | `knowledge-base/security/_index.md` | `archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/app/registration-login/README.md` | security/_index.md 已按 Security + Registration + Card Manage + Wallet converted-prd 更新证据边界和缺口索引 |
+| 28 | ALIGNED | `knowledge-base/security/*.md` | `archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/card/manage/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | security/*.md 已补齐 BIO跳过认证、DeviceID、锁定矩阵、IVS有效期、验证码重发冷却、设备绑定、Quick Login BIO处理、API/密码规则等 |
 | 29 | TODO | `knowledge-base/common/notification.md` | `archive/converted-prd/notification/push-inbox/README.md`；`archive/converted-prd/notification/system-email/README.md`；相关业务触发 PRD | 通知 / 邮件；触发场景需回看业务 PRD |
 | 30 | TODO | `knowledge-base/common/errors.md` | 多份 converted-prd 中的错误码 / 文案 | 错误文案字典 |
 | 31 | TODO | `knowledge-base/_meta/*.md` | 多份 converted-prd | 状态、字段、限制、地区等字典 |
@@ -152,14 +152,16 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 指标 | 数量 |
 |---|---:|
 | 总任务 | 32 |
-| ALIGNED | 20 |
+| ALIGNED | 22 |
 | NEED_CONFIRMATION | 3 |
 | CONFLICT | 1 |
 | SOURCE_GAP | 2 |
-| TODO | 5 |
+| TODO | 3 |
 | OUT_OF_SCOPE | 1 |
 
 ## Batch Notes
+
+- 2026-05-09：完成 Security 批次。security index 和 security/*.md 标 ALIGNED；补齐 BIO登录跳过认证、DeviceID、OTP/Email OTP/Passcode/Face锁定矩阵、IVS 10/5分钟有效期、验证码重发冷却与设备绑定、Quick Login BIO清理、API路径、密码策略等 Evidence→KB 缺口。
 
 - 2026-05-09：完成 KYC 批次。kyc index / account-opening 标 ALIGNED；补齐 Waitlist 页面级拦截、Face Loading 30秒超时、申请单长期有效、Face 失败锁定、Home 钱包面板映射、Card 申卡前置依赖等 Evidence→KB 缺口。
 

@@ -1,11 +1,11 @@
 ---
 module: security
 feature: biometric-verification
-version: "1.0"
+version: "1.1"
 status: active
-source_doc: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx
-source_section: 8.5 Biometric认证
-last_updated: 2026-05-01
+source_doc: archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/app/registration-login/README.md；archive/converted-prd/card/manage/README.md；archive/converted-prd/wallet/deposit-send-swap/README.md
+source_section: Security / 7 全局规则、8 需求描述、9 外部接口、10 错误码；Registration BIO / Password；Card Manage PIN / Sensitive operations；Wallet Send/Swap auth
+last_updated: 2026-05-09
 owner: 吴忆锋
 depends_on:
   - security/_index
@@ -188,6 +188,17 @@ flowchart LR
 | 平台差异 | iOS 可控制校验次数；Android 依据系统 | 测试用例需区分平台 | 8.5 |
 | 失败后禁用 | 前端返回失败后，禁用该功能至用户重新授权 | 防止异常状态下继续使用 BIO | 7.1 |
 | 与 Face Authentication 分离 | Biometric 是设备生物识别，不等同于 DTC / AAI 活体识别 | 防止认证能力混用 | 7.1 / 8.5 / 8.6 |
+
+## Source alignment additions
+
+| 规则 | 结论 | 来源 |
+|---|---|---|
+| Quick Login 展示条件 | 仅当 App 本地检测到存在可用 Biometric 密钥信息时才展示 Quick Login | Registration / Login Page |
+| BIO 登录跳过后续认证 | Security 变更日志明确 BIO 登录场景可跳过认证 | Security changelog |
+| 设备端验证通过 | 设备端验证通过后进行后端验证，后端验证成功后进入下一步流程，并使用 biometric 签名请求身份认证 | Registration / Biometric login |
+| 后端验证失败 | 弹窗提示错误，引导跳转至输入手机号 / 登录页面，同时前端清除本地 Bio 信息，后端关闭账户 Bio 开关 | Registration / Biometric login；Security BIOMETRICS |
+| 设备失败 | 设备本地验证失败后，禁用至重新授权；超过设备限制时清除本地 Bio 并隐藏 Quick Login / 引导使用其他方式 | Security / 7.1；Registration / Biometric login |
+| Enable BIO | 登录成功后，若用户未设置 BIO 且设备支持，展示引导页供用户选择是否开启；不是强制开启 | Registration / Enable BIO Page |
 
 ## 10. 来源引用
 

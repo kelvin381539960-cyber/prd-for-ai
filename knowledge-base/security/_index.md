@@ -1,11 +1,11 @@
 ---
 module: security
 feature: security-index
-version: "1.0"
+version: "1.1"
 status: active
-source_doc: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx
-source_section: 6 客户端对接方式；7 全局规则；8 需求描述
-last_updated: 2026-05-01
+source_doc: archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/app/registration-login/README.md；archive/converted-prd/card/manage/README.md；archive/converted-prd/wallet/deposit-send-swap/README.md
+source_section: Security / 7 全局规则、8 需求描述、9 外部接口、10 错误码；Registration BIO / Password；Card Manage PIN / Sensitive operations；Wallet Send/Swap auth
+last_updated: 2026-05-09
 owner: 吴忆锋
 depends_on:
   - _meta/status-dictionary
@@ -165,6 +165,20 @@ sequenceDiagram
 | AIX 自有认证无缓存 | 每次操作均需重新认证 | 影响钱包地址、兑换、转账、解冻卡等场景 | 7.4 验证有效期说明 |
 | Challenge 状态闭环 | INITIAL / VALIDATING / DONE / EXPIRED 必须闭环 | 防止认证状态不可追踪 | 7.5 身份认证状态机 |
 | 外部验证 requestId 可追溯 | 查询验证结果依赖 requestId | 外部认证结果可查询 | 9.1.1 / 9.1.2 |
+
+## Source alignment additions
+
+| 证据规则 | 已落入文件 | 说明 |
+|---|---|---|
+| BIO 登录场景可跳过后续认证 | global-rules.md / biometric-verification.md | Security 变更日志明确“如果是 bio 登录场景，可以跳过认证” |
+| DeviceID 定义 | global-rules.md | 用于设备绑定、可信设备判断及风控 |
+| 认证方式锁定矩阵 | global-rules.md / otp / email / passcode / face | OTP 全局共享，Email OTP / Login Passcode / Face Auth 场景隔离 |
+| IVS token 10/5 分钟 | global-rules.md | DTC 实际 10 分钟，AIX 按 5 分钟校验，形成缓冲 |
+| Challenge 有效期 | global-rules.md | 验证挑战中 10 分钟；验证成功后的认证凭证 10 分钟 |
+| OTP / Email OTP 重发冷却 | otp / email-otp | 24 小时最多 3 次 resend，达到上限后 20 分钟冷却 |
+| 验证码设备绑定 | otp / email-otp | 验证码仅限发起请求的设备使用，更换设备无效 |
+| Quick Login 失败后 BIO 处理 | biometric-verification.md | 后端验证失败时清除本地 Bio，后端关闭该账户 Bio 开关 |
+| 忘记密码 BIO 清理 | account/password-reset.md | 注册登录 PRD 中该章节为删除线，Security 仅登记待确认，不沉淀为 confirmed fact |
 
 ## 10. 来源引用
 

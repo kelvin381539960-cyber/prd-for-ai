@@ -1,11 +1,11 @@
 ---
 module: security
 feature: face-authentication
-version: "1.0"
+version: "1.1"
 status: active
-source_doc: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx
-source_section: 8.6 活体识别认证
-last_updated: 2026-05-01
+source_doc: archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/app/registration-login/README.md；archive/converted-prd/card/manage/README.md；archive/converted-prd/wallet/deposit-send-swap/README.md
+source_section: Security / 7 全局规则、8 需求描述、9 外部接口、10 错误码；Registration BIO / Password；Card Manage PIN / Sensitive operations；Wallet Send/Swap auth
+last_updated: 2026-05-09
 owner: 吴忆锋
 depends_on:
   - security/_index
@@ -273,6 +273,17 @@ Confirm Exit 弹窗：
 | 清零规则 | 人脸验证通过后清零；接口层面连续发起次数验证成功后清零 | 保证用户通过后恢复尝试能力 | 8.6.3 |
 | 计费边界 | liveness 采集失败不会计费，采集成功才会计费 | 影响成本与对账 | 8.6.2 |
 | DTC 活体有效期 | DTC 后端实际有效期 10 分钟，AIX 按 5 分钟窗口校验 | 影响跨业务场景免重认证 | 7.4 |
+
+## Source alignment additions
+
+| 规则 | 结论 | 来源 |
+|---|---|---|
+| Face Auth 锁定 | 24 小时内累计失败 5 次锁 20 分钟；累计失败 10 次锁 24 小时；接口层面连续发起 20 次锁 20 分钟，验证成功后清零 | Security / Face Auth Guide Page |
+| 未锁定状态 | 用户点击后，系统调用 AAI H5 开始活体采集 | Security / Face Auth Guide Page |
+| Loading 成功 | DTC 返回 DONE 时，跳转业务成功回调并进入下一流程 | Security / Face Auth Loading |
+| Loading 失败 | DTC 返回 FAIL / EXPIRED / incomplete / 空值，自动跳转 Face Auth Failed Page | Security / Face Auth Loading |
+| Face Failed 文案 | 后端返回 FAIL / EXPIRED / incomplete 时，展示 Face Comparison API 错误码映射文案 | Security / Face Auth Failed |
+| 锁定弹窗删除线 | Face Auth Failed Page 中“锁定状态点击按钮弹窗提示”在源文档为删除线，不沉淀为 confirmed fact | Security / Face Auth Failed |
 
 ## 10. 来源引用
 

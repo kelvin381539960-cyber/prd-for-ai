@@ -1,11 +1,11 @@
 ---
 module: security
 feature: otp-verification
-version: "1.0"
+version: "1.1"
 status: active
-source_doc: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx
-source_section: 8.2 OTP认证
-last_updated: 2026-05-01
+source_doc: archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/app/registration-login/README.md；archive/converted-prd/card/manage/README.md；archive/converted-prd/wallet/deposit-send-swap/README.md
+source_section: Security / 7 全局规则、8 需求描述、9 外部接口、10 错误码；Registration BIO / Password；Card Manage PIN / Sensitive operations；Wallet Send/Swap auth
+last_updated: 2026-05-09
 owner: 吴忆锋
 depends_on:
   - security/_index
@@ -245,6 +245,19 @@ flowchart LR
 | 失败锁定 | 24 小时内失败 5 次锁定 20 分钟；10 次锁定 24 小时 | 防暴力破解 | 7.1 / 8.2.1 |
 | 重发冷却 | 24 小时内最多 3 次重发，达到上限后冷却 20 分钟 | 防短信轰炸与滥用 | 8.2.1 |
 | 全局共享锁定 | OTP 使用全局共享锁定 | 影响所有手机号类 OTP 验证方式 | 7.1 |
+
+## Source alignment additions
+
+| 规则 | 结论 | 来源 |
+|---|---|---|
+| 验证码位数 | OTP 为 4 位数字验证码 | Security / 8.2 OTP |
+| 验证码有效期 | 5 分钟有效 | Security / Verify Page |
+| 失败 5 次 | 24 小时内连续失败 5 次，触发 20 分钟锁定，弹窗 Too Many Attempts | Security / Verify Page |
+| 失败 10 次 | 24 小时内连续失败 10 次，触发 24 小时锁定，弹窗 Too Many Attempts | Security / Verify Page |
+| 锁定方式 | 全局共享锁定；同一 UID / 手机号在所有 OTP 场景共享累计 | Security / 7.1 |
+| Resend 限制 | 24 小时内最多执行 3 次验证码重新发送，达到上限后触发 20 分钟冷却 | Security / Verify Page |
+| 设备绑定 | 验证码仅限发起请求的设备使用，更换设备无效 | Security / Verify Page |
+| 手机展示 | 登录注册场景明文展示用户填写手机号；其他场景按国际区号 + 前 N 位掩码 + 最后三位明文 | Security / OTP Verify Page |
 
 ## 10. 来源引用
 
