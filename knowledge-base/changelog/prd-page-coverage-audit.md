@@ -1,7 +1,7 @@
 ---
 module: changelog
 feature: prd-page-visual-coverage
-version: "1.3"
+version: "1.4"
 status: active
 source_doc: archive/converted-prd/**/README.md
 source_section: image references and page-like units
@@ -24,7 +24,8 @@ owner: 吴忆锋
 | 已绑定到 KB 的页面图（按自动审计口径） | 331 |
 | 支撑图 / 流程图 / 接口图 / 数据字典图 | 290 |
 | Out of scope / 暂无 KB 承接文件 | 245 |
-| 仍需复核 | 3 |
+| 删除线来源，不绑定 runtime | 3 |
+| 仍需复核 | 0 |
 
 ## 3. 已绑定目标文件
 
@@ -92,9 +93,9 @@ owner: 吴忆锋
 | 24 | common/faq | `archive/converted-prd/app/faq/assets/media/image14.png` | Deposit method  | knowledge-base/common/faq.md | PAGE_VISUAL | BOUND_TO_KB |
 | 25 | common/faq | `archive/converted-prd/app/faq/assets/media/image2.png` | Deposit method  | knowledge-base/common/faq.md | PAGE_VISUAL | BOUND_TO_KB |
 | 26 | common/faq | `archive/converted-prd/app/faq/assets/media/image15.png` | Receive Crypto  | knowledge-base/common/faq.md | PAGE_VISUAL | BOUND_TO_KB |
-| 27 | common/faq | `archive/converted-prd/app/faq/assets/media/image16.png` | 4. Chat with us | knowledge-base/common/faq.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
-| 28 | common/faq | `archive/converted-prd/app/faq/assets/media/image17.png` | 4. Chat with us | knowledge-base/common/faq.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
-| 29 | common/faq | `archive/converted-prd/app/faq/assets/media/image18.png` | 4. Chat with us | knowledge-base/common/faq.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 27 | common/faq | `archive/converted-prd/app/faq/assets/media/image16.png` | 4. Chat with us | knowledge-base/common/faq.md | PAGE_VISUAL | DELETED_SOURCE_NOT_BOUND |
+| 28 | common/faq | `archive/converted-prd/app/faq/assets/media/image17.png` | 4. Chat with us | knowledge-base/common/faq.md | PAGE_VISUAL | DELETED_SOURCE_NOT_BOUND |
+| 29 | common/faq | `archive/converted-prd/app/faq/assets/media/image18.png` | 4. Chat with us | knowledge-base/common/faq.md | PAGE_VISUAL | DELETED_SOURCE_NOT_BOUND |
 | 30 | home | `archive/converted-prd/app/home/assets/media/image1.jpeg` | 3. 全局说明 | knowledge-base/home/app-home.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 31 | home | `archive/converted-prd/app/home/assets/media/image2.jpeg` | 4. 整体流程 | knowledge-base/home/app-home.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 32 | home | `archive/converted-prd/app/home/assets/media/image3.jpeg` | 4. 整体流程 | knowledge-base/home/app-home.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
