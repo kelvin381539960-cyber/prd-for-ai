@@ -1,11 +1,11 @@
 ---
 module: kyc
 feature: account-opening
-version: "1.2"
+version: "3.1"
 status: active
-source_doc: archive/historical-prd/kyc/AIX WALLET 钱包开户KYC需求V1.0 (1).docx；external-docs/dtc/Master sub account 设计方案 (2).docx；external-docs/dtc/DTC Wallet OpenAPI Document20260126 (1).docx（本轮未核验，仅保留历史来源提示）；knowledge-base/integrations/aai/_index.md；knowledge-base/integrations/dtc/_index.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-02
-source_section: AIX Wallet Account Opening & KYC；KYC 状态机；开户页面逻辑；DTC KYC API；Master / Sub Account；D-SUB-ACCOUNT-ID；POA Upload；错误码映射；标准 PRD 模板
-last_updated: 2026-05-04
+source_doc: archive/converted-prd/kyc/wallet-opening/README.md；archive/converted-prd/app/home/README.md；archive/converted-prd/card/application/README.md；archive/converted-prd/security/identity-verification/README.md
+source_section: KYC / 国家线、状态机、开户页面逻辑、外部接口、错误码；Home / 钱包区域展示；Card Application / 申卡前置
+last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
 depends_on:
@@ -20,6 +20,9 @@ depends_on:
 ---
 
 # Account Opening / KYC 开户与身份认证准入 PRD
+
+> Source alignment note: 本文件已按 `archive/converted-prd/kyc/wallet-opening/README.md` 做双向覆盖校验，并同步核对 Home 钱包面板、Card Application 申卡前置和 Security 身份认证支撑证据。
+
 
 ## 1. 文档信息
 
@@ -842,9 +845,50 @@ poa success
 
 ---
 
+## Source alignment additions
+
+### A. KYC source rules confirmed
+
+| 规则 | 结论 | 来源 |
+|---|---|---|
+| Waitlist | Waitlist 场景由弹窗提示调整为页面级拦截；被识别为 Waitlist 时停留在 Waitlist Page，不允许继续后续流程 | KYC changelog / Waitlist 处理方式 |
+| Face Loading 超时 | Face Loading Page 等待超过 30 秒仍未收到检测结果，自动跳转 Face Loading Failed / Loading Failed Page | KYC changelog / 7.2.8 / 7.2.9 |
+| Loading Failed Retry | 点击 Retry 后进入 Face Loading Page 重新提交，不返回 Face Scan | KYC / 7.2.9 |
+| 申请单长期有效 | 申请单自创建后即长期有效；OCR、Face 等核心认证通过后，在 DTC 侧认证结果永久有效，不因时间推移失效 | KYC / 6.2 KYC状态机 |
+| Passport / Face 成功不回退 | 只要 passport、face 认证通过，不会再变为失败状态 | KYC / 6.2 KYC状态机 |
+| Face 失败锁定 | 24 小时内累计失败 5 次锁 20 分钟；累计失败 10 次锁 24 小时；接口层面连续发起 20 次锁 20 分钟，验证成功后清零 | KYC / 7.2.6 |
+| Face 失败计数口径 | DTC 返回 face result=fail 才算失败，其他结果不算失败 | KYC / 7.2.6 |
+| Face Failed 原因优先级 | passport 与 face 均失败时优先展示 passport 失败原因；POA 失败展示 POA error code 映射 | KYC / 7.2.10 |
+| POA | AAI 机审提取 POA 资料，验证真实性、有效期，并校验 POA 国家与用户填报居住国是否匹配、申请国家是否白名单 | KYC / 7.2.11 |
+
+### B. Home wallet panel mapping
+
+| KYC 状态 | Home 钱包区域展示 | 行为 | 来源 |
+|---|---|---|---|
+| 无开户记录 / Pending | 显示未申请开通钱包面板；KYC 为空无 Tips，Pending 显示剩余步骤 | 点击 Activate wallet 进入钱包开通页面 | Home / 钱包区域 |
+| Under Review | 显示审核中面板，Tips title 为 Verification is under reviewing，进度为 3 Steps Finished | 首页进入时局部静默刷新 | Home / 钱包区域 |
+| Failed | 显示审核失败面板，后端 passport / face / POA 失败按对应错误码映射展示；任一验证项失败可重新开户 | 点击 Reactivate Now 进入钱包开通页面 | Home / 钱包区域 |
+| Rejected | 显示审核拒绝面板；因风险被 DTC 拒绝的用户会被拦截开户且隐藏激活钱包入口 | 不允许再次提交 | Home / 钱包区域 |
+| Approved | 显示审核通过 / 资产面板，后端获取全量钱包余额并展示稳定币资产 | 进入 Wallet 资产页 | Home / 钱包区域 |
+
+### C. Card prerequisite mapping
+
+| 规则 | 结论 | 来源 |
+|---|---|---|
+| 申卡前置 | 仅完成钱包开通、DTC 渠道开户、KYC 验证通过、刷脸 Token 有效、申卡 5 张以内的用户才能申请卡 | Card Application / 2.1 |
+| KYC 与 Card 边界 | KYC 只维护开户 / 身份认证事实；卡申请、制卡费、卡类型和结果页由 card/application.md 维护 | Card Application |
+
+### D. Source boundaries
+
+- Security 身份认证 PRD 是 KYC 的支撑证据，但 KYC 钱包开户流程中的 Passport / Face / POA 页面和错误码以 KYC 主 PRD 为准。
+- 删除线内容不沉淀为 confirmed fact，例如部分旧 Face 空值文案和锁定弹窗历史文案。
+
 ## 12. 来源引用
 
-- (Ref: archive/historical-prd/kyc/AIX WALLET 钱包开户KYC需求V1.0 (1).docx / 需求变更日志 / 国家线 / 6.2 KYC 状态机 / 7.2 开户页面逻辑 / 8 外部接口依赖 / 9 接口错误码映射 / 10 待确认事项)
+- (Ref: archive/converted-prd/kyc/wallet-opening/README.md / 需求变更日志 / 国家线 / 6.2 KYC 状态机 / 7.2 开户页面逻辑 / 8 外部接口依赖 / 9 接口错误码映射 / 10 待确认事项)
+- (Ref: archive/converted-prd/app/home/README.md / Home 钱包区域展示逻辑)
+- (Ref: archive/converted-prd/card/application/README.md / 申卡前置条件)
+- (Ref: archive/converted-prd/security/identity-verification/README.md / 身份认证支撑能力)
 - (Ref: external-docs/dtc/Master sub account 设计方案 (2).docx / KYC 流程 / DTC API / Master Account / Sub Account / D-SUB-ACCOUNT-ID / POA 文件上传流程 / 失败原因)
 - (Ref: DTC Wallet OpenAPI Document20260126 / WalletConnect Token / D-SUB-ACCOUNT-ID / WalletAccount：本轮未上传，相关内容仅保留历史来源提示，不作为本轮核验事实)
 - (Ref: prd-template/standard-prd-template.md / 标准 PRD 模板)

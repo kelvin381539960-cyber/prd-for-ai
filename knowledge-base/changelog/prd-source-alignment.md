@@ -138,8 +138,8 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 22 | ALIGNED | `knowledge-base/wallet/_index.md` | `archive/converted-prd/wallet/asset/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/security/identity-verification/README.md` | wallet/_index.md 已更新 Wallet Asset + Deposit/Send/Swap + KYC/Security/Transaction 证据边界，并登记 Send/Swap 缺口 |
 | 23 | ALIGNED | `knowledge-base/wallet/assets.md` | `archive/converted-prd/wallet/asset/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md` | assets.md 已补齐稳定币范围、Total Asset、汇率异常、排序、隐藏余额、Recent transaction、Withdraw隐藏 |
 | 24 | SOURCE_GAP | `knowledge-base/wallet/deposit.md` | `archive/converted-prd/wallet/deposit-send-swap/README.md`；`archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/transaction-history/README.md` | deposit.md 已补齐 Deposit/GTR/WalletConnect 关键规则；Send/Swap 完整流程尚未沉淀，需后续拆分或补齐 |
-| 25 | TODO | `knowledge-base/kyc/_index.md` | `archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/home/README.md` | KYC 索引 |
-| 26 | TODO | `knowledge-base/kyc/account-opening.md` | `archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/home/README.md`；`archive/converted-prd/card/application/README.md` | 钱包开户 / KYC；卡申请前置也要核对 |
+| 25 | ALIGNED | `knowledge-base/kyc/_index.md` | `archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/home/README.md` | kyc/_index.md 已按 KYC + Home + Card Application + Security converted-prd 更新证据边界 |
+| 26 | ALIGNED | `knowledge-base/kyc/account-opening.md` | `archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/home/README.md`；`archive/converted-prd/card/application/README.md` | account-opening.md 已补齐 Waitlist页面级拦截、Face 30秒超时、长期有效、Face锁定、Home钱包面板映射、申卡前置 |
 | 27 | TODO | `knowledge-base/security/_index.md` | `archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/app/registration-login/README.md` | Security 索引 |
 | 28 | TODO | `knowledge-base/security/*.md` | `archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/card/manage/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | OTP / BIO / Face / Password；需看调用场景 |
 | 29 | TODO | `knowledge-base/common/notification.md` | `archive/converted-prd/notification/push-inbox/README.md`；`archive/converted-prd/notification/system-email/README.md`；相关业务触发 PRD | 通知 / 邮件；触发场景需回看业务 PRD |
@@ -152,14 +152,16 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 指标 | 数量 |
 |---|---:|
 | 总任务 | 32 |
-| ALIGNED | 18 |
+| ALIGNED | 20 |
 | NEED_CONFIRMATION | 3 |
 | CONFLICT | 1 |
 | SOURCE_GAP | 2 |
-| TODO | 7 |
+| TODO | 5 |
 | OUT_OF_SCOPE | 1 |
 
 ## Batch Notes
+
+- 2026-05-09：完成 KYC 批次。kyc index / account-opening 标 ALIGNED；补齐 Waitlist 页面级拦截、Face Loading 30秒超时、申请单长期有效、Face 失败锁定、Home 钱包面板映射、Card 申卡前置依赖等 Evidence→KB 缺口。
 
 - 2026-05-09：完成 Wallet 批次。wallet index / assets 标 ALIGNED；deposit 标 SOURCE_GAP，原因是 Deposit 已补齐但源 PRD 中 Send / Swap 完整流程尚未沉淀为独立 KB。
 
