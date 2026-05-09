@@ -36,7 +36,7 @@
 | 10 | DONE | `archive/historical-prd/common/[2026-03-09]AIX+多语言翻译逻辑.docx` | `archive/converted-prd/common/i18n/` | 已完成；图片引用 2，图片文件 2，缺失 0；HTML 表格 0 |
 | 11 | DONE | `archive/historical-prd/kyc/AIX WALLET 钱包开户KYC需求V1.0 (1).docx` | `archive/converted-prd/kyc/wallet-opening/` | 已完成；图片引用 28，图片文件 27，缺失 0；HTML 表格 22 |
 | 12 | TODO | `archive/historical-prd/mgm/[2026-03-31]AIX-MGM及邀请码.docx` | `archive/converted-prd/mgm/referral-invite-code/` |  |
-| 13 | TODO | `archive/historical-prd/notification/[2025-11-25] AIX+Notification（push及站内信）.docx` | `archive/converted-prd/notification/push-inbox/` |  |
+| 13 | DONE | `archive/historical-prd/notification/[2025-11-25] AIX+Notification（push及站内信）.docx` | `archive/converted-prd/notification/push-inbox/` | 已完成；图片引用 159，图片文件 83，缺失 0；HTML 表格 25 |
 | 14 | DONE | `archive/historical-prd/notification/[2026-03-12]AIX+系统邮件.docx` | `archive/converted-prd/notification/system-email/` | 已完成；图片引用 2，图片文件 2，缺失 0；HTML 表格 0 |
 | 15 | TODO | `archive/historical-prd/oboss/[AIX]OBOSS MVP.docx` | `archive/converted-prd/oboss/mvp/` |  |
 | 16 | TODO | `archive/historical-prd/oboss/[2026-04-14]AIX-Oboss能力.docx` | `archive/converted-prd/oboss/capabilities/` | 源文件较大，转换后需重点检查图片和表格 |
@@ -59,6 +59,6 @@
 | 指标 | 数量 |
 |---|---:|
 | 历史 docx 总数 | 23 |
-| 已完成 | 14 |
-| 待转换 | 9 |
+| 已完成 | 15 |
+| 待转换 | 8 |
 | 受阻 | 0 |
