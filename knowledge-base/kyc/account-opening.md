@@ -1,7 +1,7 @@
 ---
 module: kyc
 feature: account-opening
-version: "3.1"
+version: "2.0"
 status: active
 source_doc: archive/converted-prd/kyc/wallet-opening/README.md；archive/converted-prd/app/home/README.md；archive/converted-prd/card/application/README.md；archive/converted-prd/security/identity-verification/README.md
 source_section: KYC / 国家线、状态机、开户页面逻辑、外部接口、错误码；Home / 钱包区域展示；Card Application / 申卡前置
@@ -41,6 +41,14 @@ depends_on:
 ---
 
 ## 2. 需求背景、目标与范围
+
+> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
+> 功能结构与账户结构图。
+
+![KYC function structure - image1.jpeg](_assets/account-opening/image1.jpeg)
+
+![KYC function structure - image2.jpeg](_assets/account-opening/image2.jpeg)
+
 
 ### 2.1 需求背景
 
@@ -92,6 +100,12 @@ KYC 能力不是单一 Wallet 页面能力，而是影响 Account、Wallet、Dep
 ---
 
 ## 3. 业务流程与规则
+
+> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
+> 开户业务流程总图。
+
+![KYC business flow - image4.jpeg](_assets/account-opening/image4.jpeg)
+
 
 ### 3.1 业务主流程说明
 
@@ -226,6 +240,12 @@ sequenceDiagram
 | 14 | KYC Submission Success | POA 提交成功 | App / Backend | 展示提交成功状态 | 用户返回入口，等待审核 | 后续状态通过通知或入口感知 | AIX KYC PRD 7.2.12 |
 
 ### 3.4 状态规则
+
+> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
+> KYC 状态机图。
+
+![KYC status machine - image3.jpeg](_assets/account-opening/image3.jpeg)
+
 
 #### 3.4.1 AIX 页面状态
 
@@ -372,6 +392,11 @@ flowchart LR
 
 ### 4.2 KYC Loading Page
 
+> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
+
+![KYC Loading Page - image6.jpeg](_assets/account-opening/image6.jpeg)
+
+
 截图暂缺，视觉以 Figma 为准。
 
 | 区块 | 内容 |
@@ -388,6 +413,16 @@ flowchart LR
 | 备注 / 边界 | waitlist 是页面级拦截，不是弹窗继续。 |
 
 ### 4.3 KYC Start Page
+
+> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
+> 包含 Start Page 主图、协议阅读 / waitlist 拦截等页面内状态。
+
+![KYC Start Page - image7.png](_assets/account-opening/image7.png)
+
+![KYC Start Page - image9.png](_assets/account-opening/image9.png)
+
+![KYC Start Page - image10.png](_assets/account-opening/image10.png)
+
 
 截图暂缺，视觉以 Figma 为准。
 
@@ -415,6 +450,13 @@ flowchart LR
 
 ### 4.4 Select Residence Country Page
 
+> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
+
+![Select Residence Country Page - image11.png](_assets/account-opening/image11.png)
+
+![Select Residence Country Page - image12.png](_assets/account-opening/image12.png)
+
+
 截图暂缺，视觉以 Figma 为准。
 
 | 区块 | 内容 |
@@ -431,6 +473,11 @@ flowchart LR
 | 备注 / 边界 | 国家线存在版本口径冲突，见 GAP-KYC-COUNTRY-001。 |
 
 ### 4.5 Waitlist Page
+
+> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
+
+![Waitlist Page - image13.png](_assets/account-opening/image13.png)
+
 
 截图暂缺，视觉以 Figma 为准。
 
@@ -449,6 +496,16 @@ flowchart LR
 
 ### 4.6 Identity Verify Page / Identity Scan H5
 
+> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
+> 源 PRD 对 Identity Scan H5 标注“截图暂缺，视觉以 Figma / AAI H5 为准”；image16 只作为 H5 流程来源图。
+
+![Identity Verify Page / Identity Scan H5 - image14.png](_assets/account-opening/image14.png)
+
+![Identity Verify Page / Identity Scan H5 - image15.png](_assets/account-opening/image15.png)
+
+![Identity Verify Page / Identity Scan H5 - image16.png](_assets/account-opening/image16.png)
+
+
 截图暂缺，视觉以 Figma / AAI H5 为准。
 
 | 区块 | 内容 |
@@ -465,6 +522,17 @@ flowchart LR
 | 备注 / 边界 | App 不判断 AAI 内部识别逻辑。 |
 
 ### 4.7 Face Guide / Face Scan / Face Loading
+
+> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
+
+![Face Guide / Face Scan / Face Loading - image17.png](_assets/account-opening/image17.png)
+
+![Face Guide / Face Scan / Face Loading - image18.png](_assets/account-opening/image18.png)
+
+![Face Guide / Face Scan / Face Loading - image19.png](_assets/account-opening/image19.png)
+
+![Face Guide / Face Scan / Face Loading - image6.jpeg](_assets/account-opening/image6.jpeg)
+
 
 截图暂缺，视觉以 Figma / AAI H5 为准。
 
@@ -483,6 +551,11 @@ flowchart LR
 
 ### 4.8 Loading Failed Page
 
+> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
+
+![Loading Failed Page - image20.png](_assets/account-opening/image20.png)
+
+
 截图暂缺，视觉以 Figma 为准。
 
 | 区块 | 内容 |
@@ -499,6 +572,11 @@ flowchart LR
 | 备注 / 边界 | Retry 不是返回 Face Scan。 |
 
 ### 4.9 Face Failed Page
+
+> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
+
+![Face Failed Page - image21.png](_assets/account-opening/image21.png)
+
 
 截图暂缺，视觉以 Figma 为准。
 
@@ -517,6 +595,19 @@ flowchart LR
 
 ### 4.10 Address Upload Page
 
+> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
+
+![Address Upload Page - image22.png](_assets/account-opening/image22.png)
+
+![Address Upload Page - image23.jpeg](_assets/account-opening/image23.jpeg)
+
+![Address Upload Page - image24.png](_assets/account-opening/image24.png)
+
+![Address Upload Page - image25.png](_assets/account-opening/image25.png)
+
+![Address Upload Page - image26.png](_assets/account-opening/image26.png)
+
+
 截图暂缺，视觉以 Figma 为准。
 
 | 区块 | 内容 |
@@ -533,6 +624,11 @@ flowchart LR
 | 备注 / 边界 | POA continue 后跳转存在源文档冲突，见 GAP-KYC-POA-002。 |
 
 ### 4.11 KYC Submission Success Page
+
+> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
+
+![KYC Submission Success Page - image27.png](_assets/account-opening/image27.png)
+
 
 截图暂缺，视觉以 Figma 为准。
 
@@ -897,115 +993,3 @@ poa success
 - (Ref: knowledge-base/common/notification.md：Notification 规则待核验)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP-030 ~ ALL-GAP-035 / ALL-GAP-045 / ALL-GAP-046)
 - (Ref: 用户确认结论 / 2026-05-02 / KYC 文件名不应带 wallet；新主事实源改为 account-opening.md)
-
-## Page Visuals 页面图索引
-
-> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
-
-### 7. 需求描述
-
-![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image4.jpeg)
-
-_Source: archive/converted-prd/kyc/wallet-opening/README.md:224_
-
-![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image5.jpeg)
-
-_Source: archive/converted-prd/kyc/wallet-opening/README.md:230_
-
-![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image7.png)
-
-_Source: archive/converted-prd/kyc/wallet-opening/README.md:292_
-
-![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image8.png)
-
-_Source: archive/converted-prd/kyc/wallet-opening/README.md:309_
-
-![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image9.png)
-
-_Source: archive/converted-prd/kyc/wallet-opening/README.md:320_
-
-![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image11.png)
-
-_Source: archive/converted-prd/kyc/wallet-opening/README.md:367_
-
-![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image12.png)
-
-_Source: archive/converted-prd/kyc/wallet-opening/README.md:376_
-
-![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image13.png)
-
-_Source: archive/converted-prd/kyc/wallet-opening/README.md:406_
-
-![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image14.png)
-
-_Source: archive/converted-prd/kyc/wallet-opening/README.md:447_
-
-![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image15.png)
-
-_Source: archive/converted-prd/kyc/wallet-opening/README.md:464_
-
-![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image18.png)
-
-_Source: archive/converted-prd/kyc/wallet-opening/README.md:551_
-
-![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image22.png)
-
-_Source: archive/converted-prd/kyc/wallet-opening/README.md:751_
-
-### Waitlist
-
-![Waitlist](../../archive/converted-prd/kyc/wallet-opening/assets/media/image10.png)
-
-_Source: archive/converted-prd/kyc/wallet-opening/README.md:341_
-
-![Waitlist](../../archive/converted-prd/kyc/wallet-opening/assets/media/image26.png)
-
-_Source: archive/converted-prd/kyc/wallet-opening/README.md:794_
-
-### Verify Page
-
-![Verify Page](../../archive/converted-prd/kyc/wallet-opening/assets/media/image16.png)
-
-_Source: archive/converted-prd/kyc/wallet-opening/README.md:493_
-
-![Verify Page](../../archive/converted-prd/kyc/wallet-opening/assets/media/image25.png)
-
-_Source: archive/converted-prd/kyc/wallet-opening/README.md:782_
-
-### Failed Page
-
-![Failed Page](../../archive/converted-prd/kyc/wallet-opening/assets/media/image17.png)
-
-_Source: archive/converted-prd/kyc/wallet-opening/README.md:520_
-
-### Face Loading
-
-![Face Loading](../../archive/converted-prd/kyc/wallet-opening/assets/media/image19.png)
-
-_Source: archive/converted-prd/kyc/wallet-opening/README.md:592_
-
-![Face Loading](../../archive/converted-prd/kyc/wallet-opening/assets/media/image20.png)
-
-_Source: archive/converted-prd/kyc/wallet-opening/README.md:660_
-
-## Additional Page Visuals 补充页面图
-
-> 本节补充第二轮页面覆盖审计中识别出的页面截图，仍引用 converted-prd 原始资产。
-
-### 7. 需求描述
-
-![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image23.jpeg)
-
-_Source: archive/converted-prd/kyc/wallet-opening/README.md:765_
-
-### 7. 需求描述
-
-![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image24.png)
-
-_Source: archive/converted-prd/kyc/wallet-opening/README.md:776_
-
-### 7. 需求描述
-
-![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image27.png)
-
-_Source: archive/converted-prd/kyc/wallet-opening/README.md:824_
