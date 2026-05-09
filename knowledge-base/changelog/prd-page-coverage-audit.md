@@ -1,7 +1,7 @@
 ---
 module: changelog
 feature: prd-page-visual-coverage
-version: "1.4"
+version: "1.5"
 status: active
 source_doc: archive/converted-prd/**/README.md
 source_section: image references and page-like units
@@ -23,7 +23,7 @@ owner: 吴忆锋
 | 初步识别为页面 / 页面组视觉 | 579 |
 | 已绑定到 KB 的页面图（按自动审计口径） | 331 |
 | 支撑图 / 流程图 / 接口图 / 数据字典图 | 290 |
-| Out of scope / 暂无 KB 承接文件 | 245 |
+| Out of scope / 暂无 runtime KB 承接文件，已转 non-runtime visual index | 245 |
 | 删除线来源，不绑定 runtime | 3 |
 | 仍需复核 | 0 |
 
@@ -61,7 +61,7 @@ owner: 吴忆锋
 1. 页面截图放在对应 KB 文件的 `Page Visuals 页面图索引` 或 `Additional Page Visuals 补充页面图` 中，按页面名分组。
 2. 图片使用相对链接引用 `archive/converted-prd` 原始资产，避免重复复制。
 3. 删除线页面不进入 runtime 规则，只可登记为 deleted / out_of_scope。
-4. Website / OBoss / MGM / Popup Banner / Card Me 等当前没有 runtime KB 承接文件的页面，先标 `OUT_OF_SCOPE_OR_NO_KB_TARGET`，不混入已有业务文件。
+4. Website / OBoss / MGM / Popup Banner / Card Me 等当前没有 runtime KB 承接文件的页面，已单独承接到 `knowledge-base/non-runtime/`，状态为 visual-only，不混入已有业务事实文件。
 
 ## 5. 页面图片覆盖清单（自动识别）
 
@@ -347,55 +347,55 @@ owner: 吴忆锋
 | 278 | card/manage | `archive/converted-prd/card/manage/assets/media/image31.png` | Card Home | knowledge-base/card/manage/_index.md | PAGE_VISUAL | BOUND_TO_KB |
 | 279 | card/manage | `archive/converted-prd/card/manage/assets/media/image32.jpeg` | 7. 需求描述 | knowledge-base/card/manage/_index.md | PAGE_VISUAL | BOUND_TO_KB |
 | 280 | card/manage | `archive/converted-prd/card/manage/assets/media/image33.jpeg` | 7. 需求描述 | knowledge-base/card/manage/_index.md | PAGE_VISUAL | BOUND_TO_KB |
-| 281 | other | `archive/converted-prd/card/me/assets/media/image1.png` | 1. 需求变更日志 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 282 | other | `archive/converted-prd/card/me/assets/media/image2.jpeg` | 1. 需求变更日志 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 283 | other | `archive/converted-prd/card/me/assets/media/image3.jpeg` | 4. 功能结构 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
+| 281 | other | `archive/converted-prd/card/me/assets/media/image1.png` | 1. 需求变更日志 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 282 | other | `archive/converted-prd/card/me/assets/media/image2.jpeg` | 1. 需求变更日志 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 283 | other | `archive/converted-prd/card/me/assets/media/image3.jpeg` | 4. 功能结构 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
 | 284 | other | `archive/converted-prd/card/me/assets/media/image4.png` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 285 | other | `archive/converted-prd/card/me/assets/media/image5.png` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 286 | other | `archive/converted-prd/card/me/assets/media/image6.png` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 287 | other | `archive/converted-prd/card/me/assets/media/image7.png` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
-| 288 | other | `archive/converted-prd/card/me/assets/media/image8.png` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 289 | other | `archive/converted-prd/card/me/assets/media/image9.png` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 290 | other | `archive/converted-prd/card/me/assets/media/image10.png` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 291 | other | `archive/converted-prd/card/me/assets/media/image11.png` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 292 | other | `archive/converted-prd/card/me/assets/media/image12.png` | Set Password Page | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 293 | other | `archive/converted-prd/card/me/assets/media/image13.png` | Set Password Page | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 294 | other | `archive/converted-prd/card/me/assets/media/image14.png` | Set Password Page | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 295 | other | `archive/converted-prd/card/me/assets/media/image15.png` | Re-enter Password Page | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 296 | other | `archive/converted-prd/card/me/assets/media/image16.jpeg` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 297 | other | `archive/converted-prd/card/me/assets/media/image17.jpeg` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 298 | other | `archive/converted-prd/card/me/assets/media/image18.jpeg` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 299 | other | `archive/converted-prd/card/me/assets/media/image19.jpeg` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
+| 288 | other | `archive/converted-prd/card/me/assets/media/image8.png` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 289 | other | `archive/converted-prd/card/me/assets/media/image9.png` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 290 | other | `archive/converted-prd/card/me/assets/media/image10.png` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 291 | other | `archive/converted-prd/card/me/assets/media/image11.png` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 292 | other | `archive/converted-prd/card/me/assets/media/image12.png` | Set Password Page | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 293 | other | `archive/converted-prd/card/me/assets/media/image13.png` | Set Password Page | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 294 | other | `archive/converted-prd/card/me/assets/media/image14.png` | Set Password Page | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 295 | other | `archive/converted-prd/card/me/assets/media/image15.png` | Re-enter Password Page | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 296 | other | `archive/converted-prd/card/me/assets/media/image16.jpeg` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 297 | other | `archive/converted-prd/card/me/assets/media/image17.jpeg` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 298 | other | `archive/converted-prd/card/me/assets/media/image18.jpeg` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 299 | other | `archive/converted-prd/card/me/assets/media/image19.jpeg` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
 | 300 | other | `archive/converted-prd/card/me/assets/media/image20.png` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 301 | other | `archive/converted-prd/card/me/assets/media/image21.png` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 302 | other | `archive/converted-prd/card/me/assets/media/image22.png` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
-| 303 | other | `archive/converted-prd/card/me/assets/media/image23.jpeg` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
+| 303 | other | `archive/converted-prd/card/me/assets/media/image23.jpeg` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
 | 304 | other | `archive/converted-prd/card/me/assets/media/image24.png` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
-| 305 | other | `archive/converted-prd/card/me/assets/media/image25.png` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
+| 305 | other | `archive/converted-prd/card/me/assets/media/image25.png` | 6. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
 | 306 | card/transaction | `archive/converted-prd/card/transaction/assets/media/image1.jpeg` | 4. 功能结构 | knowledge-base/card/transaction.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 307 | card/transaction | `archive/converted-prd/card/transaction/assets/media/image2.jpeg` | 7. 需求描述 | knowledge-base/card/transaction.md | PAGE_VISUAL | BOUND_TO_KB |
 | 308 | other | `archive/converted-prd/common/i18n/assets/media/image1.jpeg` | 3. 系统交互 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 309 | other | `archive/converted-prd/common/i18n/assets/media/image2.jpeg` | 3. 系统交互 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
-| 310 | other | `archive/converted-prd/common/popup-banner/assets/media/image1.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 311 | other | `archive/converted-prd/common/popup-banner/assets/media/image2.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 312 | other | `archive/converted-prd/common/popup-banner/assets/media/image3.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 313 | other | `archive/converted-prd/common/popup-banner/assets/media/image4.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 314 | other | `archive/converted-prd/common/popup-banner/assets/media/image5.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 315 | other | `archive/converted-prd/common/popup-banner/assets/media/image6.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 316 | other | `archive/converted-prd/common/popup-banner/assets/media/image7.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 317 | other | `archive/converted-prd/common/popup-banner/assets/media/image8.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 318 | other | `archive/converted-prd/common/popup-banner/assets/media/image9.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 319 | other | `archive/converted-prd/common/popup-banner/assets/media/image10.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 320 | other | `archive/converted-prd/common/popup-banner/assets/media/image11.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 321 | other | `archive/converted-prd/common/popup-banner/assets/media/image12.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 322 | other | `archive/converted-prd/common/popup-banner/assets/media/image13.jpeg` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 323 | other | `archive/converted-prd/common/popup-banner/assets/media/image14.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 324 | other | `archive/converted-prd/common/popup-banner/assets/media/image15.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 325 | other | `archive/converted-prd/common/popup-banner/assets/media/image16.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 326 | other | `archive/converted-prd/common/popup-banner/assets/media/image17.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 327 | other | `archive/converted-prd/common/popup-banner/assets/media/image18.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 328 | other | `archive/converted-prd/common/popup-banner/assets/media/image19.jpeg` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 329 | other | `archive/converted-prd/common/popup-banner/assets/media/image20.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
+| 310 | other | `archive/converted-prd/common/popup-banner/assets/media/image1.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 311 | other | `archive/converted-prd/common/popup-banner/assets/media/image2.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 312 | other | `archive/converted-prd/common/popup-banner/assets/media/image3.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 313 | other | `archive/converted-prd/common/popup-banner/assets/media/image4.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 314 | other | `archive/converted-prd/common/popup-banner/assets/media/image5.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 315 | other | `archive/converted-prd/common/popup-banner/assets/media/image6.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 316 | other | `archive/converted-prd/common/popup-banner/assets/media/image7.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 317 | other | `archive/converted-prd/common/popup-banner/assets/media/image8.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 318 | other | `archive/converted-prd/common/popup-banner/assets/media/image9.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 319 | other | `archive/converted-prd/common/popup-banner/assets/media/image10.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 320 | other | `archive/converted-prd/common/popup-banner/assets/media/image11.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 321 | other | `archive/converted-prd/common/popup-banner/assets/media/image12.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 322 | other | `archive/converted-prd/common/popup-banner/assets/media/image13.jpeg` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 323 | other | `archive/converted-prd/common/popup-banner/assets/media/image14.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 324 | other | `archive/converted-prd/common/popup-banner/assets/media/image15.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 325 | other | `archive/converted-prd/common/popup-banner/assets/media/image16.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 326 | other | `archive/converted-prd/common/popup-banner/assets/media/image17.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 327 | other | `archive/converted-prd/common/popup-banner/assets/media/image18.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 328 | other | `archive/converted-prd/common/popup-banner/assets/media/image19.jpeg` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 329 | other | `archive/converted-prd/common/popup-banner/assets/media/image20.png` | \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
 | 330 | kyc | `archive/converted-prd/kyc/wallet-opening/assets/media/image1.jpeg` | 4. 功能结构 | knowledge-base/kyc/account-opening.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 331 | kyc | `archive/converted-prd/kyc/wallet-opening/assets/media/image2.jpeg` | 6. 统一规则 | knowledge-base/kyc/account-opening.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 332 | kyc | `archive/converted-prd/kyc/wallet-opening/assets/media/image3.jpeg` | 6. 统一规则 | knowledge-base/kyc/account-opening.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
@@ -424,37 +424,37 @@ owner: 吴忆锋
 | 355 | kyc | `archive/converted-prd/kyc/wallet-opening/assets/media/image25.png` | Verify Page | knowledge-base/kyc/account-opening.md | PAGE_VISUAL | BOUND_TO_KB |
 | 356 | kyc | `archive/converted-prd/kyc/wallet-opening/assets/media/image26.png` | Waitlist | knowledge-base/kyc/account-opening.md | PAGE_VISUAL | BOUND_TO_KB |
 | 357 | kyc | `archive/converted-prd/kyc/wallet-opening/assets/media/image27.png` | 7. 需求描述 | knowledge-base/kyc/account-opening.md | PAGE_VISUAL | BOUND_TO_KB |
-| 358 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image1.jpeg` | 5. 整体框架 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 359 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image2.jpeg` | 5. 整体框架 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
+| 358 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image1.jpeg` | 5. 整体框架 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 359 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image2.jpeg` | 5. 整体框架 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
 | 360 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image3.png` | 10. Demo | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
-| 361 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image4.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 362 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image5.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 363 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image6.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 364 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image7.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 365 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image8.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 366 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image9.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 367 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image10.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 368 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image11.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 369 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image12.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 370 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image13.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 371 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image14.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 372 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image15.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 373 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image16.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 374 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image17.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 375 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image18.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 376 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image19.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 377 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image20.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 378 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image21.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 379 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image22.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 380 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image23.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 381 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image24.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 382 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image25.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 383 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image26.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 384 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image27.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 385 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image28.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 386 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image29.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 387 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image30.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 388 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image31.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
+| 361 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image4.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 362 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image5.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 363 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image6.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 364 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image7.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 365 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image8.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 366 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image9.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 367 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image10.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 368 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image11.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 369 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image12.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 370 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image13.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 371 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image14.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 372 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image15.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 373 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image16.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 374 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image17.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 375 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image18.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 376 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image19.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 377 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image20.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 378 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image21.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 379 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image22.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 380 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image23.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 381 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image24.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 382 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image25.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 383 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image26.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 384 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image27.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 385 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image28.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 386 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image29.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 387 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image30.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 388 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image31.png` | 12. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
 | 389 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image1.png` | 1. 修订记录 | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 390 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image2.png` | 1. 修订记录 | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 391 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image3.png` | 1. 修订记录 | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
@@ -616,16 +616,16 @@ owner: 吴忆锋
 | 547 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image38.png` | 4. 其他可见 | knowledge-base/common/notification.md | PAGE_VISUAL | BOUND_TO_KB |
 | 548 | notification | `archive/converted-prd/notification/system-email/assets/media/image1.jpeg` | 3. demo | knowledge-base/common/notification.md | PAGE_VISUAL | BOUND_TO_KB |
 | 549 | notification | `archive/converted-prd/notification/system-email/assets/media/image2.jpeg` | 4. Interface interaction | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
-| 550 | other | `archive/converted-prd/oboss/capabilities/assets/media/image1.jpg` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 551 | other | `archive/converted-prd/oboss/capabilities/assets/media/image2.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 552 | other | `archive/converted-prd/oboss/capabilities/assets/media/image3.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 553 | other | `archive/converted-prd/oboss/capabilities/assets/media/image4.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 554 | other | `archive/converted-prd/oboss/capabilities/assets/media/image5.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 555 | other | `archive/converted-prd/oboss/capabilities/assets/media/image6.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 556 | other | `archive/converted-prd/oboss/capabilities/assets/media/image7.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 557 | other | `archive/converted-prd/oboss/capabilities/assets/media/image8.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 558 | other | `archive/converted-prd/oboss/capabilities/assets/media/image9.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 559 | other | `archive/converted-prd/oboss/capabilities/assets/media/image10.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
+| 550 | other | `archive/converted-prd/oboss/capabilities/assets/media/image1.jpg` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 551 | other | `archive/converted-prd/oboss/capabilities/assets/media/image2.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 552 | other | `archive/converted-prd/oboss/capabilities/assets/media/image3.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 553 | other | `archive/converted-prd/oboss/capabilities/assets/media/image4.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 554 | other | `archive/converted-prd/oboss/capabilities/assets/media/image5.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 555 | other | `archive/converted-prd/oboss/capabilities/assets/media/image6.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 556 | other | `archive/converted-prd/oboss/capabilities/assets/media/image7.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 557 | other | `archive/converted-prd/oboss/capabilities/assets/media/image8.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 558 | other | `archive/converted-prd/oboss/capabilities/assets/media/image9.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 559 | other | `archive/converted-prd/oboss/capabilities/assets/media/image10.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
 | 560 | other | `archive/converted-prd/oboss/capabilities/assets/media/image11.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 561 | other | `archive/converted-prd/oboss/capabilities/assets/media/image12.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 562 | other | `archive/converted-prd/oboss/capabilities/assets/media/image13.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
@@ -637,73 +637,73 @@ owner: 吴忆锋
 | 568 | other | `archive/converted-prd/oboss/capabilities/assets/media/image19.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 569 | other | `archive/converted-prd/oboss/capabilities/assets/media/image20.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 570 | other | `archive/converted-prd/oboss/capabilities/assets/media/image21.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
-| 571 | other | `archive/converted-prd/oboss/capabilities/assets/media/image22.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 572 | other | `archive/converted-prd/oboss/capabilities/assets/media/image23.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 573 | other | `archive/converted-prd/oboss/capabilities/assets/media/image24.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 574 | other | `archive/converted-prd/oboss/capabilities/assets/media/image25.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 575 | other | `archive/converted-prd/oboss/capabilities/assets/media/image26.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 576 | other | `archive/converted-prd/oboss/capabilities/assets/media/image27.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 577 | other | `archive/converted-prd/oboss/capabilities/assets/media/image28.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 578 | other | `archive/converted-prd/oboss/capabilities/assets/media/image29.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 579 | other | `archive/converted-prd/oboss/capabilities/assets/media/image30.jpg` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 580 | other | `archive/converted-prd/oboss/capabilities/assets/media/image31.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 581 | other | `archive/converted-prd/oboss/capabilities/assets/media/image3.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 582 | other | `archive/converted-prd/oboss/capabilities/assets/media/image32.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 583 | other | `archive/converted-prd/oboss/capabilities/assets/media/image33.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 584 | other | `archive/converted-prd/oboss/capabilities/assets/media/image34.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 585 | other | `archive/converted-prd/oboss/capabilities/assets/media/image35.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 586 | other | `archive/converted-prd/oboss/capabilities/assets/media/image36.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 587 | other | `archive/converted-prd/oboss/capabilities/assets/media/image28.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 588 | other | `archive/converted-prd/oboss/capabilities/assets/media/image37.jpg` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 589 | other | `archive/converted-prd/oboss/capabilities/assets/media/image31.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 590 | other | `archive/converted-prd/oboss/capabilities/assets/media/image3.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 591 | other | `archive/converted-prd/oboss/capabilities/assets/media/image38.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 592 | other | `archive/converted-prd/oboss/capabilities/assets/media/image39.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 593 | other | `archive/converted-prd/oboss/capabilities/assets/media/image40.png` | Swap | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 594 | other | `archive/converted-prd/oboss/capabilities/assets/media/image41.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 595 | other | `archive/converted-prd/oboss/capabilities/assets/media/image42.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 596 | other | `archive/converted-prd/oboss/capabilities/assets/media/image43.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 597 | other | `archive/converted-prd/oboss/capabilities/assets/media/image44.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 598 | other | `archive/converted-prd/oboss/capabilities/assets/media/image45.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 599 | other | `archive/converted-prd/oboss/capabilities/assets/media/image46.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 600 | other | `archive/converted-prd/oboss/capabilities/assets/media/image47.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 601 | other | `archive/converted-prd/oboss/capabilities/assets/media/image48.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 602 | other | `archive/converted-prd/oboss/capabilities/assets/media/image49.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 603 | other | `archive/converted-prd/oboss/capabilities/assets/media/image50.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 604 | other | `archive/converted-prd/oboss/capabilities/assets/media/image43.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
+| 571 | other | `archive/converted-prd/oboss/capabilities/assets/media/image22.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 572 | other | `archive/converted-prd/oboss/capabilities/assets/media/image23.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 573 | other | `archive/converted-prd/oboss/capabilities/assets/media/image24.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 574 | other | `archive/converted-prd/oboss/capabilities/assets/media/image25.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 575 | other | `archive/converted-prd/oboss/capabilities/assets/media/image26.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 576 | other | `archive/converted-prd/oboss/capabilities/assets/media/image27.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 577 | other | `archive/converted-prd/oboss/capabilities/assets/media/image28.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 578 | other | `archive/converted-prd/oboss/capabilities/assets/media/image29.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 579 | other | `archive/converted-prd/oboss/capabilities/assets/media/image30.jpg` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 580 | other | `archive/converted-prd/oboss/capabilities/assets/media/image31.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 581 | other | `archive/converted-prd/oboss/capabilities/assets/media/image3.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 582 | other | `archive/converted-prd/oboss/capabilities/assets/media/image32.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 583 | other | `archive/converted-prd/oboss/capabilities/assets/media/image33.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 584 | other | `archive/converted-prd/oboss/capabilities/assets/media/image34.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 585 | other | `archive/converted-prd/oboss/capabilities/assets/media/image35.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 586 | other | `archive/converted-prd/oboss/capabilities/assets/media/image36.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 587 | other | `archive/converted-prd/oboss/capabilities/assets/media/image28.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 588 | other | `archive/converted-prd/oboss/capabilities/assets/media/image37.jpg` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 589 | other | `archive/converted-prd/oboss/capabilities/assets/media/image31.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 590 | other | `archive/converted-prd/oboss/capabilities/assets/media/image3.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 591 | other | `archive/converted-prd/oboss/capabilities/assets/media/image38.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 592 | other | `archive/converted-prd/oboss/capabilities/assets/media/image39.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 593 | other | `archive/converted-prd/oboss/capabilities/assets/media/image40.png` | Swap | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 594 | other | `archive/converted-prd/oboss/capabilities/assets/media/image41.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 595 | other | `archive/converted-prd/oboss/capabilities/assets/media/image42.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 596 | other | `archive/converted-prd/oboss/capabilities/assets/media/image43.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 597 | other | `archive/converted-prd/oboss/capabilities/assets/media/image44.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 598 | other | `archive/converted-prd/oboss/capabilities/assets/media/image45.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 599 | other | `archive/converted-prd/oboss/capabilities/assets/media/image46.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 600 | other | `archive/converted-prd/oboss/capabilities/assets/media/image47.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 601 | other | `archive/converted-prd/oboss/capabilities/assets/media/image48.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 602 | other | `archive/converted-prd/oboss/capabilities/assets/media/image49.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 603 | other | `archive/converted-prd/oboss/capabilities/assets/media/image50.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 604 | other | `archive/converted-prd/oboss/capabilities/assets/media/image43.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
 | 605 | other | `archive/converted-prd/oboss/mvp/assets/media/image1.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
-| 606 | other | `archive/converted-prd/oboss/mvp/assets/media/image2.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
+| 606 | other | `archive/converted-prd/oboss/mvp/assets/media/image2.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
 | 607 | other | `archive/converted-prd/oboss/mvp/assets/media/image3.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
-| 608 | other | `archive/converted-prd/oboss/mvp/assets/media/image4.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 609 | other | `archive/converted-prd/oboss/mvp/assets/media/image5.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 610 | other | `archive/converted-prd/oboss/mvp/assets/media/image6.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 611 | other | `archive/converted-prd/oboss/mvp/assets/media/image7.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 612 | other | `archive/converted-prd/oboss/mvp/assets/media/image8.png` | Notification center | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
+| 608 | other | `archive/converted-prd/oboss/mvp/assets/media/image4.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 609 | other | `archive/converted-prd/oboss/mvp/assets/media/image5.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 610 | other | `archive/converted-prd/oboss/mvp/assets/media/image6.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 611 | other | `archive/converted-prd/oboss/mvp/assets/media/image7.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 612 | other | `archive/converted-prd/oboss/mvp/assets/media/image8.png` | Notification center | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
 | 613 | other | `archive/converted-prd/oboss/mvp/assets/media/image9.png` | Notification center | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
-| 614 | other | `archive/converted-prd/oboss/mvp/assets/media/image10.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 615 | other | `archive/converted-prd/oboss/mvp/assets/media/image11.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 616 | other | `archive/converted-prd/oboss/mvp/assets/media/image12.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 617 | other | `archive/converted-prd/oboss/mvp/assets/media/image13.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 618 | other | `archive/converted-prd/oboss/mvp/assets/media/image14.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 619 | other | `archive/converted-prd/oboss/mvp/assets/media/image15.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 620 | other | `archive/converted-prd/oboss/mvp/assets/media/image16.png` | Notification center | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 621 | other | `archive/converted-prd/oboss/mvp/assets/media/image17.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
+| 614 | other | `archive/converted-prd/oboss/mvp/assets/media/image10.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 615 | other | `archive/converted-prd/oboss/mvp/assets/media/image11.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 616 | other | `archive/converted-prd/oboss/mvp/assets/media/image12.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 617 | other | `archive/converted-prd/oboss/mvp/assets/media/image13.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 618 | other | `archive/converted-prd/oboss/mvp/assets/media/image14.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 619 | other | `archive/converted-prd/oboss/mvp/assets/media/image15.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 620 | other | `archive/converted-prd/oboss/mvp/assets/media/image16.png` | Notification center | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 621 | other | `archive/converted-prd/oboss/mvp/assets/media/image17.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
 | 622 | other | `archive/converted-prd/oboss/mvp/assets/media/image18.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
-| 623 | other | `archive/converted-prd/oboss/mvp/assets/media/image19.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 624 | other | `archive/converted-prd/oboss/mvp/assets/media/image20.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 625 | other | `archive/converted-prd/oboss/mvp/assets/media/image21.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 626 | other | `archive/converted-prd/oboss/mvp/assets/media/image22.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 627 | other | `archive/converted-prd/oboss/mvp/assets/media/image23.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 628 | other | `archive/converted-prd/oboss/mvp/assets/media/image24.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 629 | other | `archive/converted-prd/oboss/mvp/assets/media/image25.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 630 | other | `archive/converted-prd/oboss/mvp/assets/media/image26.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 631 | other | `archive/converted-prd/oboss/mvp/assets/media/image27.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 632 | other | `archive/converted-prd/oboss/mvp/assets/media/image28.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 633 | other | `archive/converted-prd/oboss/mvp/assets/media/image29.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 634 | other | `archive/converted-prd/oboss/mvp/assets/media/image30.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 635 | other | `archive/converted-prd/oboss/mvp/assets/media/image31.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 636 | other | `archive/converted-prd/oboss/mvp/assets/media/image32.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 637 | other | `archive/converted-prd/oboss/mvp/assets/media/image33.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
+| 623 | other | `archive/converted-prd/oboss/mvp/assets/media/image19.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 624 | other | `archive/converted-prd/oboss/mvp/assets/media/image20.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 625 | other | `archive/converted-prd/oboss/mvp/assets/media/image21.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 626 | other | `archive/converted-prd/oboss/mvp/assets/media/image22.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 627 | other | `archive/converted-prd/oboss/mvp/assets/media/image23.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 628 | other | `archive/converted-prd/oboss/mvp/assets/media/image24.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 629 | other | `archive/converted-prd/oboss/mvp/assets/media/image25.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 630 | other | `archive/converted-prd/oboss/mvp/assets/media/image26.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 631 | other | `archive/converted-prd/oboss/mvp/assets/media/image27.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 632 | other | `archive/converted-prd/oboss/mvp/assets/media/image28.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 633 | other | `archive/converted-prd/oboss/mvp/assets/media/image29.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 634 | other | `archive/converted-prd/oboss/mvp/assets/media/image30.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 635 | other | `archive/converted-prd/oboss/mvp/assets/media/image31.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 636 | other | `archive/converted-prd/oboss/mvp/assets/media/image32.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 637 | other | `archive/converted-prd/oboss/mvp/assets/media/image33.png` | \ AIX\ OBOSS MVP | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
 | 638 | other | `archive/converted-prd/security/identity-verification/assets/media/image1.png` | 1. 需求变更日志 | knowledge-base/security/global-rules.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 639 | other | `archive/converted-prd/security/identity-verification/assets/media/image2.png` | Verify Page | knowledge-base/security/otp-verification.md | PAGE_VISUAL | BOUND_TO_KB |
 | 640 | other | `archive/converted-prd/security/identity-verification/assets/media/image3.png` | Verify Page | knowledge-base/security/otp-verification.md | PAGE_VISUAL | BOUND_TO_KB |
@@ -804,26 +804,26 @@ owner: 吴忆锋
 | 735 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image72.jpeg` | 7. DTC渠道接口需求 | knowledge-base/wallet/deposit.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 736 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image73.jpeg` | 7. DTC渠道接口需求 | knowledge-base/wallet/deposit.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 737 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image63.jpeg` | 7. DTC渠道接口需求 | knowledge-base/wallet/deposit.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
-| 738 | other | `archive/converted-prd/website/phase-1/assets/media/image1.jpg` | 4. 需求优先级 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 739 | other | `archive/converted-prd/website/phase-1/assets/media/image2.png` | 4. 需求优先级 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 740 | other | `archive/converted-prd/website/phase-1/assets/media/image3.png` | 4. 需求优先级 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
+| 738 | other | `archive/converted-prd/website/phase-1/assets/media/image1.jpg` | 4. 需求优先级 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 739 | other | `archive/converted-prd/website/phase-1/assets/media/image2.png` | 4. 需求优先级 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 740 | other | `archive/converted-prd/website/phase-1/assets/media/image3.png` | 4. 需求优先级 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
 | 741 | other | `archive/converted-prd/website/phase-1/assets/media/image4.png` | 4. 需求优先级 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 742 | other | `archive/converted-prd/website/phase-1/assets/media/image5.png` | 4. 需求优先级 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 743 | other | `archive/converted-prd/website/phase-1/assets/media/image6.png` | 4. 需求优先级 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 744 | other | `archive/converted-prd/website/phase-1/assets/media/image7.png` | 4. 需求优先级 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 745 | other | `archive/converted-prd/website/phase-1/assets/media/image8.png` | 4. 需求优先级 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
-| 746 | other | `archive/converted-prd/website/phase-1/assets/media/image9.png` | 4. 需求优先级 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 747 | other | `archive/converted-prd/website/phase-1/assets/media/image10.png` | 4. 需求优先级 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 748 | other | `archive/converted-prd/website/phase-1/assets/media/image11.jpg` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 749 | other | `archive/converted-prd/website/phase-1/assets/media/image12.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 750 | other | `archive/converted-prd/website/phase-1/assets/media/image13.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 751 | other | `archive/converted-prd/website/phase-1/assets/media/image14.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 752 | other | `archive/converted-prd/website/phase-1/assets/media/image15.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 753 | other | `archive/converted-prd/website/phase-1/assets/media/image16.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 754 | other | `archive/converted-prd/website/phase-1/assets/media/image17.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 755 | other | `archive/converted-prd/website/phase-1/assets/media/image18.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 756 | other | `archive/converted-prd/website/phase-1/assets/media/image19.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 757 | other | `archive/converted-prd/website/phase-1/assets/media/image20.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
+| 746 | other | `archive/converted-prd/website/phase-1/assets/media/image9.png` | 4. 需求优先级 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 747 | other | `archive/converted-prd/website/phase-1/assets/media/image10.png` | 4. 需求优先级 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 748 | other | `archive/converted-prd/website/phase-1/assets/media/image11.jpg` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 749 | other | `archive/converted-prd/website/phase-1/assets/media/image12.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 750 | other | `archive/converted-prd/website/phase-1/assets/media/image13.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 751 | other | `archive/converted-prd/website/phase-1/assets/media/image14.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 752 | other | `archive/converted-prd/website/phase-1/assets/media/image15.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 753 | other | `archive/converted-prd/website/phase-1/assets/media/image16.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 754 | other | `archive/converted-prd/website/phase-1/assets/media/image17.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 755 | other | `archive/converted-prd/website/phase-1/assets/media/image18.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 756 | other | `archive/converted-prd/website/phase-1/assets/media/image19.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 757 | other | `archive/converted-prd/website/phase-1/assets/media/image20.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
 | 758 | other | `archive/converted-prd/website/phase-1/assets/media/image21.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 759 | other | `archive/converted-prd/website/phase-1/assets/media/image22.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 760 | other | `archive/converted-prd/website/phase-1/assets/media/image23.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
@@ -835,52 +835,52 @@ owner: 吴忆锋
 | 766 | other | `archive/converted-prd/website/phase-1/assets/media/image29.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 767 | other | `archive/converted-prd/website/phase-1/assets/media/image30.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 768 | other | `archive/converted-prd/website/phase-1/assets/media/image31.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
-| 769 | other | `archive/converted-prd/website/phase-1/assets/media/image32.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 770 | other | `archive/converted-prd/website/phase-1/assets/media/image33.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 771 | other | `archive/converted-prd/website/phase-1/assets/media/image34.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 772 | other | `archive/converted-prd/website/phase-1/assets/media/image35.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 773 | other | `archive/converted-prd/website/phase-1/assets/media/image36.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 774 | other | `archive/converted-prd/website/phase-1/assets/media/image37.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 775 | other | `archive/converted-prd/website/phase-1/assets/media/image38.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 776 | other | `archive/converted-prd/website/phase-1/assets/media/image39.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 777 | other | `archive/converted-prd/website/phase-1/assets/media/image40.jpg` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 778 | other | `archive/converted-prd/website/phase-1/assets/media/image41.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 779 | other | `archive/converted-prd/website/phase-1/assets/media/image13.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 780 | other | `archive/converted-prd/website/phase-1/assets/media/image42.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 781 | other | `archive/converted-prd/website/phase-1/assets/media/image43.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 782 | other | `archive/converted-prd/website/phase-1/assets/media/image44.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 783 | other | `archive/converted-prd/website/phase-1/assets/media/image45.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 784 | other | `archive/converted-prd/website/phase-1/assets/media/image46.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 785 | other | `archive/converted-prd/website/phase-1/assets/media/image38.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 786 | other | `archive/converted-prd/website/phase-1/assets/media/image47.jpg` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 787 | other | `archive/converted-prd/website/phase-1/assets/media/image41.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 788 | other | `archive/converted-prd/website/phase-1/assets/media/image13.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 789 | other | `archive/converted-prd/website/phase-1/assets/media/image48.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 790 | other | `archive/converted-prd/website/phase-1/assets/media/image49.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 791 | other | `archive/converted-prd/website/phase-1/assets/media/image50.png` | Swap | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 792 | other | `archive/converted-prd/website/phase-1/assets/media/image51.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 793 | other | `archive/converted-prd/website/phase-1/assets/media/image52.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 794 | other | `archive/converted-prd/website/phase-1/assets/media/image53.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 795 | other | `archive/converted-prd/website/phase-1/assets/media/image54.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 796 | other | `archive/converted-prd/website/phase-1/assets/media/image55.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 797 | other | `archive/converted-prd/website/phase-1/assets/media/image56.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 798 | other | `archive/converted-prd/website/phase-1/assets/media/image57.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 799 | other | `archive/converted-prd/website/phase-1/assets/media/image58.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 800 | other | `archive/converted-prd/website/phase-1/assets/media/image59.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 801 | other | `archive/converted-prd/website/phase-1/assets/media/image60.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 802 | other | `archive/converted-prd/website/phase-1/assets/media/image53.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 803 | other | `archive/converted-prd/website/phase-2/assets/media/image1.jpeg` | 3. 需求概况 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 804 | other | `archive/converted-prd/website/phase-2/assets/media/image2.jpeg` | 3. 需求概况 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 805 | other | `archive/converted-prd/website/phase-2/assets/media/image3.jpg` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 806 | other | `archive/converted-prd/website/phase-2/assets/media/image4.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 807 | other | `archive/converted-prd/website/phase-2/assets/media/image5.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 808 | other | `archive/converted-prd/website/phase-2/assets/media/image6.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 809 | other | `archive/converted-prd/website/phase-2/assets/media/image7.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 810 | other | `archive/converted-prd/website/phase-2/assets/media/image8.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 811 | other | `archive/converted-prd/website/phase-2/assets/media/image9.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 812 | other | `archive/converted-prd/website/phase-2/assets/media/image10.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 813 | other | `archive/converted-prd/website/phase-2/assets/media/image11.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 814 | other | `archive/converted-prd/website/phase-2/assets/media/image12.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
+| 769 | other | `archive/converted-prd/website/phase-1/assets/media/image32.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 770 | other | `archive/converted-prd/website/phase-1/assets/media/image33.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 771 | other | `archive/converted-prd/website/phase-1/assets/media/image34.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 772 | other | `archive/converted-prd/website/phase-1/assets/media/image35.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 773 | other | `archive/converted-prd/website/phase-1/assets/media/image36.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 774 | other | `archive/converted-prd/website/phase-1/assets/media/image37.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 775 | other | `archive/converted-prd/website/phase-1/assets/media/image38.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 776 | other | `archive/converted-prd/website/phase-1/assets/media/image39.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 777 | other | `archive/converted-prd/website/phase-1/assets/media/image40.jpg` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 778 | other | `archive/converted-prd/website/phase-1/assets/media/image41.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 779 | other | `archive/converted-prd/website/phase-1/assets/media/image13.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 780 | other | `archive/converted-prd/website/phase-1/assets/media/image42.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 781 | other | `archive/converted-prd/website/phase-1/assets/media/image43.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 782 | other | `archive/converted-prd/website/phase-1/assets/media/image44.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 783 | other | `archive/converted-prd/website/phase-1/assets/media/image45.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 784 | other | `archive/converted-prd/website/phase-1/assets/media/image46.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 785 | other | `archive/converted-prd/website/phase-1/assets/media/image38.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 786 | other | `archive/converted-prd/website/phase-1/assets/media/image47.jpg` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 787 | other | `archive/converted-prd/website/phase-1/assets/media/image41.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 788 | other | `archive/converted-prd/website/phase-1/assets/media/image13.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 789 | other | `archive/converted-prd/website/phase-1/assets/media/image48.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 790 | other | `archive/converted-prd/website/phase-1/assets/media/image49.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 791 | other | `archive/converted-prd/website/phase-1/assets/media/image50.png` | Swap | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 792 | other | `archive/converted-prd/website/phase-1/assets/media/image51.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 793 | other | `archive/converted-prd/website/phase-1/assets/media/image52.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 794 | other | `archive/converted-prd/website/phase-1/assets/media/image53.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 795 | other | `archive/converted-prd/website/phase-1/assets/media/image54.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 796 | other | `archive/converted-prd/website/phase-1/assets/media/image55.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 797 | other | `archive/converted-prd/website/phase-1/assets/media/image56.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 798 | other | `archive/converted-prd/website/phase-1/assets/media/image57.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 799 | other | `archive/converted-prd/website/phase-1/assets/media/image58.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 800 | other | `archive/converted-prd/website/phase-1/assets/media/image59.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 801 | other | `archive/converted-prd/website/phase-1/assets/media/image60.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 802 | other | `archive/converted-prd/website/phase-1/assets/media/image53.png` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 803 | other | `archive/converted-prd/website/phase-2/assets/media/image1.jpeg` | 3. 需求概况 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 804 | other | `archive/converted-prd/website/phase-2/assets/media/image2.jpeg` | 3. 需求概况 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 805 | other | `archive/converted-prd/website/phase-2/assets/media/image3.jpg` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 806 | other | `archive/converted-prd/website/phase-2/assets/media/image4.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 807 | other | `archive/converted-prd/website/phase-2/assets/media/image5.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 808 | other | `archive/converted-prd/website/phase-2/assets/media/image6.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 809 | other | `archive/converted-prd/website/phase-2/assets/media/image7.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 810 | other | `archive/converted-prd/website/phase-2/assets/media/image8.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 811 | other | `archive/converted-prd/website/phase-2/assets/media/image9.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 812 | other | `archive/converted-prd/website/phase-2/assets/media/image10.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 813 | other | `archive/converted-prd/website/phase-2/assets/media/image11.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 814 | other | `archive/converted-prd/website/phase-2/assets/media/image12.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
 | 815 | other | `archive/converted-prd/website/phase-2/assets/media/image13.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 816 | other | `archive/converted-prd/website/phase-2/assets/media/image14.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 817 | other | `archive/converted-prd/website/phase-2/assets/media/image15.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
@@ -892,47 +892,47 @@ owner: 吴忆锋
 | 823 | other | `archive/converted-prd/website/phase-2/assets/media/image21.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 824 | other | `archive/converted-prd/website/phase-2/assets/media/image22.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 825 | other | `archive/converted-prd/website/phase-2/assets/media/image23.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
-| 826 | other | `archive/converted-prd/website/phase-2/assets/media/image24.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 827 | other | `archive/converted-prd/website/phase-2/assets/media/image25.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 828 | other | `archive/converted-prd/website/phase-2/assets/media/image26.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 829 | other | `archive/converted-prd/website/phase-2/assets/media/image27.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 830 | other | `archive/converted-prd/website/phase-2/assets/media/image28.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 831 | other | `archive/converted-prd/website/phase-2/assets/media/image29.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 832 | other | `archive/converted-prd/website/phase-2/assets/media/image30.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 833 | other | `archive/converted-prd/website/phase-2/assets/media/image31.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 834 | other | `archive/converted-prd/website/phase-2/assets/media/image32.jpg` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 835 | other | `archive/converted-prd/website/phase-2/assets/media/image33.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 836 | other | `archive/converted-prd/website/phase-2/assets/media/image5.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 837 | other | `archive/converted-prd/website/phase-2/assets/media/image34.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 838 | other | `archive/converted-prd/website/phase-2/assets/media/image35.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 839 | other | `archive/converted-prd/website/phase-2/assets/media/image36.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 840 | other | `archive/converted-prd/website/phase-2/assets/media/image37.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 841 | other | `archive/converted-prd/website/phase-2/assets/media/image38.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 842 | other | `archive/converted-prd/website/phase-2/assets/media/image30.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 843 | other | `archive/converted-prd/website/phase-2/assets/media/image39.jpg` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 844 | other | `archive/converted-prd/website/phase-2/assets/media/image33.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 845 | other | `archive/converted-prd/website/phase-2/assets/media/image5.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 846 | other | `archive/converted-prd/website/phase-2/assets/media/image40.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 847 | other | `archive/converted-prd/website/phase-2/assets/media/image41.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 848 | other | `archive/converted-prd/website/phase-2/assets/media/image42.png` | Swap | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 849 | other | `archive/converted-prd/website/phase-2/assets/media/image43.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 850 | other | `archive/converted-prd/website/phase-2/assets/media/image44.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 851 | other | `archive/converted-prd/website/phase-2/assets/media/image45.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 852 | other | `archive/converted-prd/website/phase-2/assets/media/image46.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 853 | other | `archive/converted-prd/website/phase-2/assets/media/image47.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 854 | other | `archive/converted-prd/website/phase-2/assets/media/image48.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 855 | other | `archive/converted-prd/website/phase-2/assets/media/image49.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 856 | other | `archive/converted-prd/website/phase-2/assets/media/image50.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 857 | other | `archive/converted-prd/website/phase-2/assets/media/image51.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 858 | other | `archive/converted-prd/website/phase-2/assets/media/image52.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 859 | other | `archive/converted-prd/website/phase-2/assets/media/image45.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 860 | other | `archive/converted-prd/website/waitlist-addition/assets/media/image1.jpg` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 861 | other | `archive/converted-prd/website/waitlist-addition/assets/media/image2.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 862 | other | `archive/converted-prd/website/waitlist-addition/assets/media/image3.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 863 | other | `archive/converted-prd/website/waitlist-addition/assets/media/image4.jpeg` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 864 | other | `archive/converted-prd/website/waitlist-addition/assets/media/image5.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 865 | other | `archive/converted-prd/website/waitlist-addition/assets/media/image6.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 866 | other | `archive/converted-prd/website/waitlist-addition/assets/media/image7.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 867 | other | `archive/converted-prd/website/waitlist-campaign/assets/media/image1.jpg` | 4. Demo | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 868 | other | `archive/converted-prd/website/waitlist-campaign/assets/media/image2.jpg` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
-| 869 | other | `archive/converted-prd/website/waitlist-campaign/assets/media/image3.jpg` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | OUT_OF_SCOPE_OR_NO_KB_TARGET |
+| 826 | other | `archive/converted-prd/website/phase-2/assets/media/image24.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 827 | other | `archive/converted-prd/website/phase-2/assets/media/image25.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 828 | other | `archive/converted-prd/website/phase-2/assets/media/image26.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 829 | other | `archive/converted-prd/website/phase-2/assets/media/image27.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 830 | other | `archive/converted-prd/website/phase-2/assets/media/image28.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 831 | other | `archive/converted-prd/website/phase-2/assets/media/image29.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 832 | other | `archive/converted-prd/website/phase-2/assets/media/image30.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 833 | other | `archive/converted-prd/website/phase-2/assets/media/image31.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 834 | other | `archive/converted-prd/website/phase-2/assets/media/image32.jpg` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 835 | other | `archive/converted-prd/website/phase-2/assets/media/image33.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 836 | other | `archive/converted-prd/website/phase-2/assets/media/image5.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 837 | other | `archive/converted-prd/website/phase-2/assets/media/image34.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 838 | other | `archive/converted-prd/website/phase-2/assets/media/image35.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 839 | other | `archive/converted-prd/website/phase-2/assets/media/image36.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 840 | other | `archive/converted-prd/website/phase-2/assets/media/image37.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 841 | other | `archive/converted-prd/website/phase-2/assets/media/image38.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 842 | other | `archive/converted-prd/website/phase-2/assets/media/image30.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 843 | other | `archive/converted-prd/website/phase-2/assets/media/image39.jpg` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 844 | other | `archive/converted-prd/website/phase-2/assets/media/image33.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 845 | other | `archive/converted-prd/website/phase-2/assets/media/image5.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 846 | other | `archive/converted-prd/website/phase-2/assets/media/image40.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 847 | other | `archive/converted-prd/website/phase-2/assets/media/image41.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 848 | other | `archive/converted-prd/website/phase-2/assets/media/image42.png` | Swap | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 849 | other | `archive/converted-prd/website/phase-2/assets/media/image43.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 850 | other | `archive/converted-prd/website/phase-2/assets/media/image44.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 851 | other | `archive/converted-prd/website/phase-2/assets/media/image45.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 852 | other | `archive/converted-prd/website/phase-2/assets/media/image46.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 853 | other | `archive/converted-prd/website/phase-2/assets/media/image47.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 854 | other | `archive/converted-prd/website/phase-2/assets/media/image48.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 855 | other | `archive/converted-prd/website/phase-2/assets/media/image49.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 856 | other | `archive/converted-prd/website/phase-2/assets/media/image50.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 857 | other | `archive/converted-prd/website/phase-2/assets/media/image51.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 858 | other | `archive/converted-prd/website/phase-2/assets/media/image52.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 859 | other | `archive/converted-prd/website/phase-2/assets/media/image45.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 860 | other | `archive/converted-prd/website/waitlist-addition/assets/media/image1.jpg` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 861 | other | `archive/converted-prd/website/waitlist-addition/assets/media/image2.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 862 | other | `archive/converted-prd/website/waitlist-addition/assets/media/image3.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 863 | other | `archive/converted-prd/website/waitlist-addition/assets/media/image4.jpeg` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 864 | other | `archive/converted-prd/website/waitlist-addition/assets/media/image5.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 865 | other | `archive/converted-prd/website/waitlist-addition/assets/media/image6.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 866 | other | `archive/converted-prd/website/waitlist-addition/assets/media/image7.png` | 4. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 867 | other | `archive/converted-prd/website/waitlist-campaign/assets/media/image1.jpg` | 4. Demo | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 868 | other | `archive/converted-prd/website/waitlist-campaign/assets/media/image2.jpg` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
+| 869 | other | `archive/converted-prd/website/waitlist-campaign/assets/media/image3.jpg` | 5. 需求描述 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NON_RUNTIME_VISUAL_INDEXED |
