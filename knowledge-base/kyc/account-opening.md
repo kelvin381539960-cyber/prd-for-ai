@@ -987,3 +987,25 @@ _Source: archive/converted-prd/kyc/wallet-opening/README.md:592_
 ![Face Loading](../../archive/converted-prd/kyc/wallet-opening/assets/media/image20.png)
 
 _Source: archive/converted-prd/kyc/wallet-opening/README.md:660_
+
+## Additional Page Visuals 补充页面图
+
+> 本节补充第二轮页面覆盖审计中识别出的页面截图，仍引用 converted-prd 原始资产。
+
+### 7. 需求描述
+
+![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image23.jpeg)
+
+_Source: archive/converted-prd/kyc/wallet-opening/README.md:765_
+
+### 7. 需求描述
+
+![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image24.png)
+
+_Source: archive/converted-prd/kyc/wallet-opening/README.md:776_
+
+### 7. 需求描述
+
+![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image27.png)
+
+_Source: archive/converted-prd/kyc/wallet-opening/README.md:824_

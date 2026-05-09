@@ -546,3 +546,49 @@ _Source: archive/converted-prd/app/registration-login/README.md:663_
 ![Select Country Page](../../archive/converted-prd/app/registration-login/assets/media/image31.png)
 
 _Source: archive/converted-prd/app/registration-login/README.md:702_
+
+## Additional Page Visuals 补充页面图
+
+> 本节补充第二轮页面覆盖审计中识别出的页面截图，仍引用 converted-prd 原始资产。
+
+### 7. 需求描述
+
+![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image34.jpeg)
+
+_Source: archive/converted-prd/app/registration-login/README.md:818_
+
+### 7. 需求描述
+
+![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image35.png)
+
+_Source: archive/converted-prd/app/registration-login/README.md:831_
+
+### 7. 需求描述
+
+![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image36.jpeg)
+
+_Source: archive/converted-prd/app/registration-login/README.md:835_
+
+### 7. 需求描述
+
+![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image37.jpeg)
+
+_Source: archive/converted-prd/app/registration-login/README.md:848_
+
+### 7. 需求描述
+
+![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image38.png)
+
+_Source: archive/converted-prd/app/registration-login/README.md:879_
+
+### 7. 需求描述
+
+![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image39.png)
+
+_Source: archive/converted-prd/app/registration-login/README.md:890_
+
+### 7. 需求描述
+
+![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image41.jpeg)
+
+_Source: archive/converted-prd/app/registration-login/README.md:941_

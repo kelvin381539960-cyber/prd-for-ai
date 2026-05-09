@@ -295,3 +295,31 @@ Confirm Exit 弹窗：
 - (Ref: knowledge-base/security/global-rules.md)
 - (Ref: knowledge-base/security/biometric-verification.md)
 - (Ref: knowledge-base/common/errors.md)
+
+## Additional Page Visuals 补充页面图
+
+> 本节补充第二轮页面覆盖审计中识别出的页面截图，仍引用 converted-prd 原始资产。
+
+### Face Auth
+
+![Face Auth](../../archive/converted-prd/security/identity-verification/assets/media/image14.jpeg)
+
+_Source: archive/converted-prd/security/identity-verification/README.md:1160_
+
+### Face Auth
+
+![Face Auth](../../archive/converted-prd/security/identity-verification/assets/media/image15.jpeg)
+
+_Source: archive/converted-prd/security/identity-verification/README.md:1164_
+
+### Face Auth
+
+![Face Auth](../../archive/converted-prd/security/identity-verification/assets/media/image17.png)
+
+_Source: archive/converted-prd/security/identity-verification/README.md:1223_
+
+### Face Auth
+
+![Face Auth](../../archive/converted-prd/security/identity-verification/assets/media/image18.png)
+
+_Source: archive/converted-prd/security/identity-verification/README.md:1249_

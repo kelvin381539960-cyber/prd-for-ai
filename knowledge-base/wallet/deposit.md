@@ -662,3 +662,91 @@ _Source: archive/converted-prd/wallet/deposit-send-swap/README.md:741_
 ![Receive Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image42.png)
 
 _Source: archive/converted-prd/wallet/deposit-send-swap/README.md:742_
+
+## Additional Page Visuals 补充页面图
+
+> 本节补充第二轮页面覆盖审计中识别出的页面截图，仍引用 converted-prd 原始资产。
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image40.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:715_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image43.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:789_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image44.jpeg)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:853_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image45.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:857_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image46.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:877_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image47.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:878_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image48.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:879_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image53.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:921_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image54.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:973_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image55.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:974_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image56.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:975_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image57.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:976_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image60.png)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:1049_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image61.jpeg)
+
+_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:1056_

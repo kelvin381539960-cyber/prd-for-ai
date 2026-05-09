@@ -294,3 +294,61 @@ flowchart LR
 - (Ref: knowledge-base/security/login-passcode-verification.md)
 - (Ref: knowledge-base/security/biometric-verification.md)
 - (Ref: knowledge-base/security/face-authentication.md)
+
+## Additional Page Visuals 补充页面图
+
+> 本节补充第二轮页面覆盖审计中识别出的页面截图，仍引用 converted-prd 原始资产。
+
+### 7. 全局规则
+
+![7. 全局规则](../../archive/converted-prd/security/identity-verification/assets/media/image4.png)
+
+_Source: archive/converted-prd/security/identity-verification/README.md:628_
+
+### 7. 全局规则
+
+![7. 全局规则](../../archive/converted-prd/security/identity-verification/assets/media/image5.png)
+
+_Source: archive/converted-prd/security/identity-verification/README.md:654_
+
+### 7. 全局规则
+
+![7. 全局规则](../../archive/converted-prd/security/identity-verification/assets/media/image6.png)
+
+_Source: archive/converted-prd/security/identity-verification/README.md:678_
+
+### 8. 需求描述
+
+![8. 需求描述](../../archive/converted-prd/security/identity-verification/assets/media/image8.png)
+
+_Source: archive/converted-prd/security/identity-verification/README.md:716_
+
+### 8. 需求描述
+
+![8. 需求描述](../../archive/converted-prd/security/identity-verification/assets/media/image9.png)
+
+_Source: archive/converted-prd/security/identity-verification/README.md:736_
+
+### 8. 需求描述
+
+![8. 需求描述](../../archive/converted-prd/security/identity-verification/assets/media/image10.png)
+
+_Source: archive/converted-prd/security/identity-verification/README.md:859_
+
+### 8. 需求描述
+
+![8. 需求描述](../../archive/converted-prd/security/identity-verification/assets/media/image11.png)
+
+_Source: archive/converted-prd/security/identity-verification/README.md:883_
+
+### 8. 需求描述
+
+![8. 需求描述](../../archive/converted-prd/security/identity-verification/assets/media/image12.png)
+
+_Source: archive/converted-prd/security/identity-verification/README.md:1007_
+
+### 8. 需求描述
+
+![8. 需求描述](../../archive/converted-prd/security/identity-verification/assets/media/image16.png)
+
+_Source: archive/converted-prd/security/identity-verification/README.md:1179_

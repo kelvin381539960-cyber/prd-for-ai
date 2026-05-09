@@ -230,3 +230,25 @@ _Source: archive/converted-prd/notification/push-inbox/README.md:2436_
 ![3. demo](../../archive/converted-prd/notification/system-email/assets/media/image1.jpeg)
 
 _Source: archive/converted-prd/notification/system-email/README.md:37_
+
+## Additional Page Visuals 补充页面图
+
+> 本节补充第二轮页面覆盖审计中识别出的页面截图，仍引用 converted-prd 原始资产。
+
+### 4. 其他可见
+
+![4. 其他可见](../../archive/converted-prd/notification/push-inbox/assets/media/image32.png)
+
+_Source: archive/converted-prd/notification/push-inbox/README.md:2386_
+
+### 4. 其他可见
+
+![4. 其他可见](../../archive/converted-prd/notification/push-inbox/assets/media/image33.png)
+
+_Source: archive/converted-prd/notification/push-inbox/README.md:2394_
+
+### 4. 其他可见
+
+![4. 其他可见](../../archive/converted-prd/notification/push-inbox/assets/media/image37.png)
+
+_Source: archive/converted-prd/notification/push-inbox/README.md:2426_

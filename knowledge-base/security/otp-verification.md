@@ -268,3 +268,13 @@ flowchart LR
 - (Ref: knowledge-base/security/_index.md)
 - (Ref: knowledge-base/security/global-rules.md)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / Security OTP / 2026-05-01)
+
+## Additional Page Visuals 补充页面图
+
+> 本节补充第二轮页面覆盖审计中识别出的页面截图，仍引用 converted-prd 原始资产。
+
+### Verify Page
+
+![Verify Page](../../archive/converted-prd/security/identity-verification/assets/media/image7.jpeg)
+
+_Source: archive/converted-prd/security/identity-verification/README.md:699_

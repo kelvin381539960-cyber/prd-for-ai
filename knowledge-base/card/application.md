@@ -508,3 +508,85 @@ _Source: archive/converted-prd/card/application/README.md:813_
 ![Activate Card](../../archive/converted-prd/card/application/assets/media/image46.png)
 
 _Source: archive/converted-prd/card/application/README.md:815_
+
+## Additional Page Visuals 补充页面图
+
+> 本节补充第二轮页面覆盖审计中识别出的页面截图，仍引用 converted-prd 原始资产。
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image27.png)
+
+_Source: archive/converted-prd/card/application/README.md:465_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image28.png)
+
+_Source: archive/converted-prd/card/application/README.md:466_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image29.png)
+
+_Source: archive/converted-prd/card/application/README.md:468_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image30.png)
+
+_Source: archive/converted-prd/card/application/README.md:469_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image31.png)
+
+_Source: archive/converted-prd/card/application/README.md:471_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image32.png)
+
+_Source: archive/converted-prd/card/application/README.md:508_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image33.png)
+
+_Source: archive/converted-prd/card/application/README.md:543_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image34.png)
+
+_Source: archive/converted-prd/card/application/README.md:544_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image35.png)
+
+_Source: archive/converted-prd/card/application/README.md:545_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image36.png)
+
+_Source: archive/converted-prd/card/application/README.md:546_
+
+### 申卡入口
+
+![申卡入口](../../archive/converted-prd/card/application/assets/media/image49.png)
+
+_Source: archive/converted-prd/card/application/README.md:837_
+
+### 申卡入口
+
+![申卡入口](../../archive/converted-prd/card/application/assets/media/image50.png)
+
+_Source: archive/converted-prd/card/application/README.md:839_
+
+### 申卡入口
+
+![申卡入口](../../archive/converted-prd/card/application/assets/media/image51.png)
+
+_Source: archive/converted-prd/card/application/README.md:840_
