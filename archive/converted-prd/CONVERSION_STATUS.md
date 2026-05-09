@@ -30,7 +30,7 @@
 | 4 | DONE | `archive/historical-prd/app/AIX APP V1.0【Transaction & History】 (1).docx` | `archive/converted-prd/app/transaction-history/` | 已完成；图片引用 66，图片文件 63，缺失 0；HTML 表格 11 |
 | 5 | TODO | `archive/historical-prd/card/AIX Card V1.0【Application】.docx` | `archive/converted-prd/card/application/` |  |
 | 6 | TODO | `archive/historical-prd/card/AIX Card ME模块需求V1.0 (1).docx` | `archive/converted-prd/card/me/` |  |
-| 7 | TODO | `archive/historical-prd/card/AIX Card 【manage】模块需求V1.0 .docx` | `archive/converted-prd/card/manage/` |  |
+| 7 | DONE | `archive/historical-prd/card/AIX Card 【manage】模块需求V1.0 .docx` | `archive/converted-prd/card/manage/` | 已完成；图片引用 33，图片文件 32，缺失 0；HTML 表格 29 |
 | 8 | DONE | `archive/historical-prd/card/AIX Card交易【transaction】.docx` | `archive/converted-prd/card/transaction/` | 已完成；图片引用 2，图片文件 2，缺失 0；HTML 表格 5 |
 | 9 | TODO | `archive/historical-prd/common/[2025-11-27] AIX+PopUp+banner等能力接入【首页+MGM页面】.docx` | `archive/converted-prd/common/popup-banner/` |  |
 | 10 | DONE | `archive/historical-prd/common/[2026-03-09]AIX+多语言翻译逻辑.docx` | `archive/converted-prd/common/i18n/` | 已完成；图片引用 2，图片文件 2，缺失 0；HTML 表格 0 |
@@ -59,6 +59,6 @@
 | 指标 | 数量 |
 |---|---:|
 | 历史 docx 总数 | 23 |
-| 已完成 | 8 |
-| 待转换 | 15 |
+| 已完成 | 9 |
+| 待转换 | 14 |
 | 受阻 | 0 |
