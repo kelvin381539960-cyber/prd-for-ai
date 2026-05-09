@@ -27,7 +27,7 @@
 | 1 | DONE | `archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx` | `archive/converted-prd/app/registration-login/` | 已完成；43 个图片引用，41 个唯一图片文件，0 缺失；表格保留为 HTML table |
 | 2 | DONE | `archive/historical-prd/app/AIX APP V1.0【Home】.docx` | `archive/converted-prd/app/home/` | 已完成；图片引用 47，图片文件 47，缺失 0；HTML 表格 8 |
 | 3 | DONE | `archive/historical-prd/app/AIX APP V1.0 【FAQ】.docx` | `archive/converted-prd/app/faq/` | 已完成；图片引用 29，图片文件 18，缺失 0；HTML 表格 3 |
-| 4 | TODO | `archive/historical-prd/app/AIX APP V1.0【Transaction & History】 (1).docx` | `archive/converted-prd/app/transaction-history/` |  |
+| 4 | DONE | `archive/historical-prd/app/AIX APP V1.0【Transaction & History】 (1).docx` | `archive/converted-prd/app/transaction-history/` | 已完成；图片引用 66，图片文件 63，缺失 0；HTML 表格 11 |
 | 5 | TODO | `archive/historical-prd/card/AIX Card V1.0【Application】.docx` | `archive/converted-prd/card/application/` |  |
 | 6 | TODO | `archive/historical-prd/card/AIX Card ME模块需求V1.0 (1).docx` | `archive/converted-prd/card/me/` |  |
 | 7 | TODO | `archive/historical-prd/card/AIX Card 【manage】模块需求V1.0 .docx` | `archive/converted-prd/card/manage/` |  |
@@ -59,6 +59,6 @@
 | 指标 | 数量 |
 |---|---:|
 | 历史 docx 总数 | 23 |
-| 已完成 | 4 |
-| 待转换 | 19 |
+| 已完成 | 5 |
+| 待转换 | 18 |
 | 受阻 | 0 |
