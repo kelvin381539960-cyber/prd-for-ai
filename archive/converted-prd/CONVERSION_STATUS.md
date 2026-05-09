@@ -34,7 +34,7 @@
 | 8 | DONE | `archive/historical-prd/card/AIX Card交易【transaction】.docx` | `archive/converted-prd/card/transaction/` | 已完成；图片引用 2，图片文件 2，缺失 0；HTML 表格 5 |
 | 9 | DONE | `archive/historical-prd/common/[2025-11-27] AIX+PopUp+banner等能力接入【首页+MGM页面】.docx` | `archive/converted-prd/common/popup-banner/` | 已完成；图片引用 20，图片文件 20，缺失 0；HTML 表格 4 |
 | 10 | DONE | `archive/historical-prd/common/[2026-03-09]AIX+多语言翻译逻辑.docx` | `archive/converted-prd/common/i18n/` | 已完成；图片引用 2，图片文件 2，缺失 0；HTML 表格 0 |
-| 11 | TODO | `archive/historical-prd/kyc/AIX WALLET 钱包开户KYC需求V1.0 (1).docx` | `archive/converted-prd/kyc/wallet-opening/` |  |
+| 11 | DONE | `archive/historical-prd/kyc/AIX WALLET 钱包开户KYC需求V1.0 (1).docx` | `archive/converted-prd/kyc/wallet-opening/` | 已完成；图片引用 28，图片文件 27，缺失 0；HTML 表格 22 |
 | 12 | TODO | `archive/historical-prd/mgm/[2026-03-31]AIX-MGM及邀请码.docx` | `archive/converted-prd/mgm/referral-invite-code/` |  |
 | 13 | TODO | `archive/historical-prd/notification/[2025-11-25] AIX+Notification（push及站内信）.docx` | `archive/converted-prd/notification/push-inbox/` |  |
 | 14 | DONE | `archive/historical-prd/notification/[2026-03-12]AIX+系统邮件.docx` | `archive/converted-prd/notification/system-email/` | 已完成；图片引用 2，图片文件 2，缺失 0；HTML 表格 0 |
@@ -59,6 +59,6 @@
 | 指标 | 数量 |
 |---|---:|
 | 历史 docx 总数 | 23 |
-| 已完成 | 12 |
-| 待转换 | 11 |
+| 已完成 | 13 |
+| 待转换 | 10 |
 | 受阻 | 0 |
