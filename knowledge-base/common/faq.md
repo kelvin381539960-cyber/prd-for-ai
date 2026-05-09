@@ -1,34 +1,55 @@
 ---
 module: common
 feature: faq
-version: "1.1"
-status: active
-source_doc: reference-data/faq/phase-1-faq.xlsx；knowledge-base/_kb-ingestion-process.md；knowledge-base/common/_index.md；knowledge-base/changelog/knowledge-gaps.md
-source_section: reference-data/faq/phase-1-faq.xlsx / sheet `(v4) AIX FAQs - Isaac` / final answer column；外部依赖收窄原则
-last_updated: 2026-05-02
+version: "1.2"
+status: source_gap
+source_doc: archive/converted-prd/app/faq/README.md；archive/converted-prd/app/home/README.md；reference-data/faq/phase-1-faq.xlsx
+source_section: converted FAQ / 3 功能需求；Home / FAQ 展示；legacy xlsx FAQ
+last_updated: 2026-05-09
 owner: 吴忆锋
 depends_on:
   - common/_index
-  - changelog/knowledge-gaps
+  - home/app-home
+  - changelog/prd-source-alignment
 ---
 
 # FAQ 公共问答
 
-## 1. 功能定位
+## 1. Source alignment status
 
-FAQ 用于沉淀 AIX App 面向用户的问答口径。
+本文件当前标记为 `SOURCE_GAP`。
 
-本文件仅转写已有 FAQ 原文，不新增问题，不扩展答案，不根据接口文档或模型推理补充客服口径。
+原因：现有 FAQ 知识库主要来自旧的 `reference-data/faq/phase-1-faq.xlsx`，而本轮校准要求以 `archive/converted-prd/app/faq/README.md` 作为证据层。自动覆盖检查发现 converted FAQ 中至少存在与当前 KB 不完全一致的问题或答案口径，例如：
 
-本次来源为用户上传的 `reference-data/faq/phase-1-faq.xlsx`，sheet 为 `(v4) AIX FAQs - Isaac`。优先采用 C 列最终答案；若 C 列为空且 B 列有答案，才采用 B 列。无答案的问题不写入 FAQ 正文，只进入缺口清单。
+- `What types of cards does AIX Pay offer?`
+- `Who is eligible to open an AIX Pay account?`
 
-## 2. 使用限制
+这些内容与当前 KB 中的 `AIX Pay Card` 问法、资格说明、Google Pay / Apple Pay / Samsung Pay 等表述存在差异，需要后续单独按 converted FAQ 重写或覆盖 FAQ 全文。
 
-1. 本文件记录的是 FAQ 原文口径，不等同于功能上线状态确认。
-2. 涉及 Deposit / WalletConnect / Risk Withheld 的内容，只能按 FAQ 原文引用，不得扩展为完整状态机、完整错误码、完整合规规则。
-3. 不得把 FAQ 中的用户表达反推为 DTC / AAI / 后端实现事实。
-4. 后续如 FAQ 原文更新，应以新版 FAQ 文件覆盖，不自行改写。
+## 2. Runtime rules already confirmed from converted PRD
 
+| 规则 | 结论 | 来源 |
+|---|---|---|
+| 首页 FAQ 展示 | FAQ 默认只显示问题折叠答案，点击任意一个问题只显示当前这条答案 | Home / FAQ 区域 |
+| `more>` 入口 | 点击 `more>` 跳转 Zendesk 链接查看更多 FAQ | Home / FAQ 区域；FAQ PRD |
+| `more>` 显示条件 | 链接由服务端配置；没有链接则不显示 `more` 入口 | FAQ PRD |
+| Chat with us | `Chat with us` 章节为删除线，不作为 confirmed runtime fact | FAQ / 4 Chat with us 删除线 |
+
+## 3. Required follow-up
+
+后续需要把 FAQ 原文从 `archive/converted-prd/app/faq/README.md` 重新抽取为结构化知识库，至少覆盖：
+
+1. 首页最近 3 条 FAQ；
+2. 各 Zendesk Section 的问题、答案和 more 链接；
+3. 删除线模块不沉淀为 confirmed fact；
+4. 与旧 xlsx FAQ 冲突的问法 / 答案，标 `CONFLICT` 或以 converted-prd 覆盖；
+5. 与 Card / Wallet / KYC / Common Errors 的事实边界。
+
+## 4. Legacy FAQ content
+
+以下保留旧版 FAQ 原文，直到完成 converted FAQ 全量重写。使用时必须注意：旧版内容尚未完全按 converted-prd 校准，不能作为最终 confirmed source。
+
+---
 ## 3. FAQ 原文清单
 
 

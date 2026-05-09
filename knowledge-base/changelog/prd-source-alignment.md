@@ -118,9 +118,9 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 2 | ALIGNED | `knowledge-base/account/registration.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | registration.md 已按 registration-login + security 证据校准；Locked 不作为账户状态沉淀 |
 | 3 | NEED_CONFIRMATION | `knowledge-base/account/login.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | login.md 已更新来源与风险说明；Email/Phone 输入范围、Forgot password 入口需确认 |
 | 4 | NEED_CONFIRMATION | `knowledge-base/account/password-reset.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | password-reset.md 已重写为待确认；7.3 忘记密码正文为删除线，不能作为 active runtime fact |
-| 5 | TODO | `knowledge-base/home/_index.md` | `archive/converted-prd/app/home/README.md` | 首页索引 |
-| 6 | TODO | `knowledge-base/home/app-home.md` | `archive/converted-prd/app/home/README.md` | 首页 |
-| 7 | TODO | `knowledge-base/common/faq.md` | `archive/converted-prd/app/faq/README.md` | FAQ |
+| 5 | ALIGNED | `knowledge-base/home/_index.md` | `archive/converted-prd/app/home/README.md` | home/_index.md 已按 Home + FAQ 证据更新，明确首页查询入口与跨模块边界 |
+| 6 | ALIGNED | `knowledge-base/home/app-home.md` | `archive/converted-prd/app/home/README.md` | app-home.md 已补齐 Evidence→KB 缺口：钱包状态、申卡入口、卡片展示、FAQ、核心交易入口、刷新规则 |
+| 7 | SOURCE_GAP | `knowledge-base/common/faq.md` | `archive/converted-prd/app/faq/README.md` | common/faq.md 已登记 SOURCE_GAP：converted FAQ 与旧 xlsx FAQ 口径不一致，需后续按 converted-prd 全量重写 |
 | 8 | TODO | `knowledge-base/transaction/_index.md` | `archive/converted-prd/app/transaction-history/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | 交易索引；需同时关注 Wallet / Card 交易来源 |
 | 9 | TODO | `knowledge-base/transaction/history.md` | `archive/converted-prd/app/transaction-history/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | 全量交易历史 |
 | 10 | TODO | `knowledge-base/transaction/detail.md` | `archive/converted-prd/app/transaction-history/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | 交易详情 |
@@ -152,14 +152,16 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 指标 | 数量 |
 |---|---:|
 | 总任务 | 32 |
-| ALIGNED | 1 |
+| ALIGNED | 3 |
 | NEED_CONFIRMATION | 3 |
 | CONFLICT | 0 |
-| SOURCE_GAP | 0 |
-| TODO | 27 |
+| SOURCE_GAP | 1 |
+| TODO | 24 |
 | OUT_OF_SCOPE | 1 |
 
 ## Batch Notes
+
+- 2026-05-09：完成 Home + FAQ 批次。Home index/app-home 标 ALIGNED；FAQ 标 SOURCE_GAP，原因是 converted FAQ 与旧 xlsx FAQ 口径不一致，需按 converted-prd 单独重写。
 
 - 2026-05-09：创建本审计任务表。下一步从 account 模块开始校准。
 - 2026-05-09：补充交叉证据规则。Account / Registration / Login / Password Reset 不能只看注册登录 PRD，必须同时核对 Security 身份认证 PRD；后续 Card / Wallet / Transaction / Notification 同理按主证据 + 支撑证据执行。
