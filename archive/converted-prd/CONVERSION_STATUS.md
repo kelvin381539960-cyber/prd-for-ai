@@ -37,7 +37,7 @@
 | 11 | TODO | `archive/historical-prd/kyc/AIX WALLET 钱包开户KYC需求V1.0 (1).docx` | `archive/converted-prd/kyc/wallet-opening/` |  |
 | 12 | TODO | `archive/historical-prd/mgm/[2026-03-31]AIX-MGM及邀请码.docx` | `archive/converted-prd/mgm/referral-invite-code/` |  |
 | 13 | TODO | `archive/historical-prd/notification/[2025-11-25] AIX+Notification（push及站内信）.docx` | `archive/converted-prd/notification/push-inbox/` |  |
-| 14 | TODO | `archive/historical-prd/notification/[2026-03-12]AIX+系统邮件.docx` | `archive/converted-prd/notification/system-email/` |  |
+| 14 | DONE | `archive/historical-prd/notification/[2026-03-12]AIX+系统邮件.docx` | `archive/converted-prd/notification/system-email/` | 已完成；图片引用 2，图片文件 2，缺失 0；HTML 表格 0 |
 | 15 | TODO | `archive/historical-prd/oboss/[AIX]OBOSS MVP.docx` | `archive/converted-prd/oboss/mvp/` |  |
 | 16 | TODO | `archive/historical-prd/oboss/[2026-04-14]AIX-Oboss能力.docx` | `archive/converted-prd/oboss/capabilities/` | 源文件较大，转换后需重点检查图片和表格 |
 | 17 | TODO | `archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx` | `archive/converted-prd/security/identity-verification/` |  |
@@ -59,6 +59,6 @@
 | 指标 | 数量 |
 |---|---:|
 | 历史 docx 总数 | 23 |
-| 已完成 | 6 |
-| 待转换 | 17 |
+| 已完成 | 7 |
+| 待转换 | 16 |
 | 受阻 | 0 |
