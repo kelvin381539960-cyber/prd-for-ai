@@ -1,8 +1,8 @@
 ---
 module: knowledge-base
 feature: prd-source-alignment
-version: "1.1"
-status: active
+version: "2.0"
+status: completed_pending_product_decision
 source_doc: archive/converted-prd/README.md；archive/converted-prd/CONTENT_COMPARISON_REPORT.md；archive/converted-prd/VALIDATION_REPORT.md
 source_section: converted-prd full corpus
 last_updated: 2026-05-09
