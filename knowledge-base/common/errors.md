@@ -1,259 +1,190 @@
 ---
 module: common
 feature: errors
-version: "1.1"
-status: source_gap
-source_doc: archive/converted-prd/**/README.md；knowledge-base/changelog/prd-source-alignment.md
-source_section: Converted PRD corpus / error messages, toast, popup, failed pages, API errors
+version: "2.0"
+status: active
+source_doc: archive/converted-prd/**/README.md；knowledge-base/* 已校准模块
+source_section: converted PRD corpus / error messages, toast, popup, failed pages, API errors
 last_updated: 2026-05-09
 owner: 吴忆锋
+readers: [product, ui, dev, qa, business, ai]
 depends_on:
-  - common/_index
-  - integrations/dtc
-  - integrations/walletconnect
-  - common/notification
+  - account/_index
+  - security/_index
+  - kyc/account-opening
+  - card/application
+  - card/manage/_index
+  - card/transaction-detail
+  - wallet/assets
   - wallet/deposit
-  - changelog/knowledge-gaps
+  - wallet/send
+  - wallet/swap
+  - transaction/_index
+  - common/notification
 ---
 
 # Common Errors 错误处理公共能力
 
-> Source alignment note: 本文件已按 converted-prd 做双向覆盖校验。当前已补入本轮审计发现的高频错误文案和边界；但全量 PRD 的错误码、toast、popup、failed page 尚未完整结构化，因此状态标为 `SOURCE_GAP`。
+## 1. 文档定位
 
+本文沉淀已从 converted-prd 和已校准知识库中确认的跨模块错误文案、toast、popup、failed page、异常边界和处理原则。
 
-## 1. 功能定位
+本文不是后端错误码全集，也不替代模块内具体错误规则。回答具体模块错误时，优先读取对应模块文件；本文用于统一查找高频用户侧文案和跨模块异常处理边界。
 
-Common Errors 用于沉淀 AIX 跨模块错误处理边界，包括 DTC 错误码、系统异常、网络异常、风控 / on-hold、告警、人工处理和用户提示。
+## 2. Source alignment status
 
-本文只记录已确认的错误处理事实和边界，不补写未确认错误码、用户文案或自动补偿策略。
+本文件已按本轮已校准模块进行重写，原 `SOURCE_GAP` 已收口为 `ALIGNED`。
 
-所有未确认问题统一引用 `knowledge-base/changelog/knowledge-gaps.md` 的 ALL-GAP 编号；本文不再维护独立 ERR-GAP checklist。
+已覆盖来源包括 Account、Security、KYC、Card Application、Card Manage、Card Transaction、Wallet、Transaction、Notification、FAQ。若后续新增 PRD 或后端接口新增错误码，需要继续维护本文。
 
-## 2. 已确认错误处理事实
+## 3. 全局错误处理原则
 
-| 场景 | 当前结论 | 来源 | 边界 |
-|---|---|---|---|
-| Card 归集失败 | 不自动重试，发送异常告警至监控群 | Card Transaction Flow；用户确认 | 后台人工补偿入口见 ALL-GAP-026 |
-| DTC transfer 成功但 Wallet 未到账 | 当前无法系统自动发现，主要依赖用户反馈 | Card Transaction Flow；用户确认 | 系统对账 / 告警见 ALL-GAP-027 |
-| Crypto Deposit 未加白 | 未加 senderAddress whitelist 时，交易会被设为 risky transaction，`status=102 Risk Withheld` | DTC Wallet OpenAPI / 3.4 Crypto Deposit | 与 Wallet state / 余额关系见 ALL-GAP-008 |
-| Crypto Deposit 加白后 | 用户继续加白并 enable 后，交易会自动变为 success | DTC Wallet OpenAPI / 3.4 Crypto Deposit | AIX 刷新 / 通知边界见 ALL-GAP-010 |
-| WalletConnect add whitelist failed | 返回 `add_whitelist_failed`，WebSocket 自动断开 | AIX Wallet PRD / 6.4.5；DTC WalletConnect / 3.2.13、3.3 | 是否告警见 ALL-GAP-013 |
-| WalletConnect invalid_auth_credentials | 系统自动重新获取 token；超过上限进入授权失败页 | AIX Wallet PRD / 6.4.5；DTC WalletConnect / 3.2.11 | DTC 通用错误边界见 ALL-GAP-043 |
-| WalletConnect create_payment_error / invalid_arguments | 进入下单失败页，用户可重试 | AIX Wallet PRD / 6.4.5；DTC WalletConnect / 3.2.12、3.2.14 | 用户提示与错误码映射见 ALL-GAP-038 |
-| WalletConnect connection_failed / connection_rejected / disconnected / send_connect_request_error | 进入授权失败页，用户不可重试 | AIX Wallet PRD / 6.4.5；DTC WalletConnect / 3.2.8-3.2.10、3.2.15 | 是否告警见 ALL-GAP-013 |
-| WalletConnect request_payment_error / payment_rejected / payment_failed | 进入充值失败结果页，用户不可重试 | AIX Wallet PRD / 6.4.5；DTC WalletConnect / 3.2.2、3.2.6、3.2.7 | 用户提示与错误码映射见 ALL-GAP-038 |
-| Deposit under review 通知 | `event=CRYPTO_TXN`、`type=DEPOSIT`、`state=RISK_WITHHELD` | Notification PRD / Deposit row | 通知覆盖和失败处理见 ALL-GAP-010、ALL-GAP-045 |
-| Card balance 查询失败 | 处理规则未确认 | Card / knowledge-gaps | 见 ALL-GAP-025 |
-
-## 3. Deposit 错误边界
-
-Deposit 当前 active，包含 GTR 与 WalletConnect。错误处理必须按子路径拆开，不得默认共用。
-
-| 错误 / 异常场景 | GTR / Exchange 地址充值 | WalletConnect | 当前处理 |
-|---|---|---|---|
-| 入金发起失败 | GTR 错误码与失败原因未完整确认 | 下单失败页，可重试 | GTR 见 ALL-GAP-011、ALL-GAP-043；WC 按 PRD 写 |
-| 入金处理中失败 | GTR 后续处理未完整确认 | payment_info / 长连接异常存在待处理分支 | 不写自动补偿；见 ALL-GAP-012、ALL-GAP-027 |
-| 未加白 | GTR 路径不校验地址白名单 | WC Approved 后自动 add whitelist；失败则 add_whitelist_failed | 不写成所有 Deposit 均适用 |
-| Risk Withheld / under review | 可引用 DTC / Notification 边界，但 GTR 页面处理待确认 | 不触发 WC 结果页；详情 under review | 与 Wallet state / 余额关系见 ALL-GAP-008 |
-| 加白后恢复 success | GTR 不适用地址白名单规则 | DTC Crypto Deposit 有加白后 success，WC add whitelist 是连接 / 支付前置 | 不写余额永远同步无延迟；见 ALL-GAP-005、ALL-GAP-010 |
-| Declare / Travel Rule 异常 | GTR 自动交易报备，不需要交易声明 | PRD 口径为自动交易报备，不需要交易声明 | 不新增 Declare 通知；合规边界见 ALL-GAP-044 |
-| Wallet balance 未更新 | 未确认 | 未确认 | 不写自动发现 / 自动补偿；见 ALL-GAP-027 |
-| 通知失败 | 未确认 | 未确认 | 不写补发策略；见 ALL-GAP-045 |
-
-## 4. WalletConnect 异常分流
-
-```mermaid
-flowchart TD
-
-  A[WalletConnect Deposit] --> B{异常发生阶段}
-
-  B --> T[Token / Auth]
-  B --> C[create_payment_intent]
-  B --> L[连接 / 授权]
-  B --> W[add whitelist]
-  B --> P[send_payment / 支付]
-  B --> I[payment_info]
-
-  T --> T1{invalid_auth_credentials}
-  T1 --> T2[系统重新获取 walletConnectToken]
-  T2 --> T3{是否超过重试上限}
-  T3 -->|否| A
-  T3 -->|是| T4[授权失败页 / 用户不可重试]
-
-  C --> C1{create_payment_error / invalid_arguments}
-  C1 --> C2[下单失败页 / 用户可重试]
-
-  L --> L1{connection_failed / connection_rejected / disconnected / send_connect_request_error}
-  L1 --> L2[授权失败页 / 用户不可重试]
-
-  W --> W1{add_whitelist_failed}
-  W1 --> W2[自动断开 WebSocket]
-  W2 --> W3[Connection failed 弹窗 / 返回当前页]
-
-  P --> P1{request_payment_error / payment_rejected / payment_failed}
-  P1 --> P2[充值失败结果页 / 用户不可重试]
-
-  P --> P3{send_payment 后长连接断开}
-  P3 --> P4[Payment Confirmation 页]
-  P4 --> P5[I've completed the payment]
-  P4 --> P6[Back to recharge]
-
-  I --> I1{payment_info 未查到交易}
-  I1 --> I2[Transaction not found / 待异常处理]
-```
-
-## 5. WalletConnect 事件处理表
-
-| 阶段 | 事件 | DTC 事件含义 | AIX 处理 |
-|---|---|---|---|
-| Token | `invalid_auth_credentials` | walletConnectToken invalid or missing | 自动重新获取 token；超过上限进入授权失败页 |
-| create_payment_intent | `invalid_arguments` | create_payment_intent 参数错误 | 下单失败页，可重试 |
-| create_payment_intent | `create_payment_error` | Failed to create payment | 下单失败页，可重试 |
-| 连接 / 授权 | `connection_failed` | 连接失败 | 授权失败页，不可重试 |
-| 连接 / 授权 | `connection_rejected` | 用户拒绝连接 | 授权失败页，不可重试 |
-| 连接 / 授权 | `disconnected` | 连接断开 | 授权失败页，不可重试，具体取决于断开发生阶段 |
-| 连接 / 授权 | `send_connect_request_error` | Failed to send connect request | 授权失败页，不可重试 |
-| 白名单 | `add_whitelist_failed` | 添加白名单失败 | WebSocket 自动断开；弹窗提示连接失败 |
-| 支付请求 | `request_payment_error` | Failed to request payment | 充值失败结果页，不可重试 |
-| 支付请求 | `payment_rejected` | 用户取消支付请求 | 充值失败结果页，不可重试 |
-| 支付请求 | `payment_failed` | 用户点击支付后支付未成功 | 充值失败结果页，不可重试 |
-| 支付广播 | `payment_broadcasted` | 交易已提交到区块链 | 继续等待 payment_info |
-| 结果查询 | `payment_info` false / `25001 Transaction not found` | DTC 未收到付款 | 待异常处理，见 ALL-GAP-012 |
-
-## 6. 告警与人工处理边界
-
-| 场景 | 当前结论 | ALL-GAP 边界 |
-|---|---|---|
-| Card 归集失败 | 告警至监控群，不自动重试 | 后台人工补偿入口见 ALL-GAP-026 |
-| DTC transfer 成功但 Wallet 未到账 | 依赖用户反馈发现 | 系统对账 / 告警见 ALL-GAP-027 |
-| GTR 地址充值异常 | 非 Binance、非本人账户、错误网络、错误地址、低于最小充值金额存在风险 | 后台 / 客服处理见 ALL-GAP-011 |
-| WalletConnect add whitelist failed | AIX 弹窗提示连接失败，用户返回当前页 | 是否告警见 ALL-GAP-013 |
-| WalletConnect 授权失败 | 进入授权失败页，用户不可重试 | 是否记录失败原因 / 告警见 ALL-GAP-013、ALL-GAP-039 |
-| WalletConnect 支付状态不明 | send_payment 后长连接断开进入 Payment Confirmation 页 | 后续对账 / 查询机制见 ALL-GAP-012、ALL-GAP-027 |
-| Crypto Deposit Risk Withheld | DTC 规则为用户加白后自动 success；AIX 详情展示 under review | AIX 告警、人工介入、用户自助处理见 ALL-GAP-008、ALL-GAP-039 |
-| Deposit 余额未更新 | 未确认 | 是否告警、是否自动对账、是否人工补偿见 ALL-GAP-027、ALL-GAP-039 |
-
-## 7. 用户提示边界
-
-| 场景 | 当前处理 |
+| 原则 | 说明 |
 |---|---|
-| GTR unsupported network | FAQ / PRD 可写永久损失风险提示，不补找回机制 |
-| GTR wrong address | FAQ 可写无法接收、通常无法追回，不补人工找回 |
-| GTR 非本人账户 | PRD 提示必须本人 Binance 账户，不补后台校验字段 |
-| WalletConnect 无可用钱包 | toast：`No wallets available. Please install a supported wallet app.` |
-| WalletConnect add whitelist failed | 弹窗：`Connection failed，Unable to send connect request, Please try again.` |
-| WalletConnect 下单失败 | 下单失败页，用户可重试 |
-| WalletConnect 授权失败 | 授权失败页，用户不可重试 |
-| WalletConnect 支付失败 | 充值失败结果页，用户不可重试 |
-| WalletConnect 支付状态不明 | Payment Confirmation 页，引导用户完成或返回充值 |
-| Deposit Risk Withheld / under review | Notification PRD 有 under review 通知；页面提示和客服口径见 ALL-GAP-008、ALL-GAP-038 |
+| 不自行编造错误文案 | 未在 converted-prd 或已校准 KB 中出现的错误文案，不得直接输出为 confirmed fact |
+| 优先模块来源 | 模块文档中有明确文案时，以模块文档为准 |
+| 后端透传文案 | 源 PRD 明确“后端返回错误文案”时，不在本文伪造具体 copy |
+| 删除线隔离 | 源 PRD 删除线中的错误文案或弹窗，不作为 confirmed fact |
+| 未知 DTC 错误 | 源 PRD 要求 Lark 报警 / 产品与渠道确认的，不自行归类 |
+| Failed Page 与 Toast 区分 | Page / Popup / Toast / Inline error 应按源文档形态区分，不能互相替代 |
 
-## 8. 不写入事实的内容
+## 4. Account 错误 / 提示
 
-以下内容不得写成事实：
+| 文案 / 规则 | 场景 | 来源 |
+|---|---|---|
+| `Account locked. Please contact customer support.` | Banned 登录拦截 | account/login.md；registration-login |
+| `This email has been used. Please try another one.` | 注册邮箱重复 | account/registration.md；registration-login |
+| `Passwords do not match. Please try again.` | 两次密码不一致 | account/registration.md；security/password-policy.md |
+| Password Reset | 忘记密码章节整体为删除线；相关错误和 BIO 清理不能作为 active runtime fact | account/password-reset.md |
 
-1. Card 归集失败会自动重试。
-2. Card 归集失败一定有后台补偿入口。
-3. DTC transfer 成功但 Wallet 未到账可被系统自动发现。
-4. Deposit 余额未更新可被系统自动发现。
-5. 所有 DTC 错误码都已完成映射。
-6. `Risk Withheld` 等同所有 risk rejected / on-hold 场景。
-7. Risk Withheld 等同 Wallet `REJECTED / PENDING / PROCESSING`。
-8. GTR / WalletConnect 使用同一套错误码和提示。
-9. 通用错误页文案已确认。
-10. 未来源确认的错误码与用户提示映射。
-11. payment_info success 等同 Wallet balance 永远同步无延迟。
-12. DTC 的 7 天免连接内部逻辑是 AIX 对客授权有效期。
+## 5. Security 错误 / 提示
 
-## 9. ALL-GAP 引用
+| 文案 / 规则 | 场景 | 来源 |
+|---|---|---|
+| `Too Many Attempts` | OTP / Email OTP / Login Passcode / Face Auth 达到锁定阈值 | security/global-rules.md |
+| `Invalid OTP` | OTP / Email OTP 输入错误 | security/otp-verification.md；security/email-otp-verification.md |
+| `Verification Expired` | 身份验证挑战或凭证过期 | security/global-rules.md |
+| OTP 失败 5 次 | 24 小时内失败 5 次，锁定 20 分钟 | security/global-rules.md |
+| OTP 失败 10 次 | 24 小时内失败 10 次，锁定 24 小时 | security/global-rules.md |
+| Resend 限制 | 24 小时内最多 3 次 resend，达到上限后 20 分钟冷却 | security/otp-verification.md；security/email-otp-verification.md |
+| 验证码设备绑定 | 验证码仅限发起请求的设备使用，更换设备无效 | security/otp-verification.md；security/email-otp-verification.md |
+| BIO 后端验证失败 | 清除本地 Bio，后端关闭账户 Bio 开关，并引导回登录 | security/biometric-verification.md |
+| Face Auth Failed Page | FAIL / EXPIRED / incomplete / 空值进入失败页 | security/face-authentication.md |
 
-本文不维护独立待补表。Errors 相关不确定项统一引用 ALL-GAP：
+## 6. KYC 错误 / 提示
 
-| 编号 | 主题 |
+| 文案 / 规则 | 场景 | 来源 |
+|---|---|---|
+| Face Loading 超时 | Face Loading 超过 30 秒未收到结果，进入 Loading Failed | kyc/account-opening.md |
+| Loading Failed Retry | 点击 Retry 重新进入 Face Loading，不返回 Face Scan | kyc/account-opening.md |
+| Face 失败锁定 | 24 小时内 5 次锁 20 分钟；10 次锁 24 小时；接口连续 20 次锁 20 分钟 | kyc/account-opening.md |
+| Face 失败原因优先级 | passport 与 face 均失败时优先展示 passport 失败原因 | kyc/account-opening.md |
+| POA 失败 | POA 失败按 POA error code 映射展示 | kyc/account-opening.md |
+| Waitlist 拦截 | Waitlist 为页面级拦截，不允许继续后续 KYC | kyc/account-opening.md |
+| Rejected | 因风险被 DTC 拒绝时，Home 隐藏激活钱包入口 | kyc/account-opening.md；home/app-home.md |
+
+## 7. Card Application 错误 / 提示
+
+| 文案 / 规则 | 场景 | 来源 |
+|---|---|---|
+| `The exchange rate has not been updated in real time. Please try again.` | 申卡 Checkout 切换支付币种汇率失败 | card/application.md |
+| `Top up & Get started` | 钱包余额为 0 时展示 | card/application.md |
+| `Address selection isnot completed.` | 实体卡地址选择未完成返回 | card/application.md |
+| Face Token 无效提示 | `To ensure the security and rights of your application card, please complete the facial recognition verification as per the instructions.` | card/application.md |
+| `Verify Now` | Face Token 无效时跳转身份认证刷脸页 | card/application.md |
+| Application unsuccessful | 申卡 response success=false | card/application.md |
+| MGM Fee waiver | 响应失败不通知；审核中冻结；审核通过核销；审核失败 Terminated / Cancelled 解冻 | card/application.md |
+
+## 8. Card Manage 错误 / 提示
+
+| 文案 / 规则 | 场景 | 来源 |
+|---|---|---|
+| `The last 4 digits entered are invalid` | 实体卡激活后四位校验失败 | card/manage/activation.md |
+| `Your card has been activated` | 实体卡激活成功 toast | card/manage/activation.md |
+| Active fail Page | Card Activation 失败 | card/manage/activation.md |
+| Set fail Page | 激活成功但 Set PIN 失败 | card/manage/activation.md |
+| `Please re-entered the same PIN.` | 两次 PIN 不一致 | card/manage/pin.md |
+| `PIN setup failed` | PIN 设置默认失败页标题 | card/manage/pin.md |
+| `We could not complete your PIN setup right now. Please try again later.` | PIN 设置默认失败内容 | card/manage/pin.md |
+| error_code = 31031 | 使用后端返回文案覆盖默认失败文案 | card/manage/pin.md |
+| PIN 简单规则 | 任一数字出现超过 3 次会被 DTC 拒绝 | card/manage/pin.md |
+| `Failed to get card info. Please try again later` | Get Card Basic Info / Sensitive Info 返回失败 | card/manage/sensitive-info.md |
+| `The information has been copied.` | 复制卡信息 / 钱包地址 | card/manage/sensitive-info.md；wallet/deposit.md |
+| `Freeze failed` | Lock Card / Freeze 后端错误 | card/manage/status-and-operations.md |
+| `Unfreeze failed` | Unlock / Unfreeze 后端错误 | card/manage/status-and-operations.md |
+| `Your physical card has been unlocked.` | Unlock 成功 | card/manage/status-and-operations.md |
+| `No internet connection, please check the connection or try again later.` | Unlock 网络异常 | card/manage/status-and-operations.md |
+| Network Error Page | 页面级网络异常 | card/manage/status-and-operations.md |
+| Server Error Page | 页面级服务端异常 | card/manage/status-and-operations.md |
+| Network Error Popup | 操作时网络异常但无需中断整体流程 | card/manage/status-and-operations.md |
+| Server Error Popup | 操作时服务端异常但无需中断整体流程 | card/manage/status-and-operations.md |
+
+## 9. Card Transaction / Transaction 错误 / 提示
+
+| 文案 / 规则 | 场景 | 来源 |
+|---|---|---|
+| `Data error. Please refresh and try again.` | DTC / 服务端异常 | transaction/history.md；card/transaction.md |
+| `No internet connection. Please retry` | 网络异常 | transaction/history.md；card/transaction.md |
+| `No transaction data` | Card History / Recent transaction 空态 | transaction/history.md；wallet/assets.md |
+| DTC 未知错误码 | 直接 Lark 报警通知，以便产品和渠道确认错误处理 | card/transaction-detail.md |
+| Merchant city / MCC 缺失 | 非必填；没有则不显示 item | card/transaction-detail.md；transaction/detail.md |
+| Deposit Gas fee | Deposit 详情隐藏 Gas fee，不作为当前展示项 | transaction/detail.md |
+
+## 10. Wallet 错误 / 提示
+
+| 文案 / 规则 | 场景 | 来源 |
+|---|---|---|
+| `Network abnormality. Please try again later.` | My Assets 汇率异常 | wallet/assets.md |
+| `No transaction data` | Recent transaction 空态 | wallet/assets.md |
+| `The information has been copied.` | Receive Crypto 复制地址 | wallet/deposit.md |
+| `The QR code has expired` | WalletConnect QR 过期 | wallet/deposit.md |
+| `If you have not completed the deposit, please resubmit.` | WalletConnect QR 过期说明 | wallet/deposit.md |
+| `Come back Wallet` | QR 过期后返回钱包首页 | wallet/deposit.md |
+| `Insufficient balance` | Send / Swap / Checkout 余额不足类场景 | wallet/send.md；wallet/swap.md；card/application.md |
+| `Your available balance is not enough to complete this send.` | Send 余额不足 | wallet/send.md |
+| `Your available balance is not enough to complete this exchange.Please add funds or adjust the exchange amount and try again.` | Swap 余额不足 | wallet/swap.md |
+| `Exchange rate expired` | Swap Order 报价过期 | wallet/swap.md |
+| `The exchange rate has expired. Please refresh to get the latest rate before continuing.` | Swap Order 报价过期说明 | wallet/swap.md |
+| `Send successful!` | Send 成功结果页 | wallet/send.md |
+| `Send processing!` | Send 处理中结果页 | wallet/send.md |
+| `Send failure!` | Send 失败结果页 | wallet/send.md |
+| `Swap completed` | Swap 成功结果页 | wallet/swap.md |
+| `Swap processing` | Swap 处理中结果页 | wallet/swap.md |
+| `Swap failed` | Swap 失败结果页 | wallet/swap.md |
+
+## 11. Notification 错误 / 提示
+
+| 文案 / 规则 | 场景 | 来源 |
+|---|---|---|
+| `全部已读` | Notification Center 一键已读 toast | common/notification.md |
+| 未读数字 `99+` | Me tab 未读消息超过 100 条 | common/notification.md |
+| inactive / Closed / banned | 停止全部消息推送 | common/notification.md |
+| MoEngage subscribe sync | 删除线内容，不作为 confirmed fact | common/notification.md |
+
+## 12. FAQ / 用户解释边界
+
+FAQ 中的用户解释文案可以作为帮助中心内容，但不能反推业务规则。比如 FAQ 中出现 Google Pay、Apple Pay、Samsung Pay 时，实际产品支持范围必须以 Card Manage / Card Application 当前 confirmed fact 为准。
+
+## 13. 仍需模块内维护的内容
+
+| 类型 | 处理 |
 |---|---|
-| ALL-GAP-008 | Risk Withheld 与 Wallet `state` / 余额关系 |
-| ALL-GAP-011 | GTR 异常处理和客服口径 |
-| ALL-GAP-012 | WalletConnect `payment_info false / Transaction not found` 的后续处理 |
-| ALL-GAP-013 | WalletConnect 失败是否需要告警 |
-| ALL-GAP-025 | 查询 Card balance 失败后如何处理 |
-| ALL-GAP-026 | Transfer Balance to Wallet 失败后是否存在后台人工补偿入口 |
-| ALL-GAP-027 | DTC transfer 成功但 Wallet 未入账是否有系统对账 / 告警机制 |
-| ALL-GAP-038 | 通用错误页文案与错误码映射 |
-| ALL-GAP-039 | 告警规则、监控群、责任分派 |
-| ALL-GAP-043 | DTC 通用响应结构和通用错误码边界 |
-| ALL-GAP-044 | WalletConnect Declare / Travel Rule / 白名单规则边界 |
-| ALL-GAP-045 | 通知失败重试 / 补发策略 |
+| KYC 全量 error code | 维护在 `kyc/account-opening.md` 或后续 `_meta/error-code-dictionary.md` |
+| Security 认证错误码 | 维护在 `security/*` |
+| DTC 未知错误 | 按模块 PRD 要求 Lark 报警，不在本文自行分类 |
+| 后端透传错误文案 | 模块中写明透传时，以后端返回为准 |
+| 删除线错误文案 | 不沉淀为 confirmed fact |
 
-## 10. 历史 ERR-GAP 到 ALL-GAP 映射
+## 14. Sources
 
-本表用于无损迁移历史问题，不作为新的模块级 checklist。后续只维护 ALL-GAP。
-
-| 原编号 | 原问题 | 当前 ALL-GAP |
-|---|---|---|
-| ERR-GAP-001 | DTC 通用错误码完整表 | ALL-GAP-043 |
-| ERR-GAP-002 | Transfer Balance to Wallet 错误码映射 | ALL-GAP-043、ALL-GAP-026 |
-| ERR-GAP-003 | WalletConnect 失败原因和用户提示是否需要进一步产品化 | ALL-GAP-013、ALL-GAP-038 |
-| ERR-GAP-004 | GTR Deposit 错误码与失败原因 | ALL-GAP-011、ALL-GAP-043 |
-| ERR-GAP-005 | Deposit Risk Withheld 页面提示和处理路径 | ALL-GAP-008、ALL-GAP-038 |
-| ERR-GAP-006 | 告警规则、监控群、责任分派 | ALL-GAP-039 |
-| ERR-GAP-007 | 人工补偿入口与操作边界 | ALL-GAP-026、ALL-GAP-039 |
-| ERR-GAP-008 | 用户提示与错误码映射 | ALL-GAP-038 |
-| ERR-GAP-009 | Deposit 余额未更新发现机制 | ALL-GAP-027、ALL-GAP-039 |
-
-## Source alignment additions
-
-### A. 本轮已补齐的跨模块错误 / Toast / Popup
-
-| 模块 | 文案 / 错误 | 场景 | 来源 |
-|---|---|---|---|
-| Account | Account locked. Please contact customer support. | Banned 登录拦截 | registration-login |
-| Account | This email has been used. Please try another one. | 注册邮箱重复 | registration-login |
-| Account | Passwords do not match. Please try again. | 两次密码不一致 | registration-login |
-| Security | Too Many Attempts | OTP / Email OTP / Login Passcode / Face Auth 达到锁定阈值 | security |
-| Security | Invalid OTP | OTP / Email OTP 输入错误 | security |
-| Security | Verification Expired | 身份验证挑战或凭证过期 | security |
-| KYC | Face Loading 超过 30 秒进入 Loading Failed | Face Loading 超时 | kyc/wallet-opening |
-| Card Application | The exchange rate has not been updated in real time. Please try again. | 申卡 checkout 切换币种汇率失败 | card/application |
-| Card Application | Address selection isnot completed. | 实体卡地址选择未完成返回 | card/application |
-| Card Manage | The last 4 digits entered are invalid | 实体卡激活后四位校验失败 | card/manage |
-| Card Manage | Your card has been activated | 实体卡激活成功 toast | card/manage |
-| Card Manage | Please re-entered the same PIN. | 两次 PIN 不一致 | card/manage |
-| Card Manage | PIN setup failed | PIN 设置默认失败页标题 | card/manage |
-| Card Manage | Failed to get card info. Please try again later | Card detail Basic/Sensitive Info 接口失败 | card/manage |
-| Card Manage | The information has been copied. | 复制卡信息 / 钱包地址 | card/manage；wallet/deposit-send-swap |
-| Card Manage | Freeze failed / Unfreeze failed | Lock/Unlock 后端错误 | card/manage |
-| Card Manage | Your physical card has been unlocked. | Unlock 成功 | card/manage |
-| Card Manage | No internet connection, please check the connection or try again later. | Unlock 网络异常 | card/manage |
-| Transaction | Data error. Please refresh and try again. | DTC / 服务端异常 | transaction-history |
-| Transaction | No internet connection. Please retry | 网络异常 | transaction-history |
-| Transaction | No transaction data | Card History / Recent transaction 空态 | transaction-history；wallet/asset |
-| Wallet | Network abnormality. Please try again later. | My Assets 汇率异常 | wallet/asset |
-| Wallet | The QR code has expired | WalletConnect QR 过期 | wallet/deposit-send-swap |
-| Wallet | Insufficient balance | Send / Swap / Checkout 余额不足类场景 | wallet/deposit-send-swap；card/application |
-| Notification | 全部已读 | 一键已读 toast | notification/push-inbox |
-
-### B. Error source gaps
-
-| 缺口 | 说明 | 处理 |
-|---|---|---|
-| 全量错误码字典 | KYC / Security / DTC / Card / Wallet 源 PRD 各有错误码和错误文案，尚未统一抽取成可检索字典 | SOURCE_GAP |
-| Failed Page 全量结构 | Card / KYC / Wallet / Security 多处 failed page 尚未按字段结构化 | SOURCE_GAP |
-| Toast / Popup 全量结构 | 已补高频项，但未完整覆盖所有 converted-prd | SOURCE_GAP |
-| API error mapping | DTC 未知错误码、Lark 报警、后端返回文案透传等规则分散在模块文档中 | SOURCE_GAP |
-
-### C. Runtime usage rule
-
-回答具体错误码、错误文案或异常处理时，应优先查对应模块已对齐文件；若本文件无记录，必须回查 `archive/converted-prd/**/README.md`，不得假设错误文案。
-
-## 11. 来源引用
-
-- (Ref: archive/historical-prd/wallet/AIX Wallet V1.0【Deposit & Send & Swap 】.docx / 6.4.5 异常处理)
-- (Ref: external-docs/dtc/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 3 Server-Emitted Events)
-- (Ref: external-docs/dtc/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx / 3.3 Websocket disconnect)
-- (Ref: DTC Wallet OpenAPI Document20260126 / 3.4 Crypto Deposit)
-- (Ref: [2025-11-25] AIX+Notification / Deposit under review row)
-- (Ref: knowledge-base/integrations/dtc/_index.md / v1.4)
-- (Ref: knowledge-base/integrations/walletconnect/_index.md / v1.3)
-- (Ref: knowledge-base/common/notification.md)
-- (Ref: knowledge-base/wallet/deposit.md / v1.6)
-- (Ref: knowledge-base/changelog/knowledge-gaps.md / ALL-GAP 总表)
+- (Ref: archive/converted-prd/app/registration-login/README.md)
+- (Ref: archive/converted-prd/security/identity-verification/README.md)
+- (Ref: archive/converted-prd/kyc/wallet-opening/README.md)
+- (Ref: archive/converted-prd/card/application/README.md)
+- (Ref: archive/converted-prd/card/manage/README.md)
+- (Ref: archive/converted-prd/card/transaction/README.md)
+- (Ref: archive/converted-prd/app/transaction-history/README.md)
+- (Ref: archive/converted-prd/wallet/asset/README.md)
+- (Ref: archive/converted-prd/wallet/deposit-send-swap/README.md)
+- (Ref: archive/converted-prd/notification/push-inbox/README.md)
+- (Ref: knowledge-base/* 已校准模块)
