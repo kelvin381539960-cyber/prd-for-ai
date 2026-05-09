@@ -178,7 +178,7 @@ sequenceDiagram
 | OTP / Email OTP 重发冷却 | otp / email-otp | 24 小时最多 3 次 resend，达到上限后 20 分钟冷却 |
 | 验证码设备绑定 | otp / email-otp | 验证码仅限发起请求的设备使用，更换设备无效 |
 | Quick Login 失败后 BIO 处理 | biometric-verification.md | 后端验证失败时清除本地 Bio，后端关闭该账户 Bio 开关 |
-| 忘记密码 BIO 清理 | account/password-reset.md | 注册登录 PRD 中该章节为删除线，Security 仅登记待确认，不沉淀为 confirmed fact |
+| Password Reset 删除线逻辑不纳入 runtime；Security 仅维护 BIO/OTP/Password 等支撑能力，不代表 Password Reset 存在 |
 
 ## 10. 来源引用
 

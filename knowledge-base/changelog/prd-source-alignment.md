@@ -1,7 +1,7 @@
 ---
 module: knowledge-base
 feature: prd-source-alignment
-version: "2.0"
+version: "2.1"
 status: completed_pending_product_decision
 source_doc: archive/converted-prd/README.md；archive/converted-prd/CONTENT_COMPARISON_REPORT.md；archive/converted-prd/VALIDATION_REPORT.md
 source_section: converted-prd full corpus
@@ -114,10 +114,10 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 
 | # | 状态 | knowledge-base 文件 | converted-prd 依据 | 备注 |
 |---:|---|---|---|---|
-| 1 | NEED_CONFIRMATION | `knowledge-base/account/_index.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | Account 索引已更新；Login / Password Reset 因删除线或证据不完整同步标待确认 |
+| 1 | ALIGNED | `knowledge-base/account/_index.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | Account 索引已按删除线=已删除规则收口；Password Reset / Forgot Password 不纳入 runtime，Security 锁定独立维护 |
 | 2 | ALIGNED | `knowledge-base/account/registration.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | registration.md 已按 registration-login + security 证据校准；Locked 不作为账户状态沉淀 |
-| 3 | NEED_CONFIRMATION | `knowledge-base/account/login.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | login.md 已更新来源与风险说明；Email/Phone 输入范围、Forgot password 入口需确认 |
-| 4 | NEED_CONFIRMATION | `knowledge-base/account/password-reset.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | password-reset.md 已重写为待确认；7.3 忘记密码正文为删除线，不能作为 active runtime fact |
+| 3 | ALIGNED | `knowledge-base/account/login.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | login.md 已按删除线=已删除规则收口；Forgot Password / Password Reset 不作为 active Login 入口 |
+| 4 | OUT_OF_SCOPE | `knowledge-base/account/password-reset.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | password-reset.md 已改为 deleted_out_of_scope；源 PRD 删除线内容不纳入 runtime 逻辑 |
 | 5 | ALIGNED | `knowledge-base/home/_index.md` | `archive/converted-prd/app/home/README.md` | home/_index.md 已按 Home + FAQ 证据更新，明确首页查询入口与跨模块边界 |
 | 6 | ALIGNED | `knowledge-base/home/app-home.md` | `archive/converted-prd/app/home/README.md` | app-home.md 已补齐 Evidence→KB 缺口：钱包状态、申卡入口、卡片展示、FAQ、核心交易入口、刷新规则 |
 | 7 | ALIGNED | `knowledge-base/common/faq.md` | `archive/converted-prd/app/faq/README.md` | common/faq.md 已按 converted FAQ 全量重写：FAQ 展示规则、Zendesk Section、场景入口、首页/申卡 FAQ 已收口 |
@@ -152,14 +152,16 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 指标 | 数量 |
 |---|---:|
 | 总任务 | 32 |
-| ALIGNED | 27 |
-| NEED_CONFIRMATION | 3 |
+| ALIGNED | 29 |
+| NEED_CONFIRMATION | 0 |
 | CONFLICT | 1 |
 | SOURCE_GAP | 0 |
 | TODO | 0 |
-| OUT_OF_SCOPE | 1 |
+| OUT_OF_SCOPE | 2 |
 
 ## Batch Notes
+
+- 2026-05-09：按用户确认更新删除线规则：删除线内容等同已删除。Account index 和 login 改为 ALIGNED；password-reset 改为 OUT_OF_SCOPE / deleted_out_of_scope；NEED_CONFIRMATION 归零。
 
 - 2026-05-09：收口 _meta SOURCE_GAP。7 个 _meta 文件重写为状态、字段、限制、地区、合规、错误码、术语字典，任务 31 改为 ALIGNED。SOURCE_GAP 归零；剩余 NEED_CONFIRMATION / CONFLICT 为源证据待确认项，不能强行裁决。
 
@@ -199,5 +201,5 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 ## Final Completion Boundary
 
 - 2026-05-09：已完成所有可执行的 PRD source alignment 工作。TODO=0，SOURCE_GAP=0。
-- 剩余 NEED_CONFIRMATION / CONFLICT 不是遗漏，而是源 PRD 删除线、证据不足或 active PRD 互相冲突导致，已单独整理到 `knowledge-base/changelog/prd-source-confirmation-needed.md`。
-- 在产品裁决前，不得强行把这些项改为 ALIGNED。
+- 删除线内容已按用户确认视为删除并从 runtime 逻辑排除；剩余 CONFLICT 是 active PRD 互相冲突导致，已单独整理到 `knowledge-base/changelog/prd-source-confirmation-needed.md`。
+- 在产品裁决前，不得强行裁决 Card Home 冲突。
