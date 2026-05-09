@@ -47,7 +47,7 @@
 | 21 | DONE | `archive/historical-prd/website/[2025-11-20]AIX-外部投放waitlist.docx` | `archive/converted-prd/website/waitlist-campaign/` | 已完成；图片引用 3，图片文件 3，缺失 0；HTML 表格 3；图片因单文件过大已转 JPEG 压缩版 |
     at apply (file:///tmp/convert_one_prd.mjs:11:276)
     at process.processTicksAndRejections (node:inte |
-| 22 | BLOCKED | `archive/historical-prd/website/[2026-01-04]AIX官网增加waitlist .docx` | `archive/converted-prd/website/waitlist-addition/` | 失败：Error: apply 413: {"error":"request entity too large"}
+| 22 | DONE | `archive/historical-prd/website/[2026-01-04]AIX官网增加waitlist .docx` | `archive/converted-prd/website/waitlist-addition/` | 已完成；图片引用 7，图片文件 7，缺失 0；HTML 表格 2；超大图片已转 JPEG 压缩版 |
     at apply (file:///tmp/convert_one_prd.mjs:11:276)
     at process.processTicksAndRejections (node:inte |
 | 23 | TODO | `archive/historical-prd/website/[2026-04-02]AIX-官网需求二期.docx` | `archive/converted-prd/website/phase-2/` | 源文件较大，转换后需重点检查图片和表格 |
@@ -63,6 +63,6 @@
 | 指标 | 数量 |
 |---|---:|
 | 历史 docx 总数 | 23 |
-| 已完成 | 19 |
+| 已完成 | 20 |
 | 待转换 | 3 |
-| 受阻 | 1 |
+| 受阻 | 0 |
