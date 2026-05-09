@@ -42,7 +42,7 @@
 | 16 | TODO | `archive/historical-prd/oboss/[2026-04-14]AIX-Oboss能力.docx` | `archive/converted-prd/oboss/capabilities/` | 源文件较大，转换后需重点检查图片和表格 |
 | 17 | DONE | `archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx` | `archive/converted-prd/security/identity-verification/` | 已完成；图片引用 19，图片文件 19，缺失 0；HTML 表格 38 |
 | 18 | DONE | `archive/historical-prd/wallet/AIX Wallet V1.0【Asset】.docx` | `archive/converted-prd/wallet/asset/` | 已完成；图片引用 7，图片文件 7，缺失 0；HTML 表格 2 |
-| 19 | TODO | `archive/historical-prd/wallet/AIX Wallet V1.0【Deposit & Send & Swap 】.docx` | `archive/converted-prd/wallet/deposit-send-swap/` |  |
+| 19 | DONE | `archive/historical-prd/wallet/AIX Wallet V1.0【Deposit & Send & Swap 】.docx` | `archive/converted-prd/wallet/deposit-send-swap/` | 已完成；图片引用 74，图片文件 73，缺失 0；HTML 表格 17 |
 | 20 | TODO | `archive/historical-prd/website/[2025-11-05]AIX-官网需求一期.docx` | `archive/converted-prd/website/phase-1/` | 源文件较大，转换后需重点检查图片和表格 |
 | 21 | TODO | `archive/historical-prd/website/[2025-11-20]AIX-外部投放waitlist.docx` | `archive/converted-prd/website/waitlist-campaign/` | 源文件较大，转换后需重点检查图片和表格 |
 | 22 | TODO | `archive/historical-prd/website/[2026-01-04]AIX官网增加waitlist .docx` | `archive/converted-prd/website/waitlist-addition/` | 源文件较大，转换后需重点检查图片和表格 |
@@ -59,6 +59,6 @@
 | 指标 | 数量 |
 |---|---:|
 | 历史 docx 总数 | 23 |
-| 已完成 | 17 |
-| 待转换 | 6 |
+| 已完成 | 18 |
+| 待转换 | 5 |
 | 受阻 | 0 |
