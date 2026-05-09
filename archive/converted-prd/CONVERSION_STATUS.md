@@ -40,23 +40,13 @@
 | 14 | DONE | `archive/historical-prd/notification/[2026-03-12]AIX+系统邮件.docx` | `archive/converted-prd/notification/system-email/` | 已完成；图片引用 2，图片文件 2，缺失 0；HTML 表格 0 |
 | 15 | DONE | `archive/historical-prd/oboss/[AIX]OBOSS MVP.docx` | `archive/converted-prd/oboss/mvp/` | 已完成；图片引用 33，图片文件 33，缺失 0；HTML 表格 17 |
 | 16 | DONE | `archive/historical-prd/oboss/[2026-04-14]AIX-Oboss能力.docx` | `archive/converted-prd/oboss/capabilities/` | 已完成；图片引用 55，图片文件 50，缺失 0；HTML 表格 9；3 张超大图片已转 JPEG 压缩版 |
-    at apply (file:///tmp/convert_one_prd.mjs:11:276)
-    at process.processTicksAndRejections (node:inte |
 | 17 | DONE | `archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx` | `archive/converted-prd/security/identity-verification/` | 已完成；图片引用 19，图片文件 19，缺失 0；HTML 表格 38 |
 | 18 | DONE | `archive/historical-prd/wallet/AIX Wallet V1.0【Asset】.docx` | `archive/converted-prd/wallet/asset/` | 已完成；图片引用 7，图片文件 7，缺失 0；HTML 表格 2 |
 | 19 | DONE | `archive/historical-prd/wallet/AIX Wallet V1.0【Deposit & Send & Swap 】.docx` | `archive/converted-prd/wallet/deposit-send-swap/` | 已完成；图片引用 74，图片文件 73，缺失 0；HTML 表格 17 |
 | 20 | DONE | `archive/historical-prd/website/[2025-11-05]AIX-官网需求一期.docx` | `archive/converted-prd/website/phase-1/` | 已完成；图片引用 65，图片文件 60，缺失 0；HTML 表格 11；4 张超大图片已转 JPEG 压缩版 |
-    at apply (file:///tmp/convert_one_prd.mjs:11:276)
-    at process.processTicksAndRejections (node:inte |
 | 21 | DONE | `archive/historical-prd/website/[2025-11-20]AIX-外部投放waitlist.docx` | `archive/converted-prd/website/waitlist-campaign/` | 已完成；图片引用 3，图片文件 3，缺失 0；HTML 表格 3；图片因单文件过大已转 JPEG 压缩版 |
-    at apply (file:///tmp/convert_one_prd.mjs:11:276)
-    at process.processTicksAndRejections (node:inte |
 | 22 | DONE | `archive/historical-prd/website/[2026-01-04]AIX官网增加waitlist .docx` | `archive/converted-prd/website/waitlist-addition/` | 已完成；图片引用 7，图片文件 7，缺失 0；HTML 表格 2；超大图片已转 JPEG 压缩版 |
-    at apply (file:///tmp/convert_one_prd.mjs:11:276)
-    at process.processTicksAndRejections (node:inte |
 | 23 | DONE | `archive/historical-prd/website/[2026-04-02]AIX-官网需求二期.docx` | `archive/converted-prd/website/phase-2/` | 已完成；图片引用 57，图片文件 52，缺失 0；HTML 表格 9；3 张超大图片已转 JPEG 压缩版 |
-    at apply (file:///tmp/convert_one_prd.mjs:11:276)
-    at process.processTicksAndRejections (node:inte |
 
 ## 执行顺序建议
 
