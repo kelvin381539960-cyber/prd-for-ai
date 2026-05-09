@@ -140,7 +140,7 @@
 
 3.4 **开户状态机**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image1.jpeg" style="width:5.75in;height:2.07292in" />
+<img src="assets/media/image1.jpeg" style="width:5.75in;height:2.07292in" />
 
 3.5 **卡状态映射**
 
@@ -152,83 +152,83 @@
 
 4.1.1 **Wallet Register**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image2.jpeg" style="width:5.75in;height:1.48958in" />
+<img src="assets/media/image2.jpeg" style="width:5.75in;height:1.48958in" />
 
 4.1.2 **Whitelist Address**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image3.jpeg" style="width:5.75in;height:1.77083in" />
+<img src="assets/media/image3.jpeg" style="width:5.75in;height:1.77083in" />
 
 4.1.3 **Wallet PayIn**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image4.jpeg" style="width:5.75in;height:1.52083in" />
+<img src="assets/media/image4.jpeg" style="width:5.75in;height:1.52083in" />
 
 4.1.4 **Wallet Pay Out**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image5.jpeg" style="width:5.75in;height:1.73958in" />
+<img src="assets/media/image5.jpeg" style="width:5.75in;height:1.73958in" />
 
 4.1.5 **Get Balance**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image6.jpeg" style="width:5.75in;height:0.40625in" />
+<img src="assets/media/image6.jpeg" style="width:5.75in;height:0.40625in" />
 
 4.1.6 **Get Wallet Balance**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image7.jpeg" style="width:5.75in;height:0.40625in" />
+<img src="assets/media/image7.jpeg" style="width:5.75in;height:0.40625in" />
 
 4.1.7 **Exchange（同钱包内不同币种）**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image8.jpeg" style="width:5.75in;height:0.65625in" />
+<img src="assets/media/image8.jpeg" style="width:5.75in;height:0.65625in" />
 
 4.1.8 **Transfer（不同DTC账户之间同币种）**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image9.jpeg" style="width:5.75in;height:0.65625in" />
+<img src="assets/media/image9.jpeg" style="width:5.75in;height:0.65625in" />
 
 4.1.9 **Get Wallet Transaction**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image10.jpeg" style="width:5.75in;height:0.40625in" />
+<img src="assets/media/image10.jpeg" style="width:5.75in;height:0.40625in" />
 
 4.2 **Card Flow**
 
 4.2.1 **Card Issue & Bind**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image11.jpeg" style="width:5.75in;height:1.73958in" />
+<img src="assets/media/image11.jpeg" style="width:5.75in;height:1.73958in" />
 
 4.2.2 **Card Activation**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image12.jpeg" style="width:5.75in;height:0.65625in" />
+<img src="assets/media/image12.jpeg" style="width:5.75in;height:0.65625in" />
 
 4.2.3 **Set Pin**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image13.jpeg" style="width:5.75in;height:0.84375in" />
+<img src="assets/media/image13.jpeg" style="width:5.75in;height:0.84375in" />
 
 4.2.4 **Get Card info**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image14.jpeg" style="width:5.75in;height:0.40625in" />
+<img src="assets/media/image14.jpeg" style="width:5.75in;height:0.40625in" />
 
 4.2.5 **Get Card Transaction**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image15.jpeg" style="width:5.75in;height:0.40625in" />
+<img src="assets/media/image15.jpeg" style="width:5.75in;height:0.40625in" />
 
 4.2.6 **Card Transfer**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image16.jpeg" style="width:5.75in;height:0.65625in" />
+<img src="assets/media/image16.jpeg" style="width:5.75in;height:0.65625in" />
 
 4.2.7 **Card Management**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image17.jpeg" style="width:5.75in;height:1.52083in" />
+<img src="assets/media/image17.jpeg" style="width:5.75in;height:1.52083in" />
 
 4.3 **Payment Flow**
 
 4.3.1 **Transaction（Auth）**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image18.jpeg" style="width:5.75in;height:1.69792in" />
+<img src="assets/media/image18.jpeg" style="width:5.75in;height:1.69792in" />
 
 4.3.2 **Transaction（Unauth）**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image19.jpeg" style="width:5.75in;height:1.69792in" />
+<img src="assets/media/image19.jpeg" style="width:5.75in;height:1.69792in" />
 
 4.3.3 **Refund**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image20.jpeg" style="width:5.75in;height:1.77083in" />
+<img src="assets/media/image20.jpeg" style="width:5.75in;height:1.77083in" />
 
 # 5. 数据字典
 
@@ -257,7 +257,7 @@
 
 6.1.3 **页面交互**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image21.png" style="width:5.75in;height:4.75in" />
+<img src="assets/media/image21.png" style="width:5.75in;height:4.75in" />
 
 6.1.4 **展示逻辑**
 
@@ -287,7 +287,7 @@
 </tr>
 <tr>
 <td style="text-align: left;"><strong>顶部操作栏</strong></td>
-<td style="text-align: center;"><img src="/tmp/prd-batch-convert/app-home/assets/media/image22.png" style="width:1.14583in;height:1.47917in" /></td>
+<td style="text-align: center;"><img src="assets/media/image22.png" style="width:1.14583in;height:1.47917in" /></td>
 <td style="text-align: center;"><p><strong>快捷入口</strong>：</p>
 <p>Profile：点击“三”进入个人中心页；</p>
 <p>Gift：活动中心，点击图标进入邀请好友页Invite Friends；</p>
@@ -301,7 +301,7 @@
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Waitlist</strong></td>
-<td style="text-align: center;"><img src="/tmp/prd-batch-convert/app-home/assets/media/image23.png" style="width:1.14583in;height:0.6875in" /></td>
+<td style="text-align: center;"><img src="assets/media/image23.png" style="width:1.14583in;height:0.6875in" /></td>
 <td style="text-align: center;"><p><strong>Waitlist展示逻辑：</strong></p>
 <p>当该用户uid<strong>在waitlist清单</strong>(仅限来源渠道为APP)，将会显示该面板：</p>
 <p>Title：You’re On the list!</p>
@@ -313,17 +313,17 @@
 <tr>
 <td style="text-align: left;"><strong>钱包区域</strong></td>
 <td style="text-align: left;"><p>未申请开通钱包</p>
-<p><img src="/tmp/prd-batch-convert/app-home/assets/media/image24.png" style="width:1.13542in;height:1.16667in" /></p>
-<p><img src="/tmp/prd-batch-convert/app-home/assets/media/image25.png" style="width:1.14583in;height:1.51042in" /></p>
+<p><img src="assets/media/image24.png" style="width:1.13542in;height:1.16667in" /></p>
+<p><img src="assets/media/image25.png" style="width:1.14583in;height:1.51042in" /></p>
 <p>开通钱包审核中</p>
-<p><img src="/tmp/prd-batch-convert/app-home/assets/media/image26.png" style="width:1.14583in;height:1.32292in" /></p>
+<p><img src="assets/media/image26.png" style="width:1.14583in;height:1.32292in" /></p>
 <p>开通钱包审核失败</p>
-<p><img src="/tmp/prd-batch-convert/app-home/assets/media/image27.png" style="width:1.14583in;height:1.53125in" /></p>
+<p><img src="assets/media/image27.png" style="width:1.14583in;height:1.53125in" /></p>
 <p>开通钱包审核拒绝</p>
-<p><img src="/tmp/prd-batch-convert/app-home/assets/media/image28.png" style="width:1.14583in;height:0.83333in" /></p>
+<p><img src="assets/media/image28.png" style="width:1.14583in;height:0.83333in" /></p>
 <p>开通钱包审核通过</p>
-<p><img src="/tmp/prd-batch-convert/app-home/assets/media/image29.png" style="width:1.14583in;height:0.67708in" /></p>
-<p><img src="/tmp/prd-batch-convert/app-home/assets/media/image30.png" style="width:1.14583in;height:0.67708in" /></p></td>
+<p><img src="assets/media/image29.png" style="width:1.14583in;height:0.67708in" /></p>
+<p><img src="assets/media/image30.png" style="width:1.14583in;height:0.67708in" /></p></td>
 <td style="text-align: center;"><p><strong>前置条件：</strong></p>
 <p>已登录AIX APP</p>
 <p>该用户uid<strong>不在waitlist清单</strong>(仅限来源渠道为APP)；</p>
@@ -394,18 +394,18 @@
 <tr>
 <td style="text-align: center;"><strong>申卡入口</strong></td>
 <td style="text-align: left;"><p>Banner入口</p>
-<p><img src="/tmp/prd-batch-convert/app-home/assets/media/image31.png" style="width:1.14583in;height:0.63542in" /></p>
+<p><img src="assets/media/image31.png" style="width:1.14583in;height:0.63542in" /></p>
 <p>卡片入口</p>
-<p><img src="/tmp/prd-batch-convert/app-home/assets/media/image32.png" style="width:1.14583in;height:0.60417in" /></p>
+<p><img src="assets/media/image32.png" style="width:1.14583in;height:0.60417in" /></p>
 <p>常驻入口①</p>
 <p>有申卡入口</p>
-<p><img src="/tmp/prd-batch-convert/app-home/assets/media/image33.jpeg" style="width:1.14583in;height:0.58333in" /></p>
+<p><img src="assets/media/image33.jpeg" style="width:1.14583in;height:0.58333in" /></p>
 <p>常驻入口②</p>
 <p>有申卡入口但不可点击（申卡小于5张且有审核中）</p>
-<p><img src="/tmp/prd-batch-convert/app-home/assets/media/image34.jpeg" style="width:1.14583in;height:0.63542in" /></p>
+<p><img src="assets/media/image34.jpeg" style="width:1.14583in;height:0.63542in" /></p>
 <p>常驻入口③</p>
 <p>无申卡入口（申卡5张）</p>
-<p><img src="/tmp/prd-batch-convert/app-home/assets/media/image35.png" style="width:1.14583in;height:0.6875in" /></p></td>
+<p><img src="assets/media/image35.png" style="width:1.14583in;height:0.6875in" /></p></td>
 <td style="text-align: left;"><p><strong>前置条件：</strong></p>
 <p>已开通钱包且审核通过（即KYC状态为Approved）；</p>
 <p><strong>展示逻辑</strong></p>
@@ -436,15 +436,15 @@
 <tr>
 <td style="text-align: left;"><strong>卡管入口（已申请卡片展示）</strong></td>
 <td style="text-align: left;"><p>审核中</p>
-<p><img src="/tmp/prd-batch-convert/app-home/assets/media/image36.png" style="width:1.14583in;height:0.61458in" /></p>
+<p><img src="assets/media/image36.png" style="width:1.14583in;height:0.61458in" /></p>
 <p>待激活</p>
-<p><img src="/tmp/prd-batch-convert/app-home/assets/media/image37.png" style="width:1.14583in;height:0.61458in" /></p>
+<p><img src="assets/media/image37.png" style="width:1.14583in;height:0.61458in" /></p>
 <p>已激活未设置PIN</p>
-<p><img src="/tmp/prd-batch-convert/app-home/assets/media/image38.png" style="width:1.14583in;height:0.61458in" /></p>
+<p><img src="assets/media/image38.png" style="width:1.14583in;height:0.61458in" /></p>
 <p>已激活已设置PIN</p>
-<p><img src="/tmp/prd-batch-convert/app-home/assets/media/image39.png" style="width:1.13542in;height:0.625in" /></p>
+<p><img src="assets/media/image39.png" style="width:1.13542in;height:0.625in" /></p>
 <p>已冻结</p>
-<p><img src="/tmp/prd-batch-convert/app-home/assets/media/image40.png" style="width:1.13542in;height:0.625in" /></p></td>
+<p><img src="assets/media/image40.png" style="width:1.13542in;height:0.625in" /></p></td>
 <td style="text-align: left;"><p><strong>当前卡片展示逻辑：（无修改PIN）</strong></p>
 <p>Title：Cards</p>
 <p>点击“&gt;”跳转到卡管首页My Card；</p>
@@ -468,13 +468,13 @@
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Banner</strong></td>
-<td style="text-align: center;"><img src="/tmp/prd-batch-convert/app-home/assets/media/image41.png" style="width:1.14583in;height:0.59375in" /></td>
+<td style="text-align: center;"><img src="assets/media/image41.png" style="width:1.14583in;height:0.59375in" /></td>
 <td style="text-align: center;">首页固定一个Banner由@Bing Han 韩冰负责，具体需求看：<a href="https://advancegroup.sg.larksuite.com/wiki/LPahw9N9minPZWkwthclU5l6grH">[2025-11-27] AIX+PopUp+banner等能力接入【首页+MGM页面】</a></td>
 <td style="text-align: left;">韩冰的需求</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>帮助中心区</strong></td>
-<td style="text-align: center;"><img src="/tmp/prd-batch-convert/app-home/assets/media/image42.png" style="width:1.14583in;height:1.73958in" /></td>
+<td style="text-align: center;"><img src="assets/media/image42.png" style="width:1.14583in;height:1.73958in" /></td>
 <td style="text-align: center;"><p>Get Help问题列表：</p>
 <p><del>FAQ暂未做OBoss可视化编辑Dashboard，先预设到数据库（<strong>问题 ID、标题、描述、关联场景、类型、超链接、创建时间</strong>）；</del></p>
 <p><del>展示最新3条，根据关键场景“Home”、类型“Get Help”和最近时间筛选FAQ并展示给用户；</del></p>
@@ -509,8 +509,8 @@
 </tr>
 <tr>
 <td style="text-align: left;"><strong>底部操作栏</strong></td>
-<td style="text-align: center;"><p><img src="/tmp/prd-batch-convert/app-home/assets/media/image43.png" style="width:1.14583in;height:0.38542in" /></p>
-<p><img src="/tmp/prd-batch-convert/app-home/assets/media/image44.png" style="width:1.14583in;height:2.48958in" /></p></td>
+<td style="text-align: center;"><p><img src="assets/media/image43.png" style="width:1.14583in;height:0.38542in" /></p>
+<p><img src="assets/media/image44.png" style="width:1.14583in;height:2.48958in" /></p></td>
 <td style="text-align: center;"><p><strong>前置条件</strong></p>
 <p>已完成开通钱包的用户才显示核心交易操作入口</p>
 <p><strong>底部操作栏</strong>：</p>
@@ -525,7 +525,7 @@
 </tr>
 <tr>
 <td style="text-align: left;"><strong>首页弹窗</strong></td>
-<td style="text-align: center;"><img src="/tmp/prd-batch-convert/app-home/assets/media/image45.png" style="width:1.14583in;height:1.67708in" /></td>
+<td style="text-align: center;"><img src="assets/media/image45.png" style="width:1.14583in;height:1.67708in" /></td>
 <td style="text-align: left;">首页弹窗，由@Bing Han 韩冰负责，具体需求看：<a href="https://advancegroup.sg.larksuite.com/wiki/LPahw9N9minPZWkwthclU5l6grH">[2025-11-27] AIX+PopUp+banner等能力接入【首页+MGM页面】</a></td>
 <td style="text-align: left;">韩冰的需求</td>
 </tr>
@@ -546,7 +546,7 @@
 
 7.1.3 **接口时序**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image46.jpeg" style="width:5.75in;height:3.44792in" />
+<img src="assets/media/image46.jpeg" style="width:5.75in;height:3.44792in" />
 
 7.1.4 **接口请求**
 
@@ -568,7 +568,7 @@
 
 7.2.3 **接口时序**
 
-<img src="/tmp/prd-batch-convert/app-home/assets/media/image47.jpeg" style="width:5.75in;height:3.44792in" />
+<img src="assets/media/image47.jpeg" style="width:5.75in;height:3.44792in" />
 
 7.2.4 **接口请求**
 
