@@ -1,7 +1,7 @@
 ---
 module: kyc
 feature: account-opening
-version: "2.2"
+version: "2.3"
 status: active
 source_doc: archive/converted-prd/kyc/wallet-opening/README.md；archive/converted-prd/app/home/README.md；archive/converted-prd/card/application/README.md；archive/converted-prd/security/identity-verification/README.md
 source_section: KYC / 国家线、状态机、开户页面逻辑、外部接口、错误码；Home / 钱包区域展示；Card Application / 申卡前置
@@ -402,7 +402,8 @@ flowchart LR
   <tbody>
     <tr>
       <td style="width: 280px; vertical-align: top; text-align: center;"><div style="display:flex; flex-direction:column; gap:12px; align-items:center;">
-<p><strong>截图暂缺，视觉以 Figma 为准。</strong></p>
+<p><strong>
+</strong></p>
 <img src="_assets/account-opening/image6.jpeg" alt="KYC Loading Page - image6.jpeg" width="260" />
 </div></td>
       <td style="vertical-align: top;"><table>
@@ -437,8 +438,68 @@ flowchart LR
   </thead>
   <tbody>
     <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><div style="display:flex; flex-direction:column; gap:12px; align-items:center;"><img src="_assets/account-opening/image7.png" alt="KYC Start Page" width="260" /><p><strong>图 4.3-A：KYC Start Page 主页面</strong></p></div></td>
+      <td style="vertical-align: top;">
+<h4>Page Summary</h4>
+<table>
+  <tbody>
+    <tr><td><strong>页面类型</strong></td><td>主页面</td></tr>
+    <tr><td><strong>页面目标</strong></td><td>让用户确认开始身份验证、选择居住国家并同意协议。</td></tr>
+    <tr><td><strong>入口 / 触发</strong></td><td>KYC Loading 判断可继续后进入。</td></tr>
+    <tr><td><strong>成功流转</strong></td><td>支持国家进入 Identity Verify。</td></tr>
+    <tr><td><strong>失败 / 异常流转</strong></td><td>不支持国家进入 Waitlist；协议获取失败 toast。</td></tr>
+  </tbody>
+</table>
+<h4>UI Rules（按图中从上到下）</h4>
+<table>
+  <thead>
+    <tr><th>图中位置</th><th>页面元素</th><th>展示 / 默认值</th><th>交互 / 校验</th><th>备注</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>顶部导航区</td><td>关闭 / 返回入口</td><td>展示关闭按钮或返回入口</td><td>点击返回或关闭当前 KYC 流程</td><td>返回行为应遵循 KYC 通用离开确认规则。</td></tr>
+    <tr><td>标题说明区</td><td>Title / Subtitle</td><td>展示 KYC 开始说明</td><td>不可点击</td><td>文案以源 PRD / Figma 为准。</td></tr>
+    <tr><td>中部国家区</td><td>Residence Country</td><td>展示当前选择的居住国家 / 地区</td><td>点击进入 Select Residence Country Page</td><td>国家线与国家白名单见 countries-and-regions / KYC 国家规则。</td></tr>
+    <tr><td>协议区</td><td>Terms / Privacy / Declaration</td><td>展示协议勾选项；初始未满足时主按钮禁用</td><td>Terms / Privacy 可勾选；Declaration of Reverse Solicitation 需强制阅读后才能勾选</td><td>Backend 需要保存协议同意、协议快照、Reverse Solicitation 信息。</td></tr>
+    <tr><td>底部主按钮</td><td>立即认证 / Continue / Verify</td><td>协议未完成时禁用；协议完成后启用</td><td>点击后判断国家是否支持</td><td>支持国家进入 Identity Verify；不支持国家进入 Waitlist。</td></tr>
+  </tbody>
+</table>
+<h4>Interaction / Navigation</h4>
+<table>
+  <thead>
+    <tr><th>用户动作</th><th>结果</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>点击 Residence Country</td><td>进入 Select Residence Country Page。</td></tr>
+    <tr><td>勾选协议但未阅读强制协议</td><td>按钮仍不可用或需要先阅读对应协议。</td></tr>
+    <tr><td>点击已启用主按钮且国家支持</td><td>进入 Identity Verify Page。</td></tr>
+    <tr><td>点击已启用主按钮但国家不支持</td><td>进入 Waitlist Page。</td></tr>
+  </tbody>
+</table>
+<h4>System / Edge Cases</h4>
+<table>
+  <thead>
+    <tr><th>项目</th><th>规则</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>协议保存</td><td>App 展示国家和协议；Backend 保存协议同意、快照、Reverse Solicitation 信息。</td></tr>
+    <tr><td>协议获取失败</td><td>展示 toast。</td></tr>
+    <tr><td>手机号边界</td><td>已绑定手机号不展示额外 toast；手机号未绑定处理见 GAP-KYC-PHONE-001。</td></tr>
+    <tr><td>删除线规则</td><td>删除线内容不纳入 runtime 逻辑。</td></tr>
+  </tbody>
+</table>
+<h4>Original Rule Matrix（完整保留）</h4>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 280px;">UX</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
       <td style="width: 280px; vertical-align: top; text-align: center;"><div style="display:flex; flex-direction:column; gap:12px; align-items:center;">
-<p><strong>截图暂缺，视觉以 Figma 为准。</strong></p>
+<p><strong>
+</strong></p>
 <img src="_assets/account-opening/image7.png" alt="KYC Start Page - image7.png" width="260" />
 <img src="_assets/account-opening/image9.png" alt="KYC Start Page - image9.png" width="260" />
 <img src="_assets/account-opening/image10.png" alt="KYC Start Page - image10.png" width="260" />
@@ -458,6 +519,34 @@ flowchart LR
     <tr><td>成功流转</td><td>支持国家进入 Identity Verify。</td></tr>
     <tr><td>失败 / 异常流转</td><td>不支持国家进入 waitlist；协议获取失败 toast。</td></tr>
     <tr><td>备注 / 边界</td><td>手机号未绑定处理见 GAP-KYC-PHONE-001。</td></tr>
+  </tbody>
+</table></td>
+    </tr>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><div style="display:flex; flex-direction:column; gap:12px; align-items:center;"><img src="_assets/account-opening/image9.png" alt="Declaration of reverse solicitation" width="260" /><p><strong>图 4.3-B：Declaration 阅读状态</strong></p></div></td>
+      <td style="vertical-align: top;">
+<h4>UI Rules</h4>
+<table>
+  <thead>
+    <tr><th>图中位置</th><th>页面元素</th><th>规则</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>协议弹层 / 协议详情页</td><td>Declaration of Reverse Solicitation</td><td>该协议需强制阅读，同意后才能回到 Start Page 完成勾选。</td></tr>
+    <tr><td>底部操作区</td><td>同意 / 返回操作</td><td>用户同意后，系统记录协议内容和同意时间；未同意则不能完成主页面认证前置条件。</td></tr>
+  </tbody>
+</table></td>
+    </tr>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><div style="display:flex; flex-direction:column; gap:12px; align-items:center;"><img src="_assets/account-opening/image10.png" alt="Waitlist intercept" width="260" /><p><strong>图 4.3-C：不支持国家 / waitlist 拦截</strong></p></div></td>
+      <td style="vertical-align: top;">
+<h4>UI Rules</h4>
+<table>
+  <thead>
+    <tr><th>图中位置</th><th>页面元素</th><th>规则</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>弹窗 / 拦截区</td><td>Waitlist 拦截说明</td><td>点击立即认证后，后端判断国家不属于 Phase 1 支持范围时出现。</td></tr>
+    <tr><td>操作区</td><td>进入 waitlist / 返回</td><td>进入 waitlist 处理，不继续后续 KYC。</td></tr>
   </tbody>
 </table></td>
     </tr>
@@ -485,7 +574,8 @@ flowchart LR
   <tbody>
     <tr>
       <td style="width: 280px; vertical-align: top; text-align: center;"><div style="display:flex; flex-direction:column; gap:12px; align-items:center;">
-<p><strong>截图暂缺，视觉以 Figma 为准。</strong></p>
+<p><strong>
+</strong></p>
 <img src="_assets/account-opening/image11.png" alt="Select Residence Country Page - image11.png" width="260" />
 <img src="_assets/account-opening/image12.png" alt="Select Residence Country Page - image12.png" width="260" />
 </div></td>
@@ -522,7 +612,8 @@ flowchart LR
   <tbody>
     <tr>
       <td style="width: 280px; vertical-align: top; text-align: center;"><div style="display:flex; flex-direction:column; gap:12px; align-items:center;">
-<p><strong>截图暂缺，视觉以 Figma 为准。</strong></p>
+<p><strong>
+</strong></p>
 <img src="_assets/account-opening/image13.png" alt="Waitlist Page - image13.png" width="260" />
 </div></td>
       <td style="vertical-align: top;"><table>
@@ -559,7 +650,8 @@ flowchart LR
     <tr>
       <td style="width: 280px; vertical-align: top; text-align: center;"><div style="display:flex; flex-direction:column; gap:12px; align-items:center;">
 <p><strong>&gt; 源 PRD 对 Identity Scan H5 标注“截图暂缺，视觉以 Figma / AAI H5 为准”；image16 只作为 H5 流程来源图。</strong></p>
-<p><strong>截图暂缺，视觉以 Figma / AAI H5 为准。</strong></p>
+<p><strong>
+</strong></p>
 <img src="_assets/account-opening/image14.png" alt="Identity Verify Page / Identity Scan H5 - image14.png" width="260" />
 <img src="_assets/account-opening/image15.png" alt="Identity Verify Page / Identity Scan H5 - image15.png" width="260" />
 <img src="_assets/account-opening/image16.png" alt="Identity Verify Page / Identity Scan H5 - image16.png" width="260" />
@@ -597,7 +689,8 @@ flowchart LR
   <tbody>
     <tr>
       <td style="width: 280px; vertical-align: top; text-align: center;"><div style="display:flex; flex-direction:column; gap:12px; align-items:center;">
-<p><strong>截图暂缺，视觉以 Figma / AAI H5 为准。</strong></p>
+<p><strong>
+</strong></p>
 <img src="_assets/account-opening/image17.png" alt="Face Guide / Face Scan / Face Loading - image17.png" width="260" />
 <img src="_assets/account-opening/image18.png" alt="Face Guide / Face Scan / Face Loading - image18.png" width="260" />
 <img src="_assets/account-opening/image19.png" alt="Face Guide / Face Scan / Face Loading - image19.png" width="260" />
@@ -636,7 +729,8 @@ flowchart LR
   <tbody>
     <tr>
       <td style="width: 280px; vertical-align: top; text-align: center;"><div style="display:flex; flex-direction:column; gap:12px; align-items:center;">
-<p><strong>截图暂缺，视觉以 Figma 为准。</strong></p>
+<p><strong>
+</strong></p>
 <img src="_assets/account-opening/image20.png" alt="Loading Failed Page - image20.png" width="260" />
 </div></td>
       <td style="vertical-align: top;"><table>
@@ -672,7 +766,8 @@ flowchart LR
   <tbody>
     <tr>
       <td style="width: 280px; vertical-align: top; text-align: center;"><div style="display:flex; flex-direction:column; gap:12px; align-items:center;">
-<p><strong>截图暂缺，视觉以 Figma 为准。</strong></p>
+<p><strong>
+</strong></p>
 <img src="_assets/account-opening/image21.png" alt="Face Failed Page - image21.png" width="260" />
 </div></td>
       <td style="vertical-align: top;"><table>
@@ -707,8 +802,56 @@ flowchart LR
   </thead>
   <tbody>
     <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><div style="display:flex; flex-direction:column; gap:12px; align-items:center;"><img src="_assets/account-opening/image22.png" alt="Address Upload Page" width="260" /><p><strong>图 4.10-A：Address Upload 主页面</strong></p></div></td>
+      <td style="vertical-align: top;">
+<h4>Page Summary</h4>
+<table>
+  <tbody>
+    <tr><td><strong>页面类型</strong></td><td>主页面</td></tr>
+    <tr><td><strong>页面目标</strong></td><td>收集用户地址证明文件并提交 POA 审核。</td></tr>
+    <tr><td><strong>入口 / 触发</strong></td><td>Face 验证成功。</td></tr>
+    <tr><td><strong>成功流转</strong></td><td>提交成功进入 KYC Submission Success。</td></tr>
+    <tr><td><strong>失败 / 异常流转</strong></td><td>文件错误、上传失败、国家不支持、服务器错误、POA 失败。</td></tr>
+  </tbody>
+</table>
+<h4>UI Rules（按图中从上到下）</h4>
+<table>
+  <thead>
+    <tr><th>图中位置</th><th>页面元素</th><th>展示 / 默认值</th><th>交互 / 校验</th><th>备注</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>顶部导航区</td><td>返回 / 关闭入口</td><td>展示返回或关闭入口</td><td>点击触发离开当前 KYC 流程相关处理</td><td>遵循 KYC 通用离开确认规则。</td></tr>
+    <tr><td>标题说明区</td><td>Title / Subtitle</td><td>展示上传地址证明说明</td><td>不可点击</td><td>文案以源 PRD / Figma 为准。</td></tr>
+    <tr><td>Residence 区</td><td>居住国家 / 地区</td><td>展示当前 Residence</td><td>点击可修改 Residence，进入 Select Residence Country Page</td><td>POA 国家需与填报居住国匹配。</td></tr>
+    <tr><td>上传区</td><td>文件上传入口</td><td>未上传时展示上传入口</td><td>支持上传 / 删除 / 预览文件</td><td>JPG/JPEG/PNG/PDF；16MB；只能上传一份。</td></tr>
+    <tr><td>底部主按钮</td><td>Continue</td><td>未满足提交条件时禁用；成功上传后可点</td><td>点击后提交 POA 审核</td><td>POA continue 后跳转存在源文档冲突，见 GAP-KYC-POA-002。</td></tr>
+  </tbody>
+</table>
+<h4>System / Edge Cases</h4>
+<table>
+  <thead>
+    <tr><th>项目</th><th>规则</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>系统处理 / 责任方</td><td>App 校验文件；Backend 获取 DTC upload token 并上传 POA；DTC / AAI 审核。</td></tr>
+    <tr><td>文件校验</td><td>JPG/JPEG/PNG/PDF；单个文件大小上限 16MB；只能上传一份。</td></tr>
+    <tr><td>异常处理</td><td>文件错误、上传失败、国家不支持、服务器错误、POA 失败。</td></tr>
+    <tr><td>边界</td><td>POA continue 后跳转存在源文档冲突，见 GAP-KYC-POA-002。</td></tr>
+  </tbody>
+</table>
+<h4>Original Rule Matrix（完整保留）</h4>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 280px;">UX</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
       <td style="width: 280px; vertical-align: top; text-align: center;"><div style="display:flex; flex-direction:column; gap:12px; align-items:center;">
-<p><strong>截图暂缺，视觉以 Figma 为准。</strong></p>
+<p><strong>
+</strong></p>
 <img src="_assets/account-opening/image22.png" alt="Address Upload Page - image22.png" width="260" />
 <img src="_assets/account-opening/image23.jpeg" alt="Address Upload Page - image23.jpeg" width="260" />
 <img src="_assets/account-opening/image24.png" alt="Address Upload Page - image24.png" width="260" />
@@ -733,6 +876,65 @@ flowchart LR
   </tbody>
 </table></td>
     </tr>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><div style="display:flex; flex-direction:column; gap:12px; align-items:center;"><img src="_assets/account-opening/image23.jpeg" alt="Address Upload Empty State" width="260" /><p><strong>图 4.10-B：未上传状态</strong></p></div></td>
+      <td style="vertical-align: top;">
+<h4>UI Rules</h4>
+<table>
+  <thead>
+    <tr><th>图中位置</th><th>页面元素</th><th>规则</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>上传区</td><td>空状态 / 上传入口</td><td>展示文件上传入口。</td></tr>
+    <tr><td>文件规则</td><td>文件类型与大小</td><td>支持 JPG/JPEG/PNG/PDF；单个文件大小上限 16MB；只能上传一份文件。</td></tr>
+    <tr><td>底部主按钮</td><td>Continue</td><td>初始 Continue 禁用，成功上传后可点击。</td></tr>
+  </tbody>
+</table></td>
+    </tr>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><div style="display:flex; flex-direction:column; gap:12px; align-items:center;"><img src="_assets/account-opening/image24.png" alt="Address Upload Uploading State" width="260" /><p><strong>图 4.10-C：上传中状态</strong></p></div></td>
+      <td style="vertical-align: top;">
+<h4>UI Rules</h4>
+<table>
+  <thead>
+    <tr><th>图中位置</th><th>页面元素</th><th>规则</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>文件状态区</td><td>上传进度</td><td>上传中显示进度。</td></tr>
+    <tr><td>文件操作区</td><td>删除 / 取消</td><td>点击删除按钮取消上传。</td></tr>
+  </tbody>
+</table></td>
+    </tr>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><div style="display:flex; flex-direction:column; gap:12px; align-items:center;"><img src="_assets/account-opening/image25.png" alt="Address Upload Uploaded State" width="260" /><p><strong>图 4.10-D：已上传状态</strong></p></div></td>
+      <td style="vertical-align: top;">
+<h4>UI Rules</h4>
+<table>
+  <thead>
+    <tr><th>图中位置</th><th>页面元素</th><th>规则</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>文件状态区</td><td>已上传文件</td><td>展示已上传文件状态。</td></tr>
+    <tr><td>文件操作区</td><td>删除文件</td><td>点击删除按钮删除已上传文件。</td></tr>
+    <tr><td>文件预览</td><td>预览图片或 PDF</td><td>点击文件可打开预览图片或 PDF。</td></tr>
+    <tr><td>底部主按钮</td><td>Continue</td><td>点击后提交后端处理。</td></tr>
+  </tbody>
+</table></td>
+    </tr>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><div style="display:flex; flex-direction:column; gap:12px; align-items:center;"><img src="_assets/account-opening/image26.png" alt="Address Upload Waitlist Intercept" width="260" /><p><strong>图 4.10-E：国家线拦截 / waitlist 状态</strong></p></div></td>
+      <td style="vertical-align: top;">
+<h4>UI Rules</h4>
+<table>
+  <thead>
+    <tr><th>图中位置</th><th>页面元素</th><th>规则</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>拦截区</td><td>国家线 / waitlist 拦截</td><td>POA 提交后再次校验国家线；后端判断国家不属于支持范围时进入 waitlist / 拦截处理。</td></tr>
+    <tr><td>边界说明</td><td>GAP-KYC-POA-002</td><td>POA continue 后跳转存在源文档冲突，不能自行裁决。</td></tr>
+  </tbody>
+</table></td>
+    </tr>
   </tbody>
 </table>
 
@@ -748,7 +950,8 @@ flowchart LR
   <tbody>
     <tr>
       <td style="width: 280px; vertical-align: top; text-align: center;"><div style="display:flex; flex-direction:column; gap:12px; align-items:center;">
-<p><strong>截图暂缺，视觉以 Figma 为准。</strong></p>
+<p><strong>
+</strong></p>
 <img src="_assets/account-opening/image27.png" alt="KYC Submission Success Page - image27.png" width="260" />
 </div></td>
       <td style="vertical-align: top;"><table>
