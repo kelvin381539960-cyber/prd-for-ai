@@ -142,7 +142,7 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 26 | ALIGNED | `knowledge-base/kyc/account-opening.md` | `archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/home/README.md`；`archive/converted-prd/card/application/README.md` | account-opening.md 已补齐 Waitlist页面级拦截、Face 30秒超时、长期有效、Face锁定、Home钱包面板映射、申卡前置 |
 | 27 | ALIGNED | `knowledge-base/security/_index.md` | `archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/app/registration-login/README.md` | security/_index.md 已按 Security + Registration + Card Manage + Wallet converted-prd 更新证据边界和缺口索引 |
 | 28 | ALIGNED | `knowledge-base/security/*.md` | `archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/card/manage/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | security/*.md 已补齐 BIO跳过认证、DeviceID、锁定矩阵、IVS有效期、验证码重发冷却、设备绑定、Quick Login BIO处理、API/密码规则等 |
-| 29 | TODO | `knowledge-base/common/notification.md` | `archive/converted-prd/notification/push-inbox/README.md`；`archive/converted-prd/notification/system-email/README.md`；相关业务触发 PRD | 通知 / 邮件；触发场景需回看业务 PRD |
+| 29 | SOURCE_GAP | `knowledge-base/common/notification.md` | `archive/converted-prd/notification/push-inbox/README.md`；`archive/converted-prd/notification/system-email/README.md`；相关业务触发 PRD | notification.md 已补基础链路、Push、消息中心、通知设置、Webhook、System email；全量模板/OBoss/Webhook事件仍需结构化 |
 | 30 | TODO | `knowledge-base/common/errors.md` | 多份 converted-prd 中的错误码 / 文案 | 错误文案字典 |
 | 31 | TODO | `knowledge-base/_meta/*.md` | 多份 converted-prd | 状态、字段、限制、地区等字典 |
 | 32 | OUT_OF_SCOPE | Website / Marketing facts | `archive/converted-prd/website/**/README.md` | 当前 runtime KB 明确排除 website |
@@ -155,11 +155,13 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | ALIGNED | 22 |
 | NEED_CONFIRMATION | 3 |
 | CONFLICT | 1 |
-| SOURCE_GAP | 2 |
-| TODO | 3 |
+| SOURCE_GAP | 3 |
+| TODO | 2 |
 | OUT_OF_SCOPE | 1 |
 
 ## Batch Notes
+
+- 2026-05-09：完成 Notification 批次。common/notification.md 标 SOURCE_GAP；已补基础通知链路、Push规则、消息中心、通知设置、Webhook和System email边界，但全量模板、OBoss配置通知、Webhook全量事件、系统邮件模板实现仍需后续结构化。
 
 - 2026-05-09：完成 Security 批次。security index 和 security/*.md 标 ALIGNED；补齐 BIO登录跳过认证、DeviceID、OTP/Email OTP/Passcode/Face锁定矩阵、IVS 10/5分钟有效期、验证码重发冷却与设备绑定、Quick Login BIO清理、API路径、密码策略等 Evidence→KB 缺口。
 
