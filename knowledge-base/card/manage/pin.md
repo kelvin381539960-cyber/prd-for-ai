@@ -1,16 +1,19 @@
 ---
 module: card
 feature: card-pin
-version: "1.0"
+version: "1.1"
 status: active
-source_doc: archive/historical-prd/card/AIX Card 【manage】模块需求V1.0 .docx；external-docs/dtc/DTC Card Issuing API Document_20260310 (1).docx；knowledge-base/security/otp-verification.md；prd-template/standard-prd-template.md
-source_section: Manage 7.3；DTC PIN APIs；OTP For Reset PIN；Standard PRD Template v1.3
-last_updated: 2026-05-05
+source_doc: archive/converted-prd/card/manage/README.md；archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/card/application/README.md
+source_section: Card Manage / 7.3 Set PIN / Change PIN；8 外部接口；Security / Identity Verification
+last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
 ---
 
 # Card PIN 卡 PIN 设置与修改
+
+> Source alignment note: 本文件已按 converted-prd 做双向覆盖校验，补齐 Card Manage 证据缺口。
+
 
 ## 1. 文档信息
 
@@ -242,6 +245,25 @@ flowchart LR
 | 非 ACTIVE 操作 | 非 ACTIVE 卡 | 尝试 PIN 操作 | 不展示或拦截 | 不调用 PIN 接口 | 是 |
 
 ---
+
+## Source alignment additions
+
+| 规则 | 结论 | 来源 |
+|---|---|---|
+| PIN 位数 | Set PIN 页面文案为 Enter a new 6-digit card PIN for offline transaction；Confirm PIN 自动提交也按 6 位数字 PIN 触发 | Card Manage / 7.3 |
+| PIN 引导弹窗 | 从卡激活流程首次进入 Set PIN Page 时弹出；正常设置 PIN 不触发 | Card Manage / 7.3.2.2 |
+| PIN 用途文案 | A 6-digit card PIN is required for offline transactions. To transact offline: Insert card, select Savings Account and input PIN. | Card Manage / 7.3.2.2 |
+| Change PIN | 页面规则基本与 Set PIN 一致，Page title 为 Change PIN | Card Manage / 7.3.2.3 |
+| Confirm PIN | 根据进入路径展示 Set PIN 或 Change PIN；输入完成后自动提交 | Card Manage / 7.3.2.4 |
+| 两次 PIN 不一致 | Toast：Please re-entered the same PIN；关闭弹窗后清空 PIN 输入框 | Card Manage / 7.3.2.4 |
+| 身份认证后接口 | Set PIN 流程调用 Set Card PIN；Change PIN 流程调用 Reset Card PIN | Card Manage / 7.3.2.5 |
+| PIN 公钥 | POST /openapi/v1/card/pin/public-key；源 PRD 变更说明为“获取公钥调整为激活成功后才获取” | Card Manage / 变更日志、8.1 |
+| Set Card PIN | POST /openapi/v1/card/pin/set | Card Manage / 8.1 |
+| OTP For Reset PIN | POST /openapi/v1/card/otp/reset-pin | Card Manage / 8.1 |
+| Reset Card PIN | POST /openapi/v1/card/pin/reset | Card Manage / 8.1 |
+| PIN 简单规则 | DTC 会拒绝任何数字出现超过 3 次的 PIN，例如 111213 中 1 出现 4 次 | Card Manage / PIN Fail Page |
+| 特殊错误码 | error_code = 31031 时使用后端返回文案覆盖默认失败文案 | Card Manage / PIN Fail Page |
+| 默认失败文案 | Title：PIN setup failed；Content：We could not complete your PIN setup right now. Please try again later. | Card Manage / PIN Fail Page |
 
 ## 10. 来源引用
 

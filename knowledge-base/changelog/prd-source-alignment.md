@@ -128,11 +128,11 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 12 | ALIGNED | `knowledge-base/card/_index.md` | `archive/converted-prd/card/application/README.md`；`archive/converted-prd/card/manage/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/security/identity-verification/README.md` | card/_index.md 已更新 converted-prd 证据范围，并登记 Card Home 跨文档冲突 |
 | 13 | ALIGNED | `knowledge-base/card/application.md` | `archive/converted-prd/card/application/README.md`；`archive/converted-prd/app/home/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/security/identity-verification/README.md` | application.md 已补齐申卡资格、入口、费用、多币种支付、Face Auth、Billing/Mailing、MGM减免费、结果页等规则 |
 | 14 | CONFLICT | `knowledge-base/card/card-home.md` | `archive/converted-prd/app/home/README.md`；`archive/converted-prd/card/application/README.md`；`archive/converted-prd/card/manage/README.md` | card-home.md 已补齐展示规则，但 Home PRD 与 Card Application PRD 对部分首页卡片点击跳转存在冲突，待产品确认 |
-| 15 | TODO | `knowledge-base/card/manage/_index.md` | `archive/converted-prd/card/manage/README.md`；`archive/converted-prd/security/identity-verification/README.md` | 卡管索引 |
-| 16 | TODO | `knowledge-base/card/manage/activation.md` | `archive/converted-prd/card/manage/README.md`；`archive/converted-prd/security/identity-verification/README.md` | 激活；如涉及 OTP/Face/BIO 需看 Security |
-| 17 | TODO | `knowledge-base/card/manage/pin.md` | `archive/converted-prd/card/manage/README.md`；`archive/converted-prd/security/identity-verification/README.md` | PIN；如涉及验证需看 Security |
-| 18 | TODO | `knowledge-base/card/manage/sensitive-info.md` | `archive/converted-prd/card/manage/README.md`；`archive/converted-prd/security/identity-verification/README.md` | 敏感信息；身份验证必须同步看 Security |
-| 19 | TODO | `knowledge-base/card/manage/status-and-operations.md` | `archive/converted-prd/card/manage/README.md` | 状态和操作 |
+| 15 | ALIGNED | `knowledge-base/card/manage/_index.md` | `archive/converted-prd/card/manage/README.md`；`archive/converted-prd/security/identity-verification/README.md` | Card Manage index 已补齐激活/PIN/敏感信息/状态操作证据索引和 Security 支撑边界 |
+| 16 | ALIGNED | `knowledge-base/card/manage/activation.md` | `archive/converted-prd/card/manage/README.md`；`archive/converted-prd/security/identity-verification/README.md` | activation.md 已补齐后四位校验、激活成功 toast、失败页、接口路径和 autoDebit 删除线边界 |
+| 17 | ALIGNED | `knowledge-base/card/manage/pin.md` | `archive/converted-prd/card/manage/README.md`；`archive/converted-prd/security/identity-verification/README.md` | pin.md 已补齐 6 位 PIN、引导弹窗、Confirm PIN、AAI 后 set/reset、公钥接口、31031、PIN 简单规则 |
+| 18 | ALIGNED | `knowledge-base/card/manage/sensitive-info.md` | `archive/converted-prd/card/manage/README.md`；`archive/converted-prd/security/identity-verification/README.md` | sensitive-info.md 已补齐 Basic/Sensitive Info 字段来源、复制 toast、接口失败 toast |
+| 19 | ALIGNED | `knowledge-base/card/manage/status-and-operations.md` | `archive/converted-prd/card/manage/README.md` | status-and-operations.md 已补齐 Freeze/Unfreeze、网络/服务端错误、Lock/Unlock 文案和接口路径 |
 | 20 | TODO | `knowledge-base/card/transaction.md` | `archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/app/transaction-history/README.md` | 卡交易 |
 | 21 | TODO | `knowledge-base/card/transaction-detail.md` | `archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/app/transaction-history/README.md` | 卡交易详情 |
 | 22 | TODO | `knowledge-base/wallet/_index.md` | `archive/converted-prd/wallet/asset/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/security/identity-verification/README.md` | 钱包索引 |
@@ -152,14 +152,16 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 指标 | 数量 |
 |---|---:|
 | 总任务 | 32 |
-| ALIGNED | 9 |
+| ALIGNED | 14 |
 | NEED_CONFIRMATION | 3 |
 | CONFLICT | 1 |
 | SOURCE_GAP | 1 |
-| TODO | 17 |
+| TODO | 12 |
 | OUT_OF_SCOPE | 1 |
 
 ## Batch Notes
+
+- 2026-05-09：完成 Card Manage 批次。manage index / activation / pin / sensitive-info / status-and-operations 标 ALIGNED；补齐激活、6位PIN、公钥、31031、敏感信息、Freeze/Unfreeze、网络/服务端错误等 Evidence→KB 缺口。
 
 - 2026-05-09：完成 Card Application / Card Home 第一段。card index 和 application 标 ALIGNED；card-home 标 CONFLICT，原因是 Home PRD 与 Card Application PRD 对 Processing、Pending activation、Active 未设置 PIN、Frozen 的首页点击跳转存在冲突。
 

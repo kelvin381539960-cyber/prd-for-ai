@@ -1,16 +1,19 @@
 ---
 module: card
 feature: card-manage-index
-version: "1.0"
+version: "1.1"
 status: active
-source_doc: archive/historical-prd/card/AIX Card 【manage】模块需求V1.0 .docx；external-docs/dtc/DTC Card Issuing API Document_20260310 (1).docx；knowledge-base/changelog/knowledge-gaps.md
-source_section: Card Manage module；Manage 6.4 / 7.1 / 7.2 / 7.3 / 7.4 / 7.5 / 8.1
-last_updated: 2026-05-05
+source_doc: archive/converted-prd/card/manage/README.md；archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/card/application/README.md
+source_section: Card Manage / 全局规则、7.2 激活、7.3 PIN、7.4 Lock、7.5 Unlock、8 外部接口；Security / 认证方式
+last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
 ---
 
 # Card Manage 模块索引
+
+> Source alignment note: 本子模块已按 archive/converted-prd/card/manage/README.md 与 Security 证据做双向覆盖校验，补齐激活、PIN、敏感信息、状态操作和接口路径缺口。
+
 
 ## 1. 模块定位
 
@@ -53,6 +56,21 @@ Card Manage 只维护卡管理相关事实，不承接申卡、Card Home、Card 
 2. 不把全局 Transaction & History 写进 Manage。
 3. 不把 Terminate Card 写成独立 PRD 文件；只作为操作矩阵和待确认边界维护。
 4. 不把旧 Card Manage 合并文件 当作运行态入口。
+
+## Source alignment additions
+
+| 文件 | 状态 | 本轮补齐重点 |
+|---|---|---|
+| activation.md | ALIGNED | 激活后四位校验、激活成功 toast、Active fail / Set fail、autoDebit 删除线边界、接口路径 |
+| pin.md | ALIGNED | 6 位 PIN、Set/Change/Confirm 页面、PIN 引导弹窗、身份认证后 set/reset、31031 特殊错误、PIN 简单规则、公钥接口 |
+| sensitive-info.md | ALIGNED | Basic/Sensitive Info 字段、复制 toast、接口失败 toast、PAN/expiryDate/cvc 来源 |
+| status-and-operations.md | ALIGNED | Freeze/Unfreeze、操作矩阵、网络/服务端错误、锁卡/解锁文案和接口路径 |
+
+## Cross-evidence notes
+
+- Card Manage 的敏感操作依赖 Security 身份认证能力；具体认证方式、锁定、挑战有效期等以 archive/converted-prd/security/identity-verification/README.md 为准。
+- autoDebit 激活入参在 Card Manage 待确认事项中为删除线/已处理项，不作为 confirmed runtime fact 继续扩展。
+- 源 PRD 明确“获取公钥调整为激活成功后才获取”；PIN KB 已补齐该规则。
 
 ## 6. 来源引用
 

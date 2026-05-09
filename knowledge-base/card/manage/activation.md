@@ -1,16 +1,19 @@
 ---
 module: card
 feature: card-activation
-version: "1.0"
+version: "1.1"
 status: active
-source_doc: archive/historical-prd/card/AIX Card 【manage】模块需求V1.0 .docx；external-docs/dtc/DTC Card Issuing API Document_20260310 (1).docx；prd-template/standard-prd-template.md
-source_section: Manage 7.2；DTC Inquiry Card Basic Info；DTC Card Activation；Standard PRD Template v1.3
-last_updated: 2026-05-05
+source_doc: archive/converted-prd/card/manage/README.md；archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/card/application/README.md
+source_section: Card Manage / 7.2 卡激活；8 外部接口；Security / Face Authentication
+last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
 ---
 
 # Physical Card Activation 实体卡激活
+
+> Source alignment note: 本文件已按 converted-prd 做双向覆盖校验，补齐 Card Manage 证据缺口。
+
 
 ## 1. 文档信息
 
@@ -214,6 +217,21 @@ flowchart LR
 | 非待激活状态 | ACTIVE / SUSPENDED 卡 | 尝试进入激活 | 不展示入口 | 不调用接口 | 是 |
 
 ---
+
+## Source alignment additions
+
+| 规则 | 结论 | 来源 |
+|---|---|---|
+| 虚拟卡 | 申请成功后系统自动激活，无需用户操作，也无需设置 PIN | Card Manage / 7.2 |
+| 实体卡 | 需用户在 App 手动完成激活流程，激活成功后方可使用 | Card Manage / 7.2 |
+| 后四位校验 | 用户输入实体卡后四位，完整输入 4 位后自动调用 Inquiry Card Basic Info 校验 | Card Manage / 7.2.2.2 |
+| 后四位错误提示 | The last 4 digits entered are invalid | Card Manage / 7.2.2.2 |
+| 身份认证 | 后四位校验通过后进入 Set PIN / Change PIN，完成后跳转身份认证模块，调用 AAI 活体认证页面 | Card Manage / 7.2.2.3-7.2.2.4；Security |
+| 激活成功 | 调用 Card Activation 成功后进入 Card Home page，并 toast：Your card has been activated | Card Manage / 7.2.2.4 |
+| 激活失败 | 进入 Active fail Page | Card Manage / 7.2.2.4-7.2.2.5 |
+| 激活成功但 Set PIN 失败 | 进入 Set fail page | Card Manage / 7.2.2.4 |
+| Card Activation 接口 | POST /openapi/v1/card/activate | Card Manage / 8.1 |
+| autoDebit | 源 PRD 待确认事项中 autoDebit 激活入参为删除线，不继续沉淀为 confirmed runtime fact | Card Manage / 9 |
 
 ## 10. 来源引用
 

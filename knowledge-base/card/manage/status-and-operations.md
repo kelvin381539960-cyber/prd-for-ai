@@ -1,16 +1,19 @@
 ---
 module: card
 feature: status-and-operations
-version: "1.0"
+version: "1.1"
 status: active
-source_doc: archive/historical-prd/card/AIX Card 【manage】模块需求V1.0 .docx；external-docs/dtc/DTC Card Issuing API Document_20260310 (1).docx；knowledge-base/changelog/knowledge-gaps.md；prd-template/standard-prd-template.md
-source_section: Manage 6.4 / 7.4 / 7.5；DTC Freeze / Unfreeze / Terminate；Standard PRD Template v1.3
-last_updated: 2026-05-05
+source_doc: archive/converted-prd/card/manage/README.md；archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/card/application/README.md
+source_section: Card Manage / 6.4 状态与操作限制；7.4 Lock；7.5 Unlock；8 外部接口
+last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
 ---
 
 # Card Status & Operations 卡状态与操作
+
+> Source alignment note: 本文件已按 converted-prd 做双向覆盖校验，补齐 Card Manage 证据缺口。
+
 
 ## 1. 文档信息
 
@@ -245,6 +248,23 @@ flowchart LR
 | PENDING 卡操作 | PENDING 卡 | 尝试卡管理操作 | 不展示或不可点击 | 不调用操作接口 | 是 |
 
 ---
+
+## Source alignment additions
+
+| 规则 | 结论 | 来源 |
+|---|---|---|
+| Lock Card | 在 Card Home Page 点击 Lock Card 弹出确认 Popup；YES 后调用 Freeze Card 接口 | Card Manage / 7.4 |
+| Freeze 接口 | POST /openapi/v1/card/freeze | Card Manage / 8.1 |
+| Freeze 失败提示 | 其他后端错误 toast 后端返回错误文案；提示 Freeze failed | Card Manage / 7.4 |
+| Unlock Card | Unlock 提交后调用 Unfreeze Card 接口；按钮进入 Loading，禁止重复提交 | Card Manage / 7.5 |
+| Unfreeze 接口 | POST /openapi/v1/card/unfreeze | Card Manage / 8.1 |
+| Unlock 成功 | 卡状态更新为 Activate，toast：Your physical card has been unlocked. | Card Manage / 7.5 |
+| Unlock 网络异常 | No internet connection, please check the connection or try again later.；保留当前 Locked 状态，允许重试 | Card Manage / 7.5 |
+| Unfreeze 失败提示 | 其他后端错误 toast 后端返回错误文案；提示 Unfreeze failed | Card Manage / 7.5 |
+| 页面级网络异常 | 展示 Network Error Page；Try again 重新发起当前页面网络请求；关闭按钮弹出挽留弹窗 | Card Manage / 全局规则 |
+| 弹窗级网络异常 | 提交操作时检测到网络异常但无需中断整体流程时弹出 Network Error Popup | Card Manage / 全局规则 |
+| 页面级服务端异常 | 展示 Server Error Page；Try again later 返回当前流程入口页 | Card Manage / 全局规则 |
+| 弹窗级服务端异常 | 提交操作时检测到服务端异常但无需中断整体流程时弹出 Server Error Popup | Card Manage / 全局规则 |
 
 ## 10. 来源引用
 

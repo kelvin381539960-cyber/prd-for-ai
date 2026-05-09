@@ -1,16 +1,19 @@
 ---
 module: card
 feature: sensitive-info
-version: "1.0"
+version: "1.1"
 status: active
-source_doc: archive/historical-prd/card/AIX Card 【manage】模块需求V1.0 .docx；external-docs/dtc/DTC Card Issuing API Document_20260310 (1).docx；knowledge-base/security/face-authentication.md；prd-template/standard-prd-template.md
-source_section: Manage 6.4 / 7.1 / 8.1；DTC Card Basic Info / Sensitive Info；Standard PRD Template v1.3
-last_updated: 2026-05-05
+source_doc: archive/converted-prd/card/manage/README.md；archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/card/application/README.md
+source_section: Card Manage / Card detail；8 外部接口
+last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
 ---
 
 # Card Sensitive Info 卡敏感信息查看
+
+> Source alignment note: 本文件已按 converted-prd 做双向覆盖校验，补齐 Card Manage 证据缺口。
+
 
 ## 1. 文档信息
 
@@ -227,6 +230,20 @@ flowchart LR
 | 关闭 popup | popup 已展示 | 点击关闭 | 返回 Card Home | 敏感信息隐藏 | 是 |
 
 ---
+
+## Source alignment additions
+
+| 规则 | 结论 | 来源 |
+|---|---|---|
+| Basic Info 接口 | GET /openapi/v1/card/basic-info 查询卡片状态、余额、卡号后四位等非敏感信息 | Card Manage / 8.1 |
+| Sensitive Info 接口 | GET /openapi/v1/card/sensitive-info 查询完整卡号 PAN、CVC、有效期等敏感信息 | Card Manage / 8.1 |
+| Card currency | 读取 Get Card Basic Info 字段 currency | Card Manage / Card detail |
+| Card holder name | 读取 Get Card Basic Info 字段 cardHolderName | Card Manage / Card detail |
+| Card number | 读取 Get Card Sensitive Info 字段 cardNumber | Card Manage / Card detail |
+| Expiry date | 读取 Get Card Sensitive Info 字段 expiryDate | Card Manage / Card detail |
+| CVV / CVC | 读取 Get Card Sensitive Info 字段 cvc | Card Manage / Card detail |
+| 复制提示 | 点击复制完整信息，toast：The information has been copied. | Card Manage / Card detail |
+| 接口失败 toast | 点击 Card detail 时，若 Get Card Basic Info / Get Card Sensitive Info 返回失败，前端写死 toast：Failed to get card info. Please try again later | Card Manage / Card detail |
 
 ## 10. 来源引用
 
