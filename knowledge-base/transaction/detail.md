@@ -1,12 +1,12 @@
 ---
 module: transaction
 feature: detail
-version: "2.0"
+version: "3.1"
 status: active
 doc_type: ai-readable-prd-translation
-source_doc: knowledge-base/_kb-ingestion-process.md；external-docs/dtc/DTC Wallet OpenAPI Document20260126 (1).docx；knowledge-base/transaction/status-model.md；knowledge-base/transaction/history.md；knowledge-base/card/transaction.md；knowledge-base/wallet/deposit.md；knowledge-base/changelog/knowledge-gaps.md
-source_section: Transaction History；Transaction Status Model；Wallet Deposit；Search Balance History / 4.2.4；Appendix ActivityType；Crypto Deposit / 3.4；ALL-GAP 总表
-last_updated: 2026-05-04
+source_doc: archive/converted-prd/app/transaction-history/README.md；archive/converted-prd/card/transaction/README.md；archive/converted-prd/wallet/deposit-send-swap/README.md
+source_section: Transaction & History / Card Transaction Details、Crypto Transaction Details、Swap Details；Wallet Deposit/Send/Swap
+last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
 depends_on:
@@ -19,6 +19,9 @@ depends_on:
 ---
 
 # Transaction Detail 交易详情
+
+> Source alignment note: 本文件已按 converted-prd 补齐详情页展示规则，尤其是 Card / Crypto / Swap 的差异、Gas fee 隐藏规则、Exchange rate 展示规则和可选字段隐藏规则。
+
 
 > 本文件是对 Card Transaction Detail、Wallet Transaction Detail、Deposit Transaction Detail 相关历史 PRD / DTC 文档内容的 AI-readable 结构化转译稿。  
 > 本文件定位为单笔交易详情事实中心，承接 Transaction History 的点击详情场景。  
@@ -348,6 +351,40 @@ Transaction Detail 本身不新增通知规则，只引用 Deposit / Card / Wall
 13. Risk Withheld 必然等同 Wallet `REJECTED`。
 
 ---
+
+## Source alignment additions
+
+### A. Card Transaction Details
+
+| 字段 / 规则 | 结论 |
+|---|---|
+| 入口 | Card 首页交易区域或 Card History 点击任意交易记录进入 `Transaction Details` |
+| 查询接口 | 调用卡交易详情接口并上送 Transaction ID 获取最新交易记录 |
+| 金额字段 | `requestAmount` & `requestCurrency` 为法币交易金额 |
+| 状态说明 | Pending / Success / Refunded / Declined / Cancelled 的 `?` 弹窗说明可配置 |
+| Merchant city | 非必填；没有则不显示该 item |
+| MCC | 非必填；没有则不显示该 item |
+| Exchange rate | 显示小数点后 6 位，向上取整 |
+
+### B. Crypto Transaction Details
+
+| 字段 / 规则 | 结论 |
+|---|---|
+| 查询接口 | 根据交易单号 `txnId` 调用 `/openapi/v1/crypto-txn/{txnId}` 查询单笔交易详情 |
+| Transaction type | Deposit / Send / Card Application / Card Cancel 等可配置 |
+| Transaction state | Pending / Success / Refunded / Declined / Under Review / Cancelled 等说明可配置 |
+| Network | 非必填；没有则不显示该 item |
+| Gas fee | converted-prd 4月14日更正：Deposit 交易详情页隐藏 Gas fee 这个 item |
+| SenderAddress | 非必填；没有则不显示该 item |
+
+### C. Swap Details
+
+| 字段 / 规则 | 结论 |
+|---|---|
+| 查询接口 | 进入页面时调用 `[GET] /openapi/v1/otc/{otc_id}` 获取最新交易记录 |
+| 状态 | Pending / Success / Cancelled |
+| From | 展示 `sellAmount` & Currency 卖出金额及币种，方向为负 |
+| Exchange rate | Swap Detail 不做位数处理，后端给什么显示什么 |
 
 ## 11. 来源引用
 

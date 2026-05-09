@@ -1,11 +1,11 @@
 ---
 module: transaction
 feature: transaction-index
-version: "3.0"
+version: "3.1"
 status: active
-source_doc: knowledge-base/card/transaction.md；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/status-model.md；knowledge-base/transaction/reconciliation.md；knowledge-base/wallet/assets.md；knowledge-base/wallet/deposit.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/_system-boundary.md；用户确认结论 2026-05-02
-source_section: Transaction 使用态统一层；Wallet Transaction History 合并；Wallet Assets boundary；Transaction Reconciliation；ALL-GAP 总表
-last_updated: 2026-05-05
+source_doc: archive/converted-prd/app/transaction-history/README.md；archive/converted-prd/card/transaction/README.md；archive/converted-prd/wallet/deposit-send-swap/README.md
+source_section: Transaction & History / 状态及类型处理、全量交易、Card History、Transaction Details；Card Transaction；Wallet Deposit/Send/Swap
+last_updated: 2026-05-09
 owner: 吴忆锋
 depends_on:
   - card/transaction
@@ -20,6 +20,9 @@ depends_on:
 ---
 
 # Transaction 模块索引
+
+> Source alignment note: 本模块已按新转换的 `archive/converted-prd/app/transaction-history/README.md`、`archive/converted-prd/card/transaction/README.md`、`archive/converted-prd/wallet/deposit-send-swap/README.md` 做双向覆盖校验。补齐的关键 Evidence→KB 缺口包括：全量交易去搜索、REVERSAL 按 REFUND 展示、Deposit 详情隐藏 Gas fee、Exchange rate 显示规则、接口异常统一文案、INCREMENTAL_AUTH / CARD_FEE / TRANSFER_IN / TRANSFER_OUT 等类型口径。
+
 
 ## 1. 模块定位
 
@@ -152,6 +155,17 @@ Transaction 模块不维护独立 checklist。以下问题统一引用 `knowledg
 7. 不默认读取 stage-review、旧 checklist、migrated-reference 或 moved notice 文件。
 
 ---
+
+## Source alignment additions
+
+| 证据规则 | 已落入文件 | 说明 |
+|---|---|---|
+| 全量交易和卡交易去掉搜索，后续再迭代 | `transaction/history.md` | 不再把 Search 作为已确认入口 |
+| 全量交易聚合钱包加密币交易、OTC 兑换记录、卡交易记录 | `transaction/history.md` | 后端分别调用 crypto、otc、card 交易接口后聚合 |
+| 卡交易 REVERSAL / type=19 作为退款展示 | `transaction/history.md`、`transaction/status-model.md` | 前端与 REFUND 一样显示 refund-商户名 |
+| Deposit 交易详情隐藏 Gas fee item | `transaction/detail.md` | 4月14日更正，Gas fee 不作为当前展示项 |
+| Card detail Exchange rate 显示小数点后 6 位并向上取整 | `transaction/detail.md` | Swap detail 的 exchange rate 后端给什么显示什么，不做位数处理 |
+| DTC / 服务端 / 网络异常统一文案 | `transaction/history.md` | Data error / No internet connection |
 
 ## 10. 来源引用
 

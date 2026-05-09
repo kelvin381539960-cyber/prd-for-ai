@@ -121,10 +121,10 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 5 | ALIGNED | `knowledge-base/home/_index.md` | `archive/converted-prd/app/home/README.md` | home/_index.md 已按 Home + FAQ 证据更新，明确首页查询入口与跨模块边界 |
 | 6 | ALIGNED | `knowledge-base/home/app-home.md` | `archive/converted-prd/app/home/README.md` | app-home.md 已补齐 Evidence→KB 缺口：钱包状态、申卡入口、卡片展示、FAQ、核心交易入口、刷新规则 |
 | 7 | SOURCE_GAP | `knowledge-base/common/faq.md` | `archive/converted-prd/app/faq/README.md` | common/faq.md 已登记 SOURCE_GAP：converted FAQ 与旧 xlsx FAQ 口径不一致，需后续按 converted-prd 全量重写 |
-| 8 | TODO | `knowledge-base/transaction/_index.md` | `archive/converted-prd/app/transaction-history/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | 交易索引；需同时关注 Wallet / Card 交易来源 |
-| 9 | TODO | `knowledge-base/transaction/history.md` | `archive/converted-prd/app/transaction-history/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | 全量交易历史 |
-| 10 | TODO | `knowledge-base/transaction/detail.md` | `archive/converted-prd/app/transaction-history/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | 交易详情 |
-| 11 | TODO | `knowledge-base/transaction/status-model.md` | `archive/converted-prd/app/transaction-history/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | 交易状态 |
+| 8 | ALIGNED | `knowledge-base/transaction/_index.md` | `archive/converted-prd/app/transaction-history/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | transaction/_index.md 已按三份 converted-prd 更新证据范围和补齐规则索引 |
+| 9 | ALIGNED | `knowledge-base/transaction/history.md` | `archive/converted-prd/app/transaction-history/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | history.md 已补齐全量交易聚合、去搜索、过滤类型、REVERSAL退款、异常文案、时间分组 |
+| 10 | ALIGNED | `knowledge-base/transaction/detail.md` | `archive/converted-prd/app/transaction-history/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | detail.md 已补齐 Card/Crypto/Swap 详情差异、Gas fee隐藏、Exchange rate展示和可选字段隐藏 |
+| 11 | ALIGNED | `knowledge-base/transaction/status-model.md` | `archive/converted-prd/app/transaction-history/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | status-model.md 已补齐全量交易类型/状态、原始类型展示范围和 REVERSAL 退款处理 |
 | 12 | TODO | `knowledge-base/card/_index.md` | `archive/converted-prd/card/application/README.md`；`archive/converted-prd/card/manage/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/security/identity-verification/README.md` | Card 索引 |
 | 13 | TODO | `knowledge-base/card/application.md` | `archive/converted-prd/card/application/README.md`；`archive/converted-prd/app/home/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/security/identity-verification/README.md` | 申卡；入口/KYC/Face Auth 都要核对 |
 | 14 | TODO | `knowledge-base/card/card-home.md` | `archive/converted-prd/app/home/README.md`；`archive/converted-prd/card/application/README.md`；`archive/converted-prd/card/manage/README.md` | 卡入口 / 卡首页 |
@@ -152,14 +152,16 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 指标 | 数量 |
 |---|---:|
 | 总任务 | 32 |
-| ALIGNED | 3 |
+| ALIGNED | 7 |
 | NEED_CONFIRMATION | 3 |
 | CONFLICT | 0 |
 | SOURCE_GAP | 1 |
-| TODO | 24 |
+| TODO | 20 |
 | OUT_OF_SCOPE | 1 |
 
 ## Batch Notes
+
+- 2026-05-09：完成 Transaction 批次。transaction index/history/detail/status-model 标 ALIGNED；补齐全量交易去搜索、REVERSAL 退款、Gas fee 隐藏、Exchange rate、异常文案、原始类型展示范围等 Evidence→KB 缺口。
 
 - 2026-05-09：完成 Home + FAQ 批次。Home index/app-home 标 ALIGNED；FAQ 标 SOURCE_GAP，原因是 converted FAQ 与旧 xlsx FAQ 口径不一致，需按 converted-prd 单独重写。
 

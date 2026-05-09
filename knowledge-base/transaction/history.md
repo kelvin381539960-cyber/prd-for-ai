@@ -1,12 +1,12 @@
 ---
 module: transaction
 feature: history
-version: "2.0"
+version: "3.1"
 status: active
 doc_type: ai-readable-prd-translation
-source_doc: knowledge-base/_kb-ingestion-process.md；external-docs/dtc/DTC Wallet OpenAPI Document20260126 (1).docx；knowledge-base/transaction/status-model.md；knowledge-base/transaction/detail.md；knowledge-base/card/transaction.md；knowledge-base/wallet/assets.md；knowledge-base/wallet/deposit.md；knowledge-base/changelog/knowledge-gaps.md；用户确认结论 2026-05-02
-source_section: Wallet Transaction History merged into Transaction History；Wallet Assets；Wallet Deposit；Search Balance History / 4.2.4；Appendix ActivityType；Card Transaction Flow；ALL-GAP 总表
-last_updated: 2026-05-05
+source_doc: archive/converted-prd/app/transaction-history/README.md；archive/converted-prd/card/transaction/README.md；archive/converted-prd/wallet/deposit-send-swap/README.md
+source_section: Transaction & History / 7.1 全量交易；7.2 Card History；Wallet Deposit/Send/Swap 交易来源
+last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
 depends_on:
@@ -20,6 +20,9 @@ depends_on:
 ---
 
 # Transaction History 交易历史
+
+> Source alignment note: 本文件已按 converted-prd 反向补齐交易历史规则。重点补齐全量交易聚合来源、筛选范围、去搜索、REVERSAL 退款展示、异常文案、时间分组与点击跳转。
+
 
 > 本文件是对 Card History、Wallet Transaction History、Deposit History 相关历史 PRD / DTC 文档内容的 AI-readable 结构化转译稿。  
 > 本文件定位为交易历史事实载体，不是新的全局交易流水设计，不合并 Card / Wallet 字段来源，不补写未确认状态机。  
@@ -376,6 +379,39 @@ Transaction History 本身不新增通知规则，只引用 Deposit / Notificati
 11. Risk Withheld 必然等同 Wallet `REJECTED`。
 
 ---
+
+## Source alignment additions
+
+### A. 全量交易聚合与查询范围
+
+| 规则 | 结论 | 来源 |
+|---|---|---|
+| 全量交易来源 | 当前全量交易聚合钱包加密币交易、OTC 兑换记录、卡交易记录 | transaction-history / 7.1 |
+| 后端接口 | 加密币交易接口 `/openapi/v1/crypto-txn/search`、OTC 兑换记录接口 `/openapi/v1/otc/search`、卡交易接口 `/openapi/v1/card/inquiry-card-transaction` | transaction-history / 7.1 |
+| 多卡查询 | 多张卡时卡交易接口需查多次，针对已激活和已冻结的卡 | transaction-history / 7.1 |
+| 搜索 | 全量交易及卡交易去掉搜索，后续再迭代 | transaction-history changelog |
+| 数据过滤 | 查询交易记录会根据用户选择的类型、币种做不同数据过滤 | transaction-history / 7.1 |
+
+### B. 全量交易展示类型
+
+| 来源 | 展示范围 | 说明 |
+|---|---|---|
+| 加密币交易 | 原始交易类型 `DEPOSIT`、`TRANSFER_IN`、`TRANSFER_OUT`、`CARD_FEE_DEBIT`、`CARD_FEE_REFUND` | 只展示这些记录给用户 |
+| OTC 兑换 | 兑换记录 | 展示为 Swap |
+| 卡交易 | 原始交易类型 `PURCHASE`、`CASH_WITHDRAWAL`、`REFUND`、`INCREMENTAL_AUTH` | 只展示这些记录给用户 |
+| 卡交易 REVERSAL | DTC 反馈部分退款使用 `REVERSAL` / type=19 | 前端与 `REFUND` 一样显示 `refund-商户名称` |
+
+### C. 列表展示和异常
+
+| 规则 | 结论 |
+|---|---|
+| 时间分组 | 当年当月按日&简写月显示；当年历史月按具体月显示；历史年按具体月&具体年显示 |
+| 组内排序 | 每组内交易按时间降序排列 |
+| 时间格式 | 交易时间显示为 `Feb-25-2026 10:23:30` 形式 |
+| 点击跳转 | 点击单条记录，根据交易 ID 和交易类型决定调用哪个详情接口，并跳转 `Transaction Details` |
+| 无数据 | Card History 无数据时显示 `No transaction data` |
+| DTC / 服务端异常 | 前端显示缺省页面，统一提示 `Data error. Please refresh and try again.` |
+| 网络异常 | 前端显示缺省页面，统一提示 `No internet connection. Please retry` |
 
 ## 11. 来源引用
 
