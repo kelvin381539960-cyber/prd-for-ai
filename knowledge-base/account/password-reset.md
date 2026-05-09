@@ -1,242 +1,65 @@
 ---
 module: account
 feature: password-reset
-version: "1.0"
-status: active
-source_doc: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx
-source_section: 7.3 忘记密码流程页面
-last_updated: 2026-05-04
+version: "1.1"
+status: need_confirmation
+source_doc: archive/converted-prd/app/registration-login/README.md；archive/converted-prd/security/identity-verification/README.md
+source_section: registration-login / 7.3 忘记密码流程页面；security / 认证方式能力矩阵
+last_updated: 2026-05-09
 owner: 吴忆锋
 depends_on:
   - account/_index
   - login
-  - registration
-  - security/global-rules
+  - security/_index
   - security/otp-verification
   - security/email-otp-verification
-  - _meta/writing-standard
+  - security/biometric-verification
 ---
 
 # Password Reset 忘记密码流程
 
-## 1. 功能定位
+## 1. Source alignment status
 
-Password Reset 用于用户在忘记登录密码时发起密码重置流程。
+本文件已按新转换历史 PRD 重新校准。结论是：**不能把当前 `password-reset` 文件视为已确认的 active runtime fact。**
 
-原始 PRD 明确：用户重置密码后，需要清除 BIO 信息；已开启的 BIO 需要自动关闭。密码重置成功后，系统强制登出当前账户，用户需使用新密码重新登录。
+原因：`archive/converted-prd/app/registration-login/README.md` 中 `7.3 忘记密码流程页面`、`7.3.1 功能说明`、`7.3.3 Reset Password Page`、`7.3.4 身份验证流程页面`、`7.3.5 设置密码页` 等内容整体以删除线形式呈现。
 
-## 2. 适用范围
+因此，以下内容只可作为历史痕迹或待确认项，不可作为当前已确认产品事实直接引用：
 
-| 维度 | 规则 | 来源 | 备注 |
+- 忘记密码入口与页面流程；
+- Reset Password Page 的邮箱 / 手机号输入规则；
+- 忘记密码后的身份验证链路；
+- 密码重置成功后强制登出；
+- 密码重置成功后清除 BIO 信息、关闭已开启 BIO。
+
+## 2. What is supported by converted PRD
+
+| 事实 | 状态 | 来源 | 处理 |
 |---|---|---|---|
-| 国家线 | VN / PH / AU | AIX Card 注册登录需求V1.0 / 国家线 | 与 Account 模块一致 |
-| 用户状态 | 已注册用户 | AIX Card 注册登录需求V1.0 / 7.3 忘记密码流程页面 | 未注册用户不适用 |
-| 入口 | Login Page 的 Forgot password | AIX Card 注册登录需求V1.0 / 7.2 Login Page；7.3 忘记密码流程页面 | Login 页面进入 |
-| 身份验证 | 进入身份验证流程页面 | AIX Card 注册登录需求V1.0 / 7.3.4 身份验证流程页面 | 详细规则引用 Security |
-| 密码设置 | 复用 Registration 的 Set Password Page | AIX Card 注册登录需求V1.0 / 7.3.5 设置密码页 | 密码规则引用 Registration |
-| BIO 处理 | 重置密码后清除 BIO 信息并关闭已开启 BIO | AIX Card 注册登录需求V1.0 / 7.3.1 功能说明 | 安全边界 |
+| 历史 PRD 曾包含忘记密码流程章节 | VERIFIED_AS_HISTORICAL | registration-login / 7.3 | 仅作为历史痕迹 |
+| 忘记密码后需要清除 BIO、关闭已开启 BIO | NEED_CONFIRMATION | registration-login changelog 有补充记录，但 7.3.1 正文为删除线 | 不作为 active runtime fact |
+| 忘记密码涉及身份验证流程 | NEED_CONFIRMATION | registration-login / 7.3.4 删除线引用 Security；security 能力矩阵中出现“忘记密码”场景 | 需要产品确认当前是否启用 |
+| 忘记密码可使用 OTP / EMAIL_OTP | NEED_CONFIRMATION | security / 认证方式能力矩阵出现忘记密码场景 | 仅能说明 Security 能力矩阵曾覆盖该场景，不能单独证明 App 当前有入口 |
 
-## 3. 前置条件
+## 3. Runtime usage rule
 
-| 条件 | 说明 | 来源 |
+在用户或 AI 查询“忘记密码”时：
+
+1. 不得直接回答为已上线 / 已确认流程。
+2. 应说明：历史 PRD 中该章节被删除线标记，当前 runtime 规则需要产品确认。
+3. 若只问认证能力，可引用 Security 中的 OTP / EMAIL_OTP 能力，但不得反推 App 忘记密码入口已启用。
+
+## 4. 待确认项
+
+| 项目 | 问题 | 建议确认人 |
 |---|---|---|
-| 用户从 Login 进入 | 忘记密码入口位于登录流程 | AIX Card 注册登录需求V1.0 / 7.2 Login Page |
-| 用户可完成身份验证 | Reset Password Page 点击 Next 后进入身份验证流程页面 | AIX Card 注册登录需求V1.0 / 7.3.4 身份验证流程页面 |
-| 密码设置规则可复用 | 设置密码页复用注册流程 Set Password Page | AIX Card 注册登录需求V1.0 / 7.3.5 设置密码页 |
+| 忘记密码入口 | 当前 App 是否仍存在 Forgot / Reset Password 入口？ | Product |
+| 重置后 BIO 处理 | 是否仍要求清除本地 BIO 并关闭服务端 BIO 开关？ | Product / Security |
+| 重置后登录态 | 是否强制登出并要求用新密码重新登录？ | Product / Backend |
+| 认证方式 | 当前忘记密码使用 EMAIL_OTP、OTP、Face Auth 还是组合认证？ | Product / Security |
 
-## 4. 业务流程
+## 5. Sources
 
-### 4.1 主链路
-
-```text
-Login Page → Reset Password Page → Identity Verification → Set Password Page → Force Logout → Login with new password
-```
-
-### 4.2 业务流程与系统交互时序图
-
-> 本图是业务时序图，用 `sequenceDiagram` 表达泳道式业务流转。  
-> 重点说明用户、AIX App、账户服务、身份验证服务之间的业务责任、关键判断和阶段流转。  
-> 不承载具体交互细节、页面元素规则、错误文案或接口设计；这些内容以交互稿、页面卡片、异常表和相关模块文档为准。
-
-```mermaid
-sequenceDiagram
-    autonumber
-    actor 用户
-    participant App as AIX App
-    participant Account as 账户服务
-    participant Security as 身份验证服务
-
-    Note over 用户,Security: A. 发起密码重置
-    用户->>App: 进入忘记密码流程
-    App-->>用户: 展示密码重置页面
-
-    用户->>App: 提交密码重置账号信息
-    App->>App: 校验账号信息基础规则
-
-    alt 账号信息不满足基础规则
-        App-->>用户: 停留密码重置阶段，按页面规则提示
-    else 账号信息满足基础规则
-        App->>Security: 发起身份验证
-    end
-
-    Note over 用户,Security: B. 身份验证
-    用户->>Security: 完成身份验证
-
-    alt 身份验证不通过
-        Security-->>用户: 按 Security 规则处理
-    else 身份验证通过
-        Security-->>App: 通知验证通过
-        App-->>用户: 进入新密码设置
-    end
-
-    Note over 用户,Account: C. 设置新密码
-    用户->>App: 提交新登录密码
-    App->>App: 校验密码规则
-
-    alt 密码规则不通过
-        App-->>用户: 停留新密码设置阶段，按页面规则提示
-    else 密码规则通过
-        App->>Account: 发起密码重置
-        Account->>Account: 更新登录密码
-        Account->>Account: 清除 BIO 信息并关闭已开启 BIO
-        Account->>Account: 使当前登录态失效
-        Account-->>App: 密码重置成功
-        App-->>用户: 回到未登录状态，需使用新密码重新登录
-    end
-```
-
-### 4.3 业务逻辑矩阵
-
-| 阶段 | 触发条件 | 前端校验 / 展示 | 后端 / 系统动作 | 成功结果 | 失败结果 |
-|---|---|---|---|---|---|
-| 进入忘记密码 | Login Page 点击 Forgot password | 展示 Reset Password Page | 无 | 进入重置密码页 | 无 |
-| Reset Password 输入 | 用户输入 Email 或 Phone | 输入合法且非空时 Next 高亮；Email / Phone 切换时保留原填写内容 | 无 | 可进入身份验证 | 输入不合法或为空时不可继续 |
-| 身份验证 | 点击 Next | 进入身份验证流程页面 | 按 Security 模块处理 | 进入 Set Password Page | 失败按 Security 规则处理 |
-| 设置新密码 | 身份验证成功 | 复用 Registration 的 Set Password 规则 | 提交密码重置 | 密码重置成功 | 密码规则失败或提交失败 |
-| BIO 清理 | 密码重置成功 | 无 | 清除 BIO 信息，关闭已开启 BIO | BIO 不可继续用于旧密码后的快捷登录 | 无 |
-| 强制登出 | 密码重置成功 | 当前账户登出 | 使用户需使用新密码重新登录 | 回到未登录状态 | 无 |
-
-## 5. 页面关系总览
-
-本节仅表达 Password Reset 模块涉及的页面节点和页面跳转关系。
-
-身份验证细节以 Security 模块为准；密码设置规则以 Registration 的 Set Password Page 为准。
-
-```mermaid
-flowchart LR
-    subgraph Entry[入口层]
-        Login[Login Page]
-    end
-
-    subgraph Main[主页面层]
-        ResetPassword[Reset Password Page]
-        Identity[Identity Verification]
-        SetPassword[Set Password Page]
-    end
-
-    subgraph Result[结果页 / 异常承接]
-        Logout[Force Logout]
-        SecurityError((Security / Error Handling))
-    end
-
-    Login -->|Forgot password| ResetPassword
-    ResetPassword -->|Next| Identity
-    Identity -->|Success| SetPassword
-    Identity -.->|Failed| SecurityError
-    SetPassword -->|Password reset success| Logout
-    Logout -->|Login with new password| Login
-```
-
-## 6. 页面卡片与交互规则
-
-### 6.1 Reset Password Page
-
-![Reset Password Page Overview](../assets/account/image40.jpeg)
-
-![Reset Password Page UX](../assets/account/image41.jpeg)
-
-| 维度 | 内容 |
-|---|---|
-| 页面目的 | 用户发起忘记密码流程 |
-| 入口 | Login Page 点击 Forgot password |
-| 出口 | Next → 身份验证流程页面 |
-| 关键规则 | Email / Phone 输入合法且非空后 Next 高亮可点击；切换时保留原填写内容 |
-
-| 元素 | 类型 | 展示条件 | 交互规则 | 异常 |
-|---|---|---|---|---|
-| Back | Button | 页面展示时 | 点击返回上一级页面 | 无 |
-| Email / Phone 切换 | Tab | 默认展示，默认选中 Email | 用户可切换重置密码账号类型；切换时保留原填写内容 | 无 |
-| Email 输入框 | TextInput | Email tab | 非空、邮箱格式校验；最长 254 字符 | `Email format is invalid`；`Email should not be empty` |
-| Country Code | Selector | Phone tab | 点击进入 Select Country Page | 国家 / 地区规则同 Login |
-| Phone 输入框 | TextInput | Phone tab | 仅允许输入数字；最长 20 位 | 具体错误文案按 Login / 文案表 |
-| Next | Button | 输入合法且非空 | 点击进入身份验证流程页面 | 身份验证失败按 Security 规则处理 |
-
-### 6.2 Identity Verification
-
-| 维度 | 内容 |
-|---|---|
-| 页面目的 | 忘记密码流程中的身份验证 |
-| 入口 | Reset Password Page 点击 Next |
-| 出口 | 验证成功 → Set Password Page |
-| 关联模块 | `security/global-rules.md`、`security/otp-verification.md`、`security/email-otp-verification.md` |
-
-原始 PRD 写明：详细需求见 `AIX Security 身份认证需求V1.0`。
-
-### 6.3 Set Password Page
-
-| 维度 | 内容 |
-|---|---|
-| 页面目的 | 用户设置新登录密码 |
-| 入口 | 身份验证成功 |
-| 关键规则 | 复用 Registration 的 Set Password Page |
-| 关联模块 | `account/registration.md` |
-
-密码规则以 Registration 的 Set Password Page 为准，不在本文重复定义。
-
-## 7. 字段与接口依赖
-
-| 字段 / 能力 | 用途 | 读/写 | 来源 | 备注 |
-|---|---|---|---|---|
-| resetInput | Reset Password Page 输入账号 | 读 | Reset Password Page | 支持 Email / Phone 两种类型；字段实现命名以接口为准 |
-| email | 重置密码账号 | 读 | Reset Password Page | 非空、邮箱格式校验；最长 254 字符 |
-| phone | 重置密码账号 | 读 | Reset Password Page | 仅允许输入数字；最长 20 位 |
-| countryCode | Phone 重置密码国家 / 地区区号 | 读 | Reset Password Page / Select Country Page | 规则同 Login |
-| authenticationResult | 身份验证结果 | 读 | Security Module | 详细规则引用 Security |
-| password | 新登录密码 | 写 | Registration / Set Password Page | 复用注册密码规则 |
-| bioEnabled | BIO 开关状态 | 写 | Password Reset 功能说明 | 密码重置成功后关闭已开启 BIO |
-| biometricLocalKey | 本地 BIO 信息 | 写 | Password Reset 功能说明 | 密码重置成功后清除 BIO 信息 |
-| loginSession | 当前登录态 | 写 | Password Reset 安全规则 | 密码重置成功后强制登出 |
-
-## 8. 异常与失败处理
-
-| 场景 | 触发条件 | 用户提示 | 系统动作 | 最终状态 | 来源 |
-|---|---|---|---|---|---|
-| Email 为空或格式不合法 | Reset Password Page Email 输入不满足要求 | `Email should not be empty` / `Email format is invalid` | Next 不可点击或阻止继续 | 留在 Reset Password Page | AIX Card 注册登录需求V1.0 / 7.3.3 |
-| Phone 为空或格式不合法 | Reset Password Page Phone 输入不满足要求 | 按 Login / 文案表规则 | Next 不可点击或阻止继续 | 留在 Reset Password Page | AIX Card 注册登录需求V1.0 / 7.3.3 |
-| 身份验证失败 | Security 认证失败 | 按 Security 模块规则处理 | 阻止进入 Set Password | Security / Error Handling | AIX Card 注册登录需求V1.0 / 7.3.4 |
-| 密码规则失败 | 新密码不满足规则 | 按 Registration Set Password 规则处理 | 阻止提交 | 留在 Set Password Page | AIX Card 注册登录需求V1.0 / 7.3.5 |
-| 密码重置成功 | 新密码设置成功 | 原文未明确成功提示 | 清除 BIO，关闭已开启 BIO，强制登出 | 用户需使用新密码重新登录 | AIX Card 注册登录需求V1.0 / 7.3.1 / 7.3.5 |
-
-## 9. 风控 / 合规边界
-
-| 边界 | 规则 | 影响 | 来源 |
-|---|---|---|---|
-| 身份验证 | Reset Password Page 点击 Next 后进入身份验证流程 | 防止未验证用户直接重设密码 | AIX Card 注册登录需求V1.0 / 7.3.4 |
-| 密码规则复用 | 设置密码页复用注册 Set Password Page | 保持密码规则一致 | AIX Card 注册登录需求V1.0 / 7.3.5 |
-| BIO 清理 | 密码重置后清除 BIO 信息 | 防止旧认证链路继续用于快捷登录 | AIX Card 注册登录需求V1.0 / 7.3.1 |
-| BIO 关闭 | 已开启的 BIO 需要自动关闭 | 用户需重新完成 BIO 设置 | AIX Card 注册登录需求V1.0 / 7.3.1 |
-| 强制登出 | 密码重置成功后强制登出当前账户 | 用户需使用新密码重新登录 | AIX Card 注册登录需求V1.0 / 7.3.5 |
-
-## 10. 来源引用
-
-- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.3.1 功能说明 / V1.0)
-- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.3.2 页面概览 / V1.0)
-- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.3.3 Reset Password Page / V1.0)
-- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.3.4 身份验证流程页面 / V1.0)
-- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.3.5 设置密码页 / V1.0)
-- (Ref: knowledge-base/account/registration.md / Set Password Page)
-- (Ref: knowledge-base/security/global-rules.md)
-- (Ref: knowledge-base/security/otp-verification.md)
-- (Ref: knowledge-base/security/email-otp-verification.md)
-- (Ref: knowledge-base/account/login.md / Login Page 输入规则)
-- (Ref: knowledge-base/changelog/knowledge-gaps.md / Account Password Reset / 2026-05-01)
+- (Ref: archive/converted-prd/app/registration-login/README.md / 7.3 忘记密码流程页面，删除线)
+- (Ref: archive/converted-prd/app/registration-login/README.md / 需求变更日志，忘记密码后关闭 BIO 补充记录)
+- (Ref: archive/converted-prd/security/identity-verification/README.md / 认证方式能力矩阵，忘记密码场景)

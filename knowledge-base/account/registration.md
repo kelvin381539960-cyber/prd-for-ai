@@ -1,11 +1,11 @@
 ---
 module: account
 feature: registration
-version: "1.0"
+version: "1.1"
 status: active
-source_doc: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx
-source_section: 7.1 注册功能
-last_updated: 2026-05-04
+source_doc: archive/converted-prd/app/registration-login/README.md；archive/converted-prd/security/identity-verification/README.md
+source_section: registration-login / 5.2 账户说明；7.1 注册功能；security / Email OTP 认证
+last_updated: 2026-05-09
 owner: 吴忆锋
 depends_on:
   - account/_index
@@ -22,7 +22,9 @@ depends_on:
 
 Registration 用于新用户通过邮箱创建 AIX 账户，并完成邮箱 OTP 验证、登录密码设置、AIX Tag 设置或跳过设置后进入 App 首页。
 
-注册成功后，服务端生成 UID，账户状态为 Active。用户成功注册后，系统自动将当前 Device ID 与账户绑定。
+注册成功后，服务端生成 UID，账户状态为 Active。用户成功注册 / 登录后，系统自动将当前 Device ID 与账户绑定。
+
+> Source alignment note: 本文件按 `archive/converted-prd/app/registration-login/README.md` 校准；邮箱 OTP 等认证细节以 `archive/converted-prd/security/identity-verification/README.md` 为支撑证据。
 
 ## 2. 适用范围
 
@@ -32,7 +34,7 @@ Registration 用于新用户通过邮箱创建 AIX 账户，并完成邮箱 OTP 
 | 用户状态 | 未注册用户 | AIX Card 注册登录需求V1.0 / 7.1 注册功能 | 已有账户用户应进入 Login |
 | 注册方式 | Email 注册 | AIX Card 注册登录需求V1.0 / 7.1.4 Registration Page | 原文为“邮箱注册页” |
 | 账号唯一性 | 邮箱全局唯一，不允许重复注册或绑定 | AIX Card 注册登录需求V1.0 / 5.2.5 手机号/邮箱唯一性规则 | 手机号唯一性属于全局账户规则 |
-| 账户状态 | 注册成功后触发 Active | AIX Card 注册登录需求V1.0 / 5.2.2 账户状态 | Banned / Closed / Locked 定义见账户状态规则 |
+| 账户状态 | 注册成功后触发 Active | registration-login / 5.2.2 账户状态 | converted-prd 明确当前账户状态为 Active / Banned / Closed；`Locked` 在源文档中为删除线，不作为账户状态沉淀 |
 | 设备绑定 | 注册成功后自动绑定当前 Device ID | AIX Card 注册登录需求V1.0 / 5.2.6 设备绑定策略 | 单账户最多绑定 1 个 deviceId，最多 1 个设备同时在线 |
 | 邮箱 OTP | 注册流程进入邮箱 OTP 页，详细规则见 Security | AIX Card 注册登录需求V1.0 / 7.1.5 邮箱OTP验证页 | 需引用 Security 模块 |
 
@@ -457,20 +459,20 @@ Tag 创建结果：
 | Referral code 校验 | 格式校验 + 后端存在性校验 | 无效推荐码不可继续注册 | AIX Card 注册登录需求V1.0 / 7.1.4 |
 | 协议同意 | 必选协议勾选后 Next 才可点击；注册成功后生成协议快照并绑定账户 | 合规留痕 | AIX Card 注册登录需求V1.0 / 7.1.4 |
 | 频控 | 同设备指纹 5 次 / 10 分钟；同 IP 100 次 / 10 分钟；接口总限流研发定义 | 防刷注册 | AIX Card 注册登录需求V1.0 / 7.1.4 |
-| 账户状态 | 注册成功后账户状态为 Active | 账户可正常使用 | AIX Card 注册登录需求V1.0 / 5.2.2 |
-| 设备绑定 | 注册成功后自动绑定当前 Device ID；单账户最多绑定 1 个 Device ID | 限制多设备并发与 BIO 启用前置 | AIX Card 注册登录需求V1.0 / 5.2.6 |
+| 账户状态 | 注册成功后账户状态为 Active | 账户可正常使用 | registration-login / 5.2.2 |
+| 设备绑定 | 注册 / 登录成功后自动绑定当前 Device ID；单账户最多绑定 1 个 deviceId；最多允许 1 个设备同时在线 | 限制多设备并发与 BIO 启用前置 | registration-login / 5.2.6 |
 | AIX Tag 不可更改 | 创建唯一 ID，确认后不可更改 | 影响后续收款识别 | AIX Card 注册登录需求V1.0 / 7.1.8 |
 
 ## 10. 来源引用
 
-- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 5.2.2 账户状态 / V1.0)
-- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 5.2.5 手机号/邮箱唯一性规则 / V1.0)
-- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 5.2.6 设备绑定策略 / V1.0)
-- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.1.3 Navigation Page / V1.0)
-- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.1.4 Registration Page / V1.0)
-- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.1.5 邮箱OTP验证页 / V1.0)
-- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.1.6 Set Password Page / V1.0)
-- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.1.7 Re-enter Password Page / V1.0)
-- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.1.8 Set Tag Page / V1.0)
-- (Ref: knowledge-base/security/email-otp-verification.md)
+- (Ref: archive/converted-prd/app/registration-login/README.md / 5.2.2 账户状态 / V1.0)
+- (Ref: archive/converted-prd/app/registration-login/README.md / 5.2.5 手机号/邮箱唯一性规则 / V1.0)
+- (Ref: archive/converted-prd/app/registration-login/README.md / 5.2.6 设备绑定策略 / V1.0)
+- (Ref: archive/converted-prd/app/registration-login/README.md / 7.1.3 Navigation Page / V1.0)
+- (Ref: archive/converted-prd/app/registration-login/README.md / 7.1.4 Registration Page / V1.0)
+- (Ref: archive/converted-prd/app/registration-login/README.md / 7.1.5 邮箱OTP验证页 / V1.0)
+- (Ref: archive/converted-prd/app/registration-login/README.md / 7.1.6 Set Password Page / V1.0)
+- (Ref: archive/converted-prd/app/registration-login/README.md / 7.1.7 Re-enter Password Page / V1.0)
+- (Ref: archive/converted-prd/app/registration-login/README.md / 7.1.8 Set Tag Page / V1.0)
+- (Ref: archive/converted-prd/security/identity-verification/README.md / 8.3 Email OTP认证)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / Account Registration / 2026-05-01)

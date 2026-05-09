@@ -2,10 +2,10 @@
 module: account
 feature: login
 version: "1.1"
-status: active
-source_doc: "archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx；archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx"
-source_section: "7.2 登录功能；7.2.3 Navigation Page；7.2.4 Login Page；7.2.4.1 Select Country Page；7.2.5 Biometric登录；7.2.7 Enable BIO Page"
-last_updated: 2026-05-04
+status: need_confirmation
+source_doc: "archive/converted-prd/app/registration-login/README.md；archive/converted-prd/security/identity-verification/README.md"
+source_section: "registration-login / 7.2 登录功能；security / 认证方式能力矩阵、OTP、Email OTP、Face Auth、BIO"
+last_updated: 2026-05-09
 owner: 吴忆锋
 depends_on:
   - account/_index
@@ -21,14 +21,17 @@ tags: [login, account, biometric, email, phone, otp, country-selector]
 
 # Login 登录功能
 
+> Source alignment note: 本文件已开始按 `archive/converted-prd/app/registration-login/README.md` 与 `archive/converted-prd/security/identity-verification/README.md` 校准。登录主流程、Quick Login、Enable BIO 在注册登录 PRD 中有来源；但 Login Page 中“邮箱 / 手机号输入切换、邮箱输入框、手机号输入框”等部分在 converted-prd 中带删除线，同时 Select Country Page 又仍有正文描述，因此登录输入方式范围暂标 `NEED_CONFIRMATION`。
+
+
 ## 1. 文档定位
 
 本文是 AIX Account / Login 的运行时事实源，用于沉淀：
 
-1. 已注册用户通过 Email / Phone 登录 AIX App 的页面、流程和规则。
+1. 已注册用户进入 Login Page、发起登录、Quick Login、Enable BIO 的页面、流程和规则；Email / Phone 输入范围需确认。
 2. Quick Login / Biometric 快捷登录的展示条件和系统交互边界。
 3. 登录成功后 Enable BIO Page 的展示、跳过、开启和重新认证规则。
-4. Login 与 Security 身份认证模块、Password Reset、Registration、Home 的关系。
+4. Login 与 Security 身份认证模块、Registration、Home 的关系；Password Reset 仅作为待确认入口处理。
 5. 登录失败、账户拦截、Biometric 失败等异常处理边界。
 
 本文不维护 Security 模块的完整认证规则。OTP、Email OTP、Login Passcode、Biometric 认证失败、锁定、有效期等细节以 `knowledge-base/security/*` 为准。
@@ -38,10 +41,10 @@ tags: [login, account, biometric, email, phone, otp, country-selector]
 | 维度 | 规则 | 来源 / 备注 |
 |---|---|---|
 | 用户状态 | 已注册用户可进入登录流程 | 未注册用户应走 Registration |
-| 账户状态 | Active 可继续登录；Banned / Closed / Locked 等异常状态应被拦截 | 具体状态定义以 Account / Security 状态文件为准 |
-| 登录方式 | Email / Phone / Quick Login | Quick Login 仅本地存在可用 Biometric 密钥时展示 |
+| 账户状态 | Active 可继续登录；Banned / Closed 应被拦截 | `Locked` 在 registration-login 的账户状态中为删除线；OTP / Email OTP / Face Auth 锁定归入 Security 场景锁定 |
+| 登录方式 | Login Page 输入方式 NEED_CONFIRMATION；Quick Login | Quick Login 仅本地存在可用 Biometric 密钥时展示 |
 | 国家 / 地区选择 | Phone 登录时选择 Country Code | 国家列表展示全部国家 / 地区；中国和中国台湾选项后端隐藏 |
-| 身份认证 | Email / Phone 登录成功前需进入身份验证流程 | 具体认证方式由 Security 模块决定 |
+| 身份认证 | 手动登录成功前需进入身份验证流程 | 具体认证方式由 Security 模块决定 |
 | Biometric | 支持 iOS Face ID / Touch ID、Android Face / Fingerprint | 设备端通过后仍需后端验证 |
 | Enable BIO | 登录成功后，若用户未启用 BIO 且设备支持，则引导用户开启 | 已启用 BIO 或设备未开启生物识别时不展示 |
 
@@ -54,7 +57,7 @@ flowchart LR
   Navigation[Navigation Page]
   Login[Login Page]
   Country[Select Country Page]
-  PasswordReset[Password Reset Page]
+  PasswordReset[Password Reset Page - NEED_CONFIRMATION]
   Identity[Identity Verification Page]
   DeviceBio[Device Biometric Verification]
   EnableBio[Enable BIO Page]
@@ -67,7 +70,7 @@ flowchart LR
   Login -->|Tap country code| Country
   Country -->|Select country / region| Login
 
-  Login -->|Tap Forgot password| PasswordReset
+  Login -.->|Forgot password / NEED_CONFIRMATION| PasswordReset
   Login -->|Tap Next| Identity
   Login -->|Tap Quick Login| DeviceBio
 
@@ -103,8 +106,8 @@ sequenceDiagram
     App-->>User: Return to Login Page with country code
   end
 
-  alt Email / Phone manual login
-    User->>App: Enter Email / Phone and tap Next
+  alt Manual login
+    User->>App: Enter account credential and tap Next
     App->>App: Validate input format
 
     alt Input invalid
@@ -187,12 +190,12 @@ sequenceDiagram
 | 页面 / 能力 | 页面类型 | 入口 / 触发 | 下一步 | 备注 |
 |---|---|---|---|---|
 | Navigation Page | AIX App 主页面 | App 未登录启动 / 退出登录后 | Login Page / Registration Page | 复用 Registration 的 Navigation Page |
-| Login Page | AIX App 主页面 | Navigation Page 点击登录入口 | Identity Verification / Quick Login / Password Reset / Country Select | 登录主入口 |
+| Login Page | AIX App 主页面 | Navigation Page 点击登录入口 | Identity Verification / Quick Login / Country Select；Password Reset 为 NEED_CONFIRMATION | 登录主入口 |
 | Select Country Page | AIX App 主页面 | Login Page Phone tab 点击 Country Code | Login Page | 选择手机号区号 |
-| Identity Verification Page | Security 页面 / 认证流程 | Email / Phone 账号校验通过 | Home / Enable BIO / Security Handling | 具体规则由 Security 模块维护 |
+| Identity Verification Page | Security 页面 / 认证流程 | 账号校验通过 | Home / Enable BIO / Security Handling | 具体规则由 Security 模块维护 |
 | Device Biometric Verification | 系统生物识别能力 | Quick Login 或 Enable BIO | Home / Security Handling | iOS / Android 设备能力 |
 | Enable BIO Page | AIX App 引导页 | 登录成功且用户未启用 BIO 且设备支持 BIO | Home / Device BIO / Identity Verification | 登录后引导，不是强制阻断 |
-| Password Reset Page | AIX App 主页面 | Login Page 点击 Forgot password | Password Reset 流程 | 详见 password-reset.md |
+| Password Reset Page | NEED_CONFIRMATION | 历史 PRD 7.3 为删除线 | 不作为当前已确认入口 | 详见 password-reset.md |
 | Home Page | AIX App 主页面 | 登录成功 | App 首页 | 本文不维护 Home 规则 |
 
 ## 6. 页面详情
@@ -218,26 +221,26 @@ sequenceDiagram
 | 项目 | 规则 |
 |---|---|
 | 页面类型 | AIX App 主页面 |
-| 页面目标 | 用户通过 Email / Phone 或 Quick Login 发起登录 |
+| 页面目标 | 用户通过 Login Page 或 Quick Login 发起登录；Email / Phone 输入方式需确认 |
 | 入口 / 触发 | Navigation Page 点击 `I already have an account` |
-| 展示内容 | Email / Phone 登录入口、Country Code、Next、Quick Login、Forgot password |
-| 用户动作 | 输入 Email / Phone；选择国家区号；点击 Next；点击 Quick Login；点击 Forgot password |
+| 展示内容 | Login 输入区、Country Code、Next、Quick Login；Email / Phone 输入切换与 Forgot password 均需确认 |
+| 用户动作 | 输入账号信息；选择国家区号；点击 Next；点击 Quick Login；Forgot password 为 NEED_CONFIRMATION |
 | AIX 处理 | 校验输入格式；判断账号是否存在；判断账户状态；决定进入身份验证或展示错误 |
 | 外部依赖 | AIX Backend、Security Module、Device Biometric |
-| 下一步 | Identity Verification / Device Biometric Verification / Password Reset / Select Country |
+| 下一步 | Identity Verification / Device Biometric Verification / Select Country；Password Reset 为 NEED_CONFIRMATION |
 | 边界说明 | Security 认证细节不在本文维护 |
 
 #### Login Page 元素规则
 
 | 元素 | 类型 | 展示条件 | 交互规则 | 异常 / 备注 |
 |---|---|---|---|---|
-| Email / Phone 切换 | Tab | 默认展示，默认选中 Email | 用户可切换登录方式；切换时保留原填写内容 | 原始 PRD 已明确保留输入内容 |
+| Email / Phone 切换 | NEED_CONFIRMATION | converted-prd 中相关输入切换、邮箱输入框、手机号输入框为删除线 | 不作为当前已确认事实 | 需产品确认当前登录输入方式 |
 | Email 输入框 | TextInput | Email tab | 非空、邮箱格式校验；最长 254 字符 | `Email format is invalid`；`Email should not be empty` |
 | Country Code | Selector | Phone tab | 点击进入 Select Country Page | 中国和中国台湾选项后端隐藏 |
 | Phone 输入框 | TextInput | Phone tab | 仅允许输入数字；最长 20 位；手机号少于 6 位提示错误 | `Phone number must be at least 6 digits` |
 | Next | Button | 输入框不为空且格式校验通过后可用 | 点击后校验账号与账户状态，正常进入身份验证 | 账号不存在 / 未注册 / Banned 等展示错误 |
 | Quick Login | Button | App 本地检测到可用 Biometric 密钥 | 点击触发生物识别快捷登录 | 无本地 BIO 密钥不展示 |
-| Forgot password | Link / Button | Login Page 展示 | 点击进入 Password Reset Page | 详见 `password-reset.md` |
+| Forgot password | NEED_CONFIRMATION | 历史 PRD 7.3 为删除线，Login Page 是否保留入口需确认 | 不作为当前已确认跳转 | 详见 `password-reset.md` |
 
 #### Next 按钮处理逻辑
 
@@ -247,7 +250,7 @@ sequenceDiagram
 | 输入格式不合法 | Next 不可用或展示格式错误 | 按输入类型展示错误 | 原 PRD / 实现 |
 | Phone 少于 6 位 | 阻止继续 | `Phone number must be at least 6 digits` | 历史 Login 文档 |
 | 账号不存在或未注册 | 后端判断账号不存在 | `您输入的账号信息有误，请检查或注册新账号。` | 原 PRD |
-| 账号 Banned | 阻止登录 | `Account locked. Please contact customer support.` | 历史 Login 文档 |
+| 账号 Banned | 阻止登录 | `Account locked. Please contact customer support.` | registration-login / 7.2.4 Login Page |
 | 正常流程 | 账号存在且状态允许登录 | 自动跳转至身份验证流程页 | 原 PRD |
 | 身份验证失败 / 锁定 | Security 认证失败或达到锁定规则 | 按 Security / Biometric 规则处理 | 修复点：不在 Login 内重复定义 |
 
@@ -368,7 +371,7 @@ sequenceDiagram
 | email | Email 登录账号 | Login Page | 非空、格式校验；最长 254 字符 |
 | phone | Phone 登录账号 | Login Page | 仅允许输入数字；最长 20 位；Phone 少于 6 位提示错误 |
 | countryCode | Phone 登录国家 / 地区区号 | Select Country Page | 国家列表隐藏中国和中国台湾 |
-| accountStatus | 登录拦截 | Backend / Account | Banned / Closed / Locked 等不可登录 |
+| accountStatus | 登录拦截 | Backend / Account | Banned / Closed 不可登录；`Locked` 不作为 Account Status 沉淀 |
 | biometricLocalKey | 判断是否展示 Quick Login | App 本地 | 本地存在可用 BIO 密钥才展示 Quick Login |
 | bioEnabled | 判断是否展示 Enable BIO Page | Backend / Security | 已启用则跳过 Enable BIO Page |
 | manualLoginTime | 判断是否需要重新身份认证 | App / Backend | 手动登录后 5 分钟内免再次身份验证 |
@@ -378,7 +381,7 @@ sequenceDiagram
 
 | 场景 | 触发条件 | 用户提示 / 页面表现 | 系统动作 | 最终状态 |
 |---|---|---|---|---|
-| 输入为空 | Email / Phone 未输入 | Next 禁用 | 不发起登录 | 留在 Login Page |
+| 输入为空 | 账号输入为空 | Next 禁用 | 不发起登录 | 留在 Login Page |
 | Phone 少于 6 位 | Phone 长度不足 | `Phone number must be at least 6 digits` | 阻止继续 | 留在 Login Page |
 | 账号不存在或未注册 | 后端校验账号不存在 | `您输入的账号信息有误，请检查或注册新账号。` | 阻止进入身份验证 | 留在 Login Page |
 | 账号 Banned | 账户被限制登录 | `Account locked. Please contact customer support.` | 阻止登录 | 留在 Login Page |
@@ -393,14 +396,14 @@ sequenceDiagram
 
 | 范围 | AIX 责任 | 外部 / 其他模块责任 |
 |---|---|---|
-| Login 页面 | 展示 Email / Phone / Quick Login / Forgot password / Country Code 等入口 | 无 |
+| Login 页面 | Quick Login、Country Code 等有来源；Email / Phone 输入切换与 Forgot password 需确认 | 无 |
 | 输入校验 | 控制 Next 是否可用，展示基础输入错误 | 无 |
 | 账户校验 | 调用 Backend 判断账号是否存在、状态是否允许登录 | Backend 提供账户状态与校验结果 |
 | 身份认证 | 进入 Security 认证流程，承接认证结果 | Security 维护 OTP、Email OTP、Login Passcode、BIO 等规则；登录场景支持 OTP、EMAIL_OTP、Login Passcode、Biometric，Bio 登录场景可跳过后续认证 |
 | Device Biometric | 拉起系统生物识别，承接设备端结果 | OS / Device 控制 Face ID / Touch ID / 指纹 / 人脸识别 |
 | Quick Login | 根据本地 BIO 密钥展示入口；设备端通过后发起后端验证；后端验证失败时清除本地 BIO、关闭后端 BIO 开关并引导回登录方式；Android 超过设备限制时隐藏 Quick Login | Backend 处理 biometric 签名和身份认证 |
 | Enable BIO | 登录后展示引导，控制 5 分钟免重认证规则 | Security / Device 处理认证与生物识别权限 |
-| Password Reset | 从 Login 跳转到 Password Reset | Password Reset 文件维护具体规则 |
+| Password Reset | NEED_CONFIRMATION；不得从 Login 反推当前入口已启用 | password-reset.md 说明待确认原因 |
 
 ## 10. 不得推导的内容
 
@@ -419,20 +422,20 @@ sequenceDiagram
 | 问题 | 影响范围 | 当前处理 |
 |---|---|---|
 | Phone 少于 6 位错误提示是否为最终英文文案 | Login Page | 保留历史文档记录，后续以文案表 / UI 为准 |
-| 账号 Banned 提示文案是否覆盖 Closed / Locked 等其他状态 | Login / Account Status | 不合并推导，其他状态按 Account / Security 规则确认 |
+| 账号 Banned 提示文案是否覆盖 Closed | Login / Account Status | 不合并推导，Closed 文案需确认；`Locked` 不作为 Account Status 沉淀 |
 | 中国和中国台湾隐藏规则由前端还是后端最终实现 | Select Country Page | 当前记录为后端隐藏，不扩展实现细节 |
 | Android Fingerprint 旧描述中的“协议已全部勾选”是否应删除 | Biometric Login | 标记为疑似串入注册逻辑，不作为强事实扩展 |
 | Enable BIO 失败后的具体弹窗 / toast / retry 文案 | Enable BIO / Biometric | 按 Security / Biometric 规则处理，本文不重复定义 |
 
 ## 12. 来源引用
 
-- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.2 登录功能)
-- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.2.3 Navigation Page)
-- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.2.4 Login Page)
-- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.2.4.1 Select Country Page)
-- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.2.5 Biometric登录)
-- (Ref: archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx / 7.2.7 Enable BIO Page)
-- (Ref: archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx)
+- (Ref: archive/converted-prd/app/registration-login/README.md / 7.2 登录功能)
+- (Ref: archive/converted-prd/app/registration-login/README.md / 7.2.3 Navigation Page)
+- (Ref: archive/converted-prd/app/registration-login/README.md / 7.2.4 Login Page)
+- (Ref: archive/converted-prd/app/registration-login/README.md / 7.2.4.1 Select Country Page)
+- (Ref: archive/converted-prd/app/registration-login/README.md / 7.2.5 Biometric登录)
+- (Ref: archive/converted-prd/app/registration-login/README.md / 7.2.7 Enable BIO Page)
+- (Ref: archive/converted-prd/security/identity-verification/README.md)
 - (Ref: knowledge-base/security/global-rules.md)
 - (Ref: knowledge-base/security/biometric-verification.md)
 - (Ref: 用户确认 / 2026-05-03 / Login 文档需要 Mermaid 页面流程图和 sequenceDiagram 时序图；补回 SecurityError label、Enable BIO 到 Identity、失败按 Security / Biometric 规则处理)

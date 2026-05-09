@@ -82,10 +82,10 @@ owner: 吴忆锋
 
 | # | 状态 | knowledge-base 文件 | converted-prd 依据 | 备注 |
 |---:|---|---|---|---|
-| 1 | TODO | `knowledge-base/account/_index.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | 账户入口索引；需同时关注身份认证能力 |
-| 2 | TODO | `knowledge-base/account/registration.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | 注册；OTP/密码/Face/BIO 规则必须同步看 Security |
-| 3 | TODO | `knowledge-base/account/login.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | 登录；锁定/验证/登录态规则必须同步看 Security |
-| 4 | TODO | `knowledge-base/account/password-reset.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | 忘记密码；OTP/密码/Face Auth 规则必须同步看 Security |
+| 1 | NEED_CONFIRMATION | `knowledge-base/account/_index.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | Account 索引已更新；Login / Password Reset 因删除线或证据不完整同步标待确认 |
+| 2 | ALIGNED | `knowledge-base/account/registration.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | registration.md 已按 registration-login + security 证据校准；Locked 不作为账户状态沉淀 |
+| 3 | NEED_CONFIRMATION | `knowledge-base/account/login.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | login.md 已更新来源与风险说明；Email/Phone 输入范围、Forgot password 入口需确认 |
+| 4 | NEED_CONFIRMATION | `knowledge-base/account/password-reset.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | password-reset.md 已重写为待确认；7.3 忘记密码正文为删除线，不能作为 active runtime fact |
 | 5 | TODO | `knowledge-base/home/_index.md` | `archive/converted-prd/app/home/README.md` | 首页索引 |
 | 6 | TODO | `knowledge-base/home/app-home.md` | `archive/converted-prd/app/home/README.md` | 首页 |
 | 7 | TODO | `knowledge-base/common/faq.md` | `archive/converted-prd/app/faq/README.md` | FAQ |
@@ -120,13 +120,14 @@ owner: 吴忆锋
 | 指标 | 数量 |
 |---|---:|
 | 总任务 | 32 |
-| ALIGNED | 0 |
-| NEED_CONFIRMATION | 0 |
+| ALIGNED | 1 |
+| NEED_CONFIRMATION | 3 |
 | CONFLICT | 0 |
-| TODO | 31 |
+| TODO | 27 |
 | OUT_OF_SCOPE | 1 |
 
 ## Batch Notes
 
 - 2026-05-09：创建本审计任务表。下一步从 account 模块开始校准。
 - 2026-05-09：补充交叉证据规则。Account / Registration / Login / Password Reset 不能只看注册登录 PRD，必须同时核对 Security 身份认证 PRD；后续 Card / Wallet / Transaction / Notification 同理按主证据 + 支撑证据执行。
+- 2026-05-09：完成 account 第一批校准：registration 标 ALIGNED；account index / login / password-reset 标 NEED_CONFIRMATION，原因是 Login 输入方式和 Password Reset 入口在 converted-prd 中存在删除线或证据不完整。
