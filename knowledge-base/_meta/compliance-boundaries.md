@@ -1,50 +1,45 @@
 ---
 module: _meta
 feature: compliance-boundaries
-version: "1.1"
-status: source_gap
+version: "2.0"
+status: active
 source_doc: archive/converted-prd/**/README.md；knowledge-base/* 已校准模块
-source_section: Converted PRD corpus / statuses, fields, limits, regions, compliance boundaries
+source_section: converted PRD corpus / compliance boundaries
 last_updated: 2026-05-09
 owner: 吴忆锋
-readers: [product, dev, qa, business, ai]
+readers: [product, ui, dev, qa, business, ai]
 ---
 
 # Compliance Boundaries 合规边界
 
 ## 1. 文档定位
 
-本文档用于沉淀 AIX 涉及 KYC、AML、制裁、高风险地区、资金路径、交易报备、卡与钱包合规边界的全局规则。
+本文沉淀 AIX App runtime knowledge-base 中已确认的合规边界，用于防止 AI 或产品文档错误扩展能力。
 
-## 2. 合规边界分类
-
-| 分类 | 适用模块 | 示例 | 来源 | 状态 |
-|------|----------|------|------|------|
-| KYC Boundary | wallet / security / card | 开户、申卡、活体、证件验证 | 待补充 | draft |
-| AML / Risk Boundary | wallet / transaction | 风控拦截、资金 hold、交易报备 | 待补充 | draft |
-| Sanction Boundary | card / wallet | 高风险地区、制裁地区过滤 | 待补充 | draft |
-| Travel Rule Boundary | wallet | GTR、WalletConnect、地址充值 | 待补充 | draft |
-| Funds Traceability | wallet / card / transaction | 资金入账、冻结、退款、回退钱包 | 待补充 | draft |
-
-## 3. 记录模板
-
-| 边界名称 | 适用场景 | 规则内容 | 资金影响 | 系统动作 | 用户影响 | 来源 | 待确认 |
-|----------|----------|----------|----------|----------|----------|------|--------|
-| TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
-
-## Source alignment additions
+## 2. 已确认合规边界
 
 | 边界 | 结论 | 来源 |
 |---|---|---|
-| Wallet Withdraw | 因牌照等合规问题，提现不做，用户联系 CS 走人工处理；App 隐藏 Withdraw 入口 | wallet/asset；wallet/deposit-send-swap |
-| Wallet Waitlist | Waitlist 用户无法申请开通钱包；停留在 Waitlist Page | kyc/wallet-opening；home |
-| Notification compliance | 金融信息合规优先，营销类需用户明确同意；加密资产通知需提示风险，不承诺收益 | notification/push-inbox |
-| MoEngage subscribe sync | 源 PRD 中同步 MoEngage subscribe status 到 notification preference 为删除线，不沉淀为 confirmed fact | notification/push-inbox |
+| Wallet Withdraw | 因牌照等合规问题，提现不做，用户联系 CS 走人工处理；App 隐藏 Withdraw 入口 | wallet/assets.md；wallet/deposit.md |
+| Waitlist KYC | Waitlist 用户无法申请开通钱包；停留在 Waitlist Page | kyc/account-opening.md；home/app-home.md |
+| Rejected KYC | 因高风险被 DTC 拒绝的用户会被拦截开户且隐藏激活钱包入口 | kyc/account-opening.md；home/app-home.md |
+| Notification compliance | 金融信息合规优先，营销类需用户明确同意；加密资产通知需提示风险，不承诺收益 | common/notification.md |
+| Push preference | inactive / Closed / banned 停止全部消息推送 | common/notification.md |
+| MoEngage subscribe sync | 删除线内容，不作为 confirmed fact | common/notification.md |
 | Website / Marketing | 当前 runtime KB 不纳入 Website / Marketing PRD | knowledge-base/README；prd-source-alignment |
+| Password Reset | 注册登录 PRD 7.3 为删除线，不能作为 active runtime fact | account/password-reset.md |
+| Card Home click conflicts | Home PRD 与 Card Application PRD 对部分首页卡片点击跳转冲突，不自行裁决 | card/card-home.md |
 
-## 4. 维护规则
+## 3. 使用规则
 
-- 涉及资金路径必须可追溯。
-- 涉及交易失败必须说明资金状态。
-- 涉及 KYC / AML / 制裁必须明确支持范围与禁止范围。
-- 合规不确定时，不得推断，必须标记待确认。
+1. 若某能力被标为隐藏、删除线、待确认或 out of scope，不得回答为已上线事实。
+2. 合规边界优先级高于 FAQ 用户解释。
+3. Website / Marketing PRD 不进入 runtime KB，除非后续显式变更范围。
+
+## 4. Sources
+
+- (Ref: archive/converted-prd/wallet/asset/README.md)
+- (Ref: archive/converted-prd/wallet/deposit-send-swap/README.md)
+- (Ref: archive/converted-prd/kyc/wallet-opening/README.md)
+- (Ref: archive/converted-prd/notification/push-inbox/README.md)
+- (Ref: archive/converted-prd/app/registration-login/README.md)

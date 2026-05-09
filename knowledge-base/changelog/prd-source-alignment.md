@@ -144,7 +144,7 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 28 | ALIGNED | `knowledge-base/security/*.md` | `archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/card/manage/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | security/*.md 已补齐 BIO跳过认证、DeviceID、锁定矩阵、IVS有效期、验证码重发冷却、设备绑定、Quick Login BIO处理、API/密码规则等 |
 | 29 | ALIGNED | `knowledge-base/common/notification.md` | `archive/converted-prd/notification/push-inbox/README.md`；`archive/converted-prd/notification/system-email/README.md`；相关业务触发 PRD | common/notification.md 已重写为 Notification 公共能力文档，覆盖 Push、消息中心、通知设置、Webhook、System Email 边界 |
 | 30 | ALIGNED | `knowledge-base/common/errors.md` | 多份 converted-prd 中的错误码 / 文案 | common/errors.md 已重写为统一错误字典，覆盖已校准模块的错误文案、toast、popup、failed page 和异常边界 |
-| 31 | SOURCE_GAP | `knowledge-base/_meta/*.md` | 多份 converted-prd | _meta/*.md 已补关键状态/字段/限制/地区/合规/术语；全量字典仍需专项结构化 |
+| 31 | ALIGNED | `knowledge-base/_meta/*.md` | 多份 converted-prd | _meta/*.md 已重写为状态、字段、限制、地区、合规、错误码、术语字典，SOURCE_GAP 收口 |
 | 32 | OUT_OF_SCOPE | Website / Marketing facts | `archive/converted-prd/website/**/README.md` | 当前 runtime KB 明确排除 website |
 
 ## Progress
@@ -152,14 +152,16 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 指标 | 数量 |
 |---|---:|
 | 总任务 | 32 |
-| ALIGNED | 26 |
+| ALIGNED | 27 |
 | NEED_CONFIRMATION | 3 |
 | CONFLICT | 1 |
-| SOURCE_GAP | 1 |
+| SOURCE_GAP | 0 |
 | TODO | 0 |
 | OUT_OF_SCOPE | 1 |
 
 ## Batch Notes
+
+- 2026-05-09：收口 _meta SOURCE_GAP。7 个 _meta 文件重写为状态、字段、限制、地区、合规、错误码、术语字典，任务 31 改为 ALIGNED。SOURCE_GAP 归零；剩余 NEED_CONFIRMATION / CONFLICT 为源证据待确认项，不能强行裁决。
 
 - 2026-05-09：收口 common/notification SOURCE_GAP。common/notification.md 重写为 Notification 公共能力文档，覆盖 Push、消息中心、通知设置、Webhook、System Email 边界，任务 29 改为 ALIGNED。
 

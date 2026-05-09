@@ -1,56 +1,64 @@
 ---
 module: _meta
 feature: field-dictionary
-version: "1.1"
-status: source_gap
+version: "2.0"
+status: active
 source_doc: archive/converted-prd/**/README.md；knowledge-base/* 已校准模块
-source_section: Converted PRD corpus / statuses, fields, limits, regions, compliance boundaries
+source_section: converted PRD corpus / field dictionary
 last_updated: 2026-05-09
 owner: 吴忆锋
-readers: [product, dev, qa, ai]
+readers: [product, ui, dev, qa, business, ai]
 ---
 
 # Field Dictionary 字段字典
 
 ## 1. 文档定位
 
-本文档用于沉淀 AIX 全局字段定义、字段来源、读写关系、脱敏规则和前后端展示规则。
+本文记录跨模块常用字段的含义和来源，避免不同模块重复定义或误用。
 
-字段字典优先服务开发、测试、接口对接、数据校验和 AI PRD 复用。
+## 2. 用户 / 设备字段
 
-## 2. 字段分类
-
-| 分类 | 适用模块 | 示例 | 来源 | 状态 |
-|------|----------|------|------|------|
-| Account Fields | account | UID / email / mobile / deviceId | 待补充 | draft |
-| Security Fields | security | challengeId / token / expireTime | 待补充 | draft |
-| Wallet Fields | wallet | balance / currency / mainNet | 待补充 | draft |
-| Card Fields | card | cardStatus / cardNumber / cvc / expiryDate | 待补充 | draft |
-| Transaction Fields | transaction | txnId / referenceNo / amount / status | 待补充 | draft |
-| Growth Fields | growth | referralCode / bannerId / popupId | 待补充 | draft |
-
-## 3. 字段记录模板
-
-| 字段名 | 标准名称 | 类型 | 含义 | 读/写 | 脱敏规则 | 来源接口/页面 | 来源文档 | 备注 |
-|--------|----------|------|------|------|----------|--------------|----------|------|
-| TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
-
-## Source alignment additions
-
-| 字段 | 含义 / 用途 | 来源 |
+| 字段 | 含义 | 来源 |
 |---|---|---|
-| UID | 注册成功后服务端生成的用户 ID | registration-login |
-| DeviceID / deviceId | 唯一识别用户客户端设备，用于设备绑定、可信设备判断和风控 | security；registration-login |
-| AIX Tag | 用户标识 / 收款人相关字段，Send 场景需要后续完整沉淀 | wallet/deposit-send-swap |
-| cardId | 卡记录定位字段，卡状态变更 webhook 根据 cardId 定位卡记录 | notification/push-inbox；card/manage |
-| newCardStatus | 卡状态变更 webhook 的最新卡状态来源 | notification/push-inbox |
-| requestAmount / requestCurrency | Card Transaction Detail 中的法币交易金额和币种 | transaction-history |
-| dtcQuoteId | OTC Swap 一次性报价标识，用后失效 | wallet/deposit-send-swap |
-| title / body | Push 基础字段，保留用于老消息兼容和 push 展示 | notification/push-inbox |
+| UID | 注册成功后服务端生成的用户 ID | account/registration.md |
+| DeviceID / deviceId | 唯一识别用户客户端设备，用于设备绑定、可信设备判断和风控 | security/global-rules.md；account/registration.md |
+| Email | 注册 / 登录 / Email OTP 等场景使用；登录输入范围存在待确认 | account/registration.md；security/email-otp-verification.md |
+| Phone | OTP / Send recipient 等场景使用 | security/otp-verification.md；wallet/send.md |
+| AIX Tag / X-Tag | Send recipient 可使用的收款人标识之一 | wallet/send.md |
 
-## 4. 维护规则
+## 3. Card 字段
 
-- 字段必须标明来源接口或来源 PRD。
-- 同一字段不得重复定义多个含义。
-- 涉及敏感信息时，必须写脱敏规则。
-- 涉及资金金额时，必须写币种、精度、舍入规则。
+| 字段 | 含义 | 来源 |
+|---|---|---|
+| cardId | 卡记录定位字段；卡状态变更 webhook 根据 cardId 定位卡记录 | common/notification.md；card/manage/_index.md |
+| newCardStatus | 卡状态变更 webhook 的最新卡状态来源 | common/notification.md |
+| cardHolderName | Get Card Basic Info 返回，Card detail 使用 | card/manage/sensitive-info.md |
+| cardNumber / PAN | Get Card Sensitive Info 返回完整卡号 | card/manage/sensitive-info.md |
+| expiryDate | Get Card Sensitive Info 返回有效期 | card/manage/sensitive-info.md |
+| cvc | Get Card Sensitive Info 返回 CVC / CVV | card/manage/sensitive-info.md |
+| requestAmount / requestCurrency | Card Transaction Detail 中的法币交易金额和币种 | transaction/detail.md；card/transaction-detail.md |
+
+## 4. Wallet / Transaction 字段
+
+| 字段 | 含义 | 来源 |
+|---|---|---|
+| currency | 币种，如 USDC、USDT、WUSD、FDUSD | wallet/assets.md |
+| balance | 钱包余额 | wallet/assets.md |
+| dtcQuoteId | OTC Swap 一次性报价标识，用后失效 | wallet/swap.md |
+| txnId | Crypto transaction detail 查询单笔交易详情使用 | transaction/detail.md |
+| otc_id | Swap detail 查询 OTC 交易详情使用 | transaction/detail.md |
+| transactionId | Card Transaction Detail 查询交易详情使用 | card/transaction-detail.md |
+
+## 5. Notification 字段
+
+| 字段 | 含义 | 来源 |
+|---|---|---|
+| title | Push 基础字段，保留用于老消息兼容和 push 展示 | common/notification.md |
+| body | Push 基础字段，保留用于老消息兼容和 push 展示 | common/notification.md |
+| Key title | 消息标题优先展示字段 | common/notification.md |
+| category | Notification 分类，如 promotion / system / transaction | common/notification.md |
+| device-token | Push 依赖 App 上报 device-token 确认推送设备 | common/notification.md |
+
+## 6. Sources
+
+- (Ref: knowledge-base/* 已校准模块)

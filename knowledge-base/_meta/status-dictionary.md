@@ -1,79 +1,81 @@
 ---
 module: _meta
 feature: status-dictionary
-version: "1.1"
-status: source_gap
+version: "2.0"
+status: active
 source_doc: archive/converted-prd/**/README.md；knowledge-base/* 已校准模块
-source_section: Converted PRD corpus / statuses, fields, limits, regions, compliance boundaries
+source_section: converted PRD corpus / status dictionary
 last_updated: 2026-05-09
 owner: 吴忆锋
-readers: [product, dev, qa, business, ai]
+readers: [product, ui, dev, qa, business, ai]
 ---
 
 # Status Dictionary 状态字典
 
 ## 1. 文档定位
 
-本文档用于沉淀 AIX 全局状态定义、状态来源、状态映射、终态与迁移规则。
+本文沉淀跨模块状态、状态来源、展示边界和禁止混用规则。
 
-状态字典优先服务开发、测试、交易链路、卡链路、钱包链路和 AI PRD 复用。
-
-## 2. 状态分类
-
-| 分类 | 示例 | 适用模块 | 来源 | 状态 |
-|------|------|----------|------|------|
-| Account Status | Active / Locked / Banned / Closed | account | AIX Card 注册登录需求V1.0 | seeded |
-| IVS Status | INITIAL / VALIDATING / DONE / EXPIRED | security | AIX Security 身份认证需求V1.0 | seeded |
-| KYC Status | 待补充 | wallet / security | 待补充 | draft |
-| Card Status | 待补充 | card | 待补充 | draft |
-| Card Transaction Status | 待补充 | transaction | 待补充 | draft |
-| Crypto Transaction State | 待补充 | wallet / transaction | 待补充 | draft |
-| OTC Status | 待补充 | wallet / transaction | 待补充 | draft |
-
-## 3. Account Status
-
-| 状态值 | 标准名称 | 含义 | 是否终态 | 可迁移到 | 来源 | 备注 |
-|--------|----------|------|----------|----------|------|------|
-| Active | Active | 账户正常使用中 | 否 | Locked / Banned / Closed | AIX Card 注册登录需求V1.0 / 5.2 账户说明 | 注册成功后进入 |
-| Locked | Locked | 因安全原因临时锁定 | 否 | Active | AIX Card 注册登录需求V1.0 / 5.2 账户说明 | 锁定到期或忘记密码重置后解除 |
-| Banned | Banned | 账户被限制使用，可恢复 | 否 | Active（需客服 / 风控处理） | AIX Card 注册登录需求V1.0 / 5.2 账户说明 | 一期不支持 |
-| Closed | Closed | 账户被注销，不可恢复 | 是 | 无 | AIX Card 注册登录需求V1.0 / 5.2 账户说明 | 一期不支持 |
-
-## 4. IVS Status
-
-| 状态值 | 标准名称 | 含义 | 是否终态 | 可迁移到 | 来源 | 备注 |
-|--------|----------|------|----------|----------|------|------|
-| INITIAL | INITIAL | 发起挑战初始化，create challenge | 否 | VALIDATING / EXPIRED | AIX Security 身份认证需求V1.0 / 7.5 身份认证状态机 | 非终态 |
-| VALIDATING | VALIDATING | 验证中 | 否 | DONE / EXPIRED | AIX Security 身份认证需求V1.0 / 7.5 身份认证状态机 | 非终态 |
-| DONE | DONE | 验证成功完成 | 是 | 无 | AIX Security 身份认证需求V1.0 / 7.5 身份认证状态机 | 终态 |
-| EXPIRED | EXPIRED | 已过期，流程终止 | 是 | 无 | AIX Security 身份认证需求V1.0 / 7.5 身份认证状态机 | 终态 |
-
-## 5. 待补充状态
-
-| 分类 | 适用模块 | 待补充内容 | 优先级 |
-|------|----------|------------|--------|
-| KYC Status | wallet / security | KYC 审核、证件、活体、POA 状态 | P0 |
-| Card Status | card | 卡申请、实体卡、虚拟卡、冻结、激活、注销状态 | P0 |
-| Transaction Status | transaction | 卡交易、钱包交易、退款、失败、风控拦截状态 | P0 |
-| Crypto Transaction State | wallet / transaction | GTR、WalletConnect、链上充值、提现状态 | P0 |
-| OTC Status | wallet / transaction | 法币交易、兑换相关状态 | P1 |
-
-## 6. 维护规则
-
-- 状态必须标明来源。
-- 渠道原始状态、后端状态、前端展示状态需分开记录。
-- 资金和交易相关状态必须能闭环。
-- 无法闭环时必须标记“冲突 / 待确认”。
-
-## Source alignment additions
+## 2. Account / Security 状态
 
 | 状态域 | 状态 | 说明 | 来源 |
 |---|---|---|---|
-| Account | Active / Banned / Closed | converted-prd 中 Locked 为删除线，不作为 Account Status 沉淀 | registration-login |
-| Security Lock | Locked | OTP / Email OTP / Login Passcode / Face Auth 的场景锁定，不等同 Account Status | security |
-| KYC | Pending / Under Review / Failed / Rejected / Approved | Home 钱包面板和 KYC 状态机使用 | kyc/wallet-opening；home |
-| Card Application / Card | Processing / Pending activation / Active / Frozen 等 | 首页和卡管理使用；部分点击跳转存在 CONFLICT | home；card/application；card/manage |
-| Transaction | Pending / Success / Refunded / Declined / Under Review / Cancelled | 全量交易和详情页展示状态 | transaction-history |
-| Wallet transaction | DEPOSIT / TRANSFER_IN / TRANSFER_OUT / CARD_FEE_DEBIT / CARD_FEE_REFUND | crypto 交易展示范围 | transaction-history |
-| Card transaction | PURCHASE / CASH_WITHDRAWAL / REFUND / INCREMENTAL_AUTH / REVERSAL | 卡交易展示范围；REVERSAL 按 REFUND 展示 | transaction-history；card/transaction |
-| Notification user status | active / inactive / Closed / banned | active 可发；inactive/Closed/banned 停止全部消息推送 | notification/push-inbox |
+| Account | Active | 注册成功后账户状态 | account/registration.md |
+| Account | Banned | 账户不可登录 | account/_index.md；account/login.md |
+| Account | Closed | 账户不可登录 | account/_index.md |
+| Account | Locked | 不作为 Account Status 沉淀；源 PRD 中为删除线 | account/_index.md |
+| Security Lock | Locked | OTP / Email OTP / Login Passcode / Face Auth 的场景锁定 | security/global-rules.md |
+
+## 3. KYC 状态
+
+| 状态 | 说明 | Home 映射 | 来源 |
+|---|---|---|---|
+| Pending / 无开户记录 | 未完成开户 | 显示未申请开通钱包面板 | kyc/account-opening.md；home/app-home.md |
+| Under Review | 审核中 | 显示审核中面板，3 Steps Finished | kyc/account-opening.md；home/app-home.md |
+| Failed | 审核失败 | 显示审核失败面板，可 Reactivate Now | kyc/account-opening.md；home/app-home.md |
+| Rejected | 审核拒绝 | 隐藏激活钱包入口 | kyc/account-opening.md；home/app-home.md |
+| Approved | 审核通过 | 展示资产面板 | kyc/account-opening.md；home/app-home.md |
+
+## 4. Card 状态
+
+| 状态 | 说明 | 来源 |
+|---|---|---|
+| Processing | 审核中 / 在途 | card/application.md；card/card-home.md |
+| Pending activation | 待激活 | card/application.md；card/manage/activation.md |
+| Active | 已激活 | card/manage/_index.md |
+| Frozen / Suspended | 冻结 / 锁定类卡状态 | card/manage/status-and-operations.md |
+| Terminated / Cancelled | 申卡失败 / 取消等场景可能用于 MGM 减免费解冻 | card/application.md |
+
+注意：Home PRD 与 Card Application PRD 对 Processing、Pending activation、Active 未设置 PIN、Frozen 的首页点击跳转存在冲突，状态解释不得直接推出唯一跳转。
+
+## 5. Transaction 状态
+
+| 状态 | 说明 | 来源 |
+|---|---|---|
+| Pending | 待处理 | transaction/status-model.md |
+| Success | 成功 | transaction/status-model.md |
+| Refunded | 已退款 | transaction/status-model.md |
+| Declined | 被拒绝 / 失败类展示 | transaction/status-model.md |
+| Under Review | 风控审核 / Risk Withheld 等场景可引用，但不得等同 Wallet REJECTED | transaction/status-model.md |
+| Cancelled | 已取消 | transaction/status-model.md |
+
+## 6. Transaction 原始类型
+
+| 来源 | 原始类型 | AIX 处理 | 来源文件 |
+|---|---|---|---|
+| Crypto | DEPOSIT、TRANSFER_IN、TRANSFER_OUT、CARD_FEE_DEBIT、CARD_FEE_REFUND | 可进入全量交易展示 | transaction/status-model.md |
+| Card | PURCHASE、CASH_WITHDRAWAL、REFUND、INCREMENTAL_AUTH | 可进入全量交易 / Card History 展示 | transaction/status-model.md |
+| Card | REVERSAL / type=19 | 作为退款展示，前端与 REFUND 一样显示 refund-商户名称 | transaction/status-model.md |
+| OTC | 兑换记录 | 展示为 Swap；Swap 列表不显示交易状态 | transaction/status-model.md |
+
+## 7. Notification 状态
+
+| 状态域 | 状态 | 说明 | 来源 |
+|---|---|---|---|
+| User status | active | 满足其他条件时可推送 | common/notification.md |
+| User status | inactive / Closed / banned | 停止全部消息推送 | common/notification.md |
+| Message read | read / unread | 未读显示红点，已读不显示 | common/notification.md |
+
+## 8. Sources
+
+- (Ref: knowledge-base/* 已校准模块)
