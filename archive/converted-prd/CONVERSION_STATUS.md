@@ -39,7 +39,7 @@
 | 13 | DONE | `archive/historical-prd/notification/[2025-11-25] AIX+Notification（push及站内信）.docx` | `archive/converted-prd/notification/push-inbox/` | 已完成；图片引用 159，图片文件 83，缺失 0；HTML 表格 25 |
 | 14 | DONE | `archive/historical-prd/notification/[2026-03-12]AIX+系统邮件.docx` | `archive/converted-prd/notification/system-email/` | 已完成；图片引用 2，图片文件 2，缺失 0；HTML 表格 0 |
 | 15 | DONE | `archive/historical-prd/oboss/[AIX]OBOSS MVP.docx` | `archive/converted-prd/oboss/mvp/` | 已完成；图片引用 33，图片文件 33，缺失 0；HTML 表格 17 |
-| 16 | BLOCKED | `archive/historical-prd/oboss/[2026-04-14]AIX-Oboss能力.docx` | `archive/converted-prd/oboss/capabilities/` | 失败：Error: apply 413: {"error":"request entity too large"}
+| 16 | DONE | `archive/historical-prd/oboss/[2026-04-14]AIX-Oboss能力.docx` | `archive/converted-prd/oboss/capabilities/` | 已完成；图片引用 55，图片文件 50，缺失 0；HTML 表格 9；3 张超大图片已转 JPEG 压缩版 |
     at apply (file:///tmp/convert_one_prd.mjs:11:276)
     at process.processTicksAndRejections (node:inte |
 | 17 | DONE | `archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx` | `archive/converted-prd/security/identity-verification/` | 已完成；图片引用 19，图片文件 19，缺失 0；HTML 表格 38 |
@@ -65,6 +65,6 @@
 | 指标 | 数量 |
 |---|---:|
 | 历史 docx 总数 | 23 |
-| 已完成 | 20 |
+| 已完成 | 21 |
 | 待转换 | 2 |
-| 受阻 | 1 |
+| 受阻 | 0 |
