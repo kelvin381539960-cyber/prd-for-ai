@@ -135,9 +135,9 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 19 | ALIGNED | `knowledge-base/card/manage/status-and-operations.md` | `archive/converted-prd/card/manage/README.md` | status-and-operations.md 已补齐 Freeze/Unfreeze、网络/服务端错误、Lock/Unlock 文案和接口路径 |
 | 20 | ALIGNED | `knowledge-base/card/transaction.md` | `archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/app/transaction-history/README.md` | card/transaction.md 已补齐 DTC 通知、资金回退、REVERSAL type=19、展示范围、异常文案 |
 | 21 | ALIGNED | `knowledge-base/card/transaction-detail.md` | `archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/app/transaction-history/README.md` | card/transaction-detail.md 已补齐 Card History/Details、去搜索、状态说明、Exchange rate、可选字段隐藏和 DTC 未知错误处理 |
-| 22 | TODO | `knowledge-base/wallet/_index.md` | `archive/converted-prd/wallet/asset/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/security/identity-verification/README.md` | 钱包索引 |
-| 23 | TODO | `knowledge-base/wallet/assets.md` | `archive/converted-prd/wallet/asset/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md` | 钱包资产 |
-| 24 | TODO | `knowledge-base/wallet/deposit.md` | `archive/converted-prd/wallet/deposit-send-swap/README.md`；`archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/transaction-history/README.md` | 充值 / 转账 / 兑换；需核对身份验证与交易记录 |
+| 22 | ALIGNED | `knowledge-base/wallet/_index.md` | `archive/converted-prd/wallet/asset/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/security/identity-verification/README.md` | wallet/_index.md 已更新 Wallet Asset + Deposit/Send/Swap + KYC/Security/Transaction 证据边界，并登记 Send/Swap 缺口 |
+| 23 | ALIGNED | `knowledge-base/wallet/assets.md` | `archive/converted-prd/wallet/asset/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md` | assets.md 已补齐稳定币范围、Total Asset、汇率异常、排序、隐藏余额、Recent transaction、Withdraw隐藏 |
+| 24 | SOURCE_GAP | `knowledge-base/wallet/deposit.md` | `archive/converted-prd/wallet/deposit-send-swap/README.md`；`archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/transaction-history/README.md` | deposit.md 已补齐 Deposit/GTR/WalletConnect 关键规则；Send/Swap 完整流程尚未沉淀，需后续拆分或补齐 |
 | 25 | TODO | `knowledge-base/kyc/_index.md` | `archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/home/README.md` | KYC 索引 |
 | 26 | TODO | `knowledge-base/kyc/account-opening.md` | `archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/home/README.md`；`archive/converted-prd/card/application/README.md` | 钱包开户 / KYC；卡申请前置也要核对 |
 | 27 | TODO | `knowledge-base/security/_index.md` | `archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/app/registration-login/README.md` | Security 索引 |
@@ -152,14 +152,16 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 指标 | 数量 |
 |---|---:|
 | 总任务 | 32 |
-| ALIGNED | 16 |
+| ALIGNED | 18 |
 | NEED_CONFIRMATION | 3 |
 | CONFLICT | 1 |
-| SOURCE_GAP | 1 |
-| TODO | 10 |
+| SOURCE_GAP | 2 |
+| TODO | 7 |
 | OUT_OF_SCOPE | 1 |
 
 ## Batch Notes
+
+- 2026-05-09：完成 Wallet 批次。wallet index / assets 标 ALIGNED；deposit 标 SOURCE_GAP，原因是 Deposit 已补齐但源 PRD 中 Send / Swap 完整流程尚未沉淀为独立 KB。
 
 - 2026-05-09：完成 Card Transaction 批次。card/transaction 和 card/transaction-detail 标 ALIGNED；补齐 DTC 通知、REVERSAL type=19、卡交易展示范围、去搜索、Exchange rate、DTC未知错误处理等规则。
 

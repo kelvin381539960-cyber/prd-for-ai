@@ -1,11 +1,11 @@
 ---
 module: wallet
 feature: wallet-index
-version: "4.0"
+version: "1.1"
 status: active
-source_doc: knowledge-base/wallet/assets.md；knowledge-base/wallet/deposit.md；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/reconciliation.md；knowledge-base/kyc/account-opening.md；knowledge-base/changelog/knowledge-gaps.md；knowledge-base/_system-boundary.md
-source_section: Wallet runtime structure；Assets；Deposit；Transaction boundary；KYC boundary；ALL-GAP
-last_updated: 2026-05-05
+source_doc: archive/converted-prd/wallet/asset/README.md；archive/converted-prd/wallet/deposit-send-swap/README.md；archive/converted-prd/kyc/wallet-opening/README.md；archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/app/transaction-history/README.md
+source_section: Wallet Asset；Wallet Deposit/Send/Swap；KYC wallet opening；Security；Transaction History
+last_updated: 2026-05-09
 owner: 吴忆锋
 depends_on:
   - wallet/assets
@@ -19,6 +19,9 @@ depends_on:
 ---
 
 # Wallet 模块索引
+
+> Source alignment note: Wallet 已按 converted-prd 做双向覆盖校验。本批将 wallet/assets 标 ALIGNED；wallet/deposit 因源文档同时包含 Deposit / Send / Swap，而现有 KB 尚未完整沉淀 Send / Swap，标 SOURCE_GAP。
+
 
 > 本文件是模块索引，不是功能 PRD；PRD 模板检查仅做弱校验，重点检查模块边界、读取规则和依赖关系。
 
@@ -175,6 +178,22 @@ flowchart TD
 10. 不得把 Risk Withheld 写死为 Wallet `REJECTED` / `PENDING` / `PROCESSING`。
 
 ---
+
+## Source alignment additions
+
+| 文件 | 状态 | 说明 |
+|---|---|---|
+| wallet/_index.md | ALIGNED | 已登记 Wallet Asset、Deposit/Send/Swap、KYC、Security、Transaction 的证据边界 |
+| wallet/assets.md | ALIGNED | My Assets 资产、稳定币、Total Asset、Recent transaction、隐藏提现入口等已覆盖 |
+| wallet/deposit.md | SOURCE_GAP | Deposit 已覆盖较多，但 Send / Swap 仅部分出现，需后续拆分或补齐 `wallet/send.md`、`wallet/swap.md` |
+
+## Wallet source gap register
+
+| 缺口 | 来源 | 处理 |
+|---|---|---|
+| Send Crypto 完整流程 | wallet/deposit-send-swap / 6.1 | 当前 deposit.md 未完整沉淀，登记 SOURCE_GAP |
+| Swap Crypto 完整流程 | wallet/deposit-send-swap / 6.2 | 当前 deposit.md 未完整沉淀，登记 SOURCE_GAP |
+| WalletConnect QR 过期 / Quick Deposit Check 细节 | wallet/deposit-send-swap / 6.4 | 补入 deposit.md source alignment additions |
 
 ## 10. 来源引用
 

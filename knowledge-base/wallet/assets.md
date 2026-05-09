@@ -1,12 +1,12 @@
 ---
 module: wallet
 feature: assets
-version: "3.1"
+version: "1.1"
 status: active
 doc_type: ai-readable-prd-translation
-source_doc: archive/historical-prd/wallet/AIX Wallet V1.0【Asset】.docx；external-docs/dtc/DTC Wallet OpenAPI Document20260126 (1).docx；knowledge-base/wallet/deposit.md；knowledge-base/transaction/history.md；knowledge-base/transaction/status-model.md；knowledge-base/changelog/knowledge-gaps.md
-source_section: AIX Wallet V1.0【Asset】 / 4.1 钱包首页 My Assets；DTC Wallet OpenAPI / Wallet balance；OTC rate；Crypto transaction search；OTC search；ALL-GAP
-last_updated: 2026-05-05
+source_doc: archive/converted-prd/wallet/asset/README.md；archive/converted-prd/wallet/deposit-send-swap/README.md；archive/converted-prd/kyc/wallet-opening/README.md；archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/app/transaction-history/README.md
+source_section: Wallet Asset / 4.1 钱包首页 My Assets；Transaction History / 全量交易
+last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
 depends_on:
@@ -18,6 +18,9 @@ depends_on:
 ---
 
 # Wallet Assets 钱包资产首页
+
+> Source alignment note: 本文件已按 Wallet Asset converted-prd 做双向覆盖校验，补齐 Total Asset、稳定币排序、Recent transaction 聚合和 Withdraw 隐藏规则。
+
 
 > 本文件是对历史 PRD `AIX Wallet V1.0【Asset】` 的 AI-readable PRD translation，并按标准 PRD 模板章节组织。  
 > 本文件不是新迭代 PRD，不新增原始 PRD 未确认事实。  
@@ -509,6 +512,21 @@ My Assets 页面是资产展示页。原始 Asset PRD 未定义 My Assets 页面
 | View all | 有最近交易 | 点击 View all | 跳转 Transactions | 进入全量交易记录页面 | 是 |
 
 ---
+
+## Source alignment additions
+
+| 规则 | 结论 | 来源 |
+|---|---|---|
+| 稳定币范围 | 当前钱包仅做稳定币业务：FDUSD、USDC、USDT、WUSD | Wallet Asset / 全局说明 |
+| Total Asset | USDT余额*Rate1 + USDC余额*Rate2 + WUSD余额*Rate3 + FDUSD余额*Rate4；各稳定币四舍五入保留 2 位后再相加 | Wallet Asset / 4.1 |
+| 汇率异常 | 任一汇率获取异常，提示 Network abnormality. Please try again later. | Wallet Asset / 4.1 |
+| 稳定币排序 | 按 USDC、USDT、WUSD、FDUSD 固定排序，暂不按余额降序；后端可配置展示币种 | Wallet Asset / 4.1 |
+| 隐藏余额 | 眼睛控制总资产和稳定币余额显示/隐藏；隐藏时显示 **** | Wallet Asset / 4.1 |
+| Recent transaction | 聚合加密币交易和兑换交易；调用 crypto-txn/search 与 otc/search，并按交易类型过滤 | Wallet Asset / 4.1 |
+| Recent 空态 | 条数为 0 时显示 No transaction data | Wallet Asset / 4.1 |
+| View all | 点击 View all 跳转全量交易记录 Transactions | Wallet Asset / 4.1 |
+| Recent 类型 | Crypto Deposit、Receive、Send、Swap | Wallet Asset / 4.1 |
+| Withdraw | 因合规问题用户无法正常操作 Withdraw，只能按退款走人工处理，先隐藏 Withdraw 入口 | Wallet Asset / 4.1 |
 
 ## 10. 来源引用
 

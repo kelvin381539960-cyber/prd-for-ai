@@ -1,12 +1,12 @@
 ---
 module: wallet
 feature: deposit
-version: "2.0"
-status: active
+version: "1.1"
+status: source_gap
 doc_type: ai-readable-prd-translation
-source_doc: archive/historical-prd/wallet/AIX Wallet V1.0【Deposit & Send & Swap 】.docx；external-docs/dtc/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx；external-docs/dtc/DTC Wallet OpenAPI Document20260126 (1).docx；archive/historical-prd/notification/[2025-11-25] AIX+Notification（push及站内信）.docx；knowledge-base/changelog/knowledge-gaps.md
-source_section: AIX Wallet V1.0 / 3.1 交易说明；3.2 接口范围；6.3 钱包地址充值 Deposit（GTR's Wallet）；6.4 钱包链接充值 Deposit（WalletConnect）；7.4 钱包充值 Wallet Connect；Documentation dtc-nodejs-wallet-connect / 1 Request Wallet Connect Token；3 Server-Emitted Events；4 Client-Emitted Events；5 sequence diagram；ALL-GAP 总表
-last_updated: 2026-05-05
+source_doc: archive/converted-prd/wallet/asset/README.md；archive/converted-prd/wallet/deposit-send-swap/README.md；archive/converted-prd/kyc/wallet-opening/README.md；archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/app/transaction-history/README.md
+source_section: Wallet Deposit/Send/Swap / 6.1 Send；6.2 Swap；6.3 GTR Deposit；6.4 WalletConnect Deposit；Security / Face Auth；Transaction History
+last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
 depends_on:
@@ -21,6 +21,9 @@ depends_on:
 ---
 
 # Wallet Deposit 钱包充值
+
+> Source alignment note: 本文件已按 Wallet Deposit/Send/Swap converted-prd 做双向覆盖校验。Deposit 规则已补齐关键缺口；但源 PRD 中的 Send Crypto 与 Swap Crypto 尚未完整沉淀到独立 KB，本文状态暂标 SOURCE_GAP。
+
 
 > 本文件是对历史 PRD / DTC 文档中 Wallet Deposit 相关内容的 AI-readable 结构化转译稿。  
 > 原始事实以附件 PRD、DTC 文档、Notification 文档为准；本文只调整结构，不新增原文档不存在的业务事实。  
@@ -465,6 +468,37 @@ flowchart LR
 | GAP 处理检查 | ALL-GAP 可查 | 核对未确认项 | 未确认项不写成事实 | 正确引用 ALL-GAP | 是 |
 
 ---
+
+## Source alignment additions
+
+### A. Deposit rules added from converted-prd
+
+| 规则 | 结论 | 来源 |
+|---|---|---|
+| Withdraw | 提现不做，因牌照等合规问题，引导联系 CS 走人工处理 | Wallet DSS / 全局说明 |
+| GTR Deposit | 用户通过生成专属钱包接收地址，接收来自他人的稳定币转账；GTR Wallet 自动交易报备，不需要交易声明和地址白名单校验 | Wallet DSS / 6.3 |
+| GTR 当前钱包 | 当前支持 GTR 的只有 Binance，DTC 后续更新列表 | Wallet DSS / 6.3 |
+| Select Asset to deposit | 调用 GET /openapi/v1/wallet/balances，筛选 USDT、USDC、WUSD、FDUSD；固定排序 USDC、USDT、WUSD、FDUSD | Wallet DSS / 6.3 |
+| GTR 网络 | USDC: BASE/BSC/ETHEREUM/SOLANA；USDT: BSC/ETHEREUM/SOLANA；WUSD: ETHEREUM；FDUSD: BSC/ETHEREUM/SOLANA | Wallet DSS / 6.3 |
+| Receive Crypto | 生成地址 QR，显示币种图标和 Network；复制地址提示 The information has been copied. | Wallet DSS / 6.3 |
+| Minimum deposit popup | 源 PRD 中 Minimum deposit required 弹窗为删除线，不沉淀为 confirmed fact | Wallet DSS / 6.3 |
+| WalletConnect deeplink | 系统生成 WalletConnect deeplink 后，有效期 5 分钟 | Wallet DSS / 6.4 |
+| WalletConnect 授权 | 用户完成 WalletConnect 授权后，授权有效期为 1 天 | Wallet DSS / 6.4 |
+| 默认网络 | 未选择网络或切换其他币种时，默认 BSC BNB Smart Chain (BEP-20)，若无对应 BSC 网络则默认 ETH | Wallet DSS / 6.4 |
+| QR 过期 | 二维码过期后置灰，分享按钮不可点击，提示 The QR code has expired / If you have not completed the deposit, please resubmit.，点击 Come back Wallet 返回钱包首页 | Wallet DSS / 6.4 |
+| Quick Deposit Check | WalletConnect Deposit 页面包含 Right Coin 和 Got Gas 提示；私有钱包必须有网络原生币支付 gas | Wallet DSS / 6.4 |
+
+### B. Source gaps for Send / Swap
+
+| 缺口 | 源文档规则 | 当前处理 |
+|---|---|---|
+| Send Crypto | 支持手机号、Email、Tag 等收款人，选择 USDC/USDT/WUSD/FDUSD，余额不足提示 Insufficient balance，Send Now 触发刷脸 Token 校验，结果页有 Send successful / processing / failure | SOURCE_GAP，需后续补 `wallet/send.md` 或扩展本文件 |
+| Swap Crypto | 支持稳定币间兑换，Sell/Buy 币种互斥，Rate 由 get-otc-rate 获取，Swap Order Confirm 校验报价有效期和余额，结果页有 Swap completed / processing / failed | SOURCE_GAP，需后续补 `wallet/swap.md` 或扩展本文件 |
+| OTC Quote | dtcQuoteId 是一次性报价标识符，使用后失效，需重新调用 get-otc-rate 获取 | SOURCE_GAP，需落入 Swap 文档 |
+
+### C. Runtime usage rule
+
+在 Send / Swap 专项文档补齐前，AI 回答转账或兑换细节时必须回查 `archive/converted-prd/wallet/deposit-send-swap/README.md`，不得只依赖本文件。
 
 ## 10. 来源引用
 
