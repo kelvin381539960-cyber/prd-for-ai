@@ -25,13 +25,13 @@
 | 序号 | 状态 | 源文件 | 目标目录 | 备注 |
 |---:|---|---|---|---|
 | 1 | DONE | `archive/historical-prd/card/AIX Card 注册登录需求V1.0 (2).docx` | `archive/converted-prd/app/registration-login/` | 已完成；43 个图片引用，41 个唯一图片文件，0 缺失；表格保留为 HTML table |
-| 2 | TODO | `archive/historical-prd/app/AIX APP V1.0【Home】.docx` | `archive/converted-prd/app/home/` |  |
+| 2 | DONE | `archive/historical-prd/app/AIX APP V1.0【Home】.docx` | `archive/converted-prd/app/home/` | 已完成；图片引用 47，图片文件 47，缺失 0；HTML 表格 8 |
 | 3 | TODO | `archive/historical-prd/app/AIX APP V1.0 【FAQ】.docx` | `archive/converted-prd/app/faq/` |  |
 | 4 | TODO | `archive/historical-prd/app/AIX APP V1.0【Transaction & History】 (1).docx` | `archive/converted-prd/app/transaction-history/` |  |
 | 5 | TODO | `archive/historical-prd/card/AIX Card V1.0【Application】.docx` | `archive/converted-prd/card/application/` |  |
 | 6 | TODO | `archive/historical-prd/card/AIX Card ME模块需求V1.0 (1).docx` | `archive/converted-prd/card/me/` |  |
 | 7 | TODO | `archive/historical-prd/card/AIX Card 【manage】模块需求V1.0 .docx` | `archive/converted-prd/card/manage/` |  |
-| 8 | DONE | `archive/historical-prd/card/AIX Card交易【transaction】.docx` | `archive/converted-prd/card/transaction/` | 已完成；图片引用 2，图片文件 2，缺失 2；HTML 表格 5 |
+| 8 | DONE | `archive/historical-prd/card/AIX Card交易【transaction】.docx` | `archive/converted-prd/card/transaction/` | 已完成；图片引用 2，图片文件 2，缺失 0；HTML 表格 5 |
 | 9 | TODO | `archive/historical-prd/common/[2025-11-27] AIX+PopUp+banner等能力接入【首页+MGM页面】.docx` | `archive/converted-prd/common/popup-banner/` |  |
 | 10 | TODO | `archive/historical-prd/common/[2026-03-09]AIX+多语言翻译逻辑.docx` | `archive/converted-prd/common/i18n/` |  |
 | 11 | TODO | `archive/historical-prd/kyc/AIX WALLET 钱包开户KYC需求V1.0 (1).docx` | `archive/converted-prd/kyc/wallet-opening/` |  |
@@ -59,6 +59,6 @@
 | 指标 | 数量 |
 |---|---:|
 | 历史 docx 总数 | 23 |
-| 已完成 | 2 |
-| 待转换 | 21 |
+| 已完成 | 3 |
+| 待转换 | 20 |
 | 受阻 | 0 |
