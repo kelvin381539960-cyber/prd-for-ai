@@ -1,7 +1,7 @@
 ---
 module: changelog
 feature: prd-page-visual-coverage
-version: "1.1"
+version: "1.2"
 status: active
 source_doc: archive/converted-prd/**/README.md
 source_section: image references and page-like units
@@ -21,7 +21,7 @@ owner: 吴忆锋
 |---|---:|
 | converted-prd 图片引用总数 | 869 |
 | 初步识别为页面 / 页面组视觉 | 579 |
-| 已绑定到 KB Page Visuals 的页面图 | 315 |
+| 已实际嵌入 KB Page Visuals 的图片 | 249 |
 | 流程图 / 接口图 / 数据字典等支撑图 | 290 |
 
 ## 3. 已绑定目标文件
@@ -166,14 +166,14 @@ owner: 吴忆锋
 | 108 | account | `archive/converted-prd/app/registration-login/assets/media/image31.png` | Select Country Page | knowledge-base/account/login.md | PAGE_VISUAL | BOUND_TO_KB |
 | 109 | account | `archive/converted-prd/app/registration-login/assets/media/image32.png` | 7. 需求描述 | knowledge-base/account/login.md | PAGE_VISUAL | BOUND_TO_KB |
 | 110 | account | `archive/converted-prd/app/registration-login/assets/media/image33.jpeg` | 7. 需求描述 | knowledge-base/account/login.md | PAGE_VISUAL | BOUND_TO_KB |
-| 111 | account | `archive/converted-prd/app/registration-login/assets/media/image34.jpeg` | 7. 需求描述 | knowledge-base/account/login.md | PAGE_VISUAL | BOUND_TO_KB |
-| 112 | account | `archive/converted-prd/app/registration-login/assets/media/image35.png` | 7. 需求描述 | knowledge-base/account/login.md | PAGE_VISUAL | BOUND_TO_KB |
-| 113 | account | `archive/converted-prd/app/registration-login/assets/media/image36.jpeg` | 7. 需求描述 | knowledge-base/account/login.md | PAGE_VISUAL | BOUND_TO_KB |
-| 114 | account | `archive/converted-prd/app/registration-login/assets/media/image37.jpeg` | 7. 需求描述 | knowledge-base/account/login.md | PAGE_VISUAL | BOUND_TO_KB |
-| 115 | account | `archive/converted-prd/app/registration-login/assets/media/image38.png` | 7. 需求描述 | knowledge-base/account/login.md | PAGE_VISUAL | BOUND_TO_KB |
-| 116 | account | `archive/converted-prd/app/registration-login/assets/media/image39.png` | 7. 需求描述 | knowledge-base/account/login.md | PAGE_VISUAL | BOUND_TO_KB |
+| 111 | account | `archive/converted-prd/app/registration-login/assets/media/image34.jpeg` | 7. 需求描述 | knowledge-base/account/login.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 112 | account | `archive/converted-prd/app/registration-login/assets/media/image35.png` | 7. 需求描述 | knowledge-base/account/login.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 113 | account | `archive/converted-prd/app/registration-login/assets/media/image36.jpeg` | 7. 需求描述 | knowledge-base/account/login.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 114 | account | `archive/converted-prd/app/registration-login/assets/media/image37.jpeg` | 7. 需求描述 | knowledge-base/account/login.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 115 | account | `archive/converted-prd/app/registration-login/assets/media/image38.png` | 7. 需求描述 | knowledge-base/account/login.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 116 | account | `archive/converted-prd/app/registration-login/assets/media/image39.png` | 7. 需求描述 | knowledge-base/account/login.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
 | 117 | account | `archive/converted-prd/app/registration-login/assets/media/image40.jpeg` | set Password Page | knowledge-base/account/registration.md | PAGE_VISUAL | BOUND_TO_KB |
-| 118 | account | `archive/converted-prd/app/registration-login/assets/media/image41.jpeg` | 7. 需求描述 | knowledge-base/account/login.md | PAGE_VISUAL | BOUND_TO_KB |
+| 118 | account | `archive/converted-prd/app/registration-login/assets/media/image41.jpeg` | 7. 需求描述 | knowledge-base/account/login.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
 | 119 | account | `archive/converted-prd/app/registration-login/assets/media/image31.png` | Select Country Page | knowledge-base/account/login.md | PAGE_VISUAL | BOUND_TO_KB |
 | 120 | transaction | `archive/converted-prd/app/transaction-history/assets/media/image1.jpeg` | 2. 全局说明 | knowledge-base/transaction/history.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 121 | transaction | `archive/converted-prd/app/transaction-history/assets/media/image2.png` | 3. 状态及类型处理 | knowledge-base/transaction/history.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
@@ -267,17 +267,17 @@ owner: 吴忆锋
 | 209 | card/application | `archive/converted-prd/card/application/assets/media/image24.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | BOUND_TO_KB |
 | 210 | card/application | `archive/converted-prd/card/application/assets/media/image25.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | BOUND_TO_KB |
 | 211 | card/application | `archive/converted-prd/card/application/assets/media/image26.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | BOUND_TO_KB |
-| 212 | card/application | `archive/converted-prd/card/application/assets/media/image27.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | BOUND_TO_KB |
-| 213 | card/application | `archive/converted-prd/card/application/assets/media/image28.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | BOUND_TO_KB |
-| 214 | card/application | `archive/converted-prd/card/application/assets/media/image29.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | BOUND_TO_KB |
-| 215 | card/application | `archive/converted-prd/card/application/assets/media/image30.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | BOUND_TO_KB |
-| 216 | card/application | `archive/converted-prd/card/application/assets/media/image31.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | BOUND_TO_KB |
-| 217 | card/application | `archive/converted-prd/card/application/assets/media/image32.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | BOUND_TO_KB |
+| 212 | card/application | `archive/converted-prd/card/application/assets/media/image27.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 213 | card/application | `archive/converted-prd/card/application/assets/media/image28.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 214 | card/application | `archive/converted-prd/card/application/assets/media/image29.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 215 | card/application | `archive/converted-prd/card/application/assets/media/image30.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 216 | card/application | `archive/converted-prd/card/application/assets/media/image31.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 217 | card/application | `archive/converted-prd/card/application/assets/media/image32.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
 | 218 | card/application | `archive/converted-prd/card/application/assets/media/image26.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | BOUND_TO_KB |
-| 219 | card/application | `archive/converted-prd/card/application/assets/media/image33.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | BOUND_TO_KB |
-| 220 | card/application | `archive/converted-prd/card/application/assets/media/image34.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | BOUND_TO_KB |
-| 221 | card/application | `archive/converted-prd/card/application/assets/media/image35.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | BOUND_TO_KB |
-| 222 | card/application | `archive/converted-prd/card/application/assets/media/image36.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | BOUND_TO_KB |
+| 219 | card/application | `archive/converted-prd/card/application/assets/media/image33.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 220 | card/application | `archive/converted-prd/card/application/assets/media/image34.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 221 | card/application | `archive/converted-prd/card/application/assets/media/image35.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 222 | card/application | `archive/converted-prd/card/application/assets/media/image36.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
 | 223 | card/application | `archive/converted-prd/card/application/assets/media/image37.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 224 | card/application | `archive/converted-prd/card/application/assets/media/image38.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 225 | card/application | `archive/converted-prd/card/application/assets/media/image39.png` | 6. AIX前端功能需求 | knowledge-base/card/application.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
@@ -290,9 +290,9 @@ owner: 吴忆锋
 | 232 | card/application | `archive/converted-prd/card/application/assets/media/image46.png` | Activate Card | knowledge-base/card/application.md | PAGE_VISUAL | BOUND_TO_KB |
 | 233 | card/application | `archive/converted-prd/card/application/assets/media/image47.png` | 申卡入口 | knowledge-base/card/application.md | PAGE_VISUAL | BOUND_TO_KB |
 | 234 | card/application | `archive/converted-prd/card/application/assets/media/image48.png` | 申卡入口 | knowledge-base/card/application.md | PAGE_VISUAL | BOUND_TO_KB |
-| 235 | card/application | `archive/converted-prd/card/application/assets/media/image49.png` | 申卡入口 | knowledge-base/card/application.md | PAGE_VISUAL | BOUND_TO_KB |
-| 236 | card/application | `archive/converted-prd/card/application/assets/media/image50.png` | 申卡入口 | knowledge-base/card/application.md | PAGE_VISUAL | BOUND_TO_KB |
-| 237 | card/application | `archive/converted-prd/card/application/assets/media/image51.png` | 申卡入口 | knowledge-base/card/application.md | PAGE_VISUAL | BOUND_TO_KB |
+| 235 | card/application | `archive/converted-prd/card/application/assets/media/image49.png` | 申卡入口 | knowledge-base/card/application.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 236 | card/application | `archive/converted-prd/card/application/assets/media/image50.png` | 申卡入口 | knowledge-base/card/application.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 237 | card/application | `archive/converted-prd/card/application/assets/media/image51.png` | 申卡入口 | knowledge-base/card/application.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
 | 238 | card/application | `archive/converted-prd/card/application/assets/media/image52.png` | 当前卡片展示 | knowledge-base/card/application.md | PAGE_VISUAL | BOUND_TO_KB |
 | 239 | card/application | `archive/converted-prd/card/application/assets/media/image53.png` | 当前卡片展示 | knowledge-base/card/application.md | PAGE_VISUAL | BOUND_TO_KB |
 | 240 | card/application | `archive/converted-prd/card/application/assets/media/image54.png` | Activate card | knowledge-base/card/application.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
@@ -408,11 +408,11 @@ owner: 吴忆锋
 | 350 | kyc | `archive/converted-prd/kyc/wallet-opening/assets/media/image20.png` | Face Loading | knowledge-base/kyc/account-opening.md | PAGE_VISUAL | BOUND_TO_KB |
 | 351 | kyc | `archive/converted-prd/kyc/wallet-opening/assets/media/image21.png` | 7. 需求描述 | knowledge-base/kyc/account-opening.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 352 | kyc | `archive/converted-prd/kyc/wallet-opening/assets/media/image22.png` | 7. 需求描述 | knowledge-base/kyc/account-opening.md | PAGE_VISUAL | BOUND_TO_KB |
-| 353 | kyc | `archive/converted-prd/kyc/wallet-opening/assets/media/image23.jpeg` | 7. 需求描述 | knowledge-base/kyc/account-opening.md | PAGE_VISUAL | BOUND_TO_KB |
-| 354 | kyc | `archive/converted-prd/kyc/wallet-opening/assets/media/image24.png` | 7. 需求描述 | knowledge-base/kyc/account-opening.md | PAGE_VISUAL | BOUND_TO_KB |
+| 353 | kyc | `archive/converted-prd/kyc/wallet-opening/assets/media/image23.jpeg` | 7. 需求描述 | knowledge-base/kyc/account-opening.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 354 | kyc | `archive/converted-prd/kyc/wallet-opening/assets/media/image24.png` | 7. 需求描述 | knowledge-base/kyc/account-opening.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
 | 355 | kyc | `archive/converted-prd/kyc/wallet-opening/assets/media/image25.png` | Verify Page | knowledge-base/kyc/account-opening.md | PAGE_VISUAL | BOUND_TO_KB |
 | 356 | kyc | `archive/converted-prd/kyc/wallet-opening/assets/media/image26.png` | Waitlist | knowledge-base/kyc/account-opening.md | PAGE_VISUAL | BOUND_TO_KB |
-| 357 | kyc | `archive/converted-prd/kyc/wallet-opening/assets/media/image27.png` | 7. 需求描述 | knowledge-base/kyc/account-opening.md | PAGE_VISUAL | BOUND_TO_KB |
+| 357 | kyc | `archive/converted-prd/kyc/wallet-opening/assets/media/image27.png` | 7. 需求描述 | knowledge-base/kyc/account-opening.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
 | 358 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image1.jpeg` | 5. 整体框架 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
 | 359 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image2.jpeg` | 5. 整体框架 | OUT_OF_SCOPE_OR_UNMAPPED | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
 | 360 | other | `archive/converted-prd/mgm/referral-invite-code/assets/media/image3.png` | 10. Demo | OUT_OF_SCOPE_OR_UNMAPPED | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
@@ -524,9 +524,9 @@ owner: 吴忆锋
 | 466 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image29.png` | 1. 修订记录 | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 467 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image30.png` | 1. 修订记录 | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 468 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image31.png` | 1. 修订记录 | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
-| 469 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image32.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | BOUND_TO_KB |
-| 470 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image33.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | BOUND_TO_KB |
-| 471 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image34.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | BOUND_TO_KB |
+| 469 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image32.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 470 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image33.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 471 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image34.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
 | 472 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image35.png` | 1. 修订记录 | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 473 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image36.png` | 1. 修订记录 | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 474 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image37.png` | 1. 修订记录 | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
@@ -540,16 +540,16 @@ owner: 吴忆锋
 | 482 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image29.png` | 1. 修订记录 | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 483 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image30.png` | 1. 修订记录 | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 484 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image31.png` | 1. 修订记录 | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
-| 485 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image32.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | BOUND_TO_KB |
-| 486 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image33.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | BOUND_TO_KB |
-| 487 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image34.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | BOUND_TO_KB |
+| 485 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image32.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 486 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image33.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 487 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image34.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
 | 488 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image35.png` | 1. 修订记录 | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 489 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image36.png` | 1. 修订记录 | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 490 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image37.png` | 1. 修订记录 | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 491 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image38.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | BOUND_TO_KB |
 | 492 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image51.png` | 1. 修订记录 | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
-| 493 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image52.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | BOUND_TO_KB |
-| 494 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image52.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | BOUND_TO_KB |
+| 493 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image52.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 494 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image52.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
 | 495 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image53.png` | 1. 修订记录 | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 496 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image53.png` | 1. 修订记录 | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 497 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image28.png` | 1. 修订记录 | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
@@ -574,14 +574,14 @@ owner: 吴忆锋
 | 516 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image30.png` | 1. 修订记录 | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 517 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image62.png` | 1. 修订记录 | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 518 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image63.png` | 1. 修订记录 | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
-| 519 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image37.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | BOUND_TO_KB |
-| 520 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image64.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | BOUND_TO_KB |
-| 521 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image65.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | BOUND_TO_KB |
-| 522 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image66.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | BOUND_TO_KB |
-| 523 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image67.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | BOUND_TO_KB |
-| 524 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image68.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | BOUND_TO_KB |
-| 525 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image69.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | BOUND_TO_KB |
-| 526 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image70.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | BOUND_TO_KB |
+| 519 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image37.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 520 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image64.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 521 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image65.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 522 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image66.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 523 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image67.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 524 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image68.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 525 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image69.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 526 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image70.png` | 1. 修订记录 | knowledge-base/common/notification.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
 | 527 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image71.png` | 1. 加密钱包交易类webhook | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 528 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image72.png` | 1. 加密钱包交易类webhook | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 529 | notification | `archive/converted-prd/notification/push-inbox/assets/media/image73.png` | 2. 卡交易类webhook | knowledge-base/common/notification.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
@@ -758,28 +758,28 @@ owner: 吴忆锋
 | 700 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image37.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
 | 701 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image38.png` | Deposit Crypto | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
 | 702 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image39.png` | Deposit Crypto | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
-| 703 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image40.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
+| 703 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image40.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
 | 704 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image41.png` | Receive Crypto | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
 | 705 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image42.png` | Receive Crypto | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
-| 706 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image43.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
-| 707 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image44.jpeg` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
-| 708 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image45.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
-| 709 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image46.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
-| 710 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image47.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
-| 711 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image48.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
+| 706 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image43.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 707 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image44.jpeg` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 708 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image45.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 709 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image46.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 710 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image47.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 711 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image48.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
 | 712 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image49.png` | Deposit Crypto | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
 | 713 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image50.png` | Deposit Crypto | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
 | 714 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image51.png` | Deposit Crypto | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
 | 715 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image52.png` | Deposit Crypto | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
-| 716 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image53.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
-| 717 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image54.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
-| 718 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image55.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
-| 719 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image56.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
-| 720 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image57.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
+| 716 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image53.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 717 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image54.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 718 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image55.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 719 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image56.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 720 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image57.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
 | 721 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image58.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 722 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image59.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
-| 723 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image60.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
-| 724 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image61.jpeg` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
+| 723 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image60.png` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
+| 724 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image61.jpeg` | 6. AIX前端功能需求 | knowledge-base/wallet/deposit.md | PAGE_VISUAL | NOT_BOUND_OR_SUPPORTING_REVIEW |
 | 725 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image62.png` | Transaction Details | knowledge-base/wallet/deposit.md | PAGE_VISUAL | BOUND_TO_KB |
 | 726 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image63.jpeg` | 7. DTC渠道接口需求 | knowledge-base/wallet/deposit.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
 | 727 | wallet | `archive/converted-prd/wallet/deposit-send-swap/assets/media/image64.jpeg` | 7. DTC渠道接口需求 | knowledge-base/wallet/deposit.md | NON_PAGE_OR_SUPPORTING_VISUAL | SUPPORTING_VISUAL |
