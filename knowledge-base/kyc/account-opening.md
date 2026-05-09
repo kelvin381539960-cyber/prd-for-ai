@@ -1,7 +1,7 @@
 ---
 module: kyc
 feature: account-opening
-version: "2.0"
+version: "2.1"
 status: active
 source_doc: archive/converted-prd/kyc/wallet-opening/README.md；archive/converted-prd/app/home/README.md；archive/converted-prd/card/application/README.md；archive/converted-prd/security/identity-verification/README.md
 source_section: KYC / 国家线、状态机、开户页面逻辑、外部接口、错误码；Home / 钱包区域展示；Card Application / 申卡前置
@@ -392,52 +392,66 @@ flowchart LR
 
 ### 4.2 KYC Loading Page
 
-> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
 
-![KYC Loading Page - image6.jpeg](_assets/account-opening/image6.jpeg)
-
-
-截图暂缺，视觉以 Figma 为准。
-
-| 区块 | 内容 |
-|---|---|
-| 页面类型 | 状态页 |
-| 页面目标 | 在进入 KYC 时判断用户是否可继续流程。 |
-| 入口 / 触发 | 用户从业务入口发起 KYC。 |
-| 展示内容 | 状态 1：`loading...`；状态 2：`Verification unavailable` 及说明文案。 |
-| 用户动作 | 可点击关闭按钮；状态 2 可点击 Back。 |
-| 系统处理 / 责任方 | AIX Backend 查询 KYC 状态与 waitlist 状态；AIX App 展示分流结果。 |
-| 元素 / 状态 / 提示规则 | Under review / Rejected / Approved 或 APP 来源 waitlist 展示状态 2；Pending / failed 进入后续流程。 |
-| 成功流转 | 可继续时进入 KYC Start 或后续流程。 |
-| 失败 / 异常流转 | Network Error、Server Error、Loading Failed。 |
-| 备注 / 边界 | waitlist 是页面级拦截，不是弹窗继续。 |
+<table>
+  <thead>
+    <tr>
+      <th style="width: 280px;">UX</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><img src="_assets/account-opening/image6.jpeg" alt="KYC Loading Page" width="260" /></td>
+      <td style="vertical-align: top;"><p><strong>页面类型</strong>：状态页。</p>
+<p><strong>页面目标</strong>：进入 KYC 时判断用户是否可继续流程。</p>
+<p><strong>入口 / 触发</strong>：用户从业务入口发起 KYC。</p>
+<p><strong>展示内容</strong>：状态 1 为 loading；状态 2 为 Verification unavailable 及说明文案。</p>
+<p><strong>系统处理 / 责任方</strong>：AIX Backend 查询 KYC 状态与 waitlist 状态；AIX App 展示分流结果。</p>
+<p><strong>元素 / 状态 / 提示规则</strong>：Under review / Rejected / Approved 或 APP 来源 waitlist 展示状态 2；Pending / Failed 可进入后续流程。</p>
+<p><strong>失败 / 异常流转</strong>：Network Error、Server Error、Loading Failed。</p>
+<p><strong>备注 / 边界</strong>：waitlist 是页面级拦截，不是弹窗继续。</p></td>
+    </tr>
+  </tbody>
+</table>
 
 ### 4.3 KYC Start Page
 
-> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
-> 包含 Start Page 主图、协议阅读 / waitlist 拦截等页面内状态。
 
-![KYC Start Page - image7.png](_assets/account-opening/image7.png)
-
-![KYC Start Page - image9.png](_assets/account-opening/image9.png)
-
-![KYC Start Page - image10.png](_assets/account-opening/image10.png)
-
-
-截图暂缺，视觉以 Figma 为准。
-
-| 区块 | 内容 |
-|---|---|
-| 页面类型 | 主页面 |
-| 页面目标 | 让用户确认开始身份验证、选择居住国家并同意协议。 |
-| 入口 / 触发 | KYC Loading 判断可继续后进入。 |
-| 展示内容 | title、subtitle、居住国家、协议、立即认证按钮。 |
-| 用户动作 | 选择国家、勾选协议、点击立即认证、返回。 |
-| 系统处理 / 责任方 | App 展示国家和协议；Backend 保存协议同意、快照、Reverse Solicitation 信息。 |
-| 元素 / 状态 / 提示规则 | 协议未勾选按钮禁用；已勾选按钮可点；已绑定手机号不展示额外 toast。 |
-| 成功流转 | 支持国家进入 Identity Verify。 |
-| 失败 / 异常流转 | 不支持国家进入 waitlist；协议获取失败 toast。 |
-| 备注 / 边界 | 手机号未绑定处理见 GAP-KYC-PHONE-001。 |
+<table>
+  <thead>
+    <tr>
+      <th style="width: 280px;">UX</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><img src="_assets/account-opening/image7.png" alt="KYC Start Page" width="260" /></td>
+      <td style="vertical-align: top;"><p><strong>页面类型</strong>：主页面。</p>
+<p><strong>页面目标</strong>：让用户确认开始身份验证、选择居住国家并同意协议。</p>
+<p><strong>入口 / 触发</strong>：KYC Loading 判断可继续后进入。</p>
+<p><strong>展示内容</strong>：title、subtitle、居住国家、协议、立即认证按钮。</p>
+<p><strong>用户动作</strong>：选择国家、勾选协议、点击立即认证、返回。</p>
+<p><strong>系统处理 / 责任方</strong>：App 展示国家和协议；Backend 保存协议同意、快照、Reverse Solicitation 信息。</p>
+<p><strong>元素 / 状态 / 提示规则</strong>：协议未勾选按钮禁用；已勾选按钮可点。</p>
+<p><strong>成功流转</strong>：支持国家进入 Identity Verify。</p>
+<p><strong>失败 / 异常流转</strong>：不支持国家进入 waitlist；协议获取失败 toast。</p></td>
+    </tr>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><img src="_assets/account-opening/image9.png" alt="Declaration of reverse solicitation" width="260" /></td>
+      <td style="vertical-align: top;"><p><strong>页面内状态</strong>：Declaration of reverse solicitation 协议阅读。</p>
+<p><strong>交互规则</strong>：该协议需强制阅读，同意后才能勾选。</p>
+<p><strong>数据规则</strong>：需要保存协议内容，以及用户同意并提交的时间。</p></td>
+    </tr>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><img src="_assets/account-opening/image10.png" alt="Waitlist intercept" width="260" /></td>
+      <td style="vertical-align: top;"><p><strong>页面内状态</strong>：不支持国家 / phase 2 waitlist 拦截。</p>
+<p><strong>触发条件</strong>：点击立即认证后，后端判断国家不属于 Phase 1 支持范围。</p>
+<p><strong>处理规则</strong>：进入 waitlist 处理，不继续后续 KYC。</p></td>
+    </tr>
+  </tbody>
+</table>
 
 #### 4.3.1 协议元素明细
 
@@ -450,190 +464,270 @@ flowchart LR
 
 ### 4.4 Select Residence Country Page
 
-> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
 
-![Select Residence Country Page - image11.png](_assets/account-opening/image11.png)
-
-![Select Residence Country Page - image12.png](_assets/account-opening/image12.png)
-
-
-截图暂缺，视觉以 Figma 为准。
-
-| 区块 | 内容 |
-|---|---|
-| 页面类型 | 选择页 |
-| 页面目标 | 让用户选择居住国家 / 地区。 |
-| 入口 / 触发 | KYC Start 或 Address Upload 点击 Residence。 |
-| 展示内容 | 国家列表、搜索、支持国家和不可支持国家。 |
-| 用户动作 | 搜索、选择国家、关闭返回。 |
-| 系统处理 / 责任方 | App 根据配置展示国家；禁止国家隐藏。 |
-| 元素 / 状态 / 提示规则 | 默认 IP 检测国家；检测不到默认 SG；按首字母排序。 |
-| 成功流转 | 选择国家后返回上一级页面。 |
-| 失败 / 异常流转 | 不适用。 |
-| 备注 / 边界 | 国家线存在版本口径冲突，见 GAP-KYC-COUNTRY-001。 |
+<table>
+  <thead>
+    <tr>
+      <th style="width: 280px;">UX</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><img src="_assets/account-opening/image11.png" alt="Select Residence Country Page" width="260" /></td>
+      <td style="vertical-align: top;"><p><strong>页面类型</strong>：选择页。</p>
+<p><strong>页面目标</strong>：让用户选择居住国家 / 地区。</p>
+<p><strong>入口 / 触发</strong>：KYC Start 或 Address Upload 点击 Residence。</p>
+<p><strong>展示内容</strong>：国家列表、搜索、支持国家和不可支持国家。</p>
+<p><strong>用户动作</strong>：搜索、选择国家、关闭返回。</p>
+<p><strong>系统处理 / 责任方</strong>：App 根据配置展示国家；禁止国家隐藏。</p>
+<p><strong>元素 / 状态 / 提示规则</strong>：默认 IP 检测国家；检测不到默认 SG；按首字母排序。</p>
+<p><strong>成功流转</strong>：选择国家后返回上一级页面。</p></td>
+    </tr>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><img src="_assets/account-opening/image12.png" alt="Select country list state" width="260" /></td>
+      <td style="vertical-align: top;"><p><strong>页面内状态</strong>：国家列表 / 搜索状态。</p>
+<p><strong>展示规则</strong>：展示支持国家和不可支持国家；禁止国家隐藏。</p>
+<p><strong>特殊处理</strong>：部分内测版本国家线有临时处理，具体国家线以 Countries and Regions 规则为准。</p></td>
+    </tr>
+  </tbody>
+</table>
 
 ### 4.5 Waitlist Page
 
-> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
 
-![Waitlist Page - image13.png](_assets/account-opening/image13.png)
-
-
-截图暂缺，视觉以 Figma 为准。
-
-| 区块 | 内容 |
-|---|---|
-| 页面类型 | 拦截 / 提交页 |
-| 页面目标 | 对不支持国家或 waitlist 用户收集邮箱，并阻止继续 KYC。 |
-| 入口 / 触发 | 国家为 phase 2-waitlist，或 KYC Loading 命中 waitlist。 |
-| 展示内容 | email 输入框、Join waitlist 按钮、关闭按钮。 |
-| 用户动作 | 输入 email、提交、关闭。 |
-| 系统处理 / 责任方 | Backend 按 userId 加入 waitlist，记录 email、国家、来源、提交时间、设备指纹，并推送数仓。 |
-| 元素 / 状态 / 提示规则 | email 最长 103 字符；空值和格式校验；按钮根据输入状态禁用 / 启用。 |
-| 成功流转 | 提交成功后返回业务入口页，用户无法继续申请 KYC。 |
-| 失败 / 异常流转 | 网络异常 / 后端服务器错误 toast。 |
-| 备注 / 边界 | waitlist 是页面级拦截。 |
+<table>
+  <thead>
+    <tr>
+      <th style="width: 280px;">UX</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><img src="_assets/account-opening/image13.png" alt="Waitlist Page" width="260" /></td>
+      <td style="vertical-align: top;"><p><strong>页面类型</strong>：拦截 / 提交页。</p>
+<p><strong>页面目标</strong>：对不支持国家或 waitlist 用户收集邮箱，并阻止继续 KYC。</p>
+<p><strong>入口 / 触发</strong>：国家为 phase 2-waitlist，或 KYC Loading 命中 waitlist。</p>
+<p><strong>展示内容</strong>：email 输入框、Join waitlist 按钮、关闭按钮。</p>
+<p><strong>用户动作</strong>：输入 email、提交、关闭。</p>
+<p><strong>系统处理 / 责任方</strong>：Backend 按 userId 加入 waitlist，记录 email、国家、来源、提交时间、设备指纹，并推送数仓。</p>
+<p><strong>元素 / 状态 / 提示规则</strong>：email 最长 103 字符；空值和格式校验；按钮根据输入状态禁用 / 启用。</p>
+<p><strong>成功流转</strong>：提交成功后返回业务入口页，用户无法继续申请 KYC。</p>
+<p><strong>失败 / 异常流转</strong>：网络异常 / 后端服务器错误 toast。</p></td>
+    </tr>
+  </tbody>
+</table>
 
 ### 4.6 Identity Verify Page / Identity Scan H5
 
-> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
-> 源 PRD 对 Identity Scan H5 标注“截图暂缺，视觉以 Figma / AAI H5 为准”；image16 只作为 H5 流程来源图。
 
-![Identity Verify Page / Identity Scan H5 - image14.png](_assets/account-opening/image14.png)
-
-![Identity Verify Page / Identity Scan H5 - image15.png](_assets/account-opening/image15.png)
-
-![Identity Verify Page / Identity Scan H5 - image16.png](_assets/account-opening/image16.png)
-
-
-截图暂缺，视觉以 Figma / AAI H5 为准。
-
-| 区块 | 内容 |
-|---|---|
-| 页面类型 | 主页面 + 外部 H5 |
-| 页面目标 | 引导用户上传 / 扫描护照完成 Passport OCR。 |
-| 入口 / 触发 | KYC Start 支持国家且协议已同意。 |
-| 展示内容 | 标题、副标题、上传 / 相机按钮、权限弹窗。 |
-| 用户动作 | 点击相机、授权、进入 H5 扫描护照。 |
-| 系统处理 / 责任方 | App 判断相机权限；Backend / DTC 生成 Passport H5 URL；AAI 完成 OCR。 |
-| 元素 / 状态 / 提示规则 | 未授权弹窗；永久拒绝 open settings；DTC 01009 / 01005 toast。 |
-| 成功流转 | Identity Scan 成功进入 Face Guide。 |
-| 失败 / 异常流转 | Identity Scan 失败返回 Identity Verify。 |
-| 备注 / 边界 | App 不判断 AAI 内部识别逻辑。 |
+<table>
+  <thead>
+    <tr>
+      <th style="width: 280px;">UX</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><img src="_assets/account-opening/image14.png" alt="Identity Verify Page" width="260" /></td>
+      <td style="vertical-align: top;"><p><strong>页面类型</strong>：主页面。</p>
+<p><strong>页面目标</strong>：引导用户上传 / 扫描护照完成 Passport OCR。</p>
+<p><strong>入口 / 触发</strong>：KYC Start 支持国家且协议已同意。</p>
+<p><strong>展示内容</strong>：标题、副标题、上传 / 相机按钮。</p>
+<p><strong>用户动作</strong>：点击相机或上传入口，进入权限判断和 H5 扫描流程。</p>
+<p><strong>系统处理 / 责任方</strong>：App 判断相机权限；Backend / DTC 生成 Passport H5 URL。</p></td>
+    </tr>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><img src="_assets/account-opening/image15.png" alt="Camera permission popup" width="260" /></td>
+      <td style="vertical-align: top;"><p><strong>页面内状态</strong>：相机权限弹窗。</p>
+<p><strong>触发条件</strong>：用户点击相机但未授权或已拒绝。</p>
+<p><strong>交互规则</strong>：Not now 关闭弹窗并停留当前页；Allow access 触发系统授权或引导 open settings。</p>
+<p><strong>异常提示</strong>：DTC 01009 / 01005 按源 PRD toast 映射。</p></td>
+    </tr>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><p><strong>截图暂缺</strong></p><p>截图暂缺，视觉以 Figma / AAI H5 为准。</p></td>
+      <td style="vertical-align: top;"><p><strong>页面类型</strong>：外部 H5。</p>
+<p><strong>页面目标</strong>：调用 AAI H5 扫描护照。</p>
+<p><strong>成功流转</strong>：Identity Scan 成功进入 Face Guide。</p>
+<p><strong>失败 / 异常流转</strong>：Identity Scan 失败返回 Identity Verify。</p>
+<p><strong>备注 / 边界</strong>：App 不判断 AAI 内部识别逻辑；视觉以 Figma / AAI H5 为准。</p></td>
+    </tr>
+  </tbody>
+</table>
 
 ### 4.7 Face Guide / Face Scan / Face Loading
 
-> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
 
-![Face Guide / Face Scan / Face Loading - image17.png](_assets/account-opening/image17.png)
-
-![Face Guide / Face Scan / Face Loading - image18.png](_assets/account-opening/image18.png)
-
-![Face Guide / Face Scan / Face Loading - image19.png](_assets/account-opening/image19.png)
-
-![Face Guide / Face Scan / Face Loading - image6.jpeg](_assets/account-opening/image6.jpeg)
-
-
-截图暂缺，视觉以 Figma / AAI H5 为准。
-
-| 区块 | 内容 |
-|---|---|
-| 页面类型 | 主页面 + 外部 H5 + 状态页 |
-| 页面目标 | 完成活体采集和人脸比对。 |
-| 入口 / 触发 | Passport OCR 成功后进入。 |
-| 展示内容 | Face Guide 说明、Continue 按钮、锁定弹窗、Face Loading。 |
-| 用户动作 | 点击 Continue、完成 H5 活体采集、等待结果。 |
-| 系统处理 / 责任方 | Backend 判断锁定、获取 passport country、生成 selfie H5 URL、轮询或接收结果。 |
-| 元素 / 状态 / 提示规则 | 5 次锁 20 分钟；10 次锁 24 小时；接口连续 20 次锁 20 分钟；30 秒超时进入 Loading Failed。 |
-| 成功流转 | Face 成功进入 Address Upload。 |
-| 失败 / 异常流转 | Face Failed、Loading Failed、Network Error、Server Error。 |
-| 备注 / 边界 | 同一 signatureId 最多重试 3 次，重来需重新 generate-url。 |
+<table>
+  <thead>
+    <tr>
+      <th style="width: 280px;">UX</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><img src="_assets/account-opening/image17.png" alt="Face Guide Page" width="260" /></td>
+      <td style="vertical-align: top;"><p><strong>页面类型</strong>：主页面。</p>
+<p><strong>页面目标</strong>：引导用户开始活体采集。</p>
+<p><strong>入口 / 触发</strong>：Passport OCR 成功后进入。</p>
+<p><strong>展示内容</strong>：Face Guide 说明、Continue 按钮、关闭按钮。</p>
+<p><strong>系统处理 / 责任方</strong>：Backend 判断锁定、获取 passport country、生成 selfie H5 URL。</p>
+<p><strong>锁定规则</strong>：5 次锁 20 分钟；10 次锁 24 小时；接口连续 20 次锁 20 分钟。</p></td>
+    </tr>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><img src="_assets/account-opening/image18.png" alt="Face locked popup" width="260" /></td>
+      <td style="vertical-align: top;"><p><strong>页面内状态</strong>：Face Auth 锁定拦截。</p>
+<p><strong>触发条件</strong>：失败次数达到锁定阈值。</p>
+<p><strong>交互规则</strong>：弹窗阻止继续发起新的 Face 流程，确认后返回入口。</p></td>
+    </tr>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><img src="_assets/account-opening/image19.png" alt="Face Scan H5" width="260" /></td>
+      <td style="vertical-align: top;"><p><strong>页面类型</strong>：外部 H5。</p>
+<p><strong>页面目标</strong>：调用 AAI H5 进行活体采集。</p>
+<p><strong>流转规则</strong>：采集结束后进入 Face Loading Page。</p>
+<p><strong>备注 / 边界</strong>：同一 signatureId 最多重试 3 次，重来需重新 generate-url。</p></td>
+    </tr>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><img src="_assets/account-opening/image6.jpeg" alt="Face Loading Page" width="260" /></td>
+      <td style="vertical-align: top;"><p><strong>页面类型</strong>：状态页。</p>
+<p><strong>页面目标</strong>：等待人脸比对结果。</p>
+<p><strong>触发条件</strong>：AAI 完成活体采集后进入。</p>
+<p><strong>成功流转</strong>：Face 成功进入 Address Upload。</p>
+<p><strong>失败 / 异常流转</strong>：Face Failed、Loading Failed、Network Error、Server Error。</p>
+<p><strong>超时规则</strong>：等待超过 30 秒仍未收到结果，进入 Loading Failed。</p></td>
+    </tr>
+  </tbody>
+</table>
 
 ### 4.8 Loading Failed Page
 
-> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
 
-![Loading Failed Page - image20.png](_assets/account-opening/image20.png)
-
-
-截图暂缺，视觉以 Figma 为准。
-
-| 区块 | 内容 |
-|---|---|
-| 页面类型 | 错误页 |
-| 页面目标 | 处理 Face Loading 超过 30 秒无结果。 |
-| 入口 / 触发 | Face Loading 等待超过 30 秒。 |
-| 展示内容 | 加载失败提示、Retry、返回。 |
-| 用户动作 | Retry 或 Leave。 |
-| 系统处理 / 责任方 | App 重新进入 Face Loading 并重新提交。 |
-| 元素 / 状态 / 提示规则 | 返回按钮使用通用挽留弹窗。 |
-| 成功流转 | Retry 进入 Face Loading。 |
-| 失败 / 异常流转 | Leave 返回入口。 |
-| 备注 / 边界 | Retry 不是返回 Face Scan。 |
+<table>
+  <thead>
+    <tr>
+      <th style="width: 280px;">UX</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><img src="_assets/account-opening/image20.png" alt="Loading Failed Page" width="260" /></td>
+      <td style="vertical-align: top;"><p><strong>页面类型</strong>：错误页。</p>
+<p><strong>页面目标</strong>：处理 Face Loading 超过 30 秒无结果。</p>
+<p><strong>入口 / 触发</strong>：Face Loading 等待超过 30 秒。</p>
+<p><strong>展示内容</strong>：加载失败提示、Retry、返回。</p>
+<p><strong>用户动作</strong>：Retry 或 Leave。</p>
+<p><strong>系统处理 / 责任方</strong>：App 重新进入 Face Loading 并重新提交。</p>
+<p><strong>元素 / 状态 / 提示规则</strong>：返回按钮使用通用挽留弹窗。</p>
+<p><strong>成功流转</strong>：Retry 进入 Face Loading。</p>
+<p><strong>备注 / 边界</strong>：Retry 不是返回 Face Scan。</p></td>
+    </tr>
+  </tbody>
+</table>
 
 ### 4.9 Face Failed Page
 
-> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
 
-![Face Failed Page - image21.png](_assets/account-opening/image21.png)
-
-
-截图暂缺，视觉以 Figma 为准。
-
-| 区块 | 内容 |
-|---|---|
-| 页面类型 | 失败页 |
-| 页面目标 | 展示人脸 / 护照 / POA 失败原因，并提供重试入口。 |
-| 入口 / 触发 | Face Loading 验证失败、Face Scan 失败、POA 失败等。 |
-| 展示内容 | 固定主文案、动态原因文案、Try again、关闭按钮。 |
-| 用户动作 | Try again 或关闭。 |
-| 系统处理 / 责任方 | Backend 返回失败原因；App 按优先级展示映射文案。 |
-| 元素 / 状态 / 提示规则 | passport 与 face 均失败时优先 passport；锁定态展示安全弹窗。 |
-| 成功流转 | 正常态 Try again 重新触发 KYC 流程。 |
-| 失败 / 异常流转 | 锁定态确认后返回入口。 |
-| 备注 / 边界 | 错误文案来源为 PRD 第 9 章映射表。 |
+<table>
+  <thead>
+    <tr>
+      <th style="width: 280px;">UX</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><img src="_assets/account-opening/image21.png" alt="Face Failed Page" width="260" /></td>
+      <td style="vertical-align: top;"><p><strong>页面类型</strong>：失败页。</p>
+<p><strong>页面目标</strong>：展示人脸 / 护照 / POA 失败原因，并提供重试入口。</p>
+<p><strong>入口 / 触发</strong>：Face Loading 验证失败、Face Scan 失败、POA 失败等。</p>
+<p><strong>展示内容</strong>：固定主文案、动态原因文案、Try again、关闭按钮。</p>
+<p><strong>用户动作</strong>：Try again 或关闭。</p>
+<p><strong>系统处理 / 责任方</strong>：Backend 返回失败原因；App 按优先级展示映射文案。</p>
+<p><strong>元素 / 状态 / 提示规则</strong>：passport 与 face 均失败时优先 passport；锁定态展示安全弹窗。</p>
+<p><strong>备注 / 边界</strong>：错误文案来源为 PRD 第 9 章映射表。</p></td>
+    </tr>
+  </tbody>
+</table>
 
 ### 4.10 Address Upload Page
 
-> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
 
-![Address Upload Page - image22.png](_assets/account-opening/image22.png)
-
-![Address Upload Page - image23.jpeg](_assets/account-opening/image23.jpeg)
-
-![Address Upload Page - image24.png](_assets/account-opening/image24.png)
-
-![Address Upload Page - image25.png](_assets/account-opening/image25.png)
-
-![Address Upload Page - image26.png](_assets/account-opening/image26.png)
-
-
-截图暂缺，视觉以 Figma 为准。
-
-| 区块 | 内容 |
-|---|---|
-| 页面类型 | 主页面 |
-| 页面目标 | 收集用户地址证明文件并提交 POA 审核。 |
-| 入口 / 触发 | Face 验证成功。 |
-| 展示内容 | Residence、文件上传区、Continue 按钮、文件状态。 |
-| 用户动作 | 修改 Residence、上传 / 删除 / 预览文件、点击 Continue。 |
-| 系统处理 / 责任方 | App 校验文件；Backend 获取 DTC upload token 并上传 POA；DTC / AAI 审核。 |
-| 元素 / 状态 / 提示规则 | JPG/JPEG/PNG/PDF；16MB；只能上传一份；上传中 / 已上传状态。 |
-| 成功流转 | 提交成功进入 KYC Submission Success。 |
-| 失败 / 异常流转 | 文件错误、上传失败、国家不支持、服务器错误、POA 失败。 |
-| 备注 / 边界 | POA continue 后跳转存在源文档冲突，见 GAP-KYC-POA-002。 |
+<table>
+  <thead>
+    <tr>
+      <th style="width: 280px;">UX</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><img src="_assets/account-opening/image22.png" alt="Address Upload Page" width="260" /></td>
+      <td style="vertical-align: top;"><p><strong>页面类型</strong>：主页面。</p>
+<p><strong>页面目标</strong>：收集用户地址证明文件并提交 POA 审核。</p>
+<p><strong>入口 / 触发</strong>：Face 验证成功。</p>
+<p><strong>展示内容</strong>：Residence、文件上传区、Continue 按钮、文件状态。</p>
+<p><strong>用户动作</strong>：修改 Residence、上传 / 删除 / 预览文件、点击 Continue。</p></td>
+    </tr>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><img src="_assets/account-opening/image23.jpeg" alt="Address upload empty state" width="260" /></td>
+      <td style="vertical-align: top;"><p><strong>状态 1：未上传</strong>。</p>
+<p><strong>文件规则</strong>：支持 JPG / JPEG / PNG / PDF；单个文件大小上限 16MB；只能上传一份文件。</p>
+<p><strong>按钮规则</strong>：初始 Continue 禁用，成功上传后可点击。</p></td>
+    </tr>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><img src="_assets/account-opening/image24.png" alt="Address upload uploading state" width="260" /></td>
+      <td style="vertical-align: top;"><p><strong>状态 2：上传中</strong>。</p>
+<p><strong>展示规则</strong>：显示上传进度。</p>
+<p><strong>用户动作</strong>：点击删除按钮取消上传。</p></td>
+    </tr>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><img src="_assets/account-opening/image25.png" alt="Address upload uploaded state" width="260" /></td>
+      <td style="vertical-align: top;"><p><strong>状态 3：已上传</strong>。</p>
+<p><strong>用户动作</strong>：点击删除按钮删除已上传文件；点击文件可打开预览图片或 PDF。</p>
+<p><strong>成功流转</strong>：点击 Continue 后提交后端处理。</p></td>
+    </tr>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><img src="_assets/account-opening/image26.png" alt="Address upload waitlist intercept" width="260" /></td>
+      <td style="vertical-align: top;"><p><strong>异常 / 拦截状态</strong>：POA 提交后再次校验国家线。</p>
+<p><strong>触发条件</strong>：后端判断国家不属于支持范围。</p>
+<p><strong>失败 / 异常流转</strong>：进入 waitlist / 拦截处理。</p>
+<p><strong>备注 / 边界</strong>：POA continue 后跳转存在源文档冲突，见 GAP-KYC-POA-002。</p></td>
+    </tr>
+  </tbody>
+</table>
 
 ### 4.11 KYC Submission Success Page
 
-> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
 
-![KYC Submission Success Page - image27.png](_assets/account-opening/image27.png)
+<table>
+  <thead>
+    <tr>
+      <th style="width: 280px;">UX</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="width: 280px; vertical-align: top; text-align: center;"><img src="_assets/account-opening/image27.png" alt="KYC Submission Success Page" width="260" /></td>
+      <td style="vertical-align: top;"><p><strong>页面类型</strong>：成功页。</p>
+<p><strong>页面目标</strong>：告知用户 KYC 资料已提交，等待审核结果。</p>
+<p><strong>入口 / 触发</strong>：POA 提交成功。</p>
+<p><strong>展示内容</strong>：固定成功文案、返回首页按钮。</p>
+<p><strong>用户动作</strong>：点击返回首页。</p>
+<p><strong>系统处理 / 责任方</strong>：App 关闭当前 KYC 流程。</p>
+<p><strong>成功流转</strong>：返回入口，后续通过状态或通知感知结果。</p></td>
+    </tr>
+  </tbody>
+</table>
 
 
-截图暂缺，视觉以 Figma 为准。
+---
 
-| 区块 | 内容 |
-|---|---|
+---|---|
 | 页面类型 | 成功页 |
 | 页面目标 | 告知用户 KYC 资料已提交，等待审核结果。 |
 | 入口 / 触发 | POA 提交成功。 |
