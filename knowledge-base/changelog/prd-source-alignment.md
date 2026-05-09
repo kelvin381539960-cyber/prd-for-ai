@@ -195,3 +195,9 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 - 2026-05-09：补充交叉证据规则。Account / Registration / Login / Password Reset 不能只看注册登录 PRD，必须同时核对 Security 身份认证 PRD；后续 Card / Wallet / Transaction / Notification 同理按主证据 + 支撑证据执行。
 - 2026-05-09：完成 account 第一批校准：registration 标 ALIGNED；account index / login / password-reset 标 NEED_CONFIRMATION，原因是 Login 输入方式和 Password Reset 入口在 converted-prd 中存在删除线或证据不完整。
 - 2026-05-09：补充双向覆盖校验规则。后续每个模块必须同时检查 KB → Evidence 和 Evidence → KB，防止“知识库有但无证据”和“证据有但知识库漏写”两类问题。
+
+## Final Completion Boundary
+
+- 2026-05-09：已完成所有可执行的 PRD source alignment 工作。TODO=0，SOURCE_GAP=0。
+- 剩余 NEED_CONFIRMATION / CONFLICT 不是遗漏，而是源 PRD 删除线、证据不足或 active PRD 互相冲突导致，已单独整理到 `knowledge-base/changelog/prd-source-confirmation-needed.md`。
+- 在产品裁决前，不得强行把这些项改为 ALIGNED。
