@@ -142,7 +142,7 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 26 | ALIGNED | `knowledge-base/kyc/account-opening.md` | `archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/home/README.md`；`archive/converted-prd/card/application/README.md` | account-opening.md 已补齐 Waitlist页面级拦截、Face 30秒超时、长期有效、Face锁定、Home钱包面板映射、申卡前置 |
 | 27 | ALIGNED | `knowledge-base/security/_index.md` | `archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/app/registration-login/README.md` | security/_index.md 已按 Security + Registration + Card Manage + Wallet converted-prd 更新证据边界和缺口索引 |
 | 28 | ALIGNED | `knowledge-base/security/*.md` | `archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/card/manage/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | security/*.md 已补齐 BIO跳过认证、DeviceID、锁定矩阵、IVS有效期、验证码重发冷却、设备绑定、Quick Login BIO处理、API/密码规则等 |
-| 29 | SOURCE_GAP | `knowledge-base/common/notification.md` | `archive/converted-prd/notification/push-inbox/README.md`；`archive/converted-prd/notification/system-email/README.md`；相关业务触发 PRD | notification.md 已补基础链路、Push、消息中心、通知设置、Webhook、System email；全量模板/OBoss/Webhook事件仍需结构化 |
+| 29 | ALIGNED | `knowledge-base/common/notification.md` | `archive/converted-prd/notification/push-inbox/README.md`；`archive/converted-prd/notification/system-email/README.md`；相关业务触发 PRD | common/notification.md 已重写为 Notification 公共能力文档，覆盖 Push、消息中心、通知设置、Webhook、System Email 边界 |
 | 30 | ALIGNED | `knowledge-base/common/errors.md` | 多份 converted-prd 中的错误码 / 文案 | common/errors.md 已重写为统一错误字典，覆盖已校准模块的错误文案、toast、popup、failed page 和异常边界 |
 | 31 | SOURCE_GAP | `knowledge-base/_meta/*.md` | 多份 converted-prd | _meta/*.md 已补关键状态/字段/限制/地区/合规/术语；全量字典仍需专项结构化 |
 | 32 | OUT_OF_SCOPE | Website / Marketing facts | `archive/converted-prd/website/**/README.md` | 当前 runtime KB 明确排除 website |
@@ -152,14 +152,16 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 指标 | 数量 |
 |---|---:|
 | 总任务 | 32 |
-| ALIGNED | 25 |
+| ALIGNED | 26 |
 | NEED_CONFIRMATION | 3 |
 | CONFLICT | 1 |
-| SOURCE_GAP | 2 |
+| SOURCE_GAP | 1 |
 | TODO | 0 |
 | OUT_OF_SCOPE | 1 |
 
 ## Batch Notes
+
+- 2026-05-09：收口 common/notification SOURCE_GAP。common/notification.md 重写为 Notification 公共能力文档，覆盖 Push、消息中心、通知设置、Webhook、System Email 边界，任务 29 改为 ALIGNED。
 
 - 2026-05-09：收口 common/errors SOURCE_GAP。common/errors.md 重写为统一错误字典，覆盖 Account/Security/KYC/Card/Wallet/Transaction/Notification 的已确认错误文案、toast、popup、failed page 和异常边界，任务 30 改为 ALIGNED。
 
