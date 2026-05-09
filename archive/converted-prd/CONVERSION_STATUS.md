@@ -40,7 +40,7 @@
 | 14 | DONE | `archive/historical-prd/notification/[2026-03-12]AIX+系统邮件.docx` | `archive/converted-prd/notification/system-email/` | 已完成；图片引用 2，图片文件 2，缺失 0；HTML 表格 0 |
 | 15 | TODO | `archive/historical-prd/oboss/[AIX]OBOSS MVP.docx` | `archive/converted-prd/oboss/mvp/` |  |
 | 16 | TODO | `archive/historical-prd/oboss/[2026-04-14]AIX-Oboss能力.docx` | `archive/converted-prd/oboss/capabilities/` | 源文件较大，转换后需重点检查图片和表格 |
-| 17 | TODO | `archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx` | `archive/converted-prd/security/identity-verification/` |  |
+| 17 | DONE | `archive/historical-prd/security/AIX Security 身份认证需求V1.0 (1).docx` | `archive/converted-prd/security/identity-verification/` | 已完成；图片引用 19，图片文件 19，缺失 0；HTML 表格 38 |
 | 18 | DONE | `archive/historical-prd/wallet/AIX Wallet V1.0【Asset】.docx` | `archive/converted-prd/wallet/asset/` | 已完成；图片引用 7，图片文件 7，缺失 0；HTML 表格 2 |
 | 19 | TODO | `archive/historical-prd/wallet/AIX Wallet V1.0【Deposit & Send & Swap 】.docx` | `archive/converted-prd/wallet/deposit-send-swap/` |  |
 | 20 | TODO | `archive/historical-prd/website/[2025-11-05]AIX-官网需求一期.docx` | `archive/converted-prd/website/phase-1/` | 源文件较大，转换后需重点检查图片和表格 |
@@ -59,6 +59,6 @@
 | 指标 | 数量 |
 |---|---:|
 | 历史 docx 总数 | 23 |
-| 已完成 | 9 |
-| 待转换 | 14 |
+| 已完成 | 10 |
+| 待转换 | 13 |
 | 受阻 | 0 |
