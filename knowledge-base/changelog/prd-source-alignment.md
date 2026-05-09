@@ -22,6 +22,7 @@ owner: 吴忆锋
 5. 官网 / Website / Marketing PRD 暂不进入 runtime knowledge-base，除非用户明确要求。
 6. 每批更新后，必须更新本表状态。
 7. 审计不能只看主 PRD；凡是业务链路依赖其他能力 PRD，必须同步纳入证据。例如注册登录涉及邮箱 OTP、密码、BIO、Face Auth、账户锁定等时，必须同时核对 `registration-login` 和 `security/identity-verification` 两份 converted-prd。
+8. 必须做双向覆盖校验：不仅检查 `knowledge-base` 里的事实是否有证据，也要检查 converted-prd 证据里明确存在的关键规则是否已经进入对应知识库文件。证据有、知识库没有的关键规则，标为 `SOURCE_GAP` 并补充到知识库，或在确认为非 runtime 范围时标 `OUT_OF_SCOPE`。
 
 ## 证据使用规则
 
@@ -32,6 +33,7 @@ owner: 吴忆锋
 | Cross-module evidence | 另一个模块中定义了入口、状态、限制或异常文案 | 作为补充来源，需在知识库中标明来源 |
 | Conflict evidence | 两份 PRD 对同一事实描述不一致 | 标 `CONFLICT`，不自行裁决 |
 | Missing evidence | 知识库事实找不到 converted-prd 支持 | 标 `NEED_CONFIRMATION` |
+| Source coverage gap | converted-prd 中有明确规则，但知识库未覆盖 | 标 `SOURCE_GAP`；若属于 runtime 知识，应补入知识库；若属于 Website/Marketing/废弃删除线等非 runtime 范围，标 `OUT_OF_SCOPE` 或 `NEED_CONFIRMATION` |
 
 ### 关键交叉证据
 
@@ -56,6 +58,36 @@ owner: 吴忆锋
 | NEED_CONFIRMATION | 知识库事实与历史 PRD 不完全一致，或历史 PRD 无明确依据 |
 | CONFLICT | 多份历史 PRD 之间存在冲突 |
 | OUT_OF_SCOPE | 不纳入 runtime knowledge-base |
+| SOURCE_GAP | converted-prd 证据中有关键规则，但对应知识库文件尚未覆盖 |
+
+## 双向覆盖校验清单
+
+每个模块审计时必须同时完成两类检查：
+
+| 检查方向 | 问题 | 结果处理 |
+|---|---|---|
+| KB → Evidence | 知识库里的事实是否能在 converted-prd 中找到明确依据？ | 找不到则标 `NEED_CONFIRMATION`，不得继续当作 confirmed fact |
+| Evidence → KB | converted-prd 里的关键规则是否已经进入知识库？ | 未覆盖则标 `SOURCE_GAP`，并补入知识库或说明不纳入原因 |
+
+Evidence → KB 至少要抽取并检查这些规则类型：
+
+| 规则类型 | 例子 | 处理要求 |
+|---|---|---|
+| 流程 / 页面入口 | 注册、登录、申卡、充值、转账、交易详情入口 | 需进入对应模块主文档或索引 |
+| 状态 / 状态流转 | Account Status、Card Status、Transaction Status、KYC Status | 需进入模块文档或 `_meta/status-dictionary.md` |
+| 字段 / 输入规则 | Email、手机号、AIX Tag、密码、金额、币种、网络 | 需进入字段规则或对应页面规则 |
+| 校验 / 频控 / 限制 | OTP 锁定、失败次数、冷却期、设备限制、国家隐藏规则 | 需进入模块规则或 Security / Common 规则 |
+| 错误文案 | `Account locked...`、`Invalid OTP`、格式错误提示 | 需进入 `common/errors.md` 或对应页面规则 |
+| 跨模块依赖 | KYC 前置、Face Auth、BIO、Notification、OBOSS | 需在主模块标明 supporting evidence |
+| 删除线 / 废弃内容 | Word 转换中的 `<del>` 或 `~~...~~` | 不直接沉淀为 confirmed fact；标 `NEED_CONFIRMATION` 或说明历史废弃 |
+| 待定事项 / TBD | PRD 的待定事项章节 | 不沉淀为 confirmed fact；进入待确认项 |
+
+只有同时满足以下条件，任务才能标为 `ALIGNED`：
+
+1. 该知识库文件中的关键事实都有 converted-prd 证据支持；
+2. 对应 converted-prd 的关键 runtime 规则已被知识库覆盖；
+3. 未覆盖的证据规则均已登记为 `SOURCE_GAP` / `OUT_OF_SCOPE` / `NEED_CONFIRMATION`；
+4. 删除线、历史废弃、待定事项没有被错误沉淀为 confirmed fact。
 
 ## Source Corpus
 
@@ -123,6 +155,7 @@ owner: 吴忆锋
 | ALIGNED | 1 |
 | NEED_CONFIRMATION | 3 |
 | CONFLICT | 0 |
+| SOURCE_GAP | 0 |
 | TODO | 27 |
 | OUT_OF_SCOPE | 1 |
 
@@ -131,3 +164,4 @@ owner: 吴忆锋
 - 2026-05-09：创建本审计任务表。下一步从 account 模块开始校准。
 - 2026-05-09：补充交叉证据规则。Account / Registration / Login / Password Reset 不能只看注册登录 PRD，必须同时核对 Security 身份认证 PRD；后续 Card / Wallet / Transaction / Notification 同理按主证据 + 支撑证据执行。
 - 2026-05-09：完成 account 第一批校准：registration 标 ALIGNED；account index / login / password-reset 标 NEED_CONFIRMATION，原因是 Login 输入方式和 Password Reset 入口在 converted-prd 中存在删除线或证据不完整。
+- 2026-05-09：补充双向覆盖校验规则。后续每个模块必须同时检查 KB → Evidence 和 Evidence → KB，防止“知识库有但无证据”和“证据有但知识库漏写”两类问题。
