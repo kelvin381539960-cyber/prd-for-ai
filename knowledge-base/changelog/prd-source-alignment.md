@@ -120,7 +120,7 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 4 | NEED_CONFIRMATION | `knowledge-base/account/password-reset.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | password-reset.md 已重写为待确认；7.3 忘记密码正文为删除线，不能作为 active runtime fact |
 | 5 | ALIGNED | `knowledge-base/home/_index.md` | `archive/converted-prd/app/home/README.md` | home/_index.md 已按 Home + FAQ 证据更新，明确首页查询入口与跨模块边界 |
 | 6 | ALIGNED | `knowledge-base/home/app-home.md` | `archive/converted-prd/app/home/README.md` | app-home.md 已补齐 Evidence→KB 缺口：钱包状态、申卡入口、卡片展示、FAQ、核心交易入口、刷新规则 |
-| 7 | SOURCE_GAP | `knowledge-base/common/faq.md` | `archive/converted-prd/app/faq/README.md` | common/faq.md 已登记 SOURCE_GAP：converted FAQ 与旧 xlsx FAQ 口径不一致，需后续按 converted-prd 全量重写 |
+| 7 | ALIGNED | `knowledge-base/common/faq.md` | `archive/converted-prd/app/faq/README.md` | common/faq.md 已按 converted FAQ 全量重写：FAQ 展示规则、Zendesk Section、场景入口、首页/申卡 FAQ 已收口 |
 | 8 | ALIGNED | `knowledge-base/transaction/_index.md` | `archive/converted-prd/app/transaction-history/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | transaction/_index.md 已按三份 converted-prd 更新证据范围和补齐规则索引 |
 | 9 | ALIGNED | `knowledge-base/transaction/history.md` | `archive/converted-prd/app/transaction-history/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | history.md 已补齐全量交易聚合、去搜索、过滤类型、REVERSAL退款、异常文案、时间分组 |
 | 10 | ALIGNED | `knowledge-base/transaction/detail.md` | `archive/converted-prd/app/transaction-history/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | detail.md 已补齐 Card/Crypto/Swap 详情差异、Gas fee隐藏、Exchange rate展示和可选字段隐藏 |
@@ -152,14 +152,16 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 指标 | 数量 |
 |---|---:|
 | 总任务 | 32 |
-| ALIGNED | 23 |
+| ALIGNED | 24 |
 | NEED_CONFIRMATION | 3 |
 | CONFLICT | 1 |
-| SOURCE_GAP | 4 |
+| SOURCE_GAP | 3 |
 | TODO | 0 |
 | OUT_OF_SCOPE | 1 |
 
 ## Batch Notes
+
+- 2026-05-09：收口 FAQ SOURCE_GAP。common/faq.md 按 archive/converted-prd/app/faq/README.md 重写，旧 xlsx 不再作为主事实来源，任务 7 改为 ALIGNED。
 
 - 2026-05-09：收口 Wallet SOURCE_GAP。新增 wallet/send.md 和 wallet/swap.md；wallet/deposit.md 改为只承接 Deposit/GTR/WalletConnect，任务 24 改为 ALIGNED。
 
