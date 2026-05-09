@@ -133,8 +133,8 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 17 | ALIGNED | `knowledge-base/card/manage/pin.md` | `archive/converted-prd/card/manage/README.md`；`archive/converted-prd/security/identity-verification/README.md` | pin.md 已补齐 6 位 PIN、引导弹窗、Confirm PIN、AAI 后 set/reset、公钥接口、31031、PIN 简单规则 |
 | 18 | ALIGNED | `knowledge-base/card/manage/sensitive-info.md` | `archive/converted-prd/card/manage/README.md`；`archive/converted-prd/security/identity-verification/README.md` | sensitive-info.md 已补齐 Basic/Sensitive Info 字段来源、复制 toast、接口失败 toast |
 | 19 | ALIGNED | `knowledge-base/card/manage/status-and-operations.md` | `archive/converted-prd/card/manage/README.md` | status-and-operations.md 已补齐 Freeze/Unfreeze、网络/服务端错误、Lock/Unlock 文案和接口路径 |
-| 20 | TODO | `knowledge-base/card/transaction.md` | `archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/app/transaction-history/README.md` | 卡交易 |
-| 21 | TODO | `knowledge-base/card/transaction-detail.md` | `archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/app/transaction-history/README.md` | 卡交易详情 |
+| 20 | ALIGNED | `knowledge-base/card/transaction.md` | `archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/app/transaction-history/README.md` | card/transaction.md 已补齐 DTC 通知、资金回退、REVERSAL type=19、展示范围、异常文案 |
+| 21 | ALIGNED | `knowledge-base/card/transaction-detail.md` | `archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/app/transaction-history/README.md` | card/transaction-detail.md 已补齐 Card History/Details、去搜索、状态说明、Exchange rate、可选字段隐藏和 DTC 未知错误处理 |
 | 22 | TODO | `knowledge-base/wallet/_index.md` | `archive/converted-prd/wallet/asset/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/security/identity-verification/README.md` | 钱包索引 |
 | 23 | TODO | `knowledge-base/wallet/assets.md` | `archive/converted-prd/wallet/asset/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md` | 钱包资产 |
 | 24 | TODO | `knowledge-base/wallet/deposit.md` | `archive/converted-prd/wallet/deposit-send-swap/README.md`；`archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/transaction-history/README.md` | 充值 / 转账 / 兑换；需核对身份验证与交易记录 |
@@ -152,14 +152,16 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 指标 | 数量 |
 |---|---:|
 | 总任务 | 32 |
-| ALIGNED | 14 |
+| ALIGNED | 16 |
 | NEED_CONFIRMATION | 3 |
 | CONFLICT | 1 |
 | SOURCE_GAP | 1 |
-| TODO | 12 |
+| TODO | 10 |
 | OUT_OF_SCOPE | 1 |
 
 ## Batch Notes
+
+- 2026-05-09：完成 Card Transaction 批次。card/transaction 和 card/transaction-detail 标 ALIGNED；补齐 DTC 通知、REVERSAL type=19、卡交易展示范围、去搜索、Exchange rate、DTC未知错误处理等规则。
 
 - 2026-05-09：完成 Card Manage 批次。manage index / activation / pin / sensitive-info / status-and-operations 标 ALIGNED；补齐激活、6位PIN、公钥、31031、敏感信息、Freeze/Unfreeze、网络/服务端错误等 Evidence→KB 缺口。
 

@@ -1,16 +1,19 @@
 ---
 module: card
 feature: card-transaction-detail
-version: "1.3"
+version: "1.1"
 status: active
-source_doc: archive/historical-prd/app/AIX APP V1.0【Transaction & History】 (1).docx；reference-data/transaction/card-wallet-transaction-status-mapping.docx；knowledge-base/card/card-home.md；knowledge-base/transaction/history.md；knowledge-base/transaction/detail.md；knowledge-base/transaction/status-model.md；knowledge-base/changelog/knowledge-gaps.md；prd-template/standard-prd-template.md
-source_section: 7.1 全量交易记录 Transaction；7.2 卡交易列表 Card History；7.3 卡交易详情 Card Transaction Details；8.1 Transaction History of Card；8.2 Card Transaction Detail Inquiry；卡交易&钱包交易状态梳理 / 嵌入 Excel hFgXns；Standard PRD Template v1.3
-last_updated: 2026-05-05
+source_doc: archive/converted-prd/card/transaction/README.md；archive/converted-prd/app/transaction-history/README.md
+source_section: Transaction & History / 7.2 Card History；7.3 Card Transaction Details；8.1/8.2 DTC card transaction APIs
+last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
 ---
 
 # Card Transaction Detail 卡交易列表与详情
+
+> Source alignment note: 本文件已按 App Transaction History PRD 与 Card Transaction PRD 做双向覆盖校验，补齐 type=19、去搜索、接口地址、状态说明、Exchange rate、可选字段隐藏等来源。
+
 
 ## 1. 文档信息
 
@@ -394,6 +397,21 @@ flowchart LR
 | 网络异常 | 网络断开 | 进入列表 / 详情 | `No internet connection. Please retry` | 可重试 | 是 |
 
 ---
+
+## Source alignment additions
+
+| 规则 | 结论 | 来源 |
+|---|---|---|
+| Card History 标题 | 页面标题为 Card History | Transaction & History / 7.2 |
+| 搜索 | 卡交易去掉搜索，后续再迭代 | Transaction & History changelog |
+| 展示类型 | PURCHASE、CASH_WITHDRAWAL、REFUND、INCREMENTAL_AUTH；REVERSAL / type=19 按 REFUND 展示 | Transaction & History / 7.2 |
+| Transaction Details 入口 | Card Home 交易区域或 Card History 点击任意交易进入 Transaction Details | Transaction & History / 7.3 |
+| Detail 查询 | 进入详情时调用 Card Transaction Detail Inquiry，上送 Transaction ID 获取最新交易记录 | Transaction & History / 7.3 / 8.2 |
+| requestAmount/requestCurrency | 交易金额为法币金额 | Transaction & History / 7.3 |
+| 状态说明 | Pending / Success / Refunded / Declined / Cancelled 的说明弹窗按 PRD 文案展示 | Transaction & History / 7.3 |
+| Merchant city / MCC | 非必填；没有则不显示该 item | Transaction & History / 7.3 |
+| Exchange rate | 显示小数点后 6 位，向上取整；交互改成半弹层 | Transaction & History changelog / 7.3 |
+| DTC 未知错误 | DTCPay 返回当前错误码之外的其他错误，直接 Lark 报警通知，以便产品和渠道确定后续错误处理 | Transaction & History / 8.1、8.2 |
 
 ## 10. 来源引用
 

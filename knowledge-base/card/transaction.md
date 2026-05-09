@@ -1,16 +1,19 @@
 ---
 module: card
 feature: card-transaction
-version: "1.2"
+version: "1.1"
 status: active
-source_doc: archive/historical-prd/card/AIX Card交易【transaction】.docx；external-docs/dtc/DTC Card Issuing API Document_20260310 (1).docx；external-docs/dtc/DTC Wallet OpenAPI Document20260126 (1).docx；knowledge-base/changelog/knowledge-gaps.md；prd-template/standard-prd-template.md
-source_section: Card Transaction；7.1 功能概述；7.2 业务流程；7.3 流程说明；8.1 外部接口清单；Standard PRD Template v1.3
-last_updated: 2026-05-05
+source_doc: archive/converted-prd/card/transaction/README.md；archive/converted-prd/app/transaction-history/README.md
+source_section: Card Transaction / 7.1 资金回退；Transaction & History / 7.2 Card History；7.3 Card Transaction Details
+last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
 ---
 
 # Card Transaction 卡交易资金回退
+
+> Source alignment note: 本文件已按 Card Transaction PRD 与 App Transaction History PRD 做双向覆盖校验，补齐卡交易通知、退款/回退、REVERSAL type=19、卡交易展示范围和异常文案。
+
 
 ## 1. 文档信息
 
@@ -235,6 +238,29 @@ sequenceDiagram
 | 回退失败 | 目标类型，balance > 0，Transfer 失败 | 无用户操作 | 用户可能不可见资金 | 发送异常告警，人工介入 | 是 |
 
 ---
+
+## Source alignment additions
+
+### A. Card transaction notification / funds rollback
+
+| 规则 | 结论 | 来源 |
+|---|---|---|
+| DTC 通知 | DTC 检测发生交易后，通过 Card Transaction Notification 接口向 AIX 发送交易通知 | Card Transaction / 7.1 |
+| AIX 校验类型 | AIX 收到交易通知后先校验 type 是否为 refund、reversal、deposit 等源 PRD 定义范围；Top-up 为删除线，不沉淀为 confirmed fact | Card Transaction / 7.1 |
+| 余额回查 | 若匹配，AIX 调用 Inquiry Card Basic Info 主动查询当前卡余额，DTC 返回最新 card balance | Card Transaction / 7.1 |
+| 回退结果 | AIX 校验回退接口返回结果；具体异常与渠道确认事项不自行扩展 | Card Transaction / 7.1 |
+
+### B. Card History display range
+
+| 规则 | 结论 | 来源 |
+|---|---|---|
+| 卡交易列表接口 | [POST] /openapi/v1/card/inquiry-card-transaction | Transaction & History / 7.2、8.1 |
+| 搜索 | 全量交易及卡交易去掉搜索，后续再迭代 | Transaction & History changelog |
+| 原始类型展示范围 | 仅展示 PURCHASE、CASH_WITHDRAWAL、REFUND、INCREMENTAL_AUTH | Transaction & History / 7.2 |
+| REVERSAL | DTC 反馈部分退款会使用 REVERSAL，因此卡交易需展示该 type=19 单子 | Transaction & History changelog / 7.2 |
+| REVERSAL 展示 | 前端与 REFUND 一样显示 refund-商户名称 | Transaction & History changelog / 7.2 |
+| 无数据 | 如果没有数据，占位符显示 No transaction data | Transaction & History / 7.2 |
+| 异常文案 | DTC / 服务端异常显示 Data error. Please refresh and try again.；网络异常显示 No internet connection. Please retry | Transaction & History / 7.1 |
 
 ## 10. 来源引用
 
