@@ -1,11 +1,11 @@
 ---
 module: common
 feature: errors
-version: "1.4"
-status: active
-source_doc: knowledge-base/_kb-ingestion-process.md；archive/historical-prd/wallet/AIX Wallet V1.0【Deposit & Send & Swap 】.docx；external-docs/dtc/Documentation dtc-nodejs-wallet-connect (ARCHIVE).docx；external-docs/dtc/DTC Wallet OpenAPI Document20260126 (1).docx；archive/historical-prd/notification/[2025-11-25] AIX+Notification（push及站内信）.docx；knowledge-base/integrations/dtc/_index.md；knowledge-base/integrations/walletconnect/_index.md；knowledge-base/common/notification.md；knowledge-base/wallet/deposit.md；knowledge-base/changelog/knowledge-gaps.md
-source_section: AIX Wallet PRD / 6.4.5 异常处理；DTC WalletConnect / 3 Server-Emitted Events；3.3 Websocket disconnect；Wallet Deposit v1.6；WalletConnect v1.3；ALL-GAP 总表
-last_updated: 2026-05-02
+version: "1.1"
+status: source_gap
+source_doc: archive/converted-prd/**/README.md；knowledge-base/changelog/prd-source-alignment.md
+source_section: Converted PRD corpus / error messages, toast, popup, failed pages, API errors
+last_updated: 2026-05-09
 owner: 吴忆锋
 depends_on:
   - common/_index
@@ -17,6 +17,9 @@ depends_on:
 ---
 
 # Common Errors 错误处理公共能力
+
+> Source alignment note: 本文件已按 converted-prd 做双向覆盖校验。当前已补入本轮审计发现的高频错误文案和边界；但全量 PRD 的错误码、toast、popup、failed page 尚未完整结构化，因此状态标为 `SOURCE_GAP`。
+
 
 ## 1. 功能定位
 
@@ -196,6 +199,51 @@ flowchart TD
 | ERR-GAP-007 | 人工补偿入口与操作边界 | ALL-GAP-026、ALL-GAP-039 |
 | ERR-GAP-008 | 用户提示与错误码映射 | ALL-GAP-038 |
 | ERR-GAP-009 | Deposit 余额未更新发现机制 | ALL-GAP-027、ALL-GAP-039 |
+
+## Source alignment additions
+
+### A. 本轮已补齐的跨模块错误 / Toast / Popup
+
+| 模块 | 文案 / 错误 | 场景 | 来源 |
+|---|---|---|---|
+| Account | Account locked. Please contact customer support. | Banned 登录拦截 | registration-login |
+| Account | This email has been used. Please try another one. | 注册邮箱重复 | registration-login |
+| Account | Passwords do not match. Please try again. | 两次密码不一致 | registration-login |
+| Security | Too Many Attempts | OTP / Email OTP / Login Passcode / Face Auth 达到锁定阈值 | security |
+| Security | Invalid OTP | OTP / Email OTP 输入错误 | security |
+| Security | Verification Expired | 身份验证挑战或凭证过期 | security |
+| KYC | Face Loading 超过 30 秒进入 Loading Failed | Face Loading 超时 | kyc/wallet-opening |
+| Card Application | The exchange rate has not been updated in real time. Please try again. | 申卡 checkout 切换币种汇率失败 | card/application |
+| Card Application | Address selection isnot completed. | 实体卡地址选择未完成返回 | card/application |
+| Card Manage | The last 4 digits entered are invalid | 实体卡激活后四位校验失败 | card/manage |
+| Card Manage | Your card has been activated | 实体卡激活成功 toast | card/manage |
+| Card Manage | Please re-entered the same PIN. | 两次 PIN 不一致 | card/manage |
+| Card Manage | PIN setup failed | PIN 设置默认失败页标题 | card/manage |
+| Card Manage | Failed to get card info. Please try again later | Card detail Basic/Sensitive Info 接口失败 | card/manage |
+| Card Manage | The information has been copied. | 复制卡信息 / 钱包地址 | card/manage；wallet/deposit-send-swap |
+| Card Manage | Freeze failed / Unfreeze failed | Lock/Unlock 后端错误 | card/manage |
+| Card Manage | Your physical card has been unlocked. | Unlock 成功 | card/manage |
+| Card Manage | No internet connection, please check the connection or try again later. | Unlock 网络异常 | card/manage |
+| Transaction | Data error. Please refresh and try again. | DTC / 服务端异常 | transaction-history |
+| Transaction | No internet connection. Please retry | 网络异常 | transaction-history |
+| Transaction | No transaction data | Card History / Recent transaction 空态 | transaction-history；wallet/asset |
+| Wallet | Network abnormality. Please try again later. | My Assets 汇率异常 | wallet/asset |
+| Wallet | The QR code has expired | WalletConnect QR 过期 | wallet/deposit-send-swap |
+| Wallet | Insufficient balance | Send / Swap / Checkout 余额不足类场景 | wallet/deposit-send-swap；card/application |
+| Notification | 全部已读 | 一键已读 toast | notification/push-inbox |
+
+### B. Error source gaps
+
+| 缺口 | 说明 | 处理 |
+|---|---|---|
+| 全量错误码字典 | KYC / Security / DTC / Card / Wallet 源 PRD 各有错误码和错误文案，尚未统一抽取成可检索字典 | SOURCE_GAP |
+| Failed Page 全量结构 | Card / KYC / Wallet / Security 多处 failed page 尚未按字段结构化 | SOURCE_GAP |
+| Toast / Popup 全量结构 | 已补高频项，但未完整覆盖所有 converted-prd | SOURCE_GAP |
+| API error mapping | DTC 未知错误码、Lark 报警、后端返回文案透传等规则分散在模块文档中 | SOURCE_GAP |
+
+### C. Runtime usage rule
+
+回答具体错误码、错误文案或异常处理时，应优先查对应模块已对齐文件；若本文件无记录，必须回查 `archive/converted-prd/**/README.md`，不得假设错误文案。
 
 ## 11. 来源引用
 

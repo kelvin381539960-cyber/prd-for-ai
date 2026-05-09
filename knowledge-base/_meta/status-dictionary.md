@@ -1,11 +1,11 @@
 ---
 module: _meta
 feature: status-dictionary
-version: "1.0"
-status: draft
-source_doc: reference-data/transaction/card-wallet-transaction-status-mapping.docx；knowledge-base/transaction/status-model.md；knowledge-base/_kb-ingestion-process.md
-source_section: "4. 推荐目录结构"
-last_updated: 2026-05-01
+version: "1.1"
+status: source_gap
+source_doc: archive/converted-prd/**/README.md；knowledge-base/* 已校准模块
+source_section: Converted PRD corpus / statuses, fields, limits, regions, compliance boundaries
+last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, dev, qa, business, ai]
 ---
@@ -64,3 +64,16 @@ readers: [product, dev, qa, business, ai]
 - 渠道原始状态、后端状态、前端展示状态需分开记录。
 - 资金和交易相关状态必须能闭环。
 - 无法闭环时必须标记“冲突 / 待确认”。
+
+## Source alignment additions
+
+| 状态域 | 状态 | 说明 | 来源 |
+|---|---|---|---|
+| Account | Active / Banned / Closed | converted-prd 中 Locked 为删除线，不作为 Account Status 沉淀 | registration-login |
+| Security Lock | Locked | OTP / Email OTP / Login Passcode / Face Auth 的场景锁定，不等同 Account Status | security |
+| KYC | Pending / Under Review / Failed / Rejected / Approved | Home 钱包面板和 KYC 状态机使用 | kyc/wallet-opening；home |
+| Card Application / Card | Processing / Pending activation / Active / Frozen 等 | 首页和卡管理使用；部分点击跳转存在 CONFLICT | home；card/application；card/manage |
+| Transaction | Pending / Success / Refunded / Declined / Under Review / Cancelled | 全量交易和详情页展示状态 | transaction-history |
+| Wallet transaction | DEPOSIT / TRANSFER_IN / TRANSFER_OUT / CARD_FEE_DEBIT / CARD_FEE_REFUND | crypto 交易展示范围 | transaction-history |
+| Card transaction | PURCHASE / CASH_WITHDRAWAL / REFUND / INCREMENTAL_AUTH / REVERSAL | 卡交易展示范围；REVERSAL 按 REFUND 展示 | transaction-history；card/transaction |
+| Notification user status | active / inactive / Closed / banned | active 可发；inactive/Closed/banned 停止全部消息推送 | notification/push-inbox |

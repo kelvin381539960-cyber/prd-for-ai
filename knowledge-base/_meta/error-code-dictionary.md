@@ -1,11 +1,11 @@
 ---
 module: _meta
 feature: error-code-dictionary
-version: "1.0"
-status: draft
-source_doc: knowledge-base/common/errors.md；knowledge-base/_kb-ingestion-process.md
-source_section: "4. 推荐目录结构"
-last_updated: 2026-05-01
+version: "1.1"
+status: source_gap
+source_doc: archive/converted-prd/**/README.md；knowledge-base/* 已校准模块
+source_section: Converted PRD corpus / statuses, fields, limits, regions, compliance boundaries
+last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
 ---
@@ -32,6 +32,16 @@ readers: [product, ui, dev, qa, business, ai]
 | 错误码 | 标准错误名 | 触发条件 | 用户提示 | 系统动作 | 是否可重试 | 来源 | 备注 |
 |--------|------------|----------|----------|----------|------------|------|------|
 | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
+
+## Source alignment additions
+
+本文件当前为 `SOURCE_GAP`：converted-prd 中的错误码与文案仍分散在 KYC、Security、Card Manage、Transaction、Wallet 等模块。已在 `common/errors.md` 补入高频错误文案，后续需按 code / module / trigger / user copy / backend action 抽取全量字典。
+
+| 已知错误码 / 类型 | 说明 | 来源 |
+|---|---|---|
+| 31031 | PIN 设置失败时使用后端返回文案覆盖默认失败文案 | card/manage |
+| FACE_QUALITY_TOO_POOR / USER_TIMEOUT / SIMILARITY_FAILED 等 | Face / KYC 错误码映射来源 | kyc/wallet-opening；security |
+| DTC 未知错误码 | 需 Lark 报警通知产品和渠道确定后续处理 | transaction-history |
 
 ## 4. 维护规则
 

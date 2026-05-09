@@ -1,11 +1,11 @@
 ---
 module: _meta
 feature: compliance-boundaries
-version: "1.0"
-status: draft
-source_doc: knowledge-base/_kb-ingestion-process.md；knowledge-base/_system-boundary.md
-source_section: "4. 推荐目录结构"
-last_updated: 2026-05-01
+version: "1.1"
+status: source_gap
+source_doc: archive/converted-prd/**/README.md；knowledge-base/* 已校准模块
+source_section: Converted PRD corpus / statuses, fields, limits, regions, compliance boundaries
+last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, dev, qa, business, ai]
 ---
@@ -31,6 +31,16 @@ readers: [product, dev, qa, business, ai]
 | 边界名称 | 适用场景 | 规则内容 | 资金影响 | 系统动作 | 用户影响 | 来源 | 待确认 |
 |----------|----------|----------|----------|----------|----------|------|--------|
 | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
+
+## Source alignment additions
+
+| 边界 | 结论 | 来源 |
+|---|---|---|
+| Wallet Withdraw | 因牌照等合规问题，提现不做，用户联系 CS 走人工处理；App 隐藏 Withdraw 入口 | wallet/asset；wallet/deposit-send-swap |
+| Wallet Waitlist | Waitlist 用户无法申请开通钱包；停留在 Waitlist Page | kyc/wallet-opening；home |
+| Notification compliance | 金融信息合规优先，营销类需用户明确同意；加密资产通知需提示风险，不承诺收益 | notification/push-inbox |
+| MoEngage subscribe sync | 源 PRD 中同步 MoEngage subscribe status 到 notification preference 为删除线，不沉淀为 confirmed fact | notification/push-inbox |
+| Website / Marketing | 当前 runtime KB 不纳入 Website / Marketing PRD | knowledge-base/README；prd-source-alignment |
 
 ## 4. 维护规则
 

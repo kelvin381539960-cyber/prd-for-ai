@@ -143,8 +143,8 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | 27 | ALIGNED | `knowledge-base/security/_index.md` | `archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/app/registration-login/README.md` | security/_index.md 已按 Security + Registration + Card Manage + Wallet converted-prd 更新证据边界和缺口索引 |
 | 28 | ALIGNED | `knowledge-base/security/*.md` | `archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/card/manage/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | security/*.md 已补齐 BIO跳过认证、DeviceID、锁定矩阵、IVS有效期、验证码重发冷却、设备绑定、Quick Login BIO处理、API/密码规则等 |
 | 29 | SOURCE_GAP | `knowledge-base/common/notification.md` | `archive/converted-prd/notification/push-inbox/README.md`；`archive/converted-prd/notification/system-email/README.md`；相关业务触发 PRD | notification.md 已补基础链路、Push、消息中心、通知设置、Webhook、System email；全量模板/OBoss/Webhook事件仍需结构化 |
-| 30 | TODO | `knowledge-base/common/errors.md` | 多份 converted-prd 中的错误码 / 文案 | 错误文案字典 |
-| 31 | TODO | `knowledge-base/_meta/*.md` | 多份 converted-prd | 状态、字段、限制、地区等字典 |
+| 30 | SOURCE_GAP | `knowledge-base/common/errors.md` | 多份 converted-prd 中的错误码 / 文案 | common/errors.md 已补高频错误/Toast/Popup；全量错误码、failed page、API error mapping 仍需专项结构化 |
+| 31 | SOURCE_GAP | `knowledge-base/_meta/*.md` | 多份 converted-prd | _meta/*.md 已补关键状态/字段/限制/地区/合规/术语；全量字典仍需专项结构化 |
 | 32 | OUT_OF_SCOPE | Website / Marketing facts | `archive/converted-prd/website/**/README.md` | 当前 runtime KB 明确排除 website |
 
 ## Progress
@@ -155,11 +155,13 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 | ALIGNED | 22 |
 | NEED_CONFIRMATION | 3 |
 | CONFLICT | 1 |
-| SOURCE_GAP | 3 |
-| TODO | 2 |
+| SOURCE_GAP | 5 |
+| TODO | 0 |
 | OUT_OF_SCOPE | 1 |
 
 ## Batch Notes
+
+- 2026-05-09：完成最终 TODO 批次。common/errors 和 _meta/*.md 标 SOURCE_GAP；已补本轮审计发现的高频错误、状态、字段、限制、国家/地区、合规边界、术语，但全量字典化仍需后续专项结构化。至此原 32 项任务无 TODO。
 
 - 2026-05-09：完成 Notification 批次。common/notification.md 标 SOURCE_GAP；已补基础通知链路、Push规则、消息中心、通知设置、Webhook和System email边界，但全量模板、OBoss配置通知、Webhook全量事件、系统邮件模板实现仍需后续结构化。
 
