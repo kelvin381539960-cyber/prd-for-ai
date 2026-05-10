@@ -19,7 +19,7 @@ last_updated: 2026-05-05
 | `validate_prd.py` | 校验 `requirements/` 下的 PRD 是否符合写作 workflow | `python3 tools/validate_prd.py` |
 | `extract_docx_tables.py` | 从 DOCX 来源文件中提取表格为 Markdown 或 CSV | `python3 tools/extract_docx_tables.py path/to/file.docx --out tmp/tables.md` |
 | `extract_tables.py` | 兼容入口，转调 `extract_docx_tables.py` | `python3 tools/extract_tables.py path/to/file.docx` |
-| `visual_structure_extract.py` | 基于成熟库封装图片结构提取：PaddleOCR 2.x / PP-Structure 2.x 做 OCR 与区域识别，OpenCV 可选做流程图节点与候选连线；输出确认模板，不直接生成 PRD | `python3 tools/visual_structure_extract.py path/to/image.png --mode flowchart --out tmp/visual --ocr paddle --structure ppstructure --detect-flow-nodes --detect-connectors` |
+| `visual_structure_extract.py` | 基于成熟库封装图片结构提取：PaddleOCR 2.x / PP-Structure 2.x 做 OCR 与区域识别，OpenCV 可选做流程图节点与候选连线；输出确认模板，不直接生成 PRD。说明见 `tools/visual-structure-extract.md`，Docker 环境见 `tools/Dockerfile.visual` | `python3 tools/visual_structure_extract.py path/to/image.png --mode flowchart --out tmp/visual --ocr paddle --structure ppstructure --detect-flow-nodes --detect-connectors` |
 
 ## validate_prd.py
 
