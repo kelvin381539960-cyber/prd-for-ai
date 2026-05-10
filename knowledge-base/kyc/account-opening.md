@@ -139,98 +139,141 @@ KYC Loading
 
 关键分支包括：waitlist、Verification unavailable、Network Error、Server Error、Loading Failed、Face Failed、POA 错误、DTC API 错误、国家线冲突和外部状态延迟。
 
-### 3.2 业务流程图
+### 3.2 业务时序图
 
-> 本图对齐原文 `7.1 开户业务流程` 与 `7.2 开户页面逻辑`，只表达用户在 App 内看到的页面、状态和业务流转。DTC / AAI 的 URL 生成、webhook、query、错误码等接口细节不放在本图，见第 5 章。
+> 本图用时序图形式表达业务页面 / 状态流转，对齐原文 `7.1 开户业务流程` 与 `7.2 开户页面逻辑`。本图不展开 DTC / AAI 的 URL 生成、webhook、query、错误码等接口链路；接口细节见第 5 章。
 
 ```mermaid
-flowchart TD
-  Entry["业务流程入口页"]
-  Loading["KYC Loading Page"]
-  Unavailable["状态2 / Verification unavailable"]
-  Start["KYC Start Page"]
-  Country["Select Residence Country Page"]
-  Declaration["弹窗：Declaration of Reverse Solicitation"]
-  StartWaitlist["拦截：KYC Start Waitlist"]
-  Waitlist["Waitlist Page"]
-  IdentityVerify["Identity Verify Page"]
-  Permission["相机权限提示 / Open settings"]
-  IdentityScan["H5：Identity Scan Page"]
-  FaceGuide["Face Guide Page"]
-  TooMany["Too many attempts"]
-  FaceScan["H5：Face Scan Page"]
-  FaceLoading["Face Loading Page"]
-  LoadingFailed["Loading Failed Page"]
-  FaceFailed["Face Failed Page"]
-  AddressUpload["Address Upload Page"]
-  AddressWaitlist["拦截：Address Upload Waitlist"]
-  Success["KYC Submission Success Page"]
-  NetworkError["Network Error Page"]
-  ServerError["Server Error Page"]
+sequenceDiagram
+    autonumber
+    actor User as 用户
+    participant Entry as 业务流程入口页
+    participant Loading as KYC Loading Page
+    participant Start as KYC Start Page
+    participant Country as Select Residence Country Page
+    participant Waitlist as Waitlist Page
+    participant Identity as Identity Verify / Identity Scan
+    participant Face as Face Guide / Face Scan / Face Loading
+    participant POA as Address Upload Page
+    participant Failed as Failed / Error Page
+    participant Success as KYC Submission Success Page
 
-  Entry -->|发起 KYC / 开户流程| Loading
+    User->>Entry: 发起 KYC / 开户流程
+    Entry->>Loading: 进入 KYC Loading Page
 
-  Loading -->|KYC 状态 = Pending / failed| Start
-  Loading -->|KYC 状态 = Under review / Rejected / Approved| Unavailable
-  Loading -->|用户在 waitlist 中，且来源渠道是 APP| Unavailable
-  Loading -->|网络异常| NetworkError
-  Loading -->|系统异常| ServerError
-  Loading -->|30 秒无结果| LoadingFailed
-  Unavailable -->|Back / Leave| Entry
+    alt 后端返回 KYC 状态机为 Under review / Rejected / Approved
+        Loading-->>User: 展示状态2 / Verification unavailable
+        User->>Entry: Back / Leave，返回业务流程入口页
+    else 用户在 waitlist 中，且来源渠道是 APP
+        Loading-->>User: 展示状态2 / Verification unavailable
+        User->>Entry: Back / Leave，返回业务流程入口页
+    else KYC 状态为 Pending / failed
+        Loading->>Start: 进入 KYC Start Page 或后续未完成节点
+    else 网络异常
+        Loading->>Failed: 进入 Network Error Page
+    else 系统异常
+        Loading->>Failed: 进入 Server Error Page
+    else 30 秒无结果
+        Loading->>Failed: 进入 Loading Failed Page
+    end
 
-  Start -->|点击居住国家 / 地区| Country
-  Country -->|从 KYC Start 进入，选择国家后| Start
-  Country -->|从 Address Upload 进入，选择国家后| AddressUpload
-  Country -->|关闭 / 返回| Start
+    User->>Start: 查看居住国家、协议、底部认证按钮
+    opt 修改居住国家
+        Start->>Country: 点击居住国家 / 地区
+        Country-->>Start: 从 KYC Start 进入时，选择国家后返回 KYC Start
+    end
 
-  Start -->|点击 Declaration 协议项| Declaration
-  Declaration -->|点击 I agree| Start
-  Declaration -->|关闭 / 返回，Declaration 不算完成| Start
+    opt Declaration 强制阅读
+        Start-->>User: 点击 Declaration 协议项，展示 Declaration 弹窗 / 阅读页
+        alt 点击 I agree
+            User->>Start: Declaration 变为已完成
+        else 关闭 / 返回
+            User->>Start: Declaration 不算完成，底部认证按钮仍按协议未完成处理
+        end
+    end
 
-  Start -->|协议未完成| Start
-  Start -->|协议完成 + 国家 Type = Phase 1| IdentityVerify
-  Start -->|协议完成 + 国家 Type = phase 2-waitlist| StartWaitlist
-  Start -->|协议获取 / 保存失败| Start
-  StartWaitlist -->|Join waitlist| Waitlist
+    alt 任一必选协议未完成
+        Start-->>User: 底部认证按钮禁用，不推进流程
+    else 协议完成 + 国家 Type = Phase 1
+        Start->>Identity: 保存协议相关信息，进入 Identity Verify Page
+    else 协议完成 + 国家 Type = phase 2-waitlist
+        Start-->>User: 展示 KYC Start Page 内 Waitlist 拦截
+        User->>Waitlist: 点击 Join waitlist，进入 Waitlist Page
+    else 协议获取 / 保存失败
+        Start-->>User: Toast：Something went wrong. Please try again later，不进入 Identity Verify
+    end
 
-  Waitlist -->|提交成功：按 userId 加入 waitlist| Entry
-  Waitlist -->|关闭 / 返回| Entry
+    alt Waitlist Page 提交成功
+        Waitlist-->>User: 按 userId 加入 waitlist，记录邮箱、国家、来源、提交时间、设备指纹 ID，并推送数仓
+        User->>Entry: 返回业务流程入口页
+    else Waitlist Page 关闭 / 返回
+        User->>Entry: 返回业务流程入口页
+    end
 
-  IdentityVerify -->|点击相机 / 开始扫描，且有权限| IdentityScan
-  IdentityVerify -->|相机未授权 / 永久拒绝| Permission
-  Permission -->|Open settings 后返回| IdentityVerify
-  IdentityVerify -->|DTC 01009 / 01005 / 其他 URL 错误| IdentityVerify
+    User->>Identity: 点击相机 / 开始扫描
+    alt 相机未授权 / 永久拒绝
+        Identity-->>User: 展示权限提示；永久拒绝时引导 Open settings
+    else DTC 返回 01009 / 01005 / 其他 URL 错误
+        Identity-->>User: 不进入 H5；01009 / 01005 展示对应 Toast，其他错误见 5.2
+    else 有权限且成功获取 H5 URL
+        Identity-->>User: 打开 Identity Scan H5
+        alt Passport OCR 成功
+            Identity->>Face: 进入 Face Guide Page
+        else Passport OCR 失败
+            Identity-->>User: 返回 Identity Verify Page
+        end
+    end
 
-  IdentityScan -->|扫描成功| FaceGuide
-  IdentityScan -->|扫描失败| IdentityVerify
+    User->>Face: 在 Face Guide 点击 Continue
+    alt 命中 face 锁定规则
+        Face-->>User: 展示 Too many attempts，不进入 Face Scan H5
+        User->>Entry: Try again later，返回业务流程入口页
+    else 未锁定
+        Face-->>User: 进入 Face Scan H5
+        User->>Face: 完成活体采集
+        Face->>Face: 进入 Face Loading Page
+    end
 
-  FaceGuide -->|Continue + 未锁定| FaceScan
-  FaceGuide -->|命中锁定规则| TooMany
-  TooMany -->|Try again later| Entry
+    alt Face 验证成功
+        Face->>POA: 进入 Address Upload Page
+    else Face result 为 FAIL / EXPIRED / incomplete
+        Face->>Failed: 进入 Face Failed Page，并展示 Face Comparison 错误码映射文案
+    else Face Loading 超过 30 秒未收到结果
+        Face->>Failed: 进入 Loading Failed Page
+        alt 点击 Retry
+            Failed->>Face: 回到 Face Loading Page，重新提交
+        else 点击 Leave
+            User->>Entry: 返回业务流程入口页
+        end
+    else 网络异常
+        Face->>Failed: 进入 Network Error Page
+    else 系统异常
+        Face->>Failed: 进入 Server Error Page
+    end
 
-  FaceScan -->|采集结束| FaceLoading
+    User->>POA: 确认 Residence 并上传地址证明文件
+    opt 修改 Residence
+        POA->>Country: 点击 Residence
+        Country-->>POA: 从 Address Upload 进入时，选择国家后返回 Address Upload
+    end
 
-  FaceLoading -->|验证成功| AddressUpload
-  FaceLoading -->|后端返回验证失败| FaceFailed
-  FaceLoading -->|30 秒无结果| LoadingFailed
-  FaceLoading -->|网络异常| NetworkError
-  FaceLoading -->|系统异常| ServerError
+    alt 文件格式错误 / 超 16MB / 上传服务器报错
+        POA-->>User: 展示对应 Toast，不进入 Success
+    else 申请国家不属于支持国家 / 白名单
+        POA-->>User: 展示 Address Upload Page 内 Waitlist 拦截
+        alt Join waitlist
+            User->>Waitlist: 进入 Waitlist Page
+        else Select other country
+            POA->>Country: 进入 Select Residence Country Page
+        end
+    else POA OCR 国家与填报居住国家不匹配 / POA 审核失败
+        POA->>Failed: 按 POA error code 映射展示前端提示文案
+    else POA 文件和国家信息提交成功
+        POA->>Success: 进入 KYC Submission Success Page
+    end
 
-  LoadingFailed -->|Retry| FaceLoading
-  LoadingFailed -->|Leave| Entry
-
-  FaceFailed -->|Try again 且未锁定| Loading
-  FaceFailed -->|Close / 返回| Entry
-
-  AddressUpload -->|点击 Residence| Country
-  AddressUpload -->|文件格式错误 / 超 16MB / 上传服务器报错| AddressUpload
-  AddressUpload -->|国家 Type = phase 2-waitlist / 申请国家不支持| AddressWaitlist
-  AddressWaitlist -->|Join waitlist| Waitlist
-  AddressWaitlist -->|Select other country| Country
-  AddressUpload -->|POA OCR 国家不匹配 / POA 审核失败| FaceFailed
-  AddressUpload -->|POA 文件和国家信息提交成功| Success
-
-  Success -->|返回首页 / 完成| Entry
+    User->>Success: 点击完成 / 返回入口
+    Success->>Entry: 关闭当前 KYC 流程，返回业务流程入口页
 ```
 
 ### 3.3 流程步骤与业务规则
