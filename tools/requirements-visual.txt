@@ -1,14 +1,12 @@
 # Optional dependencies for tools/visual_structure_extract.py
-# Install only in a local / CI environment prepared for image OCR.
+# Stable path: PaddleOCR 2.x + PP-Structure 2.x.
+# PaddleOCR 3.x changed public APIs and removed the old PPStructure entry point,
+# so this tool intentionally pins <3 until a dedicated 3.x adapter is added.
 
-# Mature OCR + layout engines
-paddleocr>=2.7.0
-paddlepaddle>=2.6.0
+paddleocr>=2.7.0,<3.0.0
+paddlepaddle>=2.6.0,<3.0.0
 
-# Image processing and overlays
-opencv-python>=4.8.0
-numpy>=1.24.0
-Pillow>=10.0.0
-
-# Optional: enable only when a model config is approved in visual_structure_extract.py
-# layoutparser>=0.3.4
+# Server-friendly OpenCV build for overlays and flowchart candidate detection.
+opencv-python-headless>=4.8.0,<5.0.0
+numpy>=1.24.0,<2.0.0
+Pillow>=10.0.0,<11.0.0
