@@ -291,20 +291,21 @@ sequenceDiagram
 
 | 步骤 | 场景 / 规则 | 触发条件 | 责任方 | 系统处理 | 成功结果 | 失败 / 分支结果 | 来源 |
 |---|---|---|---|---|---|---|---|
-| 1 | KYC Loading 状态判断 | 用户进入 KYC | App / Backend | 查询 KYC 状态和 waitlist 状态 | KYC 状态为 Pending / failed 时进入 KYC Start 或后续未完成节点 | KYC 状态为 Under review / Rejected / Approved 时展示状态2；用户在 waitlist 中且来源渠道是 APP 时展示状态2；网络异常进入 Network Error Page；系统异常进入 Server Error Page；30 秒无结果进入 Loading Failed Page | AIX KYC PRD 7.2.2 |
-| 2 | KYC Start | 状态允许继续 KYC | App | 展示标题、副标题、居住国家、协议、认证按钮 | 用户可选择国家和勾选协议 | 手机号未绑定处理待确认 | AIX KYC PRD 7.2.3 |
-| 3 | 国家选择 | 用户点击居住国家 | App / Backend / 配置 | 展示国家列表、搜索、排序、Type 判断 | Phase 1 国家可继续 | phase 2-waitlist 进入 waitlist；Forbiden 隐藏 | AIX KYC PRD 7.2.3.1 |
-| 4 | 协议确认 | 用户勾选协议 | App / Backend | 保存同意时间、Declaration 内容和快照 | 按钮可点击，继续 Identity Verify | 获取协议失败 toast；Reverse Solicitation 缺失可触发 DTC 50013 | AIX KYC PRD 7.2.3；Master sub account |
-| 5 | Waitlist | 国家 Type = phase 2-waitlist，或 KYC Loading 判断用户在 waitlist 中且来源渠道是 APP | App / Backend | 校验 email；提交成功后按 userId 加入 waitlist，记录邮箱、国家、来源、提交时间、设备指纹 ID，并推送数仓 | 用户加入 waitlist，无法继续申请 KYC；历史原文返回业务流程入口页 | email 为空、格式错误、长度超过 103 字符时不提交；网络异常 Toast：Please check your internet connection and try again.；后端服务器错误 Toast：Something went wrong. Please try again later | AIX KYC PRD 7.2.3.2 |
-| 6 | Identity Verify | 用户点击相机 | App / Backend / DTC | 判断相机权限，生成 Passport H5 URL | 进入 Identity Scan H5 | 未授权 / 永久拒绝 / DTC 01009 / 01005 | AIX KYC PRD 7.2.4；Master sub account |
-| 7 | Identity Scan | 用户扫描护照 | AAI / DTC | AAI H5 完成 Passport OCR，DTC 接收结果 | 成功进入 Face Guide | 失败返回 Identity Verify | AIX KYC PRD 7.2.5 |
-| 8 | Face Guide | 用户点击 Continue | App / Backend | 判断 face 锁定规则，获取 passport country，生成 selfie H5 URL | 未锁定进入 Face Scan | 锁定弹窗；网络 / 服务器错误 toast | AIX KYC PRD 7.2.6 |
-| 9 | Face Scan | 用户完成活体采集 | AAI / DTC | 外部 H5 完成 Liveness / Face capture | 进入 Face Loading | AAI signatureId 3 次后需重新生成 URL | AIX KYC PRD 7.2.7 |
-| 10 | Face Loading | 活体采集结束 | App / Backend / DTC / AAI | 轮询或接收验证结果 | 成功进入 Address Upload | 失败进入 Face Failed；30 秒超时进入 Loading Failed；网络 / 系统错误页 | AIX KYC PRD 7.2.8 |
-| 11 | Loading Failed | Face Loading 超过 30 秒无结果 | App | 展示超时失败页 | Retry 后进入 Face Loading 重新提交 | Leave 返回入口 | AIX KYC PRD 7.2.9 |
-| 12 | Face Failed | Face result 为 FAIL / EXPIRED / incomplete，或 Passport / Document Verification 失败，或 POA 失败 | App / Backend | Face 失败展示 Face Comparison 错误码映射文案；Passport 失败展示 Passport / Document Verification 错误码映射文案；POA 失败展示 POA error code 映射文案；Passport 与 Face 均失败时优先展示 Passport 原因 | Try again 且未锁定时重新触发 KYC 流程 | Try again 但已锁定时展示 Too many attempts，不允许重试 | AIX KYC PRD 7.2.10 / 9 |
-| 13 | Address Upload / POA | Face 成功 | App / Backend / DTC / AAI | 上传 POA 文件；二次判断居住国家；AAI 机审提取 POA 国家并核验与用户填报居住国是否匹配，同时校验申请国家是否属于白名单 | POA 文件和国家信息提交成功后进入 Submission Success | 非 JPG/JPEG/PNG/PDF 阻止上传并展示格式 toast；单文件超过 16MB 阻止上传并展示大小 toast；上传服务器报错展示 Server busy toast；国家不支持进入 waitlist 拦截；POA OCR 国家不匹配或 POA 审核失败时按 POA error code 映射展示文案 | AIX KYC PRD 7.2.11；Master sub account |
-| 14 | KYC Submission Success | POA 提交成功 | App / Backend | 展示提交成功状态 | 用户返回入口，等待审核 | 后续状态通过通知或入口感知 | AIX KYC PRD 7.2.12 |
+| 1 | 手机号绑定判断 | 用户发起 KYC / 开户流程 | App / Account | 判断是否已绑定手机号 | 已绑定：继续 KYC 状态判断；KYC Start 不展示额外绑定成功 toast | 未绑定：进入手机号绑定流程；绑定完成后继续 KYC 状态判断；未绑定流程细节见 `GAP-KYC-PHONE-001` | AIX KYC PRD 7.1 / 7.2.3 |
+| 2 | KYC Loading 状态判断 | 用户进入 KYC | App / Backend | 查询 KYC 状态和 waitlist 状态 | KYC 状态为 Pending / failed 时进入 KYC Start 或后续未完成节点 | KYC 状态为 Under review / Rejected / Approved 时展示状态2；用户在 waitlist 中且来源渠道是 APP 时展示状态2；网络异常进入 Network Error Page；系统异常进入 Server Error Page；30 秒无结果进入 Loading Failed Page | AIX KYC PRD 7.2.2 |
+| 3 | KYC Start | 状态允许继续 KYC | App | 展示标题、副标题、居住国家、协议、认证按钮 | 用户可选择国家和勾选协议 | 手机号未绑定处理待确认 | AIX KYC PRD 7.2.3 |
+| 4 | 国家选择 | 用户点击居住国家 | App / Backend / 配置 | 展示国家列表、搜索、排序、Type 判断 | Phase 1 国家可继续 | phase 2-waitlist 进入 waitlist；Forbiden 隐藏 | AIX KYC PRD 7.2.3.1 |
+| 5 | 协议确认 | 用户勾选协议 | App / Backend | 保存同意时间、Declaration 内容和快照 | 按钮可点击，继续 Identity Verify | 获取协议失败 toast；Reverse Solicitation 缺失可触发 DTC 50013 | AIX KYC PRD 7.2.3；Master sub account |
+| 6 | Waitlist | 国家 Type = phase 2-waitlist，或 KYC Loading 判断用户在 waitlist 中且来源渠道是 APP | App / Backend | 校验 email；提交成功后按 userId 加入 waitlist，记录邮箱、国家、来源、提交时间、设备指纹 ID，并推送数仓 | 用户加入 waitlist，无法继续申请 KYC；历史原文返回业务流程入口页 | email 为空、格式错误、长度超过 103 字符时不提交；网络异常 Toast：Please check your internet connection and try again.；后端服务器错误 Toast：Something went wrong. Please try again later | AIX KYC PRD 7.2.3.2 |
+| 7 | Identity Verify | 用户点击相机 | App / Backend / DTC | 判断相机权限，生成 Passport H5 URL | 进入 Identity Scan H5 | 未授权 / 永久拒绝 / DTC 01009 / 01005 | AIX KYC PRD 7.2.4；Master sub account |
+| 8 | Identity Scan | 用户扫描护照 | AAI / DTC | AAI H5 完成 Passport OCR，DTC 接收结果 | 成功进入 Face Guide | 失败返回 Identity Verify | AIX KYC PRD 7.2.5 |
+| 9 | Face Guide | 用户点击 Continue | App / Backend | 判断 face 锁定规则，获取 passport country，生成 selfie H5 URL | 未锁定进入 Face Scan | 锁定弹窗；网络 / 服务器错误 toast | AIX KYC PRD 7.2.6 |
+| 10 | Face Scan | 用户完成活体采集 | AAI / DTC | 外部 H5 完成 Liveness / Face capture | 进入 Face Loading | AAI signatureId 3 次后需重新生成 URL | AIX KYC PRD 7.2.7 |
+| 11 | Face Loading | 活体采集结束 | App / Backend / DTC / AAI | 轮询或接收验证结果 | 成功进入 Address Upload | 失败进入 Face Failed；30 秒超时进入 Loading Failed；网络 / 系统错误页 | AIX KYC PRD 7.2.8 |
+| 12 | Loading Failed | Face Loading 超过 30 秒无结果 | App | 展示超时失败页 | Retry 后进入 Face Loading 重新提交 | Leave 返回入口 | AIX KYC PRD 7.2.9 |
+| 13 | Face Failed | Face result 为 FAIL / EXPIRED / incomplete，或 Passport / Document Verification 失败，或 POA 失败 | App / Backend | Face 失败展示 Face Comparison 错误码映射文案；Passport 失败展示 Passport / Document Verification 错误码映射文案；POA 失败展示 POA error code 映射文案；Passport 与 Face 均失败时优先展示 Passport 原因 | Try again 且未锁定时重新触发 KYC 流程 | Try again 但已锁定时展示 Too many attempts，不允许重试 | AIX KYC PRD 7.2.10 / 9 |
+| 14 | Address Upload / POA | Face 成功 | App / Backend / DTC / AAI | 上传 POA 文件；二次判断居住国家；AAI 机审提取 POA 国家并核验与用户填报居住国是否匹配，同时校验申请国家是否属于白名单 | POA 文件和国家信息提交成功后进入 Submission Success | 非 JPG/JPEG/PNG/PDF 阻止上传并展示格式 toast；单文件超过 16MB 阻止上传并展示大小 toast；上传服务器报错展示 Server busy toast；国家不支持进入 waitlist 拦截；POA OCR 国家不匹配或 POA 审核失败时按 POA error code 映射展示文案 | AIX KYC PRD 7.2.11；Master sub account |
+| 15 | KYC Submission Success | POA 提交成功 | App / Backend | 展示提交成功状态 | 用户返回入口，等待审核 | 后续状态通过通知或入口感知 | AIX KYC PRD 7.2.12 |
 
 ### 3.4 状态规则
 
