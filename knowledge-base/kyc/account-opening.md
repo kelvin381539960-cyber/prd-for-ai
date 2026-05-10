@@ -402,7 +402,6 @@ flowchart LR
         </li>
       </ul>
       <p>国家线存在版本口径冲突，见 <code>GAP-KYC-COUNTRY-001</code>。</p>
-
       <p><strong>协议区</strong></p>
       <ul>
         <li>Terms / Privacy：可直接勾选，无需强制阅读；需保存用户同意并提交的时间。</li>
@@ -411,7 +410,6 @@ flowchart LR
         <li>所有必选协议完成：底部认证按钮高亮，可点击。</li>
         <li>无法获取协议：Toast <code>Something went wrong. Please try again later</code>，不允许继续。</li>
       </ul>
-
       <p><strong>底部认证按钮</strong></p>
       <p>原 PRD 中称 <code>立即认证 / Continue / Verify</code>，具体文案以 UI 为准。</p>
       <ul>
@@ -424,7 +422,6 @@ flowchart LR
           </ul>
         </li>
       </ul>
-
       <p><strong>入口边界</strong></p>
       <ul>
         <li>手机号已绑定：直接进入 Start Page，不展示额外绑定成功 toast。</li>
@@ -448,13 +445,11 @@ flowchart LR
     <td valign="top">
       <p><strong>触发方式</strong></p>
       <p>用户在 KYC Start Page 点击 Declaration 协议项后展示。</p>
-
       <p><strong>弹窗内操作</strong></p>
       <ul>
         <li>点击 <code>I agree</code>：关闭弹窗，Declaration 变为已完成。</li>
         <li>关闭 / 返回：关闭弹窗，Declaration 不算完成，底部认证按钮仍按协议未完成处理。</li>
       </ul>
-
       <p><strong>保存要求与边界</strong></p>
       <ul>
         <li>保存 Declaration 内容。</li>
@@ -481,7 +476,6 @@ flowchart LR
     <td valign="top">
       <p><strong>触发方式</strong></p>
       <p>用户在 KYC Start Page 点击底部认证按钮后，后端判断所选国家不支持继续 KYC。</p>
-
       <p><strong>拦截状态</strong></p>
       <ul>
         <li><strong>处理结果</strong>：不允许进入 Identity Verify。</li>
@@ -492,7 +486,6 @@ flowchart LR
           </ul>
         </li>
       </ul>
-
       <p><strong>展示边界</strong></p>
       <p>源文档同时出现“弹窗拦截”描述和“waitlist 调整为页面级拦截”的变更记录。当前文档只确认结果：用户不能继续 KYC，并可进入 Waitlist Page；具体展示形态以最新 UI 为准。</p>
     </td>
