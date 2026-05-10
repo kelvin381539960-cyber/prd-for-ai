@@ -429,8 +429,6 @@ flowchart LR
 
 用户在本页选择居住国家、确认协议，并通过底部认证按钮进入身份认证流程。
 
-#### 4.3.1 主页面
-
 <table>
   <tr>
     <th width="48%">页面</th>
@@ -448,7 +446,7 @@ flowchart LR
           <ul>
             <li><strong>选择结果按国家 Type 判断</strong>：</li>
             <li>Type = Phase 1：返回本页；协议完成后可继续 KYC。</li>
-            <li>Type = phase 2 - waitlist：返回本页；点击底部认证按钮后进入 waitlist 处理；拦截展示见 <a href="#433-拦截waitlist">4.3.3 拦截：Waitlist</a>，提交页细则见 <a href="#45-waitlist-page">4.5 Waitlist Page</a>。</li>
+            <li>Type = phase 2 - waitlist：返回本页；点击底部认证按钮后进入 waitlist 处理；拦截展示见 <a href="#432-拦截waitlist">4.3.2 拦截：Waitlist</a>，提交页细则见 <a href="#45-waitlist-page">4.5 Waitlist Page</a>。</li>
             <li>Type = Forbiden：国家列表隐藏，不可选择。</li>
           </ul>
         </li>
@@ -458,7 +456,7 @@ flowchart LR
       <p><strong>协议区</strong></p>
       <ul>
         <li>Terms / Privacy：可直接勾选，无需强制阅读；需保存用户同意并提交的时间。</li>
-        <li>Declaration：点击后打开 Declaration 弹窗 / 阅读页；完成规则见 <a href="#432-弹窗declaration-of-reverse-solicitation">4.3.2 弹窗：Declaration of Reverse Solicitation</a>。</li>
+        <li>Declaration：点击后打开 Declaration 弹窗 / 阅读页；完成规则见 <a href="#431-弹窗declaration-of-reverse-solicitation">4.3.1 弹窗：Declaration of Reverse Solicitation</a>。</li>
         <li>任一必选协议未完成：底部认证按钮灰色，不可点击。</li>
         <li>所有必选协议完成：底部认证按钮高亮，可点击。</li>
         <li>无法获取协议：Toast <code>Something went wrong. Please try again later</code>，不允许继续。</li>
@@ -468,7 +466,7 @@ flowchart LR
       <p>原 PRD 中称 <code>立即认证 / Continue / Verify</code>，具体文案以 UI 为准。</p>
       <ul>
         <li>协议完成 + 国家 Type = Phase 1：保存协议相关信息，进入 Identity Verify；后续细则见 <a href="#46-identity-verify-page--identity-scan-h5">4.6 Identity Verify Page / Identity Scan H5</a>。</li>
-        <li>协议完成 + 国家 Type = phase 2 - waitlist：不进入 Identity Verify，触发 waitlist 拦截；见 <a href="#433-拦截waitlist">4.3.3 拦截：Waitlist</a>。</li>
+        <li>协议完成 + 国家 Type = phase 2 - waitlist：不进入 Identity Verify，触发 waitlist 拦截；见 <a href="#432-拦截waitlist">4.3.2 拦截：Waitlist</a>。</li>
         <li>协议保存失败：不推进流程，应阻止继续；源文档未明确“勾选即保存”还是“点击底部认证按钮统一保存”，实现时需以后端接口约定为准。</li>
       </ul>
 
@@ -481,7 +479,7 @@ flowchart LR
   </tr>
 </table>
 
-#### 4.3.2 弹窗：Declaration of Reverse Solicitation
+#### 4.3.1 弹窗：Declaration of Reverse Solicitation
 
 <table>
   <tr>
@@ -494,7 +492,7 @@ flowchart LR
     </td>
     <td valign="top">
       <p><strong>触发方式</strong></p>
-      <p>用户在 KYC Start 主页面点击 Declaration 协议项后展示。入口见 <a href="#431-主页面">4.3.1 主页面</a>。</p>
+      <p>用户在 KYC Start Page 点击 Declaration 协议项后展示。</p>
 
       <p><strong>完成条件</strong></p>
       <ul>
@@ -514,7 +512,7 @@ flowchart LR
   </tr>
 </table>
 
-#### 4.3.3 拦截：Waitlist
+#### 4.3.2 拦截：Waitlist
 
 <table>
   <tr>
@@ -527,7 +525,7 @@ flowchart LR
     </td>
     <td valign="top">
       <p><strong>触发方式</strong></p>
-      <p>用户在 KYC Start 主页面点击底部认证按钮后，后端判断所选国家不支持继续 KYC。入口见 <a href="#431-主页面">4.3.1 主页面</a>。</p>
+      <p>用户在 KYC Start Page 点击底部认证按钮后，后端判断所选国家不支持继续 KYC。</p>
 
       <p><strong>处理结果</strong></p>
       <ul>
