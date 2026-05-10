@@ -265,21 +265,6 @@ flowchart TB
 | `failed` | `verifyStatus = VERIFY_FAILURE` | Passport/Face/POA 任一失败 | 展示原因，可重试 |
 | `waitlist` | - | 国家不支持或命中 waitlist | 阻断继续 |
 
-### 3.3 关键规则补充
-
-| 规则 | 说明 | 影响 |
-|---|---|---|
-| 页面说明边界 | 本章不展开页面展示、按钮、弹窗、toast 和页面跳转 | 页面级交互统一见第 4 章 |
-| 手机号前置 | 用户进入 KYC 前需具备有效手机号绑定状态 | 未绑定时需先完成手机号绑定，再继续 KYC |
-| 国家线与 waitlist | 居住国家根据配置判断支持、waitlist 或隐藏 | 不支持或命中 waitlist 时阻断后续 KYC |
-| Reverse Solicitation | 用户协议确认需要留痕，包括确认时间、内容或快照 | 缺失时可能影响后续 DTC 请求或合规审计 |
-| 证件认证结果 | Passport OCR / 证件认证结果由 DTC / AAI 返回，AIX 不自行推导 | 决定是否进入 Face、失败页或继续等待 |
-| Face 失败限制 | Face 失败后需根据错误码与失败次数判断是否允许重试 | 超过限制时进入 locked / 不可继续状态 |
-| POA 校验 | POA 文件格式、大小、OCR 国家、居住国家匹配关系需校验 | 校验失败时按 POA 错误码展示失败原因 |
-| 异步结果 | Passport、Face、POA、clientStatus 可能异步返回 | 前端需支持处理中、超时、失败和重新查询 |
-| 状态一致性 | AIX 状态、DTC clientStatus、各认证项状态需以后端映射为准 | 避免前端基于单字段误判最终 KYC 状态 |
-| 审核通过边界 | KYC Approved 仅表示开户 / KYC 审核通过 | Wallet、Card、Sub Account 等能力准入需按对应模块规则判断 |
-
 ## 4. 页面与交互说明
 
 ### 4.1 页面关系总览图
