@@ -1,11 +1,11 @@
 ---
 type: prd-template
 feature: standard-prd-template
-version: "1.9"
+version: "1.10"
 status: active
-source_doc: workflow/prd-workflow.md；prd-template/README.md；prd-template/prd-writing-workflow.md；prd-template/prd-writing-preferences.md；用户确认结论 2026-05-05；用户确认结论 2026-05-06；用户确认结论 2026-05-06 Canvas 草稿协作、文件最小化与落地评审
-source_section: "multi-agent workflow；canvas-first；review gates；engineering execution PRD rules；optional sections；reuse page rules；lightweight artifact rules；landing review rules"
-last_updated: 2026-05-06
+source_doc: workflow/prd-workflow.md；prd-template/README.md；prd-template/prd-writing-workflow.md；prd-template/prd-writing-preferences.md；用户确认结论 2026-05-05；用户确认结论 2026-05-06；用户确认结论 2026-05-06 Canvas 草稿协作、文件最小化与落地评审；用户确认结论 2026-05-10 页面章节分层与左图右说明
+source_section: "multi-agent workflow；canvas-first；review gates；engineering execution PRD rules；optional sections；reuse page rules；lightweight artifact rules；landing review rules；page hierarchy rules；page-left explanation-right rules"
+last_updated: 2026-05-10
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
 ---
@@ -13,7 +13,7 @@ readers: [product, ui, dev, qa, business, ai]
 # Standard PRD Template 标准 PRD 模板
 
 > 适用对象：前端、后端、测试、设计、产品。  
-> 写作原则：页面能看出来的不写；公共能力已有的不重复写；不能开发和测试的不写；每条规则都要能判断对错；章节按需保留，不为模板完整而补废话。  
+> 写作原则：页面能看出来的不写；公共能力已有的不重复写；不能开发和测试的不写；每条规则都要能判断对错；章节按需保留，不为模板完整而补废话；页面级别保持同层，页面内复杂弹窗 / 拦截 / 组件按需拆下级章节。  
 > 使用方式：先在 Canvas 中生成 PRD 草稿并完成用户修改与落地评审；用户确认后，再写入 Git。  
 > 流程规则：PRD 写作必须遵守 `workflow/prd-workflow.md` 中定义的多 Agent 闸门式流程。
 
@@ -213,6 +213,58 @@ stateDiagram-v2
 
 > 页面相关需求保留本章；纯后端、配置、数据或非页面型需求可删除或改为“入口与操作方式”。
 
+### 3.0 页面章节分层规范
+
+**页面级别内容保持同一层级。** 每个页面使用一个页面章节承载，不要再为页面本身创建“主页面”子章节。
+
+错误示例：
+
+```md
+### 4.3 KYC Start Page
+
+#### 4.3.1 主页面
+```
+
+正确示例：
+
+```md
+### 4.3 KYC Start Page
+
+页面截图 + 页面说明
+
+#### 4.3.1 弹窗：Declaration of Reverse Solicitation
+
+#### 4.3.2 拦截：Waitlist
+```
+
+页面内的区域、控件、按钮、toast、简单弹窗、简单状态，优先写在当前页面的左图右说明中。
+
+如果页面内某个弹窗、拦截态、复杂组件或复杂状态在当前页面说明中无法简洁讲清楚，或会导致右侧说明过长、阅读困难，则在当前页面下创建子章节。子章节标题应带类型前缀，例如：
+
+- `弹窗：xxx`
+- `拦截：xxx`
+- `组件：xxx`
+- `状态：xxx`
+
+子章节仍归属于当前页面，不作为新的页面级章节。
+
+**拆分判断：**
+
+| 情况 | 处理 |
+|---|---|
+| 一两句话能讲清楚 | 放在当前页面说明里 |
+| Toast / 简单提示 | 放在当前页面说明里 |
+| 按钮置灰 / 小状态变化 | 放在当前页面说明里 |
+| 有独立截图 | 倾向拆下级章节 |
+| 有多个按钮 / 多种操作结果 | 倾向拆下级章节 |
+| 有保存规则 / 接口参数影响 | 倾向拆下级章节 |
+| 写在右侧说明里会显得很长很乱 | 拆下级章节 |
+| QA 需要单独测 | 拆下级章节 |
+
+**异常与边界放置规则：** 异常、边界、Gap 跟随它影响的页面区域 / 弹窗 / 拦截态，不单独汇总。只有确实无法归属到某个展示单元时，才放在页面末尾备注。
+
+---
+
 ### 3.1 页面关系图
 
 > 推荐使用 Mermaid `flowchart`。  
@@ -235,34 +287,109 @@ flowchart LR
 
 ### 3.2 页面：新增 / 改造页面名称
 
-![低保真原型](./assets/path/page-name.svg)
+> 页面级章节直接承载该页面本身，不要再创建“主页面”子章节。  
+> 优先采用左图右说明，让产品、设计、开发、QA 在大屏上可以对照页面阅读。  
+> 页面上已经直观看到的普通布局和静态文案不复述；右侧说明只写区域如何工作、触发后去哪、异常怎么处理、哪些规则需要测试。
 
-> 每个新增或改造页面建议有低保真原型。原型用于表达页面结构、关键控件、状态入口和主按钮，不要求最终 UI 视觉。  
-> 如果暂时没有原型，应在页面目的和交互规则中写清关键结构，不要编造已存在的图片路径。
+<table>
+  <tr>
+    <th width="48%">页面</th>
+    <th width="52%">说明</th>
+  </tr>
+  <tr>
+    <td valign="top">
+      <img src="./assets/path/page-name.svg" width="480" />
+    </td>
+    <td valign="top">
+      <p><strong>页面区域 / 功能点 A</strong></p>
+      <ul>
+        <li><strong>默认展示</strong>：写默认状态、默认值来源、必要边界。</li>
+        <li><strong>用户操作</strong>：写点击 / 输入 / 选择后的结果；如跳到其他页面，应给章节指引。</li>
+        <li><strong>处理规则</strong>：写开发和测试需要判断的条件，不复述截图能直接看出的静态内容。</li>
+        <li><strong>异常 / 边界</strong>：直接写在影响该区域的位置，不单独挪到页面末尾。</li>
+      </ul>
 
-**页面目的**  
-一句话说明页面用途。不要写用户教育型描述。
+      <p><strong>页面区域 / 功能点 B</strong></p>
+      <ul>
+        <li>...</li>
+      </ul>
+    </td>
+  </tr>
+</table>
 
-**用户体验要点**
-- 用户是否能理解当前步骤、为什么要做这一步、下一步会发生什么。
-- 关键操作是否有明确反馈，例如发送成功、验证失败、保存成功、处理中、失败可重试。
-- 失败、锁定、过期、不可用等场景是否给用户可理解的下一步。
-- 用户是否知道当前状态、是否还能继续、失败后如何恢复。
-- 是否存在重复提交、误操作、返回后状态丢失等体验风险。
+**写作要求**
 
-**展示规则**
-- 只写开发和测试需要验证、且不能仅从原型看出来的规则。
-- 页面上已经直观看到的布局、按钮、普通文案不写。
+- 图片放左侧，说明放右侧，图片使用 `valign="top"`，建议宽度 `480`。
+- 说明可以使用 `<p>`、`<ul>` 分段，不要用大量 `<br>` 堆叠。
+- 当动作会进入另一个页面 / 弹窗 / 拦截态时，要写清层级，并给出章节指引。
+- 当前页面直接发生的事写一级；点击后进入的新页面 / 弹窗 / 选择结果写下一级。
+- 不要写无效信息，例如“页面区域：按钮、标题、输入框”。这些截图已经能看出来。
 
-**交互与校验规则**
+**层级示例**
 
-| 场景 / 元素 | 规则 | 不满足时提示 / 结果 | 后续流转 |
-|---|---|---|---|
-| 点击主按钮 |  |  |  |
-| 输入为空 |  |  |  |
-| 输入格式错误 |  |  |  |
-| 后端校验失败 |  |  |  |
-| 成功 |  |  |  |
+```md
+- 点击国家区域：进入 Select Residence Country Page；细则见 4.4 Select Residence Country Page。
+  - 选择结果按国家 Type 判断：
+    - Type = Phase 1：返回本页；协议完成后可继续。
+    - Type = phase 2 - waitlist：返回本页；点击底部按钮后触发 waitlist 拦截；见 4.3.2 拦截：Waitlist。
+    - Type = Forbiden：国家列表隐藏，不可选择。
+```
+
+**页面内复杂展示的下级章节示例**
+
+当弹窗、拦截态、复杂组件或复杂状态在当前页面说明中写不清楚时，在当前页面下创建子章节。
+
+```md
+#### 3.2.1 弹窗：弹窗名称
+
+<table>
+  <tr>
+    <th width="48%">页面</th>
+    <th width="52%">说明</th>
+  </tr>
+  <tr>
+    <td valign="top">
+      <img src="./assets/path/dialog-name.svg" width="480" />
+    </td>
+    <td valign="top">
+      <p><strong>触发方式</strong></p>
+      <ul>
+        <li>...</li>
+      </ul>
+
+      <p><strong>完成条件 / 操作结果</strong></p>
+      <ul>
+        <li>...</li>
+      </ul>
+
+      <p><strong>异常 / 边界</strong></p>
+      <ul>
+        <li>...</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+#### 3.2.2 拦截：拦截名称
+
+左图右说明，写触发条件、处理结果、返回路径和后续页面指引。
+```
+
+**跳转指引要求**
+
+当说明中提到其他页面、弹窗、拦截态、错误码或公共能力时，应直接写“见 x.x 章节”。
+
+错误示例：
+
+```md
+触发 waitlist 拦截。
+```
+
+正确示例：
+
+```md
+触发 waitlist 拦截；见 4.3.2 拦截：Waitlist。提交页细则见 4.5 Waitlist Page。
+```
 
 ---
 
