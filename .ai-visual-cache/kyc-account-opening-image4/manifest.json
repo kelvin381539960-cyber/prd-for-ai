@@ -1,0 +1,169 @@
+{
+  "source": "knowledge-base/kyc/_assets/account-opening/image4.jpeg",
+  "width": 2560,
+  "height": 2560,
+  "cols": 4,
+  "rows": 4,
+  "crops": [
+    {
+      "row": 0,
+      "col": 0,
+      "left": 0,
+      "top": 0,
+      "width": 640,
+      "height": 640,
+      "scale": 2,
+      "path": ".ai-visual-cache/kyc-account-opening-image4/r0_c0.png"
+    },
+    {
+      "row": 0,
+      "col": 1,
+      "left": 640,
+      "top": 0,
+      "width": 640,
+      "height": 640,
+      "scale": 2,
+      "path": ".ai-visual-cache/kyc-account-opening-image4/r0_c1.png"
+    },
+    {
+      "row": 0,
+      "col": 2,
+      "left": 1280,
+      "top": 0,
+      "width": 640,
+      "height": 640,
+      "scale": 2,
+      "path": ".ai-visual-cache/kyc-account-opening-image4/r0_c2.png"
+    },
+    {
+      "row": 0,
+      "col": 3,
+      "left": 1920,
+      "top": 0,
+      "width": 640,
+      "height": 640,
+      "scale": 2,
+      "path": ".ai-visual-cache/kyc-account-opening-image4/r0_c3.png"
+    },
+    {
+      "row": 1,
+      "col": 0,
+      "left": 0,
+      "top": 640,
+      "width": 640,
+      "height": 640,
+      "scale": 2,
+      "path": ".ai-visual-cache/kyc-account-opening-image4/r1_c0.png"
+    },
+    {
+      "row": 1,
+      "col": 1,
+      "left": 640,
+      "top": 640,
+      "width": 640,
+      "height": 640,
+      "scale": 2,
+      "path": ".ai-visual-cache/kyc-account-opening-image4/r1_c1.png"
+    },
+    {
+      "row": 1,
+      "col": 2,
+      "left": 1280,
+      "top": 640,
+      "width": 640,
+      "height": 640,
+      "scale": 2,
+      "path": ".ai-visual-cache/kyc-account-opening-image4/r1_c2.png"
+    },
+    {
+      "row": 1,
+      "col": 3,
+      "left": 1920,
+      "top": 640,
+      "width": 640,
+      "height": 640,
+      "scale": 2,
+      "path": ".ai-visual-cache/kyc-account-opening-image4/r1_c3.png"
+    },
+    {
+      "row": 2,
+      "col": 0,
+      "left": 0,
+      "top": 1280,
+      "width": 640,
+      "height": 640,
+      "scale": 2,
+      "path": ".ai-visual-cache/kyc-account-opening-image4/r2_c0.png"
+    },
+    {
+      "row": 2,
+      "col": 1,
+      "left": 640,
+      "top": 1280,
+      "width": 640,
+      "height": 640,
+      "scale": 2,
+      "path": ".ai-visual-cache/kyc-account-opening-image4/r2_c1.png"
+    },
+    {
+      "row": 2,
+      "col": 2,
+      "left": 1280,
+      "top": 1280,
+      "width": 640,
+      "height": 640,
+      "scale": 2,
+      "path": ".ai-visual-cache/kyc-account-opening-image4/r2_c2.png"
+    },
+    {
+      "row": 2,
+      "col": 3,
+      "left": 1920,
+      "top": 1280,
+      "width": 640,
+      "height": 640,
+      "scale": 2,
+      "path": ".ai-visual-cache/kyc-account-opening-image4/r2_c3.png"
+    },
+    {
+      "row": 3,
+      "col": 0,
+      "left": 0,
+      "top": 1920,
+      "width": 640,
+      "height": 640,
+      "scale": 2,
+      "path": ".ai-visual-cache/kyc-account-opening-image4/r3_c0.png"
+    },
+    {
+      "row": 3,
+      "col": 1,
+      "left": 640,
+      "top": 1920,
+      "width": 640,
+      "height": 640,
+      "scale": 2,
+      "path": ".ai-visual-cache/kyc-account-opening-image4/r3_c1.png"
+    },
+    {
+      "row": 3,
+      "col": 2,
+      "left": 1280,
+      "top": 1920,
+      "width": 640,
+      "height": 640,
+      "scale": 2,
+      "path": ".ai-visual-cache/kyc-account-opening-image4/r3_c2.png"
+    },
+    {
+      "row": 3,
+      "col": 3,
+      "left": 1920,
+      "top": 1920,
+      "width": 640,
+      "height": 640,
+      "scale": 2,
+      "path": ".ai-visual-cache/kyc-account-opening-image4/r3_c3.png"
+    }
+  ]
+}
