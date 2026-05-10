@@ -112,7 +112,8 @@ KYC 能力不是单一 Wallet 页面能力，而是影响 Account、Wallet、Dep
 KYC 主流程按业务阶段可归纳为：
 
 ```text
-准入状态判断
+手机号绑定判断
+→ 准入状态判断
 → 居住国家与协议确认
 → 证件认证
 → 人脸验证
@@ -124,7 +125,8 @@ KYC 主流程按业务阶段可归纳为：
 页面路径为：
 
 ```text
-KYC Loading
+手机号绑定判断 / 绑定流程
+→ KYC Loading
 → KYC Start
 → Select Residence Country
 → Agreement
@@ -141,13 +143,14 @@ KYC Loading
 
 ### 3.2 业务时序图
 
-> 本图用时序图形式表达业务页面 / 状态流转，对齐原文 `7.1 开户业务流程` 与 `7.2 开户页面逻辑`。本图不展开 DTC / AAI 的 URL 生成、webhook、query、错误码等接口链路；接口细节见第 5 章。
+> 本图用时序图形式表达业务页面 / 状态流转，对齐原文 `7.1 开户业务流程` 与 `7.2 开户页面逻辑`。原流程图第一步是“判断是否已绑定手机号”，本图按该顺序展开。DTC / AAI 的 URL 生成、webhook、query、错误码等接口链路不在本图展开，接口细节见第 5 章。
 
 ```mermaid
 sequenceDiagram
     autonumber
     actor User as 用户
     participant Entry as 业务流程入口页
+    participant Phone as 手机号绑定判断 / 绑定流程
     participant Loading as KYC Loading Page
     participant Start as KYC Start Page
     participant Country as Select Residence Country Page
@@ -159,7 +162,15 @@ sequenceDiagram
     participant Success as KYC Submission Success Page
 
     User->>Entry: 发起 KYC / 开户流程
-    Entry->>Loading: 进入 KYC Loading Page
+    Entry->>Phone: 判断是否已绑定手机号
+
+    alt 已绑定手机号
+        Phone->>Loading: 继续 KYC 状态判断
+    else 未绑定手机号
+        Phone-->>User: 进入手机号绑定流程
+        User->>Phone: 完成手机号绑定
+        Phone->>Loading: 继续 KYC 状态判断；不展示额外绑定成功 toast
+    end
 
     alt 后端返回 KYC 状态机为 Under review / Rejected / Approved
         Loading-->>User: 展示状态2 / Verification unavailable
