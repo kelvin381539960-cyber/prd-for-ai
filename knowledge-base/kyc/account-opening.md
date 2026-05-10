@@ -143,148 +143,113 @@ KYC 主流程按业务阶段可归纳为：
 
 ### 3.2 业务时序图
 
-> 本图用时序图形式表达业务页面 / 状态流转，对齐原文 `7.1 开户业务流程` 与 `7.2 开户页面逻辑`。原流程图第一步是“判断是否已绑定手机号”，本图按该顺序展开。DTC / AAI 的 URL 生成、webhook、query、错误码等接口链路不在本图展开，接口细节见第 5 章。
+> 本图只把第三章业务流程图时序化表达，参与方保持流程图泳道：AIX 客户端、AIX 中后台、DTCPay 服务端、AAI 服务。页面弹窗、waitlist、异常页等未在该流程图主干展示的细节，不在本图补充，见第 4 章与 3.5。
 
 ```mermaid
 sequenceDiagram
     autonumber
-    actor User as 用户
-    participant Entry as 业务流程入口页
-    participant Phone as 手机号绑定判断 / 绑定流程
-    participant Loading as KYC Loading Page
-    participant Start as KYC Start Page
-    participant Country as Select Residence Country Page
-    participant Waitlist as Waitlist Page
-    participant Identity as Identity Verify / Identity Scan
-    participant Face as Face Guide / Face Scan / Face Loading
-    participant POA as Address Upload Page
-    participant Failed as Failed / Error Page
-    participant Success as KYC Submission Success Page
+    participant APP as AIX 客户端
+    participant BE as AIX 中后台
+    participant DTC as DTCPay 服务端
+    participant AAI as AAI 服务
 
-    User->>Entry: 发起 KYC / 开户流程
-    Entry->>Phone: 判断是否已绑定手机号
+    APP->>APP: KYC Start Page（状态：未绑定手机）
+    APP->>APP: 引导用户绑定手机
 
-    alt 已绑定手机号
-        Phone->>Loading: 继续 KYC 状态判断
-    else 未绑定手机号
-        Phone-->>User: 进入手机号绑定流程
-        User->>Phone: 完成手机号绑定
-        Phone->>Loading: 继续 KYC 状态判断；不展示额外绑定成功 toast
-    end
+    alt 未绑定手机
+        APP->>APP: 提示用户绑定手机流程
+    else 已绑定手机
+        APP->>BE: 查询 KYC 认证结果
+        BE->>DTC: GET /openapi/v1/ekyc/verification-result/{externalId}
+        DTC-->>BE: 返回认证结果（clientStatus、Passport、Face、POA result）
+        BE->>BE: 更新 KYC 状态机
 
-    alt 后端返回 KYC 状态机为 Under review / Rejected / Approved
-        Loading-->>User: 展示状态2 / Verification unavailable
-        User->>Entry: Back / Leave，返回业务流程入口页
-    else 用户在 waitlist 中，且来源渠道是 APP
-        Loading-->>User: 展示状态2 / Verification unavailable
-        User->>Entry: Back / Leave，返回业务流程入口页
-    else KYC 状态为 Pending / failed
-        Loading->>Start: 进入 KYC Start Page 或后续未完成节点
-    else 网络异常
-        Loading->>Failed: 进入 Network Error Page
-    else 系统异常
-        Loading->>Failed: 进入 Server Error Page
-    else 30 秒无结果
-        Loading->>Failed: 进入 Loading Failed Page
-    end
-
-    User->>Start: 查看居住国家、协议、底部认证按钮
-    opt 修改居住国家
-        Start->>Country: 点击居住国家 / 地区
-        Country-->>Start: 从 KYC Start 进入时，选择国家后返回 KYC Start
-    end
-
-    opt Declaration 强制阅读
-        Start-->>User: 点击 Declaration 协议项，展示 Declaration 弹窗 / 阅读页
-        alt 点击 I agree
-            User->>Start: Declaration 变为已完成
-        else 关闭 / 返回
-            User->>Start: Declaration 不算完成，底部认证按钮仍按协议未完成处理
+        alt KYC 状态为 Under review / Rejected / Approved
+            BE-->>APP: 返回不可继续状态
+            APP->>APP: 展示 Verification unavailable
+        else KYC 状态为 pending / failed
+            BE-->>APP: 返回可继续状态
+            APP->>APP: KYC Start Page（状态：已绑定手机）
+            APP->>APP: 用户填写居住国家，点击下一步
         end
     end
 
-    alt 任一必选协议未完成
-        Start-->>User: 底部认证按钮禁用，不推进流程
-    else 协议完成 + 国家 Type = Phase 1
-        Start->>Identity: 保存协议相关信息，进入 Identity Verify Page
-    else 协议完成 + 国家 Type = phase 2-waitlist
-        Start-->>User: 展示 KYC Start Page 内 Waitlist 拦截
-        User->>Waitlist: 点击 Join waitlist，进入 Waitlist Page
-    else 协议获取 / 保存失败
-        Start-->>User: Toast：Something went wrong. Please try again later，不进入 Identity Verify
+    APP->>BE: 请求 Passport 扫描 URL（verifyType = 1）
+    BE->>DTC: POST /openapi/v1/ekyc/get-verification-url
+    DTC-->>BE: 返回 Passport H5 URL
+    BE-->>APP: 返回 Passport H5 URL
+    APP->>APP: 客户端打开 H5 扫描页，进行扫描
+
+    APP->>AAI: H5 内完成 Passport OCR
+    AAI-->>DTC: 返回 OCR 信息 / Passport 信息
+    DTC-->>BE: 返回 OCR 信息 / Passport 信息
+
+    alt OCR 失败
+        BE-->>APP: 返回 OCR 失败结果
+        APP->>APP: 回到业务场景，由后续规则处理
+    else OCR 完成
+        BE->>BE: 按 Passport / Face 状态判断后续流程
     end
 
-    alt Waitlist Page 提交成功
-        Waitlist-->>User: 按 userId 加入 waitlist，记录邮箱、国家、来源、提交时间、设备指纹 ID，并推送数仓
-        User->>Entry: 返回业务流程入口页
-    else Waitlist Page 关闭 / 返回
-        User->>Entry: 返回业务流程入口页
+    alt passport = SUCCESS 且 face = UNVERIFIED / FAILURE
+        BE-->>APP: 进入 Face Guide Page
+        APP->>BE: 请求活体 URL（verifyType = 4）
+        BE->>DTC: POST /openapi/v1/ekyc/get-verification-url
+        DTC-->>BE: 返回活体 URL
+        BE-->>APP: 返回活体 URL
+        APP->>APP: 客户端打开活体 URL，进入活体识别页
+        APP->>AAI: 进行活体识别 / 人脸比对
+        AAI-->>DTC: 返回 Face result
+        DTC-->>BE: 返回 Face result / webhook 结果
+    else passport = VERIFYING 且 face = SUCCESS / FAILURE / VERIFYING
+        BE-->>APP: 进入 Loading Page
+    else passport = SUCCESS 且 face = VERIFYING
+        BE-->>APP: 进入 Loading Page
+    else Face 比对失败
+        BE-->>APP: 进入人脸比对失败页
+        APP->>APP: 展示失败信息
     end
 
-    User->>Identity: 点击相机 / 开始扫描
-    alt 相机未授权 / 永久拒绝
-        Identity-->>User: 展示权限提示；永久拒绝时引导 Open settings
-    else DTC 返回 01009 / 01005 / 其他 URL 错误
-        Identity-->>User: 不进入 H5；01009 / 01005 展示对应 Toast，其他错误见 5.2
-    else 有权限且成功获取 H5 URL
-        Identity-->>User: 打开 Identity Scan H5
-        alt Passport OCR 成功
-            Identity->>Face: 进入 Face Guide Page
-        else Passport OCR 失败
-            Identity-->>User: 返回 Identity Verify Page
-        end
+    APP->>BE: Loading 中主动查询验证结果
+    BE->>DTC: GET /openapi/v1/ekyc/verification-result/{externalId}
+    DTC-->>BE: 返回 Passport / Face 验证结果
+    BE-->>APP: 返回查询结果
+
+    alt passport result = VERIFY_SUCCESS 且 face result = VERIFY_SUCCESS
+        APP->>APP: 进入 Address Upload Page
+        APP->>APP: 上传 POA 文件
+    else face = UNVERIFIED / 其他 result / VERIFY_FAILURE
+        BE-->>APP: 返回失败或未完成结果
+        APP->>APP: 按失败结果处理
     end
 
-    User->>Face: 在 Face Guide 点击 Continue
-    alt 命中 face 锁定规则
-        Face-->>User: 展示 Too many attempts，不进入 Face Scan H5
-        User->>Entry: Try again later，返回业务流程入口页
-    else 未锁定
-        Face-->>User: 进入 Face Scan H5
-        User->>Face: 完成活体采集
-        Face->>Face: 进入 Face Loading Page
-    end
+    APP->>BE: POST /openapi/v1/ekyc/upload 上传 POA 文件
+    BE->>DTC: 提交 POA 文件与居住地信息
+    DTC->>AAI: 处理 POA 文件 / POA OCR
+    AAI-->>DTC: 返回 POA OCR 结果
+    DTC-->>BE: 返回 POA 处理结果
+    BE-->>APP: 返回提交结果
+    APP->>APP: 进入 Under review Page
 
-    alt Face 验证成功
-        Face->>POA: 进入 Address Upload Page
-    else Face result 为 FAIL / EXPIRED / incomplete
-        Face->>Failed: 进入 Face Failed Page，并展示 Face Comparison 错误码映射文案
-    else Face Loading 超过 30 秒未收到结果
-        Face->>Failed: 进入 Loading Failed Page
-        alt 点击 Retry
-            Failed->>Face: 回到 Face Loading Page，重新提交
-        else 点击 Leave
-            User->>Entry: 返回业务流程入口页
-        end
-    else 网络异常
-        Face->>Failed: 进入 Network Error Page
-    else 系统异常
-        Face->>Failed: 进入 Server Error Page
-    end
+    APP->>BE: 定时查询 KYC 结果
+    BE->>DTC: GET /openapi/v1/ekyc/verification-result/{externalId}
+    DTC-->>BE: 返回 KYC 审核结果
 
-    User->>POA: 确认 Residence 并上传地址证明文件
-    opt 修改 Residence
-        POA->>Country: 点击 Residence
-        Country-->>POA: 从 Address Upload 进入时，选择国家后返回 Address Upload
+    alt clientStatus = ACTIVATED
+        BE->>BE: KYC 状态变更为 approved
+        BE-->>APP: 返回 Approved
+        BE-->>APP: SMS / 邮件通知用户
+    else clientStatus = REJECTED
+        BE->>BE: KYC 状态变更为 rejected
+        BE-->>APP: 返回 Rejected
+        BE-->>APP: SMS / 邮件通知用户
+    else passportVerifyStatus = VERIFY_FAILURE 或 faceIdVerifyStatus = VERIFY_FAILURE 或 proofOfAddressVerifyStatus = VERIFY_FAILURE
+        BE->>BE: KYC 状态变更为 failed
+        BE->>DTC: GET /openapi/v1/ekyc/passport-info/{externalId} 查询护照 OCR 信息
+        BE->>DTC: GET /openapi/v1/ekyc/poa-info/{externalId} 查询 POA OCR 信息
+        DTC-->>BE: 返回护照 OCR 信息 / POA OCR 信息
+        BE-->>APP: 返回 failed
     end
-
-    alt 文件格式错误 / 超 16MB / 上传服务器报错
-        POA-->>User: 展示对应 Toast，不进入 Success
-    else 申请国家不属于支持国家 / 白名单
-        POA-->>User: 展示 Address Upload Page 内 Waitlist 拦截
-        alt Join waitlist
-            User->>Waitlist: 进入 Waitlist Page
-        else Select other country
-            POA->>Country: 进入 Select Residence Country Page
-        end
-    else POA OCR 国家与填报居住国家不匹配 / POA 审核失败
-        POA->>Failed: 按 POA error code 映射展示前端提示文案
-    else POA 文件和国家信息提交成功
-        POA->>Success: 进入 KYC Submission Success Page
-    end
-
-    User->>Success: 点击完成 / 返回入口
-    Success->>Entry: 关闭当前 KYC 流程，返回业务流程入口页
 ```
 
 ### 3.3 流程步骤与业务规则
