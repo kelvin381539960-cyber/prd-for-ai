@@ -3,7 +3,7 @@ module: wallet
 feature: send
 version: "1.0"
 status: active
-source_doc: archive/converted-prd/wallet/deposit-send-swap/README.md；archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/app/transaction-history/README.md
+source_doc: archive/legacy-prd/wallet/deposit-send-swap/README.md；archive/legacy-prd/security/identity-verification/README.md；archive/legacy-prd/app/transaction-history/README.md
 source_section: Wallet Deposit/Send/Swap / 6.1 钱包转账 Send Crypto；Security / Face Auth；Transaction Details
 last_updated: 2026-05-09
 owner: 吴忆锋
@@ -23,7 +23,7 @@ Send Crypto 允许用户向他人发送稳定币，支持通过手机号、Email
 
 ## 2. Source alignment status
 
-本文件用于收口原 `wallet/deposit.md` 的 SOURCE_GAP。规则来自 `archive/converted-prd/wallet/deposit-send-swap/README.md` 的 6.1 钱包转账 Send Crypto，并同步引用 Security Face Auth 与 Transaction Details 作为支撑证据。
+本文件用于收口原 `wallet/deposit.md` 的 SOURCE_GAP。规则来自 `archive/legacy-prd/wallet/deposit-send-swap/README.md` 的 6.1 钱包转账 Send Crypto，并同步引用 Security Face Auth 与 Transaction Details 作为支撑证据。
 
 ## 3. 页面与流程
 
@@ -88,28 +88,28 @@ Send 结果页和列表记录应进入 Transaction Details；全量交易中 Sen
 
 ## 10. Sources
 
-- (Ref: archive/converted-prd/wallet/deposit-send-swap/README.md / 6.1 钱包转账 Send Crypto)
-- (Ref: archive/converted-prd/security/identity-verification/README.md / Face Auth)
-- (Ref: archive/converted-prd/app/transaction-history/README.md / Transaction Details)
+- (Ref: archive/legacy-prd/wallet/deposit-send-swap/README.md / 6.1 钱包转账 Send Crypto)
+- (Ref: archive/legacy-prd/security/identity-verification/README.md / Face Auth)
+- (Ref: archive/legacy-prd/app/transaction-history/README.md / Transaction Details)
 
 ## Page Visuals 页面图索引
 
-> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/legacy-prd` 原始资产，避免重复复制。
 
 ### Send Crypto
 
-![Send Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image9.png)
+![Send Crypto](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image9.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:321_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:321_
 
-![Send Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image10.png)
+![Send Crypto](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image10.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:322_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:322_
 
-![Send Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image11.png)
+![Send Crypto](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image11.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:323_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:323_
 
-![Send Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image12.png)
+![Send Crypto](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image12.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:324_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:324_

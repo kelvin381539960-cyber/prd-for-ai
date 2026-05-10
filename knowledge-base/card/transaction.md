@@ -3,7 +3,7 @@ module: card
 feature: card-transaction
 version: "1.1"
 status: active
-source_doc: archive/converted-prd/card/transaction/README.md；archive/converted-prd/app/transaction-history/README.md
+source_doc: archive/legacy-prd/card/transaction/README.md；archive/legacy-prd/app/transaction-history/README.md
 source_section: Card Transaction / 7.1 资金回退；Transaction & History / 7.2 Card History；7.3 Card Transaction Details
 last_updated: 2026-05-09
 owner: 吴忆锋
@@ -272,10 +272,10 @@ sequenceDiagram
 
 ## Page Visuals 页面图索引
 
-> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/legacy-prd` 原始资产，避免重复复制。
 
 ### 7. 需求描述
 
-![7. 需求描述](../../archive/converted-prd/card/transaction/assets/media/image2.jpeg)
+![7. 需求描述](../../archive/legacy-prd/card/transaction/assets/media/image2.jpeg)
 
-_Source: archive/converted-prd/card/transaction/README.md:171_
+_Source: archive/legacy-prd/card/transaction/README.md:171_

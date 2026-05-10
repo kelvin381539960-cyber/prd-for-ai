@@ -3,7 +3,7 @@ module: security
 feature: global-rules
 version: "1.1"
 status: active
-source_doc: archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/app/registration-login/README.md；archive/converted-prd/card/manage/README.md；archive/converted-prd/wallet/deposit-send-swap/README.md
+source_doc: archive/legacy-prd/security/identity-verification/README.md；archive/legacy-prd/app/registration-login/README.md；archive/legacy-prd/card/manage/README.md；archive/legacy-prd/wallet/deposit-send-swap/README.md
 source_section: Security / 7 全局规则、8 需求描述、9 外部接口、10 错误码；Registration BIO / Password；Card Manage PIN / Sensitive operations；Wallet Send/Swap auth
 last_updated: 2026-05-09
 owner: 吴忆锋
@@ -301,54 +301,54 @@ flowchart LR
 
 ### 7. 全局规则
 
-![7. 全局规则](../../archive/converted-prd/security/identity-verification/assets/media/image4.png)
+![7. 全局规则](../../archive/legacy-prd/security/identity-verification/assets/media/image4.png)
 
-_Source: archive/converted-prd/security/identity-verification/README.md:628_
-
-### 7. 全局规则
-
-![7. 全局规则](../../archive/converted-prd/security/identity-verification/assets/media/image5.png)
-
-_Source: archive/converted-prd/security/identity-verification/README.md:654_
+_Source: archive/legacy-prd/security/identity-verification/README.md:628_
 
 ### 7. 全局规则
 
-![7. 全局规则](../../archive/converted-prd/security/identity-verification/assets/media/image6.png)
+![7. 全局规则](../../archive/legacy-prd/security/identity-verification/assets/media/image5.png)
 
-_Source: archive/converted-prd/security/identity-verification/README.md:678_
+_Source: archive/legacy-prd/security/identity-verification/README.md:654_
 
-### 8. 需求描述
+### 7. 全局规则
 
-![8. 需求描述](../../archive/converted-prd/security/identity-verification/assets/media/image8.png)
+![7. 全局规则](../../archive/legacy-prd/security/identity-verification/assets/media/image6.png)
 
-_Source: archive/converted-prd/security/identity-verification/README.md:716_
-
-### 8. 需求描述
-
-![8. 需求描述](../../archive/converted-prd/security/identity-verification/assets/media/image9.png)
-
-_Source: archive/converted-prd/security/identity-verification/README.md:736_
+_Source: archive/legacy-prd/security/identity-verification/README.md:678_
 
 ### 8. 需求描述
 
-![8. 需求描述](../../archive/converted-prd/security/identity-verification/assets/media/image10.png)
+![8. 需求描述](../../archive/legacy-prd/security/identity-verification/assets/media/image8.png)
 
-_Source: archive/converted-prd/security/identity-verification/README.md:859_
-
-### 8. 需求描述
-
-![8. 需求描述](../../archive/converted-prd/security/identity-verification/assets/media/image11.png)
-
-_Source: archive/converted-prd/security/identity-verification/README.md:883_
+_Source: archive/legacy-prd/security/identity-verification/README.md:716_
 
 ### 8. 需求描述
 
-![8. 需求描述](../../archive/converted-prd/security/identity-verification/assets/media/image12.png)
+![8. 需求描述](../../archive/legacy-prd/security/identity-verification/assets/media/image9.png)
 
-_Source: archive/converted-prd/security/identity-verification/README.md:1007_
+_Source: archive/legacy-prd/security/identity-verification/README.md:736_
 
 ### 8. 需求描述
 
-![8. 需求描述](../../archive/converted-prd/security/identity-verification/assets/media/image16.png)
+![8. 需求描述](../../archive/legacy-prd/security/identity-verification/assets/media/image10.png)
 
-_Source: archive/converted-prd/security/identity-verification/README.md:1179_
+_Source: archive/legacy-prd/security/identity-verification/README.md:859_
+
+### 8. 需求描述
+
+![8. 需求描述](../../archive/legacy-prd/security/identity-verification/assets/media/image11.png)
+
+_Source: archive/legacy-prd/security/identity-verification/README.md:883_
+
+### 8. 需求描述
+
+![8. 需求描述](../../archive/legacy-prd/security/identity-verification/assets/media/image12.png)
+
+_Source: archive/legacy-prd/security/identity-verification/README.md:1007_
+
+### 8. 需求描述
+
+![8. 需求描述](../../archive/legacy-prd/security/identity-verification/assets/media/image16.png)
+
+_Source: archive/legacy-prd/security/identity-verification/README.md:1179_

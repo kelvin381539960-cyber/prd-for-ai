@@ -3,7 +3,7 @@ module: home
 feature: app-home
 version: "1.1"
 status: active
-source_doc: archive/converted-prd/app/home/README.md；archive/converted-prd/app/faq/README.md；archive/converted-prd/common/popup-banner/README.md
+source_doc: archive/legacy-prd/app/home/README.md；archive/legacy-prd/app/faq/README.md；archive/legacy-prd/common/popup-banner/README.md
 source_section: Home / 6.1 AIX Home；FAQ / 首页 FAQ；Popup Banner / 首页运营位
 last_updated: 2026-05-09
 owner: 吴忆锋
@@ -29,7 +29,7 @@ depends_on:
 
 ## 2. Source alignment status
 
-本文件已按 `archive/converted-prd/app/home/README.md` 做 Evidence → KB 反向补齐。此前 Home KB 只保留边界，缺少源 PRD 中的首页钱包状态、申卡入口、卡片展示、FAQ、核心交易操作等 runtime 规则；本版已补入。
+本文件已按 `archive/legacy-prd/app/home/README.md` 做 Evidence → KB 反向补齐。此前 Home KB 只保留边界，缺少源 PRD 中的首页钱包状态、申卡入口、卡片展示、FAQ、核心交易操作等 runtime 规则；本版已补入。
 
 ## 3. 首页整体能力
 
@@ -145,7 +145,7 @@ Home 读取最近一笔钱包开通记录判断钱包区域展示。
 | 项目 | 规则 |
 |---|---|
 | 首页 FAQ 展示 | FAQ 默认只显示问题折叠答案，点击任意一个问题只显示当前这条答案 |
-| FAQ 来源 | FAQ 配置来自 `archive/converted-prd/app/faq/README.md`，业务人员提供常见 QA list |
+| FAQ 来源 | FAQ 配置来自 `archive/legacy-prd/app/faq/README.md`，业务人员提供常见 QA list |
 | `more>` 入口 | 点击 `more>` 可查看更多 FAQ，跳转 Zendesk 链接 |
 | `more>` 显示条件 | 链接由服务端配置；没有链接则不显示 `more` 入口 |
 | Chat with us | converted-prd 中 `Chat with us` 章节为删除线，不沉淀为 confirmed runtime fact |
@@ -182,106 +182,106 @@ Home 读取最近一笔钱包开通记录判断钱包区域展示。
 
 ## 13. Sources
 
-- (Ref: archive/converted-prd/app/home/README.md / 6.1 AIX Home)
-- (Ref: archive/converted-prd/app/faq/README.md / FAQ 首页展示与 Zendesk more 规则)
-- (Ref: archive/converted-prd/common/popup-banner/README.md / 首页 Banner / Popup 配置能力，待后续 common 审计)
+- (Ref: archive/legacy-prd/app/home/README.md / 6.1 AIX Home)
+- (Ref: archive/legacy-prd/app/faq/README.md / FAQ 首页展示与 Zendesk more 规则)
+- (Ref: archive/legacy-prd/common/popup-banner/README.md / 首页 Banner / Popup 配置能力，待后续 common 审计)
 
 ## Page Visuals 页面图索引
 
-> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/legacy-prd` 原始资产，避免重复复制。
 
 ### 4. 整体流程
 
-![4. 整体流程](../../archive/converted-prd/app/home/assets/media/image5.jpeg)
+![4. 整体流程](../../archive/legacy-prd/app/home/assets/media/image5.jpeg)
 
-_Source: archive/converted-prd/app/home/README.md:167_
+_Source: archive/legacy-prd/app/home/README.md:167_
 
-![4. 整体流程](../../archive/converted-prd/app/home/assets/media/image6.jpeg)
+![4. 整体流程](../../archive/legacy-prd/app/home/assets/media/image6.jpeg)
 
-_Source: archive/converted-prd/app/home/README.md:171_
+_Source: archive/legacy-prd/app/home/README.md:171_
 
-![4. 整体流程](../../archive/converted-prd/app/home/assets/media/image7.jpeg)
+![4. 整体流程](../../archive/legacy-prd/app/home/assets/media/image7.jpeg)
 
-_Source: archive/converted-prd/app/home/README.md:175_
+_Source: archive/legacy-prd/app/home/README.md:175_
 
 ### Set Pin
 
-![Set Pin](../../archive/converted-prd/app/home/assets/media/image14.jpeg)
+![Set Pin](../../archive/legacy-prd/app/home/assets/media/image14.jpeg)
 
-_Source: archive/converted-prd/app/home/README.md:205_
+_Source: archive/legacy-prd/app/home/README.md:205_
 
 ### 申卡入口
 
-![申卡入口](../../archive/converted-prd/app/home/assets/media/image21.png)
+![申卡入口](../../archive/legacy-prd/app/home/assets/media/image21.png)
 
-_Source: archive/converted-prd/app/home/README.md:260_
+_Source: archive/legacy-prd/app/home/README.md:260_
 
-![申卡入口](../../archive/converted-prd/app/home/assets/media/image31.png)
+![申卡入口](../../archive/legacy-prd/app/home/assets/media/image31.png)
 
-_Source: archive/converted-prd/app/home/README.md:397_
+_Source: archive/legacy-prd/app/home/README.md:397_
 
-![申卡入口](../../archive/converted-prd/app/home/assets/media/image35.png)
+![申卡入口](../../archive/legacy-prd/app/home/assets/media/image35.png)
 
-_Source: archive/converted-prd/app/home/README.md:408_
+_Source: archive/legacy-prd/app/home/README.md:408_
 
-![申卡入口](../../archive/converted-prd/app/home/assets/media/image36.png)
+![申卡入口](../../archive/legacy-prd/app/home/assets/media/image36.png)
 
-_Source: archive/converted-prd/app/home/README.md:439_
+_Source: archive/legacy-prd/app/home/README.md:439_
 
-![申卡入口](../../archive/converted-prd/app/home/assets/media/image37.png)
+![申卡入口](../../archive/legacy-prd/app/home/assets/media/image37.png)
 
-_Source: archive/converted-prd/app/home/README.md:441_
+_Source: archive/legacy-prd/app/home/README.md:441_
 
-![申卡入口](../../archive/converted-prd/app/home/assets/media/image38.png)
+![申卡入口](../../archive/legacy-prd/app/home/assets/media/image38.png)
 
-_Source: archive/converted-prd/app/home/README.md:443_
+_Source: archive/legacy-prd/app/home/README.md:443_
 
-![申卡入口](../../archive/converted-prd/app/home/assets/media/image41.png)
+![申卡入口](../../archive/legacy-prd/app/home/assets/media/image41.png)
 
-_Source: archive/converted-prd/app/home/README.md:471_
+_Source: archive/legacy-prd/app/home/README.md:471_
 
-![申卡入口](../../archive/converted-prd/app/home/assets/media/image42.png)
+![申卡入口](../../archive/legacy-prd/app/home/assets/media/image42.png)
 
-_Source: archive/converted-prd/app/home/README.md:477_
+_Source: archive/legacy-prd/app/home/README.md:477_
 
 ### 未申请开通钱包
 
-![未申请开通钱包](../../archive/converted-prd/app/home/assets/media/image27.png)
+![未申请开通钱包](../../archive/legacy-prd/app/home/assets/media/image27.png)
 
-_Source: archive/converted-prd/app/home/README.md:321_
+_Source: archive/legacy-prd/app/home/README.md:321_
 
-![未申请开通钱包](../../archive/converted-prd/app/home/assets/media/image28.png)
+![未申请开通钱包](../../archive/legacy-prd/app/home/assets/media/image28.png)
 
-_Source: archive/converted-prd/app/home/README.md:323_
+_Source: archive/legacy-prd/app/home/README.md:323_
 
-![未申请开通钱包](../../archive/converted-prd/app/home/assets/media/image29.png)
+![未申请开通钱包](../../archive/legacy-prd/app/home/assets/media/image29.png)
 
-_Source: archive/converted-prd/app/home/README.md:325_
+_Source: archive/legacy-prd/app/home/README.md:325_
 
-![未申请开通钱包](../../archive/converted-prd/app/home/assets/media/image30.png)
+![未申请开通钱包](../../archive/legacy-prd/app/home/assets/media/image30.png)
 
-_Source: archive/converted-prd/app/home/README.md:326_
+_Source: archive/legacy-prd/app/home/README.md:326_
 
 ### 当前卡片展示
 
-![当前卡片展示](../../archive/converted-prd/app/home/assets/media/image39.png)
+![当前卡片展示](../../archive/legacy-prd/app/home/assets/media/image39.png)
 
-_Source: archive/converted-prd/app/home/README.md:445_
+_Source: archive/legacy-prd/app/home/README.md:445_
 
-![当前卡片展示](../../archive/converted-prd/app/home/assets/media/image40.png)
+![当前卡片展示](../../archive/legacy-prd/app/home/assets/media/image40.png)
 
-_Source: archive/converted-prd/app/home/README.md:447_
+_Source: archive/legacy-prd/app/home/README.md:447_
 
 ### Select Wallet
 
-![Select Wallet](../../archive/converted-prd/app/home/assets/media/image43.png)
+![Select Wallet](../../archive/legacy-prd/app/home/assets/media/image43.png)
 
-_Source: archive/converted-prd/app/home/README.md:512_
+_Source: archive/legacy-prd/app/home/README.md:512_
 
-![Select Wallet](../../archive/converted-prd/app/home/assets/media/image44.png)
+![Select Wallet](../../archive/legacy-prd/app/home/assets/media/image44.png)
 
-_Source: archive/converted-prd/app/home/README.md:513_
+_Source: archive/legacy-prd/app/home/README.md:513_
 
-![Select Wallet](../../archive/converted-prd/app/home/assets/media/image45.png)
+![Select Wallet](../../archive/legacy-prd/app/home/assets/media/image45.png)
 
-_Source: archive/converted-prd/app/home/README.md:528_
+_Source: archive/legacy-prd/app/home/README.md:528_

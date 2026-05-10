@@ -3,7 +3,7 @@ module: supporting-visuals
 feature: kyc-wallet-opening
 version: "1.0"
 status: visual_only
-source_doc: archive/converted-prd/kyc/wallet-opening
+source_doc: archive/legacy-prd/kyc/wallet-opening
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,39 +19,39 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 1. 4. 功能结构
 
-![4. 功能结构](../../archive/converted-prd/kyc/wallet-opening/assets/media/image1.jpeg)
+![4. 功能结构](../../archive/legacy-prd/kyc/wallet-opening/assets/media/image1.jpeg)
 
-_Source: archive/converted-prd/kyc/wallet-opening/assets/media/image1.jpeg_
+_Source: archive/legacy-prd/kyc/wallet-opening/assets/media/image1.jpeg_
 
 ### 2. 6. 统一规则
 
-![6. 统一规则](../../archive/converted-prd/kyc/wallet-opening/assets/media/image2.jpeg)
+![6. 统一规则](../../archive/legacy-prd/kyc/wallet-opening/assets/media/image2.jpeg)
 
-_Source: archive/converted-prd/kyc/wallet-opening/assets/media/image2.jpeg_
+_Source: archive/legacy-prd/kyc/wallet-opening/assets/media/image2.jpeg_
 
 ### 3. 6. 统一规则
 
-![6. 统一规则](../../archive/converted-prd/kyc/wallet-opening/assets/media/image3.jpeg)
+![6. 统一规则](../../archive/legacy-prd/kyc/wallet-opening/assets/media/image3.jpeg)
 
-_Source: archive/converted-prd/kyc/wallet-opening/assets/media/image3.jpeg_
+_Source: archive/legacy-prd/kyc/wallet-opening/assets/media/image3.jpeg_
 
 ### 4. 7. 需求描述
 
-![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image6.jpeg)
+![7. 需求描述](../../archive/legacy-prd/kyc/wallet-opening/assets/media/image6.jpeg)
 
-_Source: archive/converted-prd/kyc/wallet-opening/assets/media/image6.jpeg_
+_Source: archive/legacy-prd/kyc/wallet-opening/assets/media/image6.jpeg_
 
 ### 5. 7. 需求描述
 
-![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image6.jpeg)
+![7. 需求描述](../../archive/legacy-prd/kyc/wallet-opening/assets/media/image6.jpeg)
 
-_Source: archive/converted-prd/kyc/wallet-opening/assets/media/image6.jpeg_
+_Source: archive/legacy-prd/kyc/wallet-opening/assets/media/image6.jpeg_
 
 ### 6. 7. 需求描述
 
-![7. 需求描述](../../archive/converted-prd/kyc/wallet-opening/assets/media/image21.png)
+![7. 需求描述](../../archive/legacy-prd/kyc/wallet-opening/assets/media/image21.png)
 
-_Source: archive/converted-prd/kyc/wallet-opening/assets/media/image21.png_
+_Source: archive/legacy-prd/kyc/wallet-opening/assets/media/image21.png_
 
 
 ## 3. 使用规则

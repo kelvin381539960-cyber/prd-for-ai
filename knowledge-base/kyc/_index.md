@@ -3,7 +3,7 @@ module: kyc
 feature: kyc-index
 version: "3.1"
 status: active
-source_doc: archive/converted-prd/kyc/wallet-opening/README.md；archive/converted-prd/app/home/README.md；archive/converted-prd/card/application/README.md；archive/converted-prd/security/identity-verification/README.md
+source_doc: archive/legacy-prd/kyc/wallet-opening/README.md；archive/legacy-prd/app/home/README.md；archive/legacy-prd/card/application/README.md；archive/legacy-prd/security/identity-verification/README.md
 source_section: KYC wallet opening；Home wallet panel；Card application prerequisite；Security identity verification
 last_updated: 2026-05-09
 owner: 吴忆锋
@@ -91,7 +91,7 @@ KYC 目录不保留 review、correction plan、stage review、临时 checklist�
 
 ## 7. 来源引用
 
-- (Ref: archive/converted-prd/kyc/wallet-opening/README.md；knowledge-base/kyc/account-opening.md)
+- (Ref: archive/legacy-prd/kyc/wallet-opening/README.md；knowledge-base/kyc/account-opening.md)
 - (Ref: knowledge-base/integrations/aai/_index.md)
 - (Ref: knowledge-base/integrations/dtc/_index.md)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md)

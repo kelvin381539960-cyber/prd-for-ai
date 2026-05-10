@@ -3,7 +3,7 @@ module: card
 feature: card-transaction-detail
 version: "1.1"
 status: active
-source_doc: archive/converted-prd/card/transaction/README.md；archive/converted-prd/app/transaction-history/README.md
+source_doc: archive/legacy-prd/card/transaction/README.md；archive/legacy-prd/app/transaction-history/README.md
 source_section: Transaction & History / 7.2 Card History；7.3 Card Transaction Details；8.1/8.2 DTC card transaction APIs
 last_updated: 2026-05-09
 owner: 吴忆锋

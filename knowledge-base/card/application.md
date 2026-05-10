@@ -3,7 +3,7 @@ module: card
 feature: application
 version: "1.4"
 status: active
-source_doc: archive/converted-prd/card/application/README.md；archive/converted-prd/app/home/README.md；archive/converted-prd/kyc/wallet-opening/README.md；archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/card/manage/README.md
+source_doc: archive/legacy-prd/card/application/README.md；archive/legacy-prd/app/home/README.md；archive/legacy-prd/kyc/wallet-opening/README.md；archive/legacy-prd/security/identity-verification/README.md；archive/legacy-prd/card/manage/README.md
 source_section: Card Application / 2.1 申卡说明；6.1 申请开卡；Home / 申卡入口；Security / Face Auth；KYC / wallet opening
 last_updated: 2026-05-09
 owner: 吴忆锋
@@ -12,7 +12,7 @@ readers: [product, ui, dev, qa, business, ai]
 
 # Card Application 申卡流程
 
-> Source alignment note: 本文件已按 `archive/converted-prd/card/application/README.md` 进行 Evidence→KB 补齐，并同步核对 Home、KYC、Security 支撑证据。补齐重点包括多币种制卡费支付、Fee waiver、余额校验、Face Auth token、Billing/Mailing 字段限制、实体卡打印名、MGM 减免费状态和结果页规则。
+> Source alignment note: 本文件已按 `archive/legacy-prd/card/application/README.md` 进行 Evidence→KB 补齐，并同步核对 Home、KYC、Security 支撑证据。补齐重点包括多币种制卡费支付、Fee waiver、余额校验、Face Auth token、Billing/Mailing 字段限制、实体卡打印名、MGM 减免费状态和结果页规则。
 
 
 ## 1. 文档信息
@@ -353,161 +353,161 @@ flowchart LR
 
 ## Page Visuals 页面图索引
 
-> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/legacy-prd` 原始资产，避免重复复制。
 
 ### 申卡入口
 
-![申卡入口](../../archive/converted-prd/card/application/assets/media/image2.jpeg)
+![申卡入口](../../archive/legacy-prd/card/application/assets/media/image2.jpeg)
 
-_Source: archive/converted-prd/card/application/README.md:186_
+_Source: archive/legacy-prd/card/application/README.md:186_
 
-![申卡入口](../../archive/converted-prd/card/application/assets/media/image3.png)
+![申卡入口](../../archive/legacy-prd/card/application/assets/media/image3.png)
 
-_Source: archive/converted-prd/card/application/README.md:190_
+_Source: archive/legacy-prd/card/application/README.md:190_
 
-![申卡入口](../../archive/converted-prd/card/application/assets/media/image4.png)
+![申卡入口](../../archive/legacy-prd/card/application/assets/media/image4.png)
 
-_Source: archive/converted-prd/card/application/README.md:192_
+_Source: archive/legacy-prd/card/application/README.md:192_
 
-![申卡入口](../../archive/converted-prd/card/application/assets/media/image5.png)
+![申卡入口](../../archive/legacy-prd/card/application/assets/media/image5.png)
 
-_Source: archive/converted-prd/card/application/README.md:216_
+_Source: archive/legacy-prd/card/application/README.md:216_
 
-![申卡入口](../../archive/converted-prd/card/application/assets/media/image6.png)
+![申卡入口](../../archive/legacy-prd/card/application/assets/media/image6.png)
 
-_Source: archive/converted-prd/card/application/README.md:217_
+_Source: archive/legacy-prd/card/application/README.md:217_
 
-![申卡入口](../../archive/converted-prd/card/application/assets/media/image7.png)
+![申卡入口](../../archive/legacy-prd/card/application/assets/media/image7.png)
 
-_Source: archive/converted-prd/card/application/README.md:218_
+_Source: archive/legacy-prd/card/application/README.md:218_
 
-![申卡入口](../../archive/converted-prd/card/application/assets/media/image8.png)
+![申卡入口](../../archive/legacy-prd/card/application/assets/media/image8.png)
 
-_Source: archive/converted-prd/card/application/README.md:220_
+_Source: archive/legacy-prd/card/application/README.md:220_
 
-![申卡入口](../../archive/converted-prd/card/application/assets/media/image9.png)
+![申卡入口](../../archive/legacy-prd/card/application/assets/media/image9.png)
 
-_Source: archive/converted-prd/card/application/README.md:247_
+_Source: archive/legacy-prd/card/application/README.md:247_
 
-![申卡入口](../../archive/converted-prd/card/application/assets/media/image10.png)
+![申卡入口](../../archive/legacy-prd/card/application/assets/media/image10.png)
 
-_Source: archive/converted-prd/card/application/README.md:248_
+_Source: archive/legacy-prd/card/application/README.md:248_
 
-![申卡入口](../../archive/converted-prd/card/application/assets/media/image11.png)
+![申卡入口](../../archive/legacy-prd/card/application/assets/media/image11.png)
 
-_Source: archive/converted-prd/card/application/README.md:249_
+_Source: archive/legacy-prd/card/application/README.md:249_
 
-![申卡入口](../../archive/converted-prd/card/application/assets/media/image47.png)
+![申卡入口](../../archive/legacy-prd/card/application/assets/media/image47.png)
 
-_Source: archive/converted-prd/card/application/README.md:835_
+_Source: archive/legacy-prd/card/application/README.md:835_
 
-![申卡入口](../../archive/converted-prd/card/application/assets/media/image48.png)
+![申卡入口](../../archive/legacy-prd/card/application/assets/media/image48.png)
 
-_Source: archive/converted-prd/card/application/README.md:836_
+_Source: archive/legacy-prd/card/application/README.md:836_
 
 ### 6. AIX前端功能需求
 
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image12.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image12.png)
 
-_Source: archive/converted-prd/card/application/README.md:251_
+_Source: archive/legacy-prd/card/application/README.md:251_
 
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image13.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image13.png)
 
-_Source: archive/converted-prd/card/application/README.md:252_
+_Source: archive/legacy-prd/card/application/README.md:252_
 
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image14.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image14.png)
 
-_Source: archive/converted-prd/card/application/README.md:318_
+_Source: archive/legacy-prd/card/application/README.md:318_
 
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image15.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image15.png)
 
-_Source: archive/converted-prd/card/application/README.md:319_
+_Source: archive/legacy-prd/card/application/README.md:319_
 
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image16.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image16.png)
 
-_Source: archive/converted-prd/card/application/README.md:320_
+_Source: archive/legacy-prd/card/application/README.md:320_
 
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image20.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image20.png)
 
-_Source: archive/converted-prd/card/application/README.md:381_
+_Source: archive/legacy-prd/card/application/README.md:381_
 
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image21.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image21.png)
 
-_Source: archive/converted-prd/card/application/README.md:382_
+_Source: archive/legacy-prd/card/application/README.md:382_
 
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image22.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image22.png)
 
-_Source: archive/converted-prd/card/application/README.md:383_
+_Source: archive/legacy-prd/card/application/README.md:383_
 
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image23.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image23.png)
 
-_Source: archive/converted-prd/card/application/README.md:384_
+_Source: archive/legacy-prd/card/application/README.md:384_
 
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image24.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image24.png)
 
-_Source: archive/converted-prd/card/application/README.md:431_
+_Source: archive/legacy-prd/card/application/README.md:431_
 
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image25.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image25.png)
 
-_Source: archive/converted-prd/card/application/README.md:432_
+_Source: archive/legacy-prd/card/application/README.md:432_
 
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image26.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image26.png)
 
-_Source: archive/converted-prd/card/application/README.md:454_
+_Source: archive/legacy-prd/card/application/README.md:454_
 
 ### Select Crypto
 
-![Select Crypto](../../archive/converted-prd/card/application/assets/media/image17.png)
+![Select Crypto](../../archive/legacy-prd/card/application/assets/media/image17.png)
 
-_Source: archive/converted-prd/card/application/README.md:348_
+_Source: archive/legacy-prd/card/application/README.md:348_
 
-![Select Crypto](../../archive/converted-prd/card/application/assets/media/image18.png)
+![Select Crypto](../../archive/legacy-prd/card/application/assets/media/image18.png)
 
-_Source: archive/converted-prd/card/application/README.md:349_
+_Source: archive/legacy-prd/card/application/README.md:349_
 
-![Select Crypto](../../archive/converted-prd/card/application/assets/media/image19.png)
+![Select Crypto](../../archive/legacy-prd/card/application/assets/media/image19.png)
 
-_Source: archive/converted-prd/card/application/README.md:350_
+_Source: archive/legacy-prd/card/application/README.md:350_
 
 ### 当前卡片展示
 
-![当前卡片展示](../../archive/converted-prd/card/application/assets/media/image40.png)
+![当前卡片展示](../../archive/legacy-prd/card/application/assets/media/image40.png)
 
-_Source: archive/converted-prd/card/application/README.md:647_
+_Source: archive/legacy-prd/card/application/README.md:647_
 
-![当前卡片展示](../../archive/converted-prd/card/application/assets/media/image41.png)
+![当前卡片展示](../../archive/legacy-prd/card/application/assets/media/image41.png)
 
-_Source: archive/converted-prd/card/application/README.md:649_
+_Source: archive/legacy-prd/card/application/README.md:649_
 
-![当前卡片展示](../../archive/converted-prd/card/application/assets/media/image42.png)
+![当前卡片展示](../../archive/legacy-prd/card/application/assets/media/image42.png)
 
-_Source: archive/converted-prd/card/application/README.md:807_
+_Source: archive/legacy-prd/card/application/README.md:807_
 
-![当前卡片展示](../../archive/converted-prd/card/application/assets/media/image52.png)
+![当前卡片展示](../../archive/legacy-prd/card/application/assets/media/image52.png)
 
-_Source: archive/converted-prd/card/application/README.md:922_
+_Source: archive/legacy-prd/card/application/README.md:922_
 
-![当前卡片展示](../../archive/converted-prd/card/application/assets/media/image53.png)
+![当前卡片展示](../../archive/legacy-prd/card/application/assets/media/image53.png)
 
-_Source: archive/converted-prd/card/application/README.md:923_
+_Source: archive/legacy-prd/card/application/README.md:923_
 
 ### Activate Card
 
-![Activate Card](../../archive/converted-prd/card/application/assets/media/image43.png)
+![Activate Card](../../archive/legacy-prd/card/application/assets/media/image43.png)
 
-_Source: archive/converted-prd/card/application/README.md:809_
+_Source: archive/legacy-prd/card/application/README.md:809_
 
-![Activate Card](../../archive/converted-prd/card/application/assets/media/image44.png)
+![Activate Card](../../archive/legacy-prd/card/application/assets/media/image44.png)
 
-_Source: archive/converted-prd/card/application/README.md:811_
+_Source: archive/legacy-prd/card/application/README.md:811_
 
-![Activate Card](../../archive/converted-prd/card/application/assets/media/image45.png)
+![Activate Card](../../archive/legacy-prd/card/application/assets/media/image45.png)
 
-_Source: archive/converted-prd/card/application/README.md:813_
+_Source: archive/legacy-prd/card/application/README.md:813_
 
-![Activate Card](../../archive/converted-prd/card/application/assets/media/image46.png)
+![Activate Card](../../archive/legacy-prd/card/application/assets/media/image46.png)
 
-_Source: archive/converted-prd/card/application/README.md:815_
+_Source: archive/legacy-prd/card/application/README.md:815_
 
 ## Additional Page Visuals 补充页面图
 
@@ -515,78 +515,78 @@ _Source: archive/converted-prd/card/application/README.md:815_
 
 ### 6. AIX前端功能需求
 
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image27.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image27.png)
 
-_Source: archive/converted-prd/card/application/README.md:465_
-
-### 6. AIX前端功能需求
-
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image28.png)
-
-_Source: archive/converted-prd/card/application/README.md:466_
+_Source: archive/legacy-prd/card/application/README.md:465_
 
 ### 6. AIX前端功能需求
 
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image29.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image28.png)
 
-_Source: archive/converted-prd/card/application/README.md:468_
-
-### 6. AIX前端功能需求
-
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image30.png)
-
-_Source: archive/converted-prd/card/application/README.md:469_
+_Source: archive/legacy-prd/card/application/README.md:466_
 
 ### 6. AIX前端功能需求
 
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image31.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image29.png)
 
-_Source: archive/converted-prd/card/application/README.md:471_
-
-### 6. AIX前端功能需求
-
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image32.png)
-
-_Source: archive/converted-prd/card/application/README.md:508_
+_Source: archive/legacy-prd/card/application/README.md:468_
 
 ### 6. AIX前端功能需求
 
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image33.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image30.png)
 
-_Source: archive/converted-prd/card/application/README.md:543_
-
-### 6. AIX前端功能需求
-
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image34.png)
-
-_Source: archive/converted-prd/card/application/README.md:544_
+_Source: archive/legacy-prd/card/application/README.md:469_
 
 ### 6. AIX前端功能需求
 
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image35.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image31.png)
 
-_Source: archive/converted-prd/card/application/README.md:545_
+_Source: archive/legacy-prd/card/application/README.md:471_
 
 ### 6. AIX前端功能需求
 
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image36.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image32.png)
 
-_Source: archive/converted-prd/card/application/README.md:546_
+_Source: archive/legacy-prd/card/application/README.md:508_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image33.png)
+
+_Source: archive/legacy-prd/card/application/README.md:543_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image34.png)
+
+_Source: archive/legacy-prd/card/application/README.md:544_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image35.png)
+
+_Source: archive/legacy-prd/card/application/README.md:545_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image36.png)
+
+_Source: archive/legacy-prd/card/application/README.md:546_
 
 ### 申卡入口
 
-![申卡入口](../../archive/converted-prd/card/application/assets/media/image49.png)
+![申卡入口](../../archive/legacy-prd/card/application/assets/media/image49.png)
 
-_Source: archive/converted-prd/card/application/README.md:837_
-
-### 申卡入口
-
-![申卡入口](../../archive/converted-prd/card/application/assets/media/image50.png)
-
-_Source: archive/converted-prd/card/application/README.md:839_
+_Source: archive/legacy-prd/card/application/README.md:837_
 
 ### 申卡入口
 
-![申卡入口](../../archive/converted-prd/card/application/assets/media/image51.png)
+![申卡入口](../../archive/legacy-prd/card/application/assets/media/image50.png)
 
-_Source: archive/converted-prd/card/application/README.md:840_
+_Source: archive/legacy-prd/card/application/README.md:839_
+
+### 申卡入口
+
+![申卡入口](../../archive/legacy-prd/card/application/assets/media/image51.png)
+
+_Source: archive/legacy-prd/card/application/README.md:840_

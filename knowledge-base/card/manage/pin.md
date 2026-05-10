@@ -3,7 +3,7 @@ module: card
 feature: card-pin
 version: "1.1"
 status: active
-source_doc: archive/converted-prd/card/manage/README.md；archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/card/application/README.md
+source_doc: archive/legacy-prd/card/manage/README.md；archive/legacy-prd/security/identity-verification/README.md；archive/legacy-prd/card/application/README.md
 source_section: Card Manage / 7.3 Set PIN / Change PIN；8 外部接口；Security / Identity Verification
 last_updated: 2026-05-09
 owner: 吴忆锋
@@ -275,36 +275,36 @@ flowchart LR
 
 ## Page Visuals 页面图索引
 
-> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/legacy-prd` 原始资产，避免重复复制。
 
 ### set pin
 
-![set pin](../../../archive/converted-prd/card/manage/assets/media/image2.png)
+![set pin](../../../archive/legacy-prd/card/manage/assets/media/image2.png)
 
-_Source: archive/converted-prd/card/manage/README.md:30_
+_Source: archive/legacy-prd/card/manage/README.md:30_
 
 ### Set PIN
 
-![Set PIN](../../../archive/converted-prd/card/manage/assets/media/image22.jpeg)
+![Set PIN](../../../archive/legacy-prd/card/manage/assets/media/image22.jpeg)
 
-_Source: archive/converted-prd/card/manage/README.md:857_
+_Source: archive/legacy-prd/card/manage/README.md:857_
 
-![Set PIN](../../../archive/converted-prd/card/manage/assets/media/image23.jpeg)
+![Set PIN](../../../archive/legacy-prd/card/manage/assets/media/image23.jpeg)
 
-_Source: archive/converted-prd/card/manage/README.md:863_
+_Source: archive/legacy-prd/card/manage/README.md:863_
 
-![Set PIN](../../../archive/converted-prd/card/manage/assets/media/image25.png)
+![Set PIN](../../../archive/legacy-prd/card/manage/assets/media/image25.png)
 
-_Source: archive/converted-prd/card/manage/README.md:923_
+_Source: archive/legacy-prd/card/manage/README.md:923_
 
-![Set PIN](../../../archive/converted-prd/card/manage/assets/media/image26.png)
+![Set PIN](../../../archive/legacy-prd/card/manage/assets/media/image26.png)
 
-_Source: archive/converted-prd/card/manage/README.md:974_
+_Source: archive/legacy-prd/card/manage/README.md:974_
 
-![Set PIN](../../../archive/converted-prd/card/manage/assets/media/image27.png)
+![Set PIN](../../../archive/legacy-prd/card/manage/assets/media/image27.png)
 
-_Source: archive/converted-prd/card/manage/README.md:1003_
+_Source: archive/legacy-prd/card/manage/README.md:1003_
 
-![Set PIN](../../../archive/converted-prd/card/manage/assets/media/image19.png)
+![Set PIN](../../../archive/legacy-prd/card/manage/assets/media/image19.png)
 
-_Source: archive/converted-prd/card/manage/README.md:1089_
+_Source: archive/legacy-prd/card/manage/README.md:1089_

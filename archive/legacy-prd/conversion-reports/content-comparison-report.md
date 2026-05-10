@@ -14,7 +14,7 @@
 ## 比对方法
 
 1. 使用 mammoth 从原始 `.docx` 提取原始正文。
-2. 读取转换后的 `archive/converted-prd/**/README.md`。
+2. 读取转换后的 `archive/legacy-prd/**/README.md`。
 3. 对两边文本做归一化处理：去除 Markdown 标记、HTML 标签、HTML entity、空白差异、部分中英文标点差异。
 4. 按原始 docx 段落逐段检查是否被 Markdown 覆盖。
 5. 对自动比对剩余的疑似缺失项进行人工搜索复核。

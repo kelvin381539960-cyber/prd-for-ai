@@ -3,7 +3,7 @@ module: changelog
 feature: prd-source-confirmation-needed
 version: "2.0"
 status: active
-source_doc: archive/converted-prd/app/registration-login/README.md；archive/converted-prd/app/home/README.md；archive/converted-prd/card/application/README.md
+source_doc: archive/legacy-prd/app/registration-login/README.md；archive/legacy-prd/app/home/README.md；archive/legacy-prd/card/application/README.md
 source_section: final unresolved evidence after PRD source alignment
 last_updated: 2026-05-09
 owner: 吴忆锋
@@ -44,8 +44,8 @@ readers: [product, ui, dev, qa, business, ai]
 
 | 来源 | 相关段落 |
 |---|---|
-| `archive/converted-prd/app/home/README.md` | 首页当前卡片展示逻辑 |
-| `archive/converted-prd/card/application/README.md` | Card Application / Card Home 展示逻辑 |
+| `archive/legacy-prd/app/home/README.md` | 首页当前卡片展示逻辑 |
+| `archive/legacy-prd/card/application/README.md` | Card Application / Card Home 展示逻辑 |
 
 ### 4.2 冲突矩阵
 
@@ -74,7 +74,7 @@ readers: [product, ui, dev, qa, business, ai]
 
 ## 7. Sources
 
-- (Ref: archive/converted-prd/app/registration-login/README.md / 7.3.3 Reset Password 删除线)
-- (Ref: archive/converted-prd/app/home/README.md / 当前卡片展示逻辑)
-- (Ref: archive/converted-prd/card/application/README.md / Card Home 展示逻辑)
-- (Ref: archive/converted-prd/security/identity-verification/README.md / Security 场景锁定)
+- (Ref: archive/legacy-prd/app/registration-login/README.md / 7.3.3 Reset Password 删除线)
+- (Ref: archive/legacy-prd/app/home/README.md / 当前卡片展示逻辑)
+- (Ref: archive/legacy-prd/card/application/README.md / Card Home 展示逻辑)
+- (Ref: archive/legacy-prd/security/identity-verification/README.md / Security 场景锁定)

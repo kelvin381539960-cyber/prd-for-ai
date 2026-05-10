@@ -3,7 +3,7 @@ module: home
 feature: index
 version: "1.1"
 status: active
-source_doc: archive/converted-prd/app/home/README.md；archive/converted-prd/app/faq/README.md
+source_doc: archive/legacy-prd/app/home/README.md；archive/legacy-prd/app/faq/README.md
 source_section: App Home；Home FAQ；runtime routing
 last_updated: 2026-05-09
 owner: 吴忆锋
@@ -59,6 +59,6 @@ Home 不是官网、Web 或 Marketing 站点模块；它只承接 App 内首页�
 
 ## 6. 来源引用
 
-- (Ref: archive/converted-prd/app/home/README.md)
-- (Ref: archive/converted-prd/app/faq/README.md)
-- (Ref: archive/converted-prd/common/popup-banner/README.md，待 common 审计)
+- (Ref: archive/legacy-prd/app/home/README.md)
+- (Ref: archive/legacy-prd/app/faq/README.md)
+- (Ref: archive/legacy-prd/common/popup-banner/README.md，待 common 审计)

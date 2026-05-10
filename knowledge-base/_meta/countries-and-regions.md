@@ -3,7 +3,7 @@ module: _meta
 feature: countries-and-regions
 version: "2.0"
 status: active
-source_doc: archive/converted-prd/**/README.md；knowledge-base/* 已校准模块
+source_doc: archive/legacy-prd/**/README.md；knowledge-base/* 已校准模块
 source_section: converted PRD corpus / countries and regions
 last_updated: 2026-05-09
 owner: 吴忆锋
@@ -34,6 +34,6 @@ readers: [product, ui, dev, qa, business, ai]
 
 ## 4. Sources
 
-- (Ref: archive/converted-prd/card/application/README.md)
-- (Ref: archive/converted-prd/kyc/wallet-opening/README.md)
-- (Ref: archive/converted-prd/app/registration-login/README.md)
+- (Ref: archive/legacy-prd/card/application/README.md)
+- (Ref: archive/legacy-prd/kyc/wallet-opening/README.md)
+- (Ref: archive/legacy-prd/app/registration-login/README.md)

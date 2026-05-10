@@ -3,7 +3,7 @@ module: supporting-visuals
 feature: oboss-mvp
 version: "1.0"
 status: visual_only
-source_doc: archive/converted-prd/oboss/mvp
+source_doc: archive/legacy-prd/oboss/mvp
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,27 +19,27 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 1. \ AIX\ OBOSS MVP
 
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image1.png)
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image1.png)
 
-_Source: archive/converted-prd/oboss/mvp/assets/media/image1.png_
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image1.png_
 
 ### 2. \ AIX\ OBOSS MVP
 
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image3.png)
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image3.png)
 
-_Source: archive/converted-prd/oboss/mvp/assets/media/image3.png_
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image3.png_
 
 ### 3. Notification center
 
-![Notification center](../../archive/converted-prd/oboss/mvp/assets/media/image9.png)
+![Notification center](../../archive/legacy-prd/oboss/mvp/assets/media/image9.png)
 
-_Source: archive/converted-prd/oboss/mvp/assets/media/image9.png_
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image9.png_
 
 ### 4. \ AIX\ OBOSS MVP
 
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image18.png)
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image18.png)
 
-_Source: archive/converted-prd/oboss/mvp/assets/media/image18.png_
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image18.png_
 
 
 ## 3. 使用规则

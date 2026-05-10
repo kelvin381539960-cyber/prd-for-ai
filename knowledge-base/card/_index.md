@@ -3,7 +3,7 @@ module: card
 feature: card-index
 version: "3.4"
 status: active
-source_doc: archive/converted-prd/card/application/README.md；archive/converted-prd/app/home/README.md；archive/converted-prd/kyc/wallet-opening/README.md；archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/card/manage/README.md
+source_doc: archive/legacy-prd/card/application/README.md；archive/legacy-prd/app/home/README.md；archive/legacy-prd/kyc/wallet-opening/README.md；archive/legacy-prd/security/identity-verification/README.md；archive/legacy-prd/card/manage/README.md
 source_section: Card Application；Home Card entry；KYC wallet opening；Security verification；Card Manage
 last_updated: 2026-05-09
 owner: 吴忆锋

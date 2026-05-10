@@ -3,7 +3,7 @@ module: supporting-visuals
 feature: card-me
 version: "1.0"
 status: visual_only
-source_doc: archive/converted-prd/card/me
+source_doc: archive/legacy-prd/card/me
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,51 +19,51 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 1. 6. 需求描述
 
-![6. 需求描述](../../archive/converted-prd/card/me/assets/media/image4.png)
+![6. 需求描述](../../archive/legacy-prd/card/me/assets/media/image4.png)
 
-_Source: archive/converted-prd/card/me/assets/media/image4.png_
+_Source: archive/legacy-prd/card/me/assets/media/image4.png_
 
 ### 2. 6. 需求描述
 
-![6. 需求描述](../../archive/converted-prd/card/me/assets/media/image5.png)
+![6. 需求描述](../../archive/legacy-prd/card/me/assets/media/image5.png)
 
-_Source: archive/converted-prd/card/me/assets/media/image5.png_
+_Source: archive/legacy-prd/card/me/assets/media/image5.png_
 
 ### 3. 6. 需求描述
 
-![6. 需求描述](../../archive/converted-prd/card/me/assets/media/image6.png)
+![6. 需求描述](../../archive/legacy-prd/card/me/assets/media/image6.png)
 
-_Source: archive/converted-prd/card/me/assets/media/image6.png_
+_Source: archive/legacy-prd/card/me/assets/media/image6.png_
 
 ### 4. 6. 需求描述
 
-![6. 需求描述](../../archive/converted-prd/card/me/assets/media/image7.png)
+![6. 需求描述](../../archive/legacy-prd/card/me/assets/media/image7.png)
 
-_Source: archive/converted-prd/card/me/assets/media/image7.png_
+_Source: archive/legacy-prd/card/me/assets/media/image7.png_
 
 ### 5. 6. 需求描述
 
-![6. 需求描述](../../archive/converted-prd/card/me/assets/media/image20.png)
+![6. 需求描述](../../archive/legacy-prd/card/me/assets/media/image20.png)
 
-_Source: archive/converted-prd/card/me/assets/media/image20.png_
+_Source: archive/legacy-prd/card/me/assets/media/image20.png_
 
 ### 6. 6. 需求描述
 
-![6. 需求描述](../../archive/converted-prd/card/me/assets/media/image21.png)
+![6. 需求描述](../../archive/legacy-prd/card/me/assets/media/image21.png)
 
-_Source: archive/converted-prd/card/me/assets/media/image21.png_
+_Source: archive/legacy-prd/card/me/assets/media/image21.png_
 
 ### 7. 6. 需求描述
 
-![6. 需求描述](../../archive/converted-prd/card/me/assets/media/image22.png)
+![6. 需求描述](../../archive/legacy-prd/card/me/assets/media/image22.png)
 
-_Source: archive/converted-prd/card/me/assets/media/image22.png_
+_Source: archive/legacy-prd/card/me/assets/media/image22.png_
 
 ### 8. 6. 需求描述
 
-![6. 需求描述](../../archive/converted-prd/card/me/assets/media/image24.png)
+![6. 需求描述](../../archive/legacy-prd/card/me/assets/media/image24.png)
 
-_Source: archive/converted-prd/card/me/assets/media/image24.png_
+_Source: archive/legacy-prd/card/me/assets/media/image24.png_
 
 
 ## 3. 使用规则

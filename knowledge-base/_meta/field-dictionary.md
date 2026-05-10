@@ -3,7 +3,7 @@ module: _meta
 feature: field-dictionary
 version: "2.0"
 status: active
-source_doc: archive/converted-prd/**/README.md；knowledge-base/* 已校准模块
+source_doc: archive/legacy-prd/**/README.md；knowledge-base/* 已校准模块
 source_section: converted PRD corpus / field dictionary
 last_updated: 2026-05-09
 owner: 吴忆锋

@@ -3,7 +3,7 @@ module: non-runtime
 feature: website-waitlist-addition
 version: "1.0"
 status: visual_only
-source_doc: archive/converted-prd/website/waitlist-addition
+source_doc: archive/legacy-prd/website/waitlist-addition
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,45 +19,45 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 4. 需求描述
 
-![4. 需求描述](../../archive/converted-prd/website/waitlist-addition/assets/media/image1.jpg)
+![4. 需求描述](../../archive/legacy-prd/website/waitlist-addition/assets/media/image1.jpg)
 
-_Source: archive/converted-prd/website/waitlist-addition/assets/media/image1.jpg_
-
-### 4. 需求描述
-
-![4. 需求描述](../../archive/converted-prd/website/waitlist-addition/assets/media/image2.png)
-
-_Source: archive/converted-prd/website/waitlist-addition/assets/media/image2.png_
+_Source: archive/legacy-prd/website/waitlist-addition/assets/media/image1.jpg_
 
 ### 4. 需求描述
 
-![4. 需求描述](../../archive/converted-prd/website/waitlist-addition/assets/media/image3.png)
+![4. 需求描述](../../archive/legacy-prd/website/waitlist-addition/assets/media/image2.png)
 
-_Source: archive/converted-prd/website/waitlist-addition/assets/media/image3.png_
-
-### 4. 需求描述
-
-![4. 需求描述](../../archive/converted-prd/website/waitlist-addition/assets/media/image4.jpeg)
-
-_Source: archive/converted-prd/website/waitlist-addition/assets/media/image4.jpeg_
+_Source: archive/legacy-prd/website/waitlist-addition/assets/media/image2.png_
 
 ### 4. 需求描述
 
-![4. 需求描述](../../archive/converted-prd/website/waitlist-addition/assets/media/image5.png)
+![4. 需求描述](../../archive/legacy-prd/website/waitlist-addition/assets/media/image3.png)
 
-_Source: archive/converted-prd/website/waitlist-addition/assets/media/image5.png_
-
-### 4. 需求描述
-
-![4. 需求描述](../../archive/converted-prd/website/waitlist-addition/assets/media/image6.png)
-
-_Source: archive/converted-prd/website/waitlist-addition/assets/media/image6.png_
+_Source: archive/legacy-prd/website/waitlist-addition/assets/media/image3.png_
 
 ### 4. 需求描述
 
-![4. 需求描述](../../archive/converted-prd/website/waitlist-addition/assets/media/image7.png)
+![4. 需求描述](../../archive/legacy-prd/website/waitlist-addition/assets/media/image4.jpeg)
 
-_Source: archive/converted-prd/website/waitlist-addition/assets/media/image7.png_
+_Source: archive/legacy-prd/website/waitlist-addition/assets/media/image4.jpeg_
+
+### 4. 需求描述
+
+![4. 需求描述](../../archive/legacy-prd/website/waitlist-addition/assets/media/image5.png)
+
+_Source: archive/legacy-prd/website/waitlist-addition/assets/media/image5.png_
+
+### 4. 需求描述
+
+![4. 需求描述](../../archive/legacy-prd/website/waitlist-addition/assets/media/image6.png)
+
+_Source: archive/legacy-prd/website/waitlist-addition/assets/media/image6.png_
+
+### 4. 需求描述
+
+![4. 需求描述](../../archive/legacy-prd/website/waitlist-addition/assets/media/image7.png)
+
+_Source: archive/legacy-prd/website/waitlist-addition/assets/media/image7.png_
 
 
 ## 3. 使用规则

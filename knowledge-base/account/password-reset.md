@@ -3,7 +3,7 @@ module: account
 feature: password-reset
 version: "2.0"
 status: deleted_out_of_scope
-source_doc: archive/converted-prd/app/registration-login/README.md；archive/converted-prd/security/identity-verification/README.md
+source_doc: archive/legacy-prd/app/registration-login/README.md；archive/legacy-prd/security/identity-verification/README.md
 source_section: Registration Login / 7.3 Password Reset 删除线内容
 last_updated: 2026-05-09
 owner: 吴忆锋
@@ -14,7 +14,7 @@ readers: [product, ui, dev, qa, business, ai]
 
 ## 1. 当前结论
 
-Password Reset / Forgot Password 相关内容在 `archive/converted-prd/app/registration-login/README.md` 中属于删除线内容。
+Password Reset / Forgot Password 相关内容在 `archive/legacy-prd/app/registration-login/README.md` 中属于删除线内容。
 
 用户已确认：删除线内容等同已删除，不再作为待确认逻辑，也不纳入当前 App runtime knowledge-base。
 
@@ -35,5 +35,5 @@ Password Reset / Forgot Password 相关内容在 `archive/converted-prd/app/regi
 
 ## 4. Sources
 
-- (Ref: archive/converted-prd/app/registration-login/README.md / 7.3 Password Reset 删除线)
-- (Ref: archive/converted-prd/security/identity-verification/README.md / OTP / Password / BIO 支撑能力，不代表 Password Reset active)
+- (Ref: archive/legacy-prd/app/registration-login/README.md / 7.3 Password Reset 删除线)
+- (Ref: archive/legacy-prd/security/identity-verification/README.md / OTP / Password / BIO 支撑能力，不代表 Password Reset active)

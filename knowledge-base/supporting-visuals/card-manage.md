@@ -3,7 +3,7 @@ module: supporting-visuals
 feature: card-manage
 version: "1.0"
 status: visual_only
-source_doc: archive/converted-prd/card/manage
+source_doc: archive/legacy-prd/card/manage
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,33 +19,33 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 1. 4. 功能结构
 
-![4. 功能结构](../../archive/converted-prd/card/manage/assets/media/image4.jpeg)
+![4. 功能结构](../../archive/legacy-prd/card/manage/assets/media/image4.jpeg)
 
-_Source: archive/converted-prd/card/manage/assets/media/image4.jpeg_
+_Source: archive/legacy-prd/card/manage/assets/media/image4.jpeg_
 
 ### 2. 6. 全局规则
 
-![6. 全局规则](../../archive/converted-prd/card/manage/assets/media/image5.jpeg)
+![6. 全局规则](../../archive/legacy-prd/card/manage/assets/media/image5.jpeg)
 
-_Source: archive/converted-prd/card/manage/assets/media/image5.jpeg_
+_Source: archive/legacy-prd/card/manage/assets/media/image5.jpeg_
 
 ### 3. 6. 全局规则
 
-![6. 全局规则](../../archive/converted-prd/card/manage/assets/media/image6.jpeg)
+![6. 全局规则](../../archive/legacy-prd/card/manage/assets/media/image6.jpeg)
 
-_Source: archive/converted-prd/card/manage/assets/media/image6.jpeg_
+_Source: archive/legacy-prd/card/manage/assets/media/image6.jpeg_
 
 ### 4. 6. 全局规则
 
-![6. 全局规则](../../archive/converted-prd/card/manage/assets/media/image7.jpeg)
+![6. 全局规则](../../archive/legacy-prd/card/manage/assets/media/image7.jpeg)
 
-_Source: archive/converted-prd/card/manage/assets/media/image7.jpeg_
+_Source: archive/legacy-prd/card/manage/assets/media/image7.jpeg_
 
 ### 5. 7. 需求描述
 
-![7. 需求描述](../../archive/converted-prd/card/manage/assets/media/image24.png)
+![7. 需求描述](../../archive/legacy-prd/card/manage/assets/media/image24.png)
 
-_Source: archive/converted-prd/card/manage/assets/media/image24.png_
+_Source: archive/legacy-prd/card/manage/assets/media/image24.png_
 
 
 ## 3. 使用规则

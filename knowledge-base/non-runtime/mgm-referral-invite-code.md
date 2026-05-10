@@ -3,7 +3,7 @@ module: non-runtime
 feature: mgm-referral-invite-code
 version: "1.0"
 status: visual_only
-source_doc: archive/converted-prd/mgm/referral-invite-code
+source_doc: archive/legacy-prd/mgm/referral-invite-code
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,183 +19,183 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 5. 整体框架
 
-![5. 整体框架](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image1.jpeg)
+![5. 整体框架](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image1.jpeg)
 
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image1.jpeg_
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image1.jpeg_
 
 ### 5. 整体框架
 
-![5. 整体框架](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image2.jpeg)
+![5. 整体框架](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image2.jpeg)
 
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image2.jpeg_
-
-### 12. 需求描述
-
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image4.png)
-
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image4.png_
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image2.jpeg_
 
 ### 12. 需求描述
 
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image5.png)
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image4.png)
 
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image5.png_
-
-### 12. 需求描述
-
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image6.png)
-
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image6.png_
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image4.png_
 
 ### 12. 需求描述
 
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image7.png)
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image5.png)
 
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image7.png_
-
-### 12. 需求描述
-
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image8.png)
-
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image8.png_
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image5.png_
 
 ### 12. 需求描述
 
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image9.png)
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image6.png)
 
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image9.png_
-
-### 12. 需求描述
-
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image10.png)
-
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image10.png_
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image6.png_
 
 ### 12. 需求描述
 
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image11.png)
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image7.png)
 
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image11.png_
-
-### 12. 需求描述
-
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image12.png)
-
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image12.png_
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image7.png_
 
 ### 12. 需求描述
 
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image13.png)
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image8.png)
 
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image13.png_
-
-### 12. 需求描述
-
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image14.png)
-
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image14.png_
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image8.png_
 
 ### 12. 需求描述
 
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image15.png)
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image9.png)
 
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image15.png_
-
-### 12. 需求描述
-
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image16.png)
-
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image16.png_
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image9.png_
 
 ### 12. 需求描述
 
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image17.png)
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image10.png)
 
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image17.png_
-
-### 12. 需求描述
-
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image18.png)
-
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image18.png_
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image10.png_
 
 ### 12. 需求描述
 
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image19.png)
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image11.png)
 
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image19.png_
-
-### 12. 需求描述
-
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image20.png)
-
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image20.png_
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image11.png_
 
 ### 12. 需求描述
 
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image21.png)
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image12.png)
 
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image21.png_
-
-### 12. 需求描述
-
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image22.png)
-
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image22.png_
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image12.png_
 
 ### 12. 需求描述
 
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image23.png)
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image13.png)
 
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image23.png_
-
-### 12. 需求描述
-
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image24.png)
-
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image24.png_
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image13.png_
 
 ### 12. 需求描述
 
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image25.png)
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image14.png)
 
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image25.png_
-
-### 12. 需求描述
-
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image26.png)
-
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image26.png_
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image14.png_
 
 ### 12. 需求描述
 
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image27.png)
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image15.png)
 
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image27.png_
-
-### 12. 需求描述
-
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image28.png)
-
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image28.png_
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image15.png_
 
 ### 12. 需求描述
 
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image29.png)
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image16.png)
 
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image29.png_
-
-### 12. 需求描述
-
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image30.png)
-
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image30.png_
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image16.png_
 
 ### 12. 需求描述
 
-![12. 需求描述](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image31.png)
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image17.png)
 
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image31.png_
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image17.png_
+
+### 12. 需求描述
+
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image18.png)
+
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image18.png_
+
+### 12. 需求描述
+
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image19.png)
+
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image19.png_
+
+### 12. 需求描述
+
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image20.png)
+
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image20.png_
+
+### 12. 需求描述
+
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image21.png)
+
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image21.png_
+
+### 12. 需求描述
+
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image22.png)
+
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image22.png_
+
+### 12. 需求描述
+
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image23.png)
+
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image23.png_
+
+### 12. 需求描述
+
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image24.png)
+
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image24.png_
+
+### 12. 需求描述
+
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image25.png)
+
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image25.png_
+
+### 12. 需求描述
+
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image26.png)
+
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image26.png_
+
+### 12. 需求描述
+
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image27.png)
+
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image27.png_
+
+### 12. 需求描述
+
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image28.png)
+
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image28.png_
+
+### 12. 需求描述
+
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image29.png)
+
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image29.png_
+
+### 12. 需求描述
+
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image30.png)
+
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image30.png_
+
+### 12. 需求描述
+
+![12. 需求描述](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image31.png)
+
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image31.png_
 
 
 ## 3. 使用规则

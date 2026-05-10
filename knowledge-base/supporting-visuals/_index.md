@@ -3,7 +3,7 @@ module: supporting-visuals
 feature: index
 version: "1.0"
 status: active
-source_doc: archive/converted-prd supporting visuals
+source_doc: archive/legacy-prd supporting visuals
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]

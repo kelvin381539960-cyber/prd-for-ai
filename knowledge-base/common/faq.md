@@ -3,7 +3,7 @@ module: common
 feature: faq
 version: "2.0"
 status: active
-source_doc: archive/converted-prd/app/faq/README.md；archive/converted-prd/app/home/README.md
+source_doc: archive/legacy-prd/app/faq/README.md；archive/legacy-prd/app/home/README.md
 source_section: FAQ / 3 功能需求；Home / FAQ 展示
 last_updated: 2026-05-09
 owner: 吴忆锋
@@ -23,11 +23,11 @@ depends_on:
 
 本文沉淀 AIX App 内 FAQ 展示、场景配置、入口、Zendesk Section 和已在 converted-prd 中明确给出的 FAQ 内容。
 
-本文件不再以旧 `reference-data/faq/phase-1-faq.xlsx` 作为主事实来源；本轮以 `archive/converted-prd/app/faq/README.md` 为准。
+本文件不再以旧 `reference-data/faq/phase-1-faq.xlsx` 作为主事实来源；本轮以 `archive/legacy-prd/app/faq/README.md` 为准。
 
 ## 2. Source alignment status
 
-本文件已按 `archive/converted-prd/app/faq/README.md` 重写，原 `SOURCE_GAP` 已收口。
+本文件已按 `archive/legacy-prd/app/faq/README.md` 重写，原 `SOURCE_GAP` 已收口。
 
 需要注意：FAQ PRD 中部分“关联场景 / 类型 / Chat with us”等字段带删除线，这些不沉淀为 confirmed fact。当前 confirmed fact 仅包括：服务端配置展示、最近 3 条 / 仅入口、more / Zendesk Section 链接、首页 3 条 FAQ、申卡虚拟卡 / 实体卡 3 条 FAQ，以及若干场景入口映射。
 
@@ -169,140 +169,140 @@ Once the card is approved, the delivery address cannot be changed. The user shou
 
 ## 11. Sources
 
-- (Ref: archive/converted-prd/app/faq/README.md / 3 功能需求)
-- (Ref: archive/converted-prd/app/faq/README.md / 4 Chat with us，删除线)
-- (Ref: archive/converted-prd/app/home/README.md / FAQ 首页展示)
+- (Ref: archive/legacy-prd/app/faq/README.md / 3 功能需求)
+- (Ref: archive/legacy-prd/app/faq/README.md / 4 Chat with us，删除线)
+- (Ref: archive/legacy-prd/app/home/README.md / FAQ 首页展示)
 
 ## Page Visuals 页面图索引
 
-> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/legacy-prd` 原始资产，避免重复复制。
 
 ### 3. 功能需求
 
-![3. 功能需求](../../archive/converted-prd/app/faq/assets/media/image1.png)
+![3. 功能需求](../../archive/legacy-prd/app/faq/assets/media/image1.png)
 
-_Source: archive/converted-prd/app/faq/README.md:91_
+_Source: archive/legacy-prd/app/faq/README.md:91_
 
-![3. 功能需求](../../archive/converted-prd/app/faq/assets/media/image2.png)
+![3. 功能需求](../../archive/legacy-prd/app/faq/assets/media/image2.png)
 
-_Source: archive/converted-prd/app/faq/README.md:92_
+_Source: archive/legacy-prd/app/faq/README.md:92_
 
-![3. 功能需求](../../archive/converted-prd/app/faq/assets/media/image3.png)
+![3. 功能需求](../../archive/legacy-prd/app/faq/assets/media/image3.png)
 
-_Source: archive/converted-prd/app/faq/README.md:142_
+_Source: archive/legacy-prd/app/faq/README.md:142_
 
 ### Virtual Card
 
-![Virtual Card](../../archive/converted-prd/app/faq/assets/media/image4.png)
+![Virtual Card](../../archive/legacy-prd/app/faq/assets/media/image4.png)
 
-_Source: archive/converted-prd/app/faq/README.md:175_
+_Source: archive/legacy-prd/app/faq/README.md:175_
 
 ### Physical Card
 
-![Physical Card](../../archive/converted-prd/app/faq/assets/media/image5.png)
+![Physical Card](../../archive/legacy-prd/app/faq/assets/media/image5.png)
 
-_Source: archive/converted-prd/app/faq/README.md:209_
+_Source: archive/legacy-prd/app/faq/README.md:209_
 
-![Physical Card](../../archive/converted-prd/app/faq/assets/media/image2.png)
+![Physical Card](../../archive/legacy-prd/app/faq/assets/media/image2.png)
 
-_Source: archive/converted-prd/app/faq/README.md:211_
+_Source: archive/legacy-prd/app/faq/README.md:211_
 
-![Physical Card](../../archive/converted-prd/app/faq/assets/media/image6.png)
+![Physical Card](../../archive/legacy-prd/app/faq/assets/media/image6.png)
 
-_Source: archive/converted-prd/app/faq/README.md:212_
+_Source: archive/legacy-prd/app/faq/README.md:212_
 
 ### Select Crypto
 
-![Select Crypto](../../archive/converted-prd/app/faq/assets/media/image7.png)
+![Select Crypto](../../archive/legacy-prd/app/faq/assets/media/image7.png)
 
-_Source: archive/converted-prd/app/faq/README.md:231_
+_Source: archive/legacy-prd/app/faq/README.md:231_
 
-![Select Crypto](../../archive/converted-prd/app/faq/assets/media/image2.png)
+![Select Crypto](../../archive/legacy-prd/app/faq/assets/media/image2.png)
 
-_Source: archive/converted-prd/app/faq/README.md:232_
+_Source: archive/legacy-prd/app/faq/README.md:232_
 
 ### Card home
 
-![Card home](../../archive/converted-prd/app/faq/assets/media/image7.png)
+![Card home](../../archive/legacy-prd/app/faq/assets/media/image7.png)
 
-_Source: archive/converted-prd/app/faq/README.md:251_
+_Source: archive/legacy-prd/app/faq/README.md:251_
 
-![Card home](../../archive/converted-prd/app/faq/assets/media/image2.png)
+![Card home](../../archive/legacy-prd/app/faq/assets/media/image2.png)
 
-_Source: archive/converted-prd/app/faq/README.md:252_
+_Source: archive/legacy-prd/app/faq/README.md:252_
 
 ### Bind Google Wallet
 
-![Bind Google Wallet](../../archive/converted-prd/app/faq/assets/media/image8.png)
+![Bind Google Wallet](../../archive/legacy-prd/app/faq/assets/media/image8.png)
 
-_Source: archive/converted-prd/app/faq/README.md:272_
+_Source: archive/legacy-prd/app/faq/README.md:272_
 
-![Bind Google Wallet](../../archive/converted-prd/app/faq/assets/media/image2.png)
+![Bind Google Wallet](../../archive/legacy-prd/app/faq/assets/media/image2.png)
 
-_Source: archive/converted-prd/app/faq/README.md:273_
+_Source: archive/legacy-prd/app/faq/README.md:273_
 
 ### Update Phone
 
-![Update Phone](../../archive/converted-prd/app/faq/assets/media/image9.png)
+![Update Phone](../../archive/legacy-prd/app/faq/assets/media/image9.png)
 
-_Source: archive/converted-prd/app/faq/README.md:291_
+_Source: archive/legacy-prd/app/faq/README.md:291_
 
-![Update Phone](../../archive/converted-prd/app/faq/assets/media/image2.png)
+![Update Phone](../../archive/legacy-prd/app/faq/assets/media/image2.png)
 
-_Source: archive/converted-prd/app/faq/README.md:292_
+_Source: archive/legacy-prd/app/faq/README.md:292_
 
 ### All Transactions
 
-![All Transactions](../../archive/converted-prd/app/faq/assets/media/image10.png)
+![All Transactions](../../archive/legacy-prd/app/faq/assets/media/image10.png)
 
-_Source: archive/converted-prd/app/faq/README.md:310_
+_Source: archive/legacy-prd/app/faq/README.md:310_
 
-![All Transactions](../../archive/converted-prd/app/faq/assets/media/image2.png)
+![All Transactions](../../archive/legacy-prd/app/faq/assets/media/image2.png)
 
-_Source: archive/converted-prd/app/faq/README.md:311_
+_Source: archive/legacy-prd/app/faq/README.md:311_
 
 ### Transaction Details
 
-![Transaction Details](../../archive/converted-prd/app/faq/assets/media/image11.png)
+![Transaction Details](../../archive/legacy-prd/app/faq/assets/media/image11.png)
 
-_Source: archive/converted-prd/app/faq/README.md:329_
+_Source: archive/legacy-prd/app/faq/README.md:329_
 
-![Transaction Details](../../archive/converted-prd/app/faq/assets/media/image2.png)
+![Transaction Details](../../archive/legacy-prd/app/faq/assets/media/image2.png)
 
-_Source: archive/converted-prd/app/faq/README.md:330_
+_Source: archive/legacy-prd/app/faq/README.md:330_
 
 ### Crypto Send
 
-![Crypto Send](../../archive/converted-prd/app/faq/assets/media/image12.png)
+![Crypto Send](../../archive/legacy-prd/app/faq/assets/media/image12.png)
 
-_Source: archive/converted-prd/app/faq/README.md:348_
+_Source: archive/legacy-prd/app/faq/README.md:348_
 
-![Crypto Send](../../archive/converted-prd/app/faq/assets/media/image2.png)
+![Crypto Send](../../archive/legacy-prd/app/faq/assets/media/image2.png)
 
-_Source: archive/converted-prd/app/faq/README.md:349_
+_Source: archive/legacy-prd/app/faq/README.md:349_
 
 ### Crypto Swap
 
-![Crypto Swap](../../archive/converted-prd/app/faq/assets/media/image13.png)
+![Crypto Swap](../../archive/legacy-prd/app/faq/assets/media/image13.png)
 
-_Source: archive/converted-prd/app/faq/README.md:367_
+_Source: archive/legacy-prd/app/faq/README.md:367_
 
-![Crypto Swap](../../archive/converted-prd/app/faq/assets/media/image2.png)
+![Crypto Swap](../../archive/legacy-prd/app/faq/assets/media/image2.png)
 
-_Source: archive/converted-prd/app/faq/README.md:368_
+_Source: archive/legacy-prd/app/faq/README.md:368_
 
 ### Deposit method
 
-![Deposit method](../../archive/converted-prd/app/faq/assets/media/image14.png)
+![Deposit method](../../archive/legacy-prd/app/faq/assets/media/image14.png)
 
-_Source: archive/converted-prd/app/faq/README.md:387_
+_Source: archive/legacy-prd/app/faq/README.md:387_
 
-![Deposit method](../../archive/converted-prd/app/faq/assets/media/image2.png)
+![Deposit method](../../archive/legacy-prd/app/faq/assets/media/image2.png)
 
-_Source: archive/converted-prd/app/faq/README.md:388_
+_Source: archive/legacy-prd/app/faq/README.md:388_
 
 ### Receive Crypto
 
-![Receive Crypto](../../archive/converted-prd/app/faq/assets/media/image15.png)
+![Receive Crypto](../../archive/legacy-prd/app/faq/assets/media/image15.png)
 
-_Source: archive/converted-prd/app/faq/README.md:406_
+_Source: archive/legacy-prd/app/faq/README.md:406_

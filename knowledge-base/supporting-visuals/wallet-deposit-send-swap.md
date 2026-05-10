@@ -3,7 +3,7 @@ module: supporting-visuals
 feature: wallet-deposit-send-swap
 version: "1.0"
 status: visual_only
-source_doc: archive/converted-prd/wallet/deposit-send-swap
+source_doc: archive/legacy-prd/wallet/deposit-send-swap
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,87 +19,87 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 1. 6. AIX前端功能需求
 
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image58.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image58.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/assets/media/image58.png_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/assets/media/image58.png_
 
 ### 2. 6. AIX前端功能需求
 
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image59.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image59.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/assets/media/image59.png_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/assets/media/image59.png_
 
 ### 3. 7. DTC渠道接口需求
 
-![7. DTC渠道接口需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image63.jpeg)
+![7. DTC渠道接口需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image63.jpeg)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/assets/media/image63.jpeg_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/assets/media/image63.jpeg_
 
 ### 4. 7. DTC渠道接口需求
 
-![7. DTC渠道接口需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image64.jpeg)
+![7. DTC渠道接口需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image64.jpeg)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/assets/media/image64.jpeg_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/assets/media/image64.jpeg_
 
 ### 5. 7. DTC渠道接口需求
 
-![7. DTC渠道接口需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image65.jpeg)
+![7. DTC渠道接口需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image65.jpeg)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/assets/media/image65.jpeg_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/assets/media/image65.jpeg_
 
 ### 6. 7. DTC渠道接口需求
 
-![7. DTC渠道接口需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image66.png)
+![7. DTC渠道接口需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image66.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/assets/media/image66.png_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/assets/media/image66.png_
 
 ### 7. 7. DTC渠道接口需求
 
-![7. DTC渠道接口需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image67.jpeg)
+![7. DTC渠道接口需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image67.jpeg)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/assets/media/image67.jpeg_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/assets/media/image67.jpeg_
 
 ### 8. 7. DTC渠道接口需求
 
-![7. DTC渠道接口需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image68.jpeg)
+![7. DTC渠道接口需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image68.jpeg)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/assets/media/image68.jpeg_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/assets/media/image68.jpeg_
 
 ### 9. 7. DTC渠道接口需求
 
-![7. DTC渠道接口需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image69.jpeg)
+![7. DTC渠道接口需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image69.jpeg)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/assets/media/image69.jpeg_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/assets/media/image69.jpeg_
 
 ### 10. 7. DTC渠道接口需求
 
-![7. DTC渠道接口需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image70.jpeg)
+![7. DTC渠道接口需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image70.jpeg)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/assets/media/image70.jpeg_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/assets/media/image70.jpeg_
 
 ### 11. 7. DTC渠道接口需求
 
-![7. DTC渠道接口需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image71.jpeg)
+![7. DTC渠道接口需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image71.jpeg)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/assets/media/image71.jpeg_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/assets/media/image71.jpeg_
 
 ### 12. 7. DTC渠道接口需求
 
-![7. DTC渠道接口需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image72.jpeg)
+![7. DTC渠道接口需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image72.jpeg)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/assets/media/image72.jpeg_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/assets/media/image72.jpeg_
 
 ### 13. 7. DTC渠道接口需求
 
-![7. DTC渠道接口需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image73.jpeg)
+![7. DTC渠道接口需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image73.jpeg)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/assets/media/image73.jpeg_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/assets/media/image73.jpeg_
 
 ### 14. 7. DTC渠道接口需求
 
-![7. DTC渠道接口需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image63.jpeg)
+![7. DTC渠道接口需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image63.jpeg)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/assets/media/image63.jpeg_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/assets/media/image63.jpeg_
 
 
 ## 3. 使用规则

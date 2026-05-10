@@ -1,6 +1,6 @@
 ---
 source_section: Security / 7 全局规则、8 需求描述、9 外部接口、10 错误码；Registration BIO / Password；Card Manage PIN / Sensitive operations；Wallet Send/Swap auth
-source_doc: archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/app/registration-login/README.md；archive/converted-prd/card/manage/README.md；archive/converted-prd/wallet/deposit-send-swap/README.md
+source_doc: archive/legacy-prd/security/identity-verification/README.md；archive/legacy-prd/app/registration-login/README.md；archive/legacy-prd/card/manage/README.md；archive/legacy-prd/wallet/deposit-send-swap/README.md
 module: security
 feature: password-policy
 version: "1.1"

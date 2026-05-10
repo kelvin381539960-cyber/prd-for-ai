@@ -3,7 +3,7 @@ module: transaction
 feature: transaction-index
 version: "3.1"
 status: active
-source_doc: archive/converted-prd/app/transaction-history/README.md；archive/converted-prd/card/transaction/README.md；archive/converted-prd/wallet/deposit-send-swap/README.md
+source_doc: archive/legacy-prd/app/transaction-history/README.md；archive/legacy-prd/card/transaction/README.md；archive/legacy-prd/wallet/deposit-send-swap/README.md
 source_section: Transaction & History / 状态及类型处理、全量交易、Card History、Transaction Details；Card Transaction；Wallet Deposit/Send/Swap
 last_updated: 2026-05-09
 owner: 吴忆锋
@@ -21,7 +21,7 @@ depends_on:
 
 # Transaction 模块索引
 
-> Source alignment note: 本模块已按新转换的 `archive/converted-prd/app/transaction-history/README.md`、`archive/converted-prd/card/transaction/README.md`、`archive/converted-prd/wallet/deposit-send-swap/README.md` 做双向覆盖校验。补齐的关键 Evidence→KB 缺口包括：全量交易去搜索、REVERSAL 按 REFUND 展示、Deposit 详情隐藏 Gas fee、Exchange rate 显示规则、接口异常统一文案、INCREMENTAL_AUTH / CARD_FEE / TRANSFER_IN / TRANSFER_OUT 等类型口径。
+> Source alignment note: 本模块已按新转换的 `archive/legacy-prd/app/transaction-history/README.md`、`archive/legacy-prd/card/transaction/README.md`、`archive/legacy-prd/wallet/deposit-send-swap/README.md` 做双向覆盖校验。补齐的关键 Evidence→KB 缺口包括：全量交易去搜索、REVERSAL 按 REFUND 展示、Deposit 详情隐藏 Gas fee、Exchange rate 显示规则、接口异常统一文案、INCREMENTAL_AUTH / CARD_FEE / TRANSFER_IN / TRANSFER_OUT 等类型口径。
 
 
 ## 1. 模块定位

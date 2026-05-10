@@ -3,7 +3,7 @@ module: non-runtime
 feature: index
 version: "1.0"
 status: active
-source_doc: archive/converted-prd non-runtime visual sources
+source_doc: archive/legacy-prd non-runtime visual sources
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]

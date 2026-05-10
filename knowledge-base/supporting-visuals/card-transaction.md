@@ -3,7 +3,7 @@ module: supporting-visuals
 feature: card-transaction
 version: "1.0"
 status: visual_only
-source_doc: archive/converted-prd/card/transaction
+source_doc: archive/legacy-prd/card/transaction
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,9 +19,9 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 1. 4. 功能结构
 
-![4. 功能结构](../../archive/converted-prd/card/transaction/assets/media/image1.jpeg)
+![4. 功能结构](../../archive/legacy-prd/card/transaction/assets/media/image1.jpeg)
 
-_Source: archive/converted-prd/card/transaction/assets/media/image1.jpeg_
+_Source: archive/legacy-prd/card/transaction/assets/media/image1.jpeg_
 
 
 ## 3. 使用规则

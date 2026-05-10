@@ -3,7 +3,7 @@ module: account
 feature: login
 version: "2.1"
 status: active
-source_doc: "archive/converted-prd/app/registration-login/README.md；archive/converted-prd/security/identity-verification/README.md"
+source_doc: "archive/legacy-prd/app/registration-login/README.md；archive/legacy-prd/security/identity-verification/README.md"
 source_section: "registration-login / 7.2 登录功能；security / 认证方式能力矩阵、OTP、Email OTP、Face Auth、BIO"
 last_updated: 2026-05-09
 owner: 吴忆锋
@@ -21,7 +21,7 @@ tags: [login, account, biometric, email, phone, otp, country-selector]
 
 # Login 登录功能
 
-> Source alignment note: 本文件已开始按 `archive/converted-prd/app/registration-login/README.md` 与 `archive/converted-prd/security/identity-verification/README.md` 校准。登录主流程、Quick Login、Enable BIO 在注册登录 PRD 中有来源；但 Login Page 中“邮箱 / 手机号输入切换、邮箱输入框、手机号输入框”等部分在 converted-prd 中带删除线，同时 Select Country Page 又仍有正文描述，因此登录输入方式范围暂标 `DELETED_SOURCE`。
+> Source alignment note: 本文件已开始按 `archive/legacy-prd/app/registration-login/README.md` 与 `archive/legacy-prd/security/identity-verification/README.md` 校准。登录主流程、Quick Login、Enable BIO 在注册登录 PRD 中有来源；但 Login Page 中“邮箱 / 手机号输入切换、邮箱输入框、手机号输入框”等部分在 converted-prd 中带删除线，同时 Select Country Page 又仍有正文描述，因此登录输入方式范围暂标 `DELETED_SOURCE`。
 
 
 ## 1. 文档定位
@@ -428,13 +428,13 @@ sequenceDiagram
 
 ## 12. 来源引用
 
-- (Ref: archive/converted-prd/app/registration-login/README.md / 7.2 登录功能)
-- (Ref: archive/converted-prd/app/registration-login/README.md / 7.2.3 Navigation Page)
-- (Ref: archive/converted-prd/app/registration-login/README.md / 7.2.4 Login Page)
-- (Ref: archive/converted-prd/app/registration-login/README.md / 7.2.4.1 Select Country Page)
-- (Ref: archive/converted-prd/app/registration-login/README.md / 7.2.5 Biometric登录)
-- (Ref: archive/converted-prd/app/registration-login/README.md / 7.2.7 Enable BIO Page)
-- (Ref: archive/converted-prd/security/identity-verification/README.md)
+- (Ref: archive/legacy-prd/app/registration-login/README.md / 7.2 登录功能)
+- (Ref: archive/legacy-prd/app/registration-login/README.md / 7.2.3 Navigation Page)
+- (Ref: archive/legacy-prd/app/registration-login/README.md / 7.2.4 Login Page)
+- (Ref: archive/legacy-prd/app/registration-login/README.md / 7.2.4.1 Select Country Page)
+- (Ref: archive/legacy-prd/app/registration-login/README.md / 7.2.5 Biometric登录)
+- (Ref: archive/legacy-prd/app/registration-login/README.md / 7.2.7 Enable BIO Page)
+- (Ref: archive/legacy-prd/security/identity-verification/README.md)
 - (Ref: knowledge-base/security/global-rules.md)
 - (Ref: knowledge-base/security/biometric-verification.md)
 - (Ref: 用户确认 / 2026-05-03 / Login 文档需要 Mermaid 页面流程图和 sequenceDiagram 时序图；补回 SecurityError label、Enable BIO 到 Identity、失败按 Security / Biometric 规则处理)
@@ -445,107 +445,107 @@ sequenceDiagram
 
 ## Page Visuals 页面图索引
 
-> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/legacy-prd` 原始资产，避免重复复制。
 
 ### 1. 需求变更日志
 
-![1. 需求变更日志](../../archive/converted-prd/app/registration-login/assets/media/image7.png)
+![1. 需求变更日志](../../archive/legacy-prd/app/registration-login/assets/media/image7.png)
 
-_Source: archive/converted-prd/app/registration-login/README.md:71_
+_Source: archive/legacy-prd/app/registration-login/README.md:71_
 
-![1. 需求变更日志](../../archive/converted-prd/app/registration-login/assets/media/image8.png)
+![1. 需求变更日志](../../archive/legacy-prd/app/registration-login/assets/media/image8.png)
 
-_Source: archive/converted-prd/app/registration-login/README.md:74_
+_Source: archive/legacy-prd/app/registration-login/README.md:74_
 
-![1. 需求变更日志](../../archive/converted-prd/app/registration-login/assets/media/image9.png)
+![1. 需求变更日志](../../archive/legacy-prd/app/registration-login/assets/media/image9.png)
 
-_Source: archive/converted-prd/app/registration-login/README.md:84_
+_Source: archive/legacy-prd/app/registration-login/README.md:84_
 
-![1. 需求变更日志](../../archive/converted-prd/app/registration-login/assets/media/image12.png)
+![1. 需求变更日志](../../archive/legacy-prd/app/registration-login/assets/media/image12.png)
 
-_Source: archive/converted-prd/app/registration-login/README.md:136_
+_Source: archive/legacy-prd/app/registration-login/README.md:136_
 
-![1. 需求变更日志](../../archive/converted-prd/app/registration-login/assets/media/image13.png)
+![1. 需求变更日志](../../archive/legacy-prd/app/registration-login/assets/media/image13.png)
 
-_Source: archive/converted-prd/app/registration-login/README.md:144_
+_Source: archive/legacy-prd/app/registration-login/README.md:144_
 
 ### Enable BIO Page
 
-![Enable BIO Page](../../archive/converted-prd/app/registration-login/assets/media/image10.png)
+![Enable BIO Page](../../archive/legacy-prd/app/registration-login/assets/media/image10.png)
 
-_Source: archive/converted-prd/app/registration-login/README.md:122_
+_Source: archive/legacy-prd/app/registration-login/README.md:122_
 
 ### 6. 全局规则
 
-![6. 全局规则](../../archive/converted-prd/app/registration-login/assets/media/image15.jpeg)
+![6. 全局规则](../../archive/legacy-prd/app/registration-login/assets/media/image15.jpeg)
 
-_Source: archive/converted-prd/app/registration-login/README.md:335_
+_Source: archive/legacy-prd/app/registration-login/README.md:335_
 
 ### 7. 需求描述
 
-![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image16.jpeg)
+![7. 需求描述](../../archive/legacy-prd/app/registration-login/assets/media/image16.jpeg)
 
-_Source: archive/converted-prd/app/registration-login/README.md:357_
+_Source: archive/legacy-prd/app/registration-login/README.md:357_
 
-![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image17.jpeg)
+![7. 需求描述](../../archive/legacy-prd/app/registration-login/assets/media/image17.jpeg)
 
-_Source: archive/converted-prd/app/registration-login/README.md:361_
+_Source: archive/legacy-prd/app/registration-login/README.md:361_
 
-![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image21.png)
+![7. 需求描述](../../archive/legacy-prd/app/registration-login/assets/media/image21.png)
 
-_Source: archive/converted-prd/app/registration-login/README.md:418_
+_Source: archive/legacy-prd/app/registration-login/README.md:418_
 
-![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image22.png)
+![7. 需求描述](../../archive/legacy-prd/app/registration-login/assets/media/image22.png)
 
-_Source: archive/converted-prd/app/registration-login/README.md:467_
+_Source: archive/legacy-prd/app/registration-login/README.md:467_
 
-![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image23.png)
+![7. 需求描述](../../archive/legacy-prd/app/registration-login/assets/media/image23.png)
 
-_Source: archive/converted-prd/app/registration-login/README.md:478_
+_Source: archive/legacy-prd/app/registration-login/README.md:478_
 
-![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image24.png)
+![7. 需求描述](../../archive/legacy-prd/app/registration-login/assets/media/image24.png)
 
-_Source: archive/converted-prd/app/registration-login/README.md:523_
+_Source: archive/legacy-prd/app/registration-login/README.md:523_
 
-![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image25.png)
+![7. 需求描述](../../archive/legacy-prd/app/registration-login/assets/media/image25.png)
 
-_Source: archive/converted-prd/app/registration-login/README.md:599_
+_Source: archive/legacy-prd/app/registration-login/README.md:599_
 
-![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image26.png)
+![7. 需求描述](../../archive/legacy-prd/app/registration-login/assets/media/image26.png)
 
-_Source: archive/converted-prd/app/registration-login/README.md:604_
+_Source: archive/legacy-prd/app/registration-login/README.md:604_
 
-![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image27.png)
+![7. 需求描述](../../archive/legacy-prd/app/registration-login/assets/media/image27.png)
 
-_Source: archive/converted-prd/app/registration-login/README.md:634_
+_Source: archive/legacy-prd/app/registration-login/README.md:634_
 
-![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image30.png)
+![7. 需求描述](../../archive/legacy-prd/app/registration-login/assets/media/image30.png)
 
-_Source: archive/converted-prd/app/registration-login/README.md:682_
+_Source: archive/legacy-prd/app/registration-login/README.md:682_
 
-![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image32.png)
+![7. 需求描述](../../archive/legacy-prd/app/registration-login/assets/media/image32.png)
 
-_Source: archive/converted-prd/app/registration-login/README.md:748_
+_Source: archive/legacy-prd/app/registration-login/README.md:748_
 
-![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image33.jpeg)
+![7. 需求描述](../../archive/legacy-prd/app/registration-login/assets/media/image33.jpeg)
 
-_Source: archive/converted-prd/app/registration-login/README.md:802_
+_Source: archive/legacy-prd/app/registration-login/README.md:802_
 
 ### Login Page
 
-![Login Page](../../archive/converted-prd/app/registration-login/assets/media/image28.jpeg)
+![Login Page](../../archive/legacy-prd/app/registration-login/assets/media/image28.jpeg)
 
-_Source: archive/converted-prd/app/registration-login/README.md:659_
+_Source: archive/legacy-prd/app/registration-login/README.md:659_
 
-![Login Page](../../archive/converted-prd/app/registration-login/assets/media/image29.jpeg)
+![Login Page](../../archive/legacy-prd/app/registration-login/assets/media/image29.jpeg)
 
-_Source: archive/converted-prd/app/registration-login/README.md:663_
+_Source: archive/legacy-prd/app/registration-login/README.md:663_
 
 ### Select Country Page
 
-![Select Country Page](../../archive/converted-prd/app/registration-login/assets/media/image31.png)
+![Select Country Page](../../archive/legacy-prd/app/registration-login/assets/media/image31.png)
 
-_Source: archive/converted-prd/app/registration-login/README.md:702_
+_Source: archive/legacy-prd/app/registration-login/README.md:702_
 
 ## Additional Page Visuals 补充页面图
 
@@ -553,42 +553,42 @@ _Source: archive/converted-prd/app/registration-login/README.md:702_
 
 ### 7. 需求描述
 
-![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image34.jpeg)
+![7. 需求描述](../../archive/legacy-prd/app/registration-login/assets/media/image34.jpeg)
 
-_Source: archive/converted-prd/app/registration-login/README.md:818_
-
-### 7. 需求描述
-
-![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image35.png)
-
-_Source: archive/converted-prd/app/registration-login/README.md:831_
+_Source: archive/legacy-prd/app/registration-login/README.md:818_
 
 ### 7. 需求描述
 
-![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image36.jpeg)
+![7. 需求描述](../../archive/legacy-prd/app/registration-login/assets/media/image35.png)
 
-_Source: archive/converted-prd/app/registration-login/README.md:835_
-
-### 7. 需求描述
-
-![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image37.jpeg)
-
-_Source: archive/converted-prd/app/registration-login/README.md:848_
+_Source: archive/legacy-prd/app/registration-login/README.md:831_
 
 ### 7. 需求描述
 
-![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image38.png)
+![7. 需求描述](../../archive/legacy-prd/app/registration-login/assets/media/image36.jpeg)
 
-_Source: archive/converted-prd/app/registration-login/README.md:879_
-
-### 7. 需求描述
-
-![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image39.png)
-
-_Source: archive/converted-prd/app/registration-login/README.md:890_
+_Source: archive/legacy-prd/app/registration-login/README.md:835_
 
 ### 7. 需求描述
 
-![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image41.jpeg)
+![7. 需求描述](../../archive/legacy-prd/app/registration-login/assets/media/image37.jpeg)
 
-_Source: archive/converted-prd/app/registration-login/README.md:941_
+_Source: archive/legacy-prd/app/registration-login/README.md:848_
+
+### 7. 需求描述
+
+![7. 需求描述](../../archive/legacy-prd/app/registration-login/assets/media/image38.png)
+
+_Source: archive/legacy-prd/app/registration-login/README.md:879_
+
+### 7. 需求描述
+
+![7. 需求描述](../../archive/legacy-prd/app/registration-login/assets/media/image39.png)
+
+_Source: archive/legacy-prd/app/registration-login/README.md:890_
+
+### 7. 需求描述
+
+![7. 需求描述](../../archive/legacy-prd/app/registration-login/assets/media/image41.jpeg)
+
+_Source: archive/legacy-prd/app/registration-login/README.md:941_

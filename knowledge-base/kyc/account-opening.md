@@ -3,7 +3,7 @@ module: kyc
 feature: account-opening
 version: "2.6"
 status: active
-source_doc: archive/converted-prd/kyc/wallet-opening/README.md；archive/converted-prd/app/home/README.md；archive/converted-prd/card/application/README.md；archive/converted-prd/security/identity-verification/README.md
+source_doc: archive/legacy-prd/kyc/wallet-opening/README.md；archive/legacy-prd/app/home/README.md；archive/legacy-prd/card/application/README.md；archive/legacy-prd/security/identity-verification/README.md
 source_section: KYC / 国家线、状态机、开户页面逻辑、外部接口、错误码；Home / 钱包区域展示；Card Application / 申卡前置
 last_updated: 2026-05-09
 owner: 吴忆锋
@@ -21,7 +21,7 @@ depends_on:
 
 # Account Opening / KYC 开户与身份认证准入 PRD
 
-> Source alignment note: 本文件已按 `archive/converted-prd/kyc/wallet-opening/README.md` 做双向覆盖校验，并同步核对 Home 钱包面板、Card Application 申卡前置和 Security 身份认证支撑证据。
+> Source alignment note: 本文件已按 `archive/legacy-prd/kyc/wallet-opening/README.md` 做双向覆盖校验，并同步核对 Home 钱包面板、Card Application 申卡前置和 Security 身份认证支撑证据。
 
 
 ## 1. 文档信息
@@ -1426,10 +1426,10 @@ poa success
 
 ## 12. 来源引用
 
-- (Ref: archive/converted-prd/kyc/wallet-opening/README.md / 需求变更日志 / 国家线 / 6.2 KYC 状态机 / 7.2 开户页面逻辑 / 8 外部接口依赖 / 9 接口错误码映射 / 10 待确认事项)
-- (Ref: archive/converted-prd/app/home/README.md / Home 钱包区域展示逻辑)
-- (Ref: archive/converted-prd/card/application/README.md / 申卡前置条件)
-- (Ref: archive/converted-prd/security/identity-verification/README.md / 身份认证支撑能力)
+- (Ref: archive/legacy-prd/kyc/wallet-opening/README.md / 需求变更日志 / 国家线 / 6.2 KYC 状态机 / 7.2 开户页面逻辑 / 8 外部接口依赖 / 9 接口错误码映射 / 10 待确认事项)
+- (Ref: archive/legacy-prd/app/home/README.md / Home 钱包区域展示逻辑)
+- (Ref: archive/legacy-prd/card/application/README.md / 申卡前置条件)
+- (Ref: archive/legacy-prd/security/identity-verification/README.md / 身份认证支撑能力)
 - (Ref: external-docs/dtc/Master sub account 设计方案 (2).docx / KYC 流程 / DTC API / Master Account / Sub Account / D-SUB-ACCOUNT-ID / POA 文件上传流程 / 失败原因)
 - (Ref: DTC Wallet OpenAPI Document20260126 / WalletConnect Token / D-SUB-ACCOUNT-ID / WalletAccount：本轮未上传，相关内容仅保留历史来源提示，不作为本轮核验事实)
 - (Ref: prd-template/standard-prd-template.md / 标准 PRD 模板)

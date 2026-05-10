@@ -3,7 +3,7 @@ module: wallet
 feature: wallet-index
 version: "1.1"
 status: active
-source_doc: archive/converted-prd/wallet/asset/README.md；archive/converted-prd/wallet/deposit-send-swap/README.md；archive/converted-prd/kyc/wallet-opening/README.md；archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/app/transaction-history/README.md
+source_doc: archive/legacy-prd/wallet/asset/README.md；archive/legacy-prd/wallet/deposit-send-swap/README.md；archive/legacy-prd/kyc/wallet-opening/README.md；archive/legacy-prd/security/identity-verification/README.md；archive/legacy-prd/app/transaction-history/README.md
 source_section: Wallet Asset；Wallet Deposit/Send/Swap；KYC wallet opening；Security；Transaction History
 last_updated: 2026-05-09
 owner: 吴忆锋

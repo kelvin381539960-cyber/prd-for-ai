@@ -3,7 +3,7 @@ module: account
 feature: account-index
 version: "2.1"
 status: active
-source_doc: archive/converted-prd/app/registration-login/README.md；archive/converted-prd/security/identity-verification/README.md
+source_doc: archive/legacy-prd/app/registration-login/README.md；archive/legacy-prd/security/identity-verification/README.md
 source_section: registration-login / 5.2 账户说明；7 注册 / 登录；security / 认证方式能力矩阵
 last_updated: 2026-05-09
 owner: 吴忆锋
@@ -126,10 +126,10 @@ flowchart LR
 
 ## 10. 来源引用
 
-- (Ref: archive/converted-prd/app/registration-login/README.md / 5.2 账户说明 / V1.0)
-- (Ref: archive/converted-prd/app/registration-login/README.md / 7.1 注册功能 / V1.0)
-- (Ref: archive/converted-prd/app/registration-login/README.md / 7.2 登录功能 / V1.0)
-- (Ref: archive/converted-prd/app/registration-login/README.md / 7.3 忘记密码流程页面 / V1.0)
+- (Ref: archive/legacy-prd/app/registration-login/README.md / 5.2 账户说明 / V1.0)
+- (Ref: archive/legacy-prd/app/registration-login/README.md / 7.1 注册功能 / V1.0)
+- (Ref: archive/legacy-prd/app/registration-login/README.md / 7.2 登录功能 / V1.0)
+- (Ref: archive/legacy-prd/app/registration-login/README.md / 7.3 忘记密码流程页面 / V1.0)
 - (Ref: knowledge-base/account/registration.md)
 - (Ref: knowledge-base/account/login.md)
 - (Ref: knowledge-base/account/password-reset.md)

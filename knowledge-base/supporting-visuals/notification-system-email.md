@@ -3,7 +3,7 @@ module: supporting-visuals
 feature: notification-system-email
 version: "1.0"
 status: visual_only
-source_doc: archive/converted-prd/notification/system-email
+source_doc: archive/legacy-prd/notification/system-email
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,9 +19,9 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 1. 4. Interface interaction
 
-![4. Interface interaction](../../archive/converted-prd/notification/system-email/assets/media/image2.jpeg)
+![4. Interface interaction](../../archive/legacy-prd/notification/system-email/assets/media/image2.jpeg)
 
-_Source: archive/converted-prd/notification/system-email/assets/media/image2.jpeg_
+_Source: archive/legacy-prd/notification/system-email/assets/media/image2.jpeg_
 
 
 ## 3. 使用规则

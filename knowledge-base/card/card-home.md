@@ -3,7 +3,7 @@ module: card
 feature: card-home
 version: "1.5"
 status: conflict
-source_doc: archive/converted-prd/card/application/README.md；archive/converted-prd/app/home/README.md；archive/converted-prd/card/manage/README.md；archive/converted-prd/security/identity-verification/README.md
+source_doc: archive/legacy-prd/card/application/README.md；archive/legacy-prd/app/home/README.md；archive/legacy-prd/card/manage/README.md；archive/legacy-prd/security/identity-verification/README.md
 source_section: Application / 6.2 卡片首页；Home / 当前卡片展示逻辑；Manage / Card operations；Security / identity verification
 last_updated: 2026-05-09
 owner: 吴忆锋

@@ -3,7 +3,7 @@ module: supporting-visuals
 feature: wallet-asset
 version: "1.0"
 status: visual_only
-source_doc: archive/converted-prd/wallet/asset
+source_doc: archive/legacy-prd/wallet/asset
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,15 +19,15 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 1. 5. DTC渠道接口需求
 
-![5. DTC渠道接口需求](../../archive/converted-prd/wallet/asset/assets/media/image6.jpeg)
+![5. DTC渠道接口需求](../../archive/legacy-prd/wallet/asset/assets/media/image6.jpeg)
 
-_Source: archive/converted-prd/wallet/asset/assets/media/image6.jpeg_
+_Source: archive/legacy-prd/wallet/asset/assets/media/image6.jpeg_
 
 ### 2. 5. DTC渠道接口需求
 
-![5. DTC渠道接口需求](../../archive/converted-prd/wallet/asset/assets/media/image7.jpeg)
+![5. DTC渠道接口需求](../../archive/legacy-prd/wallet/asset/assets/media/image7.jpeg)
 
-_Source: archive/converted-prd/wallet/asset/assets/media/image7.jpeg_
+_Source: archive/legacy-prd/wallet/asset/assets/media/image7.jpeg_
 
 
 ## 3. 使用规则

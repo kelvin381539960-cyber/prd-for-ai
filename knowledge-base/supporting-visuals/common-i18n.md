@@ -3,7 +3,7 @@ module: supporting-visuals
 feature: common-i18n
 version: "1.0"
 status: visual_only
-source_doc: archive/converted-prd/common/i18n
+source_doc: archive/legacy-prd/common/i18n
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,15 +19,15 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 1. 3. 系统交互
 
-![3. 系统交互](../../archive/converted-prd/common/i18n/assets/media/image1.jpeg)
+![3. 系统交互](../../archive/legacy-prd/common/i18n/assets/media/image1.jpeg)
 
-_Source: archive/converted-prd/common/i18n/assets/media/image1.jpeg_
+_Source: archive/legacy-prd/common/i18n/assets/media/image1.jpeg_
 
 ### 2. 3. 系统交互
 
-![3. 系统交互](../../archive/converted-prd/common/i18n/assets/media/image2.jpeg)
+![3. 系统交互](../../archive/legacy-prd/common/i18n/assets/media/image2.jpeg)
 
-_Source: archive/converted-prd/common/i18n/assets/media/image2.jpeg_
+_Source: archive/legacy-prd/common/i18n/assets/media/image2.jpeg_
 
 
 ## 3. 使用规则

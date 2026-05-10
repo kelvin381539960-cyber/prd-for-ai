@@ -3,7 +3,7 @@ module: non-runtime
 feature: website-phase-1
 version: "1.0"
 status: visual_only
-source_doc: archive/converted-prd/website/phase-1
+source_doc: archive/legacy-prd/website/phase-1
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,297 +19,297 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 4. 需求优先级
 
-![4. 需求优先级](../../archive/converted-prd/website/phase-1/assets/media/image1.jpg)
+![4. 需求优先级](../../archive/legacy-prd/website/phase-1/assets/media/image1.jpg)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image1.jpg_
-
-### 4. 需求优先级
-
-![4. 需求优先级](../../archive/converted-prd/website/phase-1/assets/media/image2.png)
-
-_Source: archive/converted-prd/website/phase-1/assets/media/image2.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image1.jpg_
 
 ### 4. 需求优先级
 
-![4. 需求优先级](../../archive/converted-prd/website/phase-1/assets/media/image3.png)
+![4. 需求优先级](../../archive/legacy-prd/website/phase-1/assets/media/image2.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image3.png_
-
-### 4. 需求优先级
-
-![4. 需求优先级](../../archive/converted-prd/website/phase-1/assets/media/image9.png)
-
-_Source: archive/converted-prd/website/phase-1/assets/media/image9.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image2.png_
 
 ### 4. 需求优先级
 
-![4. 需求优先级](../../archive/converted-prd/website/phase-1/assets/media/image10.png)
+![4. 需求优先级](../../archive/legacy-prd/website/phase-1/assets/media/image3.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image10.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image3.png_
 
-### 5. 需求描述
+### 4. 需求优先级
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image11.jpg)
+![4. 需求优先级](../../archive/legacy-prd/website/phase-1/assets/media/image9.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image11.jpg_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image9.png_
 
-### 5. 需求描述
+### 4. 需求优先级
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image12.png)
+![4. 需求优先级](../../archive/legacy-prd/website/phase-1/assets/media/image10.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image12.png_
-
-### 5. 需求描述
-
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image13.png)
-
-_Source: archive/converted-prd/website/phase-1/assets/media/image13.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image10.png_
 
 ### 5. 需求描述
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image14.png)
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image11.jpg)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image14.png_
-
-### 5. 需求描述
-
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image15.png)
-
-_Source: archive/converted-prd/website/phase-1/assets/media/image15.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image11.jpg_
 
 ### 5. 需求描述
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image16.png)
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image12.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image16.png_
-
-### 5. 需求描述
-
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image17.png)
-
-_Source: archive/converted-prd/website/phase-1/assets/media/image17.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image12.png_
 
 ### 5. 需求描述
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image18.png)
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image13.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image18.png_
-
-### 5. 需求描述
-
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image19.png)
-
-_Source: archive/converted-prd/website/phase-1/assets/media/image19.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image13.png_
 
 ### 5. 需求描述
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image20.png)
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image14.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image20.png_
-
-### 5. 需求描述
-
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image32.png)
-
-_Source: archive/converted-prd/website/phase-1/assets/media/image32.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image14.png_
 
 ### 5. 需求描述
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image33.png)
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image15.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image33.png_
-
-### 5. 需求描述
-
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image34.png)
-
-_Source: archive/converted-prd/website/phase-1/assets/media/image34.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image15.png_
 
 ### 5. 需求描述
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image35.png)
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image16.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image35.png_
-
-### 5. 需求描述
-
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image36.png)
-
-_Source: archive/converted-prd/website/phase-1/assets/media/image36.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image16.png_
 
 ### 5. 需求描述
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image37.png)
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image17.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image37.png_
-
-### 5. 需求描述
-
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image38.png)
-
-_Source: archive/converted-prd/website/phase-1/assets/media/image38.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image17.png_
 
 ### 5. 需求描述
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image39.png)
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image18.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image39.png_
-
-### 5. 需求描述
-
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image40.jpg)
-
-_Source: archive/converted-prd/website/phase-1/assets/media/image40.jpg_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image18.png_
 
 ### 5. 需求描述
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image41.png)
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image19.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image41.png_
-
-### 5. 需求描述
-
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image13.png)
-
-_Source: archive/converted-prd/website/phase-1/assets/media/image13.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image19.png_
 
 ### 5. 需求描述
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image42.png)
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image20.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image42.png_
-
-### 5. 需求描述
-
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image43.png)
-
-_Source: archive/converted-prd/website/phase-1/assets/media/image43.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image20.png_
 
 ### 5. 需求描述
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image44.png)
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image32.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image44.png_
-
-### 5. 需求描述
-
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image45.png)
-
-_Source: archive/converted-prd/website/phase-1/assets/media/image45.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image32.png_
 
 ### 5. 需求描述
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image46.png)
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image33.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image46.png_
-
-### 5. 需求描述
-
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image38.png)
-
-_Source: archive/converted-prd/website/phase-1/assets/media/image38.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image33.png_
 
 ### 5. 需求描述
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image47.jpg)
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image34.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image47.jpg_
-
-### 5. 需求描述
-
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image41.png)
-
-_Source: archive/converted-prd/website/phase-1/assets/media/image41.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image34.png_
 
 ### 5. 需求描述
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image13.png)
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image35.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image13.png_
-
-### 5. 需求描述
-
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image48.png)
-
-_Source: archive/converted-prd/website/phase-1/assets/media/image48.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image35.png_
 
 ### 5. 需求描述
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image49.png)
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image36.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image49.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image36.png_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image37.png)
+
+_Source: archive/legacy-prd/website/phase-1/assets/media/image37.png_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image38.png)
+
+_Source: archive/legacy-prd/website/phase-1/assets/media/image38.png_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image39.png)
+
+_Source: archive/legacy-prd/website/phase-1/assets/media/image39.png_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image40.jpg)
+
+_Source: archive/legacy-prd/website/phase-1/assets/media/image40.jpg_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image41.png)
+
+_Source: archive/legacy-prd/website/phase-1/assets/media/image41.png_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image13.png)
+
+_Source: archive/legacy-prd/website/phase-1/assets/media/image13.png_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image42.png)
+
+_Source: archive/legacy-prd/website/phase-1/assets/media/image42.png_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image43.png)
+
+_Source: archive/legacy-prd/website/phase-1/assets/media/image43.png_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image44.png)
+
+_Source: archive/legacy-prd/website/phase-1/assets/media/image44.png_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image45.png)
+
+_Source: archive/legacy-prd/website/phase-1/assets/media/image45.png_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image46.png)
+
+_Source: archive/legacy-prd/website/phase-1/assets/media/image46.png_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image38.png)
+
+_Source: archive/legacy-prd/website/phase-1/assets/media/image38.png_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image47.jpg)
+
+_Source: archive/legacy-prd/website/phase-1/assets/media/image47.jpg_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image41.png)
+
+_Source: archive/legacy-prd/website/phase-1/assets/media/image41.png_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image13.png)
+
+_Source: archive/legacy-prd/website/phase-1/assets/media/image13.png_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image48.png)
+
+_Source: archive/legacy-prd/website/phase-1/assets/media/image48.png_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image49.png)
+
+_Source: archive/legacy-prd/website/phase-1/assets/media/image49.png_
 
 ### Swap
 
-![Swap](../../archive/converted-prd/website/phase-1/assets/media/image50.png)
+![Swap](../../archive/legacy-prd/website/phase-1/assets/media/image50.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image50.png_
-
-### 5. 需求描述
-
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image51.png)
-
-_Source: archive/converted-prd/website/phase-1/assets/media/image51.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image50.png_
 
 ### 5. 需求描述
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image52.png)
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image51.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image52.png_
-
-### 5. 需求描述
-
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image53.png)
-
-_Source: archive/converted-prd/website/phase-1/assets/media/image53.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image51.png_
 
 ### 5. 需求描述
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image54.png)
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image52.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image54.png_
-
-### 5. 需求描述
-
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image55.png)
-
-_Source: archive/converted-prd/website/phase-1/assets/media/image55.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image52.png_
 
 ### 5. 需求描述
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image56.png)
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image53.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image56.png_
-
-### 5. 需求描述
-
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image57.png)
-
-_Source: archive/converted-prd/website/phase-1/assets/media/image57.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image53.png_
 
 ### 5. 需求描述
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image58.png)
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image54.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image58.png_
-
-### 5. 需求描述
-
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image59.png)
-
-_Source: archive/converted-prd/website/phase-1/assets/media/image59.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image54.png_
 
 ### 5. 需求描述
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image60.png)
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image55.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image60.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image55.png_
 
 ### 5. 需求描述
 
-![5. 需求描述](../../archive/converted-prd/website/phase-1/assets/media/image53.png)
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image56.png)
 
-_Source: archive/converted-prd/website/phase-1/assets/media/image53.png_
+_Source: archive/legacy-prd/website/phase-1/assets/media/image56.png_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image57.png)
+
+_Source: archive/legacy-prd/website/phase-1/assets/media/image57.png_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image58.png)
+
+_Source: archive/legacy-prd/website/phase-1/assets/media/image58.png_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image59.png)
+
+_Source: archive/legacy-prd/website/phase-1/assets/media/image59.png_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image60.png)
+
+_Source: archive/legacy-prd/website/phase-1/assets/media/image60.png_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/phase-1/assets/media/image53.png)
+
+_Source: archive/legacy-prd/website/phase-1/assets/media/image53.png_
 
 
 ## 3. 使用规则

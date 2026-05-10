@@ -3,7 +3,7 @@ module: supporting-visuals
 feature: website-phase-2
 version: "1.0"
 status: visual_only
-source_doc: archive/converted-prd/website/phase-2
+source_doc: archive/legacy-prd/website/phase-2
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,69 +19,69 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 1. 4. 需求描述
 
-![4. 需求描述](../../archive/converted-prd/website/phase-2/assets/media/image13.png)
+![4. 需求描述](../../archive/legacy-prd/website/phase-2/assets/media/image13.png)
 
-_Source: archive/converted-prd/website/phase-2/assets/media/image13.png_
+_Source: archive/legacy-prd/website/phase-2/assets/media/image13.png_
 
 ### 2. 4. 需求描述
 
-![4. 需求描述](../../archive/converted-prd/website/phase-2/assets/media/image14.png)
+![4. 需求描述](../../archive/legacy-prd/website/phase-2/assets/media/image14.png)
 
-_Source: archive/converted-prd/website/phase-2/assets/media/image14.png_
+_Source: archive/legacy-prd/website/phase-2/assets/media/image14.png_
 
 ### 3. 4. 需求描述
 
-![4. 需求描述](../../archive/converted-prd/website/phase-2/assets/media/image15.png)
+![4. 需求描述](../../archive/legacy-prd/website/phase-2/assets/media/image15.png)
 
-_Source: archive/converted-prd/website/phase-2/assets/media/image15.png_
+_Source: archive/legacy-prd/website/phase-2/assets/media/image15.png_
 
 ### 4. 4. 需求描述
 
-![4. 需求描述](../../archive/converted-prd/website/phase-2/assets/media/image16.png)
+![4. 需求描述](../../archive/legacy-prd/website/phase-2/assets/media/image16.png)
 
-_Source: archive/converted-prd/website/phase-2/assets/media/image16.png_
+_Source: archive/legacy-prd/website/phase-2/assets/media/image16.png_
 
 ### 5. 4. 需求描述
 
-![4. 需求描述](../../archive/converted-prd/website/phase-2/assets/media/image17.png)
+![4. 需求描述](../../archive/legacy-prd/website/phase-2/assets/media/image17.png)
 
-_Source: archive/converted-prd/website/phase-2/assets/media/image17.png_
+_Source: archive/legacy-prd/website/phase-2/assets/media/image17.png_
 
 ### 6. 4. 需求描述
 
-![4. 需求描述](../../archive/converted-prd/website/phase-2/assets/media/image18.png)
+![4. 需求描述](../../archive/legacy-prd/website/phase-2/assets/media/image18.png)
 
-_Source: archive/converted-prd/website/phase-2/assets/media/image18.png_
+_Source: archive/legacy-prd/website/phase-2/assets/media/image18.png_
 
 ### 7. 4. 需求描述
 
-![4. 需求描述](../../archive/converted-prd/website/phase-2/assets/media/image19.png)
+![4. 需求描述](../../archive/legacy-prd/website/phase-2/assets/media/image19.png)
 
-_Source: archive/converted-prd/website/phase-2/assets/media/image19.png_
+_Source: archive/legacy-prd/website/phase-2/assets/media/image19.png_
 
 ### 8. 4. 需求描述
 
-![4. 需求描述](../../archive/converted-prd/website/phase-2/assets/media/image20.png)
+![4. 需求描述](../../archive/legacy-prd/website/phase-2/assets/media/image20.png)
 
-_Source: archive/converted-prd/website/phase-2/assets/media/image20.png_
+_Source: archive/legacy-prd/website/phase-2/assets/media/image20.png_
 
 ### 9. 4. 需求描述
 
-![4. 需求描述](../../archive/converted-prd/website/phase-2/assets/media/image21.png)
+![4. 需求描述](../../archive/legacy-prd/website/phase-2/assets/media/image21.png)
 
-_Source: archive/converted-prd/website/phase-2/assets/media/image21.png_
+_Source: archive/legacy-prd/website/phase-2/assets/media/image21.png_
 
 ### 10. 4. 需求描述
 
-![4. 需求描述](../../archive/converted-prd/website/phase-2/assets/media/image22.png)
+![4. 需求描述](../../archive/legacy-prd/website/phase-2/assets/media/image22.png)
 
-_Source: archive/converted-prd/website/phase-2/assets/media/image22.png_
+_Source: archive/legacy-prd/website/phase-2/assets/media/image22.png_
 
 ### 11. 4. 需求描述
 
-![4. 需求描述](../../archive/converted-prd/website/phase-2/assets/media/image23.png)
+![4. 需求描述](../../archive/legacy-prd/website/phase-2/assets/media/image23.png)
 
-_Source: archive/converted-prd/website/phase-2/assets/media/image23.png_
+_Source: archive/legacy-prd/website/phase-2/assets/media/image23.png_
 
 
 ## 3. 使用规则

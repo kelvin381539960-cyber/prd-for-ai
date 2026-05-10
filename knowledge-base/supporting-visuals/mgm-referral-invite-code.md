@@ -3,7 +3,7 @@ module: supporting-visuals
 feature: mgm-referral-invite-code
 version: "1.0"
 status: visual_only
-source_doc: archive/converted-prd/mgm/referral-invite-code
+source_doc: archive/legacy-prd/mgm/referral-invite-code
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,9 +19,9 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 1. 10. Demo
 
-![10. Demo](../../archive/converted-prd/mgm/referral-invite-code/assets/media/image3.png)
+![10. Demo](../../archive/legacy-prd/mgm/referral-invite-code/assets/media/image3.png)
 
-_Source: archive/converted-prd/mgm/referral-invite-code/assets/media/image3.png_
+_Source: archive/legacy-prd/mgm/referral-invite-code/assets/media/image3.png_
 
 
 ## 3. 使用规则

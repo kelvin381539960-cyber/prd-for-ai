@@ -3,7 +3,7 @@ module: common
 feature: notification
 version: "2.0"
 status: active
-source_doc: archive/converted-prd/notification/push-inbox/README.md；archive/converted-prd/notification/system-email/README.md
+source_doc: archive/legacy-prd/notification/push-inbox/README.md；archive/legacy-prd/notification/system-email/README.md
 source_section: Notification push/inbox / 接入链路、Push、消息中心、通知设置、Webhook；System Email / interface interaction
 last_updated: 2026-05-09
 owner: 吴忆锋
@@ -26,7 +26,7 @@ depends_on:
 
 ## 2. Source alignment status
 
-本文件已按 `archive/converted-prd/notification/push-inbox/README.md` 和 `archive/converted-prd/notification/system-email/README.md` 重写，原 `SOURCE_GAP` 已收口为 `ALIGNED`。
+本文件已按 `archive/legacy-prd/notification/push-inbox/README.md` 和 `archive/legacy-prd/notification/system-email/README.md` 重写，原 `SOURCE_GAP` 已收口为 `ALIGNED`。
 
 ## 3. 通知平台链路
 
@@ -153,8 +153,8 @@ depends_on:
 
 ## 15. Sources
 
-- (Ref: archive/converted-prd/notification/push-inbox/README.md)
-- (Ref: archive/converted-prd/notification/system-email/README.md)
+- (Ref: archive/legacy-prd/notification/push-inbox/README.md)
+- (Ref: archive/legacy-prd/notification/system-email/README.md)
 - (Ref: knowledge-base/card/transaction.md)
 - (Ref: knowledge-base/transaction/status-model.md)
 - (Ref: knowledge-base/wallet/deposit.md)
@@ -163,73 +163,73 @@ depends_on:
 
 ## Page Visuals 页面图索引
 
-> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/legacy-prd` 原始资产，避免重复复制。
 
 ### 1. 修订记录
 
-![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image11.png)
+![1. 修订记录](../../archive/legacy-prd/notification/push-inbox/assets/media/image11.png)
 
-_Source: archive/converted-prd/notification/push-inbox/README.md:561_
+_Source: archive/legacy-prd/notification/push-inbox/README.md:561_
 
-![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image12.png)
+![1. 修订记录](../../archive/legacy-prd/notification/push-inbox/assets/media/image12.png)
 
-_Source: archive/converted-prd/notification/push-inbox/README.md:583_
+_Source: archive/legacy-prd/notification/push-inbox/README.md:583_
 
-![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image13.png)
+![1. 修订记录](../../archive/legacy-prd/notification/push-inbox/assets/media/image13.png)
 
-_Source: archive/converted-prd/notification/push-inbox/README.md:604_
+_Source: archive/legacy-prd/notification/push-inbox/README.md:604_
 
-![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image20.png)
+![1. 修订记录](../../archive/legacy-prd/notification/push-inbox/assets/media/image20.png)
 
-_Source: archive/converted-prd/notification/push-inbox/README.md:828_
+_Source: archive/legacy-prd/notification/push-inbox/README.md:828_
 
-![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image21.png)
+![1. 修订记录](../../archive/legacy-prd/notification/push-inbox/assets/media/image21.png)
 
-_Source: archive/converted-prd/notification/push-inbox/README.md:865_
+_Source: archive/legacy-prd/notification/push-inbox/README.md:865_
 
-![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image22.png)
+![1. 修订记录](../../archive/legacy-prd/notification/push-inbox/assets/media/image22.png)
 
-_Source: archive/converted-prd/notification/push-inbox/README.md:866_
+_Source: archive/legacy-prd/notification/push-inbox/README.md:866_
 
-![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image23.png)
+![1. 修订记录](../../archive/legacy-prd/notification/push-inbox/assets/media/image23.png)
 
-_Source: archive/converted-prd/notification/push-inbox/README.md:876_
+_Source: archive/legacy-prd/notification/push-inbox/README.md:876_
 
-![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image26.png)
+![1. 修订记录](../../archive/legacy-prd/notification/push-inbox/assets/media/image26.png)
 
-_Source: archive/converted-prd/notification/push-inbox/README.md:970_
+_Source: archive/legacy-prd/notification/push-inbox/README.md:970_
 
-![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image38.png)
+![1. 修订记录](../../archive/legacy-prd/notification/push-inbox/assets/media/image38.png)
 
-_Source: archive/converted-prd/notification/push-inbox/README.md:1081_
+_Source: archive/legacy-prd/notification/push-inbox/README.md:1081_
 
-![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image40.png)
+![1. 修订记录](../../archive/legacy-prd/notification/push-inbox/assets/media/image40.png)
 
-_Source: archive/converted-prd/notification/push-inbox/README.md:1157_
+_Source: archive/legacy-prd/notification/push-inbox/README.md:1157_
 
-![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image44.png)
+![1. 修订记录](../../archive/legacy-prd/notification/push-inbox/assets/media/image44.png)
 
-_Source: archive/converted-prd/notification/push-inbox/README.md:1347_
+_Source: archive/legacy-prd/notification/push-inbox/README.md:1347_
 
-![1. 修订记录](../../archive/converted-prd/notification/push-inbox/assets/media/image48.png)
+![1. 修订记录](../../archive/legacy-prd/notification/push-inbox/assets/media/image48.png)
 
-_Source: archive/converted-prd/notification/push-inbox/README.md:1532_
+_Source: archive/legacy-prd/notification/push-inbox/README.md:1532_
 
 ### 4. 其他可见
 
-![4. 其他可见](../../archive/converted-prd/notification/push-inbox/assets/media/image75.png)
+![4. 其他可见](../../archive/legacy-prd/notification/push-inbox/assets/media/image75.png)
 
-_Source: archive/converted-prd/notification/push-inbox/README.md:2301_
+_Source: archive/legacy-prd/notification/push-inbox/README.md:2301_
 
-![4. 其他可见](../../archive/converted-prd/notification/push-inbox/assets/media/image38.png)
+![4. 其他可见](../../archive/legacy-prd/notification/push-inbox/assets/media/image38.png)
 
-_Source: archive/converted-prd/notification/push-inbox/README.md:2436_
+_Source: archive/legacy-prd/notification/push-inbox/README.md:2436_
 
 ### 3. demo
 
-![3. demo](../../archive/converted-prd/notification/system-email/assets/media/image1.jpeg)
+![3. demo](../../archive/legacy-prd/notification/system-email/assets/media/image1.jpeg)
 
-_Source: archive/converted-prd/notification/system-email/README.md:37_
+_Source: archive/legacy-prd/notification/system-email/README.md:37_
 
 ## Additional Page Visuals 补充页面图
 
@@ -237,18 +237,18 @@ _Source: archive/converted-prd/notification/system-email/README.md:37_
 
 ### 4. 其他可见
 
-![4. 其他可见](../../archive/converted-prd/notification/push-inbox/assets/media/image32.png)
+![4. 其他可见](../../archive/legacy-prd/notification/push-inbox/assets/media/image32.png)
 
-_Source: archive/converted-prd/notification/push-inbox/README.md:2386_
-
-### 4. 其他可见
-
-![4. 其他可见](../../archive/converted-prd/notification/push-inbox/assets/media/image33.png)
-
-_Source: archive/converted-prd/notification/push-inbox/README.md:2394_
+_Source: archive/legacy-prd/notification/push-inbox/README.md:2386_
 
 ### 4. 其他可见
 
-![4. 其他可见](../../archive/converted-prd/notification/push-inbox/assets/media/image37.png)
+![4. 其他可见](../../archive/legacy-prd/notification/push-inbox/assets/media/image33.png)
 
-_Source: archive/converted-prd/notification/push-inbox/README.md:2426_
+_Source: archive/legacy-prd/notification/push-inbox/README.md:2394_
+
+### 4. 其他可见
+
+![4. 其他可见](../../archive/legacy-prd/notification/push-inbox/assets/media/image37.png)
+
+_Source: archive/legacy-prd/notification/push-inbox/README.md:2426_

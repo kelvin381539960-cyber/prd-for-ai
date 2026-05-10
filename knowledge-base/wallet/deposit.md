@@ -4,7 +4,7 @@ feature: deposit
 version: "1.1"
 status: active
 doc_type: ai-readable-prd-translation
-source_doc: archive/converted-prd/wallet/asset/README.md；archive/converted-prd/wallet/deposit-send-swap/README.md；archive/converted-prd/kyc/wallet-opening/README.md；archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/app/transaction-history/README.md
+source_doc: archive/legacy-prd/wallet/asset/README.md；archive/legacy-prd/wallet/deposit-send-swap/README.md；archive/legacy-prd/kyc/wallet-opening/README.md；archive/legacy-prd/security/identity-verification/README.md；archive/legacy-prd/app/transaction-history/README.md
 source_section: Wallet Deposit/Send/Swap / 6.1 Send；6.2 Swap；6.3 GTR Deposit；6.4 WalletConnect Deposit；Security / Face Auth；Transaction History
 last_updated: 2026-05-09
 owner: 吴忆锋
@@ -519,149 +519,149 @@ flowchart LR
 
 ## Page Visuals 页面图索引
 
-> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/legacy-prd` 原始资产，避免重复复制。
 
 ### 1. 引言
 
-![1. 引言](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image1.png)
+![1. 引言](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image1.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:36_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:36_
 
-![1. 引言](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image2.png)
+![1. 引言](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image2.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:38_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:38_
 
-![1. 引言](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image3.png)
+![1. 引言](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image3.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:42_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:42_
 
-![1. 引言](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image4.png)
+![1. 引言](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image4.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:45_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:45_
 
-![1. 引言](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image5.png)
+![1. 引言](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image5.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:47_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:47_
 
-![1. 引言](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image6.png)
+![1. 引言](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image6.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:50_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:50_
 
 ### 6. AIX前端功能需求
 
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image7.jpeg)
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image7.jpeg)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:297_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:297_
 
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image8.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image8.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:301_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:301_
 
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image13.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image13.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:360_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:360_
 
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image14.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image14.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:361_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:361_
 
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image15.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image15.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:362_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:362_
 
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image21.jpeg)
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image21.jpeg)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:479_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:479_
 
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image22.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image22.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:483_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:483_
 
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image33.jpeg)
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image33.jpeg)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:642_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:642_
 
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image34.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image34.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:646_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:646_
 
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image35.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image35.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:666_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:666_
 
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image36.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image36.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:667_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:667_
 
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image37.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image37.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:668_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:668_
 
 ### Deposit Crypto
 
-![Deposit Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image16.png)
+![Deposit Crypto](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image16.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:400_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:400_
 
-![Deposit Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image17.png)
+![Deposit Crypto](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image17.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:401_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:401_
 
-![Deposit Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image32.png)
+![Deposit Crypto](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image32.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:573_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:573_
 
-![Deposit Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image38.png)
+![Deposit Crypto](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image38.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:677_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:677_
 
-![Deposit Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image39.png)
+![Deposit Crypto](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image39.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:697_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:697_
 
-![Deposit Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image49.png)
+![Deposit Crypto](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image49.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:888_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:888_
 
-![Deposit Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image50.png)
+![Deposit Crypto](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image50.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:908_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:908_
 
-![Deposit Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image51.png)
+![Deposit Crypto](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image51.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:909_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:909_
 
-![Deposit Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image52.png)
+![Deposit Crypto](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image52.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:910_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:910_
 
 ### Transaction Details
 
-![Transaction Details](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image18.png)
+![Transaction Details](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image18.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:424_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:424_
 
-![Transaction Details](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image19.png)
+![Transaction Details](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image19.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:425_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:425_
 
-![Transaction Details](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image20.png)
+![Transaction Details](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image20.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:426_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:426_
 
-![Transaction Details](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image62.png)
+![Transaction Details](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image62.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:1070_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:1070_
 
 ### Receive Crypto
 
-![Receive Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image41.png)
+![Receive Crypto](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image41.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:741_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:741_
 
-![Receive Crypto](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image42.png)
+![Receive Crypto](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image42.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:742_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:742_
 
 ## Additional Page Visuals 补充页面图
 
@@ -669,84 +669,84 @@ _Source: archive/converted-prd/wallet/deposit-send-swap/README.md:742_
 
 ### 6. AIX前端功能需求
 
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image40.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image40.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:715_
-
-### 6. AIX前端功能需求
-
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image43.png)
-
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:789_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:715_
 
 ### 6. AIX前端功能需求
 
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image44.jpeg)
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image43.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:853_
-
-### 6. AIX前端功能需求
-
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image45.png)
-
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:857_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:789_
 
 ### 6. AIX前端功能需求
 
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image46.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image44.jpeg)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:877_
-
-### 6. AIX前端功能需求
-
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image47.png)
-
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:878_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:853_
 
 ### 6. AIX前端功能需求
 
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image48.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image45.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:879_
-
-### 6. AIX前端功能需求
-
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image53.png)
-
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:921_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:857_
 
 ### 6. AIX前端功能需求
 
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image54.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image46.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:973_
-
-### 6. AIX前端功能需求
-
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image55.png)
-
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:974_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:877_
 
 ### 6. AIX前端功能需求
 
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image56.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image47.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:975_
-
-### 6. AIX前端功能需求
-
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image57.png)
-
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:976_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:878_
 
 ### 6. AIX前端功能需求
 
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image60.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image48.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:1049_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:879_
 
 ### 6. AIX前端功能需求
 
-![6. AIX前端功能需求](../../archive/converted-prd/wallet/deposit-send-swap/assets/media/image61.jpeg)
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image53.png)
 
-_Source: archive/converted-prd/wallet/deposit-send-swap/README.md:1056_
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:921_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image54.png)
+
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:973_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image55.png)
+
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:974_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image56.png)
+
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:975_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image57.png)
+
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:976_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image60.png)
+
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:1049_
+
+### 6. AIX前端功能需求
+
+![6. AIX前端功能需求](../../archive/legacy-prd/wallet/deposit-send-swap/assets/media/image61.jpeg)
+
+_Source: archive/legacy-prd/wallet/deposit-send-swap/README.md:1056_

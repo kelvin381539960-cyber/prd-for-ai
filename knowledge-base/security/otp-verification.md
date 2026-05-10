@@ -3,7 +3,7 @@ module: security
 feature: otp-verification
 version: "1.1"
 status: active
-source_doc: archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/app/registration-login/README.md；archive/converted-prd/card/manage/README.md；archive/converted-prd/wallet/deposit-send-swap/README.md
+source_doc: archive/legacy-prd/security/identity-verification/README.md；archive/legacy-prd/app/registration-login/README.md；archive/legacy-prd/card/manage/README.md；archive/legacy-prd/wallet/deposit-send-swap/README.md
 source_section: Security / 7 全局规则、8 需求描述、9 外部接口、10 错误码；Registration BIO / Password；Card Manage PIN / Sensitive operations；Wallet Send/Swap auth
 last_updated: 2026-05-09
 owner: 吴忆锋
@@ -275,6 +275,6 @@ flowchart LR
 
 ### Verify Page
 
-![Verify Page](../../archive/converted-prd/security/identity-verification/assets/media/image7.jpeg)
+![Verify Page](../../archive/legacy-prd/security/identity-verification/assets/media/image7.jpeg)
 
-_Source: archive/converted-prd/security/identity-verification/README.md:699_
+_Source: archive/legacy-prd/security/identity-verification/README.md:699_

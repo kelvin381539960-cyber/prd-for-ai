@@ -3,7 +3,7 @@ module: _meta
 feature: glossary
 version: "2.0"
 status: active
-source_doc: archive/converted-prd/**/README.md；knowledge-base/* 已校准模块
+source_doc: archive/legacy-prd/**/README.md；knowledge-base/* 已校准模块
 source_section: converted PRD corpus / glossary
 last_updated: 2026-05-09
 owner: 吴忆锋
@@ -16,7 +16,7 @@ readers: [product, ui, dev, qa, business, ai]
 
 | 术语 | 定义 |
 |---|---|
-| converted-prd | 由历史 Word PRD 转换得到的 Markdown 证据层，位于 archive/converted-prd |
+| converted-prd | 由历史 Word PRD 转换得到的 Markdown 证据层，位于 archive/legacy-prd |
 | knowledge-base | 当前整理后的 runtime 产品事实库 |
 | ALIGNED | 知识库文件已完成 KB→Evidence 与 Evidence→KB 双向覆盖校验 |
 | SOURCE_GAP | converted-prd 中有关键规则，但知识库尚未完整结构化覆盖 |

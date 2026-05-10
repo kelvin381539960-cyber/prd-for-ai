@@ -3,7 +3,7 @@ module: account
 feature: registration
 version: "1.1"
 status: active
-source_doc: archive/converted-prd/app/registration-login/README.md；archive/converted-prd/security/identity-verification/README.md
+source_doc: archive/legacy-prd/app/registration-login/README.md；archive/legacy-prd/security/identity-verification/README.md
 source_section: registration-login / 5.2 账户说明；7.1 注册功能；security / Email OTP 认证
 last_updated: 2026-05-09
 owner: 吴忆锋
@@ -24,7 +24,7 @@ Registration 用于新用户通过邮箱创建 AIX 账户，并完成邮箱 OTP 
 
 注册成功后，服务端生成 UID，账户状态为 Active。用户成功注册 / 登录后，系统自动将当前 Device ID 与账户绑定。
 
-> Source alignment note: 本文件按 `archive/converted-prd/app/registration-login/README.md` 校准；邮箱 OTP 等认证细节以 `archive/converted-prd/security/identity-verification/README.md` 为支撑证据。
+> Source alignment note: 本文件按 `archive/legacy-prd/app/registration-login/README.md` 校准；邮箱 OTP 等认证细节以 `archive/legacy-prd/security/identity-verification/README.md` 为支撑证据。
 
 ## 2. 适用范围
 
@@ -465,24 +465,24 @@ Tag 创建结果：
 
 ## 10. 来源引用
 
-- (Ref: archive/converted-prd/app/registration-login/README.md / 5.2.2 账户状态 / V1.0)
-- (Ref: archive/converted-prd/app/registration-login/README.md / 5.2.5 手机号/邮箱唯一性规则 / V1.0)
-- (Ref: archive/converted-prd/app/registration-login/README.md / 5.2.6 设备绑定策略 / V1.0)
-- (Ref: archive/converted-prd/app/registration-login/README.md / 7.1.3 Navigation Page / V1.0)
-- (Ref: archive/converted-prd/app/registration-login/README.md / 7.1.4 Registration Page / V1.0)
-- (Ref: archive/converted-prd/app/registration-login/README.md / 7.1.5 邮箱OTP验证页 / V1.0)
-- (Ref: archive/converted-prd/app/registration-login/README.md / 7.1.6 Set Password Page / V1.0)
-- (Ref: archive/converted-prd/app/registration-login/README.md / 7.1.7 Re-enter Password Page / V1.0)
-- (Ref: archive/converted-prd/app/registration-login/README.md / 7.1.8 Set Tag Page / V1.0)
-- (Ref: archive/converted-prd/security/identity-verification/README.md / 8.3 Email OTP认证)
+- (Ref: archive/legacy-prd/app/registration-login/README.md / 5.2.2 账户状态 / V1.0)
+- (Ref: archive/legacy-prd/app/registration-login/README.md / 5.2.5 手机号/邮箱唯一性规则 / V1.0)
+- (Ref: archive/legacy-prd/app/registration-login/README.md / 5.2.6 设备绑定策略 / V1.0)
+- (Ref: archive/legacy-prd/app/registration-login/README.md / 7.1.3 Navigation Page / V1.0)
+- (Ref: archive/legacy-prd/app/registration-login/README.md / 7.1.4 Registration Page / V1.0)
+- (Ref: archive/legacy-prd/app/registration-login/README.md / 7.1.5 邮箱OTP验证页 / V1.0)
+- (Ref: archive/legacy-prd/app/registration-login/README.md / 7.1.6 Set Password Page / V1.0)
+- (Ref: archive/legacy-prd/app/registration-login/README.md / 7.1.7 Re-enter Password Page / V1.0)
+- (Ref: archive/legacy-prd/app/registration-login/README.md / 7.1.8 Set Tag Page / V1.0)
+- (Ref: archive/legacy-prd/security/identity-verification/README.md / 8.3 Email OTP认证)
 - (Ref: knowledge-base/changelog/knowledge-gaps.md / Account Registration / 2026-05-01)
 
 ## Page Visuals 页面图索引
 
-> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/converted-prd` 原始资产，避免重复复制。
+> 本节绑定 converted-prd 中与本文件页面规则相关的页面截图 / 页面组图片，方便查看规则时同步查看页面长什么样。图片仍引用 `archive/legacy-prd` 原始资产，避免重复复制。
 
 ### set Password Page
 
-![set Password Page](../../archive/converted-prd/app/registration-login/assets/media/image40.jpeg)
+![set Password Page](../../archive/legacy-prd/app/registration-login/assets/media/image40.jpeg)
 
-_Source: archive/converted-prd/app/registration-login/README.md:926_
+_Source: archive/legacy-prd/app/registration-login/README.md:926_

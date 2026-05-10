@@ -3,7 +3,7 @@ module: supporting-visuals
 feature: app-registration-login
 version: "1.0"
 status: visual_only
-source_doc: archive/converted-prd/app/registration-login
+source_doc: archive/legacy-prd/app/registration-login
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,69 +19,69 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 1. 1. 需求变更日志
 
-![1. 需求变更日志](../../archive/converted-prd/app/registration-login/assets/media/image1.png)
+![1. 需求变更日志](../../archive/legacy-prd/app/registration-login/assets/media/image1.png)
 
-_Source: archive/converted-prd/app/registration-login/assets/media/image1.png_
+_Source: archive/legacy-prd/app/registration-login/assets/media/image1.png_
 
 ### 2. 1. 需求变更日志
 
-![1. 需求变更日志](../../archive/converted-prd/app/registration-login/assets/media/image2.png)
+![1. 需求变更日志](../../archive/legacy-prd/app/registration-login/assets/media/image2.png)
 
-_Source: archive/converted-prd/app/registration-login/assets/media/image2.png_
+_Source: archive/legacy-prd/app/registration-login/assets/media/image2.png_
 
 ### 3. 1. 需求变更日志
 
-![1. 需求变更日志](../../archive/converted-prd/app/registration-login/assets/media/image3.png)
+![1. 需求变更日志](../../archive/legacy-prd/app/registration-login/assets/media/image3.png)
 
-_Source: archive/converted-prd/app/registration-login/assets/media/image3.png_
+_Source: archive/legacy-prd/app/registration-login/assets/media/image3.png_
 
 ### 4. 1. 需求变更日志
 
-![1. 需求变更日志](../../archive/converted-prd/app/registration-login/assets/media/image4.png)
+![1. 需求变更日志](../../archive/legacy-prd/app/registration-login/assets/media/image4.png)
 
-_Source: archive/converted-prd/app/registration-login/assets/media/image4.png_
+_Source: archive/legacy-prd/app/registration-login/assets/media/image4.png_
 
 ### 5. 1. 需求变更日志
 
-![1. 需求变更日志](../../archive/converted-prd/app/registration-login/assets/media/image5.png)
+![1. 需求变更日志](../../archive/legacy-prd/app/registration-login/assets/media/image5.png)
 
-_Source: archive/converted-prd/app/registration-login/assets/media/image5.png_
+_Source: archive/legacy-prd/app/registration-login/assets/media/image5.png_
 
 ### 6. 1. 需求变更日志
 
-![1. 需求变更日志](../../archive/converted-prd/app/registration-login/assets/media/image6.png)
+![1. 需求变更日志](../../archive/legacy-prd/app/registration-login/assets/media/image6.png)
 
-_Source: archive/converted-prd/app/registration-login/assets/media/image6.png_
+_Source: archive/legacy-prd/app/registration-login/assets/media/image6.png_
 
 ### 7. 1. 需求变更日志
 
-![1. 需求变更日志](../../archive/converted-prd/app/registration-login/assets/media/image11.png)
+![1. 需求变更日志](../../archive/legacy-prd/app/registration-login/assets/media/image11.png)
 
-_Source: archive/converted-prd/app/registration-login/assets/media/image11.png_
+_Source: archive/legacy-prd/app/registration-login/assets/media/image11.png_
 
 ### 8. 4. 功能结构
 
-![4. 功能结构](../../archive/converted-prd/app/registration-login/assets/media/image14.jpeg)
+![4. 功能结构](../../archive/legacy-prd/app/registration-login/assets/media/image14.jpeg)
 
-_Source: archive/converted-prd/app/registration-login/assets/media/image14.jpeg_
+_Source: archive/legacy-prd/app/registration-login/assets/media/image14.jpeg_
 
 ### 9. 7. 需求描述
 
-![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image18.png)
+![7. 需求描述](../../archive/legacy-prd/app/registration-login/assets/media/image18.png)
 
-_Source: archive/converted-prd/app/registration-login/assets/media/image18.png_
+_Source: archive/legacy-prd/app/registration-login/assets/media/image18.png_
 
 ### 10. 7. 需求描述
 
-![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image19.png)
+![7. 需求描述](../../archive/legacy-prd/app/registration-login/assets/media/image19.png)
 
-_Source: archive/converted-prd/app/registration-login/assets/media/image19.png_
+_Source: archive/legacy-prd/app/registration-login/assets/media/image19.png_
 
 ### 11. 7. 需求描述
 
-![7. 需求描述](../../archive/converted-prd/app/registration-login/assets/media/image20.png)
+![7. 需求描述](../../archive/legacy-prd/app/registration-login/assets/media/image20.png)
 
-_Source: archive/converted-prd/app/registration-login/assets/media/image20.png_
+_Source: archive/legacy-prd/app/registration-login/assets/media/image20.png_
 
 
 ## 3. 使用规则

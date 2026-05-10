@@ -3,7 +3,7 @@ module: non-runtime
 feature: website-waitlist-campaign
 version: "1.0"
 status: visual_only
-source_doc: archive/converted-prd/website/waitlist-campaign
+source_doc: archive/legacy-prd/website/waitlist-campaign
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,21 +19,21 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 4. Demo
 
-![4. Demo](../../archive/converted-prd/website/waitlist-campaign/assets/media/image1.jpg)
+![4. Demo](../../archive/legacy-prd/website/waitlist-campaign/assets/media/image1.jpg)
 
-_Source: archive/converted-prd/website/waitlist-campaign/assets/media/image1.jpg_
-
-### 5. 需求描述
-
-![5. 需求描述](../../archive/converted-prd/website/waitlist-campaign/assets/media/image2.jpg)
-
-_Source: archive/converted-prd/website/waitlist-campaign/assets/media/image2.jpg_
+_Source: archive/legacy-prd/website/waitlist-campaign/assets/media/image1.jpg_
 
 ### 5. 需求描述
 
-![5. 需求描述](../../archive/converted-prd/website/waitlist-campaign/assets/media/image3.jpg)
+![5. 需求描述](../../archive/legacy-prd/website/waitlist-campaign/assets/media/image2.jpg)
 
-_Source: archive/converted-prd/website/waitlist-campaign/assets/media/image3.jpg_
+_Source: archive/legacy-prd/website/waitlist-campaign/assets/media/image2.jpg_
+
+### 5. 需求描述
+
+![5. 需求描述](../../archive/legacy-prd/website/waitlist-campaign/assets/media/image3.jpg)
+
+_Source: archive/legacy-prd/website/waitlist-campaign/assets/media/image3.jpg_
 
 
 ## 3. 使用规则

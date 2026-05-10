@@ -3,7 +3,7 @@ module: knowledge-base
 feature: prd-source-alignment
 version: "2.1"
 status: completed_pending_product_decision
-source_doc: archive/converted-prd/README.md；archive/converted-prd/CONTENT_COMPARISON_REPORT.md；archive/converted-prd/VALIDATION_REPORT.md
+source_doc: archive/legacy-prd/README.md；archive/legacy-prd/CONTENT_COMPARISON_REPORT.md；archive/legacy-prd/VALIDATION_REPORT.md
 source_section: converted-prd full corpus
 last_updated: 2026-05-09
 owner: 吴忆锋
@@ -11,12 +11,12 @@ owner: 吴忆锋
 
 # PRD Source Alignment Task
 
-目标：把 `knowledge-base/` 中的业务事实，严格校准到新转换的历史 PRD：`archive/converted-prd/`。
+目标：把 `knowledge-base/` 中的业务事实，严格校准到新转换的历史 PRD：`archive/legacy-prd/`。
 
 ## 原则
 
-1. `archive/converted-prd/` 是本轮知识库校准的证据层。
-2. `knowledge-base/` 只保留能被 `archive/converted-prd` 明确支持的事实。
+1. `archive/legacy-prd/` 是本轮知识库校准的证据层。
+2. `knowledge-base/` 只保留能被 `archive/legacy-prd` 明确支持的事实。
 3. 找不到历史 PRD 依据的内容，不直接删除；先标为 `NEED_CONFIRMATION` 或移入 `knowledge-gaps.md`。
 4. 历史 PRD 之间冲突时，不自行判断当前规则；标为 `CONFLICT`，等待用户确认。
 5. 官网 / Website / Marketing PRD 暂不进入 runtime knowledge-base，除非用户明确要求。
@@ -39,14 +39,14 @@ owner: 吴忆锋
 
 | 知识库域 | Primary evidence | Supporting evidence | 说明 |
 |---|---|---|---|
-| account / registration | `archive/converted-prd/app/registration-login/README.md` | `archive/converted-prd/security/identity-verification/README.md` | 注册页定义主流程；Security 定义 OTP、Face Auth、BIO、锁定、验证规则 |
-| account / login | `archive/converted-prd/app/registration-login/README.md` | `archive/converted-prd/security/identity-verification/README.md` | 登录页定义入口和页面；Security 定义验证与锁定规则 |
-| account / password-reset | `archive/converted-prd/app/registration-login/README.md` | `archive/converted-prd/security/identity-verification/README.md` | 忘记密码流程涉及 OTP、密码规则、Face Auth 等 |
-| security | `archive/converted-prd/security/identity-verification/README.md` | `archive/converted-prd/app/registration-login/README.md` | Security 是能力 PRD；注册登录提供调用场景 |
-| card application | `archive/converted-prd/card/application/README.md` | `archive/converted-prd/app/home/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/security/identity-verification/README.md` | 申卡入口在 Home；申卡前置依赖钱包开户/KYC、Face Auth |
-| wallet deposit/send/swap | `archive/converted-prd/wallet/deposit-send-swap/README.md` | `archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/transaction-history/README.md` | 转账/兑换涉及身份验证、钱包开户、交易记录 |
-| transaction | `archive/converted-prd/app/transaction-history/README.md` | `archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | 全量交易整合 Wallet / Card / Swap 等来源 |
-| notification | `archive/converted-prd/notification/push-inbox/README.md` | `archive/converted-prd/notification/system-email/README.md`；业务触发 PRD | Push、站内信、系统邮件分别核对 |
+| account / registration | `archive/legacy-prd/app/registration-login/README.md` | `archive/legacy-prd/security/identity-verification/README.md` | 注册页定义主流程；Security 定义 OTP、Face Auth、BIO、锁定、验证规则 |
+| account / login | `archive/legacy-prd/app/registration-login/README.md` | `archive/legacy-prd/security/identity-verification/README.md` | 登录页定义入口和页面；Security 定义验证与锁定规则 |
+| account / password-reset | `archive/legacy-prd/app/registration-login/README.md` | `archive/legacy-prd/security/identity-verification/README.md` | 忘记密码流程涉及 OTP、密码规则、Face Auth 等 |
+| security | `archive/legacy-prd/security/identity-verification/README.md` | `archive/legacy-prd/app/registration-login/README.md` | Security 是能力 PRD；注册登录提供调用场景 |
+| card application | `archive/legacy-prd/card/application/README.md` | `archive/legacy-prd/app/home/README.md`；`archive/legacy-prd/kyc/wallet-opening/README.md`；`archive/legacy-prd/security/identity-verification/README.md` | 申卡入口在 Home；申卡前置依赖钱包开户/KYC、Face Auth |
+| wallet deposit/send/swap | `archive/legacy-prd/wallet/deposit-send-swap/README.md` | `archive/legacy-prd/security/identity-verification/README.md`；`archive/legacy-prd/kyc/wallet-opening/README.md`；`archive/legacy-prd/app/transaction-history/README.md` | 转账/兑换涉及身份验证、钱包开户、交易记录 |
+| transaction | `archive/legacy-prd/app/transaction-history/README.md` | `archive/legacy-prd/card/transaction/README.md`；`archive/legacy-prd/wallet/deposit-send-swap/README.md` | 全量交易整合 Wallet / Card / Swap 等来源 |
+| notification | `archive/legacy-prd/notification/push-inbox/README.md` | `archive/legacy-prd/notification/system-email/README.md`；业务触发 PRD | Push、站内信、系统邮件分别核对 |
 
 ## 状态说明
 
@@ -93,59 +93,59 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 
 | 域 | converted-prd 来源 |
 |---|---|
-| account / registration-login | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` |
-| home | `archive/converted-prd/app/home/README.md` |
-| faq | `archive/converted-prd/app/faq/README.md` |
-| transaction-history | `archive/converted-prd/app/transaction-history/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` |
-| card application | `archive/converted-prd/card/application/README.md`；`archive/converted-prd/app/home/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/security/identity-verification/README.md` |
-| card manage | `archive/converted-prd/card/manage/README.md`；`archive/converted-prd/security/identity-verification/README.md` |
-| card transaction | `archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/app/transaction-history/README.md` |
-| common popup/banner | `archive/converted-prd/common/popup-banner/README.md` |
-| i18n | `archive/converted-prd/common/i18n/README.md` |
-| kyc | `archive/converted-prd/kyc/wallet-opening/README.md` |
-| mgm | `archive/converted-prd/mgm/referral-invite-code/README.md`；`archive/converted-prd/app/registration-login/README.md` |
-| notification | `archive/converted-prd/notification/push-inbox/README.md`；`archive/converted-prd/notification/system-email/README.md` |
-| oboss | `archive/converted-prd/oboss/mvp/README.md`；`archive/converted-prd/oboss/capabilities/README.md` |
-| security | `archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/app/registration-login/README.md` |
-| wallet | `archive/converted-prd/wallet/asset/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md`；`archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md` |
-| website | `archive/converted-prd/website/**/README.md`，当前 OUT_OF_SCOPE |
+| account / registration-login | `archive/legacy-prd/app/registration-login/README.md`；`archive/legacy-prd/security/identity-verification/README.md` |
+| home | `archive/legacy-prd/app/home/README.md` |
+| faq | `archive/legacy-prd/app/faq/README.md` |
+| transaction-history | `archive/legacy-prd/app/transaction-history/README.md`；`archive/legacy-prd/card/transaction/README.md`；`archive/legacy-prd/wallet/deposit-send-swap/README.md` |
+| card application | `archive/legacy-prd/card/application/README.md`；`archive/legacy-prd/app/home/README.md`；`archive/legacy-prd/kyc/wallet-opening/README.md`；`archive/legacy-prd/security/identity-verification/README.md` |
+| card manage | `archive/legacy-prd/card/manage/README.md`；`archive/legacy-prd/security/identity-verification/README.md` |
+| card transaction | `archive/legacy-prd/card/transaction/README.md`；`archive/legacy-prd/app/transaction-history/README.md` |
+| common popup/banner | `archive/legacy-prd/common/popup-banner/README.md` |
+| i18n | `archive/legacy-prd/common/i18n/README.md` |
+| kyc | `archive/legacy-prd/kyc/wallet-opening/README.md` |
+| mgm | `archive/legacy-prd/mgm/referral-invite-code/README.md`；`archive/legacy-prd/app/registration-login/README.md` |
+| notification | `archive/legacy-prd/notification/push-inbox/README.md`；`archive/legacy-prd/notification/system-email/README.md` |
+| oboss | `archive/legacy-prd/oboss/mvp/README.md`；`archive/legacy-prd/oboss/capabilities/README.md` |
+| security | `archive/legacy-prd/security/identity-verification/README.md`；`archive/legacy-prd/app/registration-login/README.md` |
+| wallet | `archive/legacy-prd/wallet/asset/README.md`；`archive/legacy-prd/wallet/deposit-send-swap/README.md`；`archive/legacy-prd/security/identity-verification/README.md`；`archive/legacy-prd/kyc/wallet-opening/README.md` |
+| website | `archive/legacy-prd/website/**/README.md`，当前 OUT_OF_SCOPE |
 
 ## Alignment Tasks
 
 | # | 状态 | knowledge-base 文件 | converted-prd 依据 | 备注 |
 |---:|---|---|---|---|
-| 1 | ALIGNED | `knowledge-base/account/_index.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | Account 索引已按删除线=已删除规则收口；Password Reset / Forgot Password 不纳入 runtime，Security 锁定独立维护 |
-| 2 | ALIGNED | `knowledge-base/account/registration.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | registration.md 已按 registration-login + security 证据校准；Locked 不作为账户状态沉淀 |
-| 3 | ALIGNED | `knowledge-base/account/login.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | login.md 已按删除线=已删除规则收口；Forgot Password / Password Reset 不作为 active Login 入口 |
-| 4 | OUT_OF_SCOPE | `knowledge-base/account/password-reset.md` | `archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/security/identity-verification/README.md` | password-reset.md 已改为 deleted_out_of_scope；源 PRD 删除线内容不纳入 runtime 逻辑 |
-| 5 | ALIGNED | `knowledge-base/home/_index.md` | `archive/converted-prd/app/home/README.md` | home/_index.md 已按 Home + FAQ 证据更新，明确首页查询入口与跨模块边界 |
-| 6 | ALIGNED | `knowledge-base/home/app-home.md` | `archive/converted-prd/app/home/README.md` | app-home.md 已补齐 Evidence→KB 缺口：钱包状态、申卡入口、卡片展示、FAQ、核心交易入口、刷新规则 |
-| 7 | ALIGNED | `knowledge-base/common/faq.md` | `archive/converted-prd/app/faq/README.md` | common/faq.md 已按 converted FAQ 全量重写：FAQ 展示规则、Zendesk Section、场景入口、首页/申卡 FAQ 已收口 |
-| 8 | ALIGNED | `knowledge-base/transaction/_index.md` | `archive/converted-prd/app/transaction-history/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | transaction/_index.md 已按三份 converted-prd 更新证据范围和补齐规则索引 |
-| 9 | ALIGNED | `knowledge-base/transaction/history.md` | `archive/converted-prd/app/transaction-history/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | history.md 已补齐全量交易聚合、去搜索、过滤类型、REVERSAL退款、异常文案、时间分组 |
-| 10 | ALIGNED | `knowledge-base/transaction/detail.md` | `archive/converted-prd/app/transaction-history/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | detail.md 已补齐 Card/Crypto/Swap 详情差异、Gas fee隐藏、Exchange rate展示和可选字段隐藏 |
-| 11 | ALIGNED | `knowledge-base/transaction/status-model.md` | `archive/converted-prd/app/transaction-history/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | status-model.md 已补齐全量交易类型/状态、原始类型展示范围和 REVERSAL 退款处理 |
-| 12 | ALIGNED | `knowledge-base/card/_index.md` | `archive/converted-prd/card/application/README.md`；`archive/converted-prd/card/manage/README.md`；`archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/security/identity-verification/README.md` | card/_index.md 已更新 converted-prd 证据范围，并登记 Card Home 跨文档冲突 |
-| 13 | ALIGNED | `knowledge-base/card/application.md` | `archive/converted-prd/card/application/README.md`；`archive/converted-prd/app/home/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/security/identity-verification/README.md` | application.md 已补齐申卡资格、入口、费用、多币种支付、Face Auth、Billing/Mailing、MGM减免费、结果页等规则 |
-| 14 | CONFLICT | `knowledge-base/card/card-home.md` | `archive/converted-prd/app/home/README.md`；`archive/converted-prd/card/application/README.md`；`archive/converted-prd/card/manage/README.md` | card-home.md 已补齐展示规则，但 Home PRD 与 Card Application PRD 对部分首页卡片点击跳转存在冲突，待产品确认 |
-| 15 | ALIGNED | `knowledge-base/card/manage/_index.md` | `archive/converted-prd/card/manage/README.md`；`archive/converted-prd/security/identity-verification/README.md` | Card Manage index 已补齐激活/PIN/敏感信息/状态操作证据索引和 Security 支撑边界 |
-| 16 | ALIGNED | `knowledge-base/card/manage/activation.md` | `archive/converted-prd/card/manage/README.md`；`archive/converted-prd/security/identity-verification/README.md` | activation.md 已补齐后四位校验、激活成功 toast、失败页、接口路径和 autoDebit 删除线边界 |
-| 17 | ALIGNED | `knowledge-base/card/manage/pin.md` | `archive/converted-prd/card/manage/README.md`；`archive/converted-prd/security/identity-verification/README.md` | pin.md 已补齐 6 位 PIN、引导弹窗、Confirm PIN、AAI 后 set/reset、公钥接口、31031、PIN 简单规则 |
-| 18 | ALIGNED | `knowledge-base/card/manage/sensitive-info.md` | `archive/converted-prd/card/manage/README.md`；`archive/converted-prd/security/identity-verification/README.md` | sensitive-info.md 已补齐 Basic/Sensitive Info 字段来源、复制 toast、接口失败 toast |
-| 19 | ALIGNED | `knowledge-base/card/manage/status-and-operations.md` | `archive/converted-prd/card/manage/README.md` | status-and-operations.md 已补齐 Freeze/Unfreeze、网络/服务端错误、Lock/Unlock 文案和接口路径 |
-| 20 | ALIGNED | `knowledge-base/card/transaction.md` | `archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/app/transaction-history/README.md` | card/transaction.md 已补齐 DTC 通知、资金回退、REVERSAL type=19、展示范围、异常文案 |
-| 21 | ALIGNED | `knowledge-base/card/transaction-detail.md` | `archive/converted-prd/card/transaction/README.md`；`archive/converted-prd/app/transaction-history/README.md` | card/transaction-detail.md 已补齐 Card History/Details、去搜索、状态说明、Exchange rate、可选字段隐藏和 DTC 未知错误处理 |
-| 22 | ALIGNED | `knowledge-base/wallet/_index.md` | `archive/converted-prd/wallet/asset/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/security/identity-verification/README.md` | wallet/_index.md 已更新 Wallet Asset + Deposit/Send/Swap + KYC/Security/Transaction 证据边界，并登记 Send/Swap 缺口 |
-| 23 | ALIGNED | `knowledge-base/wallet/assets.md` | `archive/converted-prd/wallet/asset/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md` | assets.md 已补齐稳定币范围、Total Asset、汇率异常、排序、隐藏余额、Recent transaction、Withdraw隐藏 |
-| 24 | ALIGNED | `knowledge-base/wallet/deposit.md` | `archive/converted-prd/wallet/deposit-send-swap/README.md`；`archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/transaction-history/README.md` | deposit.md 只承接 Deposit/GTR/WalletConnect；已新增 wallet/send.md 和 wallet/swap.md 收口 Send/Swap SOURCE_GAP |
-| 25 | ALIGNED | `knowledge-base/kyc/_index.md` | `archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/home/README.md` | kyc/_index.md 已按 KYC + Home + Card Application + Security converted-prd 更新证据边界 |
-| 26 | ALIGNED | `knowledge-base/kyc/account-opening.md` | `archive/converted-prd/kyc/wallet-opening/README.md`；`archive/converted-prd/app/home/README.md`；`archive/converted-prd/card/application/README.md` | account-opening.md 已补齐 Waitlist页面级拦截、Face 30秒超时、长期有效、Face锁定、Home钱包面板映射、申卡前置 |
-| 27 | ALIGNED | `knowledge-base/security/_index.md` | `archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/app/registration-login/README.md` | security/_index.md 已按 Security + Registration + Card Manage + Wallet converted-prd 更新证据边界和缺口索引 |
-| 28 | ALIGNED | `knowledge-base/security/*.md` | `archive/converted-prd/security/identity-verification/README.md`；`archive/converted-prd/app/registration-login/README.md`；`archive/converted-prd/card/manage/README.md`；`archive/converted-prd/wallet/deposit-send-swap/README.md` | security/*.md 已补齐 BIO跳过认证、DeviceID、锁定矩阵、IVS有效期、验证码重发冷却、设备绑定、Quick Login BIO处理、API/密码规则等 |
-| 29 | ALIGNED | `knowledge-base/common/notification.md` | `archive/converted-prd/notification/push-inbox/README.md`；`archive/converted-prd/notification/system-email/README.md`；相关业务触发 PRD | common/notification.md 已重写为 Notification 公共能力文档，覆盖 Push、消息中心、通知设置、Webhook、System Email 边界 |
+| 1 | ALIGNED | `knowledge-base/account/_index.md` | `archive/legacy-prd/app/registration-login/README.md`；`archive/legacy-prd/security/identity-verification/README.md` | Account 索引已按删除线=已删除规则收口；Password Reset / Forgot Password 不纳入 runtime，Security 锁定独立维护 |
+| 2 | ALIGNED | `knowledge-base/account/registration.md` | `archive/legacy-prd/app/registration-login/README.md`；`archive/legacy-prd/security/identity-verification/README.md` | registration.md 已按 registration-login + security 证据校准；Locked 不作为账户状态沉淀 |
+| 3 | ALIGNED | `knowledge-base/account/login.md` | `archive/legacy-prd/app/registration-login/README.md`；`archive/legacy-prd/security/identity-verification/README.md` | login.md 已按删除线=已删除规则收口；Forgot Password / Password Reset 不作为 active Login 入口 |
+| 4 | OUT_OF_SCOPE | `knowledge-base/account/password-reset.md` | `archive/legacy-prd/app/registration-login/README.md`；`archive/legacy-prd/security/identity-verification/README.md` | password-reset.md 已改为 deleted_out_of_scope；源 PRD 删除线内容不纳入 runtime 逻辑 |
+| 5 | ALIGNED | `knowledge-base/home/_index.md` | `archive/legacy-prd/app/home/README.md` | home/_index.md 已按 Home + FAQ 证据更新，明确首页查询入口与跨模块边界 |
+| 6 | ALIGNED | `knowledge-base/home/app-home.md` | `archive/legacy-prd/app/home/README.md` | app-home.md 已补齐 Evidence→KB 缺口：钱包状态、申卡入口、卡片展示、FAQ、核心交易入口、刷新规则 |
+| 7 | ALIGNED | `knowledge-base/common/faq.md` | `archive/legacy-prd/app/faq/README.md` | common/faq.md 已按 converted FAQ 全量重写：FAQ 展示规则、Zendesk Section、场景入口、首页/申卡 FAQ 已收口 |
+| 8 | ALIGNED | `knowledge-base/transaction/_index.md` | `archive/legacy-prd/app/transaction-history/README.md`；`archive/legacy-prd/card/transaction/README.md`；`archive/legacy-prd/wallet/deposit-send-swap/README.md` | transaction/_index.md 已按三份 converted-prd 更新证据范围和补齐规则索引 |
+| 9 | ALIGNED | `knowledge-base/transaction/history.md` | `archive/legacy-prd/app/transaction-history/README.md`；`archive/legacy-prd/card/transaction/README.md`；`archive/legacy-prd/wallet/deposit-send-swap/README.md` | history.md 已补齐全量交易聚合、去搜索、过滤类型、REVERSAL退款、异常文案、时间分组 |
+| 10 | ALIGNED | `knowledge-base/transaction/detail.md` | `archive/legacy-prd/app/transaction-history/README.md`；`archive/legacy-prd/card/transaction/README.md`；`archive/legacy-prd/wallet/deposit-send-swap/README.md` | detail.md 已补齐 Card/Crypto/Swap 详情差异、Gas fee隐藏、Exchange rate展示和可选字段隐藏 |
+| 11 | ALIGNED | `knowledge-base/transaction/status-model.md` | `archive/legacy-prd/app/transaction-history/README.md`；`archive/legacy-prd/card/transaction/README.md`；`archive/legacy-prd/wallet/deposit-send-swap/README.md` | status-model.md 已补齐全量交易类型/状态、原始类型展示范围和 REVERSAL 退款处理 |
+| 12 | ALIGNED | `knowledge-base/card/_index.md` | `archive/legacy-prd/card/application/README.md`；`archive/legacy-prd/card/manage/README.md`；`archive/legacy-prd/card/transaction/README.md`；`archive/legacy-prd/security/identity-verification/README.md` | card/_index.md 已更新 converted-prd 证据范围，并登记 Card Home 跨文档冲突 |
+| 13 | ALIGNED | `knowledge-base/card/application.md` | `archive/legacy-prd/card/application/README.md`；`archive/legacy-prd/app/home/README.md`；`archive/legacy-prd/kyc/wallet-opening/README.md`；`archive/legacy-prd/security/identity-verification/README.md` | application.md 已补齐申卡资格、入口、费用、多币种支付、Face Auth、Billing/Mailing、MGM减免费、结果页等规则 |
+| 14 | CONFLICT | `knowledge-base/card/card-home.md` | `archive/legacy-prd/app/home/README.md`；`archive/legacy-prd/card/application/README.md`；`archive/legacy-prd/card/manage/README.md` | card-home.md 已补齐展示规则，但 Home PRD 与 Card Application PRD 对部分首页卡片点击跳转存在冲突，待产品确认 |
+| 15 | ALIGNED | `knowledge-base/card/manage/_index.md` | `archive/legacy-prd/card/manage/README.md`；`archive/legacy-prd/security/identity-verification/README.md` | Card Manage index 已补齐激活/PIN/敏感信息/状态操作证据索引和 Security 支撑边界 |
+| 16 | ALIGNED | `knowledge-base/card/manage/activation.md` | `archive/legacy-prd/card/manage/README.md`；`archive/legacy-prd/security/identity-verification/README.md` | activation.md 已补齐后四位校验、激活成功 toast、失败页、接口路径和 autoDebit 删除线边界 |
+| 17 | ALIGNED | `knowledge-base/card/manage/pin.md` | `archive/legacy-prd/card/manage/README.md`；`archive/legacy-prd/security/identity-verification/README.md` | pin.md 已补齐 6 位 PIN、引导弹窗、Confirm PIN、AAI 后 set/reset、公钥接口、31031、PIN 简单规则 |
+| 18 | ALIGNED | `knowledge-base/card/manage/sensitive-info.md` | `archive/legacy-prd/card/manage/README.md`；`archive/legacy-prd/security/identity-verification/README.md` | sensitive-info.md 已补齐 Basic/Sensitive Info 字段来源、复制 toast、接口失败 toast |
+| 19 | ALIGNED | `knowledge-base/card/manage/status-and-operations.md` | `archive/legacy-prd/card/manage/README.md` | status-and-operations.md 已补齐 Freeze/Unfreeze、网络/服务端错误、Lock/Unlock 文案和接口路径 |
+| 20 | ALIGNED | `knowledge-base/card/transaction.md` | `archive/legacy-prd/card/transaction/README.md`；`archive/legacy-prd/app/transaction-history/README.md` | card/transaction.md 已补齐 DTC 通知、资金回退、REVERSAL type=19、展示范围、异常文案 |
+| 21 | ALIGNED | `knowledge-base/card/transaction-detail.md` | `archive/legacy-prd/card/transaction/README.md`；`archive/legacy-prd/app/transaction-history/README.md` | card/transaction-detail.md 已补齐 Card History/Details、去搜索、状态说明、Exchange rate、可选字段隐藏和 DTC 未知错误处理 |
+| 22 | ALIGNED | `knowledge-base/wallet/_index.md` | `archive/legacy-prd/wallet/asset/README.md`；`archive/legacy-prd/wallet/deposit-send-swap/README.md`；`archive/legacy-prd/kyc/wallet-opening/README.md`；`archive/legacy-prd/security/identity-verification/README.md` | wallet/_index.md 已更新 Wallet Asset + Deposit/Send/Swap + KYC/Security/Transaction 证据边界，并登记 Send/Swap 缺口 |
+| 23 | ALIGNED | `knowledge-base/wallet/assets.md` | `archive/legacy-prd/wallet/asset/README.md`；`archive/legacy-prd/wallet/deposit-send-swap/README.md`；`archive/legacy-prd/kyc/wallet-opening/README.md` | assets.md 已补齐稳定币范围、Total Asset、汇率异常、排序、隐藏余额、Recent transaction、Withdraw隐藏 |
+| 24 | ALIGNED | `knowledge-base/wallet/deposit.md` | `archive/legacy-prd/wallet/deposit-send-swap/README.md`；`archive/legacy-prd/security/identity-verification/README.md`；`archive/legacy-prd/kyc/wallet-opening/README.md`；`archive/legacy-prd/app/transaction-history/README.md` | deposit.md 只承接 Deposit/GTR/WalletConnect；已新增 wallet/send.md 和 wallet/swap.md 收口 Send/Swap SOURCE_GAP |
+| 25 | ALIGNED | `knowledge-base/kyc/_index.md` | `archive/legacy-prd/kyc/wallet-opening/README.md`；`archive/legacy-prd/app/home/README.md` | kyc/_index.md 已按 KYC + Home + Card Application + Security converted-prd 更新证据边界 |
+| 26 | ALIGNED | `knowledge-base/kyc/account-opening.md` | `archive/legacy-prd/kyc/wallet-opening/README.md`；`archive/legacy-prd/app/home/README.md`；`archive/legacy-prd/card/application/README.md` | account-opening.md 已补齐 Waitlist页面级拦截、Face 30秒超时、长期有效、Face锁定、Home钱包面板映射、申卡前置 |
+| 27 | ALIGNED | `knowledge-base/security/_index.md` | `archive/legacy-prd/security/identity-verification/README.md`；`archive/legacy-prd/app/registration-login/README.md` | security/_index.md 已按 Security + Registration + Card Manage + Wallet converted-prd 更新证据边界和缺口索引 |
+| 28 | ALIGNED | `knowledge-base/security/*.md` | `archive/legacy-prd/security/identity-verification/README.md`；`archive/legacy-prd/app/registration-login/README.md`；`archive/legacy-prd/card/manage/README.md`；`archive/legacy-prd/wallet/deposit-send-swap/README.md` | security/*.md 已补齐 BIO跳过认证、DeviceID、锁定矩阵、IVS有效期、验证码重发冷却、设备绑定、Quick Login BIO处理、API/密码规则等 |
+| 29 | ALIGNED | `knowledge-base/common/notification.md` | `archive/legacy-prd/notification/push-inbox/README.md`；`archive/legacy-prd/notification/system-email/README.md`；相关业务触发 PRD | common/notification.md 已重写为 Notification 公共能力文档，覆盖 Push、消息中心、通知设置、Webhook、System Email 边界 |
 | 30 | ALIGNED | `knowledge-base/common/errors.md` | 多份 converted-prd 中的错误码 / 文案 | common/errors.md 已重写为统一错误字典，覆盖已校准模块的错误文案、toast、popup、failed page 和异常边界 |
 | 31 | ALIGNED | `knowledge-base/_meta/*.md` | 多份 converted-prd | _meta/*.md 已重写为状态、字段、限制、地区、合规、错误码、术语字典，SOURCE_GAP 收口 |
-| 32 | OUT_OF_SCOPE | Website / Marketing facts | `archive/converted-prd/website/**/README.md` | 当前 runtime KB 明确排除 website |
+| 32 | OUT_OF_SCOPE | Website / Marketing facts | `archive/legacy-prd/website/**/README.md` | 当前 runtime KB 明确排除 website |
 
 ## Progress
 
@@ -169,7 +169,7 @@ Evidence → KB 至少要抽取并检查这些规则类型：
 
 - 2026-05-09：收口 common/errors SOURCE_GAP。common/errors.md 重写为统一错误字典，覆盖 Account/Security/KYC/Card/Wallet/Transaction/Notification 的已确认错误文案、toast、popup、failed page 和异常边界，任务 30 改为 ALIGNED。
 
-- 2026-05-09：收口 FAQ SOURCE_GAP。common/faq.md 按 archive/converted-prd/app/faq/README.md 重写，旧 xlsx 不再作为主事实来源，任务 7 改为 ALIGNED。
+- 2026-05-09：收口 FAQ SOURCE_GAP。common/faq.md 按 archive/legacy-prd/app/faq/README.md 重写，旧 xlsx 不再作为主事实来源，任务 7 改为 ALIGNED。
 
 - 2026-05-09：收口 Wallet SOURCE_GAP。新增 wallet/send.md 和 wallet/swap.md；wallet/deposit.md 改为只承接 Deposit/GTR/WalletConnect，任务 24 改为 ALIGNED。
 

@@ -3,7 +3,7 @@ module: card
 feature: card-activation
 version: "1.1"
 status: active
-source_doc: archive/converted-prd/card/manage/README.md；archive/converted-prd/security/identity-verification/README.md；archive/converted-prd/card/application/README.md
+source_doc: archive/legacy-prd/card/manage/README.md；archive/legacy-prd/security/identity-verification/README.md；archive/legacy-prd/card/application/README.md
 source_section: Card Manage / 7.2 卡激活；8 外部接口；Security / Face Authentication
 last_updated: 2026-05-09
 owner: 吴忆锋

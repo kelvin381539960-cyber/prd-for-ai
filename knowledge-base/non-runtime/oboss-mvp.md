@@ -3,7 +3,7 @@ module: non-runtime
 feature: oboss-mvp
 version: "1.0"
 status: visual_only
-source_doc: archive/converted-prd/oboss/mvp
+source_doc: archive/legacy-prd/oboss/mvp
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,177 +19,177 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### \ AIX\ OBOSS MVP
 
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image2.png)
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image2.png)
 
-_Source: archive/converted-prd/oboss/mvp/assets/media/image2.png_
-
-### \ AIX\ OBOSS MVP
-
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image4.png)
-
-_Source: archive/converted-prd/oboss/mvp/assets/media/image4.png_
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image2.png_
 
 ### \ AIX\ OBOSS MVP
 
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image5.png)
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image4.png)
 
-_Source: archive/converted-prd/oboss/mvp/assets/media/image5.png_
-
-### \ AIX\ OBOSS MVP
-
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image6.png)
-
-_Source: archive/converted-prd/oboss/mvp/assets/media/image6.png_
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image4.png_
 
 ### \ AIX\ OBOSS MVP
 
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image7.png)
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image5.png)
 
-_Source: archive/converted-prd/oboss/mvp/assets/media/image7.png_
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image5.png_
+
+### \ AIX\ OBOSS MVP
+
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image6.png)
+
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image6.png_
+
+### \ AIX\ OBOSS MVP
+
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image7.png)
+
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image7.png_
 
 ### Notification center
 
-![Notification center](../../archive/converted-prd/oboss/mvp/assets/media/image8.png)
+![Notification center](../../archive/legacy-prd/oboss/mvp/assets/media/image8.png)
 
-_Source: archive/converted-prd/oboss/mvp/assets/media/image8.png_
-
-### \ AIX\ OBOSS MVP
-
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image10.png)
-
-_Source: archive/converted-prd/oboss/mvp/assets/media/image10.png_
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image8.png_
 
 ### \ AIX\ OBOSS MVP
 
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image11.png)
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image10.png)
 
-_Source: archive/converted-prd/oboss/mvp/assets/media/image11.png_
-
-### \ AIX\ OBOSS MVP
-
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image12.png)
-
-_Source: archive/converted-prd/oboss/mvp/assets/media/image12.png_
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image10.png_
 
 ### \ AIX\ OBOSS MVP
 
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image13.png)
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image11.png)
 
-_Source: archive/converted-prd/oboss/mvp/assets/media/image13.png_
-
-### \ AIX\ OBOSS MVP
-
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image14.png)
-
-_Source: archive/converted-prd/oboss/mvp/assets/media/image14.png_
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image11.png_
 
 ### \ AIX\ OBOSS MVP
 
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image15.png)
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image12.png)
 
-_Source: archive/converted-prd/oboss/mvp/assets/media/image15.png_
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image12.png_
+
+### \ AIX\ OBOSS MVP
+
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image13.png)
+
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image13.png_
+
+### \ AIX\ OBOSS MVP
+
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image14.png)
+
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image14.png_
+
+### \ AIX\ OBOSS MVP
+
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image15.png)
+
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image15.png_
 
 ### Notification center
 
-![Notification center](../../archive/converted-prd/oboss/mvp/assets/media/image16.png)
+![Notification center](../../archive/legacy-prd/oboss/mvp/assets/media/image16.png)
 
-_Source: archive/converted-prd/oboss/mvp/assets/media/image16.png_
-
-### \ AIX\ OBOSS MVP
-
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image17.png)
-
-_Source: archive/converted-prd/oboss/mvp/assets/media/image17.png_
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image16.png_
 
 ### \ AIX\ OBOSS MVP
 
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image19.png)
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image17.png)
 
-_Source: archive/converted-prd/oboss/mvp/assets/media/image19.png_
-
-### \ AIX\ OBOSS MVP
-
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image20.png)
-
-_Source: archive/converted-prd/oboss/mvp/assets/media/image20.png_
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image17.png_
 
 ### \ AIX\ OBOSS MVP
 
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image21.png)
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image19.png)
 
-_Source: archive/converted-prd/oboss/mvp/assets/media/image21.png_
-
-### \ AIX\ OBOSS MVP
-
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image22.png)
-
-_Source: archive/converted-prd/oboss/mvp/assets/media/image22.png_
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image19.png_
 
 ### \ AIX\ OBOSS MVP
 
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image23.png)
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image20.png)
 
-_Source: archive/converted-prd/oboss/mvp/assets/media/image23.png_
-
-### \ AIX\ OBOSS MVP
-
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image24.png)
-
-_Source: archive/converted-prd/oboss/mvp/assets/media/image24.png_
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image20.png_
 
 ### \ AIX\ OBOSS MVP
 
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image25.png)
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image21.png)
 
-_Source: archive/converted-prd/oboss/mvp/assets/media/image25.png_
-
-### \ AIX\ OBOSS MVP
-
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image26.png)
-
-_Source: archive/converted-prd/oboss/mvp/assets/media/image26.png_
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image21.png_
 
 ### \ AIX\ OBOSS MVP
 
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image27.png)
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image22.png)
 
-_Source: archive/converted-prd/oboss/mvp/assets/media/image27.png_
-
-### \ AIX\ OBOSS MVP
-
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image28.png)
-
-_Source: archive/converted-prd/oboss/mvp/assets/media/image28.png_
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image22.png_
 
 ### \ AIX\ OBOSS MVP
 
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image29.png)
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image23.png)
 
-_Source: archive/converted-prd/oboss/mvp/assets/media/image29.png_
-
-### \ AIX\ OBOSS MVP
-
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image30.png)
-
-_Source: archive/converted-prd/oboss/mvp/assets/media/image30.png_
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image23.png_
 
 ### \ AIX\ OBOSS MVP
 
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image31.png)
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image24.png)
 
-_Source: archive/converted-prd/oboss/mvp/assets/media/image31.png_
-
-### \ AIX\ OBOSS MVP
-
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image32.png)
-
-_Source: archive/converted-prd/oboss/mvp/assets/media/image32.png_
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image24.png_
 
 ### \ AIX\ OBOSS MVP
 
-![\ AIX\ OBOSS MVP](../../archive/converted-prd/oboss/mvp/assets/media/image33.png)
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image25.png)
 
-_Source: archive/converted-prd/oboss/mvp/assets/media/image33.png_
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image25.png_
+
+### \ AIX\ OBOSS MVP
+
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image26.png)
+
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image26.png_
+
+### \ AIX\ OBOSS MVP
+
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image27.png)
+
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image27.png_
+
+### \ AIX\ OBOSS MVP
+
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image28.png)
+
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image28.png_
+
+### \ AIX\ OBOSS MVP
+
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image29.png)
+
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image29.png_
+
+### \ AIX\ OBOSS MVP
+
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image30.png)
+
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image30.png_
+
+### \ AIX\ OBOSS MVP
+
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image31.png)
+
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image31.png_
+
+### \ AIX\ OBOSS MVP
+
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image32.png)
+
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image32.png_
+
+### \ AIX\ OBOSS MVP
+
+![\ AIX\ OBOSS MVP](../../archive/legacy-prd/oboss/mvp/assets/media/image33.png)
+
+_Source: archive/legacy-prd/oboss/mvp/assets/media/image33.png_
 
 
 ## 3. 使用规则

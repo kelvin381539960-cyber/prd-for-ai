@@ -3,7 +3,7 @@ module: supporting-visuals
 feature: card-application
 version: "1.0"
 status: visual_only
-source_doc: archive/converted-prd/card/application
+source_doc: archive/legacy-prd/card/application
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,75 +19,75 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 1. 4. Card申请单状态
 
-![4. Card申请单状态](../../archive/converted-prd/card/application/assets/media/image1.jpeg)
+![4. Card申请单状态](../../archive/legacy-prd/card/application/assets/media/image1.jpeg)
 
-_Source: archive/converted-prd/card/application/assets/media/image1.jpeg_
+_Source: archive/legacy-prd/card/application/assets/media/image1.jpeg_
 
 ### 2. 6. AIX前端功能需求
 
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image37.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image37.png)
 
-_Source: archive/converted-prd/card/application/assets/media/image37.png_
+_Source: archive/legacy-prd/card/application/assets/media/image37.png_
 
 ### 3. 6. AIX前端功能需求
 
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image38.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image38.png)
 
-_Source: archive/converted-prd/card/application/assets/media/image38.png_
+_Source: archive/legacy-prd/card/application/assets/media/image38.png_
 
 ### 4. 6. AIX前端功能需求
 
-![6. AIX前端功能需求](../../archive/converted-prd/card/application/assets/media/image39.png)
+![6. AIX前端功能需求](../../archive/legacy-prd/card/application/assets/media/image39.png)
 
-_Source: archive/converted-prd/card/application/assets/media/image39.png_
+_Source: archive/legacy-prd/card/application/assets/media/image39.png_
 
 ### 5. Activate card
 
-![Activate card](../../archive/converted-prd/card/application/assets/media/image54.png)
+![Activate card](../../archive/legacy-prd/card/application/assets/media/image54.png)
 
-_Source: archive/converted-prd/card/application/assets/media/image54.png_
+_Source: archive/legacy-prd/card/application/assets/media/image54.png_
 
 ### 6. 7. DTC渠道接口需求
 
-![7. DTC渠道接口需求](../../archive/converted-prd/card/application/assets/media/image55.jpeg)
+![7. DTC渠道接口需求](../../archive/legacy-prd/card/application/assets/media/image55.jpeg)
 
-_Source: archive/converted-prd/card/application/assets/media/image55.jpeg_
+_Source: archive/legacy-prd/card/application/assets/media/image55.jpeg_
 
 ### 7. 7. DTC渠道接口需求
 
-![7. DTC渠道接口需求](../../archive/converted-prd/card/application/assets/media/image56.jpeg)
+![7. DTC渠道接口需求](../../archive/legacy-prd/card/application/assets/media/image56.jpeg)
 
-_Source: archive/converted-prd/card/application/assets/media/image56.jpeg_
+_Source: archive/legacy-prd/card/application/assets/media/image56.jpeg_
 
 ### 8. 7. DTC渠道接口需求
 
-![7. DTC渠道接口需求](../../archive/converted-prd/card/application/assets/media/image57.jpeg)
+![7. DTC渠道接口需求](../../archive/legacy-prd/card/application/assets/media/image57.jpeg)
 
-_Source: archive/converted-prd/card/application/assets/media/image57.jpeg_
+_Source: archive/legacy-prd/card/application/assets/media/image57.jpeg_
 
 ### 9. 7. DTC渠道接口需求
 
-![7. DTC渠道接口需求](../../archive/converted-prd/card/application/assets/media/image58.jpeg)
+![7. DTC渠道接口需求](../../archive/legacy-prd/card/application/assets/media/image58.jpeg)
 
-_Source: archive/converted-prd/card/application/assets/media/image58.jpeg_
+_Source: archive/legacy-prd/card/application/assets/media/image58.jpeg_
 
 ### 10. 7. DTC渠道接口需求
 
-![7. DTC渠道接口需求](../../archive/converted-prd/card/application/assets/media/image59.jpeg)
+![7. DTC渠道接口需求](../../archive/legacy-prd/card/application/assets/media/image59.jpeg)
 
-_Source: archive/converted-prd/card/application/assets/media/image59.jpeg_
+_Source: archive/legacy-prd/card/application/assets/media/image59.jpeg_
 
 ### 11. 7. DTC渠道接口需求
 
-![7. DTC渠道接口需求](../../archive/converted-prd/card/application/assets/media/image60.jpeg)
+![7. DTC渠道接口需求](../../archive/legacy-prd/card/application/assets/media/image60.jpeg)
 
-_Source: archive/converted-prd/card/application/assets/media/image60.jpeg_
+_Source: archive/legacy-prd/card/application/assets/media/image60.jpeg_
 
 ### 12. 7. DTC渠道接口需求
 
-![7. DTC渠道接口需求](../../archive/converted-prd/card/application/assets/media/image61.jpeg)
+![7. DTC渠道接口需求](../../archive/legacy-prd/card/application/assets/media/image61.jpeg)
 
-_Source: archive/converted-prd/card/application/assets/media/image61.jpeg_
+_Source: archive/legacy-prd/card/application/assets/media/image61.jpeg_
 
 
 ## 3. 使用规则

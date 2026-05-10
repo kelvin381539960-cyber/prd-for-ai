@@ -3,7 +3,7 @@ module: non-runtime
 feature: card-me
 version: "1.0"
 status: visual_only
-source_doc: archive/converted-prd/card/me
+source_doc: archive/legacy-prd/card/me
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,105 +19,105 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 1. 需求变更日志
 
-![1. 需求变更日志](../../archive/converted-prd/card/me/assets/media/image1.png)
+![1. 需求变更日志](../../archive/legacy-prd/card/me/assets/media/image1.png)
 
-_Source: archive/converted-prd/card/me/assets/media/image1.png_
+_Source: archive/legacy-prd/card/me/assets/media/image1.png_
 
 ### 1. 需求变更日志
 
-![1. 需求变更日志](../../archive/converted-prd/card/me/assets/media/image2.jpeg)
+![1. 需求变更日志](../../archive/legacy-prd/card/me/assets/media/image2.jpeg)
 
-_Source: archive/converted-prd/card/me/assets/media/image2.jpeg_
+_Source: archive/legacy-prd/card/me/assets/media/image2.jpeg_
 
 ### 4. 功能结构
 
-![4. 功能结构](../../archive/converted-prd/card/me/assets/media/image3.jpeg)
+![4. 功能结构](../../archive/legacy-prd/card/me/assets/media/image3.jpeg)
 
-_Source: archive/converted-prd/card/me/assets/media/image3.jpeg_
-
-### 6. 需求描述
-
-![6. 需求描述](../../archive/converted-prd/card/me/assets/media/image8.png)
-
-_Source: archive/converted-prd/card/me/assets/media/image8.png_
+_Source: archive/legacy-prd/card/me/assets/media/image3.jpeg_
 
 ### 6. 需求描述
 
-![6. 需求描述](../../archive/converted-prd/card/me/assets/media/image9.png)
+![6. 需求描述](../../archive/legacy-prd/card/me/assets/media/image8.png)
 
-_Source: archive/converted-prd/card/me/assets/media/image9.png_
-
-### 6. 需求描述
-
-![6. 需求描述](../../archive/converted-prd/card/me/assets/media/image10.png)
-
-_Source: archive/converted-prd/card/me/assets/media/image10.png_
+_Source: archive/legacy-prd/card/me/assets/media/image8.png_
 
 ### 6. 需求描述
 
-![6. 需求描述](../../archive/converted-prd/card/me/assets/media/image11.png)
+![6. 需求描述](../../archive/legacy-prd/card/me/assets/media/image9.png)
 
-_Source: archive/converted-prd/card/me/assets/media/image11.png_
+_Source: archive/legacy-prd/card/me/assets/media/image9.png_
+
+### 6. 需求描述
+
+![6. 需求描述](../../archive/legacy-prd/card/me/assets/media/image10.png)
+
+_Source: archive/legacy-prd/card/me/assets/media/image10.png_
+
+### 6. 需求描述
+
+![6. 需求描述](../../archive/legacy-prd/card/me/assets/media/image11.png)
+
+_Source: archive/legacy-prd/card/me/assets/media/image11.png_
 
 ### Set Password Page
 
-![Set Password Page](../../archive/converted-prd/card/me/assets/media/image12.png)
+![Set Password Page](../../archive/legacy-prd/card/me/assets/media/image12.png)
 
-_Source: archive/converted-prd/card/me/assets/media/image12.png_
-
-### Set Password Page
-
-![Set Password Page](../../archive/converted-prd/card/me/assets/media/image13.png)
-
-_Source: archive/converted-prd/card/me/assets/media/image13.png_
+_Source: archive/legacy-prd/card/me/assets/media/image12.png_
 
 ### Set Password Page
 
-![Set Password Page](../../archive/converted-prd/card/me/assets/media/image14.png)
+![Set Password Page](../../archive/legacy-prd/card/me/assets/media/image13.png)
 
-_Source: archive/converted-prd/card/me/assets/media/image14.png_
+_Source: archive/legacy-prd/card/me/assets/media/image13.png_
+
+### Set Password Page
+
+![Set Password Page](../../archive/legacy-prd/card/me/assets/media/image14.png)
+
+_Source: archive/legacy-prd/card/me/assets/media/image14.png_
 
 ### Re-enter Password Page
 
-![Re-enter Password Page](../../archive/converted-prd/card/me/assets/media/image15.png)
+![Re-enter Password Page](../../archive/legacy-prd/card/me/assets/media/image15.png)
 
-_Source: archive/converted-prd/card/me/assets/media/image15.png_
-
-### 6. 需求描述
-
-![6. 需求描述](../../archive/converted-prd/card/me/assets/media/image16.jpeg)
-
-_Source: archive/converted-prd/card/me/assets/media/image16.jpeg_
+_Source: archive/legacy-prd/card/me/assets/media/image15.png_
 
 ### 6. 需求描述
 
-![6. 需求描述](../../archive/converted-prd/card/me/assets/media/image17.jpeg)
+![6. 需求描述](../../archive/legacy-prd/card/me/assets/media/image16.jpeg)
 
-_Source: archive/converted-prd/card/me/assets/media/image17.jpeg_
-
-### 6. 需求描述
-
-![6. 需求描述](../../archive/converted-prd/card/me/assets/media/image18.jpeg)
-
-_Source: archive/converted-prd/card/me/assets/media/image18.jpeg_
+_Source: archive/legacy-prd/card/me/assets/media/image16.jpeg_
 
 ### 6. 需求描述
 
-![6. 需求描述](../../archive/converted-prd/card/me/assets/media/image19.jpeg)
+![6. 需求描述](../../archive/legacy-prd/card/me/assets/media/image17.jpeg)
 
-_Source: archive/converted-prd/card/me/assets/media/image19.jpeg_
-
-### 6. 需求描述
-
-![6. 需求描述](../../archive/converted-prd/card/me/assets/media/image23.jpeg)
-
-_Source: archive/converted-prd/card/me/assets/media/image23.jpeg_
+_Source: archive/legacy-prd/card/me/assets/media/image17.jpeg_
 
 ### 6. 需求描述
 
-![6. 需求描述](../../archive/converted-prd/card/me/assets/media/image25.png)
+![6. 需求描述](../../archive/legacy-prd/card/me/assets/media/image18.jpeg)
 
-_Source: archive/converted-prd/card/me/assets/media/image25.png_
+_Source: archive/legacy-prd/card/me/assets/media/image18.jpeg_
+
+### 6. 需求描述
+
+![6. 需求描述](../../archive/legacy-prd/card/me/assets/media/image19.jpeg)
+
+_Source: archive/legacy-prd/card/me/assets/media/image19.jpeg_
+
+### 6. 需求描述
+
+![6. 需求描述](../../archive/legacy-prd/card/me/assets/media/image23.jpeg)
+
+_Source: archive/legacy-prd/card/me/assets/media/image23.jpeg_
+
+### 6. 需求描述
+
+![6. 需求描述](../../archive/legacy-prd/card/me/assets/media/image25.png)
+
+_Source: archive/legacy-prd/card/me/assets/media/image25.png_
 
 
 ## 3. 使用规则

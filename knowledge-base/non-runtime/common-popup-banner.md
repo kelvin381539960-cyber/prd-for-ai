@@ -3,7 +3,7 @@ module: non-runtime
 feature: common-popup-banner
 version: "1.0"
 status: visual_only
-source_doc: archive/converted-prd/common/popup-banner
+source_doc: archive/legacy-prd/common/popup-banner
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,123 +19,123 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
 
-![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/converted-prd/common/popup-banner/assets/media/image1.png)
+![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/legacy-prd/common/popup-banner/assets/media/image1.png)
 
-_Source: archive/converted-prd/common/popup-banner/assets/media/image1.png_
-
-### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
-
-![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/converted-prd/common/popup-banner/assets/media/image2.png)
-
-_Source: archive/converted-prd/common/popup-banner/assets/media/image2.png_
+_Source: archive/legacy-prd/common/popup-banner/assets/media/image1.png_
 
 ### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
 
-![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/converted-prd/common/popup-banner/assets/media/image3.png)
+![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/legacy-prd/common/popup-banner/assets/media/image2.png)
 
-_Source: archive/converted-prd/common/popup-banner/assets/media/image3.png_
-
-### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
-
-![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/converted-prd/common/popup-banner/assets/media/image4.png)
-
-_Source: archive/converted-prd/common/popup-banner/assets/media/image4.png_
+_Source: archive/legacy-prd/common/popup-banner/assets/media/image2.png_
 
 ### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
 
-![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/converted-prd/common/popup-banner/assets/media/image5.png)
+![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/legacy-prd/common/popup-banner/assets/media/image3.png)
 
-_Source: archive/converted-prd/common/popup-banner/assets/media/image5.png_
-
-### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
-
-![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/converted-prd/common/popup-banner/assets/media/image6.png)
-
-_Source: archive/converted-prd/common/popup-banner/assets/media/image6.png_
+_Source: archive/legacy-prd/common/popup-banner/assets/media/image3.png_
 
 ### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
 
-![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/converted-prd/common/popup-banner/assets/media/image7.png)
+![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/legacy-prd/common/popup-banner/assets/media/image4.png)
 
-_Source: archive/converted-prd/common/popup-banner/assets/media/image7.png_
-
-### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
-
-![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/converted-prd/common/popup-banner/assets/media/image8.png)
-
-_Source: archive/converted-prd/common/popup-banner/assets/media/image8.png_
+_Source: archive/legacy-prd/common/popup-banner/assets/media/image4.png_
 
 ### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
 
-![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/converted-prd/common/popup-banner/assets/media/image9.png)
+![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/legacy-prd/common/popup-banner/assets/media/image5.png)
 
-_Source: archive/converted-prd/common/popup-banner/assets/media/image9.png_
-
-### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
-
-![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/converted-prd/common/popup-banner/assets/media/image10.png)
-
-_Source: archive/converted-prd/common/popup-banner/assets/media/image10.png_
+_Source: archive/legacy-prd/common/popup-banner/assets/media/image5.png_
 
 ### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
 
-![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/converted-prd/common/popup-banner/assets/media/image11.png)
+![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/legacy-prd/common/popup-banner/assets/media/image6.png)
 
-_Source: archive/converted-prd/common/popup-banner/assets/media/image11.png_
-
-### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
-
-![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/converted-prd/common/popup-banner/assets/media/image12.png)
-
-_Source: archive/converted-prd/common/popup-banner/assets/media/image12.png_
+_Source: archive/legacy-prd/common/popup-banner/assets/media/image6.png_
 
 ### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
 
-![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/converted-prd/common/popup-banner/assets/media/image13.jpeg)
+![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/legacy-prd/common/popup-banner/assets/media/image7.png)
 
-_Source: archive/converted-prd/common/popup-banner/assets/media/image13.jpeg_
-
-### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
-
-![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/converted-prd/common/popup-banner/assets/media/image14.png)
-
-_Source: archive/converted-prd/common/popup-banner/assets/media/image14.png_
+_Source: archive/legacy-prd/common/popup-banner/assets/media/image7.png_
 
 ### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
 
-![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/converted-prd/common/popup-banner/assets/media/image15.png)
+![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/legacy-prd/common/popup-banner/assets/media/image8.png)
 
-_Source: archive/converted-prd/common/popup-banner/assets/media/image15.png_
-
-### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
-
-![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/converted-prd/common/popup-banner/assets/media/image16.png)
-
-_Source: archive/converted-prd/common/popup-banner/assets/media/image16.png_
+_Source: archive/legacy-prd/common/popup-banner/assets/media/image8.png_
 
 ### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
 
-![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/converted-prd/common/popup-banner/assets/media/image17.png)
+![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/legacy-prd/common/popup-banner/assets/media/image9.png)
 
-_Source: archive/converted-prd/common/popup-banner/assets/media/image17.png_
-
-### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
-
-![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/converted-prd/common/popup-banner/assets/media/image18.png)
-
-_Source: archive/converted-prd/common/popup-banner/assets/media/image18.png_
+_Source: archive/legacy-prd/common/popup-banner/assets/media/image9.png_
 
 ### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
 
-![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/converted-prd/common/popup-banner/assets/media/image19.jpeg)
+![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/legacy-prd/common/popup-banner/assets/media/image10.png)
 
-_Source: archive/converted-prd/common/popup-banner/assets/media/image19.jpeg_
+_Source: archive/legacy-prd/common/popup-banner/assets/media/image10.png_
 
 ### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
 
-![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/converted-prd/common/popup-banner/assets/media/image20.png)
+![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/legacy-prd/common/popup-banner/assets/media/image11.png)
 
-_Source: archive/converted-prd/common/popup-banner/assets/media/image20.png_
+_Source: archive/legacy-prd/common/popup-banner/assets/media/image11.png_
+
+### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
+
+![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/legacy-prd/common/popup-banner/assets/media/image12.png)
+
+_Source: archive/legacy-prd/common/popup-banner/assets/media/image12.png_
+
+### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
+
+![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/legacy-prd/common/popup-banner/assets/media/image13.jpeg)
+
+_Source: archive/legacy-prd/common/popup-banner/assets/media/image13.jpeg_
+
+### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
+
+![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/legacy-prd/common/popup-banner/assets/media/image14.png)
+
+_Source: archive/legacy-prd/common/popup-banner/assets/media/image14.png_
+
+### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
+
+![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/legacy-prd/common/popup-banner/assets/media/image15.png)
+
+_Source: archive/legacy-prd/common/popup-banner/assets/media/image15.png_
+
+### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
+
+![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/legacy-prd/common/popup-banner/assets/media/image16.png)
+
+_Source: archive/legacy-prd/common/popup-banner/assets/media/image16.png_
+
+### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
+
+![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/legacy-prd/common/popup-banner/assets/media/image17.png)
+
+_Source: archive/legacy-prd/common/popup-banner/assets/media/image17.png_
+
+### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
+
+![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/legacy-prd/common/popup-banner/assets/media/image18.png)
+
+_Source: archive/legacy-prd/common/popup-banner/assets/media/image18.png_
+
+### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
+
+![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/legacy-prd/common/popup-banner/assets/media/image19.jpeg)
+
+_Source: archive/legacy-prd/common/popup-banner/assets/media/image19.jpeg_
+
+### \ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】
+
+![\ 2025-11-27\ AIX+PopUp+banner等能力接入【首页+MGM页面】](../../archive/legacy-prd/common/popup-banner/assets/media/image20.png)
+
+_Source: archive/legacy-prd/common/popup-banner/assets/media/image20.png_
 
 
 ## 3. 使用规则

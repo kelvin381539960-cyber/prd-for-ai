@@ -4,7 +4,7 @@ feature: status-model
 version: "3.1"
 status: active
 doc_type: ai-readable-prd-translation
-source_doc: archive/converted-prd/app/transaction-history/README.md；archive/converted-prd/card/transaction/README.md；archive/converted-prd/wallet/deposit-send-swap/README.md
+source_doc: archive/legacy-prd/app/transaction-history/README.md；archive/legacy-prd/card/transaction/README.md；archive/legacy-prd/wallet/deposit-send-swap/README.md
 source_section: Transaction & History / Type & Status mapping；Card Transaction；Wallet Deposit/Send/Swap
 last_updated: 2026-05-09
 owner: 吴忆锋

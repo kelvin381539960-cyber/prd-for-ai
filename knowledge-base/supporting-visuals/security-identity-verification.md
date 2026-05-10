@@ -3,7 +3,7 @@ module: supporting-visuals
 feature: security-identity-verification
 version: "1.0"
 status: visual_only
-source_doc: archive/converted-prd/security/identity-verification
+source_doc: archive/legacy-prd/security/identity-verification
 last_updated: 2026-05-09
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -19,21 +19,21 @@ readers: [product, ui, dev, qa, business, ai]
 
 ### 1. 1. 需求变更日志
 
-![1. 需求变更日志](../../archive/converted-prd/security/identity-verification/assets/media/image1.png)
+![1. 需求变更日志](../../archive/legacy-prd/security/identity-verification/assets/media/image1.png)
 
-_Source: archive/converted-prd/security/identity-verification/assets/media/image1.png_
+_Source: archive/legacy-prd/security/identity-verification/assets/media/image1.png_
 
 ### 2. 8. 需求描述
 
-![8. 需求描述](../../archive/converted-prd/security/identity-verification/assets/media/image13.jpeg)
+![8. 需求描述](../../archive/legacy-prd/security/identity-verification/assets/media/image13.jpeg)
 
-_Source: archive/converted-prd/security/identity-verification/assets/media/image13.jpeg_
+_Source: archive/legacy-prd/security/identity-verification/assets/media/image13.jpeg_
 
 ### 3. 8. 需求描述
 
-![8. 需求描述](../../archive/converted-prd/security/identity-verification/assets/media/image19.png)
+![8. 需求描述](../../archive/legacy-prd/security/identity-verification/assets/media/image19.png)
 
-_Source: archive/converted-prd/security/identity-verification/assets/media/image19.png_
+_Source: archive/legacy-prd/security/identity-verification/assets/media/image19.png_
 
 
 ## 3. 使用规则
