@@ -60,9 +60,7 @@ The knowledge base must support:
 9. Every content file should include frontmatter with `visibility`, `language`, and `verification_status`.
 10. This task board is the single source of truth for task status and continuation.
 
-## 4. Recommended Directory Structure
-
-Create this structure:
+## 4. Created Directory Structure
 
 ```text
 customer-support-kb/
@@ -237,66 +235,86 @@ Use this format for files under `customer-support-kb/faq/`:
 
 | ID | Task | Output | Status | Notes |
 |---|---|---|---|---|
-| CSKB-001 | Create `customer-support-kb/` skeleton | Directory and base policy files | not_started | Start here |
-| CSKB-002 | Create answer policy | `customer-support-kb/_answer-policy.md` | not_started | Must prevent source exposure and hallucinated rules |
-| CSKB-003 | Create visibility rules | `customer-support-kb/_visibility-rules.md` | not_started | Separate user-facing vs internal |
-| CSKB-004 | Create verification status definitions | `customer-support-kb/_verification-status.md` | not_started | Default extracted content to draft_pending_review |
-| CSKB-005 | Create handoff rules | `customer-support-kb/_handoff-rules.md` | not_started | Include account, KYC, wallet, card, transaction escalation |
-| CSKB-006 | Create unresolved files | `pending-confirmation.md`, `do-not-answer.md` | not_started | Required before extraction |
-| CSKB-007 | Extract Registration / Login user-facing draft | `user-facing/registration-login.md` and `faq/registration-login-faq.md` | not_started | Use archive internally only |
-| CSKB-008 | Extract Registration / Login internal playbook | `agent-internal/registration-login-playbook.md` | not_started | Include troubleshooting and escalation |
-| CSKB-009 | Extract KYC / Wallet Opening user-facing draft | `user-facing/kyc-wallet-opening.md` and `faq/kyc-faq.md` | not_started | Be conservative on review time and compliance |
-| CSKB-010 | Extract KYC internal playbook | `agent-internal/kyc-wallet-opening-playbook.md` | not_started | Do not expose compliance logic |
-| CSKB-011 | Extract Wallet Asset user-facing draft | `user-facing/wallet-asset.md` | not_started | Do not invent supported assets |
-| CSKB-012 | Extract Wallet Deposit / Send / Swap user-facing draft | `user-facing/wallet-deposit-send-swap.md` and `faq/wallet-faq.md` | not_started | Send/Swap may need confirmation |
-| CSKB-013 | Extract Wallet internal playbook | `agent-internal/wallet-playbook.md` | not_started | Include deposit-not-arrived and asset-balance issues |
-| CSKB-014 | Extract Card user-facing draft | `user-facing/card-application-manage.md` and `faq/card-faq.md` | not_started | Do not invent card availability, limits, fees |
-| CSKB-015 | Extract Card internal playbook | `agent-internal/card-playbook.md` | not_started | Include application, freeze, failed transaction, card management |
-| CSKB-016 | Extract Transaction History user-facing draft | `user-facing/transaction-history.md` and `faq/transaction-faq.md` | not_started | Be conservative on status definitions |
-| CSKB-017 | Extract Transaction internal playbook | `agent-internal/transaction-playbook.md` | not_started | Include pending, failed, completed, missing transaction |
-| CSKB-018 | Extract Notification / System Email user-facing draft | `user-facing/notification-system-email.md` and `faq/notification-faq.md` | not_started | Include push, inbox, email issues |
-| CSKB-019 | Extract Notification internal playbook | `agent-internal/notification-playbook.md` | not_started | Include user checks and escalation |
-| CSKB-020 | Extract Website / Waitlist FAQ draft | `user-facing/website-faq.md` and `faq/website-faq.md` | not_started | P2 priority |
-| CSKB-021 | Create general FAQ index | `faq/faq-index.md` and `user-facing/general-faq.md` | not_started | Summarize common intents |
-| CSKB-022 | Review all files for source leakage | All user-facing and FAQ files | not_started | Remove PRD/archive/source paths from user-visible content |
-| CSKB-023 | Review all files for unsupported claims | All files | not_started | Move uncertain claims to pending-confirmation |
-| CSKB-024 | Final consistency pass | Entire `customer-support-kb/` | not_started | Check status labels, visibility, language, handoff rules |
+| CSKB-001 | Create `customer-support-kb/` skeleton | Directory and base policy files | done | Created base directory and policy files |
+| CSKB-002 | Create answer policy | `customer-support-kb/_answer-policy.md` | done | Prevents source exposure and hallucinated rules |
+| CSKB-003 | Create visibility rules | `customer-support-kb/_visibility-rules.md` | done | Separates user-facing vs internal |
+| CSKB-004 | Create verification status definitions | `customer-support-kb/_verification-status.md` | done | Default extracted content to draft_pending_review |
+| CSKB-005 | Create handoff rules | `customer-support-kb/_handoff-rules.md` | done | Includes account, KYC, wallet, card, transaction escalation |
+| CSKB-006 | Create unresolved files | `pending-confirmation.md`, `do-not-answer.md` | done | Created before extraction |
+| CSKB-007 | Extract Registration / Login user-facing draft | `user-facing/registration-login.md` and `faq/registration-login-faq.md` | draft_created | Generic safe draft created; still needs archive-based extraction/review |
+| CSKB-008 | Extract Registration / Login internal playbook | `agent-internal/registration-login-playbook.md` | draft_created | Generic safe draft created; still needs archive-based extraction/review |
+| CSKB-009 | Extract KYC / Wallet Opening user-facing draft | `user-facing/kyc-wallet-opening.md` and `faq/kyc-faq.md` | draft_created | Generic safe draft created; still needs archive-based extraction/review |
+| CSKB-010 | Extract KYC internal playbook | `agent-internal/kyc-wallet-opening-playbook.md` | draft_created | Generic safe draft created; compliance details remain unresolved |
+| CSKB-011 | Extract Wallet Asset user-facing draft | `user-facing/wallet-asset.md` | draft_created | Generic safe draft created; supported assets unresolved |
+| CSKB-012 | Extract Wallet Deposit / Send / Swap user-facing draft | `user-facing/wallet-deposit-send-swap.md` and `faq/wallet-faq.md` | draft_created | Generic safe draft created; Send/Swap require confirmation |
+| CSKB-013 | Extract Wallet internal playbook | `agent-internal/wallet-playbook.md` | draft_created | Generic safe draft created |
+| CSKB-014 | Extract Card user-facing draft | `user-facing/card-application-manage.md` and `faq/card-faq.md` | draft_created | Generic safe draft created; card availability, limits, fees unresolved |
+| CSKB-015 | Extract Card internal playbook | `agent-internal/card-playbook.md` | draft_created | Generic safe draft created |
+| CSKB-016 | Extract Transaction History user-facing draft | `user-facing/transaction-history.md` and `faq/transaction-faq.md` | draft_created | Generic safe draft created; status definitions unresolved |
+| CSKB-017 | Extract Transaction internal playbook | `agent-internal/transaction-playbook.md` | draft_created | Generic safe draft created |
+| CSKB-018 | Extract Notification / System Email user-facing draft | `user-facing/notification-system-email.md` and `faq/notification-faq.md` | draft_created | Generic safe draft created; official email/domain rules unresolved |
+| CSKB-019 | Extract Notification internal playbook | `agent-internal/notification-playbook.md` | draft_created | Generic safe draft created |
+| CSKB-020 | Extract Website / Waitlist FAQ draft | `user-facing/website-faq.md` and `faq/website-faq.md` | draft_created | Generic safe draft created; waitlist status unresolved |
+| CSKB-021 | Create general FAQ index | `faq/faq-index.md` and `user-facing/general-faq.md` | done | Created common-intent entry files |
+| CSKB-022 | Review all files for source leakage | All user-facing and FAQ files | pending | Must still run explicit review |
+| CSKB-023 | Review all files for unsupported claims | All files | pending | Must still run explicit review; many details intentionally unresolved |
+| CSKB-024 | Final consistency pass | Entire `customer-support-kb/` | pending | Check status labels, visibility, language, handoff rules |
 
 ## 8. Current Status
 
-Current phase: planning complete, skeleton not yet created.
+Current phase: customer-support-kb skeleton and safe draft templates created.
 
 Completed:
 
 - Confirmed target users, scope, language, visibility split, output directory, and priority modules.
 - Reviewed archive structure enough to identify relevant source directions.
 - Created this task board as the single source of truth.
+- Created `customer-support-kb/` directory structure.
+- Created base policy files:
+  - `README.md`
+  - `_answer-policy.md`
+  - `_visibility-rules.md`
+  - `_verification-status.md`
+  - `_handoff-rules.md`
+- Created unresolved files:
+  - `unresolved/pending-confirmation.md`
+  - `unresolved/do-not-answer.md`
+- Created initial Chinese safe-draft files under:
+  - `user-facing/`
+  - `agent-internal/`
+  - `faq/`
 
 Not yet completed:
 
-- `customer-support-kb/` directory has not been created.
-- No customer support KB content has been extracted yet.
-- No content has been reviewed or confirmed.
+- Content has not been deeply extracted from each archive PRD yet.
+- No content has been business-reviewed or confirmed.
+- Source leakage review is still pending.
+- Unsupported-claim review is still pending.
+- Final consistency pass is still pending.
 
 ## 9. Next Agent Instructions
 
 The next agent should proceed in this order:
 
 1. Read this file first.
-2. Create the `customer-support-kb/` skeleton and base policy files.
-3. Create `unresolved/pending-confirmation.md` and `unresolved/do-not-answer.md` before extracting module content.
-4. Extract P0 modules first:
+2. Treat existing `customer-support-kb/` files as safe draft templates, not final confirmed content.
+3. Start archive-based extraction/review with P0 modules:
    - Registration / Login
    - KYC / Identity Verification / Wallet Opening
    - Wallet Asset
    - Wallet Deposit / Send / Swap
-5. Keep all extracted content in Chinese.
-6. Mark all extracted content as `draft_pending_review` unless there is explicit confirmation.
-7. Do not expose source paths in user-facing answers.
-8. Update this task board after every meaningful change.
+4. Keep all extracted content in Chinese.
+5. Keep all extracted content as `draft_pending_review` unless there is explicit business confirmation.
+6. Do not expose source paths in user-facing answers.
+7. Move uncertain details into `customer-support-kb/unresolved/pending-confirmation.md`.
+8. Move unsafe/non-answerable topics into `customer-support-kb/unresolved/do-not-answer.md`.
+9. Run source leakage review for all `user-facing/` and `faq/` files.
+10. Run unsupported-claim review for all files.
+11. Update this task board after every meaningful change.
 
 ## 10. Change Log
 
 | Date | Change |
 |---|---|
 | 2026-05-10 | Created task board for customer support KB buildout. |
+| 2026-05-10 | Created `customer-support-kb/` skeleton, base policy files, unresolved files, safe user-facing drafts, internal playbooks, and FAQ drafts. |
