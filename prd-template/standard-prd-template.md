@@ -329,28 +329,35 @@ stateDiagram-v2
 
 > 页面相关需求保留本章；纯后端、配置、数据类需求可删除本章。
 
-本章只写页面流转和交互规则：用户怎么进入、看到什么、点了以后去哪、失败怎么处理。  
-页面上能直接看出来的静态布局和文案不重复写。
+### 3.0 颗粒度与写法规则（通用）
 
-### 3.1 页面关系总览图
+- 页面章节按“**同层页面同层表达**”组织，不为单个页面再建“主页面”子章节。
+- 页面内能一两句话说明的内容，写在当前页面说明中；只有复杂弹窗 / 拦截 / 组件 / 状态才拆下级章节。
+- 不复述截图可直接看出的静态信息（纯文案、静态布局、装饰元素）。
+- 每条规则都应可被开发实现、可被测试验证，避免抽象描述。
+- 页面说明优先写四类信息：进入条件、默认展示、用户操作、异常/边界。
+
+### 3.1 页面关系总览图（如有）
+
+> 本图只表达页面间跳转关系，不放接口细节和内部实现。
 
 ```mermaid
 flowchart LR
-  Entry[业务入口]
-  Start[页面 A]
-  Process[页面 B]
+  Entry[入口页]
+  PageA[页面 A]
+  PageB[页面 B]
   Success[成功页]
   Failed[失败页]
 
-  Entry --> Start
-  Start -->|继续| Process
-  Process -->|成功| Success
-  Process -->|失败| Failed
+  Entry --> PageA
+  PageA -->|继续| PageB
+  PageB -->|成功| Success
+  PageB -->|失败| Failed
 ```
 
 ### 3.2 页面：新增 / 改造页面名称
 
-一句话说明本页用途和在链路中的位置。
+一句话说明本页定位：在主链路中的作用、前置来源、后续去向。
 
 <table>
   <tr>
@@ -362,15 +369,16 @@ flowchart LR
       <img src="./assets/path/page-name.svg" width="480" />
     </td>
     <td valign="top">
-      <p><strong>区域 A</strong></p>
+      <p><strong>区域 / 功能点 A</strong></p>
       <ul>
-        <li><strong>默认展示</strong>：默认值、默认状态、来源。</li>
-        <li><strong>用户操作</strong>：点击 / 输入 / 选择后的去向。</li>
-        <li><strong>规则</strong>：需要开发和测试判断的条件。</li>
+        <li><strong>进入前提</strong>：从哪里来，何种状态进入。</li>
+        <li><strong>默认展示</strong>：默认值、默认态、来源。</li>
+        <li><strong>用户操作</strong>：点击 / 输入 / 选择后的结果和跳转。</li>
+        <li><strong>规则</strong>：需要判断对错的业务规则。</li>
       </ul>
-      <p><strong>区域 B</strong></p>
+      <p><strong>区域 / 功能点 B</strong></p>
       <ul>
-        <li>写明触发条件、处理结果和后续跳转。</li>
+        <li>写清触发条件、处理结果、后续节点。</li>
       </ul>
     </td>
   </tr>
@@ -380,7 +388,7 @@ flowchart LR
 
 ### 3.3 页面内下级章节（按需）
 
-当弹窗、拦截态、复杂组件在当前页面写不清楚时，拆下级章节。
+当某部分写在当前页面内会过长或不易读时，拆为下级章节。
 
 #### 3.3.1 弹窗：弹窗名称
 
@@ -396,12 +404,16 @@ flowchart LR
     <td valign="top">
       <p><strong>触发方式</strong></p>
       <ul>
-        <li>用户在页面 A 点击 xxx 后打开弹窗。</li>
+        <li>在页面 A 执行某操作后触发。</li>
       </ul>
       <p><strong>操作结果</strong></p>
       <ul>
         <li>确认：xxx。</li>
-        <li>关闭 / 返回：xxx。</li>
+        <li>取消 / 关闭：xxx。</li>
+      </ul>
+      <p><strong>异常 / 边界</strong></p>
+      <ul>
+        <li>无法完成时的提示和去向。</li>
       </ul>
     </td>
   </tr>
@@ -421,12 +433,11 @@ flowchart LR
     <td valign="top">
       <p><strong>触发方式</strong></p>
       <ul>
-        <li>命中 xxx 条件后触发拦截。</li>
+        <li>命中条件后触发拦截。</li>
       </ul>
       <p><strong>处理结果</strong></p>
       <ul>
-        <li>不允许继续当前流程。</li>
-        <li>用户可选择去页面 B / 返回页面 A。</li>
+        <li>阻断当前流程，给出后续可选路径。</li>
       </ul>
     </td>
   </tr>
@@ -434,7 +445,7 @@ flowchart LR
 
 ### 3.4 复用页面（无改造）
 
-> 复用公共页面时，只写本需求的进入条件和流转结果，不重写公共页面规则。
+> 复用公共页面时，只写本需求相关流转，不重写公共页面规则。
 
 | 场景 | 后续流转 |
 |---|---|
@@ -455,11 +466,11 @@ flowchart LR
     <td valign="top">
       <p><strong>展示内容</strong></p>
       <ul>
-        <li>说明用户当前结果，不夸大为其他能力已开通。</li>
+        <li>仅说明本流程结果，不外推为其他能力状态。</li>
       </ul>
       <p><strong>用户操作</strong></p>
       <ul>
-        <li>主按钮点击后返回业务入口或下一页面。</li>
+        <li>主按钮后续流转、关闭后的返回路径。</li>
       </ul>
     </td>
   </tr>
