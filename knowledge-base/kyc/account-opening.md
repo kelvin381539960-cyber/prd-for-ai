@@ -443,11 +443,15 @@ flowchart LR
     <td valign="top">
       <p><strong>居住国家 / 地区</strong></p>
       <ul>
-        <li>默认值来自 IP 检测；检测不到时默认 SG。</li>
-        <li>点击国家区域，进入 Select Residence Country Page；国家选择细则见 <a href="#44-select-residence-country-page">4.4 Select Residence Country Page</a>。</li>
-        <li>Type = Phase 1：返回本页；协议完成后可继续 KYC。</li>
-        <li>Type = phase 2 - waitlist：返回本页；点击底部认证按钮后进入 waitlist 处理；拦截展示见 <a href="#433-waitlist-拦截展示">4.3.3 Waitlist 拦截展示</a>，提交页细则见 <a href="#45-waitlist-page">4.5 Waitlist Page</a>。</li>
-        <li>Type = Forbiden：国家列表隐藏，不可选择。</li>
+        <li><strong>默认展示</strong>：默认值来自 IP 检测；检测不到时默认 SG。</li>
+        <li><strong>点击国家区域</strong>：进入 Select Residence Country Page；国家选择细则见 <a href="#44-select-residence-country-page">4.4 Select Residence Country Page</a>。
+          <ul>
+            <li><strong>选择结果按国家 Type 判断</strong>：</li>
+            <li>Type = Phase 1：返回本页；协议完成后可继续 KYC。</li>
+            <li>Type = phase 2 - waitlist：返回本页；点击底部认证按钮后进入 waitlist 处理；拦截展示见 <a href="#433-waitlist-拦截展示">4.3.3 Waitlist 拦截展示</a>，提交页细则见 <a href="#45-waitlist-page">4.5 Waitlist Page</a>。</li>
+            <li>Type = Forbiden：国家列表隐藏，不可选择。</li>
+          </ul>
+        </li>
       </ul>
       <p>国家线存在版本口径冲突，见 <code>GAP-KYC-COUNTRY-001</code>。</p>
 
