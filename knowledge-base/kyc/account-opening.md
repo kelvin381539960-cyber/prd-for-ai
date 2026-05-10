@@ -326,50 +326,9 @@ flowchart LR
 
 进入 KYC 时先做状态判断。该页只负责分流，不承载资料填写。
 
-<table>
-  <tr>
-    <th width="48%">页面</th>
-    <th width="52%">说明</th>
-  </tr>
-  <tr>
-    <td valign="top">
-      <img src="_assets/account-opening/image6.jpeg" width="480" />
-    </td>
-    <td valign="top">
-      <p><strong>Loading 状态</strong></p>
-      <ul>
-        <li><strong>进入前提</strong>：用户从业务入口发起 KYC。</li>
-        <li><strong>展示内容</strong>：展示 <code>loading...</code>。</li>
-        <li><strong>系统处理</strong>：查询 KYC 状态和 waitlist 状态。
-          <ul>
-            <li>KYC 状态为 Pending / failed：进入 KYC Start 或后续未完成节点。</li>
-            <li>KYC 状态为 Under review / Rejected / Approved：进入本页的 Verification unavailable 状态。</li>
-            <li>用户在 waitlist 中，且来源渠道为 APP：进入本页的 Verification unavailable 状态，阻止继续 KYC。</li>
-          </ul>
-        </li>
-      </ul>
-
-      <p><strong>Verification unavailable 状态</strong></p>
-      <ul>
-        <li><strong>触发前提</strong>：后端返回 KYC 状态机为 Under review / Rejected / Approved，或用户在 waitlist 中且来源渠道是 APP。</li>
-        <li><strong>展示内容</strong>：展示不可继续认证说明和 <code>Back</code> 按钮。</li>
-        <li><strong>用户操作</strong>：
-          <ul>
-            <li>点击 Back：返回业务入口。</li>
-            <li>点击关闭：关闭当前 KYC 流程。</li>
-          </ul>
-        </li>
-      </ul>
-
-      <p><strong>Loading 异常</strong></p>
-      <ul>
-        <li>网络异常：进入 Network Error Page。</li>
-        <li>服务异常：进入 Server Error Page。</li>
-        <li>30 秒无结果：进入 Loading Failed Page；细则见 <a href="#49-loading-failed-page">4.9 Loading Failed Page</a>。</li>
-      </ul>
-    </td>
-  </tr>
-</table>
+| 页面 | 说明 |
+|---|---|
+| <img src="_assets/account-opening/image6.jpeg" width="480" /> | **Loading 状态**<br>- **进入前提**：用户从业务入口发起 KYC。<br>- **展示内容**：展示 `loading...`。<br>- **系统处理**：查询 KYC 状态和 waitlist 状态。<br>  - KYC 状态为 Pending / failed：进入 KYC Start 或后续未完成节点。<br>  - KYC 状态为 Under review / Rejected / Approved：进入本页的 Verification unavailable 状态。<br>  - 用户在 waitlist 中，且来源渠道为 APP：进入本页的 Verification unavailable 状态，阻止继续 KYC。<br>**Verification unavailable 状态**<br>- **触发前提**：后端返回 KYC 状态机为 Under review / Rejected / Approved，或用户在 waitlist 中且来源渠道是 APP。<br>- **展示内容**：展示不可继续认证说明和 `Back` 按钮。<br>- **用户操作**：<br>  - 点击 Back：返回业务入口。<br>  - 点击关闭：关闭当前 KYC 流程。<br>**Loading 异常**<br>- 网络异常：进入 Network Error Page。<br>- 服务异常：进入 Server Error Page。<br>- 30 秒无结果：进入 Loading Failed Page；细则见 [4.9 Loading Failed Page](#49-loading-failed-page)。 |
 
 关联：`KYC-LOADING-001 ~ KYC-LOADING-010`；Source：AIX KYC PRD 7.2.2。
 
@@ -379,125 +338,21 @@ flowchart LR
 
 用户在本页选择居住国家、确认协议，并通过底部认证按钮进入身份认证流程。
 
-<table>
-  <tr>
-    <th width="48%">页面</th>
-    <th width="52%">说明</th>
-  </tr>
-  <tr>
-    <td valign="top">
-      <img src="_assets/account-opening/image7.png" width="480" />
-    </td>
-    <td valign="top">
-      <p><strong>居住国家 / 地区</strong></p>
-      <ul>
-        <li><strong>默认展示</strong>：默认值来自 IP 检测；检测不到时默认 SG。</li>
-        <li><strong>点击国家区域</strong>：进入 Select Residence Country Page；国家选择细则见 <a href="#44-select-residence-country-page">4.4 Select Residence Country Page</a>。
-          <ul>
-            <li><strong>选择结果按国家 Type 判断</strong>：</li>
-            <li>Type = Phase 1：返回本页；协议完成后可继续 KYC。</li>
-            <li>Type = phase 2 - waitlist：返回本页；点击底部认证按钮后触发本页 Waitlist 拦截；拦截展示见 <a href="#432-拦截waitlist">4.3.2 拦截：Waitlist</a>，提交页细则见 <a href="#45-waitlist-page">4.5 Waitlist Page</a>。</li>
-            <li>Type = Forbiden：国家列表隐藏，不可选择。</li>
-          </ul>
-        </li>
-      </ul>
-      <p>国家线存在版本口径冲突，见 <code>GAP-KYC-COUNTRY-001</code>。</p>
-
-      <p><strong>协议区</strong></p>
-      <ul>
-        <li>Terms / Privacy：可直接勾选，无需强制阅读；需保存用户同意并提交的时间。</li>
-        <li>Declaration：点击后打开 Declaration 弹窗 / 阅读页；完成规则见 <a href="#431-弹窗declaration-of-reverse-solicitation">4.3.1 弹窗：Declaration of Reverse Solicitation</a>。</li>
-        <li>任一必选协议未完成：底部认证按钮灰色，不可点击。</li>
-        <li>所有必选协议完成：底部认证按钮高亮，可点击。</li>
-        <li>无法获取协议：Toast <code>Something went wrong. Please try again later</code>，不允许继续。</li>
-      </ul>
-
-      <p><strong>底部认证按钮</strong></p>
-      <p>原 PRD 中称 <code>立即认证 / Continue / Verify</code>，具体文案以 UI 为准。</p>
-      <ul>
-        <li><strong>点击前提</strong>：所有必选协议完成。</li>
-        <li><strong>点击后处理</strong>：
-          <ul>
-            <li>协议完成 + 国家 Type = Phase 1：保存协议相关信息，进入 Identity Verify；后续细则见 <a href="#46-identity-verify-page">4.6 Identity Verify Page</a>。</li>
-            <li>协议完成 + 国家 Type = phase 2 - waitlist：不进入 Identity Verify，触发 waitlist 拦截；见 <a href="#432-拦截waitlist">4.3.2 拦截：Waitlist</a>。</li>
-            <li>协议保存失败：不推进流程，应阻止继续；源文档未明确“勾选即保存”还是“点击底部认证按钮统一保存”，实现时需以后端接口约定为准。</li>
-          </ul>
-        </li>
-      </ul>
-
-      <p><strong>入口边界</strong></p>
-      <ul>
-        <li>手机号已绑定：直接进入 Start Page，不展示额外绑定成功 toast。</li>
-        <li>手机号未绑定：本页流程未确认，见 <code>GAP-KYC-PHONE-001</code>。</li>
-      </ul>
-    </td>
-  </tr>
-</table>
+| 页面 | 说明 |
+|---|---|
+| <img src="_assets/account-opening/image7.png" width="480" /> | **居住国家 / 地区**<br>- **默认展示**：默认值来自 IP 检测；检测不到时默认 SG。<br>- **点击国家区域**：进入 Select Residence Country Page；国家选择细则见 [4.4 Select Residence Country Page](#44-select-residence-country-page)。<br>  - **选择结果按国家 Type 判断**：<br>  - Type = Phase 1：返回本页；协议完成后可继续 KYC。<br>  - Type = phase 2 - waitlist：返回本页；点击底部认证按钮后触发本页 Waitlist 拦截；拦截展示见 [4.3.2 拦截：Waitlist](#432-拦截waitlist)，提交页细则见 [4.5 Waitlist Page](#45-waitlist-page)。<br>  - Type = Forbiden：国家列表隐藏，不可选择。<br>国家线存在版本口径冲突，见 `GAP-KYC-COUNTRY-001`。<br><br>      **协议区**<br>- Terms / Privacy：可直接勾选，无需强制阅读；需保存用户同意并提交的时间。<br>- Declaration：点击后打开 Declaration 弹窗 / 阅读页；完成规则见 [4.3.1 弹窗：Declaration of Reverse Solicitation](#431-弹窗declaration-of-reverse-solicitation)。<br>- 任一必选协议未完成：底部认证按钮灰色，不可点击。<br>- 所有必选协议完成：底部认证按钮高亮，可点击。<br>- 无法获取协议：Toast `Something went wrong. Please try again later`，不允许继续。<br>**底部认证按钮**<br><br>      原 PRD 中称 `立即认证 / Continue / Verify`，具体文案以 UI 为准。<br>- **点击前提**：所有必选协议完成。<br>- **点击后处理**：<br>  - 协议完成 + 国家 Type = Phase 1：保存协议相关信息，进入 Identity Verify；后续细则见 [4.6 Identity Verify Page](#46-identity-verify-page)。<br>  - 协议完成 + 国家 Type = phase 2 - waitlist：不进入 Identity Verify，触发 waitlist 拦截；见 [4.3.2 拦截：Waitlist](#432-拦截waitlist)。<br>  - 协议保存失败：不推进流程，应阻止继续；源文档未明确“勾选即保存”还是“点击底部认证按钮统一保存”，实现时需以后端接口约定为准。<br>**入口边界**<br>- 手机号已绑定：直接进入 Start Page，不展示额外绑定成功 toast。<br>- 手机号未绑定：本页流程未确认，见 `GAP-KYC-PHONE-001`。 |
 
 #### 4.3.1 弹窗：Declaration of Reverse Solicitation
 
-<table>
-  <tr>
-    <th width="48%">页面</th>
-    <th width="52%">说明</th>
-  </tr>
-  <tr>
-    <td valign="top">
-      <img src="_assets/account-opening/image9.png" width="480" />
-    </td>
-    <td valign="top">
-      <p><strong>触发方式</strong></p>
-      <p>用户在 KYC Start Page 点击 Declaration 协议项后展示。</p>
-
-      <p><strong>弹窗内操作</strong></p>
-      <ul>
-        <li>点击 <code>I agree</code>：关闭弹窗，Declaration 变为已完成。</li>
-        <li>关闭 / 返回：关闭弹窗，Declaration 不算完成，底部认证按钮仍按协议未完成处理。</li>
-      </ul>
-
-      <p><strong>保存要求与边界</strong></p>
-      <ul>
-        <li>保存 Declaration 内容。</li>
-        <li>保存用户同意时间。</li>
-        <li>影响 DTC <code>reverseSolicitation</code> 入参。</li>
-        <li>需要反向招揽声明的国家，应传 <code>reverseSolicitation=T</code>；缺失时 DTC 可能返回 <code>50013</code>。</li>
-        <li>Reverse Solicitation 缺失：阻止生成验证 URL，需补声明后再继续；错误码细则见 <a href="#52-get-verification-url-错误码">5.2 get-verification-url 错误码</a>。</li>
-      </ul>
-    </td>
-  </tr>
-</table>
+| 页面 | 说明 |
+|---|---|
+| <img src="_assets/account-opening/image9.png" width="480" /> | **触发方式**<br><br>      用户在 KYC Start Page 点击 Declaration 协议项后展示。<br><br>      **弹窗内操作**<br>- 点击 `I agree`：关闭弹窗，Declaration 变为已完成。<br>- 关闭 / 返回：关闭弹窗，Declaration 不算完成，底部认证按钮仍按协议未完成处理。<br>**保存要求与边界**<br>- 保存 Declaration 内容。<br>- 保存用户同意时间。<br>- 影响 DTC `reverseSolicitation` 入参。<br>- 需要反向招揽声明的国家，应传 `reverseSolicitation=T`；缺失时 DTC 可能返回 `50013`。<br>- Reverse Solicitation 缺失：阻止生成验证 URL，需补声明后再继续；错误码细则见 [5.2 get-verification-url 错误码](#52-get-verification-url-错误码)。 |
 
 #### 4.3.2 拦截：Waitlist
 
-<table>
-  <tr>
-    <th width="48%">页面</th>
-    <th width="52%">说明</th>
-  </tr>
-  <tr>
-    <td valign="top">
-      <img src="_assets/account-opening/image10.png" width="480" />
-    </td>
-    <td valign="top">
-      <p><strong>触发方式</strong></p>
-      <p>用户在 KYC Start Page 点击底部认证按钮后，后端判断所选国家不支持继续 KYC。</p>
-
-      <p><strong>拦截状态</strong></p>
-      <ul>
-        <li><strong>处理结果</strong>：不允许进入 Identity Verify。</li>
-        <li><strong>用户操作</strong>：
-          <ul>
-            <li>点击 Join waitlist：进入 Waitlist Page；提交细则见 <a href="#45-waitlist-page">4.5 Waitlist Page</a>。</li>
-            <li>返回：源文档未明确返回目标。当前仅确认用户不能进入 Identity Verify；返回 KYC Start 还是业务流程入口需以最新 UI / 产品确认为准。</li>
-          </ul>
-        </li>
-      </ul>
-
-      <p><strong>展示边界</strong></p>
-      <p>源文档同时出现“弹窗拦截”描述和“waitlist 调整为页面级拦截”的变更记录。当前文档只确认结果：用户不能继续 KYC，并可进入 Waitlist Page；具体展示形态以最新 UI 为准。</p>
-    </td>
-  </tr>
-</table>
+| 页面 | 说明 |
+|---|---|
+| <img src="_assets/account-opening/image10.png" width="480" /> | **触发方式**<br><br>      用户在 KYC Start Page 点击底部认证按钮后，后端判断所选国家不支持继续 KYC。<br><br>      **拦截状态**<br>- **处理结果**：不允许进入 Identity Verify。<br>- **用户操作**：<br>  - 点击 Join waitlist：进入 Waitlist Page；提交细则见 [4.5 Waitlist Page](#45-waitlist-page)。<br>  - 返回：源文档未明确返回目标。当前仅确认用户不能进入 Identity Verify；返回 KYC Start 还是业务流程入口需以最新 UI / 产品确认为准。<br>**展示边界**<br><br>      源文档同时出现“弹窗拦截”描述和“waitlist 调整为页面级拦截”的变更记录。当前文档只确认结果：用户不能继续 KYC，并可进入 Waitlist Page；具体展示形态以最新 UI 为准。 |
 
 协议快照需在提交成功后生成并与用户账户绑定。关联：`KYC-START-001 ~ KYC-START-010`；Source：AIX KYC PRD 7.2.3、Master sub account。
 
@@ -507,55 +362,9 @@ flowchart LR
 
 用于选择或修改居住国家。来源可能是 KYC Start，也可能是 Address Upload。
 
-<table>
-  <tr>
-    <th width="48%">页面</th>
-    <th width="52%">说明</th>
-  </tr>
-  <tr>
-    <td valign="top">
-      <img src="_assets/account-opening/image11.png" width="480" />
-      <br><br>
-      <img src="_assets/account-opening/image12.png" width="480" />
-    </td>
-    <td valign="top">
-      <p><strong>默认国家列表状态</strong></p>
-      <ul>
-        <li><strong>进入前提</strong>：用户从 KYC Start 或 Address Upload 点击国家 / Residence 区域进入本页。</li>
-        <li><strong>默认展示</strong>：
-          <ul>
-            <li>IP 可识别国家：默认展示 IP 国家。</li>
-            <li>IP 不可识别国家：默认展示 SG。</li>
-          </ul>
-        </li>
-        <li><strong>列表规则</strong>：
-          <ul>
-            <li>国家 / 地区按首字母排序。</li>
-            <li>Type = Phase 1：展示，可选择。</li>
-            <li>Type = phase 2 - waitlist：展示，可选择；后续进入 waitlist 判断。</li>
-            <li>Type = Forbiden：隐藏。</li>
-          </ul>
-        </li>
-      </ul>
-
-      <p><strong>搜索状态</strong></p>
-      <ul>
-        <li><strong>触发方式</strong>：用户输入关键词。</li>
-        <li><strong>展示结果</strong>：展示匹配国家。</li>
-        <li><strong>清空关键词</strong>：恢复默认国家列表。</li>
-      </ul>
-
-      <p><strong>选择返回</strong></p>
-      <ul>
-        <li>从 KYC Start 进入：点击国家项后返回 KYC Start，并带回选择结果。</li>
-        <li>从 Address Upload 进入：点击国家项后返回 Address Upload，并带回选择结果。</li>
-        <li>点击关闭 / 返回：返回来源页面，不推进流程。</li>
-      </ul>
-
-      <p>国家线冲突见 <code>GAP-KYC-COUNTRY-001</code>。</p>
-    </td>
-  </tr>
-</table>
+| 页面 | 说明 |
+|---|---|
+| <img src="_assets/account-opening/image11.png" width="480" /><br><br><img src="_assets/account-opening/image12.png" width="480" /> | **默认国家列表状态**<br>- **进入前提**：用户从 KYC Start 或 Address Upload 点击国家 / Residence 区域进入本页。<br>- **默认展示**：<br>  - IP 可识别国家：默认展示 IP 国家。<br>  - IP 不可识别国家：默认展示 SG。<br>- **列表规则**：<br>  - 国家 / 地区按首字母排序。<br>  - Type = Phase 1：展示，可选择。<br>  - Type = phase 2 - waitlist：展示，可选择；后续进入 waitlist 判断。<br>  - Type = Forbiden：隐藏。<br>**搜索状态**<br>- **触发方式**：用户输入关键词。<br>- **展示结果**：展示匹配国家。<br>- **清空关键词**：恢复默认国家列表。<br>**选择返回**<br>- 从 KYC Start 进入：点击国家项后返回 KYC Start，并带回选择结果。<br>- 从 Address Upload 进入：点击国家项后返回 Address Upload，并带回选择结果。<br>- 点击关闭 / 返回：返回来源页面，不推进流程。<br>国家线冲突见 `GAP-KYC-COUNTRY-001`。 |
 
 关联：`KYC-COUNTRY-001 ~ KYC-COUNTRY-009`；Source：AIX KYC PRD 7.2.3.1。
 
@@ -565,49 +374,9 @@ flowchart LR
 
 国家暂不支持开户时进入本页。用户不能继续 KYC，只能提交 waitlist 或返回。
 
-<table>
-  <tr>
-    <th width="48%">页面</th>
-    <th width="52%">说明</th>
-  </tr>
-  <tr>
-    <td valign="top">
-      <img src="_assets/account-opening/image13.png" width="480" />
-    </td>
-    <td valign="top">
-      <p><strong>Email 输入区域</strong></p>
-      <ul>
-        <li><strong>输入校验</strong>：
-          <ul>
-            <li>邮箱为空：展示校验提示，不提交。</li>
-            <li>邮箱格式错误：展示校验提示，不提交。</li>
-            <li>邮箱长度超过 103 字符：展示校验提示，不提交。</li>
-            <li>邮箱格式正确：可提交。</li>
-          </ul>
-        </li>
-      </ul>
-
-      <p><strong>提交按钮</strong></p>
-      <ul>
-        <li><strong>点击前提</strong>：邮箱格式正确。</li>
-        <li><strong>提交成功</strong>：按 userId 加入 waitlist，记录邮箱、国家、来源、提交时间、设备指纹，并推送数仓。</li>
-        <li><strong>提交失败</strong>：
-          <ul>
-            <li>网络异常：Toast <code>Please check your internet connection and try again.</code></li>
-            <li>后端服务器错误：Toast <code>Something went wrong. Please try again later</code></li>
-          </ul>
-        </li>
-      </ul>
-
-      <p><strong>退出</strong></p>
-      <ul>
-        <li>点击关闭 / 返回：历史原文为“返回到业务流程入口页”。若用户从 KYC Start 的 waitlist 拦截进入本页，是否返回 KYC Start 还是业务流程入口，需以最新 UI / 产品确认为准。</li>
-      </ul>
-
-      <p>设备指纹获取失败策略源文档未确认，见 waitlist 数据边界。</p>
-    </td>
-  </tr>
-</table>
+| 页面 | 说明 |
+|---|---|
+| <img src="_assets/account-opening/image13.png" width="480" /> | **Email 输入区域**<br>- **输入校验**：<br>  - 邮箱为空：展示校验提示，不提交。<br>  - 邮箱格式错误：展示校验提示，不提交。<br>  - 邮箱长度超过 103 字符：展示校验提示，不提交。<br>  - 邮箱格式正确：可提交。<br>**提交按钮**<br>- **点击前提**：邮箱格式正确。<br>- **提交成功**：按 userId 加入 waitlist，记录邮箱、国家、来源、提交时间、设备指纹，并推送数仓。<br>- **提交失败**：<br>  - 网络异常：Toast `Please check your internet connection and try again.`<br>  - 后端服务器错误：Toast `Something went wrong. Please try again later`<br>**退出**<br>- 点击关闭 / 返回：历史原文为“返回到业务流程入口页”。若用户从 KYC Start 的 waitlist 拦截进入本页，是否返回 KYC Start 还是业务流程入口，需以最新 UI / 产品确认为准。<br>设备指纹获取失败策略源文档未确认，见 waitlist 数据边界。 |
 
 关联：`KYC-WAITLIST-001 ~ KYC-WAITLIST-010`；Source：AIX KYC PRD 7.2.3.2。
 
@@ -617,74 +386,15 @@ flowchart LR
 
 证件认证入口页。App 负责引导和权限处理，外部 H5 负责护照扫描和 OCR。
 
-<table>
-  <tr>
-    <th width="48%">页面</th>
-    <th width="52%">说明</th>
-  </tr>
-  <tr>
-    <td valign="top">
-      <img src="_assets/account-opening/image14.png" width="480" />
-      <br><br>
-      <img src="_assets/account-opening/image15.png" width="480" />
-    </td>
-    <td valign="top">
-      <p><strong>证件扫描入口</strong></p>
-      <ul>
-        <li><strong>点击相机 / 开始扫描</strong>：
-          <ul>
-            <li>有权限：请求 Passport H5 URL。</li>
-            <li>相机未授权 / 永久拒绝：展示权限提示或引导开启权限。</li>
-          </ul>
-        </li>
-        <li><strong>请求 H5 URL 失败</strong>：
-          <ul>
-            <li>DTC 返回 <code>01009</code>：Toast <code>Mobile number already exists.</code>，不进入 H5。</li>
-            <li>DTC 返回 <code>01005</code>：Toast <code>The email address is in use.</code>，不进入 H5。</li>
-            <li>DTC 返回其他 get-verification-url 错误：不进入 H5；错误码含义和已确认前端表现见 <a href="#52-get-verification-url-错误码">5.2 get-verification-url 错误码</a>，未明确前端文案的错误码需后端 / 产品确认。</li>
-          </ul>
-        </li>
-      </ul>
-
-      <p><strong>后续流转</strong></p>
-      <ul>
-        <li>成功获取 H5 URL：进入 Identity Scan H5；细则见 <a href="#461-h5identity-scan-page">4.6.1 H5：Identity Scan Page</a>。</li>
-        <li>Passport OCR 成功：进入 Face Guide Page；细则见 <a href="#47-face-guide-page">4.7 Face Guide Page</a>。</li>
-        <li>Passport OCR 失败：源文档 7.2.5 明确“扫描失败：跳转至 Identity Verify Page”；如后端同时返回 Passport / Document Verification 错误原因，前端文案映射见 <a href="#53-错误码与前端文案映射">5.3 错误码与前端文案映射</a>。</li>
-      </ul>
-    </td>
-  </tr>
-</table>
+| 页面 | 说明 |
+|---|---|
+| <img src="_assets/account-opening/image14.png" width="480" /><br><br><img src="_assets/account-opening/image15.png" width="480" /> | **证件扫描入口**<br>- **点击相机 / 开始扫描**：<br>  - 有权限：请求 Passport H5 URL。<br>  - 相机未授权 / 永久拒绝：展示权限提示或引导开启权限。<br>- **请求 H5 URL 失败**：<br>  - DTC 返回 `01009`：Toast `Mobile number already exists.`，不进入 H5。<br>  - DTC 返回 `01005`：Toast `The email address is in use.`，不进入 H5。<br>  - DTC 返回其他 get-verification-url 错误：不进入 H5；错误码含义和已确认前端表现见 [5.2 get-verification-url 错误码](#52-get-verification-url-错误码)，未明确前端文案的错误码需后端 / 产品确认。<br>**后续流转**<br>- 成功获取 H5 URL：进入 Identity Scan H5；细则见 [4.6.1 H5：Identity Scan Page](#461-h5identity-scan-page)。<br>- Passport OCR 成功：进入 Face Guide Page；细则见 [4.7 Face Guide Page](#47-face-guide-page)。<br>- Passport OCR 失败：源文档 7.2.5 明确“扫描失败：跳转至 Identity Verify Page”；如后端同时返回 Passport / Document Verification 错误原因，前端文案映射见 [5.3 错误码与前端文案映射](#53-错误码与前端文案映射)。 |
 
 #### 4.6.1 H5：Identity Scan Page
 
-<table>
-  <tr>
-    <th width="48%">页面</th>
-    <th width="52%">说明</th>
-  </tr>
-  <tr>
-    <td valign="top">
-      <img src="_assets/account-opening/image16.png" width="480" />
-    </td>
-    <td valign="top">
-      <p><strong>H5 扫描状态</strong></p>
-      <ul>
-        <li><strong>进入前提</strong>：Identity Verify Page 成功获取 Passport H5 URL。</li>
-        <li><strong>用户操作</strong>：在外部 H5 完成护照扫描和 Passport OCR。</li>
-        <li><strong>处理结果</strong>：
-          <ul>
-            <li>用户完成护照扫描：等待 AAI / DTC 返回 OCR 结果。</li>
-            <li>用户取消或返回 H5：返回 Identity Verify Page。</li>
-            <li>Passport OCR 成功：进入 Face Guide Page；细则见 <a href="#47-face-guide-page">4.7 Face Guide Page</a>。</li>
-            <li>Passport OCR 失败：返回 Identity Verify Page；如后端返回 Passport / Document Verification 错误原因，前端文案映射见 <a href="#53-错误码与前端文案映射">5.3 错误码与前端文案映射</a>。</li>
-            <li>H5 URL 过期或不可用：源文档未明确自动重试策略。当前仅确认不能继续使用该 URL；是否重新请求 <code>get-verification-url</code> 或展示接口错误，需要以后端接口约定为准。</li>
-          </ul>
-        </li>
-      </ul>
-    </td>
-  </tr>
-</table>
+| 页面 | 说明 |
+|---|---|
+| <img src="_assets/account-opening/image16.png" width="480" /> | **H5 扫描状态**<br>- **进入前提**：Identity Verify Page 成功获取 Passport H5 URL。<br>- **用户操作**：在外部 H5 完成护照扫描和 Passport OCR。<br>- **处理结果**：<br>  - 用户完成护照扫描：等待 AAI / DTC 返回 OCR 结果。<br>  - 用户取消或返回 H5：返回 Identity Verify Page。<br>  - Passport OCR 成功：进入 Face Guide Page；细则见 [4.7 Face Guide Page](#47-face-guide-page)。<br>  - Passport OCR 失败：返回 Identity Verify Page；如后端返回 Passport / Document Verification 错误原因，前端文案映射见 [5.3 错误码与前端文案映射](#53-错误码与前端文案映射)。<br>  - H5 URL 过期或不可用：源文档未明确自动重试策略。当前仅确认不能继续使用该 URL；是否重新请求 `get-verification-url` 或展示接口错误，需要以后端接口约定为准。 |
 
 关联：`get-verification-url(PASSPORT)`、`passportVerifyStatus`、`requestId`、`url`、`expireTime`；Source：AIX KYC PRD 7.2.4、7.2.5。
 
@@ -694,74 +404,15 @@ flowchart LR
 
 Passport OCR 成功后进入本页，用户从这里发起人脸活体认证。
 
-<table>
-  <tr>
-    <th width="48%">页面</th>
-    <th width="52%">说明</th>
-  </tr>
-  <tr>
-    <td valign="top">
-      <img src="_assets/account-opening/image17.png" width="480" />
-      <br><br>
-      <img src="_assets/account-opening/image18.png" width="480" />
-    </td>
-    <td valign="top">
-      <p><strong>Continue 按钮</strong></p>
-      <ul>
-        <li><strong>点击前提</strong>：用户在 Face Guide Page 点击 Continue。</li>
-        <li><strong>点击后判断</strong>：
-          <ul>
-            <li>未锁定：获取 passport country，请求 selfie / liveness H5 URL，并进入 Face Scan H5；细则见 <a href="#471-h5face-scan-page">4.7.1 H5：Face Scan Page</a>。</li>
-            <li>已锁定：展示 Too many attempts，不进入 H5。</li>
-          </ul>
-        </li>
-        <li><strong>异常</strong>：
-          <ul>
-            <li>网络异常：Toast <code>Please check your internet connection and try again.</code></li>
-            <li>后端服务器错误：Toast <code>Something went wrong. Please try again later</code></li>
-          </ul>
-        </li>
-      </ul>
-
-      <p><strong>锁定规则</strong></p>
-      <ul>
-        <li>24 小时内 face fail 5 次：锁 20 分钟。</li>
-        <li>24 小时内 face fail 10 次：锁 24 小时。</li>
-        <li>24 小时内接口层连续发起 20 次：锁 20 分钟。</li>
-        <li>Face 验证成功：清零重新计算。</li>
-      </ul>
-    </td>
-  </tr>
-</table>
+| 页面 | 说明 |
+|---|---|
+| <img src="_assets/account-opening/image17.png" width="480" /><br><br><img src="_assets/account-opening/image18.png" width="480" /> | **Continue 按钮**<br>- **点击前提**：用户在 Face Guide Page 点击 Continue。<br>- **点击后判断**：<br>  - 未锁定：获取 passport country，请求 selfie / liveness H5 URL，并进入 Face Scan H5；细则见 [4.7.1 H5：Face Scan Page](#471-h5face-scan-page)。<br>  - 已锁定：展示 Too many attempts，不进入 H5。<br>- **异常**：<br>  - 网络异常：Toast `Please check your internet connection and try again.`<br>  - 后端服务器错误：Toast `Something went wrong. Please try again later`<br>**锁定规则**<br>- 24 小时内 face fail 5 次：锁 20 分钟。<br>- 24 小时内 face fail 10 次：锁 24 小时。<br>- 24 小时内接口层连续发起 20 次：锁 20 分钟。<br>- Face 验证成功：清零重新计算。 |
 
 #### 4.7.1 H5：Face Scan Page
 
-<table>
-  <tr>
-    <th width="48%">页面</th>
-    <th width="52%">说明</th>
-  </tr>
-  <tr>
-    <td valign="top">
-      <img src="_assets/account-opening/image19.png" width="480" />
-    </td>
-    <td valign="top">
-      <p><strong>H5 活体采集状态</strong></p>
-      <ul>
-        <li><strong>进入前提</strong>：Face Guide Page 成功获取 selfie / liveness H5 URL。</li>
-        <li><strong>用户操作</strong>：在外部 H5 完成活体采集。</li>
-        <li><strong>处理结果</strong>：
-          <ul>
-            <li>用户完成活体采集：返回 App，进入 Face Loading Page；细则见 <a href="#48-face-loading-page">4.8 Face Loading Page</a>。</li>
-            <li>用户中断或返回 H5：源文档未明确 App 侧目标页。当前仅确认未完成活体采集时不能进入 Face Loading Page；返回 Face Guide Page、停留 H5 还是关闭流程，需以 AAI H5 返回协议和最新 UI 为准。</li>
-            <li>AAI 同一 <code>signatureId</code> 重试 3 次后失效：重新 generate-url，生成新的 <code>signatureId</code>。</li>
-            <li>网络 / 服务异常：源文档未明确 Face Scan H5 内异常的 App 展示形态。当前不能写死为错误页或 toast；需以 AAI H5 返回协议和 App 统一错误处理为准。</li>
-          </ul>
-        </li>
-      </ul>
-    </td>
-  </tr>
-</table>
+| 页面 | 说明 |
+|---|---|
+| <img src="_assets/account-opening/image19.png" width="480" /> | **H5 活体采集状态**<br>- **进入前提**：Face Guide Page 成功获取 selfie / liveness H5 URL。<br>- **用户操作**：在外部 H5 完成活体采集。<br>- **处理结果**：<br>  - 用户完成活体采集：返回 App，进入 Face Loading Page；细则见 [4.8 Face Loading Page](#48-face-loading-page)。<br>  - 用户中断或返回 H5：源文档未明确 App 侧目标页。当前仅确认未完成活体采集时不能进入 Face Loading Page；返回 Face Guide Page、停留 H5 还是关闭流程，需以 AAI H5 返回协议和最新 UI 为准。<br>  - AAI 同一 `signatureId` 重试 3 次后失效：重新 generate-url，生成新的 `signatureId`。<br>  - 网络 / 服务异常：源文档未明确 Face Scan H5 内异常的 App 展示形态。当前不能写死为错误页或 toast；需以 AAI H5 返回协议和 App 统一错误处理为准。 |
 
 关联：`get-verification-url(SELFIE / LIVENESS)`、face fail count、lock 状态；Source：AIX KYC PRD 7.2.6、7.2.7。
 
@@ -771,33 +422,9 @@ Passport OCR 成功后进入本页，用户从这里发起人脸活体认证。
 
 活体采集结束后进入本页，等待 face verification / face compare 结果。
 
-<table>
-  <tr>
-    <th width="48%">页面</th>
-    <th width="52%">说明</th>
-  </tr>
-  <tr>
-    <td valign="top">
-      <img src="_assets/account-opening/image6.jpeg" width="480" />
-    </td>
-    <td valign="top">
-      <p><strong>等待状态</strong></p>
-      <ul>
-        <li><strong>进入前提</strong>：Face Scan H5 完成活体采集并返回 App。</li>
-        <li><strong>系统处理</strong>：等待 face verification / face compare 结果。</li>
-        <li><strong>结果返回后</strong>：
-          <ul>
-            <li>Face 成功：进入 Address Upload Page；细则见 <a href="#411-address-upload-page">4.11 Address Upload Page</a>。</li>
-            <li>Face 失败：进入 Face Failed Page；细则见 <a href="#410-face-failed-page">4.10 Face Failed Page</a>。</li>
-            <li>30 秒无结果：进入 Loading Failed Page；细则见 <a href="#49-loading-failed-page">4.9 Loading Failed Page</a>。</li>
-            <li>网络异常：进入 Network Error Page。</li>
-            <li>系统异常：进入 Server Error Page。</li>
-          </ul>
-        </li>
-      </ul>
-    </td>
-  </tr>
-</table>
+| 页面 | 说明 |
+|---|---|
+| <img src="_assets/account-opening/image6.jpeg" width="480" /> | **等待状态**<br>- **进入前提**：Face Scan H5 完成活体采集并返回 App。<br>- **系统处理**：等待 face verification / face compare 结果。<br>- **结果返回后**：<br>  - Face 成功：进入 Address Upload Page；细则见 [4.11 Address Upload Page](#411-address-upload-page)。<br>  - Face 失败：进入 Face Failed Page；细则见 [4.10 Face Failed Page](#410-face-failed-page)。<br>  - 30 秒无结果：进入 Loading Failed Page；细则见 [4.9 Loading Failed Page](#49-loading-failed-page)。<br>  - 网络异常：进入 Network Error Page。<br>  - 系统异常：进入 Server Error Page。 |
 
 关联：`faceIdVerifyStatus`；Source：AIX KYC PRD 7.2.8。
 
@@ -807,37 +434,9 @@ Passport OCR 成功后进入本页，用户从这里发起人脸活体认证。
 
 Face Loading 超过 30 秒仍无结果时展示。
 
-<table>
-  <tr>
-    <th width="48%">页面</th>
-    <th width="52%">说明</th>
-  </tr>
-  <tr>
-    <td valign="top">
-      <img src="_assets/account-opening/image20.png" width="480" />
-    </td>
-    <td valign="top">
-      <p><strong>超时状态</strong></p>
-      <ul>
-        <li><strong>进入前提</strong>：Face Loading Page 超过 30 秒仍未收到结果。</li>
-        <li><strong>展示内容</strong>：展示 Loading Failed 状态，并提供 Retry / Leave 操作。</li>
-        <li><strong>用户操作</strong>：
-          <ul>
-            <li>点击 Retry：重新提交或重新查询 Face 结果，进入 Face Loading Page；细则见 <a href="#48-face-loading-page">4.8 Face Loading Page</a>。</li>
-            <li>点击 Leave：返回业务入口，不继续等待。</li>
-          </ul>
-        </li>
-        <li><strong>重试后结果</strong>：
-          <ul>
-            <li>重试后仍无结果：继续展示 Loading Failed。</li>
-            <li>查询返回 Face 失败：进入 Face Failed Page；细则见 <a href="#410-face-failed-page">4.10 Face Failed Page</a>。</li>
-            <li>查询返回网络 / 系统异常：源文档未明确 Loading Failed Retry 后的异常展示形态；需按 App 统一网络 / 系统错误处理确认。</li>
-          </ul>
-        </li>
-      </ul>
-    </td>
-  </tr>
-</table>
+| 页面 | 说明 |
+|---|---|
+| <img src="_assets/account-opening/image20.png" width="480" /> | **超时状态**<br>- **进入前提**：Face Loading Page 超过 30 秒仍未收到结果。<br>- **展示内容**：展示 Loading Failed 状态，并提供 Retry / Leave 操作。<br>- **用户操作**：<br>  - 点击 Retry：重新提交或重新查询 Face 结果，进入 Face Loading Page；细则见 [4.8 Face Loading Page](#48-face-loading-page)。<br>  - 点击 Leave：返回业务入口，不继续等待。<br>- **重试后结果**：<br>  - 重试后仍无结果：继续展示 Loading Failed。<br>  - 查询返回 Face 失败：进入 Face Failed Page；细则见 [4.10 Face Failed Page](#410-face-failed-page)。<br>  - 查询返回网络 / 系统异常：源文档未明确 Loading Failed Retry 后的异常展示形态；需按 App 统一网络 / 系统错误处理确认。 |
 
 关联：`KYC-LOADING-FAILED-001 ~ KYC-LOADING-FAILED-010`；Source：AIX KYC PRD 7.2.9。
 
@@ -847,46 +446,9 @@ Face Loading 超过 30 秒仍无结果时展示。
 
 认证失败后的说明页，覆盖 Passport、Face、POA 的失败展示和重试限制。
 
-<table>
-  <tr>
-    <th width="48%">页面</th>
-    <th width="52%">说明</th>
-  </tr>
-  <tr>
-    <td valign="top">
-      <img src="_assets/account-opening/image21.png" width="480" />
-    </td>
-    <td valign="top">
-      <p><strong>失败展示状态</strong></p>
-      <ul>
-        <li><strong>进入前提</strong>：Face / Passport / POA 返回失败结果。</li>
-        <li><strong>展示规则</strong>：
-          <ul>
-            <li>Face result 为 FAIL / EXPIRED / incomplete：展示 Face Comparison 错误码映射中的前端提示文案；映射见 <a href="#face-comparison">5.3 Face Comparison</a>。</li>
-            <li>POA 失败：展示 POA error code 映射中的前端提示文案；映射见 <a href="#poa">5.3 POA</a>。</li>
-            <li>Passport / Document Verification 失败：展示 Passport / Document Verification 错误码映射中的前端提示文案；映射见 <a href="#passport--document-verification">5.3 Passport / Document Verification</a>。</li>
-            <li>Passport 与 Face 均失败：验收标准要求优先展示 Passport 原因。</li>
-            <li>多个失败原因同时存在但不属于上述明确优先级：优先级源文档未完全明确，需产品 / 后端确认。</li>
-          </ul>
-        </li>
-      </ul>
-
-      <p><strong>用户操作</strong></p>
-      <ul>
-        <li>点击 Try again 且未锁定：重新触发 KYC 流程；当前流程图为 FaceFailed → Loading。</li>
-        <li>点击 Try again 但已锁定：展示锁定提示，不允许重试。</li>
-        <li>点击返回 / 关闭：历史原文为“返回到业务流程入口页”。是否存在返回上一流程节点的其他入口，源文档未明确。</li>
-      </ul>
-
-      <p><strong>锁定说明</strong></p>
-      <ul>
-        <li>命中 5 次限制：展示 Too many attempts / 安全锁提示。</li>
-        <li>命中 10 次限制：展示 Too many attempts / 安全锁提示。</li>
-        <li>命中接口层 20 次限制：展示锁定提示。</li>
-      </ul>
-    </td>
-  </tr>
-</table>
+| 页面 | 说明 |
+|---|---|
+| <img src="_assets/account-opening/image21.png" width="480" /> | **失败展示状态**<br>- **进入前提**：Face / Passport / POA 返回失败结果。<br>- **展示规则**：<br>  - Face result 为 FAIL / EXPIRED / incomplete：展示 Face Comparison 错误码映射中的前端提示文案；映射见 [5.3 Face Comparison](#face-comparison)。<br>  - POA 失败：展示 POA error code 映射中的前端提示文案；映射见 [5.3 POA](#poa)。<br>  - Passport / Document Verification 失败：展示 Passport / Document Verification 错误码映射中的前端提示文案；映射见 [5.3 Passport / Document Verification](#passport--document-verification)。<br>  - Passport 与 Face 均失败：验收标准要求优先展示 Passport 原因。<br>  - 多个失败原因同时存在但不属于上述明确优先级：优先级源文档未完全明确，需产品 / 后端确认。<br>**用户操作**<br>- 点击 Try again 且未锁定：重新触发 KYC 流程；当前流程图为 FaceFailed → Loading。<br>- 点击 Try again 但已锁定：展示锁定提示，不允许重试。<br>- 点击返回 / 关闭：历史原文为“返回到业务流程入口页”。是否存在返回上一流程节点的其他入口，源文档未明确。<br>**锁定说明**<br>- 命中 5 次限制：展示 Too many attempts / 安全锁提示。<br>- 命中 10 次限制：展示 Too many attempts / 安全锁提示。<br>- 命中接口层 20 次限制：展示锁定提示。 |
 
 关联：错误码映射见 5.3；`KYC-FACE-FAILED-001 ~ KYC-FACE-FAILED-010`；Source：AIX KYC PRD 7.2.10 / 9。
 
@@ -896,101 +458,15 @@ Face Loading 超过 30 秒仍无结果时展示。
 
 Face 成功后进入本页，用户确认居住国家并上传地址证明。
 
-<table>
-  <tr>
-    <th width="48%">页面</th>
-    <th width="52%">说明</th>
-  </tr>
-  <tr>
-    <td valign="top">
-      <img src="_assets/account-opening/image22.png" width="480" />
-      <br><br>
-      <img src="_assets/account-opening/image23.jpeg" width="480" />
-      <br><br>
-      <img src="_assets/account-opening/image24.png" width="320" />
-      <br><br>
-      <img src="_assets/account-opening/image25.png" width="480" />
-    </td>
-    <td valign="top">
-      <p><strong>Residence</strong></p>
-      <ul>
-        <li><strong>默认展示</strong>：回填 KYC 流程中已选择的居住国家。</li>
-        <li><strong>点击 Residence</strong>：进入 Select Residence Country Page；选择国家后返回本页。</li>
-        <li><strong>国家二次判断</strong>：
-          <ul>
-            <li>所选国家属于支持国家：继续 POA 提交流程。</li>
-            <li>所选国家属于 phase 2 - waitlist / 不支持国家：展示本页 waitlist 拦截；见 <a href="#4111-拦截waitlist">4.11.1 拦截：Waitlist</a>。</li>
-            <li>POA OCR 国家与用户填报居住国家不匹配：按 POA error code 映射展示文案；映射见 <a href="#poa">5.3 POA</a>。</li>
-          </ul>
-        </li>
-      </ul>
-
-      <p><strong>文件上传区域</strong></p>
-      <ul>
-        <li><strong>选择文件</strong>：支持 JPG / JPEG / PNG / PDF，单文件不超过 16MB。</li>
-        <li><strong>本地校验失败</strong>：
-          <ul>
-            <li>文件格式错误：Toast <code>Unsupported file type. Please upload a JPG, JPEG, PNG, or PDF file.</code></li>
-            <li>文件超过 16MB：Toast <code>File size exceeds the 16MB limit. Please choose a smaller file.</code></li>
-          </ul>
-        </li>
-        <li><strong>上传结果</strong>：
-          <ul>
-            <li>上传成功：文件进入待提交状态。</li>
-            <li>上传服务器报错：Toast <code>Server busy. Upload failed. Please try again.</code></li>
-          </ul>
-        </li>
-        <li>当前验收标准要求只能上传一份，上传中可取消，已上传可删除和预览。</li>
-      </ul>
-
-      <p><strong>POA 提交</strong></p>
-      <ul>
-        <li><strong>点击提交前提</strong>：已上传合法 POA 文件，并完成居住国家确认。</li>
-        <li><strong>提交成功</strong>：POA 文件和国家信息提交成功后，进入 KYC Submission Success Page；细则见 <a href="#412-kyc-submission-success-page">4.12 KYC Submission Success Page</a>。</li>
-        <li><strong>提交失败 / 不可继续</strong>：
-          <ul>
-            <li>POA OCR 国家与用户填报居住国家不匹配：按 POA error code 映射展示文案；映射见 <a href="#poa">5.3 POA</a>。</li>
-            <li>申请国家不属于支持国家 / 白名单：展示 waitlist 拦截；见 <a href="#4111-拦截waitlist">4.11.1 拦截：Waitlist</a>。</li>
-            <li>POA 审核失败：记录失败原因，并按 POA error code 映射展示前端提示文案；映射见 <a href="#poa">5.3 POA</a>。</li>
-            <li>POA 上传服务器报错：Toast <code>Server busy. Upload failed. Please try again.</code>，不进入 Success。</li>
-            <li>POA 提交阶段网络 / 服务器异常：源文档未给出独立文案；需按 App 统一网络 / 系统错误处理确认。</li>
-          </ul>
-        </li>
-      </ul>
-
-      <p>POA 机审会 OCR 提取 POA 国家信息，核验其与用户填报居住国是否匹配，并校验申请国家是否属于白名单。</p>
-    </td>
-  </tr>
-</table>
+| 页面 | 说明 |
+|---|---|
+| <img src="_assets/account-opening/image22.png" width="480" /><br><br><img src="_assets/account-opening/image23.jpeg" width="480" /><br><br><img src="_assets/account-opening/image24.png" width="320" /><br><br><img src="_assets/account-opening/image25.png" width="480" /> | **Residence**<br>- **默认展示**：回填 KYC 流程中已选择的居住国家。<br>- **点击 Residence**：进入 Select Residence Country Page；选择国家后返回本页。<br>- **国家二次判断**：<br>  - 所选国家属于支持国家：继续 POA 提交流程。<br>  - 所选国家属于 phase 2 - waitlist / 不支持国家：展示本页 waitlist 拦截；见 [4.11.1 拦截：Waitlist](#4111-拦截waitlist)。<br>  - POA OCR 国家与用户填报居住国家不匹配：按 POA error code 映射展示文案；映射见 [5.3 POA](#poa)。<br>**文件上传区域**<br>- **选择文件**：支持 JPG / JPEG / PNG / PDF，单文件不超过 16MB。<br>- **本地校验失败**：<br>  - 文件格式错误：Toast `Unsupported file type. Please upload a JPG, JPEG, PNG, or PDF file.`<br>  - 文件超过 16MB：Toast `File size exceeds the 16MB limit. Please choose a smaller file.`<br>- **上传结果**：<br>  - 上传成功：文件进入待提交状态。<br>  - 上传服务器报错：Toast `Server busy. Upload failed. Please try again.`<br>- 当前验收标准要求只能上传一份，上传中可取消，已上传可删除和预览。<br>**POA 提交**<br>- **点击提交前提**：已上传合法 POA 文件，并完成居住国家确认。<br>- **提交成功**：POA 文件和国家信息提交成功后，进入 KYC Submission Success Page；细则见 [4.12 KYC Submission Success Page](#412-kyc-submission-success-page)。<br>- **提交失败 / 不可继续**：<br>  - POA OCR 国家与用户填报居住国家不匹配：按 POA error code 映射展示文案；映射见 [5.3 POA](#poa)。<br>  - 申请国家不属于支持国家 / 白名单：展示 waitlist 拦截；见 [4.11.1 拦截：Waitlist](#4111-拦截waitlist)。<br>  - POA 审核失败：记录失败原因，并按 POA error code 映射展示前端提示文案；映射见 [5.3 POA](#poa)。<br>  - POA 上传服务器报错：Toast `Server busy. Upload failed. Please try again.`，不进入 Success。<br>  - POA 提交阶段网络 / 服务器异常：源文档未给出独立文案；需按 App 统一网络 / 系统错误处理确认。<br>POA 机审会 OCR 提取 POA 国家信息，核验其与用户填报居住国是否匹配，并校验申请国家是否属于白名单。 |
 
 #### 4.11.1 拦截：Waitlist
 
-<table>
-  <tr>
-    <th width="48%">页面</th>
-    <th width="52%">说明</th>
-  </tr>
-  <tr>
-    <td valign="top">
-      <img src="_assets/account-opening/image26.png" width="360" />
-    </td>
-    <td valign="top">
-      <p><strong>触发方式</strong></p>
-      <p>Address Upload 阶段二次判断国家不支持时展示。</p>
-
-      <p><strong>拦截状态</strong></p>
-      <ul>
-        <li><strong>处理结果</strong>：用户不能继续提交当前国家的 POA。</li>
-        <li><strong>用户操作</strong>：
-          <ul>
-            <li>点击 Join waitlist：进入 Waitlist Page；提交细则见 <a href="#45-waitlist-page">4.5 Waitlist Page</a>。</li>
-            <li>点击 Select other country：进入 Select Residence Country Page；细则见 <a href="#44-select-residence-country-page">4.4 Select Residence Country Page</a>。</li>
-          </ul>
-        </li>
-      </ul>
-    </td>
-  </tr>
-</table>
+| 页面 | 说明 |
+|---|---|
+| <img src="_assets/account-opening/image26.png" width="360" /> | **触发方式**<br><br>      Address Upload 阶段二次判断国家不支持时展示。<br><br>      **拦截状态**<br>- **处理结果**：用户不能继续提交当前国家的 POA。<br>- **用户操作**：<br>  - 点击 Join waitlist：进入 Waitlist Page；提交细则见 [4.5 Waitlist Page](#45-waitlist-page)。<br>  - 点击 Select other country：进入 Select Residence Country Page；细则见 [4.4 Select Residence Country Page](#44-select-residence-country-page)。 |
 
 关联：POA upload token、POA 文件上传、`proofOfAddressVerifyStatus`；文件限制：JPG / JPEG / PNG / PDF，单文件 16MB；Source：AIX KYC PRD 7.2.11。
 
@@ -1000,37 +476,9 @@ Face 成功后进入本页，用户确认居住国家并上传地址证明。
 
 POA 提交成功后的完成页，只表示资料已提交，不代表 KYC 已审核通过。
 
-<table>
-  <tr>
-    <th width="48%">页面</th>
-    <th width="52%">说明</th>
-  </tr>
-  <tr>
-    <td valign="top">
-      <img src="_assets/account-opening/image27.png" width="480" />
-    </td>
-    <td valign="top">
-      <p><strong>提交成功状态</strong></p>
-      <ul>
-        <li><strong>进入前提</strong>：Address Upload Page 的 POA 文件和国家信息提交成功。</li>
-        <li><strong>展示内容</strong>：告知用户资料已提交，等待审核结果。</li>
-        <li><strong>用户操作</strong>：
-          <ul>
-            <li>点击完成 / 返回入口：关闭 KYC 流程并返回业务入口。</li>
-            <li>关闭页面：返回入口，等待审核结果。</li>
-          </ul>
-        </li>
-      </ul>
-
-      <p><strong>状态边界</strong></p>
-      <ul>
-        <li>成功页不等同于 KYC Approved。</li>
-        <li>成功页不代表 Wallet 能力全部可用。</li>
-        <li>后续审核状态通过通知或业务入口状态感知；通知模板和触达规则当前未明确，见 <code>GAP-KYC-NOTIFICATION-001</code>。</li>
-      </ul>
-    </td>
-  </tr>
-</table>
+| 页面 | 说明 |
+|---|---|
+| <img src="_assets/account-opening/image27.png" width="480" /> | **提交成功状态**<br>- **进入前提**：Address Upload Page 的 POA 文件和国家信息提交成功。<br>- **展示内容**：告知用户资料已提交，等待审核结果。<br>- **用户操作**：<br>  - 点击完成 / 返回入口：关闭 KYC 流程并返回业务入口。<br>  - 关闭页面：返回入口，等待审核结果。<br>**状态边界**<br>- 成功页不等同于 KYC Approved。<br>- 成功页不代表 Wallet 能力全部可用。<br>- 后续审核状态通过通知或业务入口状态感知；通知模板和触达规则当前未明确，见 `GAP-KYC-NOTIFICATION-001`。 |
 
 关联：Under review、Approved、Rejected、failed；`KYC-SUCCESS-001 ~ KYC-SUCCESS-009`；Source：AIX KYC PRD 7.2.12。
 
