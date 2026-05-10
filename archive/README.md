@@ -1,17 +1,22 @@
 ---
 type: archive-index
 status: active
-last_updated: 2026-05-05
+last_updated: 2026-05-10
 ---
 
 # Archive
 
-This directory stores historical or deprecated source materials.
+This directory stores historical or deprecated source materials. Archived files are kept for traceability and source verification only.
 
 ## Directories
 
 | Directory | Purpose |
 |---|---|
-| `historical-prd/` | Historical PRD source documents grouped by product area |
+| `converted-prd/` | Legacy PRD Markdown archive converted from historical Word documents, grouped by product area |
 
-Archived files are for traceability and source verification. Do not treat archived PRDs as current product facts unless the confirmed rule has been extracted into `knowledge-base/`.
+## Usage Notes
+
+- Archived PRDs are historical references, not current product facts.
+- Use them for source verification, migration checks, and historical requirement lookup.
+- Do not treat archived PRDs as current product rules unless the confirmed rule has been extracted into `knowledge-base/`.
+- Conversion and validation reports are stored under `converted-prd/conversion-reports/`.
