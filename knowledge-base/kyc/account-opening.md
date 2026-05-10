@@ -419,7 +419,7 @@ flowchart LR
 
       <p><strong>Verification unavailable 状态</strong></p>
       <ul>
-        <li><strong>触发前提</strong>：KYC 状态不可继续，或用户命中 APP 来源 waitlist。</li>
+        <li><strong>触发前提</strong>：后端返回 KYC 状态机为 Under review / Rejected / Approved，或用户在 waitlist 中且来源渠道是 APP。</li>
         <li><strong>展示内容</strong>：展示不可继续认证说明和 <code>Back</code> 按钮。</li>
         <li><strong>用户操作</strong>：
           <ul>
