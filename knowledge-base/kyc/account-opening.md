@@ -1455,9 +1455,9 @@ poa success
 
 ---
 
-## Source alignment additions
+## 12. Source alignment additions
 
-### A. KYC source rules confirmed
+### 12.1 KYC source rules confirmed
 
 | 规则 | 结论 | 来源 |
 |---|---|---|
@@ -1471,7 +1471,7 @@ poa success
 | Face Failed 原因优先级 | passport 与 face 均失败时优先展示 passport 失败原因；POA 失败展示 POA error code 映射 | KYC / 7.2.10 |
 | POA | AAI 机审提取 POA 资料，验证真实性、有效期，并校验 POA 国家与用户填报居住国是否匹配、申请国家是否白名单 | KYC / 7.2.11 |
 
-### B. Home wallet panel mapping
+### 12.2 Home wallet panel mapping
 
 | KYC 状态 | Home 钱包区域展示 | 行为 | 来源 |
 |---|---|---|---|
@@ -1481,19 +1481,19 @@ poa success
 | Rejected | 显示审核拒绝面板；因风险被 DTC 拒绝的用户会被拦截开户且隐藏激活钱包入口 | 不允许再次提交 | Home / 钱包区域 |
 | Approved | 显示审核通过 / 资产面板，后端获取全量钱包余额并展示稳定币资产 | 进入 Wallet 资产页 | Home / 钱包区域 |
 
-### C. Card prerequisite mapping
+### 12.3 Card prerequisite mapping
 
 | 规则 | 结论 | 来源 |
 |---|---|---|
 | 申卡前置 | 仅完成钱包开通、DTC 渠道开户、KYC 验证通过、刷脸 Token 有效、申卡 5 张以内的用户才能申请卡 | Card Application / 2.1 |
 | KYC 与 Card 边界 | KYC 只维护开户 / 身份认证事实；卡申请、制卡费、卡类型和结果页由 card/application.md 维护 | Card Application |
 
-### D. Source boundaries
+### 12.4 Source boundaries
 
 - Security 身份认证 PRD 是 KYC 的支撑证据，但 KYC 钱包开户流程中的 Passport / Face / POA 页面和错误码以 KYC 主 PRD 为准。
 - 删除线内容不沉淀为 confirmed fact，例如部分旧 Face 空值文案和锁定弹窗历史文案。
 
-## 12. 来源引用
+## 13. 来源引用
 
 - (Ref: archive/legacy-prd/kyc/wallet-opening/README.md / 需求变更日志 / 国家线 / 6.2 KYC 状态机 / 7.2 开户页面逻辑 / 8 外部接口依赖 / 9 接口错误码映射 / 10 待确认事项)
 - (Ref: archive/legacy-prd/app/home/README.md / Home 钱包区域展示逻辑)
