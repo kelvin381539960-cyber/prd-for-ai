@@ -1,10 +1,10 @@
 ---
 type: prd-template
 feature: standard-prd-template
-version: "1.11"
+version: "1.12"
 status: active
-source_doc: workflow/prd-workflow.md；prd-template/README.md；prd-template/prd-writing-workflow.md；prd-template/prd-writing-preferences.md；用户确认结论 2026-05-05；用户确认结论 2026-05-06；用户确认结论 2026-05-06 Canvas 草稿协作、文件最小化与落地评审；用户确认结论 2026-05-10 页面章节分层与左图右说明；用户确认结论 2026-05-10 业务时序图泳道、调用表达与第三方 H5 规则
-source_section: "multi-agent workflow；canvas-first；review gates；engineering execution PRD rules；optional sections；reuse page rules；lightweight artifact rules；landing review rules；page hierarchy rules；page-left explanation-right rules；business sequence diagram rules；external H5 flow rules；API note placement rules"
+source_doc: workflow/prd-workflow.md；prd-template/README.md；prd-template/prd-writing-workflow.md；prd-template/prd-writing-preferences.md；用户确认结论 2026-05-05；用户确认结论 2026-05-06；用户确认结论 2026-05-06 Canvas 草稿协作、文件最小化与落地评审；用户确认结论 2026-05-10 页面章节分层与左图右说明；用户确认结论 2026-05-10 业务时序图泳道、调用表达与第三方 H5 规则；用户确认结论 2026-05-10 需求背景目标范围章节规则
+source_section: "multi-agent workflow；canvas-first；review gates；engineering execution PRD rules；optional sections；reuse page rules；lightweight artifact rules；landing review rules；page hierarchy rules；page-left explanation-right rules；business sequence diagram rules；external H5 flow rules；API note placement rules；background-goal-scope rules"
 last_updated: 2026-05-10
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -93,30 +93,94 @@ readers: [product, ui, dev, qa, business, ai]
 
 ---
 
-## 1. 功能结论
+## 1. 需求背景、目标与范围
 
-### 1.1 本期做什么
+本章节用于让读者快速理解：为什么要做这个需求、这个需求的核心目标是什么、涉及哪些系统和模块。
 
-用 3～5 条说明本期交付范围，只写明确要做的功能。
+要求：
+- 本章节只写背景、目标和范围，不展开详细流程、页面规则、接口规则、异常规则和测试场景。
+- 表达必须精简，假设读者没有耐心阅读长篇内容。
+- 能一句话说明的，不写两句话；能两句话说明的，不写三句话。
+- 不写空话、套话、泛泛价值，例如“提升用户体验”“提升效率”“统一事实源”等，除非能明确说明对应业务含义。
+- 不写与正文事实不一致的系统、模块或能力；正文没有涉及的内容，不应在本章节强行加入。
+- 如果现有模板中已有“本期做什么 / 本期不做什么 / 关键产品规则”，应避免与本章节重复；本章节只负责背景、目标和范围，具体功能结论放到后续功能结论或主流程章节。
 
-- 
-- 
-- 
+### 1.1 背景
 
-### 1.2 本期不做什么
+写清楚为什么需要做这个功能。
 
-只写容易被误解、或需要明确排除的内容。不要为了凑数写无意义的“不做”。
+要求：
+- 用最短表达说明需求产生的业务背景。
+- 不写流程细节。
+- 不写系统协作细节。
+- 不写页面、接口、状态、异常等后文才展开的内容。
+- 重点回答：为什么现在需要这个能力？
 
-- 
-- 
+推荐写法：
 
-### 1.3 关键产品规则
+> 为了支持【业务能力 / 产品能力】，需要建设【功能 / 机制】，以解决【核心业务前置条件 / 风险 / 准入要求】。
 
-只写影响开发、测试、接口、数据、风控的规则。公共能力已有的规则不在这里复写，只在对应页面或流程中引用。
+示例：
 
-| 规则 | 说明 | 来源 |
-|---|---|---|
-|  |  |  |
+> AIX 钱包要接入发卡、法币出入金、支付网络和托管账户等金融能力，必须通过 KYC 确认用户身份、居住地和地址证明符合准入要求。
+
+### 1.2 目标
+
+写清楚这个需求的核心目标。
+
+要求：
+- 目标要站在业务和产品层，不写执行细节。
+- 不拆成过细的问题清单。
+- 不写过多泛化价值。
+- 可以说明该需求为哪些后续能力提供基础。
+- 通常 1～2 句话即可。
+
+推荐写法：
+
+> 【功能】的核心目标是帮助【产品 / 业务】获得【关键业务能力 / 外部接入许可 / 合规准入 / 风控能力】，并规避【核心风险】。  
+> 本需求用于建立【机制 / 流程 / 能力】，为【后续业务模块】提供统一基础。
+
+示例：
+
+> KYC 的核心目标是帮助 AIX 获得传统金融体系的接入许可，例如发卡机构、法币出入金通道、托管账户和支付网络等，并规避身份不明、地区限制、协议缺失、地址证明不完整等系统性合规风险。  
+> 本需求用于建立 AIX 钱包开户的 KYC 准入机制，为 Wallet、Deposit、Card、法币出入金等后续金融能力提供统一的合规准入基础。
+
+### 1.3 涉及系统与模块范围
+
+写清楚本需求涉及哪些系统、哪些模块。
+
+要求：
+- 必须分层级写，不要把系统和模块堆在一起。
+- 先写涉及系统，再写涉及模块。
+- 涉及系统按“谁负责什么”说明。
+- 涉及模块按用户使用链路或业务主链路拆分。
+- 只说明范围边界，不写详细规则。
+- 表格建议保持两列，避免信息过碎。
+- 如果“主要职责”较长，采用“主句 + 子段落”的方式：
+  - 主句：说明主要做什么。
+  - 子段落：用“主要包括：xxx、xxx、xxx。”拆分功能点。
+- 不建议使用过多 bullet，避免章节显得很长。
+- 正文没有展开的系统或模块，不要写入本节。
+
+#### 1.3.1 涉及系统
+
+用一两句话概括本需求涉及的系统协作关系。
+
+| 系统 | 主要职责 |
+|---|---|
+| 【系统 A】 | 【主句：说明该系统主要做什么。】<br><br>主要包括：【功能点 1】、【功能点 2】、【功能点 3】。 |
+| 【系统 B】 | 【主句：说明该系统主要做什么。】<br><br>主要包括：【功能点 1】、【功能点 2】、【功能点 3】。 |
+| 【系统 C】 | 【主句：说明该系统主要做什么。】<br><br>主要包括：【功能点 1】、【功能点 2】、【功能点 3】。 |
+
+#### 1.3.2 按用户链路拆分的模块
+
+模块应按用户完成该需求的顺序拆分，用来说明本文覆盖哪些产品能力。
+
+| 模块 | 主要说明 |
+|---|---|
+| 【模块 1】 | 【主句：说明该模块主要做什么。】<br><br>主要包括：【功能点 1】、【功能点 2】、【功能点 3】。 |
+| 【模块 2】 | 【主句：说明该模块主要做什么。】<br><br>主要包括：【功能点 1】、【功能点 2】、【功能点 3】。 |
+| 【模块 3】 | 【主句：说明该模块主要做什么。】<br><br>主要包括：【功能点 1】、【功能点 2】、【功能点 3】。 |
 
 ---
 
