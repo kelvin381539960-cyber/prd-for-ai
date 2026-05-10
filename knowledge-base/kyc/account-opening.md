@@ -264,7 +264,6 @@ flowchart TB
 | `Rejected` | `clientStatus = REJECTED` | 审核拒绝 | 流程终止 |
 | `failed` | `verifyStatus = VERIFY_FAILURE` | Passport/Face/POA 任一失败 | 展示原因，可重试 |
 | `waitlist` | - | 国家不支持或命中 waitlist | 阻断继续 |
-| `Locked` | - | 失败次数超限 | 暂时锁定 |
 
 ### 3.3 关键规则补充
 
