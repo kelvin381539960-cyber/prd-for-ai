@@ -263,7 +263,6 @@ flowchart TB
 | `Approved` | `clientStatus = ACTIVATED` | 审核通过 | 开户完成 |
 | `Rejected` | `clientStatus = REJECTED` | 审核拒绝 | 流程终止 |
 | `failed` | `verifyStatus = VERIFY_FAILURE` | Passport/Face/POA 任一失败 | 展示原因，可重试 |
-| `waitlist` | - | 国家不支持或命中 waitlist | 阻断继续 |
 
 ## 4. 页面与交互说明
 
