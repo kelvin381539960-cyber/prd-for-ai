@@ -210,8 +210,10 @@ sequenceDiagram
         DTC-->>BE: 返回活体 H5 URL
         BE-->>APP: 返回活体 H5 URL
         APP->>APP: 打开活体 H5，进入活体识别页
-        APP->>AAI: 进行活体识别 / 人脸比对
-        AAI-->>DTC: 回传 Face result
+        APP->>AAI: 用户完成活体识别 / 人脸比对
+        AAI-->>APP: 活体流程结束，返回 AIX 客户端
+        APP->>APP: 展示 Loading Page
+        AAI-->>DTC: 异步回传 Face result
         DTC-->>BE: 同步 Face result / webhook 结果
     else passport = VERIFYING 且 face = SUCCESS / FAILURE / VERIFYING
         BE-->>APP: 返回下一步为 Loading
@@ -228,12 +230,16 @@ sequenceDiagram
     BE->>DTC: 查询 DTC KYC 认证结果
     Note over BE,DTC: GET /openapi/v1/ekyc/verification-result/{externalId}
     DTC-->>BE: 返回 Passport / Face 验证结果
-    BE-->>APP: 返回查询结果
+    BE-->>APP: 返回验证结果
 
     alt passport result = VERIFY_SUCCESS 且 face result = VERIFY_SUCCESS
         APP->>APP: 展示 Address Upload Page
         APP->>APP: 上传 POA 文件
-    else face = UNVERIFIED / 其他 result / VERIFY_FAILURE
+    else Face result = VERIFYING / 未返回
+        APP->>APP: 继续展示 Loading Page
+    else Face result = VERIFY_FAILURE / FAIL / EXPIRED / incomplete
+        APP->>APP: 展示人脸比对失败页和失败信息
+    else face = UNVERIFIED / 其他 result
         BE-->>APP: 返回失败或未完成结果
         APP->>APP: 按失败结果进入对应页面
     end
