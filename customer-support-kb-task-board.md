@@ -113,13 +113,13 @@ Use these archive paths only as internal source material. Do not expose these pa
 |---|---|---:|---|
 | Registration / Login | `archive/legacy-prd/app/registration-login/` | P0 | archive_reviewed_draft |
 | KYC / Wallet Opening | `archive/legacy-prd/kyc/wallet-opening/` | P0 | archive_reviewed_draft |
-| Identity Verification | `archive/legacy-prd/security/identity-verification/` | P0 | partially_pending; key KYC content already covered, security doc still needs review |
+| Identity Verification | `archive/legacy-prd/security/identity-verification/` | P0 | archive_reviewed_draft |
 | Wallet Asset | `archive/legacy-prd/wallet/asset/` | P0 | archive_reviewed_draft |
 | Wallet Deposit / Send / Swap | `archive/legacy-prd/wallet/deposit-send-swap/` | P0 | archive_reviewed_draft |
-| Card Application | `archive/legacy-prd/card/application/` | P1 | not_started |
-| Card Manage | `archive/legacy-prd/card/manage/` | P1 | not_started |
-| Card Transaction | `archive/legacy-prd/card/transaction/` | P1 | not_started |
-| Card Me/Profile | `archive/legacy-prd/card/me/` | P1 | not_started |
+| Card Application | `archive/legacy-prd/card/application/` | P1 | archive_reviewed_draft |
+| Card Manage | `archive/legacy-prd/card/manage/` | P1 | archive_reviewed_draft |
+| Card Transaction | `archive/legacy-prd/card/transaction/` | P1 | archive_reviewed_draft |
+| Card Me/Profile | `archive/legacy-prd/card/me/` | P1 | archive_reviewed_draft |
 | Transaction History | `archive/legacy-prd/app/transaction-history/` | P1 | not_started |
 | Notification / Push Inbox | `archive/legacy-prd/notification/push-inbox/` | P1 | not_started |
 | System Email | `archive/legacy-prd/notification/system-email/` | P1 | not_started |
@@ -241,15 +241,15 @@ Use this format for files under `customer-support-kb/faq/`:
 | CSKB-004 | Create verification status definitions | `customer-support-kb/_verification-status.md` | done | Default extracted content to draft_pending_review |
 | CSKB-005 | Create handoff rules | `customer-support-kb/_handoff-rules.md` | done | Includes account, KYC, wallet, card, transaction escalation |
 | CSKB-006 | Create unresolved files | `pending-confirmation.md`, `do-not-answer.md` | done | Created before extraction |
-| CSKB-007 | Extract Registration / Login user-facing draft | `user-facing/registration-login.md` and `faq/registration-login-faq.md` | archive_reviewed_draft | Reviewed legacy PRD and refined user-facing FAQ/answers; still needs business review |
+| CSKB-007 | Extract Registration / Login user-facing draft | `user-facing/registration-login.md` and `faq/registration-login-faq.md` | archive_reviewed_draft | Reviewed registration and identity verification content; still needs business review |
 | CSKB-008 | Extract Registration / Login internal playbook | `agent-internal/registration-login-playbook.md` | archive_reviewed_draft | Reviewed legacy PRD and refined troubleshooting |
-| CSKB-009 | Extract KYC / Wallet Opening user-facing draft | `user-facing/kyc-wallet-opening.md` and `faq/kyc-faq.md` | archive_reviewed_draft | Reviewed KYC wallet-opening PRD; identity-verification PRD still worth separate review |
+| CSKB-009 | Extract KYC / Wallet Opening user-facing draft | `user-facing/kyc-wallet-opening.md` and `faq/kyc-faq.md` | archive_reviewed_draft | Reviewed KYC wallet-opening and identity verification content |
 | CSKB-010 | Extract KYC internal playbook | `agent-internal/kyc-wallet-opening-playbook.md` | archive_reviewed_draft | Compliance details remain unresolved |
 | CSKB-011 | Extract Wallet Asset user-facing draft | `user-facing/wallet-asset.md` | archive_reviewed_draft | Reviewed wallet asset PRD; supported assets unresolved |
 | CSKB-012 | Extract Wallet Deposit / Send / Swap user-facing draft | `user-facing/wallet-deposit-send-swap.md` and `faq/wallet-faq.md` | archive_reviewed_draft | Reviewed key Deposit/Send/Swap content; availability and limits require confirmation |
 | CSKB-013 | Extract Wallet internal playbook | `agent-internal/wallet-playbook.md` | archive_reviewed_draft | Reviewed wallet PRDs and refined playbook |
-| CSKB-014 | Extract Card user-facing draft | `user-facing/card-application-manage.md` and `faq/card-faq.md` | draft_created | Generic safe draft created; card availability, limits, fees unresolved |
-| CSKB-015 | Extract Card internal playbook | `agent-internal/card-playbook.md` | draft_created | Generic safe draft created |
+| CSKB-014 | Extract Card user-facing draft | `user-facing/card-application-manage.md` and `faq/card-faq.md` | archive_reviewed_draft | Reviewed Card Application / Manage / Transaction / Me; many commercial rules unresolved |
+| CSKB-015 | Extract Card internal playbook | `agent-internal/card-playbook.md` | archive_reviewed_draft | Reviewed Card Application / Manage / Transaction / Me |
 | CSKB-016 | Extract Transaction History user-facing draft | `user-facing/transaction-history.md` and `faq/transaction-faq.md` | draft_created | Generic safe draft created; status definitions unresolved |
 | CSKB-017 | Extract Transaction internal playbook | `agent-internal/transaction-playbook.md` | draft_created | Generic safe draft created |
 | CSKB-018 | Extract Notification / System Email user-facing draft | `user-facing/notification-system-email.md` and `faq/notification-faq.md` | draft_created | Generic safe draft created; official email/domain rules unresolved |
@@ -262,43 +262,35 @@ Use this format for files under `customer-support-kb/faq/`:
 
 ## 8. Current Status
 
-Current phase: P0 archive-reviewed draft completed for Registration/Login, KYC Wallet Opening, Wallet Asset, and Wallet Deposit/Send/Swap.
+Current phase: P0 archive-reviewed draft completed; P1 Card archive-reviewed draft completed.
 
 Completed:
 
 - Confirmed target users, scope, language, visibility split, output directory, and priority modules.
 - Reviewed archive structure enough to identify relevant source directions.
 - Created this task board as the single source of truth.
-- Created `customer-support-kb/` directory structure.
-- Created base policy files:
-  - `README.md`
-  - `_answer-policy.md`
-  - `_visibility-rules.md`
-  - `_verification-status.md`
-  - `_handoff-rules.md`
-- Created unresolved files:
-  - `unresolved/pending-confirmation.md`
-  - `unresolved/do-not-answer.md`
-- Created initial Chinese safe-draft files under:
-  - `user-facing/`
-  - `agent-internal/`
-  - `faq/`
+- Created `customer-support-kb/` directory structure and base policy files.
+- Created unresolved files.
+- Created initial Chinese safe-draft files under `user-facing/`, `agent-internal/`, and `faq/`.
 - Reviewed and refined P0 files from archive material:
   - Registration / Login
+  - Identity Verification
   - KYC / Wallet Opening
   - Wallet Asset
   - Wallet Deposit / Send / Swap
-- Expanded `unresolved/pending-confirmation.md` with P0 details that require business confirmation.
+- Reviewed and refined P1 Card files from archive material:
+  - Card Application
+  - Card Manage
+  - Card Transaction
+  - Card Me/Profile
+- Expanded `unresolved/pending-confirmation.md` with identity verification and Card details that require business confirmation.
 
 Not yet completed:
 
-- `security/identity-verification` still needs a focused review.
-- P1 modules have not been archive-reviewed yet:
-  - Card Application / Manage / Transaction / Me
-  - Transaction History
-  - Notification / Push Inbox
-  - System Email
-  - App FAQ
+- P1 Transaction History has not been archive-reviewed yet.
+- P1 Notification / Push Inbox has not been archive-reviewed yet.
+- P1 System Email has not been archive-reviewed yet.
+- App FAQ has not been archive-reviewed yet.
 - P2 Website / Waitlist material has not been archive-reviewed yet.
 - No content has been business-reviewed or confirmed.
 - Source leakage review is still pending.
@@ -312,12 +304,11 @@ The next agent should proceed in this order:
 1. Read this file first.
 2. Treat existing `customer-support-kb/` files as draft content, not final confirmed content.
 3. Continue archive-based extraction/review with:
-   - focused review of `security/identity-verification`
-   - then P1 Card modules
-   - then P1 Transaction History
-   - then P1 Notification / System Email
-   - then App FAQ
-   - then P2 Website / Waitlist
+   - P1 Transaction History
+   - P1 Notification / Push Inbox
+   - P1 System Email
+   - App FAQ
+   - P2 Website / Waitlist
 4. Keep all extracted content in Chinese.
 5. Keep all extracted content as `draft_pending_review` unless there is explicit business confirmation.
 6. Do not expose source paths in user-facing answers.
@@ -334,3 +325,4 @@ The next agent should proceed in this order:
 | 2026-05-10 | Created task board for customer support KB buildout. |
 | 2026-05-10 | Created `customer-support-kb/` skeleton, base policy files, unresolved files, safe user-facing drafts, internal playbooks, and FAQ drafts. |
 | 2026-05-10 | Reviewed P0 archive material and refined Registration/Login, KYC Wallet Opening, Wallet Asset, and Wallet Deposit/Send/Swap drafts. |
+| 2026-05-10 | Reviewed identity verification and P1 Card archive material; refined Registration/Login, Card user-facing FAQ, Card playbook, and pending confirmations. |
