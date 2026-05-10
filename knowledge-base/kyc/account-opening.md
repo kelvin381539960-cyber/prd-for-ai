@@ -153,12 +153,15 @@ sequenceDiagram
     participant DTC as DTCPay 服务端
     participant AAI as AAI 服务
 
-    APP->>APP: KYC Start Page（状态：未绑定手机）
-    APP->>APP: 引导用户绑定手机
+    APP->>APP: KYC Start Page（入口态）
+    APP->>BE: 查询用户是否已绑定手机号
+    BE-->>APP: 返回手机号绑定状态
 
-    alt 未绑定手机
+    alt 未绑定手机号
+        APP->>APP: KYC Start Page（状态：未绑定手机）
+        APP->>APP: 引导用户绑定手机
         APP->>APP: 提示用户绑定手机流程
-    else 已绑定手机
+    else 已绑定手机号
         APP->>BE: 查询 KYC 认证结果
         BE->>DTC: GET /openapi/v1/ekyc/verification-result/{externalId}
         DTC-->>BE: 返回认证结果（clientStatus、Passport、Face、POA result）
