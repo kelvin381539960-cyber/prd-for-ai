@@ -223,6 +223,7 @@ sequenceDiagram
     end
 ```
 
+### 3.2 状态流转说明
 
 > KYC 状态机图。
 
@@ -255,27 +256,22 @@ flowchart TB
     class Branch,Main group;
 ```
 
-| AIX 状态 | 含义 | 主要触发条件 | 用户侧结果 | 备注 |
-|---|---|---|---|---|
-| `Pending` | 用户仍可继续或重新进入 KYC | 用户尚未完成完整 KYC，或上次中断后允许继续 | 进入可继续节点 | 具体页面承接见第 4 章 |
-| `failed` | 上次认证失败，但可能允许继续 | Passport、Face、POA 任一认证失败 | 展示失败原因，可按规则重试 | 错误文案按错误码映射 |
-| `Under review` | 已提交，等待审核 | POA / KYC 材料提交成功，等待后续审核 | 不允许重复提交当前流程 | 结果通过通知或入口状态感知 |
-| `Approved` | KYC 审核通过 | DTC `clientStatus = ACTIVATED` 或后端确认审核通过 | 开户完成 | 不自动等同所有 Wallet / Card 能力均可用 |
-| `Rejected` | KYC 审核被拒绝 | DTC `clientStatus = REJECTED` 或后端确认审核拒绝 | 当前流程不可继续 | 是否允许重新申请需业务确认 |
-| `waitlist` | 用户进入等待名单 | 国家不支持、phase 2-waitlist，或来源渠道 APP 命中 waitlist | 阻断继续 KYC | 等国家线或运营策略变化 |
-| `Locked` | 用户暂时不能继续认证 | Face 等关键认证超过失败次数限制 | 阻断继续认证 | 解锁方式与时间需以后端规则为准 |
-
-DTC 状态不应在前端直接等同为 AIX 页面状态，需要由后端统一映射。当前关键映射边界如下：
-
-| DTC 字段 | 关键值 | AIX 使用边界 |
+| 状态 | 触发条件 | 用户侧表现 |
 |---|---|---|
-| `clientStatus` | `ACTIVATED` | 可映射为 KYC 审核通过 / 开户完成 |
-| `clientStatus` | `REJECTED` | 可映射为 KYC 审核拒绝 |
-| `clientStatus` | `PENDING_KYC` | 可能表示未完成或审核中，需结合认证项状态判断 |
-| `passportVerifyStatus` / `faceIdVerifyStatus` / `proofOfAddressVerifyStatus` | `UNVERIFIED` | 对应认证项未完成 |
-| 同上 | `VERIFYING` | 对应认证项处理中 |
-| 同上 | `VERIFY_SUCCESS` | 对应认证项成功 |
-| 同上 | `VERIFY_FAILURE` | 对应认证项失败，失败文案按错误码映射 |
+| `Pending` | 未完成或中断后可继续 | 进入对应流程节点 |
+| `failed` | Passport/Face/POA 任一失败 | 展示失败原因，可重试 |
+| `Under review` | 已提交审核 | 等待结果，不可重复提交 |
+| `Approved` | DTC `clientStatus = ACTIVATED` | 开户完成 |
+| `Rejected` | DTC `clientStatus = REJECTED` | 流程终止 |
+| `waitlist` | 国家不支持或命中 waitlist | 阻断继续 |
+| `Locked` | 失败次数超限 | 暂时锁定 |
+
+**DTC → AIX 状态映射**
+
+| DTC 字段 | 状态值 | AIX 映射 |
+|---|---|---|
+| `clientStatus` | `ACTIVATED` / `REJECTED` / `PENDING_KYC` | Approved / Rejected / 审核中 |
+| `passportVerifyStatus`<br>`faceIdVerifyStatus`<br>`proofOfAddressVerifyStatus` | `UNVERIFIED` / `VERIFYING` / `VERIFY_SUCCESS` / `VERIFY_FAILURE` | 未开始 / 处理中 / 通过 / 失败 |
 
 ### 3.3 关键规则补充
 
