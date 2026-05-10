@@ -392,157 +392,17 @@ flowchart LR
 
 ### 4.2 KYC Loading Page
 
-#### Page Snapshot
-
-![KYC Loading Page](_assets/account-opening/image6.jpeg)
-
-| 项目 | 说明 |
+| 主页面 | 解释说明 |
 | --- | --- |
-| 页面类型 | 状态页。 |
-| 页面目标 | 在进入 KYC 时判断用户是否可继续流程。 |
-| 入口 / 触发 | 用户从业务入口发起 KYC。 |
-| 成功流转 | 可继续时进入 KYC Start 或后续流程。 |
-| 异常流转 | Network Error、Server Error、Loading Failed。 |
-
-#### Rule Anchors
-
-| Rule ID | Scope | Rule |
-| --- | --- | --- |
-| KYC-LOADING-001 | 页面类型 | 状态页。 |
-| KYC-LOADING-002 | 页面目标 | 在进入 KYC 时判断用户是否可继续流程。 |
-| KYC-LOADING-003 | 入口 / 触发 | 用户从业务入口发起 KYC。 |
-| KYC-LOADING-004 | 展示内容 | 状态 1：loading...；状态 2：Verification unavailable 及说明文案。 |
-| KYC-LOADING-005 | 用户动作 | 可点击关闭按钮；状态 2 可点击 Back。 |
-| KYC-LOADING-006 | 系统处理 / 责任方 | AIX Backend 查询 KYC 状态与 waitlist 状态；AIX App 展示分流结果。 |
-| KYC-LOADING-007 | 状态规则 | Under review / Rejected / Approved 或 APP 来源 waitlist 展示状态 2；Pending / failed 进入后续流程。 |
-| KYC-LOADING-008 | 成功流转 | 可继续时进入 KYC Start 或后续流程。 |
-| KYC-LOADING-009 | 失败 / 异常流转 | Network Error、Server Error、Loading Failed。 |
-| KYC-LOADING-010 | 边界 | waitlist 是页面级拦截，不是弹窗继续。 |
-
-#### UX Mapping
-
-| 图中位置 | Element ID | 页面元素 | 展示 / 交互 | Rule Ref |
-| --- | --- | --- | --- | --- |
-| 顶部导航区 | close_button | 关闭按钮 | 点击关闭当前 KYC 流程。 | KYC-LOADING-005 |
-| 主体状态区 | loading_state | loading 状态 | 展示 loading 状态；等待后端判断 KYC / waitlist 状态。 | KYC-LOADING-004、KYC-LOADING-006 |
-| 主体状态区 | unavailable_state | Verification unavailable 状态 | 当状态命中拦截条件时展示不可用说明。 | KYC-LOADING-004、KYC-LOADING-007 |
-| 底部操作区 | back_button | Back 按钮 | 状态 2 可点击 Back。 | KYC-LOADING-005 |
-
-#### Navigation / Behavior
-
-| Action / State | Result | Rule Ref |
-| --- | --- | --- |
-| 状态允许继续 | 进入 KYC Start 或后续流程。 | KYC-LOADING-008 |
-| Under review / Rejected / Approved / APP waitlist | 展示 Verification unavailable。 | KYC-LOADING-007 |
-| Pending / failed | 进入后续流程。 | KYC-LOADING-007 |
-
-#### System / Edge Cases
-
-| Case | Handling | Rule Ref |
-| --- | --- | --- |
-| 网络 / 服务异常 | 进入 Network Error、Server Error 或 Loading Failed。 | KYC-LOADING-009 |
-| Waitlist | 页面级拦截。 | KYC-LOADING-010 |
+| **1. 页面用途**<br>进入 KYC 时的状态判断页，用来确认用户是否可以继续开户认证。<br><br>![KYC Loading Page](_assets/account-opening/image6.jpeg) | **3. 进入与跳转**<br><br>\| 场景 \| 条件 \| 结果 \|<br>\|---\|---\|---\|<br>\| 正常进入 \| 用户从业务入口发起 KYC \| App 展示 loading，并请求后端判断 KYC / waitlist 状态 \|<br>\| 可继续认证 \| KYC 状态为 Pending / failed \| 进入 KYC Start 或后续未完成节点 \|<br>\| 不可继续认证 \| KYC 状态为 Under review / Rejected / Approved \| 展示 Verification unavailable \|<br>\| APP waitlist \| 用户命中 APP 来源 waitlist \| 展示 Verification unavailable，页面级拦截 \| |
+| **2. 展示内容**<br>**状态 1：Loading**<br>- 展示 `loading...` 状态。<br><br>**状态 2：Verification unavailable**<br>- 展示不可继续认证说明。<br>- 展示 `Back` 按钮。<br><br>**顶部操作**<br>- 展示关闭按钮。 | **4. 用户操作与异常**<br><br>\| 类型 \| 触发 \| 处理 \|<br>\|---\|---\|---\|<br>\| 用户操作 \| 点击关闭按钮 \| 关闭当前 KYC 流程 \|<br>\| 用户操作 \| 在 Verification unavailable 点击 Back \| 返回业务入口 \|<br>\| 异常 \| 网络异常 \| 进入 Network Error Page \|<br>\| 异常 \| 服务异常 \| 进入 Server Error Page \|<br>\| 异常 \| 30 秒无结果 \| 进入 Loading Failed Page \|<br><br>**5. 关联接口 / 状态 / 来源**<br>- 状态：Pending、failed、Under review、Rejected、Approved、waitlist。<br>- 页面：KYC Start、Network Error、Server Error、Loading Failed。<br>- Rule ID：KYC-LOADING-001 ~ KYC-LOADING-010。<br>- Source：AIX KYC PRD 7.2.2。 |
 
 ### 4.3 KYC Start Page
 
-#### Product Review Summary
-
-| 项目 | 说明 |
+| 主页面 | 解释说明 |
 | --- | --- |
-| 页面目标 | 让用户完成 KYC 前置确认：确认身份验证、选择居住国家、同意协议。 |
-| 用户状态 | 用户已通过 KYC Loading 分流，允许进入 KYC 申请流程。 |
-| 主动作 | 点击立即认证 / Continue / Verify。 |
-| 次要动作 | 返回 / 关闭、选择居住国家、阅读并勾选协议。 |
-| 关键产品判断 | 国家是否支持、协议是否已完成、手机号未绑定边界是否需要阻断。 |
-| 依赖规则 | KYC-START-003、KYC-START-006、KYC-START-007、KYC-START-008、KYC-START-009、KYC-START-010 |
-
-#### Page States / Snapshot
-
-##### State A：KYC Start 主页面
-
-![KYC Start Page](_assets/account-opening/image7.png)
-
-| 项目 | 说明 |
-| --- | --- |
-| 状态含义 | 用户进入 KYC 起始页，准备选择国家并完成协议。 |
-| 触发条件 | KYC Loading 判断用户可继续。 |
-| 页面重点 | 国家选择、协议勾选、主按钮状态。 |
-| 用户下一步 | 选择国家、阅读协议并点击主按钮。 |
-| Rule Ref | KYC-START-001、KYC-START-003、KYC-START-004、KYC-START-005、KYC-START-007 |
-
-##### State B：Declaration 阅读状态
-
-![Declaration 阅读状态](_assets/account-opening/image9.png)
-
-| 项目 | 说明 |
-| --- | --- |
-| 状态含义 | 用户查看 Declaration of Reverse Solicitation。 |
-| 触发条件 | 用户点击 Declaration 链接或协议项。 |
-| 页面重点 | 强制阅读后才能完成协议前置条件。 |
-| 用户下一步 | 完成阅读 / 同意后返回 KYC Start Page。 |
-| Rule Ref | KYC-START-006、KYC-START-007、4.3.1 |
-
-##### State C：不支持国家 / waitlist 拦截
-
-![Waitlist 拦截](_assets/account-opening/image10.png)
-
-| 项目 | 说明 |
-| --- | --- |
-| 状态含义 | 国家不支持时，用户不能继续 KYC。 |
-| 触发条件 | 用户点击主按钮后，后端判断国家不支持。 |
-| 页面重点 | 阻止继续 KYC，并进入 waitlist 处理。 |
-| 用户下一步 | 进入 Waitlist Page 或返回。 |
-| Rule Ref | KYC-START-009 |
-
-#### UX Mapping
-
-| 图中位置 | Element ID | 页面元素 | 展示规则 | 交互规则 | Rule Ref |
-| --- | --- | --- | --- | --- | --- |
-| 顶部导航区 | close_button | 关闭 / 返回入口 | 展示关闭或返回入口。 | 点击返回或关闭当前 KYC 流程。 | KYC-START-005 |
-| 标题说明区 | page_title_subtitle | Title / Subtitle | 展示 KYC 开始说明。 | 不可点击。 | KYC-START-004 |
-| 中部国家区 | residence_country_selector | 居住国家 / 地区 | 展示当前选择的居住国家。 | 点击进入 Select Residence Country Page。 | KYC-START-005 |
-| 协议区 | terms_privacy_checkbox | Terms / Privacy 协议勾选 | 展示协议勾选项。 | 未满足协议条件时主按钮禁用。 | KYC-START-007 |
-| 协议区 | reverse_solicitation_link | Declaration of Reverse Solicitation | 展示 Declaration 协议入口。 | 需阅读后完成协议前置条件；细则见 4.3.1。 | KYC-START-006、KYC-START-007 |
-| 底部主按钮 | start_verify_button | 立即认证按钮 | 根据协议状态展示禁用 / 启用。 | 点击后判断国家是否支持。 | KYC-START-007、KYC-START-008、KYC-START-009 |
-| 弹窗 / 拦截区 | waitlist_intercept_message | waitlist 拦截说明 | 国家不支持时展示。 | 进入 waitlist 处理，不继续后续 KYC。 | KYC-START-009 |
-
-#### Navigation / Behavior
-
-| Action / State | Result | Rule Ref |
-| --- | --- | --- |
-| 点击居住国家 | 进入 Select Residence Country Page。 | KYC-START-005 |
-| 点击主按钮且国家支持 | 进入 Identity Verify。 | KYC-START-008 |
-| 点击主按钮但国家不支持 | 进入 Waitlist。 | KYC-START-009 |
-| 协议未完成时点击主按钮 | 按钮不可用，不能继续。 | KYC-START-007 |
-
-#### System / Edge Cases
-
-| Case | Handling | Rule Ref |
-| --- | --- | --- |
-| 协议保存 | Backend 保存协议同意、协议快照、Reverse Solicitation 信息。 | KYC-START-006 |
-| 协议获取失败 | 展示 toast。 | KYC-START-009 |
-| 手机号未绑定 | 见 GAP-KYC-PHONE-001。 | KYC-START-010 |
-
-#### Product Decisions / Open Gaps
-
-| Gap ID | 问题 | 当前处理 | 影响 |
-| --- | --- | --- | --- |
-| GAP-KYC-PHONE-001 | 手机号未绑定时的处理边界。 | 不在本页面自行裁决；仅引用边界。 | 影响是否允许继续 KYC Start 后续流程。 |
-
-#### Rule Anchors
-
-| Rule ID | Scope | Rule |
-| --- | --- | --- |
-| KYC-START-001 | 页面类型 | 主页面。 |
-| KYC-START-002 | 页面目标 | 让用户确认开始身份验证、选择居住国家并同意协议。 |
-| KYC-START-003 | 入口 / 触发 | KYC Loading 判断可继续后进入。 |
-| KYC-START-004 | 展示内容 | title、subtitle、居住国家、协议、立即认证按钮。 |
-| KYC-START-005 | 用户动作 | 选择国家、勾选协议、点击立即认证、返回。 |
-| KYC-START-006 | 系统处理 / 责任方 | App 展示国家和协议；Backend 保存协议同意、快照、Reverse Solicitation 信息。 |
-| KYC-START-007 | 协议按钮规则 | 协议未勾选按钮禁用；已勾选按钮可点；已绑定手机号不展示额外 toast。 |
-| KYC-START-008 | 成功流转 | 支持国家进入 Identity Verify。 |
-| KYC-START-009 | 失败 / 异常流转 | 不支持国家进入 waitlist；协议获取失败 toast。 |
-| KYC-START-010 | 边界 | 手机号未绑定处理见 GAP-KYC-PHONE-001。 |
+| **1. 页面用途**<br>用户正式开始身份认证前的确认页，用于选择居住国家、完成协议确认并进入证件认证。<br><br>![KYC Start Page](_assets/account-opening/image7.png)<br><br>![Declaration 阅读状态](_assets/account-opening/image9.png)<br><br>![Waitlist 拦截](_assets/account-opening/image10.png) | **3. 进入与跳转**<br><br>\| 场景 \| 条件 \| 结果 \|<br>\|---\|---\|---\|<br>\| 进入页面 \| KYC Loading 判断用户可继续 \| 展示 KYC Start 主页面 \|<br>\| 选择国家 \| 点击居住国家 / 地区 \| 进入 Select Residence Country Page \|<br>\| 国家支持 \| 点击主按钮且国家为支持范围 \| 进入 Identity Verify Page \|<br>\| 国家不支持 \| 点击主按钮后命中不支持国家 / waitlist 条件 \| 进入 Waitlist Page 或展示 waitlist 拦截 \|<br>\| 手机号未绑定 \| 用户手机号状态不满足前置条件 \| 处理边界待确认，见 GAP-KYC-PHONE-001 \| |
+| **2. 展示内容**<br>- Title / Subtitle：KYC 开始说明。<br>- 居住国家 / 地区选择入口。<br>- Terms of service 勾选项。<br>- Privacy Policy 勾选项。<br>- Declaration of Reverse Solicitation 阅读 / 同意入口。<br>- 立即认证按钮：协议未完成时禁用，完成后启用。 | **4. 用户操作与异常**<br><br>\| 类型 \| 触发 \| 处理 \|<br>\|---\|---\|---\|<br>\| 用户操作 \| 点击居住国家 \| 进入国家选择页 \|<br>\| 用户操作 \| 勾选 Terms / Privacy \| 记录协议同意状态 \|<br>\| 用户操作 \| 点击 Declaration \| 打开强制阅读内容；点击同意后完成前置条件 \|<br>\| 用户操作 \| 协议未完成时点击主按钮 \| 按钮不可用，不能继续 \|<br>\| 用户操作 \| 协议完成且国家支持时点击主按钮 \| 保存协议信息并进入 Identity Verify \|<br>\| 异常 \| 协议获取失败 \| 展示 toast，阻止继续 \|<br>\| 异常 \| 国家不支持 \| 进入 waitlist 处理，不继续后续 KYC \|<br><br>**5. 关联接口 / 状态 / 来源**<br>- 状态：国家支持状态、协议同意状态、Reverse Solicitation Declaration。<br>- 数据：协议同意时间、协议内容、协议快照、reverseSolicitation 入参。<br>- Gap：GAP-KYC-PHONE-001。<br>- Rule ID：KYC-START-001 ~ KYC-START-010。<br>- Source：AIX KYC PRD 7.2.3；Master sub account。 |
 
 #### 4.3.1 协议元素明细
 
@@ -555,542 +415,59 @@ flowchart LR
 
 ### 4.4 Select Residence Country Page
 
-#### Page Snapshot
-
-![Select Residence Country Page](_assets/account-opening/image11.png)
-
-![国家列表 / 搜索状态](_assets/account-opening/image12.png)
-
-| 项目 | 说明 |
+| 主页面 | 解释说明 |
 | --- | --- |
-| 页面类型 | 选择页。 |
-| 页面目标 | 让用户选择居住国家 / 地区。 |
-| 入口 / 触发 | KYC Start 或 Address Upload 点击 Residence。 |
-| 成功流转 | 选择国家后返回上一级页面。 |
-| 边界 | 国家线存在版本口径冲突，见 GAP-KYC-COUNTRY-001。 |
-
-#### Rule Anchors
-
-| Rule ID | Scope | Rule |
-| --- | --- | --- |
-| KYC-COUNTRY-001 | 页面类型 | 选择页。 |
-| KYC-COUNTRY-002 | 页面目标 | 让用户选择居住国家 / 地区。 |
-| KYC-COUNTRY-003 | 入口 / 触发 | KYC Start 或 Address Upload 点击 Residence。 |
-| KYC-COUNTRY-004 | 展示内容 | 国家列表、搜索、支持国家和不可支持国家。 |
-| KYC-COUNTRY-005 | 用户动作 | 搜索、选择国家、关闭返回。 |
-| KYC-COUNTRY-006 | 系统处理 / 责任方 | App 根据配置展示国家；禁止国家隐藏。 |
-| KYC-COUNTRY-007 | 元素 / 状态 / 提示规则 | 默认 IP 检测国家；检测不到默认 SG；按首字母排序。 |
-| KYC-COUNTRY-008 | 成功流转 | 选择国家后返回上一级页面。 |
-| KYC-COUNTRY-009 | 边界 | 国家线存在版本口径冲突，见 GAP-KYC-COUNTRY-001。 |
-
-#### UX Mapping
-
-| 图中位置 | Element ID | 页面元素 | 展示 / 交互 | Rule Ref |
-| --- | --- | --- | --- | --- |
-| 顶部导航区 | close_button | 关闭入口 | 点击关闭并返回上一级页面。 | KYC-COUNTRY-005、KYC-COUNTRY-008 |
-| 搜索区 | country_search_input | 国家搜索输入框 | 用户可输入关键词搜索。 | KYC-COUNTRY-005 |
-| 国家列表区 | country_list | 国家列表 | 展示支持国家和不可支持国家。 | KYC-COUNTRY-004 |
-| 国家列表区 | country_item | 国家项 | 点击选择国家。 | KYC-COUNTRY-005、KYC-COUNTRY-008 |
-| 搜索结果区 | search_result_list | 搜索结果列表 | 根据搜索词展示匹配国家。 | KYC-COUNTRY-005 |
-
-#### System / Edge Cases
-
-| Case | Handling | Rule Ref |
-| --- | --- | --- |
-| 国家展示 | App 根据配置展示国家；禁止国家隐藏。 | KYC-COUNTRY-006 |
-| 默认值 | 默认 IP 检测国家；检测不到默认 SG；按首字母排序。 | KYC-COUNTRY-007 |
-| 国家线冲突 | 见 GAP-KYC-COUNTRY-001。 | KYC-COUNTRY-009 |
+| **1. 页面用途**<br>让用户选择或修改居住国家 / 地区，供 KYC Start 和 Address Upload 使用。<br><br>![Select Residence Country Page](_assets/account-opening/image11.png)<br><br>![国家列表 / 搜索状态](_assets/account-opening/image12.png) | **3. 进入与跳转**<br><br>\| 场景 \| 条件 \| 结果 \|<br>\|---\|---\|---\|<br>\| 从 KYC Start 进入 \| 用户点击居住国家 / 地区 \| 打开国家选择页 \|<br>\| 从 Address Upload 进入 \| 用户点击 Residence \| 打开国家选择页 \|<br>\| 选择国家 \| 用户点击国家项 \| 返回上一级页面并带回选择结果 \|<br>\| 关闭页面 \| 用户点击关闭 / 返回 \| 返回上一级页面，不额外推进流程 \| |
+| **2. 展示内容**<br>- 搜索输入框。<br>- 国家 / 地区列表。<br>- 搜索结果列表。<br>- 支持国家和不可支持国家展示。<br>- 默认国家：优先 IP 检测国家；检测不到默认 SG。<br>- 排序：按首字母排序。 | **4. 用户操作与异常**<br><br>\| 类型 \| 触发 \| 处理 \|<br>\|---\|---\|---\|<br>\| 用户操作 \| 输入关键词搜索 \| 展示匹配国家结果 \|<br>\| 用户操作 \| 点击国家项 \| 选中国家并返回来源页面 \|<br>\| 用户操作 \| 点击关闭 / 返回 \| 返回来源页面 \|<br>\| 异常 \| 国家配置存在冲突 \| 不在页面内裁决，引用 GAP-KYC-COUNTRY-001 \|<br><br>**5. 关联接口 / 状态 / 来源**<br>- 状态：国家 Type、支持国家、waitlist 国家、Forbiden / 禁止国家。<br>- 规则：禁止国家隐藏；国家线口径冲突见 Gap。<br>- Gap：GAP-KYC-COUNTRY-001。<br>- Rule ID：KYC-COUNTRY-001 ~ KYC-COUNTRY-009。<br>- Source：AIX KYC PRD 7.2.3.1。 |
 
 ### 4.5 Waitlist Page
 
-#### Page Snapshot
-
-![Waitlist Page](_assets/account-opening/image13.png)
-
-| 项目 | 说明 |
+| 主页面 | 解释说明 |
 | --- | --- |
-| 页面类型 | 拦截 / 提交页。 |
-| 页面目标 | 对不支持国家或 waitlist 用户收集邮箱，并阻止继续 KYC。 |
-| 入口 / 触发 | 国家为 phase 2-waitlist，或 KYC Loading 命中 waitlist。 |
-| 成功流转 | 提交成功后返回业务入口页，用户无法继续申请 KYC。 |
-| 异常流转 | 网络异常 / 后端服务器错误 toast。 |
-
-#### Rule Anchors
-
-| Rule ID | Scope | Rule |
-| --- | --- | --- |
-| KYC-WAITLIST-001 | 页面类型 | 拦截 / 提交页。 |
-| KYC-WAITLIST-002 | 页面目标 | 对不支持国家或 waitlist 用户收集邮箱，并阻止继续 KYC。 |
-| KYC-WAITLIST-003 | 入口 / 触发 | 国家为 phase 2-waitlist，或 KYC Loading 命中 waitlist。 |
-| KYC-WAITLIST-004 | 展示内容 | email 输入框、Join waitlist 按钮、关闭按钮。 |
-| KYC-WAITLIST-005 | 用户动作 | 输入 email、提交、关闭。 |
-| KYC-WAITLIST-006 | 系统处理 / 责任方 | Backend 按 userId 加入 waitlist，记录 email、国家、来源、提交时间、设备指纹，并推送数仓。 |
-| KYC-WAITLIST-007 | 元素 / 状态 / 提示规则 | email 最长 103 字符；空值和格式校验；按钮根据输入状态禁用 / 启用。 |
-| KYC-WAITLIST-008 | 成功流转 | 提交成功后返回业务入口页，用户无法继续申请 KYC。 |
-| KYC-WAITLIST-009 | 失败 / 异常流转 | 网络异常 / 后端服务器错误 toast。 |
-| KYC-WAITLIST-010 | 边界 | waitlist 是页面级拦截。 |
-
-#### UX Mapping
-
-| 图中位置 | Element ID | 页面元素 | 展示 / 交互 | Rule Ref |
-| --- | --- | --- | --- | --- |
-| 顶部导航区 | close_button | 关闭按钮 | 点击关闭 waitlist 页面。 | KYC-WAITLIST-005 |
-| 说明区 | waitlist_message | waitlist 说明文案 | 提示当前国家或用户无法继续 KYC。 | KYC-WAITLIST-002、KYC-WAITLIST-010 |
-| 表单区 | email_input | Email 输入框 | 输入 email；校验空值、格式、长度。 | KYC-WAITLIST-004、KYC-WAITLIST-007 |
-| 底部操作区 | join_waitlist_button | Join waitlist 按钮 | 根据输入状态禁用 / 启用；点击提交。 | KYC-WAITLIST-005、KYC-WAITLIST-007 |
-
-#### System / Edge Cases
-
-| Case | Handling | Rule Ref |
-| --- | --- | --- |
-| 加入 waitlist | Backend 按 userId 记录 email、国家、来源、提交时间、设备指纹，并推送数仓。 | KYC-WAITLIST-006 |
-| 提交成功 | 返回业务入口页，用户无法继续申请 KYC。 | KYC-WAITLIST-008 |
-| 提交失败 | 网络异常 / 后端服务器错误 toast。 | KYC-WAITLIST-009 |
+| **1. 页面用途**<br>当用户所在国家暂不支持开户时，拦截后续 KYC，并允许用户提交邮箱加入 waitlist。<br><br>![Waitlist Page](_assets/account-opening/image13.png) | **3. 进入与跳转**<br><br>\| 场景 \| 条件 \| 结果 \|<br>\|---\|---\|---\|<br>\| 国家不支持 \| KYC Start 或国家选择命中 phase 2 - waitlist \| 进入 Waitlist Page \|<br>\| APP 来源 waitlist \| 用户已在 waitlist 中 \| 在 Loading 阶段拦截，不能继续 KYC \|<br>\| 提交成功 \| 邮箱校验通过且接口成功 \| 返回流程入口，用户无法继续申请 KYC \|<br>\| 放弃提交 \| 用户关闭或返回 \| 返回来源页面 / 入口 \| |
+| **2. 展示内容**<br>- Waitlist 说明文案。<br>- Email 输入框。<br>- 提交按钮。<br>- 返回 / 关闭入口。 | **4. 用户操作与异常**<br><br>\| 类型 \| 触发 \| 处理 \|<br>\|---\|---\|---\|<br>\| 用户操作 \| 输入邮箱 \| 校验非空和邮箱格式 \|<br>\| 用户操作 \| 点击提交 \| 按 userId 加入 waitlist，并记录邮箱、国家、来源、设备指纹等信息 \|<br>\| 用户操作 \| 点击关闭 / 返回 \| 返回来源页面 / 入口 \|<br>\| 异常 \| 邮箱为空或格式错误 \| 展示输入校验提示，不提交 \|<br>\| 异常 \| 网络 / 服务器错误 \| 展示错误提示，允许重试 \|<br><br>**5. 关联接口 / 状态 / 来源**<br>- 状态：waitlist。<br>- 数据：userId、email、country、source、device fingerprint。<br>- 边界：waitlist 是页面级拦截，不是弹窗继续。<br>- Rule ID：KYC-WAITLIST-001 ~ KYC-WAITLIST-010。<br>- Source：AIX KYC PRD 7.2.3.2。 |
 
 ### 4.6 Identity Verify Page / Identity Scan H5
 
-#### Page Snapshot
-
-![Identity Verify Page](_assets/account-opening/image14.png)
-
-![Camera Permission Popup](_assets/account-opening/image15.png)
-
-![Identity Scan H5 来源图](_assets/account-opening/image16.png)
-
-| 项目 | 说明 |
+| 主页面 | 解释说明 |
 | --- | --- |
-| 页面类型 | 主页面 + 外部 H5。 |
-| 页面目标 | 引导用户上传 / 扫描护照完成 Passport OCR。 |
-| 入口 / 触发 | KYC Start 支持国家且协议已同意。 |
-| 成功流转 | Identity Scan 成功进入 Face Guide。 |
-| 异常流转 | Identity Scan 失败返回 Identity Verify。 |
-
-#### Rule Anchors
-
-| Rule ID | Scope | Rule |
-| --- | --- | --- |
-| KYC-IDV-001 | 页面类型 | 主页面 + 外部 H5。 |
-| KYC-IDV-002 | 页面目标 | 引导用户上传 / 扫描护照完成 Passport OCR。 |
-| KYC-IDV-003 | 入口 / 触发 | KYC Start 支持国家且协议已同意。 |
-| KYC-IDV-004 | 展示内容 | 标题、副标题、上传 / 相机按钮、权限弹窗。 |
-| KYC-IDV-005 | 用户动作 | 点击相机、授权、进入 H5 扫描护照。 |
-| KYC-IDV-006 | 系统处理 / 责任方 | App 判断相机权限；Backend / DTC 生成 Passport H5 URL；AAI 完成 OCR。 |
-| KYC-IDV-007 | 元素 / 状态 / 提示规则 | 未授权弹窗；永久拒绝 open settings；DTC 01009 / 01005 toast。 |
-| KYC-IDV-008 | 成功流转 | Identity Scan 成功进入 Face Guide。 |
-| KYC-IDV-009 | 失败 / 异常流转 | Identity Scan 失败返回 Identity Verify。 |
-| KYC-IDV-010 | 边界 | App 不判断 AAI 内部识别逻辑。 |
-
-#### UX Mapping
-
-| 图中位置 | Element ID | 页面元素 | 展示 / 交互 | Rule Ref |
-| --- | --- | --- | --- | --- |
-| 顶部导航区 | back_or_close_button | 返回 / 关闭入口 | 点击返回或关闭当前验证流程。 | KYC-IDV-005 |
-| 标题说明区 | identity_verify_title | 标题 / 副标题 | 展示护照验证说明。 | KYC-IDV-004 |
-| 主体操作区 | camera_button | 相机按钮 | 点击后判断相机权限并进入扫描流程。 | KYC-IDV-005、KYC-IDV-006 |
-| 主体操作区 | upload_button | 上传入口 | 点击后进入上传 / 扫描流程。 | KYC-IDV-005 |
-| 弹窗标题区 | permission_title | 相机权限标题 | 提示需要相机权限。 | KYC-IDV-007 |
-| 弹窗操作区 | not_now_button | Not now | 关闭弹窗并停留当前页。 | KYC-IDV-007 |
-| 弹窗操作区 | allow_access_button | Allow access | 触发系统授权或引导 open settings。 | KYC-IDV-007 |
-| H5 区域 | identity_scan_h5 | 外部 H5 扫描页 | 由 AAI H5 完成 Passport OCR。 | KYC-IDV-006 |
-
-#### Navigation / Behavior
-
-| Action / State | Result | Rule Ref |
-| --- | --- | --- |
-| 授权成功并进入 H5 | 完成 OCR 后进入 Face Guide。 | KYC-IDV-008 |
-| Identity Scan 失败 | 返回 Identity Verify。 | KYC-IDV-009 |
-
-#### System / Edge Cases
-
-| Case | Handling | Rule Ref |
-| --- | --- | --- |
-| DTC toast | DTC 01009 / 01005 toast。 | KYC-IDV-007 |
-| AAI 逻辑 | App 不判断 AAI 内部识别逻辑。 | KYC-IDV-010 |
+| **1. 页面用途**<br>引导用户完成护照证件扫描，并通过外部 H5 获取 Passport OCR 结果。 | **3. 进入与跳转**<br><br>\| 场景 \| 条件 \| 结果 \|<br>\|---\|---\|---\|<br>\| 进入证件认证 \| KYC Start 国家和协议校验通过 \| 展示 Identity Verify Page \|<br>\| 开始扫描 \| 用户点击相机 / 开始按钮且有相机权限 \| 请求 Passport H5 URL 并进入 Identity Scan H5 \|<br>\| 扫描成功 \| AAI / DTC 返回 Passport OCR 成功 \| 进入 Face Guide Page \|<br>\| 扫描失败 \| AAI / DTC 返回失败或用户中断 \| 返回 Identity Verify 或按失败原因展示后续处理 \| |
+| **2. 展示内容**<br>- 证件认证说明。<br>- 相机 / 开始扫描入口。<br>- 权限提示。<br>- 外部 Identity Scan H5。 | **4. 用户操作与异常**<br><br>\| 类型 \| 触发 \| 处理 \|<br>\|---\|---\|---\|<br>\| 用户操作 \| 点击相机 / 开始扫描 \| 检查相机权限并请求 Passport H5 URL \|<br>\| 用户操作 \| 完成 H5 护照扫描 \| 等待 AAI / DTC 返回 OCR 结果 \|<br>\| 用户操作 \| 取消或返回 H5 \| 返回 Identity Verify Page \|<br>\| 异常 \| 相机未授权 / 永久拒绝 \| 展示权限提示或引导开启权限 \|<br>\| 异常 \| DTC 返回 01009 / 01005 / 其他错误 \| 展示 toast 或错误提示，阻止进入 H5 \|<br>\| 异常 \| Passport OCR 失败 \| 记录失败原因，返回 Identity Verify 或进入失败处理 \|<br><br>**5. 关联接口 / 状态 / 来源**<br>- 接口：get-verification-url(PASSPORT)。<br>- 状态：passportVerifyStatus、requestId、url、expireTime。<br>- 外部依赖：DTC、AAI H5。<br>- Rule ID：KYC-IDV-001 ~ KYC-IDV-010。<br>- Source：AIX KYC PRD 7.2.4、7.2.5；Master sub account。 |
 
 ### 4.7 Face Guide / Face Scan / Face Loading
 
-#### Page Snapshot
-
-![Face Guide Page](_assets/account-opening/image17.png)
-
-![Face Locked Popup](_assets/account-opening/image18.png)
-
-![Face Scan H5](_assets/account-opening/image19.png)
-
-![Face Loading Page](_assets/account-opening/image6.jpeg)
-
-| 项目 | 说明 |
+| 主页面 | 解释说明 |
 | --- | --- |
-| 页面类型 | 主页面 + 外部 H5 + 状态页。 |
-| 页面目标 | 完成活体采集和人脸比对。 |
-| 入口 / 触发 | Passport OCR 成功后进入。 |
-| 成功流转 | Face 成功进入 Address Upload。 |
-| 异常流转 | Face Failed、Loading Failed、Network Error、Server Error。 |
-
-#### Rule Anchors
-
-| Rule ID | Scope | Rule |
-| --- | --- | --- |
-| KYC-FACE-001 | 页面类型 | 主页面 + 外部 H5 + 状态页。 |
-| KYC-FACE-002 | 页面目标 | 完成活体采集和人脸比对。 |
-| KYC-FACE-003 | 入口 / 触发 | Passport OCR 成功后进入。 |
-| KYC-FACE-004 | 展示内容 | Face Guide 说明、Continue 按钮、锁定弹窗、Face Loading。 |
-| KYC-FACE-005 | 用户动作 | 点击 Continue、完成 H5 活体采集、等待结果。 |
-| KYC-FACE-006 | 系统处理 / 责任方 | Backend 判断锁定、获取 passport country、生成 selfie H5 URL、轮询或接收结果。 |
-| KYC-FACE-007 | 锁定 / 超时规则 | 5 次锁 20 分钟；10 次锁 24 小时；接口连续 20 次锁 20 分钟；30 秒超时进入 Loading Failed。 |
-| KYC-FACE-008 | 成功流转 | Face 成功进入 Address Upload。 |
-| KYC-FACE-009 | 失败 / 异常流转 | Face Failed、Loading Failed、Network Error、Server Error。 |
-| KYC-FACE-010 | 边界 | 同一 signatureId 最多重试 3 次，重来需重新 generate-url。 |
-
-#### UX Mapping
-
-| 图中位置 | Element ID | 页面元素 | 展示 / 交互 | Rule Ref |
-| --- | --- | --- | --- | --- |
-| 顶部导航区 | close_button | 关闭入口 | 点击关闭当前 Face 流程。 | KYC-FACE-005 |
-| 标题说明区 | face_guide_message | Face Guide 说明 | 展示活体采集前说明。 | KYC-FACE-004 |
-| 底部操作区 | continue_button | Continue 按钮 | 点击后进入 H5 活体采集。 | KYC-FACE-005 |
-| 弹窗区域 | face_lock_popup | Face 锁定弹窗 | 达到锁定阈值时展示，阻止继续发起 Face 流程。 | KYC-FACE-007 |
-| H5 区域 | face_scan_h5 | 外部 H5 活体采集 | 由 AAI H5 进行活体采集。 | KYC-FACE-005 |
-| 主体状态区 | face_loading_state | Face Loading | 等待人脸比对结果。 | KYC-FACE-006 |
-
-#### Navigation / Behavior
-
-| Action / State | Result | Rule Ref |
-| --- | --- | --- |
-| Face 成功 | 进入 Address Upload。 | KYC-FACE-008 |
-| Face 失败 / 超时 / 异常 | 进入 Face Failed、Loading Failed、Network Error、Server Error。 | KYC-FACE-009 |
-
-#### System / Edge Cases
-
-| Case | Handling | Rule Ref |
-| --- | --- | --- |
-| 进入前判断 | Backend 判断锁定、获取 passport country、生成 selfie H5 URL。 | KYC-FACE-006 |
-| 重试边界 | 同一 signatureId 最多重试 3 次，重来需重新 generate-url。 | KYC-FACE-010 |
-| 30 秒超时 | 进入 Loading Failed。 | KYC-FACE-007 |
+| **1. 页面用途**<br>引导用户完成人脸活体采集，并在采集后等待 face verification / face compare 结果。 | **3. 进入与跳转**<br><br>\| 场景 \| 条件 \| 结果 \|<br>\|---\|---\|---\|<br>\| 进入 Face Guide \| Passport OCR 成功 \| 展示人脸认证引导页 \|<br>\| 开始人脸认证 \| 用户点击 Continue 且未命中锁定规则 \| 请求 selfie / liveness H5 URL，进入 Face Scan H5 \|<br>\| 活体采集结束 \| 用户完成 AAI H5 活体采集 \| 进入 Face Loading Page 等待结果 \|<br>\| Face 成功 \| DTC / AAI 返回 face success \| 进入 Address Upload Page \|<br>\| Face 失败 \| DTC / AAI 返回 face failure \| 进入 Face Failed Page \|<br>\| 等待超时 \| Face Loading 30 秒无结果 \| 进入 Loading Failed Page \| |
+| **2. 展示内容**<br>- Face Guide：人脸认证引导说明、Continue 按钮。<br>- Face Scan H5：外部活体采集页面。<br>- Face Loading：结果等待状态。 | **4. 用户操作与异常**<br><br>\| 类型 \| 触发 \| 处理 \|<br>\|---\|---\|---\|<br>\| 用户操作 \| 在 Face Guide 点击 Continue \| 判断锁定规则，获取 passport country，并请求 selfie / liveness H5 URL \|<br>\| 用户操作 \| 完成 Face Scan H5 \| 返回 App 并进入 Face Loading \|<br>\| 用户操作 \| 中断或返回 H5 \| 停留或返回上一认证节点，按 H5 返回结果处理 \|<br>\| 异常 \| 24 小时内 face fail 5 次 \| 锁 20 分钟，展示 Too many attempts \|<br>\| 异常 \| 24 小时内 face fail 10 次 \| 锁 24 小时，展示 Too many attempts \|<br>\| 异常 \| 24 小时内接口层连续发起 20 次 \| 锁 20 分钟 \|<br>\| 异常 \| AAI signatureId 3 次后失效 \| 重新生成 URL \|<br>\| 异常 \| 网络 / 服务异常 \| 展示对应错误页或 toast \|<br><br>**5. 关联接口 / 状态 / 来源**<br>- 接口：get-verification-url(SELFIE / LIVENESS)、face result query / webhook。<br>- 状态：faceIdVerifyStatus、passport country、face fail count、lock 状态。<br>- 页面：Face Failed、Loading Failed、Address Upload。<br>- Rule ID：KYC-FACE-001 ~ KYC-FACE-010。<br>- Source：AIX KYC PRD 7.2.6、7.2.7、7.2.8。 |
 
 ### 4.8 Loading Failed Page
 
-#### Page Snapshot
-
-![Loading Failed Page](_assets/account-opening/image20.png)
-
-| 项目 | 说明 |
+| 主页面 | 解释说明 |
 | --- | --- |
-| 页面类型 | 错误页。 |
-| 页面目标 | 处理 Face Loading 超过 30 秒无结果。 |
-| 入口 / 触发 | Face Loading 等待超过 30 秒。 |
-| 成功流转 | Retry 进入 Face Loading。 |
-| 异常流转 | Leave 返回入口。 |
-
-#### Rule Anchors
-
-| Rule ID | Scope | Rule |
-| --- | --- | --- |
-| KYC-LOADFAIL-001 | 页面类型 | 错误页。 |
-| KYC-LOADFAIL-002 | 页面目标 | 处理 Face Loading 超过 30 秒无结果。 |
-| KYC-LOADFAIL-003 | 入口 / 触发 | Face Loading 等待超过 30 秒。 |
-| KYC-LOADFAIL-004 | 展示内容 | 加载失败提示、Retry、返回。 |
-| KYC-LOADFAIL-005 | 用户动作 | Retry 或 Leave。 |
-| KYC-LOADFAIL-006 | 系统处理 / 责任方 | App 重新进入 Face Loading 并重新提交。 |
-| KYC-LOADFAIL-007 | 元素 / 状态 / 提示规则 | 返回按钮使用通用挽留弹窗。 |
-| KYC-LOADFAIL-008 | 成功流转 | Retry 进入 Face Loading。 |
-| KYC-LOADFAIL-009 | 失败 / 异常流转 | Leave 返回入口。 |
-| KYC-LOADFAIL-010 | 边界 | Retry 不是返回 Face Scan。 |
-
-#### UX Mapping
-
-| 图中位置 | Element ID | 页面元素 | 展示 / 交互 | Rule Ref |
-| --- | --- | --- | --- | --- |
-| 顶部导航区 | back_or_close_button | 返回 / 关闭入口 | 点击触发通用挽留弹窗。 | KYC-LOADFAIL-007 |
-| 中部状态区 | failed_icon | 加载失败状态图标 | 展示加载失败视觉状态。 | KYC-LOADFAIL-004 |
-| 中部标题区 | failed_title | 加载失败提示 | 展示加载失败提示。 | KYC-LOADFAIL-004 |
-| 底部操作区 | retry_button | Retry 按钮 | 点击重新进入 Face Loading。 | KYC-LOADFAIL-005、KYC-LOADFAIL-008、KYC-LOADFAIL-010 |
-| 底部操作区 | leave_button | Leave / Back 操作 | 返回入口。 | KYC-LOADFAIL-005、KYC-LOADFAIL-009 |
-
-#### System / Edge Cases
-
-| Case | Handling | Rule Ref |
-| --- | --- | --- |
-| 重新提交 | App 重新进入 Face Loading 并重新提交。 | KYC-LOADFAIL-006 |
-| Retry 边界 | Retry 不是返回 Face Scan。 | KYC-LOADFAIL-010 |
+| **1. 页面用途**<br>当 Face Loading 超过 30 秒仍未拿到结果时，告知用户当前结果未返回，并提供重试或离开入口。 | **3. 进入与跳转**<br><br>\| 场景 \| 条件 \| 结果 \|<br>\|---\|---\|---\|<br>\| 进入页面 \| Face Loading 超过 30 秒无结果 \| 展示 Loading Failed Page \|<br>\| 用户重试 \| 点击 Retry \| 重新进入 Face Loading / 重新提交结果查询 \|<br>\| 用户离开 \| 点击 Leave \| 返回业务入口 \| |
+| **2. 展示内容**<br>- 超时失败说明。<br>- Retry 按钮。<br>- Leave 按钮。 | **4. 用户操作与异常**<br><br>\| 类型 \| 触发 \| 处理 \|<br>\|---\|---\|---\|<br>\| 用户操作 \| 点击 Retry \| 重新提交或重新查询 Face 结果 \|<br>\| 用户操作 \| 点击 Leave \| 返回入口，不继续等待 \|<br>\| 异常 \| 重试后仍无结果 \| 继续按超时规则展示 Loading Failed \|<br>\| 异常 \| 查询返回失败 \| 进入 Face Failed 或对应错误处理 \|<br><br>**5. 关联接口 / 状态 / 来源**<br>- 状态：Face Loading timeout、face result pending。<br>- 页面：Face Loading、Face Failed、入口页。<br>- Rule ID：KYC-LOADING-FAILED-001 ~ KYC-LOADING-FAILED-010。<br>- Source：AIX KYC PRD 7.2.9。 |
 
 ### 4.9 Face Failed Page
 
-#### Product Review Summary
-
-| 项目 | 说明 |
+| 主页面 | 解释说明 |
 | --- | --- |
-| 页面目标 | 展示 KYC 失败原因，并提供重试或退出路径。 |
-| 用户状态 | 用户已完成某一步验证，但当前验证失败。 |
-| 主动作 | Try again。 |
-| 次要动作 | 关闭 / 返回入口。 |
-| 关键产品判断 | 失败原因优先级、是否允许重试、是否进入锁定。 |
-| 依赖规则 | KYC-FACEFAIL-006、KYC-FACEFAIL-007、KYC-FACEFAIL-008、KYC-FACEFAIL-009、KYC-FACEFAIL-010 |
-
-#### Page States / Snapshot
-
-##### State A：正常失败态
-
-![Face Failed Page](_assets/account-opening/image21.png)
-
-| 项目 | 说明 |
-| --- | --- |
-| 状态含义 | Face / Passport / POA 相关校验失败，用户仍可处理。 |
-| 触发条件 | Face Loading 验证失败、Face Scan 失败、POA 失败等。 |
-| 页面重点 | 固定主文案、动态失败原因、Try again、关闭按钮。 |
-| 用户下一步 | 点击 Try again 重新触发 KYC 流程，或关闭返回入口。 |
-| Rule Ref | KYC-FACEFAIL-003、KYC-FACEFAIL-004、KYC-FACEFAIL-005、KYC-FACEFAIL-008 |
-
-##### State B：锁定态
-
-| 项目 | 说明 |
-| --- | --- |
-| 状态含义 | 失败次数达到锁定条件，用户不能继续重试。 |
-| 触发条件 | 锁定态由失败次数 / 安全规则触发。 |
-| 页面重点 | 展示安全锁定弹窗。 |
-| 用户下一步 | 确认后返回入口。 |
-| Rule Ref | KYC-FACEFAIL-007、KYC-FACEFAIL-009 |
-
-#### UX Mapping
-
-| 图中位置 | Element ID | 页面元素 | 展示规则 | 交互规则 | Rule Ref |
-| --- | --- | --- | --- | --- | --- |
-| 顶部导航区 | close_button | 关闭按钮 | 展示关闭按钮。 | 点击关闭失败页 / 返回入口。 | KYC-FACEFAIL-005 |
-| 中部状态区 | failed_status_icon | 失败状态图标 | 展示失败视觉状态。 | 不可点击。 | KYC-FACEFAIL-004 |
-| 中部标题区 | failure_title | 固定主文案 | 展示固定失败主文案。 | 不可点击。 | KYC-FACEFAIL-004 |
-| 中部说明区 | failure_reason | 动态原因文案 | 根据 passport / face / POA error code 展示失败原因。 | 不可点击。 | KYC-FACEFAIL-006、KYC-FACEFAIL-007、KYC-FACEFAIL-010 |
-| 底部操作区 | try_again_button | Try again 按钮 | 正常失败态展示。 | 点击重新触发 KYC 流程。 | KYC-FACEFAIL-005、KYC-FACEFAIL-008 |
-| 锁定弹窗 | lock_popup | 安全锁定弹窗 | 锁定态展示。 | 确认后返回入口。 | KYC-FACEFAIL-007、KYC-FACEFAIL-009 |
-
-#### Navigation / Behavior
-
-| Action / State | Result | Rule Ref |
-| --- | --- | --- |
-| 点击 Try again | 正常态重新触发 KYC 流程。 | KYC-FACEFAIL-008 |
-| 锁定态确认 | 返回入口。 | KYC-FACEFAIL-009 |
-| 点击关闭按钮 | 关闭失败页 / 返回入口。 | KYC-FACEFAIL-005 |
-
-#### System / Edge Cases
-
-| Case | Handling | Rule Ref |
-| --- | --- | --- |
-| 失败原因优先级 | passport 与 face 均失败时优先 passport。 | KYC-FACEFAIL-007 |
-| 文案映射来源 | 错误文案来源为 PRD 第 9 章映射表。 | KYC-FACEFAIL-010 |
-| 失败原因来源 | Backend 返回失败原因；App 按优先级展示映射文案。 | KYC-FACEFAIL-006 |
-
-#### Product Decisions / Open Gaps
-
-| Gap ID | 问题 | 当前处理 | 影响 |
-| --- | --- | --- | --- |
-| - | 本页暂无新的产品裁决项。 | 按 Rule Anchors 执行。 | - |
-
-#### Rule Anchors
-
-| Rule ID | Scope | Rule |
-| --- | --- | --- |
-| KYC-FACEFAIL-001 | 页面类型 | 失败页。 |
-| KYC-FACEFAIL-002 | 页面目标 | 展示人脸 / 护照 / POA 失败原因，并提供重试入口。 |
-| KYC-FACEFAIL-003 | 入口 / 触发 | Face Loading 验证失败、Face Scan 失败、POA 失败等。 |
-| KYC-FACEFAIL-004 | 展示内容 | 固定主文案、动态原因文案、Try again、关闭按钮。 |
-| KYC-FACEFAIL-005 | 用户动作 | Try again 或关闭。 |
-| KYC-FACEFAIL-006 | 系统处理 / 责任方 | Backend 返回失败原因；App 按优先级展示映射文案。 |
-| KYC-FACEFAIL-007 | 元素 / 状态 / 提示规则 | passport 与 face 均失败时优先 passport；锁定态展示安全弹窗。 |
-| KYC-FACEFAIL-008 | 成功流转 | 正常态 Try again 重新触发 KYC 流程。 |
-| KYC-FACEFAIL-009 | 失败 / 异常流转 | 锁定态确认后返回入口。 |
-| KYC-FACEFAIL-010 | 边界 | 错误文案来源为 PRD 第 9 章映射表。 |
+| **1. 页面用途**<br>当证件、人脸或 POA 认证失败时，向用户展示失败原因，并提供可重试或锁定态说明。 | **3. 进入与跳转**<br><br>\| 场景 \| 条件 \| 结果 \|<br>\|---\|---\|---\|<br>\| Face 失败 \| face result = failure \| 展示 Face Failed Page \|<br>\| Passport / POA 失败 \| 失败原因优先级命中对应文案 \| 展示对应失败说明 \|<br>\| 未锁定重试 \| 用户点击 Try again 且未命中锁定规则 \| 重新触发对应 KYC 流程 \|<br>\| 锁定态 \| 命中 5 次 / 10 次 / 20 次限制 \| 展示 Too many attempts / 安全锁提示，不允许继续重试 \| |
+| **2. 展示内容**<br>- 失败标题和原因文案。<br>- Try again 按钮。<br>- 锁定态文案 / 弹窗。<br>- 返回 / 关闭入口。 | **4. 用户操作与异常**<br><br>\| 类型 \| 触发 \| 处理 \|<br>\|---\|---\|---\|<br>\| 用户操作 \| 点击 Try again \| 未锁定时重新触发对应认证流程 \|<br>\| 用户操作 \| 点击返回 / 关闭 \| 返回入口或上一流程节点 \|<br>\| 异常 \| 失败原因有多个 \| 按文案优先级展示，不重复展示多个失败页 \|<br>\| 异常 \| 命中锁定规则 \| 展示锁定提示，锁定期内不允许重试 \|<br>\| 异常 \| 网络 / 服务异常 \| 展示 toast 或对应错误处理 \|<br><br>**5. 关联接口 / 状态 / 来源**<br>- 状态：passportVerifyStatus、faceIdVerifyStatus、proofOfAddressVerifyStatus、face fail count、lock 状态。<br>- 错误码：Passport / Face / POA 错误码映射见 5.3。<br>- Gap：失败文案优先级和 DTC 原始码差异以错误码章节为准。<br>- Rule ID：KYC-FACE-FAILED-001 ~ KYC-FACE-FAILED-010。<br>- Source：AIX KYC PRD 7.2.10 / 9。 |
 
 ### 4.10 Address Upload Page
 
-#### Product Review Summary
-
-| 项目 | 说明 |
+| 主页面 | 解释说明 |
 | --- | --- |
-| 页面目标 | 收集用户地址证明文件并提交 POA 审核。 |
-| 用户状态 | 用户已完成 Face 验证，进入 POA 补充材料阶段。 |
-| 主动作 | 上传地址证明文件并点击 Continue。 |
-| 次要动作 | 修改 Residence、删除文件、预览文件、返回 / 关闭。 |
-| 关键产品判断 | 文件规则、POA 国家校验、Continue 后跳转冲突。 |
-| 依赖规则 | KYC-POA-005、KYC-POA-006、KYC-POA-FILE-001、KYC-POA-008、KYC-POA-009、KYC-POA-010 |
-
-#### Page States / Snapshot
-
-##### State A：Address Upload 主页面
-
-![Address Upload 主页面](_assets/account-opening/image22.png)
-
-| 项目 | 说明 |
-| --- | --- |
-| 状态含义 | 用户进入 POA 地址证明上传主页面。 |
-| 触发条件 | Face 验证成功。 |
-| 页面重点 | Residence、文件上传区、Continue 按钮。 |
-| 用户下一步 | 选择 / 上传地址证明文件。 |
-| Rule Ref | KYC-POA-001、KYC-POA-003、KYC-POA-004、KYC-POA-005 |
-
-##### State B：未上传状态
-
-![未上传状态](_assets/account-opening/image23.jpeg)
-
-| 项目 | 说明 |
-| --- | --- |
-| 状态含义 | 用户尚未上传 POA 文件。 |
-| 触发条件 | 进入 Address Upload 后未选择文件。 |
-| 页面重点 | 上传入口、Continue 禁用。 |
-| 用户下一步 | 点击上传区选择文件。 |
-| Rule Ref | KYC-POA-004、KYC-POA-FILE-001 |
-
-##### State C：上传中状态
-
-![上传中状态](_assets/account-opening/image24.png)
-
-| 项目 | 说明 |
-| --- | --- |
-| 状态含义 | 文件正在上传。 |
-| 触发条件 | 用户选择文件后开始上传。 |
-| 页面重点 | 上传进度、取消 / 删除操作。 |
-| 用户下一步 | 等待上传完成，或点击删除 / 取消。 |
-| Rule Ref | KYC-POA-005、KYC-POA-FILE-001 |
-
-##### State D：已上传状态
-
-![已上传状态](_assets/account-opening/image25.png)
-
-| 项目 | 说明 |
-| --- | --- |
-| 状态含义 | 文件已上传成功。 |
-| 触发条件 | 文件上传完成。 |
-| 页面重点 | 已上传文件、删除、预览、Continue。 |
-| 用户下一步 | 点击 Continue 提交 POA。 |
-| Rule Ref | KYC-POA-005、KYC-POA-008、KYC-POA-FILE-001 |
-
-##### State E：国家线拦截 / waitlist 状态
-
-![国家线拦截](_assets/account-opening/image26.png)
-
-| 项目 | 说明 |
-| --- | --- |
-| 状态含义 | POA 提交后再次校验国家线，命中不支持国家。 |
-| 触发条件 | 后端判断国家不属于支持范围。 |
-| 页面重点 | 国家线 / waitlist 拦截说明。 |
-| 用户下一步 | 进入拦截处理或 waitlist。 |
-| Rule Ref | KYC-POA-009、KYC-POA-010 |
-
-#### UX Mapping
-
-| 图中位置 | Element ID | 页面元素 | 展示规则 | 交互规则 | Rule Ref |
-| --- | --- | --- | --- | --- | --- |
-| 顶部导航区 | back_or_close_button | 返回 / 关闭入口 | 展示返回或关闭入口。 | 点击触发离开当前 KYC 流程相关处理。 | KYC-POA-005 |
-| 标题说明区 | poa_title_subtitle | Title / Subtitle | 展示上传地址证明说明。 | 不可点击。 | KYC-POA-004 |
-| Residence 区 | residence_selector | 居住国家 / 地区 | 展示当前 Residence。 | 点击可修改 Residence，进入 Select Residence Country Page。 | KYC-POA-005 |
-| 上传区 | file_upload_area | 文件上传区 | 展示上传入口和文件状态；不重复写文件事实。 | 上传、删除、预览均按引用规则处理。 | KYC-POA-004、KYC-POA-FILE-001 |
-| 上传区 | empty_upload_state | 未上传空状态 | 展示文件上传入口；Continue 禁用。 | 点击上传区选择文件。 | KYC-POA-004、KYC-POA-FILE-001 |
-| 文件状态区 | upload_progress | 上传进度 | 展示上传进度。 | 点击删除按钮取消上传。 | KYC-POA-005、KYC-POA-FILE-001 |
-| 文件状态区 | uploaded_file_item | 已上传文件 | 展示已上传文件状态。 | 支持删除和预览。 | KYC-POA-005、KYC-POA-FILE-001 |
-| 底部操作区 | continue_button | Continue 按钮 | 满足提交条件后启用。 | 点击提交 POA 审核。 | KYC-POA-005、KYC-POA-008、KYC-POA-010 |
-| 拦截区 | country_block_message | 国家线 / waitlist 拦截说明 | 国家不支持时展示。 | 按拦截处理返回或进入 waitlist。 | KYC-POA-009、KYC-POA-010 |
-
-#### Navigation / Behavior
-
-| Action / State | Result | Rule Ref |
-| --- | --- | --- |
-| 点击 Residence | 进入 Select Residence Country Page。 | KYC-POA-005 |
-| 选择文件 | 进入上传中状态。 | KYC-POA-005、KYC-POA-FILE-001 |
-| 上传中点击删除 | 取消上传。 | KYC-POA-005 |
-| 已上传点击文件 | 预览图片或 PDF。 | KYC-POA-005 |
-| 已上传点击删除 | 删除已上传文件。 | KYC-POA-005 |
-| 点击 Continue | 提交 POA 审核。 | KYC-POA-005、KYC-POA-008、KYC-POA-010 |
-
-#### System / Edge Cases
-
-| Case | Handling | Rule Ref |
-| --- | --- | --- |
-| 文件校验 | 见 KYC-POA-FILE-001。 | KYC-POA-FILE-001 |
-| 后端上传 | App 校验文件；Backend 获取 DTC upload token 并上传 POA；DTC / AAI 审核。 | KYC-POA-006 |
-| 异常处理 | 见 KYC-POA-009。 | KYC-POA-009 |
-| 跳转冲突 | 见 GAP-KYC-POA-002。 | KYC-POA-010 |
-
-#### Product Decisions / Open Gaps
-
-| Gap ID | 问题 | 当前处理 | 影响 |
-| --- | --- | --- | --- |
-| GAP-KYC-POA-002 | POA continue 后跳转存在源文档冲突。 | 不自行裁决；当前只记录冲突边界。 | 影响 Continue 后进入 Submission Success、Waitlist 或其他状态的最终跳转。 |
-
-#### Rule Anchors
-
-| Rule ID | Scope | Rule |
-| --- | --- | --- |
-| KYC-POA-001 | 页面类型 | 主页面。 |
-| KYC-POA-002 | 页面目标 | 收集用户地址证明文件并提交 POA 审核。 |
-| KYC-POA-003 | 入口 / 触发 | Face 验证成功。 |
-| KYC-POA-004 | 展示内容 | Residence、文件上传区、Continue 按钮、文件状态。 |
-| KYC-POA-005 | 用户动作 | 修改 Residence、上传 / 删除 / 预览文件、点击 Continue。 |
-| KYC-POA-006 | 系统处理 / 责任方 | App 校验文件；Backend 获取 DTC upload token 并上传 POA；DTC / AAI 审核。 |
-| KYC-POA-FILE-001 | 文件规则 | JPG/JPEG/PNG/PDF；16MB；只能上传一份；上传中 / 已上传状态。 |
-| KYC-POA-008 | 成功流转 | 提交成功进入 KYC Submission Success。 |
-| KYC-POA-009 | 失败 / 异常流转 | 文件错误、上传失败、国家不支持、服务器错误、POA 失败。 |
-| KYC-POA-010 | 边界 | POA continue 后跳转存在源文档冲突，见 GAP-KYC-POA-002。 |
+| **1. 页面用途**<br>Face 认证成功后，用户上传地址证明文件并提交 POA 审核。 | **3. 进入与跳转**<br><br>\| 场景 \| 条件 \| 结果 \|<br>\|---\|---\|---\|<br>\| 进入页面 \| Face 验证成功 \| 展示 Address Upload Page \|<br>\| 修改居住国家 \| 用户点击 Residence \| 进入 Select Residence Country Page \|<br>\| 文件上传成功 \| 文件格式、大小和上传接口均通过 \| 文件进入待提交状态 \|<br>\| 提交成功 \| POA 文件和国家信息提交成功 \| 进入 KYC Submission Success Page \|<br>\| 国家不支持 \| 二次判断国家不符合规则 \| 进入 Waitlist 或展示对应错误处理 \|<br>\| POA 失败 \| DTC / AAI 返回 POA failure \| 展示 POA 错误文案或进入失败处理 \| |
+| **2. 展示内容**<br>- Residence / 居住国家入口。<br>- 地址证明上传说明。<br>- 文件上传组件。<br>- 文件格式 / 大小提示：JPG、JPEG、PNG、PDF；单文件不超过 16MB。<br>- 提交按钮。 | **4. 用户操作与异常**<br><br>\| 类型 \| 触发 \| 处理 \|<br>\|---\|---\|---\|<br>\| 用户操作 \| 点击 Residence \| 进入国家选择页 \|<br>\| 用户操作 \| 选择文件上传 \| 校验格式和大小后上传 \|<br>\| 用户操作 \| 点击提交 \| 提交 POA 文件和居住国家 \|<br>\| 异常 \| 文件格式错误 \| Toast 提示，阻止上传 \|<br>\| 异常 \| 文件超过 16MB \| Toast 提示，阻止上传 \|<br>\| 异常 \| 上传 token / 文件上传失败 \| Toast 或错误提示，允许重试 \|<br>\| 异常 \| POA 国家不匹配或不支持 \| 按错误码展示文案或 waitlist 处理 \|<br>\| 异常 \| POA 审核失败 \| 记录失败原因，按失败页或错误文案处理 \|<br><br>**5. 关联接口 / 状态 / 来源**<br>- 接口：POA upload token、POA 文件上传、POA result query / webhook。<br>- 状态：proofOfAddressVerifyStatus、Residence country、POA country。<br>- 文件限制：JPG / JPEG / PNG / PDF，单文件 16MB。<br>- Gap：POA 有效期、国家二次判断和提交后跳转冲突见待确认事项。<br>- Rule ID：KYC-ADDRESS-001 ~ KYC-ADDRESS-010。<br>- Source：AIX KYC PRD 7.2.11；Master sub account。 |
 
 ### 4.11 KYC Submission Success Page
 
-#### Page Snapshot
-
-![KYC Submission Success Page](_assets/account-opening/image27.png)
-
-| 项目 | 说明 |
+| 主页面 | 解释说明 |
 | --- | --- |
-| 页面类型 | 成功页。 |
-| 页面目标 | 告知用户 KYC 资料已提交，等待审核结果。 |
-| 入口 / 触发 | POA 提交成功。 |
-| 成功流转 | 返回入口，后续通过状态或通知感知结果。 |
-| 边界 | 通知规则待 Notification 来源核验。 |
-
-#### Rule Anchors
-
-| Rule ID | Scope | Rule |
-| --- | --- | --- |
-| KYC-SUBMIT-001 | 页面类型 | 成功页。 |
-| KYC-SUBMIT-002 | 页面目标 | 告知用户 KYC 资料已提交，等待审核结果。 |
-| KYC-SUBMIT-003 | 入口 / 触发 | POA 提交成功。 |
-| KYC-SUBMIT-004 | 展示内容 | 固定成功文案、返回首页按钮。 |
-| KYC-SUBMIT-005 | 用户动作 | 点击返回首页。 |
-| KYC-SUBMIT-006 | 系统处理 / 责任方 | App 关闭当前 KYC 流程。 |
-| KYC-SUBMIT-007 | 元素 / 状态 / 提示规则 | 返回首页按钮返回业务流程入口页。 |
-| KYC-SUBMIT-008 | 成功流转 | 返回入口，后续通过状态或通知感知结果。 |
-| KYC-SUBMIT-009 | 边界 | 通知规则待 Notification 来源核验。 |
-
-#### UX Mapping
-
-| 图中位置 | Element ID | 页面元素 | 展示 / 交互 | Rule Ref |
-| --- | --- | --- | --- | --- |
-| 顶部 / 状态区 | success_icon | 成功状态图标 | 展示提交成功视觉状态。 | KYC-SUBMIT-004 |
-| 中部标题区 | success_message | 固定成功文案 | 告知用户资料已提交，等待审核结果。 | KYC-SUBMIT-002、KYC-SUBMIT-004 |
-| 底部操作区 | back_home_button | 返回首页按钮 | 点击返回业务流程入口页。 | KYC-SUBMIT-005、KYC-SUBMIT-007、KYC-SUBMIT-008 |
-
-#### System / Edge Cases
-
-| Case | Handling | Rule Ref |
-| --- | --- | --- |
-| 关闭流程 | App 关闭当前 KYC 流程。 | KYC-SUBMIT-006 |
-| 通知边界 | 通知规则待 Notification 来源核验。 | KYC-SUBMIT-009 |
-
----
-
----
-
----
-
----|---|
-| 页面类型 | 成功页 |
-| 页面目标 | 告知用户 KYC 资料已提交，等待审核结果。 |
-| 入口 / 触发 | POA 提交成功。 |
-| 展示内容 | 固定成功文案、返回首页按钮。 |
-| 用户动作 | 点击返回首页。 |
-| 系统处理 / 责任方 | App 关闭当前 KYC 流程。 |
-| 元素 / 状态 / 提示规则 | 返回首页按钮返回业务流程入口页。 |
-| 成功流转 | 返回入口，后续通过状态或通知感知结果。 |
-| 失败 / 异常流转 | 不适用。 |
-| 备注 / 边界 | 通知规则待 Notification 来源核验。 |
-
----
+| **1. 页面用途**<br>POA 提交成功后的完成页，告知用户 KYC 已提交并等待后续审核结果。 | **3. 进入与跳转**<br><br>\| 场景 \| 条件 \| 结果 \|<br>\|---\|---\|---\|<br>\| 进入页面 \| POA 提交成功 \| 展示 KYC Submission Success Page \|<br>\| 用户完成确认 \| 点击完成 / 返回入口按钮 \| 关闭当前 KYC 流程并返回业务入口 \|<br>\| 后续状态变化 \| 审核通过 / 拒绝 / 仍在审核 \| 用户通过入口状态或通知感知结果 \| |
+| **2. 展示内容**<br>- 提交成功图标 / 状态。<br>- 提交成功说明。<br>- 返回入口 / 完成按钮。 | **4. 用户操作与异常**<br><br>\| 类型 \| 触发 \| 处理 \|<br>\|---\|---\|---\|<br>\| 用户操作 \| 点击完成 / 返回入口 \| 关闭 KYC 流程并返回入口 \|<br>\| 用户操作 \| 关闭页面 \| 返回入口，等待审核结果 \|<br>\| 异常 \| 后续审核状态未即时返回 \| 不在成功页继续轮询，后续通过通知或入口状态感知 \|<br><br>**5. 关联接口 / 状态 / 来源**<br>- 状态：Under review、Approved、Rejected、failed。<br>- 页面：业务入口、通知入口。<br>- 边界：成功页仅代表提交成功，不等同于 KYC Approved 或 Wallet 能力全部可用。<br>- Rule ID：KYC-SUCCESS-001 ~ KYC-SUCCESS-009。<br>- Source：AIX KYC PRD 7.2.12。 |
 
 ## 5. 字段、接口与数据
 
