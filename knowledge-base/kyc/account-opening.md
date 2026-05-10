@@ -464,7 +464,7 @@ flowchart LR
           <ul>
             <li><strong>选择结果按国家 Type 判断</strong>：</li>
             <li>Type = Phase 1：返回本页；协议完成后可继续 KYC。</li>
-            <li>Type = phase 2 - waitlist：返回本页；点击底部认证按钮后进入 waitlist 处理；拦截展示见 <a href="#432-拦截waitlist">4.3.2 拦截：Waitlist</a>，提交页细则见 <a href="#45-waitlist-page">4.5 Waitlist Page</a>。</li>
+            <li>Type = phase 2 - waitlist：返回本页；点击底部认证按钮后触发本页 Waitlist 拦截；拦截展示见 <a href="#432-拦截waitlist">4.3.2 拦截：Waitlist</a>，提交页细则见 <a href="#45-waitlist-page">4.5 Waitlist Page</a>。</li>
             <li>Type = Forbiden：国家列表隐藏，不可选择。</li>
           </ul>
         </li>
@@ -709,7 +709,7 @@ flowchart LR
           <ul>
             <li>DTC 返回 <code>01009</code>：Toast <code>Mobile number already exists.</code>，不进入 H5。</li>
             <li>DTC 返回 <code>01005</code>：Toast <code>The email address is in use.</code>，不进入 H5。</li>
-            <li>DTC 返回其他 get-verification-url 错误：按 <a href="#52-get-verification-url-错误码">5.2 get-verification-url 错误码</a> 处理，不进入 H5。</li>
+            <li>DTC 返回其他 get-verification-url 错误：不进入 H5；错误码含义和已确认前端表现见 <a href="#52-get-verification-url-错误码">5.2 get-verification-url 错误码</a>，未明确前端文案的错误码需后端 / 产品确认。</li>
           </ul>
         </li>
       </ul>
