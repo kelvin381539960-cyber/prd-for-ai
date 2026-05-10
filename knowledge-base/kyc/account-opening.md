@@ -143,7 +143,7 @@ KYC 主流程按业务阶段可归纳为：
 
 ### 3.2 业务时序图
 
-> 本图按第三章业务流程图泳道时序化表达：AIX 客户端、AIX 中后台、DTCPay 服务端、AAI 服务。流程图主干未展示的弹窗、waitlist、异常页细节不在本图补充，见第 4 章与 3.5。
+> 本图按第三章业务流程图泳道时序化表达：AIX 客户端、AIX 中后台、DTCPay 服务端、AAI 服务。箭头文案写业务动作；接口路径和关键参数放在该箭头下方的 Note 中，避免干扰主流程阅读。流程图主干未展示的弹窗、waitlist、异常页细节不在本图补充，见第 4 章与 3.5。
 
 ```mermaid
 sequenceDiagram
@@ -159,84 +159,93 @@ sequenceDiagram
     alt 未绑定手机号
         APP->>APP: 跳转到绑定手机号页面
         APP->>APP: 用户完成绑定手机号流程
-        APP->>APP: 进入 KYC Start Page
+        APP->>APP: 展示 KYC Start Page
     else 已绑定手机号
-        APP->>APP: 进入 KYC Start Page
+        APP->>APP: 展示 KYC Start Page
     end
 
-    APP->>BE: 查询 KYC 认证结果
-    BE->>DTC: GET /openapi/v1/ekyc/verification-result/{externalId}
-    DTC-->>BE: 返回认证结果（clientStatus、Passport、Face、POA result）
+    APP->>BE: 查询用户当前 KYC 状态
+    BE->>DTC: 查询 DTC KYC 认证结果
+    Note over BE,DTC: GET /openapi/v1/ekyc/verification-result/{externalId}
+    DTC-->>BE: 返回 clientStatus、Passport、Face、POA result
     BE->>BE: 更新 KYC 状态机
 
     alt KYC 状态为 Under review / Rejected / Approved
-        BE-->>APP: 返回不可继续结果
+        BE-->>APP: 返回不可继续 KYC
         APP->>APP: 展示 Verification unavailable
     else KYC 状态为 pending / failed
-        BE-->>APP: 返回可继续结果
-        APP->>APP: KYC Start Page
+        BE-->>APP: 返回可继续 KYC
+        APP->>APP: 展示 KYC Start Page
         APP->>APP: 用户填写居住国家，点击下一步
     end
 
-    APP->>BE: 请求 Passport 扫描 URL（verifyType = 1）
-    BE->>DTC: POST /openapi/v1/ekyc/get-verification-url
+    APP->>BE: 请求 Passport 扫描地址
+    BE->>DTC: 生成 Passport H5 URL
+    Note over BE,DTC: POST /openapi/v1/ekyc/get-verification-url；verifyType = 1
     DTC-->>BE: 返回 Passport H5 URL
     BE-->>APP: 返回 Passport H5 URL
     APP->>APP: 打开 H5 扫描页并扫描
 
     APP->>AAI: H5 内完成 Passport OCR
     AAI-->>DTC: 返回 OCR 信息 / Passport 信息
-    DTC-->>BE: 返回 OCR 信息 / Passport 信息
+    DTC-->>BE: 同步 OCR 信息 / Passport 信息
 
     alt OCR 失败
-        BE-->>APP: 返回 OCR 失败结果
-        APP->>APP: 按 OCR 失败结果处理
+        BE-->>APP: 返回 OCR 失败
+        APP->>APP: 按 OCR 失败结果进入对应页面
     else OCR 完成
         BE->>BE: 按 Passport / Face 状态分流
     end
 
     alt passport = SUCCESS 且 face = UNVERIFIED / FAILURE
-        BE-->>APP: 进入 Face Guide Page
-        APP->>BE: 请求活体 URL（verifyType = 4）
-        BE->>DTC: POST /openapi/v1/ekyc/get-verification-url
-        DTC-->>BE: 返回活体 URL
-        BE-->>APP: 返回活体 URL
-        APP->>APP: 打开活体 URL，进入活体识别页
+        BE-->>APP: 返回下一步为 Face Guide
+        APP->>APP: 展示 Face Guide Page
+        APP->>BE: 请求活体识别地址
+        BE->>DTC: 生成活体 H5 URL
+        Note over BE,DTC: POST /openapi/v1/ekyc/get-verification-url；verifyType = 4
+        DTC-->>BE: 返回活体 H5 URL
+        BE-->>APP: 返回活体 H5 URL
+        APP->>APP: 打开活体 H5，进入活体识别页
         APP->>AAI: 进行活体识别 / 人脸比对
         AAI-->>DTC: 返回 Face result
-        DTC-->>BE: 返回 Face result / webhook 结果
+        DTC-->>BE: 同步 Face result / webhook 结果
     else passport = VERIFYING 且 face = SUCCESS / FAILURE / VERIFYING
-        BE-->>APP: 进入 Loading Page
+        BE-->>APP: 返回下一步为 Loading
+        APP->>APP: 展示 Loading Page
     else passport = SUCCESS 且 face = VERIFYING
-        BE-->>APP: 进入 Loading Page
+        BE-->>APP: 返回下一步为 Loading
+        APP->>APP: 展示 Loading Page
     else Face 比对失败
-        BE-->>APP: 进入人脸比对失败页
-        APP->>APP: 展示失败信息
+        BE-->>APP: 返回人脸比对失败结果
+        APP->>APP: 展示人脸比对失败页和失败信息
     end
 
     APP->>BE: Loading 中查询验证结果
-    BE->>DTC: GET /openapi/v1/ekyc/verification-result/{externalId}
+    BE->>DTC: 查询 DTC KYC 认证结果
+    Note over BE,DTC: GET /openapi/v1/ekyc/verification-result/{externalId}
     DTC-->>BE: 返回 Passport / Face 验证结果
     BE-->>APP: 返回查询结果
 
     alt passport result = VERIFY_SUCCESS 且 face result = VERIFY_SUCCESS
-        APP->>APP: 进入 Address Upload Page
+        APP->>APP: 展示 Address Upload Page
         APP->>APP: 上传 POA 文件
     else face = UNVERIFIED / 其他 result / VERIFY_FAILURE
         BE-->>APP: 返回失败或未完成结果
-        APP->>APP: 按失败结果处理
+        APP->>APP: 按失败结果进入对应页面
     end
 
-    APP->>BE: POST /openapi/v1/ekyc/upload 上传 POA 文件
+    APP->>BE: 上传 POA 文件
+    Note over APP,BE: POST /openapi/v1/ekyc/upload
     BE->>DTC: 提交 POA 文件与居住地信息
     DTC->>AAI: 处理 POA 文件 / POA OCR
     AAI-->>DTC: 返回 POA OCR 结果
     DTC-->>BE: 返回 POA 处理结果
     BE-->>APP: 返回提交结果
-    APP->>APP: 进入 Under review Page
+    APP->>APP: 展示 Under review Page
 
     APP->>BE: 定时查询 KYC 结果
-    BE->>DTC: GET /openapi/v1/ekyc/verification-result/{externalId}
+    BE->>DTC: 查询 DTC KYC 审核结果
+    Note over BE,DTC: GET /openapi/v1/ekyc/verification-result/{externalId}
     DTC-->>BE: 返回 KYC 审核结果
 
     alt clientStatus = ACTIVATED
@@ -249,8 +258,10 @@ sequenceDiagram
         BE->>BE: 触发 SMS / 邮件通知用户
     else passportVerifyStatus = VERIFY_FAILURE 或 faceIdVerifyStatus = VERIFY_FAILURE 或 proofOfAddressVerifyStatus = VERIFY_FAILURE
         BE->>BE: KYC 状态变更为 failed
-        BE->>DTC: GET /openapi/v1/ekyc/passport-info/{externalId} 查询护照 OCR 信息
-        BE->>DTC: GET /openapi/v1/ekyc/poa-info/{externalId} 查询 POA OCR 信息
+        BE->>DTC: 查询护照 OCR 信息
+        Note over BE,DTC: GET /openapi/v1/ekyc/passport-info/{externalId}
+        BE->>DTC: 查询 POA OCR 信息
+        Note over BE,DTC: GET /openapi/v1/ekyc/poa-info/{externalId}
         DTC-->>BE: 返回护照 OCR 信息 / POA OCR 信息
         BE-->>APP: 返回 failed
     end
