@@ -184,6 +184,10 @@ def normalize_text(value: Any) -> str:
     return " / ".join(" ".join(line.split()) for line in text.split("\n") if line.strip())
 
 
+def md_cell(value: Any) -> str:
+    return str(value or "").replace("|", "\\|")
+
+
 def polygon_to_bbox(poly: Sequence[Sequence[float]]) -> BBox:
     xs = [int(round(p[0])) for p in poly]
     ys = [int(round(p[1])) for p in poly]
@@ -554,18 +558,18 @@ def write_review(out_dir: Path, image: Path, mode: str, text_blocks: List[TextBl
         "|---|---|---:|---|---|",
     ]
     for b in text_blocks:
-        lines.append(f"| {b.id} | {b.text.replace('|', '\\|')} | {b.confidence:.4f} | {str(b.needs_review).lower()} | `{json.dumps(b.bbox, ensure_ascii=False)}` |")
+        lines.append(f"| {b.id} | {md_cell(b.text)} | {b.confidence:.4f} | {str(b.needs_review).lower()} | `{json.dumps(b.bbox, ensure_ascii=False)}` |")
     if regions:
         lines += ["", "## Regions", "", "| id | type | text | needs_review | bbox | notes |", "|---|---|---|---|---|---|"]
         for r in regions:
-            lines.append(f"| {r.id} | {r.type} | {r.text.replace('|', '\\|')} | {str(r.needs_review).lower()} | `{json.dumps(r.bbox, ensure_ascii=False)}` | {r.notes.replace('|', '\\|')} |")
+            lines.append(f"| {r.id} | {r.type} | {md_cell(r.text)} | {str(r.needs_review).lower()} | `{json.dumps(r.bbox, ensure_ascii=False)}` | {md_cell(r.notes)} |")
     if mode == "flowchart":
         lines += ["", "## Flow node candidates", "", "| id | type | text | source | text_blocks | confidence | needs_review | bbox | notes |", "|---|---|---|---|---|---:|---|---|---|"]
         for n in nodes:
-            lines.append(f"| {n.id} | {n.type} | {n.text.replace('|', '\\|')} | {n.source} | {n.text_block_ids} | {n.confidence:.4f} | {str(n.needs_review).lower()} | `{json.dumps(n.bbox, ensure_ascii=False)}` | {n.notes.replace('|', '\\|')} |")
+            lines.append(f"| {n.id} | {n.type} | {md_cell(n.text)} | {n.source} | {n.text_block_ids} | {n.confidence:.4f} | {str(n.needs_review).lower()} | `{json.dumps(n.bbox, ensure_ascii=False)}` | {md_cell(n.notes)} |")
         lines += ["", "## Connector candidates", "", "| id | from | to | label | confidence | needs_review | line | notes |", "|---|---|---|---|---:|---|---|---|"]
         for c in connectors:
-            lines.append(f"| {c.id} | {c.from_node} | {c.to_node} | {c.label} | {c.confidence:.4f} | {str(c.needs_review).lower()} | `{json.dumps(c.line, ensure_ascii=False)}` | {c.notes.replace('|', '\\|')} |")
+            lines.append(f"| {c.id} | {c.from_node} | {c.to_node} | {md_cell(c.label)} | {c.confidence:.4f} | {str(c.needs_review).lower()} | `{json.dumps(c.line, ensure_ascii=False)}` | {md_cell(c.notes)} |")
     lines += [
         "",
         "## Output files",
