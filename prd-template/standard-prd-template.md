@@ -211,7 +211,7 @@ stateDiagram-v2
 
 ## 3. 页面与交互
 
-> 知识库入库前，需按 [知识库入库 Agent 检查规则](./kb-ingestion-agent-rules.md) 执行 Fact Guard、Consistency Guard、Knowledge Structure Guard 三类检查。
+> 知识库入库前，需按 [知识库入库 Agent 检查规则](./kb-ingestion-agent-rules.md) 执行 Fact Guard、Consistency Guard、Template Compliance Guard 三类检查。
 
 > 页面相关需求保留本章；纯后端、配置、数据或非页面型需求可删除或改为“入口与操作方式”。
 
