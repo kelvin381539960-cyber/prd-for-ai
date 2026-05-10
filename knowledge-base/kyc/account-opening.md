@@ -224,9 +224,13 @@ sequenceDiagram
 ```
 
 ### 3.2 状态流转说明
+### 3.2 状态流转说明
 
+<<<<<<< HEAD
 > KYC 状态机图。
 
+=======
+>>>>>>> acab884995f7e1e671fabded6594e50ec2a6ecc3
 ```mermaid
 %%{init: {"flowchart": {"curve": "step"}} }%%
 flowchart TB
@@ -254,7 +258,10 @@ flowchart TB
     class Pending,UnderReview,Fail blue;
     class Start,Approved,Rejected gray;
     class Branch,Main group;
+<<<<<<< HEAD
 ```
+=======
+>>>>>>> acab884995f7e1e671fabded6594e50ec2a6ecc3
 
 | AIX 状态 | 含义 | 主要触发条件 | 用户侧结果 | 备注 |
 |---|---|---|---|---|
