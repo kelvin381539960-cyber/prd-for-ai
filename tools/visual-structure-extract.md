@@ -45,7 +45,35 @@ python3 tools/visual_structure_extract.py --check-env
 
 如果安装到 PaddleOCR 3.x，脚本会提示不支持。PaddleOCR 3.x 的 API 和 PP-Structure 入口与 2.x 不同，需要单独适配。
 
-## 流程图解析
+## 第三章 KYC 流程图一键解析
+
+优先使用这个脚本解析第三章业务流程图：
+
+```bash
+bash tools/run_kyc_flowchart_extract.sh
+```
+
+默认输入：
+
+```text
+knowledge-base/kyc/_assets/account-opening/image4.jpeg
+```
+
+默认输出：
+
+```text
+tmp/flowchart-image4
+```
+
+也可以传入自定义图片和输出目录：
+
+```bash
+bash tools/run_kyc_flowchart_extract.sh path/to/flowchart.png tmp/flowchart-custom
+```
+
+脚本会优先使用 Docker；如果没有 Docker，会尝试使用本机 `python3` 环境。
+
+## 通用流程图解析
 
 ```bash
 python3 tools/visual_structure_extract.py \
