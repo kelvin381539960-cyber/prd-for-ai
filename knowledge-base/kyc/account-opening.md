@@ -392,18 +392,18 @@ flowchart LR
 
 ### 4.2 KYC Loading Page
 
-进入 KYC 时先做状态判断：能继续则进入后续认证，不能继续则停在不可用状态。
+进入 KYC 时先做状态判断。该页只负责分流，不承载资料填写。
 
 ![KYC Loading Page](_assets/account-opening/image6.jpeg)
 
 #### 4.2.1 状态判断
 
-| 场景 | 处理 |
-|---|---|
-| 用户从业务入口发起 KYC | 展示 `loading...`，查询 KYC / waitlist 状态 |
-| KYC 状态为 Pending / failed | 进入 KYC Start 或后续未完成节点 |
-| KYC 状态为 Under review / Rejected / Approved | 展示 Verification unavailable |
-| 命中 APP 来源 waitlist | 展示 Verification unavailable，页面级拦截 |
+| 场景 | 判断条件 | 处理 |
+|---|---|---|
+| 用户从业务入口发起 KYC | - | 展示 `loading...`，查询 KYC 状态和 waitlist 状态 |
+| 可继续认证 | KYC 状态为 Pending / failed | 进入 KYC Start 或后续未完成节点 |
+| 不可继续认证 | KYC 状态为 Under review / Rejected / Approved | 展示 Verification unavailable |
+| APP waitlist | 用户在 waitlist 中，且来源渠道为 APP | 展示 Verification unavailable，阻止继续 KYC |
 
 #### 4.2.2 Verification unavailable
 
@@ -433,29 +433,33 @@ flowchart LR
 
 #### 4.3.1 居住国家 / 地区
 
-用于国家线判断。默认展示 IP 检测国家；检测不到时默认 SG。
+用于国家线判断。默认值来自 IP 检测；检测不到时默认 SG。
 
-| 场景 | 处理 |
-|---|---|
-| 点击国家区域 | 进入 Select Residence Country Page |
-| 选择支持国家 | 返回本页，可继续 KYC |
-| 选择 waitlist 国家 | 返回本页；点击主按钮后进入 waitlist |
-| 禁止国家 | 不展示或不可选 |
+| 场景 | 判断条件 / 来源 | 处理 |
+|---|---|---|
+| 页面首次进入 | IP 可识别国家 | 默认展示 IP 国家 |
+| 页面首次进入 | IP 不可识别国家 | 默认展示 SG |
+| 点击国家区域 | - | 进入 Select Residence Country Page |
+| 选择支持国家 | 国家 Type = Phase 1 | 返回本页；协议完成后可继续 KYC |
+| 选择 waitlist 国家 | 国家 Type = phase 2 - waitlist | 返回本页；点击主按钮后进入 waitlist 处理 |
+| 禁止国家 | 国家 Type = Forbiden | 在国家列表隐藏，不可选择 |
 
-国家线口径冲突见 `GAP-KYC-COUNTRY-001`。
+国家配置来自 Countries and Regions list / 国家配置。国家线存在版本口径冲突，见 `GAP-KYC-COUNTRY-001`。
 
 #### 4.3.2 协议区
 
-包含 Terms、Privacy、Declaration。协议未完成时，主按钮不可点击。
+协议未完成时，主按钮不可点击。协议内容仅需英文，无需多语言。
 
-| 协议 / 状态 | 处理 |
-|---|---|
-| Terms of service | 可直接勾选 |
-| Privacy Policy | 可直接勾选 |
-| Declaration of Reverse Solicitation | 点击后打开阅读弹窗；同意后才算完成 |
-| 任一必选协议未完成 | 主按钮禁用 |
-| 所有必选协议完成 | 主按钮启用 |
-| 协议获取失败 | 展示 toast，不允许继续 |
+| 协议 / 状态 | 交互规则 | 保存要求 |
+|---|---|---|
+| Terms of service | 可直接勾选，无需强制阅读 | 保存用户同意并提交的时间 |
+| Privacy Policy | 可直接勾选，无需强制阅读 | 保存用户同意并提交的时间 |
+| Declaration of Reverse Solicitation | 点击后强制阅读；同意后才能勾选 | 保存协议内容、用户同意并提交的时间 |
+| 任一必选协议未完成 | 主按钮灰色，不可点击 | 不推进流程 |
+| 所有必选协议完成 | 主按钮高亮，可点击 | 点击主按钮后进入国家 / 协议提交判断 |
+| 无法获取协议 | - | Toast：`Something went wrong. Please try again later`，不允许继续 |
+
+协议快照需在提交成功后生成并与用户账户绑定；保存失败应阻止继续。源文档未明确“勾选即保存”还是“点击主按钮统一保存”，实现时需以后端接口约定为准。
 
 #### 4.3.3 Declaration 弹窗
 
@@ -466,22 +470,23 @@ flowchart LR
 | 操作 | 结果 |
 |---|---|
 | 点击 `I agree` | 关闭弹窗，Declaration 变为已完成 |
-| 关闭 / 返回 | 关闭弹窗，Declaration 不算完成 |
+| 关闭 / 返回 | 关闭弹窗，Declaration 不算完成，主按钮仍按协议未完成处理 |
 
-需保存 Declaration 内容、同意时间和 `reverseSolicitation` 入参。
+需保存 Declaration 内容、同意时间，并影响 DTC `reverseSolicitation` 入参。需要反向招揽声明的国家，应传 `reverseSolicitation=T`；缺失时 DTC 可能返回 `50013`。
 
 #### 4.3.4 主按钮
 
 主按钮只做流程推进，不承载协议解释。
 
-| 状态 | 按钮 | 点击结果 |
-|---|---|---|
-| 协议未完成 | 禁用 | 不可点击 |
-| 协议完成 + 国家支持 | 启用 | 保存协议，进入 Identity Verify |
-| 协议完成 + 国家不支持 | 启用 | 进入 waitlist 处理 |
-| 协议接口失败 | 不推进 | 展示 toast |
+| 状态 | 判断来源 | 按钮 | 点击结果 |
+|---|---|---|---|
+| 协议未完成 | 前端协议状态 | 禁用 | 不可点击 |
+| 协议完成 + 国家支持 | 后端判断国家 Type = Phase 1 | 启用 | 保存协议相关信息，进入 Identity Verify |
+| 协议完成 + 国家不支持 | 后端判断国家 Type = phase 2 - waitlist | 启用 | 不进入 Identity Verify，进入 waitlist 处理 |
+| 协议获取 / 保存失败 | 后端或协议接口失败 | 不推进 | 展示错误提示，不允许继续 |
+| Reverse Solicitation 缺失 | DTC 返回 `50013` | 不推进 | 阻止生成验证 URL，需补声明后再继续 |
 
-手机号未绑定边界见 `GAP-KYC-PHONE-001`。
+手机号未绑定流程未在本页确认，见 `GAP-KYC-PHONE-001`。已绑定手机号直接进入 Start Page，不展示额外绑定成功 toast。
 
 #### 4.3.5 Waitlist 拦截
 
@@ -489,10 +494,13 @@ flowchart LR
 
 ![Waitlist 拦截](_assets/account-opening/image10.png)
 
-| 操作 | 结果 |
+| 场景 / 操作 | 处理 |
 |---|---|
-| 进入 waitlist | 跳转 Waitlist Page |
+| 点击主按钮后后端判断国家不支持 | 展示 waitlist 拦截，不进入后续 KYC |
+| 点击 Join waitlist | 进入 Waitlist Page |
 | 返回 | 回到 KYC Start 或业务入口 |
+
+说明：源文档同时出现“弹窗拦截”描述和“waitlist 调整为页面级拦截”的变更记录。当前文档只确认结果：用户不能继续 KYC，并可进入 Waitlist Page；具体展示形态以最新 UI 为准。
 
 关联：`KYC-START-001 ~ KYC-START-010`；Source：AIX KYC PRD 7.2.3、Master sub account。
 
@@ -508,12 +516,15 @@ flowchart LR
 
 ![国家列表 / 搜索状态](_assets/account-opening/image12.png)
 
-| 场景 | 处理 |
-|---|---|
-| 默认展示 | 优先展示 IP 检测国家；检测不到默认 SG |
-| 国家排序 | 按首字母排序 |
-| 禁止国家 | 隐藏 |
-| 国家线冲突 | 见 `GAP-KYC-COUNTRY-001` |
+| 场景 | 判断条件 / 来源 | 处理 |
+|---|---|---|
+| 默认展示 | IP 可识别国家 | 默认展示 IP 国家 |
+| 默认展示 | IP 不可识别国家 | 默认展示 SG |
+| 国家排序 | 国家 / 地区名称 | 按首字母排序 |
+| 支持国家 | Type = Phase 1 | 展示，可选择 |
+| waitlist 国家 | Type = phase 2 - waitlist | 展示，可选择；后续进入 waitlist 判断 |
+| 禁止国家 | Type = Forbiden | 隐藏 |
+| 国家线冲突 | 文档存在多个版本口径 | 见 `GAP-KYC-COUNTRY-001` |
 
 #### 4.4.2 搜索
 
@@ -546,15 +557,19 @@ flowchart LR
 |---|---|
 | 邮箱为空 | 展示校验提示，不提交 |
 | 邮箱格式错误 | 展示校验提示，不提交 |
+| 邮箱长度超过 103 字符 | 展示校验提示，不提交 |
 | 邮箱格式正确 | 可提交 |
 
 #### 4.5.2 提交 waitlist
 
 | 操作 / 场景 | 结果 |
 |---|---|
-| 点击提交且接口成功 | 按 userId 加入 waitlist，记录邮箱、国家、来源、设备指纹，返回流程入口 |
-| 网络 / 服务器错误 | 展示错误提示，允许重试 |
+| 点击提交且接口成功 | 按 userId 加入 waitlist，记录邮箱、国家、来源、提交时间、设备指纹，并推送数仓 |
+| 网络异常 | Toast：`Please check your internet connection and try again.` |
+| 后端服务器错误 | Toast：`Something went wrong. Please try again later` |
 | 点击关闭 / 返回 | 返回来源页面 / 入口 |
+
+设备指纹获取失败策略源文档未确认，见 waitlist 数据边界。
 
 关联：`KYC-WAITLIST-001 ~ KYC-WAITLIST-010`；Source：AIX KYC PRD 7.2.3.2。
 
@@ -570,7 +585,9 @@ flowchart LR
 |---|---|
 | 点击相机 / 开始扫描且有权限 | 请求 Passport H5 URL |
 | 相机未授权 / 永久拒绝 | 展示权限提示或引导开启权限 |
-| DTC 返回 01009 / 01005 / 其他错误 | 展示 toast 或错误提示，阻止进入 H5 |
+| DTC 返回 `01009` | Toast：`Mobile number already exists.`，不进入 H5 |
+| DTC 返回 `01005` | Toast：`The email address is in use.`，不进入 H5 |
+| DTC 返回其他 get-verification-url 错误 | 按 5.2 错误码处理，不进入 H5 |
 
 #### 4.6.2 Passport H5
 
@@ -597,6 +614,8 @@ flowchart LR
 |---|---|
 | 点击 Continue 且未锁定 | 获取 passport country，请求 selfie / liveness H5 URL |
 | 点击 Continue 但已锁定 | 展示 Too many attempts，不进入 H5 |
+| 网络异常 | Toast：`Please check your internet connection and try again.` |
+| 后端服务器错误 | Toast：`Something went wrong. Please try again later` |
 
 #### 4.7.2 Face Scan H5
 
@@ -605,7 +624,7 @@ flowchart LR
 | 成功获取 H5 URL | 进入 Face Scan H5 |
 | 用户完成活体采集 | 返回 App，进入 Face Loading |
 | 用户中断或返回 H5 | 按 H5 返回结果处理 |
-| AAI signatureId 3 次后失效 | 重新生成 URL |
+| AAI 同一 `signatureId` 重试 3 次后失效 | 重新 generate-url，生成新的 `signatureId` |
 | 网络 / 服务异常 | 展示对应错误页或 toast |
 
 #### 4.7.3 Face Loading
@@ -615,6 +634,7 @@ flowchart LR
 | Face 成功 | 进入 Address Upload Page |
 | Face 失败 | 进入 Face Failed Page |
 | 30 秒无结果 | 进入 Loading Failed Page |
+| 网络 / 系统异常 | 进入对应错误页 |
 
 #### 4.7.4 锁定规则
 
@@ -623,6 +643,7 @@ flowchart LR
 | 24 小时内 face fail 5 次 | 锁 20 分钟 |
 | 24 小时内 face fail 10 次 | 锁 24 小时 |
 | 24 小时内接口层连续发起 20 次 | 锁 20 分钟 |
+| Face 验证成功 | 清零重新计算 |
 
 关联：`get-verification-url(SELFIE / LIVENESS)`、`faceIdVerifyStatus`、face fail count、lock 状态；Source：AIX KYC PRD 7.2.6、7.2.7、7.2.8。
 
@@ -685,6 +706,7 @@ Face 成功后进入本页，用户确认居住国家并上传地址证明。
 
 | 操作 / 场景 | 处理 |
 |---|---|
+| 页面进入 | 回填 KYC 流程中已选择的居住国家 |
 | 点击 Residence | 进入 Select Residence Country Page |
 | 选择国家后返回 | 更新本页 Residence |
 | 国家二次判断不符合规则 | 进入 Waitlist 或展示对应错误处理 |
@@ -694,10 +716,12 @@ Face 成功后进入本页，用户确认居住国家并上传地址证明。
 | 操作 / 场景 | 处理 |
 |---|---|
 | 选择 JPG / JPEG / PNG / PDF，且不超过 16MB | 上传文件 |
-| 文件格式错误 | Toast 提示，阻止上传 |
-| 文件超过 16MB | Toast 提示，阻止上传 |
+| 文件格式错误 | Toast：`Unsupported file type. Please upload a JPG, JPEG, PNG, or PDF file.` |
+| 文件超过 16MB | Toast：`File size exceeds the 16MB limit. Please choose a smaller file.` |
 | 上传成功 | 文件进入待提交状态 |
-| 上传 token / 文件上传失败 | Toast 或错误提示，允许重试 |
+| 上传服务器报错 | Toast：`Server busy. Upload failed. Please try again.` |
+
+补充：当前验收标准要求只能上传一份，上传中可取消，已上传可删除和预览。
 
 #### 4.10.3 POA 提交
 
@@ -706,6 +730,9 @@ Face 成功后进入本页，用户确认居住国家并上传地址证明。
 | POA 文件和国家信息提交成功 | 进入 KYC Submission Success Page |
 | POA 国家不匹配或不支持 | 按错误码展示文案或 waitlist 处理 |
 | POA 审核失败 | 记录失败原因，按失败页或错误文案处理 |
+| 网络 / 服务器异常 | 展示对应 toast，不进入 Success |
+
+POA 机审会 OCR 提取 POA 国家信息，核验其与用户填报居住国是否匹配，并校验申请国家是否属于白名单。
 
 关联：POA upload token、POA 文件上传、`proofOfAddressVerifyStatus`；文件限制：JPG / JPEG / PNG / PDF，单文件 16MB；Source：AIX KYC PRD 7.2.11。
 
