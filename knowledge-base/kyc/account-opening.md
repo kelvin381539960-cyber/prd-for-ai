@@ -42,60 +42,29 @@ depends_on:
 
 ## 2. 需求背景、目标与范围
 
-> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
-> 功能结构与账户结构图。
+### 2.1 背景
 
-![KYC function structure - image1.jpeg](_assets/account-opening/image1.jpeg)
+AIX 钱包开户前，用户需要完成 KYC 身份认证。KYC 流程不是单一客户端页面，而是由 AIX 客户端、AIX 服务端、OBOSS 后台、DTC、AAI 等多个系统共同完成。
 
-![KYC function structure - image2.jpeg](_assets/account-opening/image2.jpeg)
+用户在前端看到的是开户认证流程，背后实际包含国家准入判断、协议确认、证件识别、人脸验证、地址证明上传、外部审核结果同步和状态流转。
 
+### 2.2 目标
 
-### 2.1 需求背景
+KYC 的核心目标是帮助 AIX 获得传统金融体系的接入许可，例如发卡机构、法币出入金通道、托管账户和支付网络等，并规避身份不明、地区限制、协议缺失、地址证明不完整等系统性合规风险。
 
-AIX 钱包开户需要完成用户身份认证、居住国家判断、协议确认、证件识别、人脸验证、地址证明上传及后续审核，以满足合规准入、账户创建和后续钱包能力开通的基础要求。
+本需求用于建立 AIX 钱包开户的 KYC 准入机制，为 Wallet、Deposit、Card、法币出入金等后续金融能力提供统一的合规准入基础。
 
-KYC 能力不是单一 Wallet 页面能力，而是影响 Account、Wallet、Deposit、WalletConnect、Receive、Notification、外部 DTC 账户体系以及 AAI 身份验证链路的基础准入能力。
+### 2.3 涉及系统与模块范围
 
-### 2.2 用户问题 / 业务问题
-
-| 问题类型 | 当前问题 |
+| 系统 / 模块 | 主要负责内容 |
 |---|---|
-| 用户问题 | 用户需要知道是否可以开户、如何完成身份认证、失败后如何重试、被 waitlist 或锁定时如何处理。 |
-| 业务问题 | AIX 需要基于国家线、KYC 状态、外部身份认证结果控制用户能否继续开户及后续钱包能力。 |
-| 合规问题 | KYC 需要保存协议同意时间、Reverse Solicitation Declaration 内容与快照，并根据国家配置传递 DTC 反向招揽参数。 |
-| 系统问题 | KYC 依赖 AIX App / Backend、DTC、AAI、KUN 等多方系统，需要明确状态、接口、webhook、错误码和责任边界。 |
-| QA 问题 | KYC 涉及多页面、多状态、多异常、多外部依赖，必须提供验收标准和测试场景矩阵。 |
-
-### 2.3 需求目标
-
-1. 建立 AIX 钱包开户 / KYC 的标准产品流程。
-2. 明确 KYC 主流程、分支、异常、锁定、waitlist、POA 和提交审核规则。
-3. 明确 AIX 页面状态、DTC `clientStatus`、DTC `EKycFileVerifyStatus` 的边界。
-4. 明确 DTC / AAI 相关接口、webhook、字段和错误码映射。
-5. 明确权限、合规、风控、通知、数据保存和待确认事项。
-6. 提供 QA 可验收的验收标准和测试场景矩阵。
-7. 防止 AI 或后续文档错误推导 Wallet / Card / Sub Account / Notification 等跨模块事实。
-
-### 2.4 涉及功能清单
-
-| 功能点 | 本期范围 | 优先级 | 状态 | 说明 |
-|---|---|---|---|---|
-| KYC Loading 状态分流 | In Scope | P0 | Confirmed | 根据 KYC 状态、waitlist、异常和超时分流。 |
-| KYC Start | In Scope | P0 | Confirmed | 展示认证入口、居住国家、协议和立即认证按钮。 |
-| Select Residence Country | In Scope | P0 | Confirmed / Open | 国家线存在版本口径冲突，见 GAP-KYC-COUNTRY-001。 |
-| Waitlist | In Scope | P0 | Confirmed | waitlist 为页面级拦截，提交后用户无法继续 KYC。 |
-| 协议与 Reverse Solicitation | In Scope | P0 | Confirmed | 保存同意时间、协议内容、快照，并影响 DTC 入参。 |
-| Identity Verify / Passport OCR | In Scope | P0 | Confirmed | 调用外部 H5 完成护照扫描。 |
-| Face Guide / Face Scan / Face Loading | In Scope | P0 | Confirmed | 包含活体采集、人脸比对、锁定、超时和失败处理。 |
-| Address Upload / POA | In Scope | P0 | Confirmed / Open | 文件上传、国家二次判断、POA 审核；有效期和跳转冲突见 Gap。 |
-| KYC Submission Success | In Scope | P1 | Confirmed | 提交成功后关闭当前 KYC 流程并返回入口。 |
-| DTC KYC API / webhook | In Scope | P0 | Confirmed | 包含 URL、结果查询、webhook、OCR info、POA upload。 |
-| 错误码映射 | In Scope | P0 | Confirmed / Open | PRD 已有映射；部分 DTC 原始码差异见 Gap。 |
-| DTC Sub Account 创建边界 | In Scope | P1 | Confirmed / Open | 设计流程包含 POA success 后 create sub account；等价关系待确认。 |
-| KYC 通知 | Deferred | P1 | Open | 历史记录存在通知规则，本轮附件未完整核验模板。 |
-| Wallet / Deposit / WalletConnect 准入 | Deferred | P1 | Open | 只记录依赖边界，不在本文补完整钱包规则。 |
-| Card KYC 复用关系 | Out of Scope | P2 | Open | 是否复用 Wallet / Account Opening KYC 未确认。 |
-| Send / Swap | Out of Scope | P2 | Deferred | 当前不纳入 active KYC 准入范围。 |
+| AIX 客户端 | 负责用户侧 KYC 页面和交互，包括 KYC 入口、状态展示、国家选择、协议确认、证件识别入口、人脸验证入口、POA 上传、成功页、失败页和异常页展示。 |
+| AIX 服务端 | 负责 KYC 流程编排和状态判断，包括查询用户 KYC 状态、判断国家是否支持、判断 waitlist、调用 DTC / AAI 接口、保存关键状态、转换错误码并返回给客户端。 |
+| OBOSS 后台 | 负责后台查看和处理 KYC 相关信息，包括用户 KYC 状态、认证进度、失败原因、外部系统返回结果、异常问题排查。具体后台操作能力以后续 OBOSS 需求为准。 |
+| DTC | 负责外部开户和 KYC 结果能力，包括生成 verification URL、返回 KYC 认证结果、维护 `clientStatus`、处理 POA 审核结果，以及后续 Sub Account 创建相关能力。 |
+| AAI | 负责身份识别能力，包括 Passport OCR、人脸识别 / 人脸比对、POA OCR 等识别结果返回。 |
+| Waitlist 模块 | 负责国家不支持或准入受限时的拦截和留资。用户进入 waitlist 后，当前流程不允许继续 KYC。 |
+| 通知 / 数据模块 | 负责记录 KYC 关键节点和结果，用于后续通知、数据分析、问题排查和合规留存。本文只说明与 KYC 流程直接相关的边界，不展开完整通知和数据规则。 |
 
 ---
 
