@@ -21,6 +21,7 @@ last_updated: 2026-05-05
 | `extract_tables.py` | 兼容入口，转调 `extract_docx_tables.py` | `python3 tools/extract_tables.py path/to/file.docx` |
 | `visual_structure_extract.py` | 基于成熟库封装图片结构提取：PaddleOCR 2.x / PP-Structure 2.x 做 OCR 与区域识别，OpenCV 可选做流程图节点与候选连线；输出确认模板，不直接生成 PRD。说明见 `tools/visual-structure-extract.md`，Docker 环境见 `tools/Dockerfile.visual` | `python3 tools/visual_structure_extract.py path/to/image.png --mode flowchart --out tmp/visual --ocr paddle --structure ppstructure --detect-flow-nodes --detect-connectors` |
 | `run_kyc_flowchart_extract.sh` | 一键解析第三章 KYC 业务流程图 `image4.jpeg`，优先用 Docker，输出 review/overlay/confirmation 模板 | `bash tools/run_kyc_flowchart_extract.sh` |
+| `ai_bridge_image_ocr.js` | AI Bridge 可调用的图片 OCR 脚本：Node + sharp + tesseract.js，下载 GitHub 图片、整图/分块 OCR，并把结果写回仓库供助手继续读取 | `node tools/ai_bridge_image_ocr.js --image knowledge-base/kyc/_assets/account-opening/image4.jpeg --out .ai-visual-cache/kyc-account-opening-image4/ocr.json --grid 4x4 --lang eng+chi_sim` |
 
 ## validate_prd.py
 
