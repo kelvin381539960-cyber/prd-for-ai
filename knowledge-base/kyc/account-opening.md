@@ -429,7 +429,9 @@ flowchart LR
 
 用户在本页选择居住国家、确认协议，并通过底部认证按钮进入身份认证流程。
 
-#### 4.3.1 KYC Start 主页面
+本节按 **KYC Start Page 内的区域 / 展示单元** 组织；Declaration 和 Waitlist 拦截都归属本页面，不单独作为页面章节。
+
+#### 4.3.1 主页面区域：KYC Start
 
 <table>
   <tr>
@@ -448,7 +450,7 @@ flowchart LR
           <ul>
             <li><strong>选择结果按国家 Type 判断</strong>：</li>
             <li>Type = Phase 1：返回本页；协议完成后可继续 KYC。</li>
-            <li>Type = phase 2 - waitlist：返回本页；点击底部认证按钮后进入 waitlist 处理；拦截展示见 <a href="#433-waitlist-拦截展示">4.3.3 Waitlist 拦截展示</a>，提交页细则见 <a href="#45-waitlist-page">4.5 Waitlist Page</a>。</li>
+            <li>Type = phase 2 - waitlist：返回本页；点击底部认证按钮后进入 waitlist 处理；拦截展示见本节 <strong>4.3.3 页面内触发：Waitlist 拦截展示</strong>，提交页细则见 <a href="#45-waitlist-page">4.5 Waitlist Page</a>。</li>
             <li>Type = Forbiden：国家列表隐藏，不可选择。</li>
           </ul>
         </li>
@@ -458,7 +460,7 @@ flowchart LR
       <p><strong>协议区</strong></p>
       <ul>
         <li>Terms / Privacy：可直接勾选，无需强制阅读；需保存用户同意并提交的时间。</li>
-        <li>Declaration：点击后打开 Declaration 弹窗 / 阅读页；完成规则见 <a href="#432-declaration-弹窗--阅读页">4.3.2 Declaration 弹窗 / 阅读页</a>。</li>
+        <li>Declaration：点击后打开 Declaration 弹窗 / 阅读页；完成规则见本节 <strong>4.3.2 页面内触发：Declaration 弹窗 / 阅读页</strong>。</li>
         <li>任一必选协议未完成：底部认证按钮灰色，不可点击。</li>
         <li>所有必选协议完成：底部认证按钮高亮，可点击。</li>
       </ul>
@@ -467,14 +469,14 @@ flowchart LR
       <p>原 PRD 中称 <code>立即认证 / Continue / Verify</code>，具体文案以 UI 为准。</p>
       <ul>
         <li>协议完成 + 国家 Type = Phase 1：保存协议相关信息，进入 Identity Verify；后续细则见 <a href="#46-identity-verify-page--identity-scan-h5">4.6 Identity Verify Page / Identity Scan H5</a>。</li>
-        <li>协议完成 + 国家 Type = phase 2 - waitlist：不进入 Identity Verify，触发 waitlist 拦截；见 <a href="#433-waitlist-拦截展示">4.3.3 Waitlist 拦截展示</a>。</li>
-        <li>协议获取 / 保存失败：展示错误提示，不允许继续；异常见 <a href="#434-异常与边界">4.3.4 异常与边界</a>。</li>
+        <li>协议完成 + 国家 Type = phase 2 - waitlist：不进入 Identity Verify，触发 waitlist 拦截；见本节 <strong>4.3.3 页面内触发：Waitlist 拦截展示</strong>。</li>
+        <li>协议获取 / 保存失败：展示错误提示，不允许继续；异常见本节 <strong>4.3.4 页面级异常与边界</strong>。</li>
       </ul>
     </td>
   </tr>
 </table>
 
-#### 4.3.2 Declaration 弹窗 / 阅读页
+#### 4.3.2 页面内触发：Declaration 弹窗 / 阅读页
 
 <table>
   <tr>
@@ -487,7 +489,7 @@ flowchart LR
     </td>
     <td valign="top">
       <p><strong>触发方式</strong></p>
-      <p>用户在 KYC Start 主页面点击 Declaration 协议项后展示。主页面入口见 <a href="#431-kyc-start-主页面">4.3.1 KYC Start 主页面</a>。</p>
+      <p>用户在 KYC Start 主页面点击 Declaration 协议项后展示。入口见本节 <strong>4.3.1 主页面区域：KYC Start</strong>。</p>
 
       <p><strong>完成条件</strong></p>
       <ul>
@@ -506,7 +508,7 @@ flowchart LR
   </tr>
 </table>
 
-#### 4.3.3 Waitlist 拦截展示
+#### 4.3.3 页面内触发：Waitlist 拦截展示
 
 <table>
   <tr>
@@ -519,7 +521,7 @@ flowchart LR
     </td>
     <td valign="top">
       <p><strong>触发方式</strong></p>
-      <p>用户在 KYC Start 主页面点击底部认证按钮后，后端判断所选国家不支持继续 KYC。触发入口见 <a href="#431-kyc-start-主页面">4.3.1 KYC Start 主页面</a>。</p>
+      <p>用户在 KYC Start 主页面点击底部认证按钮后，后端判断所选国家不支持继续 KYC。入口见本节 <strong>4.3.1 主页面区域：KYC Start</strong>。</p>
 
       <p><strong>处理结果</strong></p>
       <ul>
@@ -534,7 +536,7 @@ flowchart LR
   </tr>
 </table>
 
-#### 4.3.4 异常与边界
+#### 4.3.4 页面级异常与边界
 
 | 场景 | 处理 | 细则 |
 |---|---|---|
