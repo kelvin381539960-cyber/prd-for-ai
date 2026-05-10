@@ -153,28 +153,29 @@ sequenceDiagram
     participant DTC as DTCPay 服务端
     participant AAI as AAI 服务
 
-    APP->>APP: KYC Start Page（入口态）
     APP->>BE: 查询用户是否已绑定手机号
     BE-->>APP: 返回手机号绑定状态
 
     alt 未绑定手机号
-        APP->>APP: KYC Start Page（状态：未绑定手机）
-        APP->>APP: 引导用户绑定手机
-        APP->>APP: 提示用户绑定手机流程
+        APP->>APP: 跳转到绑定手机号页面
+        APP->>APP: 用户完成绑定手机号流程
+        APP->>APP: 进入 KYC Start Page
     else 已绑定手机号
-        APP->>BE: 查询 KYC 认证结果
-        BE->>DTC: GET /openapi/v1/ekyc/verification-result/{externalId}
-        DTC-->>BE: 返回认证结果（clientStatus、Passport、Face、POA result）
-        BE->>BE: 更新 KYC 状态机
+        APP->>APP: 进入 KYC Start Page
+    end
 
-        alt KYC 状态为 Under review / Rejected / Approved
-            BE-->>APP: 返回不可继续状态
-            APP->>APP: 展示 Verification unavailable
-        else KYC 状态为 pending / failed
-            BE-->>APP: 返回可继续状态
-            APP->>APP: KYC Start Page（状态：已绑定手机）
-            APP->>APP: 用户填写居住国家，点击下一步
-        end
+    APP->>BE: 查询 KYC 认证结果
+    BE->>DTC: GET /openapi/v1/ekyc/verification-result/{externalId}
+    DTC-->>BE: 返回认证结果（clientStatus、Passport、Face、POA result）
+    BE->>BE: 更新 KYC 状态机
+
+    alt KYC 状态为 Under review / Rejected / Approved
+        BE-->>APP: 返回不可继续状态
+        APP->>APP: 展示 Verification unavailable
+    else KYC 状态为 pending / failed
+        BE-->>APP: 返回可继续状态
+        APP->>APP: KYC Start Page
+        APP->>APP: 用户填写居住国家，点击下一步
     end
 
     APP->>BE: 请求 Passport 扫描 URL（verifyType = 1）
