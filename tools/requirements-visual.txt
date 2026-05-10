@@ -1,0 +1,14 @@
+# Optional dependencies for tools/visual_structure_extract.py
+# Install only in a local / CI environment prepared for image OCR.
+
+# Mature OCR + layout engines
+paddleocr>=2.7.0
+paddlepaddle>=2.6.0
+
+# Image processing and overlays
+opencv-python>=4.8.0
+numpy>=1.24.0
+Pillow>=10.0.0
+
+# Optional: enable only when a model config is approved in visual_structure_extract.py
+# layoutparser>=0.3.4
