@@ -1,10 +1,10 @@
 ---
 type: prd-template
 feature: standard-prd-template
-version: "1.10"
+version: "1.11"
 status: active
-source_doc: workflow/prd-workflow.md；prd-template/README.md；prd-template/prd-writing-workflow.md；prd-template/prd-writing-preferences.md；用户确认结论 2026-05-05；用户确认结论 2026-05-06；用户确认结论 2026-05-06 Canvas 草稿协作、文件最小化与落地评审；用户确认结论 2026-05-10 页面章节分层与左图右说明
-source_section: "multi-agent workflow；canvas-first；review gates；engineering execution PRD rules；optional sections；reuse page rules；lightweight artifact rules；landing review rules；page hierarchy rules；page-left explanation-right rules"
+source_doc: workflow/prd-workflow.md；prd-template/README.md；prd-template/prd-writing-workflow.md；prd-template/prd-writing-preferences.md；用户确认结论 2026-05-05；用户确认结论 2026-05-06；用户确认结论 2026-05-06 Canvas 草稿协作、文件最小化与落地评审；用户确认结论 2026-05-10 页面章节分层与左图右说明；用户确认结论 2026-05-10 业务时序图泳道、调用表达与第三方 H5 规则
+source_section: "multi-agent workflow；canvas-first；review gates；engineering execution PRD rules；optional sections；reuse page rules；lightweight artifact rules；landing review rules；page hierarchy rules；page-left explanation-right rules；business sequence diagram rules；external H5 flow rules；API note placement rules"
 last_updated: 2026-05-10
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -127,37 +127,89 @@ readers: [product, ui, dev, qa, business, ai]
 ### 2.1 业务时序图
 
 > 推荐使用 Mermaid `sequenceDiagram`。  
-> 本图关注业务流程、责任边界和业务结果，不是技术时序图。  
-> 不写接口名、请求参数、Header、返回码、幂等 key、技术实现细节。  
-> 如果流程中调用公共能力，只表达“请求 / 复用某公共能力”和成功失败后的业务流转，不展开公共能力内部规则。
+> 本图关注业务流程、责任边界、跨系统协作和业务结果，不是技术时序图。  
+> 如果原业务流程图有泳道，参与方必须优先使用原泳道；不要把每个页面都拆成参与方。  
+> 箭头文案写业务动作；接口路径、`verifyType` 等关键参数放在紧跟动作下方的 `Note over 发起方,接收方` 中。  
+> 后端不写“进入页面”，只写“返回下一步 / 返回结果”；页面展示由客户端自循环表达。  
+> 第三方 H5 / 外部服务流程必须拆清楚：生成 URL、用户完成 H5、返回客户端、客户端展示 Loading、异步结果回传、Loading 查询 / 等待结果、按结果分流。  
+> 原文已有明确状态值、错误码、渠道条件、接口参数、结果枚举时，必须保留，不得抽象压缩。  
+> 流程图主干未展示的弹窗、waitlist、异常页、toast、页面细节，不在本图强行补充，应放到页面章节、异常章节或状态章节说明。  
+> 如果事实来源是图片流程图，必须先完成节点 / 连线 / 分支识别；无法可靠识别的内容标待确认，不得猜测写入。
+
+**写法要求**
+
+| 规则 | 要求 |
+|---|---|
+| 参与方 | 优先使用原业务流程图泳道，例如 App / 中后台 / 外部服务；页面不要作为参与方。 |
+| 箭头文案 | 写业务动作，例如“查询业务状态”“请求生成 H5 URL”“返回下一步”。 |
+| 接口信息 | 不放在主箭头上；放在紧跟箭头后的 `Note over 发起方,接收方` 中。 |
+| 页面展示 | 后端只返回结果或下一步；客户端用 `APP->>APP` 表达展示页面。 |
+| 状态枚举 | 原文有什么枚举就保留什么枚举，不得改成“可继续 / 不可继续”等抽象词后丢失事实。 |
+| 第三方 H5 | 必须拆出“生成 URL → 进入 H5 → 完成 H5 → 返回客户端 → Loading → 异步回传 / 查询 → 按结果分流”。 |
+| 未展示细节 | 流程图主干没画的弹窗、拦截、toast、错误页，不强行放入时序图。 |
+
+**推荐示例**
 
 ```mermaid
 sequenceDiagram
     autonumber
-    actor User as 用户
-    participant App as AIX App
-    participant Service as 业务服务
-    participant Common as 公共能力
+    participant APP as AIX 客户端
+    participant BE as AIX 中后台
+    participant EXT as 外部服务
 
-    User->>App: 发起业务操作
-    App->>Service: 请求业务校验 / 处理
-    Service-->>App: 返回业务判断结果
+    APP->>BE: 查询业务状态
+    BE->>EXT: 查询外部业务结果
+    Note over BE,EXT: GET /example/{id}
+    EXT-->>BE: 返回明确状态枚举
+    BE-->>APP: 返回下一步
 
-    alt 业务判断不通过
-        App-->>User: 停留当前阶段，展示业务失败结果
-    else 业务判断通过
-        App->>Common: 请求 / 复用公共能力
-        Common-->>App: 返回公共能力处理结果
+    alt 状态 = A / B / C
+        APP->>APP: 展示不可继续页面
+    else 状态 = D / E
+        APP->>APP: 展示可继续页面
+    end
 
-        alt 公共能力处理失败
-            App-->>User: 按公共能力规则处理，业务不进入下一步
-        else 公共能力处理成功
-            App->>Service: 提交最终业务变更
-            Service-->>App: 返回业务处理成功
-            App-->>User: 展示成功结果
-        end
+    APP->>BE: 请求生成第三方 H5 URL
+    BE->>EXT: 生成第三方 H5 URL
+    Note over BE,EXT: POST /example/h5-url；type = verify
+    EXT-->>BE: 返回第三方 H5 URL
+    BE-->>APP: 返回第三方 H5 URL
+    APP->>APP: 打开第三方 H5
+    APP->>EXT: 用户完成第三方 H5 流程
+    EXT-->>APP: H5 流程结束，返回客户端
+    APP->>APP: 展示 Loading Page
+    EXT-->>BE: 异步回传处理结果
+
+    APP->>BE: Loading 中查询处理结果
+    BE->>EXT: 查询外部处理结果
+    Note over BE,EXT: GET /example/result/{id}
+    EXT-->>BE: 返回处理结果
+    BE-->>APP: 返回处理结果
+
+    alt result = SUCCESS
+        APP->>APP: 展示下一步页面
+    else result = PROCESSING / 未返回
+        APP->>APP: 继续展示 Loading Page
+    else result = FAILED
+        APP->>APP: 展示失败页面和失败信息
     end
 ```
+
+**不推荐写法**
+
+```mermaid
+sequenceDiagram
+    participant APP as App
+    participant Page as Some Page
+    participant BE as Backend
+    participant EXT as External
+
+    BE-->>Page: 进入 Some Page
+    BE->>EXT: GET /example/result/{id}
+    Note right of EXT: status = SUCCESS
+```
+
+问题：页面被当成参与方；后端“进入页面”；接口路径抢占主箭头；Note 放右侧，容易被误解成另一条动作。
 
 ### 2.2 关键校验与失败处理
 
@@ -532,7 +584,7 @@ flowchart LR
 - [ ] 主流程能从入口跑到业务结果，失败、取消、返回、重试有合理结果。
 - [ ] 复杂流程已保留状态机 / 状态流，且覆盖公共能力成功但最终业务失败、更新失败、超时、重试、返回、并发等分支。
 - [ ] 页面关系图使用 Mermaid `flowchart`（如适用）。
-- [ ] 业务时序图使用 Mermaid `sequenceDiagram`（如适用），且关注业务流程和结果，不写技术时序。
+- [ ] 业务时序图使用 Mermaid `sequenceDiagram`（如适用），且按原流程图泳道建参与方；箭头写业务动作；接口放箭头下方 `Note over 发起方,接收方`；后端只返回结果或下一步；页面由客户端展示；第三方 H5 拆出返回客户端、Loading、异步回传 / 查询和结果分流；状态枚举不压缩。
 - [ ] 每个新增 / 改造页面有低保真原型或明确页面结构。
 - [ ] 用户体验顺畅：用户知道当前步骤、操作反馈、失败下一步、成功结果和后续影响。
 - [ ] 页面能看出来的内容，没有重复写成规则。
