@@ -447,6 +447,25 @@ flowchart LR
 
 > 复用公共页面时，只写本需求相关流转，不重写公共页面规则。
 
+<table>
+  <tr>
+    <th width="48%">页面</th>
+    <th width="52%">说明</th>
+  </tr>
+  <tr>
+    <td valign="top">
+      <img src="./assets/path/reuse-page.svg" width="480" />
+    </td>
+    <td valign="top">
+      <p><strong>复用说明</strong></p>
+      <ul>
+        <li>本需求复用该页面，不改造页面结构和交互规则。</li>
+        <li>仅定义本需求下的进入条件、退出条件和结果回传。</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
 | 场景 | 后续流转 |
 |---|---|
 | 成功 | 返回本流程下一节点 |
