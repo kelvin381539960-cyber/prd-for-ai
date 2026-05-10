@@ -863,14 +863,12 @@ Face Loading 超过 30 秒仍无结果时展示。
           </ul>
         </li>
       </ul>
-
       <p><strong>用户操作</strong></p>
       <ul>
         <li>点击 Try again 且未锁定：重新触发 KYC 流程；当前流程图为 FaceFailed → Loading。</li>
         <li>点击 Try again 但已锁定：展示锁定提示，不允许重试。</li>
         <li>点击返回 / 关闭：历史原文为“返回到业务流程入口页”。是否存在返回上一流程节点的其他入口，源文档未明确。</li>
       </ul>
-
       <p><strong>锁定说明</strong></p>
       <ul>
         <li>命中 5 次限制：展示 Too many attempts / 安全锁提示。</li>
@@ -900,7 +898,7 @@ Face 成功后进入本页，用户确认居住国家并上传地址证明。
       <br><br>
       <img src="_assets/account-opening/image23.jpeg" width="480" />
       <br><br>
-      <img src="_assets/account-opening/image24.png" width="320" />
+      <img src="_assets/account-opening/image24.png" width="480" />
       <br><br>
       <img src="_assets/account-opening/image25.png" width="480" />
     </td>
@@ -917,7 +915,6 @@ Face 成功后进入本页，用户确认居住国家并上传地址证明。
           </ul>
         </li>
       </ul>
-
       <p><strong>文件上传区域</strong></p>
       <ul>
         <li><strong>选择文件</strong>：支持 JPG / JPEG / PNG / PDF，单文件不超过 16MB。</li>
@@ -935,7 +932,6 @@ Face 成功后进入本页，用户确认居住国家并上传地址证明。
         </li>
         <li>当前验收标准要求只能上传一份，上传中可取消，已上传可删除和预览。</li>
       </ul>
-
       <p><strong>POA 提交</strong></p>
       <ul>
         <li><strong>点击提交前提</strong>：已上传合法 POA 文件，并完成居住国家确认。</li>
@@ -950,7 +946,6 @@ Face 成功后进入本页，用户确认居住国家并上传地址证明。
           </ul>
         </li>
       </ul>
-
       <p>POA 机审会 OCR 提取 POA 国家信息，核验其与用户填报居住国是否匹配，并校验申请国家是否属于白名单。</p>
     </td>
   </tr>
@@ -965,12 +960,11 @@ Face 成功后进入本页，用户确认居住国家并上传地址证明。
   </tr>
   <tr>
     <td valign="top">
-      <img src="_assets/account-opening/image26.png" width="360" />
+      <img src="_assets/account-opening/image26.png" width="480" />
     </td>
     <td valign="top">
       <p><strong>触发方式</strong></p>
       <p>Address Upload 阶段二次判断国家不支持时展示。</p>
-
       <p><strong>拦截状态</strong></p>
       <ul>
         <li><strong>处理结果</strong>：用户不能继续提交当前国家的 POA。</li>
