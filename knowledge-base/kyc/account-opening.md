@@ -139,98 +139,98 @@ KYC Loading
 
 关键分支包括：waitlist、Verification unavailable、Network Error、Server Error、Loading Failed、Face Failed、POA 错误、DTC API 错误、国家线冲突和外部状态延迟。
 
-### 3.2 业务时序图
+### 3.2 业务流程图
+
+> 本图对齐原文 `7.1 开户业务流程` 与 `7.2 开户页面逻辑`，只表达用户在 App 内看到的页面、状态和业务流转。DTC / AAI 的 URL 生成、webhook、query、错误码等接口细节不放在本图，见第 5 章。
 
 ```mermaid
-sequenceDiagram
-    autonumber
-    actor User as 用户
-    participant App as AIX App
-    participant Backend as AIX Backend / KYC 服务
-    participant DTC as DTC
-    participant AAI as AAI H5 / 身份验证能力
+flowchart TD
+  Entry["业务流程入口页"]
+  Loading["KYC Loading Page"]
+  Unavailable["状态2 / Verification unavailable"]
+  Start["KYC Start Page"]
+  Country["Select Residence Country Page"]
+  Declaration["弹窗：Declaration of Reverse Solicitation"]
+  StartWaitlist["拦截：KYC Start Waitlist"]
+  Waitlist["Waitlist Page"]
+  IdentityVerify["Identity Verify Page"]
+  Permission["相机权限提示 / Open settings"]
+  IdentityScan["H5：Identity Scan Page"]
+  FaceGuide["Face Guide Page"]
+  TooMany["Too many attempts"]
+  FaceScan["H5：Face Scan Page"]
+  FaceLoading["Face Loading Page"]
+  LoadingFailed["Loading Failed Page"]
+  FaceFailed["Face Failed Page"]
+  AddressUpload["Address Upload Page"]
+  AddressWaitlist["拦截：Address Upload Waitlist"]
+  Success["KYC Submission Success Page"]
+  NetworkError["Network Error Page"]
+  ServerError["Server Error Page"]
 
-    Note over User,AAI: A. 准入判断
-    User->>App: 发起 KYC / 开户流程
-    App->>Backend: 查询 KYC 状态 / waitlist 状态
-    Backend-->>App: 返回 Pending / failed / Under review / Rejected / Approved / waitlist
+  Entry -->|发起 KYC / 开户流程| Loading
 
-    alt 后端返回 KYC 状态为 Under review / Rejected / Approved
-        App-->>User: KYC Loading Page 展示状态2 / Verification unavailable，阻止继续 KYC
-    else 用户在 waitlist 中且来源渠道是 APP
-        App-->>User: KYC Loading Page 展示状态2 / Verification unavailable，阻止继续 KYC
-    else KYC 状态为 Pending / failed
-        App-->>User: 展示 KYC Start 或后续未完成节点
-    end
+  Loading -->|KYC 状态 = Pending / failed| Start
+  Loading -->|KYC 状态 = Under review / Rejected / Approved| Unavailable
+  Loading -->|用户在 waitlist 中，且来源渠道是 APP| Unavailable
+  Loading -->|网络异常| NetworkError
+  Loading -->|系统异常| ServerError
+  Loading -->|30 秒无结果| LoadingFailed
+  Unavailable -->|Back / Leave| Entry
 
-    Note over User,AAI: B. 国家与协议确认
-    User->>App: 选择居住国家并勾选协议
-    App->>Backend: 保存协议同意时间 / 快照 / reverse solicitation 信息
-    Backend-->>App: 返回协议保存结果和国家 Type 判断结果
+  Start -->|点击居住国家 / 地区| Country
+  Country -->|从 KYC Start 进入，选择国家后| Start
+  Country -->|从 Address Upload 进入，选择国家后| AddressUpload
+  Country -->|关闭 / 返回| Start
 
-    alt 国家 Type = Phase 1 且协议保存成功
-        App-->>User: 进入 Identity Verify
-    else 国家 Type = phase 2-waitlist
-        App-->>User: 展示 KYC Start Page 内 Waitlist 拦截
-        User->>App: 点击 Join waitlist
-        App-->>User: 进入 Waitlist Page
-    else 协议获取 / 保存失败
-        App-->>User: Toast：Something went wrong. Please try again later，不进入 Identity Verify
-    end
+  Start -->|点击 Declaration 协议项| Declaration
+  Declaration -->|点击 I agree| Start
+  Declaration -->|关闭 / 返回，Declaration 不算完成| Start
 
-    Note over User,AAI: C. Passport OCR
-    User->>App: 点击相机开始证件认证
-    App->>Backend: 请求护照 H5 URL
-    Backend->>DTC: get-verification-url(PASSPORT)
-    DTC->>AAI: 获取护照扫描 H5 URL
-    AAI-->>DTC: 返回 url / expireTime
-    DTC-->>Backend: 返回 url / requestId
-    Backend-->>App: 返回 H5 URL
-    App-->>User: 打开 AAI H5 扫描护照
-    AAI-->>DTC: webhook 返回 passport 结果
-    DTC-->>Backend: webhook / query 同步 passport 结果
+  Start -->|协议未完成| Start
+  Start -->|协议完成 + 国家 Type = Phase 1| IdentityVerify
+  Start -->|协议完成 + 国家 Type = phase 2-waitlist| StartWaitlist
+  Start -->|协议获取 / 保存失败| Start
+  StartWaitlist -->|Join waitlist| Waitlist
 
-    Note over User,AAI: D. Face verification
-    User->>App: 在 Face Guide 点击 Continue
-    App->>Backend: 判断锁定规则并获取 passport country
-    Backend->>DTC: 获取 selfie / liveness H5 URL
-    DTC->>AAI: 获取活体 H5 URL
-    AAI-->>DTC: 返回 url / expireTime
-    DTC-->>Backend: 返回 url / requestId
-    Backend-->>App: 返回 H5 URL
-    App-->>User: 打开 AAI H5 完成活体采集
-    AAI-->>DTC: webhook 返回 liveness / face compare 结果
-    DTC-->>Backend: webhook / query 同步 face 结果
-    Backend-->>App: 返回验证结果
+  Waitlist -->|提交成功：按 userId 加入 waitlist| Entry
+  Waitlist -->|关闭 / 返回| Entry
 
-    alt Face 成功
-        App-->>User: 进入 Address Upload
-    else Face result 为 FAIL / EXPIRED / incomplete
-        App-->>User: 进入 Face Failed Page，并展示 Face Comparison 错误码映射文案
-    else Face Loading 超过 30 秒未收到结果
-        App-->>User: 进入 Loading Failed Page
-    else 命中 face 锁定规则
-        App-->>User: 展示 Too many attempts，不进入 Face Scan H5
-    end
+  IdentityVerify -->|点击相机 / 开始扫描，且有权限| IdentityScan
+  IdentityVerify -->|相机未授权 / 永久拒绝| Permission
+  Permission -->|Open settings 后返回| IdentityVerify
+  IdentityVerify -->|DTC 01009 / 01005 / 其他 URL 错误| IdentityVerify
 
-    Note over User,AAI: E. POA 与提交审核
-    User->>App: 上传地址证明文件
-    App->>Backend: 提交 POA 文件和居住国家
-    Backend->>DTC: 获取 upload token 并上传文件
-    DTC->>AAI: 上传 / 验证 POA
-    AAI-->>DTC: webhook 返回 POA 结果
-    DTC-->>Backend: webhook / query 同步 POA 结果
+  IdentityScan -->|扫描成功| FaceGuide
+  IdentityScan -->|扫描失败| IdentityVerify
 
-    alt POA 文件和国家信息提交成功
-        Backend-->>App: 返回提交成功
-        App-->>User: 展示 KYC Submission Success
-    else 申请国家不属于支持国家 / 白名单
-        Backend-->>App: 返回 waitlist 分支
-        App-->>User: 展示 Address Upload Page 内 Waitlist 拦截
-    else POA OCR 国家与填报居住国家不匹配 / POA 审核失败
-        Backend-->>App: 返回 POA error code
-        App-->>User: 按 POA error code 映射展示前端提示文案
-    end
+  FaceGuide -->|Continue + 未锁定| FaceScan
+  FaceGuide -->|命中锁定规则| TooMany
+  TooMany -->|Try again later| Entry
+
+  FaceScan -->|采集结束| FaceLoading
+
+  FaceLoading -->|验证成功| AddressUpload
+  FaceLoading -->|后端返回验证失败| FaceFailed
+  FaceLoading -->|30 秒无结果| LoadingFailed
+  FaceLoading -->|网络异常| NetworkError
+  FaceLoading -->|系统异常| ServerError
+
+  LoadingFailed -->|Retry| FaceLoading
+  LoadingFailed -->|Leave| Entry
+
+  FaceFailed -->|Try again 且未锁定| Loading
+  FaceFailed -->|Close / 返回| Entry
+
+  AddressUpload -->|点击 Residence| Country
+  AddressUpload -->|文件格式错误 / 超 16MB / 上传服务器报错| AddressUpload
+  AddressUpload -->|国家 Type = phase 2-waitlist / 申请国家不支持| AddressWaitlist
+  AddressWaitlist -->|Join waitlist| Waitlist
+  AddressWaitlist -->|Select other country| Country
+  AddressUpload -->|POA OCR 国家不匹配 / POA 审核失败| FaceFailed
+  AddressUpload -->|POA 文件和国家信息提交成功| Success
+
+  Success -->|返回首页 / 完成| Entry
 ```
 
 ### 3.3 流程步骤与业务规则
