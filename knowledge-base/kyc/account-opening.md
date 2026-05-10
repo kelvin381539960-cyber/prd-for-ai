@@ -256,22 +256,15 @@ flowchart TB
     class Branch,Main group;
 ```
 
-| 状态 | 触发条件 | 用户侧表现 |
-|---|---|---|
-| `Pending` | 未完成或中断后可继续 | 进入对应流程节点 |
-| `failed` | Passport/Face/POA 任一失败 | 展示失败原因，可重试 |
-| `Under review` | 已提交审核 | 等待结果，不可重复提交 |
-| `Approved` | DTC `clientStatus = ACTIVATED` | 开户完成 |
-| `Rejected` | DTC `clientStatus = REJECTED` | 流程终止 |
-| `waitlist` | 国家不支持或命中 waitlist | 阻断继续 |
-| `Locked` | 失败次数超限 | 暂时锁定 |
-
-**DTC → AIX 状态映射**
-
-| DTC 字段 | 状态值 | AIX 映射 |
-|---|---|---|
-| `clientStatus` | `ACTIVATED` / `REJECTED` / `PENDING_KYC` | Approved / Rejected / 审核中 |
-| `passportVerifyStatus`<br>`faceIdVerifyStatus`<br>`proofOfAddressVerifyStatus` | `UNVERIFIED` / `VERIFYING` / `VERIFY_SUCCESS` / `VERIFY_FAILURE` | 未开始 / 处理中 / 通过 / 失败 |
+| AIX 状态 | DTC 来源 | 触发条件 | 用户表现 |
+|---|---|---|---|
+| `Pending` | - | 未完成或中断后可继续 | 进入对应节点 |
+| `Under review` | `clientStatus = PENDING_KYC` | 已提交审核 | 等待结果，不可重复提交 |
+| `Approved` | `clientStatus = ACTIVATED` | 审核通过 | 开户完成 |
+| `Rejected` | `clientStatus = REJECTED` | 审核拒绝 | 流程终止 |
+| `failed` | `verifyStatus = VERIFY_FAILURE` | Passport/Face/POA 任一失败 | 展示原因，可重试 |
+| `waitlist` | - | 国家不支持或命中 waitlist | 阻断继续 |
+| `Locked` | - | 失败次数超限 | 暂时锁定 |
 
 ### 3.3 关键规则补充
 
