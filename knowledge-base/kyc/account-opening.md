@@ -431,30 +431,100 @@ flowchart LR
 
 #### 4.3.1 KYC Start 主页面
 
-| 页面 | 说明 |
-|---|---|
-| <img src="_assets/account-opening/image7.png" width="360" /> | **页面区域**<br>- 居住国家 / 地区区域。<br>- Terms of service。<br>- Privacy Policy。<br>- Declaration of Reverse Solicitation。<br>- 底部认证按钮：原 PRD 中称 `立即认证 / Continue / Verify`，具体文案以 UI 为准。<br><br>**居住国家 / 地区**<br>- 默认值来自 IP 检测；检测不到时默认 SG。<br>- 点击国家区域，进入 Select Residence Country Page。<br>- Type = Phase 1：返回本页；协议完成后可继续 KYC。<br>- Type = phase 2 - waitlist：返回本页；点击底部认证按钮后进入 waitlist 处理。<br>- Type = Forbiden：国家列表隐藏，不可选择。<br>- 国家线存在版本口径冲突，见 `GAP-KYC-COUNTRY-001`。<br><br>**协议区**<br>- Terms / Privacy：可直接勾选，无需强制阅读；需保存用户同意并提交的时间。<br>- Declaration：点击后打开 Declaration 弹窗 / 阅读页；用户同意后才算完成。<br>- 任一必选协议未完成：底部认证按钮灰色，不可点击。<br>- 所有必选协议完成：底部认证按钮高亮，可点击。<br><br>**底部认证按钮点击后**<br>- 协议完成 + 国家 Type = Phase 1：保存协议相关信息，进入 Identity Verify。<br>- 协议完成 + 国家 Type = phase 2 - waitlist：不进入 Identity Verify，触发 waitlist 拦截。<br>- 协议获取 / 保存失败：展示错误提示，不允许继续。 |
+<table>
+  <tr>
+    <th width="48%">页面</th>
+    <th width="52%">说明</th>
+  </tr>
+  <tr>
+    <td valign="top">
+      <img src="_assets/account-opening/image7.png" width="480" />
+    </td>
+    <td valign="top">
+      <strong>页面区域</strong><br>
+      - 居住国家 / 地区区域。<br>
+      - Terms of service。<br>
+      - Privacy Policy。<br>
+      - Declaration of Reverse Solicitation。<br>
+      - 底部认证按钮：原 PRD 中称 <code>立即认证 / Continue / Verify</code>，具体文案以 UI 为准。<br><br>
+      <strong>居住国家 / 地区</strong><br>
+      - 默认值来自 IP 检测；检测不到时默认 SG。<br>
+      - 点击国家区域，进入 Select Residence Country Page；国家选择细则见 <a href="#44-select-residence-country-page">4.4 Select Residence Country Page</a>。<br>
+      - Type = Phase 1：返回本页；协议完成后可继续 KYC。<br>
+      - Type = phase 2 - waitlist：返回本页；点击底部认证按钮后进入 waitlist 处理；拦截展示见 <a href="#433-waitlist-拦截展示">4.3.3 Waitlist 拦截展示</a>，提交页细则见 <a href="#45-waitlist-page">4.5 Waitlist Page</a>。<br>
+      - Type = Forbiden：国家列表隐藏，不可选择。<br>
+      - 国家线存在版本口径冲突，见 <code>GAP-KYC-COUNTRY-001</code>。<br><br>
+      <strong>协议区</strong><br>
+      - Terms / Privacy：可直接勾选，无需强制阅读；需保存用户同意并提交的时间。<br>
+      - Declaration：点击后打开 Declaration 弹窗 / 阅读页；完成规则见 <a href="#432-declaration-弹窗--阅读页">4.3.2 Declaration 弹窗 / 阅读页</a>。<br>
+      - 任一必选协议未完成：底部认证按钮灰色，不可点击。<br>
+      - 所有必选协议完成：底部认证按钮高亮，可点击。<br><br>
+      <strong>底部认证按钮点击后</strong><br>
+      - 协议完成 + 国家 Type = Phase 1：保存协议相关信息，进入 Identity Verify；后续细则见 <a href="#46-identity-verify-page--identity-scan-h5">4.6 Identity Verify Page / Identity Scan H5</a>。<br>
+      - 协议完成 + 国家 Type = phase 2 - waitlist：不进入 Identity Verify，触发 waitlist 拦截；见 <a href="#433-waitlist-拦截展示">4.3.3 Waitlist 拦截展示</a>。<br>
+      - 协议获取 / 保存失败：展示错误提示，不允许继续；异常见 <a href="#434-异常与边界">4.3.4 异常与边界</a>。<br>
+    </td>
+  </tr>
+</table>
 
 #### 4.3.2 Declaration 弹窗 / 阅读页
 
-| 页面 | 说明 |
-|---|---|
-| <img src="_assets/account-opening/image9.png" width="360" /> | **触发方式**<br>用户在 KYC Start 主页面点击 Declaration 协议项后展示。<br><br>**完成条件**<br>- 点击 `I agree`：关闭弹窗，Declaration 变为已完成。<br>- 关闭 / 返回：关闭弹窗，Declaration 不算完成，底部认证按钮仍按协议未完成处理。<br><br>**保存要求**<br>- 保存 Declaration 内容。<br>- 保存用户同意时间。<br>- 影响 DTC `reverseSolicitation` 入参。<br>- 需要反向招揽声明的国家，应传 `reverseSolicitation=T`；缺失时 DTC 可能返回 `50013`。 |
+<table>
+  <tr>
+    <th width="48%">页面</th>
+    <th width="52%">说明</th>
+  </tr>
+  <tr>
+    <td valign="top">
+      <img src="_assets/account-opening/image9.png" width="480" />
+    </td>
+    <td valign="top">
+      <strong>触发方式</strong><br>
+      用户在 KYC Start 主页面点击 Declaration 协议项后展示。主页面入口见 <a href="#431-kyc-start-主页面">4.3.1 KYC Start 主页面</a>。<br><br>
+      <strong>完成条件</strong><br>
+      - 点击 <code>I agree</code>：关闭弹窗，Declaration 变为已完成。<br>
+      - 关闭 / 返回：关闭弹窗，Declaration 不算完成，底部认证按钮仍按协议未完成处理。<br><br>
+      <strong>保存要求</strong><br>
+      - 保存 Declaration 内容。<br>
+      - 保存用户同意时间。<br>
+      - 影响 DTC <code>reverseSolicitation</code> 入参。<br>
+      - 需要反向招揽声明的国家，应传 <code>reverseSolicitation=T</code>；缺失时 DTC 可能返回 <code>50013</code>，错误码细则见 <a href="#52-get-verification-url-错误码">5.2 get-verification-url 错误码</a>。<br>
+    </td>
+  </tr>
+</table>
 
 #### 4.3.3 Waitlist 拦截展示
 
-| 页面 | 说明 |
-|---|---|
-| <img src="_assets/account-opening/image10.png" width="360" /> | **触发方式**<br>用户点击底部认证按钮后，后端判断所选国家不支持继续 KYC。<br><br>**处理结果**<br>- 不允许进入 Identity Verify。<br>- 点击 Join waitlist：进入 Waitlist Page。<br>- 返回：回到 KYC Start 或业务入口。<br><br>**边界说明**<br>源文档同时出现“弹窗拦截”描述和“waitlist 调整为页面级拦截”的变更记录。当前文档只确认结果：用户不能继续 KYC，并可进入 Waitlist Page；具体展示形态以最新 UI 为准。 |
+<table>
+  <tr>
+    <th width="48%">页面</th>
+    <th width="52%">说明</th>
+  </tr>
+  <tr>
+    <td valign="top">
+      <img src="_assets/account-opening/image10.png" width="480" />
+    </td>
+    <td valign="top">
+      <strong>触发方式</strong><br>
+      用户在 KYC Start 主页面点击底部认证按钮后，后端判断所选国家不支持继续 KYC。触发入口见 <a href="#431-kyc-start-主页面">4.3.1 KYC Start 主页面</a>。<br><br>
+      <strong>处理结果</strong><br>
+      - 不允许进入 Identity Verify。<br>
+      - 点击 Join waitlist：进入 Waitlist Page；提交细则见 <a href="#45-waitlist-page">4.5 Waitlist Page</a>。<br>
+      - 返回：回到 KYC Start 或业务入口。<br><br>
+      <strong>边界说明</strong><br>
+      源文档同时出现“弹窗拦截”描述和“waitlist 调整为页面级拦截”的变更记录。当前文档只确认结果：用户不能继续 KYC，并可进入 Waitlist Page；具体展示形态以最新 UI 为准。<br>
+    </td>
+  </tr>
+</table>
 
 #### 4.3.4 异常与边界
 
-| 场景 | 处理 |
-|---|---|
-| 无法获取协议 | Toast：`Something went wrong. Please try again later`，不允许继续 |
-| Reverse Solicitation 缺失 | DTC 返回 `50013`；阻止生成验证 URL，需补声明后再继续 |
-| 手机号未绑定 | 本页流程未确认，见 `GAP-KYC-PHONE-001` |
-| 手机号已绑定 | 直接进入 Start Page，不展示额外绑定成功 toast |
+| 场景 | 处理 | 细则 |
+|---|---|---|
+| 无法获取协议 | Toast：`Something went wrong. Please try again later`，不允许继续 | 影响协议区和底部认证按钮 |
+| Reverse Solicitation 缺失 | DTC 返回 `50013`；阻止生成验证 URL，需补声明后再继续 | 见 [5.2 get-verification-url 错误码](#52-get-verification-url-错误码) |
+| 手机号未绑定 | 本页流程未确认 | 见 `GAP-KYC-PHONE-001` |
+| 手机号已绑定 | 直接进入 Start Page，不展示额外绑定成功 toast | - |
 
 协议快照需在提交成功后生成并与用户账户绑定；保存失败应阻止继续。源文档未明确“勾选即保存”还是“点击底部认证按钮统一保存”，实现时需以后端接口约定为准。
 
