@@ -1,10 +1,10 @@
 ---
 type: prd-template
 feature: standard-prd-template
-version: "1.13"
+version: "1.14"
 status: active
 source_doc: workflow/prd-workflow.md；prd-template/README.md；prd-template/prd-writing-workflow.md；prd-template/prd-writing-preferences.md；用户确认结论 2026-05-05；用户确认结论 2026-05-06；用户确认结论 2026-05-06 Canvas 草稿协作、文件最小化与落地评审；用户确认结论 2026-05-10 页面章节分层与左图右说明；用户确认结论 2026-05-10 业务时序图泳道、调用表达与第三方 H5 规则；用户确认结论 2026-05-10 需求背景目标范围章节规则；用户确认结论 2026-05-10 模板对齐 account-opening 颗粒度
-source_section: "multi-agent workflow；canvas-first；review gates；engineering execution PRD rules；optional sections；reuse page rules；lightweight artifact rules；landing review rules；page hierarchy rules；page-left explanation-right rules；business sequence diagram rules；external H5 flow rules；API note placement rules；background-goal-scope rules；fields-apis-data master table；error code mapping；cross-module boundary chapter；state machine paradigms"
+source_section: "multi-agent workflow；canvas-first；review gates；engineering execution PRD rules；optional sections；reuse page rules；lightweight artifact rules；landing review rules；page hierarchy rules；page-left explanation-right rules；business sequence diagram rules；external H5 flow rules；API note placement rules；background-goal-scope rules；fields-apis-data master table；error code mapping；cross-module boundary chapter；unified state machine"
 last_updated: 2026-05-10
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -308,35 +308,9 @@ sequenceDiagram
 > 状态机必须覆盖成功、失败、取消、返回、超时、重试、更新失败、公共能力成功但最终业务失败等分支。  
 > 页面关系图不能替代状态机；页面图只说明页面跳转，状态机说明业务状态和数据结果。
 
-模板提供两种状态机范式，按业务选用：
+**状态图**
 
-#### 范式 A：纯技术状态机（适用：内部状态流转、引擎、事务）
-
-```mermaid
-stateDiagram-v2
-    [*] --> INIT
-    INIT --> STEP_ONE_PROCESSING: 用户发起操作
-    STEP_ONE_PROCESSING --> STEP_ONE_FAILED: 第一步处理失败
-    STEP_ONE_PROCESSING --> STEP_ONE_DONE: 第一步处理成功
-    STEP_ONE_DONE --> FINAL_UPDATING: 提交最终业务变更
-    FINAL_UPDATING --> SUCCESS: 最终业务变更成功
-    FINAL_UPDATING --> UPDATE_FAILED: 最终业务变更失败
-    STEP_ONE_FAILED --> INIT: 用户返回 / 重试
-    UPDATE_FAILED --> FINAL_UPDATING: 用户重试且验证态仍有效
-    UPDATE_FAILED --> INIT: 验证态失效 / 用户取消
-    SUCCESS --> [*]
-```
-
-| 状态 | 进入条件 | 允许操作 | 退出条件 | 失败 / 超时 / 返回处理 | 数据结果 |
-|---|---|---|---|---|---|
-| INIT |  |  |  |  |  |
-| PROCESSING |  |  |  |  |  |
-| SUCCESS |  |  |  |  |  |
-| FAILED |  |  |  |  |  |
-
-#### 范式 B：业务状态 + 外部系统映射（适用：KYC、申请、风控、审核类）
-
-> 当本系统状态由外部系统结果驱动（如外部审核返回的 `clientStatus`、webhook、verifyStatus）时使用，需要把"业务状态 / 外部来源 / 触发条件 / 用户表现"在一张表里说清楚。
+可选用 Mermaid `stateDiagram-v2`（适合纯状态流转）或 `flowchart`（适合带外部系统驱动的业务状态）。任选其一即可，不需要画两遍。
 
 ```mermaid
 %%{init: {"flowchart": {"curve": "step"}} }%%
@@ -349,13 +323,19 @@ flowchart TB
     Fail -->|用户重试| Pending
 ```
 
-| 业务状态 | 外部系统来源 | 触发条件 | 用户表现 |
-|---|---|---|---|
-| `Pending` | - | 未完成或中断后可继续 | 进入对应节点 |
-| `Under review` | `clientStatus = PENDING_X` | 已提交，等待审核 | 等待结果，不可重复提交 |
-| `Approved` | `clientStatus = ACTIVATED` | 审核通过 | 流程完成 |
-| `Rejected` | `clientStatus = REJECTED` | 审核拒绝 | 流程终止 |
-| `Failed` | `verifyStatus = VERIFY_FAILURE` | 任一验证项失败 | 展示原因，可重试 |
+**状态定义表**
+
+> 必备列：状态、进入条件 / 触发、退出条件 / 后续、用户表现 / 数据结果。  
+> 可选列：**外部系统来源**——状态由外部系统驱动（如 `clientStatus`、webhook、`verifyStatus`）时加上；纯内部流转去掉这一列即可。  
+> 列名可按业务措辞调整，不强制照抄。
+
+| 状态 | 外部系统来源（如有） | 进入条件 / 触发 | 退出条件 / 后续 | 用户表现 / 数据结果 |
+|---|---|---|---|---|
+| `Pending` | - | 未完成或中断后可继续 | 提交材料后进入 Under review | 进入对应节点 |
+| `Under review` | `clientStatus = PENDING_X` | 已提交，等待审核 | 通过 / 拒绝 / 任一失败 | 等待结果，不可重复提交 |
+| `Approved` | `clientStatus = ACTIVATED` | 审核通过 | - | 流程完成 |
+| `Rejected` | `clientStatus = REJECTED` | 审核拒绝 | - | 流程终止 |
+| `Failed` | `verifyStatus = VERIFY_FAILURE` | 任一验证项失败 | 用户重试 → Pending | 展示原因，可重试 |
 
 **必须说明的状态规则**
 
@@ -806,7 +786,7 @@ flowchart LR
 - [ ] 章节起首有边界声明（"本章只描述 X，Y 见第 Z 章"），避免与其他章节重复。
 - [ ] 本期做什么、不做什么清楚，没有混入另一个独立功能。
 - [ ] 主流程能从入口跑到业务结果，失败、取消、返回、重试有合理结果。
-- [ ] 复杂流程已保留状态机 / 状态流，按业务选用范式 A（纯技术）或范式 B（业务状态 + 外部映射），且覆盖公共能力成功但最终业务失败、更新失败、超时、重试、返回、并发等分支。
+- [ ] 复杂流程已保留状态机 / 状态流，覆盖公共能力成功但最终业务失败、更新失败、超时、重试、返回、并发等分支；状态由外部系统驱动时，状态定义表中已给出外部来源列。
 - [ ] 页面关系图使用 Mermaid `flowchart`（如适用）。
 - [ ] 业务时序图使用 Mermaid `sequenceDiagram`（如适用），且参与方按业务责任边界设置；箭头写业务动作；接口放箭头下方 `Note over 发起方,接收方`；后端只返回结果或下一步；页面由客户端展示；第三方 H5 拆出返回客户端、Loading、异步回传 / 查询和结果分流；状态枚举不压缩。
 - [ ] 每个新增 / 改造页面有低保真原型或明确页面结构。
