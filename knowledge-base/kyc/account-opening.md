@@ -85,51 +85,11 @@ KYC 由 AIX 客户端、AIX 服务端、DTC、AAI 协作完成。
 
 ---
 
-## 3. 业务流程与规则
+## 3. 业务流程
 
-> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
-> 开户业务流程总图。
+本章只描述跨系统流程、状态流转与关键业务规则；页面展示、按钮、弹窗、toast、跳转等页面级交互统一见第 4 章。
 
-![KYC business flow - image4.jpeg](_assets/account-opening/image4.jpeg)
-
-
-### 3.1 业务主流程说明
-
-KYC 主流程按业务阶段可归纳为：
-
-```text
-手机号绑定判断
-→ 准入状态判断
-→ 居住国家与协议确认
-→ 证件认证
-→ 人脸验证
-→ 地址证明上传
-→ 提交审核
-→ 结果通知 / 入口状态感知
-```
-
-页面路径为：
-
-```text
-手机号绑定判断 / 绑定流程
-→ KYC Loading
-→ KYC Start
-→ Select Residence Country
-→ Agreement
-→ Identity Verify
-→ Identity Scan
-→ Face Guide
-→ Face Scan
-→ Face Loading
-→ Address Upload
-→ KYC Submission Success
-```
-
-关键分支包括：waitlist、Verification unavailable、Network Error、Server Error、Loading Failed、Face Failed、POA 错误、DTC API 错误、国家线冲突和外部状态延迟。
-
-### 3.2 业务时序图
-
-> 本图按第三章业务流程图泳道时序化表达：AIX 客户端、AIX 中后台、DTCPay 服务端、AAI 服务。箭头文案写业务动作；接口路径和关键参数放在该箭头下方的 Note 中，避免干扰主流程阅读。流程图主干未展示的弹窗、waitlist、异常页细节不在本图补充，见第 4 章与 3.5。
+### 3.1 业务时序图
 
 ```mermaid
 sequenceDiagram
@@ -139,243 +99,131 @@ sequenceDiagram
     participant DTC as DTCPay 服务端
     participant AAI as AAI 服务
 
-    APP->>BE: 查询手机号绑定状态
-    BE-->>APP: 返回手机号绑定状态
-
-    alt 未绑定手机号
-        APP->>APP: 跳转到绑定手机号页面
-        APP->>APP: 用户完成绑定手机号流程
-        APP->>APP: 展示 KYC Start Page
-    else 已绑定手机号
-        APP->>APP: 展示 KYC Start Page
-    end
-
-    APP->>BE: 查询用户当前 KYC 状态
-    BE->>DTC: 查询 DTC KYC 认证结果
+    APP->>BE: 查询手机号绑定状态与 KYC 状态
+    BE->>DTC: 查询当前 KYC 认证结果
     Note over BE,DTC: GET /openapi/v1/ekyc/verification-result/{externalId}
     DTC-->>BE: 返回 clientStatus、Passport、Face、POA result
-    BE->>BE: 更新 KYC 状态机
+    BE->>BE: 映射 AIX KYC 状态
+    BE-->>APP: 返回当前可继续节点或不可继续状态
 
-    alt KYC 状态为 Under review / Rejected / Approved
-        BE-->>APP: 返回不可继续 KYC
-        APP->>APP: 展示 Verification unavailable
-    else KYC 状态为 pending / failed
-        BE-->>APP: 返回可继续 KYC
-        APP->>APP: 展示 KYC Start Page
-        APP->>APP: 用户填写居住国家，点击下一步
+    alt 未绑定手机号
+        APP->>APP: 引导用户完成手机号绑定
+    else 已绑定且允许继续 KYC
+        APP->>APP: 进入 KYC 页面流程
     end
 
-    APP->>BE: 请求 Passport 扫描地址
-    BE->>DTC: 请求生成 Passport H5 URL
-    Note over BE,DTC: POST /openapi/v1/ekyc/get-verification-url；verifyType = 1
-    DTC->>AAI: 请求生成 Passport 扫描 H5 URL
-    AAI-->>DTC: 返回 Passport 扫描 H5 URL
-    DTC-->>BE: 返回 Passport H5 URL
-    BE-->>APP: 返回 Passport H5 URL
-    APP->>APP: 打开 H5 扫描页并扫描
+    APP->>BE: 提交居住国家与协议确认结果
+    BE->>BE: 校验国家线、waitlist、Reverse Solicitation 留痕
 
-    APP->>AAI: H5 内完成 Passport OCR
-    AAI-->>DTC: 回传 OCR 信息 / Passport 信息
-    DTC-->>BE: 同步 OCR 信息 / Passport 信息
-
-    alt OCR 失败
-        BE-->>APP: 返回 OCR 失败
-        APP->>APP: 按 OCR 失败结果进入对应页面
-    else OCR 完成
-        BE->>BE: 按 Passport / Face 状态分流
+    alt 国家不支持或命中 waitlist
+        BE-->>APP: 返回 waitlist 状态
+    else 国家支持且协议确认有效
+        APP->>BE: 请求证件认证 H5 URL
+        BE->>DTC: 创建 Passport 认证会话
+        Note over BE,DTC: POST /openapi/v1/ekyc/get-verification-url；verifyType = 1
+        DTC->>AAI: 请求生成 Passport OCR H5 URL
+        AAI-->>DTC: 返回 Passport OCR H5 URL
+        DTC-->>BE: 返回 Passport H5 URL
+        BE-->>APP: 返回 Passport H5 URL
+        APP->>AAI: 用户完成证件扫描
+        AAI-->>DTC: 回传 Passport OCR 结果
+        DTC-->>BE: 同步 Passport 结果
     end
 
-    alt passport = SUCCESS 且 face = UNVERIFIED / FAILURE
-        BE-->>APP: 返回下一步为 Face Guide
-        APP->>APP: 展示 Face Guide Page
-        APP->>BE: 请求活体识别地址
-        BE->>DTC: 请求生成活体 H5 URL
+    alt Passport 认证成功
+        APP->>BE: 请求 Face 认证 H5 URL
+        BE->>DTC: 创建 Face 认证会话
         Note over BE,DTC: POST /openapi/v1/ekyc/get-verification-url；verifyType = 4
-        DTC->>AAI: 请求生成活体识别 H5 URL
-        AAI-->>DTC: 返回活体识别 H5 URL
-        DTC-->>BE: 返回活体 H5 URL
-        BE-->>APP: 返回活体 H5 URL
-        APP->>APP: 打开活体 H5，进入活体识别页
-        APP->>AAI: 用户完成活体识别 / 人脸比对
-        AAI-->>APP: 活体流程结束，返回 AIX 客户端
-        APP->>APP: 展示 Loading Page
-        AAI-->>DTC: 异步回传 Face result
-        DTC-->>BE: 同步 Face result / webhook 结果
-    else passport = VERIFYING 且 face = SUCCESS / FAILURE / VERIFYING
-        BE-->>APP: 返回下一步为 Loading
-        APP->>APP: 展示 Loading Page
-    else passport = SUCCESS 且 face = VERIFYING
-        BE-->>APP: 返回下一步为 Loading
-        APP->>APP: 展示 Loading Page
-    else Face 比对失败
-        BE-->>APP: 返回人脸比对失败结果
-        APP->>APP: 展示人脸比对失败页和失败信息
+        DTC->>AAI: 请求生成 Face H5 URL
+        AAI-->>DTC: 返回 Face H5 URL
+        DTC-->>BE: 返回 Face H5 URL
+        BE-->>APP: 返回 Face H5 URL
+        APP->>AAI: 用户完成活体 / 人脸比对
+        AAI-->>DTC: 回传 Face 结果
+        DTC-->>BE: 同步 Face 结果
+    else Passport 认证失败
+        BE-->>APP: 返回失败结果与错误码
     end
 
-    APP->>BE: Loading 中查询验证结果
-    BE->>DTC: 查询 DTC KYC 认证结果
+    APP->>BE: 查询 Passport / Face 最新结果
+    BE->>DTC: 查询 KYC 认证结果
     Note over BE,DTC: GET /openapi/v1/ekyc/verification-result/{externalId}
-    DTC-->>BE: 返回 Passport / Face 验证结果
-    BE-->>APP: 返回验证结果
+    DTC-->>BE: 返回 Passport / Face / POA 状态
+    BE-->>APP: 返回下一步节点或失败状态
 
-    alt passport result = VERIFY_SUCCESS 且 face result = VERIFY_SUCCESS
-        APP->>APP: 展示 Address Upload Page
-        APP->>APP: 上传 POA 文件
-    else Face result = VERIFYING / 未返回
-        APP->>APP: 继续展示 Loading Page
-    else Face result = VERIFY_FAILURE / FAIL / EXPIRED / incomplete
-        APP->>APP: 展示人脸比对失败页和失败信息
-    else face = UNVERIFIED / 其他 result
-        BE-->>APP: 返回失败或未完成结果
-        APP->>APP: 按失败结果进入对应页面
+    alt Passport 与 Face 均通过
+        APP->>BE: 上传 POA 文件
+        Note over APP,BE: POST /openapi/v1/ekyc/upload
+        BE->>DTC: 提交 POA 文件与居住地信息
+        DTC->>AAI: 处理 POA OCR / 审核
+        AAI-->>DTC: 返回 POA 处理结果
+        DTC-->>BE: 同步 POA 结果
+        BE-->>APP: 返回提交结果
+    else Passport 或 Face 失败
+        BE-->>APP: 返回失败原因、重试状态或锁定状态
     end
 
-    APP->>BE: 上传 POA 文件
-    Note over APP,BE: POST /openapi/v1/ekyc/upload
-    BE->>DTC: 提交 POA 文件与居住地信息
-    DTC->>AAI: 处理 POA 文件 / POA OCR
-    AAI-->>DTC: 返回 POA OCR 结果
-    DTC-->>BE: 返回 POA 处理结果
-    BE-->>APP: 返回提交结果
-    APP->>APP: 展示 Under review Page
-
-    APP->>BE: 定时查询 KYC 结果
-    BE->>DTC: 查询 DTC KYC 审核结果
+    BE->>DTC: 查询最终 KYC 审核结果
     Note over BE,DTC: GET /openapi/v1/ekyc/verification-result/{externalId}
-    DTC-->>BE: 返回 KYC 审核结果
+    DTC-->>BE: 返回 clientStatus 与各认证项结果
 
     alt clientStatus = ACTIVATED
-        BE->>BE: KYC 状态变更为 approved
+        BE->>BE: 更新 AIX KYC 状态为 Approved
         BE-->>APP: 返回 Approved
-        BE->>BE: 触发 SMS / 邮件通知用户
     else clientStatus = REJECTED
-        BE->>BE: KYC 状态变更为 rejected
+        BE->>BE: 更新 AIX KYC 状态为 Rejected
         BE-->>APP: 返回 Rejected
-        BE->>BE: 触发 SMS / 邮件通知用户
-    else passportVerifyStatus = VERIFY_FAILURE 或 faceIdVerifyStatus = VERIFY_FAILURE 或 proofOfAddressVerifyStatus = VERIFY_FAILURE
-        BE->>BE: KYC 状态变更为 failed
-        BE->>DTC: 查询护照 OCR 信息
-        Note over BE,DTC: GET /openapi/v1/ekyc/passport-info/{externalId}
-        BE->>DTC: 查询 POA OCR 信息
-        Note over BE,DTC: GET /openapi/v1/ekyc/poa-info/{externalId}
-        DTC-->>BE: 返回护照 OCR 信息 / POA OCR 信息
+    else 认证项仍在处理中
+        BE->>BE: 保持 Pending / Under review
+        BE-->>APP: 返回处理中状态
+    else 认证项失败
+        BE->>BE: 更新失败状态并记录错误码
         BE-->>APP: 返回 failed
     end
 ```
 
-### 3.3 流程步骤与业务规则
+### 3.2 状态流转说明
 
-| 步骤 | 场景 / 规则 | 触发条件 | 责任方 | 系统处理 | 成功结果 | 失败 / 分支结果 | 来源 |
-|---|---|---|---|---|---|---|---|
-| 1 | 手机号绑定判断 | 用户发起 KYC / 开户流程 | App / Account | 判断是否已绑定手机号 | 已绑定：继续 KYC 状态判断；KYC Start 不展示额外绑定成功 toast | 未绑定：进入手机号绑定流程；绑定完成后继续 KYC 状态判断；未绑定流程细节见 `GAP-KYC-PHONE-001` | AIX KYC PRD 7.1 / 7.2.3 |
-| 2 | KYC Loading 状态判断 | 用户进入 KYC | App / Backend | 查询 KYC 状态和 waitlist 状态 | KYC 状态为 Pending / failed 时进入 KYC Start 或后续未完成节点 | KYC 状态为 Under review / Rejected / Approved 时展示状态2；用户在 waitlist 中且来源渠道是 APP 时展示状态2；网络异常进入 Network Error Page；系统异常进入 Server Error Page；30 秒无结果进入 Loading Failed Page | AIX KYC PRD 7.2.2 |
-| 3 | KYC Start | 状态允许继续 KYC | App | 展示标题、副标题、居住国家、协议、认证按钮 | 用户可选择国家和勾选协议 | 手机号未绑定处理待确认 | AIX KYC PRD 7.2.3 |
-| 4 | 国家选择 | 用户点击居住国家 | App / Backend / 配置 | 展示国家列表、搜索、排序、Type 判断 | Phase 1 国家可继续 | phase 2-waitlist 进入 waitlist；Forbiden 隐藏 | AIX KYC PRD 7.2.3.1 |
-| 5 | 协议确认 | 用户勾选协议 | App / Backend | 保存同意时间、Declaration 内容和快照 | 按钮可点击，继续 Identity Verify | 获取协议失败 toast；Reverse Solicitation 缺失可触发 DTC 50013 | AIX KYC PRD 7.2.3；Master sub account |
-| 6 | Waitlist | 国家 Type = phase 2-waitlist，或 KYC Loading 判断用户在 waitlist 中且来源渠道是 APP | App / Backend | 校验 email；提交成功后按 userId 加入 waitlist，记录邮箱、国家、来源、提交时间、设备指纹 ID，并推送数仓 | 用户加入 waitlist，无法继续申请 KYC；历史原文返回业务流程入口页 | email 为空、格式错误、长度超过 103 字符时不提交；网络异常 Toast：Please check your internet connection and try again.；后端服务器错误 Toast：Something went wrong. Please try again later | AIX KYC PRD 7.2.3.2 |
-| 7 | Identity Verify | 用户点击相机 | App / Backend / DTC | 判断相机权限，生成 Passport H5 URL | 进入 Identity Scan H5 | 未授权 / 永久拒绝 / DTC 01009 / 01005 | AIX KYC PRD 7.2.4；Master sub account |
-| 8 | Identity Scan | 用户扫描护照 | AAI / DTC | AAI H5 完成 Passport OCR，DTC 接收结果 | 成功进入 Face Guide | 失败返回 Identity Verify | AIX KYC PRD 7.2.5 |
-| 9 | Face Guide | 用户点击 Continue | App / Backend | 判断 face 锁定规则，获取 passport country，生成 selfie H5 URL | 未锁定进入 Face Scan | 锁定弹窗；网络 / 服务器错误 toast | AIX KYC PRD 7.2.6 |
-| 10 | Face Scan | 用户完成活体采集 | AAI / DTC | 外部 H5 完成 Liveness / Face capture | 进入 Face Loading | AAI signatureId 3 次后需重新生成 URL | AIX KYC PRD 7.2.7 |
-| 11 | Face Loading | 活体采集结束 | App / Backend / DTC / AAI | 轮询或接收验证结果 | 成功进入 Address Upload | 失败进入 Face Failed；30 秒超时进入 Loading Failed；网络 / 系统错误页 | AIX KYC PRD 7.2.8 |
-| 12 | Loading Failed | Face Loading 超过 30 秒无结果 | App | 展示超时失败页 | Retry 后进入 Face Loading 重新提交 | Leave 返回入口 | AIX KYC PRD 7.2.9 |
-| 13 | Face Failed | Face result 为 FAIL / EXPIRED / incomplete，或 Passport / Document Verification 失败，或 POA 失败 | App / Backend | Face 失败展示 Face Comparison 错误码映射文案；Passport 失败展示 Passport / Document Verification 错误码映射文案；POA 失败展示 POA error code 映射文案；Passport 与 Face 均失败时优先展示 Passport 原因 | Try again 且未锁定时重新触发 KYC 流程 | Try again 但已锁定时展示 Too many attempts，不允许重试 | AIX KYC PRD 7.2.10 / 9 |
-| 14 | Address Upload / POA | Face 成功 | App / Backend / DTC / AAI | 上传 POA 文件；二次判断居住国家；AAI 机审提取 POA 国家并核验与用户填报居住国是否匹配，同时校验申请国家是否属于白名单 | POA 文件和国家信息提交成功后进入 Submission Success | 非 JPG/JPEG/PNG/PDF 阻止上传并展示格式 toast；单文件超过 16MB 阻止上传并展示大小 toast；上传服务器报错展示 Server busy toast；国家不支持进入 waitlist 拦截；POA OCR 国家不匹配或 POA 审核失败时按 POA error code 映射展示文案 | AIX KYC PRD 7.2.11；Master sub account |
-| 15 | KYC Submission Success | POA 提交成功 | App / Backend | 展示提交成功状态 | 用户返回入口，等待审核 | 后续状态通过通知或入口感知 | AIX KYC PRD 7.2.12 |
-
-### 3.4 状态规则
-
-> 页面图：截图已复制到 `_assets/account-opening/`，阅读页面规则时可直接看到页面样式。
 > KYC 状态机图。
 
 ![KYC status machine - image3.jpeg](_assets/account-opening/image3.jpeg)
 
+| AIX 状态 | 含义 | 主要触发条件 | 用户侧结果 | 备注 |
+|---|---|---|---|---|
+| `Pending` | 用户仍可继续或重新进入 KYC | 用户尚未完成完整 KYC，或上次中断后允许继续 | 进入可继续节点 | 具体页面承接见第 4 章 |
+| `failed` | 上次认证失败，但可能允许继续 | Passport、Face、POA 任一认证失败 | 展示失败原因，可按规则重试 | 错误文案按错误码映射 |
+| `Under review` | 已提交，等待审核 | POA / KYC 材料提交成功，等待后续审核 | 不允许重复提交当前流程 | 结果通过通知或入口状态感知 |
+| `Approved` | KYC 审核通过 | DTC `clientStatus = ACTIVATED` 或后端确认审核通过 | 开户完成 | 不自动等同所有 Wallet / Card 能力均可用 |
+| `Rejected` | KYC 审核被拒绝 | DTC `clientStatus = REJECTED` 或后端确认审核拒绝 | 当前流程不可继续 | 是否允许重新申请需业务确认 |
+| `waitlist` | 用户进入等待名单 | 国家不支持、phase 2-waitlist，或来源渠道 APP 命中 waitlist | 阻断继续 KYC | 等国家线或运营策略变化 |
+| `Locked` | 用户暂时不能继续认证 | Face 等关键认证超过失败次数限制 | 阻断继续认证 | 解锁方式与时间需以后端规则为准 |
 
-#### 3.4.1 AIX 页面状态
+DTC 状态不应在前端直接等同为 AIX 页面状态，需要由后端统一映射。当前关键映射边界如下：
 
-| 状态 | 含义 | 触发条件 | 用户可见表现 | 系统处理 | 可迁移到 | 是否终态 | 来源 |
-|---|---|---|---|---|---|---|---|
-| `Pending` | 用户仍可继续或重新进入 KYC | 后端返回可继续状态 | Loading 后进入后续流程 | 继续 KYC 流程 | failed / Under review / Approved / Rejected | 否 | AIX KYC PRD |
-| `failed` | 上次流程失败，但允许按规则继续 | 上次 KYC 流程失败 | Loading 后进入后续流程 | 根据最新认证结果判断起始页 | Pending / Under review / Approved / Rejected | 否 | AIX KYC PRD |
-| `Under review` | 已提交，等待审核 | 用户提交 KYC 成功 | Verification unavailable | 不允许重复提交当前流程 | Approved / Rejected / failed（具体映射待确认） | 否 | AIX KYC PRD |
-| `Rejected` | 审核被拒绝 | KYC 审核拒绝 | Verification unavailable | 不允许继续当前 KYC 流程 | 待确认 | 是 / 待确认 | AIX KYC PRD |
-| `Approved` | KYC 审核通过 | KYC 审核通过 | Verification unavailable | 不允许重复提交 KYC | 后续 Wallet 能力准入需另行判断 | 是 | AIX KYC PRD |
-| `waitlist` | 用户被加入 waitlist | 国家不支持或来源渠道 APP 命中 waitlist | KYC Loading 状态 2 / Waitlist Page | 用户无法继续申请 KYC | 待国家线或运营策略变化 | 否 | AIX KYC PRD |
+| DTC 字段 | 关键值 | AIX 使用边界 |
+|---|---|---|
+| `clientStatus` | `ACTIVATED` | 可映射为 KYC 审核通过 / 开户完成 |
+| `clientStatus` | `REJECTED` | 可映射为 KYC 审核拒绝 |
+| `clientStatus` | `PENDING_KYC` | 可能表示未完成或审核中，需结合认证项状态判断 |
+| `passportVerifyStatus` / `faceIdVerifyStatus` / `proofOfAddressVerifyStatus` | `UNVERIFIED` | 对应认证项未完成 |
+| 同上 | `VERIFYING` | 对应认证项处理中 |
+| 同上 | `VERIFY_SUCCESS` | 对应认证项成功 |
+| 同上 | `VERIFY_FAILURE` | 对应认证项失败，失败文案按错误码映射 |
 
-#### 3.4.2 DTC clientStatus
+### 3.3 关键规则补充
 
-| Name | ID | Descriptor | AIX 映射边界 |
-|---|---:|---|---|
-| SUSPENDED | 0 | Suspended | 具体页面映射待确认 |
-| PENDING_KYC | 1 | Pending KYC | 可能对应 KYC 未完成或审核中，需后端映射确认 |
-| DORMANT | 2 | Dormant | 待确认 |
-| REGISTERED | 3 | Self Registered | 待确认 |
-| REJECTED | 4 | Rejected | 可能对应 AIX `Rejected`，需确认 |
-| OFF_BOARD | 5 | Off Board | 待确认 |
-| REFERRER | 8 | Referrer | 待确认 |
-| TERMINATED | 9 | Terminated | 待确认 |
-| DEACTIVATED | 10 | Deactivated | 待确认 |
-| RESTRICTED | 11 | Restricted | 待确认 |
-| DELETED | 12 | Deleted | 待确认 |
-| FROZEN | 13 | Frozen | 待确认 |
-| DROP | 14 | Drop | 待确认 |
-| ACTIVATED | 99 | Activated | 可能对应开户完成 / 激活，不能自动等同所有 Wallet 能力可用 |
-
-#### 3.4.3 DTC EKycFileVerifyStatus
-
-适用于 `passportVerifyStatus`、`faceIdVerifyStatus`、`proofOfAddressVerifyStatus`。
-
-| Name | ID | Descriptor | AIX 使用边界 |
-|---|---:|---|---|
-| UNVERIFIED | 1 | Document verification is not completed | 可作为未完成状态引用 |
-| VERIFYING | 2 | Document verification is in progress | 可作为处理中状态引用 |
-| VERIFY_SUCCESS | 3 | Document verification succeeded | 表示对应文件 / 认证项成功 |
-| VERIFY_FAILURE | 4 | Document verification failed | 表示对应文件 / 认证项失败，失败文案按错误码映射 |
-
-#### 3.4.4 状态生命周期规则
-
-1. 申请单自创建后长期有效。
-2. 一旦 OCR、Face 等核心认证在 DTC 侧成功通过，其认证结果长期有效，不因时间推移失效。
-3. 只要 passport、face 认证通过，不会再变为失败状态。
-4. KYC 人工审核如果 OCR 的 name 等有问题，人工审核可直接修改，不影响 passport / face 状态。
-5. 如果 ID 有问题，可直接 KYC reject；passport、face 认证状态也不会变。
-6. AIX 页面状态不等同于 DTC clientStatus 或 EKycFileVerifyStatus；映射关系需由后端实现或接口确认。
-
-#### 3.4.5 异步依赖规则
-
-DTC 支持在护照上传还没有验证结果但已有 OCR 信息时继续进行人脸比对。
-
-| 护照最终结果 | 人脸结果处理 |
-|---|---|
-| 护照通过 | 人脸通过 |
-| 护照失败 | 人脸失败 |
-
-### 3.5 业务级异常与失败处理
-
-| 异常场景 | 触发条件 | 错误来源 | 错误码 / 原因 | 用户表现 | 系统处理 | 是否可重试 | 最终状态 |
-|---|---|---|---|---|---|---|---|
-| KYC Loading 状态2：KYC 状态命中 | 后端返回 KYC 状态机为 Under review / Rejected / Approved | Backend | KYC 状态 | KYC Loading Page 展示状态2 / Verification unavailable | 阻止继续提交 | 否 | 保持当前状态 |
-| KYC Loading 状态2：APP 来源 waitlist 命中 | 用户在 waitlist 中，且来源渠道是 APP | Backend | waitlist | KYC Loading Page 展示状态2 / Verification unavailable | 阻止继续 KYC | 否 | waitlist |
-| KYC Loading 网络异常 | 查询状态网络异常 | App / Network | 网络异常 | Network Error Page | 停留错误页 | 是 | 未变更 |
-| KYC Loading 系统异常 | 后端系统异常 | Backend | 系统异常 | Server Error Page | 停留错误页 | 是 | 未变更 |
-| KYC Loading 超时 | 30 秒无结果 | Backend / Network | Timeout | Loading Failed Page | 用户可 Retry | 是 | 未变更 |
-| 协议获取失败 | 后端无法获取协议 | Backend | 获取协议失败 | Toast | 阻止继续 | 是 | 未变更 |
-| Reverse Solicitation 缺失 | 国家要求反向招揽声明但未传 `reverseSolicitation=T` | DTC | 50013 | DTC 返回 `Reverse solicitation not declared by end user`；前端提示文案源文档未明确 | 阻止生成验证 URL；需补 Declaration 声明后再继续 | 是 | 未变更 |
-| Passport URL 生成失败 | DTC get-verification-url 返回错误 | DTC | 01009 / 01005 / 其他 get-verification-url 错误码 | 01009 Toast：`Mobile number already exists.`；01005 Toast：`The email address is in use.`；其他错误码含义见 5.2，未明确前端文案的错误码需后端 / 产品确认 | 阻止进入 H5 | 01009 / 01005 可由用户更换信息后重试；其他错误码是否可重试需按 5.2 / 后端确认 | 未变更 |
-| Passport OCR 失败 | AAI / DTC 返回 Passport OCR 失败 | AAI / DTC | passport error code | 源文档 7.2.5 明确扫描失败跳转至 Identity Verify Page；如后端返回 Passport / Document Verification 错误原因，文案见 5.3 | 记录失败原因和 error code | 是 | failed / 待映射 |
-| Face 失败 | DTC 返回 face result=fail | DTC / AAI | face error code | Face Failed Page | 计入 face 失败次数 | 是，未锁定时 | failed |
-| Face 失败 5 次 | 24 小时内 face fail 5 次 | Backend / DTC | 安全限制 | Too many attempts | 锁 20 分钟 | 否，锁定期不可重试 | lock |
-| Face 失败 10 次 | 24 小时内 face fail 10 次 | Backend / DTC | 安全限制 | Too many attempts | 锁 24 小时 | 否，锁定期不可重试 | lock |
-| Face 接口连续发起 20 次 | 24 小时内接口层连续发起 20 次 | Backend | 风控限制 | Too many attempts | 锁 20 分钟 | 否，锁定期不可重试 | lock |
-| Face Loading 超时 | 30 秒无结果 | Backend / DTC / AAI | Timeout | Loading Failed Page | Retry 后重新提交 | 是 | 未变更 |
-| POA 文件格式错误 | 上传非 JPG/JPEG/PNG/PDF | App | 文件格式 | Toast | 阻止上传 | 是 | 未变更 |
-| POA 文件过大 | 单文件超 16MB | App | 文件大小 | Toast | 阻止上传 | 是 | 未变更 |
-| POA 上传失败 | 服务器或 DTC 上传失败 | Backend / DTC | 14004 / 14005 / Server error | Toast | 阻止继续 | 是 | 未变更 |
-| POA 国家不匹配 | POA OCR 国家与用户填报居住国家不匹配 | DTC / AAI | POA error code | 按 POA error code 映射展示前端提示文案 | 记录失败原因 | 是 | failed |
-| POA 国家不支持 | 申请国家不属于支持国家 / 白名单 | Backend / DTC / AAI | 国家线 / POA error code | Address Upload Page 内 Waitlist 拦截；Join waitlist 进入 Waitlist Page | 阻止当前国家继续提交 POA | 是，用户可选择其他国家或加入 waitlist | waitlist / failed |
-| webhook 延迟或未返回 | 外部验证结果未及时到达 | DTC / AAI | 异步延迟 | Loading 或超时页 | query 兜底 / 轮询 | 是 | 未变更 |
-
----
+| 规则 | 说明 | 影响 |
+|---|---|---|
+| 页面说明边界 | 本章不展开页面展示、按钮、弹窗、toast 和页面跳转 | 页面级交互统一见第 4 章 |
+| 手机号前置 | 用户进入 KYC 前需具备有效手机号绑定状态 | 未绑定时需先完成手机号绑定，再继续 KYC |
+| 国家线与 waitlist | 居住国家根据配置判断支持、waitlist 或隐藏 | 不支持或命中 waitlist 时阻断后续 KYC |
+| Reverse Solicitation | 用户协议确认需要留痕，包括确认时间、内容或快照 | 缺失时可能影响后续 DTC 请求或合规审计 |
+| 证件认证结果 | Passport OCR / 证件认证结果由 DTC / AAI 返回，AIX 不自行推导 | 决定是否进入 Face、失败页或继续等待 |
+| Face 失败限制 | Face 失败后需根据错误码与失败次数判断是否允许重试 | 超过限制时进入 locked / 不可继续状态 |
+| POA 校验 | POA 文件格式、大小、OCR 国家、居住国家匹配关系需校验 | 校验失败时按 POA 错误码展示失败原因 |
+| 异步结果 | Passport、Face、POA、clientStatus 可能异步返回 | 前端需支持处理中、超时、失败和重新查询 |
+| 状态一致性 | AIX 状态、DTC clientStatus、各认证项状态需以后端映射为准 | 避免前端基于单字段误判最终 KYC 状态 |
+| 审核通过边界 | KYC Approved 仅表示开户 / KYC 审核通过 | Wallet、Card、Sub Account 等能力准入需按对应模块规则判断 |
 
 ## 4. 页面与交互说明
 
