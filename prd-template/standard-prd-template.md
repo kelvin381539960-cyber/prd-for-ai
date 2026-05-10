@@ -1,10 +1,10 @@
 ---
 type: prd-template
 feature: standard-prd-template
-version: "1.14"
+version: "1.15"
 status: active
 source_doc: workflow/prd-workflow.md；prd-template/README.md；prd-template/prd-writing-workflow.md；prd-template/prd-writing-preferences.md；用户确认结论 2026-05-05；用户确认结论 2026-05-06；用户确认结论 2026-05-06 Canvas 草稿协作、文件最小化与落地评审；用户确认结论 2026-05-10 页面章节分层与左图右说明；用户确认结论 2026-05-10 业务时序图泳道、调用表达与第三方 H5 规则；用户确认结论 2026-05-10 需求背景目标范围章节规则；用户确认结论 2026-05-10 模板对齐 account-opening 颗粒度
-source_section: "multi-agent workflow；canvas-first；review gates；engineering execution PRD rules；optional sections；reuse page rules；lightweight artifact rules；landing review rules；page hierarchy rules；page-left explanation-right rules；business sequence diagram rules；external H5 flow rules；API note placement rules；background-goal-scope rules；fields-apis-data master table；error code mapping；cross-module boundary chapter；unified state machine"
+source_section: "multi-agent workflow；canvas-first；review gates；engineering execution PRD rules；optional sections；reuse page rules；lightweight artifact rules；landing review rules；page hierarchy rules；page-left explanation-right rules；business sequence diagram rules；external H5 flow rules；API note placement rules；background-goal-scope rules；fields-apis-data master table；error code mapping；unified state machine"
 last_updated: 2026-05-10
 owner: 吴忆锋
 readers: [product, ui, dev, qa, business, ai]
@@ -719,40 +719,7 @@ flowchart LR
 
 ---
 
-## 7. 跨模块边界 / 历史规则确认（如有）
-
-> 当本 PRD 与其他模块（如 Home、Card、Wallet、Notification）有状态映射、入口联动或前置依赖时保留本章。  
-> 本章承载三类内容：历史规则的"确认结论"、跨模块状态映射、文档边界声明。  
-> 没有跨模块影响时整章删除。
-
-### 7.1 历史规则确认（如有）
-
-> 用于沉淀历史 PRD / changelog 中分散但已确认的规则，按"规则 / 结论 / 来源"三列固化。  
-> 本节不放未确认事项；未确认事项进第 8 章。
-
-| 规则 | 结论 | 来源 |
-|---|---|---|
-| <规则点 1> | <已确认的结论> | <原文档章节 / changelog> |
-| <规则点 2> | <已确认的结论> | <原文档章节 / changelog> |
-
-### 7.2 跨模块状态映射（如有）
-
-> 当本 PRD 的业务状态会驱动其他模块的入口或展示（如 Home 钱包面板、申卡入口、Wallet 资产页）时使用。
-
-| 本系统状态 | 下游模块 | 下游展示 | 下游行为 | 来源 |
-|---|---|---|---|---|
-| <状态 A> | <模块名> | <展示形态> | <可点击 / 不可点击 / 跳转目标> | <原文档章节> |
-| <状态 B> | <模块名> | <展示形态> | <可点击 / 不可点击 / 跳转目标> | <原文档章节> |
-
-### 7.3 文档边界声明（如有）
-
-- 本 PRD 只维护 <X> 事实源；与本 PRD 相关但归属其他模块的能力（如卡申请、风控、通知模板）不在本文展开。
-- 历史 PRD 中已删除 / 标删除线 / 标 deprecated 的内容不沉淀为 confirmed fact。
-- 调研、竞品、推测内容不写入正文；放入 `research_refs` / `external_sources`。
-
----
-
-## 8. 待确认项
+## 7. 待确认项
 
 只保留真正影响产品范围、开发、测试、接口、风控、上线验收的问题。  
 不会影响本期开发的问题不放这里。  
@@ -764,7 +731,7 @@ flowchart LR
 
 ---
 
-## 9. 来源引用
+## 8. 来源引用
 
 - Brief：无 / `requirements/YYYY-MM/<module>/_brief-<feature>.md`
 - 原型：
@@ -804,7 +771,6 @@ flowchart LR
 - [ ] 成功页已写数据变化、会话刷新、返回后展示，并明确"代表什么"和"不代表什么"。
 - [ ] 第 5 章字段 / 接口 / 数据总表覆盖字段、接口、数据、日志埋点、协议留痕；接口错误码按接口拆；错误码 → 前端文案映射按业务模块拆。
 - [ ] 通知章节只保留本需求新增或差异内容。
-- [ ] 跨模块边界章节覆盖历史规则确认、跨模块状态映射、文档边界声明三类内容（如适用）。
 - [ ] 待确认项只保留真正阻塞或影响实现的问题，不放内部技术实现细节。
 - [ ] 来源引用覆盖关键事实，调研 / 竞品 / 推测未被写成确认事实。
 - [ ] PRD 已经过 Fact Review、Template Review、UX Review、Tech Review。
