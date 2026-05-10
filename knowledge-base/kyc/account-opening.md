@@ -180,14 +180,16 @@ sequenceDiagram
     end
 
     APP->>BE: 请求 Passport 扫描地址
-    BE->>DTC: 生成 Passport H5 URL
+    BE->>DTC: 请求生成 Passport H5 URL
     Note over BE,DTC: POST /openapi/v1/ekyc/get-verification-url；verifyType = 1
+    DTC->>AAI: 请求生成 Passport 扫描 H5 URL
+    AAI-->>DTC: 返回 Passport 扫描 H5 URL
     DTC-->>BE: 返回 Passport H5 URL
     BE-->>APP: 返回 Passport H5 URL
     APP->>APP: 打开 H5 扫描页并扫描
 
     APP->>AAI: H5 内完成 Passport OCR
-    AAI-->>DTC: 返回 OCR 信息 / Passport 信息
+    AAI-->>DTC: 回传 OCR 信息 / Passport 信息
     DTC-->>BE: 同步 OCR 信息 / Passport 信息
 
     alt OCR 失败
@@ -201,13 +203,15 @@ sequenceDiagram
         BE-->>APP: 返回下一步为 Face Guide
         APP->>APP: 展示 Face Guide Page
         APP->>BE: 请求活体识别地址
-        BE->>DTC: 生成活体 H5 URL
+        BE->>DTC: 请求生成活体 H5 URL
         Note over BE,DTC: POST /openapi/v1/ekyc/get-verification-url；verifyType = 4
+        DTC->>AAI: 请求生成活体识别 H5 URL
+        AAI-->>DTC: 返回活体识别 H5 URL
         DTC-->>BE: 返回活体 H5 URL
         BE-->>APP: 返回活体 H5 URL
         APP->>APP: 打开活体 H5，进入活体识别页
         APP->>AAI: 进行活体识别 / 人脸比对
-        AAI-->>DTC: 返回 Face result
+        AAI-->>DTC: 回传 Face result
         DTC-->>BE: 同步 Face result / webhook 结果
     else passport = VERIFYING 且 face = SUCCESS / FAILURE / VERIFYING
         BE-->>APP: 返回下一步为 Loading
