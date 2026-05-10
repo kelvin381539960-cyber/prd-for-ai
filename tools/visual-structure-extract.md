@@ -23,8 +23,18 @@
 
 当前稳定路径固定为 PaddleOCR 2.x + PP-Structure 2.x。
 
+本机安装：
+
 ```bash
 pip install -r tools/requirements-visual.txt
+```
+
+Docker 运行：
+
+```bash
+docker build -f tools/Dockerfile.visual -t prd-visual-tools .
+docker run --rm -v "$PWD":/workspace prd-visual-tools \
+  python3 tools/visual_structure_extract.py --check-env
 ```
 
 检查环境：
