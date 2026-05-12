@@ -3,11 +3,67 @@ module: wallet
 audience: customer
 visibility: user-facing
 language: zh-CN
-verification_status: draft_pending_review
-last_updated: 2026-05-10
+verification_status: partial_confirmed
+last_updated: 2026-05-12
 ---
 
 # 钱包 FAQ
+
+## Q: 当前支持哪些币种？
+
+### 推荐回答
+
+当前支持 FDUSD、USDC、USDT、WUSD。
+
+### 分类
+
+- module: wallet
+- intent: supported_assets
+- visibility: user-facing
+- verification_status: confirmed
+
+### 转人工
+
+通常不需要转人工，除非用户的问题涉及异常资产显示或余额异常。
+
+## Q: 当前支持哪些网络？
+
+### 推荐回答
+
+当前支持 BASE、BSC、ETHEREUM、SOLANA。
+
+### 分类
+
+- module: wallet
+- intent: supported_networks
+- visibility: user-facing
+- verification_status: confirmed
+
+### 转人工
+
+用户不确定充值网络时，建议转人工确认后再操作。
+
+## Q: 充值多久到账？
+
+### 推荐回答
+
+充值到账时间不完全固定，仅可作为参考：ETH 网络可能约 10-15 分钟，其他网络可能约 1-5 分钟。
+
+实际到账时间会受到链上状态、网络拥堵和系统处理影响，请以链上状态和 App 页面展示为准。
+
+### 分类
+
+- module: wallet
+- intent: deposit_arrival_time
+- visibility: user-facing
+- verification_status: confirmed
+
+### 转人工
+
+需要转人工：
+
+- 链上成功但 App 未到账。
+- 到账时间明显异常。
 
 ## Q: 充值前需要注意什么？
 
@@ -22,7 +78,7 @@ last_updated: 2026-05-10
 - module: wallet
 - intent: deposit_before_transfer_check
 - visibility: user-facing
-- verification_status: draft_pending_review
+- verification_status: confirmed
 
 ### 转人工
 
@@ -31,6 +87,40 @@ last_updated: 2026-05-10
 - 用户不确定应选择哪个网络。
 - 用户不确定资产是否受支持。
 - 用户已发起转账但信息可能填写错误。
+
+## Q: Send 功能当前可以用吗？
+
+### 推荐回答
+
+Send 功能当前不可用。通过手机号、邮箱或 X-Tag 查找收款人的能力当前也不可用。
+
+### 分类
+
+- module: wallet
+- intent: send_availability
+- visibility: user-facing
+- verification_status: confirmed
+
+### 转人工
+
+通常不需要转人工。
+
+## Q: Swap 功能当前可以用吗？
+
+### 推荐回答
+
+Swap 功能当前不可用，因此暂不支持币种互换。
+
+### 分类
+
+- module: wallet
+- intent: swap_availability
+- visibility: user-facing
+- verification_status: confirmed
+
+### 转人工
+
+通常不需要转人工。
 
 ## Q: 充值不到账怎么办？
 
@@ -43,7 +133,7 @@ last_updated: 2026-05-10
 - module: wallet
 - intent: deposit_not_received
 - visibility: user-facing
-- verification_status: draft_pending_review
+- verification_status: partial_confirmed
 
 ### 转人工
 
@@ -53,89 +143,21 @@ last_updated: 2026-05-10
 - 用户疑似选错网络、地址或币种。
 - 资产余额异常。
 
-## Q: 资产余额不对怎么办？
-
-### 推荐回答
-
-请先刷新页面并确认网络连接正常。如果你刚完成充值、发送、兑换或卡交易，资产余额可能需要等待相关交易状态更新后才会变化。若余额长时间异常，建议联系人工客服。
-
-### 分类
-
-- module: wallet
-- intent: balance_issue
-- visibility: user-facing
-- verification_status: draft_pending_review
-
-### 转人工
-
-需要转人工：
-
-- 余额长时间异常。
-- 用户怀疑资产丢失。
-- 交易后资产状态不一致。
-
-## Q: 发送资产失败怎么办？
-
-### 推荐回答
-
-请先查看页面提示，并确认收款人、资产、金额和余额是否正确。如果页面提示余额不足、验证失败或系统暂时无法处理，请按页面提示操作。
-
-如果发送失败后资产状态异常，或交易长时间处理中，建议联系人工客服。
-
-### 分类
-
-- module: wallet
-- intent: send_failed
-- visibility: user-facing
-- verification_status: draft_pending_review
-
-### 转人工
-
-需要转人工：
-
-- 发送失败后资产状态异常。
-- 用户要求撤销或追回。
-- 交易长时间处理中。
-
-## Q: 兑换资产失败怎么办？
-
-### 推荐回答
-
-请先查看页面提示，并确认卖出资产、买入资产、金额和页面展示的汇率信息。如果兑换显示处理中，请等待页面状态更新。
-
-如果长时间没有变化，或兑换失败后资产状态异常，建议联系人工客服。
-
-### 分类
-
-- module: wallet
-- intent: swap_failed
-- visibility: user-facing
-- verification_status: draft_pending_review
-
-### 转人工
-
-需要转人工：
-
-- 兑换长时间处理中。
-- 兑换失败后资产状态异常。
-- 用户询问未确认的汇率、费用或限额。
-
 ## Q: 选错网络、地址或币种怎么办？
 
 ### 推荐回答
 
-如果你已经发起转账，请尽快联系人工客服，并准备好交易哈希、币种、网络、地址、金额和时间。请注意，区块链转账通常无法保证撤回或找回，具体处理结果需要人工进一步核查。
+如果你已经发起转账，请尽快联系人工客服，并准备好交易哈希、币种、网络、地址、金额和时间。
+
+请注意，充错链、地址或币种时，无法保证找回。具体情况需要人工进一步核查。
 
 ### 分类
 
 - module: wallet
 - intent: wrong_network_address_asset
 - visibility: user-facing
-- verification_status: draft_pending_review
+- verification_status: confirmed
 
 ### 转人工
 
-需要转人工：
-
-- 用户已使用错误网络、地址或币种转账。
-- 用户要求找回、撤销或赔偿。
+需要转人工。

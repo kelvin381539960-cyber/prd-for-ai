@@ -3,8 +3,8 @@ module: kyc-wallet-opening
 audience: customer
 visibility: user-facing
 language: zh-CN
-verification_status: draft_pending_review
-last_updated: 2026-05-10
+verification_status: partial_confirmed
+last_updated: 2026-05-12
 ---
 
 # KYC FAQ
@@ -20,7 +20,7 @@ last_updated: 2026-05-10
 - module: kyc-wallet-opening
 - intent: why_kyc_required
 - visibility: user-facing
-- verification_status: draft_pending_review
+- verification_status: confirmed
 
 ### 转人工
 
@@ -29,24 +29,48 @@ last_updated: 2026-05-10
 - 用户询问具体合规或地区限制。
 - 用户无法完成验证。
 
-## Q: KYC 一直在审核中怎么办？
+## Q: 当前 KYC 支持哪些国家或地区？
 
 ### 推荐回答
 
-如果页面显示正在审核，请耐心等待，并保持 App 通知开启。如果审核时间较长，或页面提示需要补充信息，请按照页面提示操作；如果仍无法完成，建议联系人工客服。
+当前 KYC 仅支持 PH。其他国家或地区后续会陆续开放，请以 App 页面提示为准。
+
+如果页面提示当前国家或地区暂不支持，用户会进入 Waitlist。
 
 ### 分类
 
 - module: kyc-wallet-opening
-- intent: kyc_pending
+- intent: kyc_supported_region
 - visibility: user-facing
-- verification_status: draft_pending_review
+- verification_status: confirmed
 
 ### 转人工
 
 需要转人工：
 
-- 审核长时间无结果。
+- 用户认为地区判断不正确。
+- 用户无法进入 Waitlist。
+
+## Q: KYC 审核需要多久？
+
+### 推荐回答
+
+KYC 审核最长 3 个工作日。请保持 App 通知开启，并留意页面状态更新。
+
+如果超过 3 个工作日仍没有结果，或页面提示需要补充信息，建议联系人工客服。
+
+### 分类
+
+- module: kyc-wallet-opening
+- intent: kyc_review_time
+- visibility: user-facing
+- verification_status: confirmed
+
+### 转人工
+
+需要转人工：
+
+- 超过 3 个工作日仍无结果。
 - 用户无法重新提交。
 - 页面提示失败但原因不清楚。
 
@@ -63,14 +87,13 @@ last_updated: 2026-05-10
 - module: kyc-wallet-opening
 - intent: document_verification_failed
 - visibility: user-facing
-- verification_status: draft_pending_review
+- verification_status: partial_confirmed
 
 ### 转人工
 
 需要转人工：
 
 - 多次提交证件仍失败。
-- 页面提示证件已被使用、信息不匹配或证件类型不支持。
 - 用户无法重新提交。
 
 ## Q: 人脸验证失败怎么办？
@@ -79,14 +102,14 @@ last_updated: 2026-05-10
 
 请确保面部清晰可见，环境光线充足，并按照页面指引完成操作。请避免遮挡面部、移动过快或使用模糊画面。
 
-如果多次失败，页面可能会限制继续尝试。建议稍后再试或联系人工客服。
+如果页面提示尝试次数过多、锁定或超时，请按页面提示稍后重试；如果仍无法继续，建议联系人工客服。
 
 ### 分类
 
 - module: kyc-wallet-opening
 - intent: face_verification_failed
 - visibility: user-facing
-- verification_status: draft_pending_review
+- verification_status: confirmed
 
 ### 转人工
 
@@ -96,20 +119,20 @@ last_updated: 2026-05-10
 - 页面提示尝试次数过多。
 - 用户无法继续验证。
 
-## Q: 地址证明上传失败怎么办？
+## Q: 地址证明有什么要求？
 
 ### 推荐回答
 
-请确认文件清晰、完整，并符合页面要求的格式和大小限制。文件应能清楚显示你的姓名、地址和签发信息。
+地址证明为必需材料。文件大小限制为 16MB，签发时间需在 6 个月内。
 
-如果页面提示文件不支持、图片不清晰、地址不匹配或文件过期，请根据页面提示重新上传。
+请确认文件清晰、完整，并能清楚显示你的姓名、地址和签发信息。具体支持的文件类型请以 App 页面提示为准。
 
 ### 分类
 
 - module: kyc-wallet-opening
-- intent: proof_of_address_failed
+- intent: proof_of_address_requirement
 - visibility: user-facing
-- verification_status: draft_pending_review
+- verification_status: partial_confirmed
 
 ### 转人工
 
@@ -119,25 +142,24 @@ last_updated: 2026-05-10
 - 用户不清楚文件要求。
 - 页面提示信息不匹配或文件不被接受。
 
-## Q: 当前国家或地区无法完成 KYC 怎么办？
+## Q: 身份信息填错后能修改吗？
 
 ### 推荐回答
 
-如果页面提示当前国家/地区暂不支持，请以 App 页面展示为准。你可能需要加入 Waitlist，或根据页面提示选择其他可用选项。
+是否可以重新提交或修改，需要看具体发生在哪个环节。请先按照 App 页面提示操作。
 
-如果你不确定自己的状态，建议联系人工客服确认。
+如果页面没有修改入口，或你已经提交审核，建议联系人工客服协助处理。
 
 ### 分类
 
 - module: kyc-wallet-opening
-- intent: unsupported_region_waitlist
+- intent: identity_info_correction
 - visibility: user-facing
-- verification_status: draft_pending_review
+- verification_status: confirmed
 
 ### 转人工
 
 需要转人工：
 
-- 用户询问具体支持国家/地区。
-- 用户无法加入 Waitlist。
-- 用户认为页面国家/地区判断不正确。
+- 用户已提交审核后需要修改信息。
+- 页面没有重新提交或修改入口。
