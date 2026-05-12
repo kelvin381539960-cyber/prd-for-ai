@@ -262,7 +262,7 @@ Use this format for files under `customer-support-kb/faq/`:
 
 ## 8. Current Status
 
-Current phase: archive-reviewed drafts and review phase completed. Business confirmation is still pending.
+Current phase: first business confirmation batch applied. Remaining unresolved items still pending business confirmation.
 
 Completed:
 
@@ -287,9 +287,10 @@ Completed:
 
 Not yet completed:
 
-- No content has been business-reviewed or confirmed.
-- All content remains `draft_pending_review` until explicit business confirmation.
-- Business confirmation should now use `customer-support-kb/review/business-confirmation-checklist.md` as the working checklist.
+- Some content has been business-confirmed and applied as `partial_confirmed` or section-level `confirmed`.
+- Remaining unresolved items still need business confirmation.
+- Business confirmation should continue using `customer-support-kb/review/business-confirmation-checklist.md` as the working checklist.
+- Key pending items include card transaction scenario-specific wording, card refund fee behavior, transaction Chinese status labels, transaction query range, notification types/close rules, official email domain, and all Website / Waitlist items.
 
 ## 9. Next Agent Instructions
 
@@ -317,3 +318,4 @@ The next agent should proceed in this order:
 | 2026-05-10 | Reviewed P1 Transaction History, P1 Notification/System Email/App FAQ, and P2 Website/Waitlist material; refined related user-facing, FAQ, playbook, and pending-confirmation files. |
 | 2026-05-10 | Completed source leakage review, unsupported-claim review, and final consistency pass for `customer-support-kb/`. |
 | 2026-05-10 | Created `customer-support-kb/review/business-confirmation-checklist.md` with 85 business confirmation items across 7 modules. |
+| 2026-05-12 | Applied first batch of user-confirmed business rules to Registration/Login, KYC, Wallet, Card, Transaction History, and Notification/System Email files. Created `customer-support-kb/review/confirmed-decisions-2026-05-12.md`. |
