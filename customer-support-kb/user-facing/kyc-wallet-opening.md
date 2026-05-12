@@ -94,4 +94,4 @@ last_updated: 2026-05-10
 ## 确认状态
 
 - status: draft_pending_review
-- note: 该内容基于历史 KYC / 钱包开户需求整理。审核时长、支持国家/地区、失败原因展示规则和 Waitlist 当前规则仍需业务确认。
+- note: 该内容为客服草稿。审核时长、支持国家/地区、失败原因展示规则和 Waitlist 当前规则仍需业务确认。

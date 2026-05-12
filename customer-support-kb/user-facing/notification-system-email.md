@@ -80,4 +80,4 @@ last_updated: 2026-05-10
 ## 确认状态
 
 - status: draft_pending_review
-- note: 该内容基于历史 Notification / Push / Inbox / System Email 需求整理。当前通知类型、官方邮件域名、通知设置和系统邮件模板仍需业务确认。
+- note: 该内容为客服草稿。当前通知类型、官方邮件域名、通知设置和系统邮件模板仍需业务确认。

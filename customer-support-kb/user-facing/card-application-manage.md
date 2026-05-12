@@ -100,4 +100,4 @@ last_updated: 2026-05-10
 ## 确认状态
 
 - status: draft_pending_review
-- note: 该内容基于历史 Card Application / Manage / Transaction / Me 需求整理。当前卡申请可用范围、费用、限额、支持地区、卡数量、卡状态和退款规则均需业务确认。
+- note: 该内容为客服草稿。当前卡申请可用范围、费用、限额、支持地区、卡数量、卡状态和退款规则均需业务确认。
