@@ -3,11 +3,28 @@ module: notification-system-email
 audience: customer
 visibility: user-facing
 language: zh-CN
-verification_status: draft_pending_review
-last_updated: 2026-05-10
+verification_status: partial_confirmed
+last_updated: 2026-05-12
 ---
 
 # 通知与系统邮件 FAQ
+
+## Q: App 通知设置支持哪些方式？
+
+### 推荐回答
+
+当前 App 通知设置支持 Push、Email、SMS。具体哪些通知类型可以开启或关闭，请以 App 页面展示为准。
+
+### 分类
+
+- module: notification-system-email
+- intent: notification_channels
+- visibility: user-facing
+- verification_status: confirmed
+
+### 转人工
+
+用户无法修改通知设置，或设置后仍收不到通知时，建议转人工。
 
 ## Q: 收不到 App 推送怎么办？
 
@@ -22,7 +39,7 @@ last_updated: 2026-05-10
 - module: notification-system-email
 - intent: push_not_received
 - visibility: user-facing
-- verification_status: draft_pending_review
+- verification_status: partial_confirmed
 
 ### 转人工
 
@@ -31,46 +48,6 @@ last_updated: 2026-05-10
 - 用户持续收不到重要通知。
 - 通知内容与账户操作不一致。
 - 用户怀疑账户安全异常。
-
-## Q: 在哪里查看站内信？
-
-### 推荐回答
-
-你可以在 App 的通知或消息入口查看站内信。消息可能包含交易、账户、系统、活动、安全等类型，具体分类和展示内容请以 App 页面为准。
-
-### 分类
-
-- module: notification-system-email
-- intent: inbox_location
-- visibility: user-facing
-- verification_status: draft_pending_review
-
-### 转人工
-
-需要转人工：
-
-- 用户找不到通知或消息入口。
-- 重要交易或账户通知没有显示。
-
-## Q: 如何把消息标记为已读？
-
-### 推荐回答
-
-如果消息列表提供“一键已读”或点击消息查看详情的功能，你可以按照页面提示操作。未读消息通常会有红点或数字提示，查看后可能会更新为已读状态。
-
-### 分类
-
-- module: notification-system-email
-- intent: mark_as_read
-- visibility: user-facing
-- verification_status: draft_pending_review
-
-### 转人工
-
-需要转人工：
-
-- 未读数量显示异常。
-- 消息无法打开或无法标记已读。
 
 ## Q: 收不到系统邮件怎么办？
 
@@ -85,7 +62,7 @@ last_updated: 2026-05-10
 - module: notification-system-email
 - intent: system_email_not_received
 - visibility: user-facing
-- verification_status: draft_pending_review
+- verification_status: partial_confirmed
 
 ### 转人工
 
@@ -99,18 +76,17 @@ last_updated: 2026-05-10
 
 ### 推荐回答
 
-请不要点击可疑链接，也不要向任何人提供密码、验证码、私钥或敏感账户信息。如果你怀疑邮件异常，建议联系人工客服确认。
+请不要点击可疑链接，也不要向任何人提供密码、验证码、私钥或敏感账户信息。
+
+可疑邮件的处理规则仍需进一步确认。在确认前，建议联系人工客服核查。
 
 ### 分类
 
 - module: notification-system-email
 - intent: suspicious_email
 - visibility: user-facing
-- verification_status: draft_pending_review
+- verification_status: partial_confirmed
 
 ### 转人工
 
-需要转人工：
-
-- 用户怀疑收到钓鱼邮件。
-- 通知内容与账户操作不一致。
+建议转人工。

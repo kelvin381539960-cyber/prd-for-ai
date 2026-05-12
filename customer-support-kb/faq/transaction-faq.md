@@ -3,31 +3,64 @@ module: transaction-history
 audience: customer
 visibility: user-facing
 language: zh-CN
-verification_status: draft_pending_review
-last_updated: 2026-05-10
+verification_status: partial_confirmed
+last_updated: 2026-05-12
 ---
 
 # 交易记录 FAQ
 
-## Q: 如何查看交易记录？
+## Q: 交易记录包含哪些类型？
 
 ### 推荐回答
 
-你可以在 App 的交易记录入口查看相关交易信息。交易记录可能包含钱包充值、接收、发送、兑换、卡消费、卡退款、申卡扣费或退款等类型。具体可见类型请以 App 当前页面为准。
+交易记录会聚合钱包交易、兑换记录和卡交易。
 
 ### 分类
 
 - module: transaction-history
-- intent: view_transactions
+- intent: transaction_types
 - visibility: user-facing
-- verification_status: draft_pending_review
+- verification_status: confirmed
 
 ### 转人工
 
-需要转人工：
+用户认为交易记录缺失时，建议转人工。
 
-- 用户找不到交易记录入口。
-- 用户认为交易记录缺失。
+## Q: 当前有哪些交易状态？
+
+### 推荐回答
+
+当前有效状态包括：pending、success、failed、refunded、cancelled、declined、under review。
+
+这些状态的正式中文口径仍在确认中，请以 App 当前页面展示为准。
+
+### 分类
+
+- module: transaction-history
+- intent: transaction_statuses
+- visibility: user-facing
+- verification_status: partial_confirmed
+
+### 转人工
+
+用户不理解某个状态或状态长时间不变化时，建议转人工。
+
+## Q: 交易记录支持搜索或导出吗？
+
+### 推荐回答
+
+第一期交易记录只支持筛选，不支持搜索和导出。
+
+### 分类
+
+- module: transaction-history
+- intent: transaction_filter_search_export
+- visibility: user-facing
+- verification_status: confirmed
+
+### 转人工
+
+通常不需要转人工。
 
 ## Q: 交易一直显示处理中怎么办？
 
@@ -42,7 +75,7 @@ last_updated: 2026-05-10
 - module: transaction-history
 - intent: transaction_pending
 - visibility: user-facing
-- verification_status: draft_pending_review
+- verification_status: partial_confirmed
 
 ### 转人工
 
@@ -52,64 +85,18 @@ last_updated: 2026-05-10
 - 交易金额或状态异常。
 - 用户要求撤销、追回或赔偿。
 
-## Q: 找不到交易记录怎么办？
+## Q: 卡退款怎么显示？
 
 ### 推荐回答
 
-请先确认是否选择了正确的账户、卡、资产、时间范围或交易类型。你也可以刷新页面后重试。
-
-如果仍然找不到，建议联系人工客服协助核查。
+卡退款里的 REFUND / REVERSAL 都对用户显示为“退款”。退款金额、入账位置、手续费是否退还和处理时间仍需进一步确认，请以 App 页面展示和人工客服核查结果为准。
 
 ### 分类
 
 - module: transaction-history
-- intent: transaction_missing
+- intent: card_refund_display
 - visibility: user-facing
-- verification_status: draft_pending_review
-
-### 转人工
-
-需要转人工：
-
-- 用户仍找不到交易记录。
-- 交易涉及资金异常。
-- 用户无法提供基本交易信息但需要核查。
-
-## Q: 交易失败怎么办？
-
-### 推荐回答
-
-请先查看交易详情页或页面提示。失败可能与余额、账户状态、商户、网络、链上状态或系统处理有关。
-
-如果失败后资产、卡余额或交易状态异常，建议联系人工客服进一步核查。
-
-### 分类
-
-- module: transaction-history
-- intent: transaction_failed
-- visibility: user-facing
-- verification_status: draft_pending_review
-
-### 转人工
-
-需要转人工：
-
-- 交易失败后资产或卡余额异常。
-- 页面没有明确失败原因。
-- 用户要求撤销、追回或赔偿。
-
-## Q: 卡退款什么时候到账？
-
-### 推荐回答
-
-如果商户发起退款，相关记录可能会在卡交易或交易详情中展示。退款金额、入账位置、手续费是否退还和处理时间可能受商户及通道规则影响，请以 App 页面展示和人工客服核查结果为准。
-
-### 分类
-
-- module: transaction-history
-- intent: card_refund_status
-- visibility: user-facing
-- verification_status: draft_pending_review
+- verification_status: partial_confirmed
 
 ### 转人工
 
@@ -119,23 +106,24 @@ last_updated: 2026-05-10
 - 退款金额与预期不一致。
 - 用户询问手续费是否退还。
 
-## Q: 页面提示数据异常或网络异常怎么办？
+## Q: 找不到交易记录怎么办？
 
 ### 推荐回答
 
-请先检查网络连接并刷新页面。如果页面持续提示数据异常、网络异常或加载失败，建议稍后重试；如果问题持续存在，请联系人工客服。
+请先确认是否使用了正确的筛选条件。第一期交易记录支持筛选，但不支持搜索和导出。
+
+如果仍然找不到，建议联系人工客服协助核查。
 
 ### 分类
 
 - module: transaction-history
-- intent: transaction_page_error
+- intent: transaction_missing
 - visibility: user-facing
-- verification_status: draft_pending_review
+- verification_status: partial_confirmed
 
 ### 转人工
 
 需要转人工：
 
-- 页面持续无法加载。
-- 用户急需核查交易状态。
-- 涉及资金异常。
+- 用户仍找不到交易记录。
+- 交易涉及资金异常。
