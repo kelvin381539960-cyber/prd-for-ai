@@ -92,20 +92,42 @@ last_updated: 2026-05-10
 - 当前交易状态有哪些？
 - pending / failed / completed 等状态的正式中文口径是什么？
 - 钱包交易状态中 Pending、Success、Refunded、Declined、Under Review、Cancelled 是否仍有效？
+- 卡交易状态中 Pending、Success、Refunded、Declined 是否仍有效？
 - Deposit 结果页中的 Completed / PENDING / PROCESSING / AUTHORIZED / REJECTED / CLOSED 是否仍有效？
 - Swap 状态中的 Completed / Pending / Expired / Cancelled 是否仍有效？
-- 交易记录是否支持筛选、搜索、导出？
+- 全量交易是否聚合钱包交易、兑换记录和卡交易？
+- 当前交易记录可查询范围是否为近 1 年？卡交易单次查询最多 6 个月是否仍有效？
+- 交易记录是否支持筛选、搜索、导出？历史资料显示搜索曾被移除，需确认当前状态。
 - 不同交易类型的展示字段是否有统一规则？
+- 卡退款中的 REFUND / REVERSAL 是否都对客显示为退款？
+- 退款入账位置、手续费是否退还、到账时间是否有正式用户口径？
+- 数据异常 / 网络异常页面的正式用户提示文案是什么？
 
 ## Notification / System Email
 
-- 当前支持哪些通知类型？
-- 用户是否可以关闭或管理通知？
+- 当前支持哪些通知类型？历史资料出现交易、账户、系统、营销活动、身份安全等分类，需确认当前正式分类。
+- 用户是否可以关闭或管理通知？哪些通知类型可关闭，哪些必须保留？
+- App 内通知设置是否支持 Push、Email、SMS？
+- 系统通知和营销通知是否有不同默认开启规则？
+- 未读消息红点、数字展示、99+ 规则是否仍有效？
+- 一键已读是否上线？
+- 消息详情页是否支持跳转到交易详情或其他业务页？
 - 系统邮件发送失败、收不到邮件时的标准排查口径是什么？
 - 官方邮件域名或识别方式是否有用户可见说明？
+- 系统邮件模板、logo、footer 是否由 MoEngage 或其他平台配置？该信息是否仅内部使用？
+- 用户 unsubscribed / notification preference 对系统邮件、营销邮件、Push 的影响是否有客服口径？
 
 ## Website / FAQ
 
 - 官网 waitlist 是否仍然有效？
+- 官网 Waitlist 是否在 PC 和移动端都支持？
+- Waitlist 是否只收集邮箱和国家/地区，是否还收集用户关注点？
 - Waitlist 是否有奖励、邀请码、排名等机制？
-- 官网展示的信息是否与 App 当前能力一致？
+- Waitlist 是否存在重复提交限制？是否可对用户说明？
+- Waitlist 是否有 IP 频控或提交限制？是否可对用户说明？
+- Waitlist 加入后的通知时间和方式是什么？
+- 官网 Get the App 下载入口当前是否已上线？下载二维码或应用商店链接是否有效？
+- 官网 Card / Wallet 页面展示的能力是否与 App 当前能力一致？
+- 官网提到的 Visa、Apple Pay、Google Pay、Samsung Pay、700+ wallets、150+ blockchains 等宣传语是否仍可对用户确认？
+- 官网免责声明的正式中文客服口径是什么？
+- 官网 Help Center / Zendesk 是否已上线？
