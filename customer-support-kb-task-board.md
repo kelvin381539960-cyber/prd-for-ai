@@ -289,6 +289,7 @@ Not yet completed:
 
 - No content has been business-reviewed or confirmed.
 - All content remains `draft_pending_review` until explicit business confirmation.
+- Business confirmation should now use `customer-support-kb/review/business-confirmation-checklist.md` as the working checklist.
 
 ## 9. Next Agent Instructions
 
@@ -297,12 +298,13 @@ The next agent should proceed in this order:
 1. Read this file first.
 2. Treat existing `customer-support-kb/` files as draft content, not final confirmed content.
 3. Treat all content as `draft_pending_review` until explicit business confirmation.
-4. Use `customer-support-kb/unresolved/pending-confirmation.md` as the review checklist for business confirmation.
-5. If business confirms a topic, update the relevant KB file and move or remove the corresponding pending item.
-6. Do not expose source paths in user-facing answers.
-7. Move newly discovered uncertain details into `customer-support-kb/unresolved/pending-confirmation.md`.
-8. Move newly discovered unsafe/non-answerable topics into `customer-support-kb/unresolved/do-not-answer.md`.
-9. Update this task board after every meaningful change.
+4. Use `customer-support-kb/review/business-confirmation-checklist.md` as the primary business confirmation checklist.
+5. Use `customer-support-kb/unresolved/pending-confirmation.md` as the raw unresolved source list.
+6. If business confirms a topic, update the relevant KB file and move or remove the corresponding pending item.
+7. Do not expose source paths in user-facing answers.
+8. Move newly discovered uncertain details into `customer-support-kb/unresolved/pending-confirmation.md`.
+9. Move newly discovered unsafe/non-answerable topics into `customer-support-kb/unresolved/do-not-answer.md`.
+10. Update this task board after every meaningful change.
 
 ## 10. Change Log
 
@@ -314,3 +316,4 @@ The next agent should proceed in this order:
 | 2026-05-10 | Reviewed identity verification and P1 Card archive material; refined Registration/Login, Card user-facing FAQ, Card playbook, and pending confirmations. |
 | 2026-05-10 | Reviewed P1 Transaction History, P1 Notification/System Email/App FAQ, and P2 Website/Waitlist material; refined related user-facing, FAQ, playbook, and pending-confirmation files. |
 | 2026-05-10 | Completed source leakage review, unsupported-claim review, and final consistency pass for `customer-support-kb/`. |
+| 2026-05-10 | Created `customer-support-kb/review/business-confirmation-checklist.md` with 85 business confirmation items across 7 modules. |
