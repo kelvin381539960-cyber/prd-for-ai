@@ -12,6 +12,14 @@ source_file: customer-support-kb/unresolved/pending-confirmation.md
 
 所有条目在业务确认前，相关客服知识仍保持 `draft_pending_review`。
 
+## 已应用确认批次
+
+| Date | Confirmation Record | Status |
+|---|---|---|
+| 2026-05-12 | `customer-support-kb/review/confirmed-decisions-2026-05-12.md` | applied to relevant KB files |
+
+说明：2026-05-12 已确认并回填的内容包括 Registration / Login、KYC、Wallet、Card、Transaction History、Notification 的一部分。未覆盖或用户明确表示不确定的内容继续保持 pending。
+
 ## 使用方法
 
 1. 业务、产品、运营、合规或客服负责人逐项确认。
