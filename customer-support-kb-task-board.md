@@ -256,13 +256,13 @@ Use this format for files under `customer-support-kb/faq/`:
 | CSKB-019 | Extract Notification internal playbook | `agent-internal/notification-playbook.md` | archive_reviewed_draft | Reviewed Push/Inbox and System Email archives |
 | CSKB-020 | Extract Website / Waitlist FAQ draft | `user-facing/website-faq.md` and `faq/website-faq.md` | archive_reviewed_draft | Reviewed Website phase 1/2 and Waitlist archives; status, rewards, links, and regions unresolved |
 | CSKB-021 | Create general FAQ index | `faq/faq-index.md` and `user-facing/general-faq.md` | done | Created common-intent entry files |
-| CSKB-022 | Review all files for source leakage | All user-facing and FAQ files | pending | Must still run explicit review |
-| CSKB-023 | Review all files for unsupported claims | All files | pending | Must still run explicit review; many details intentionally unresolved |
-| CSKB-024 | Final consistency pass | Entire `customer-support-kb/` | pending | Check status labels, visibility, language, handoff rules |
+| CSKB-022 | Review all files for source leakage | All user-facing and FAQ files | done | Source leakage scan completed; user-facing and FAQ source leakage count is 0 |
+| CSKB-023 | Review all files for unsupported claims | All files | done | Unsupported-claim scan completed; remaining risky specifics are in pending-confirmation |
+| CSKB-024 | Final consistency pass | Entire `customer-support-kb/` | done | Checked 31 Markdown files for frontmatter, language, visibility, and draft status |
 
 ## 8. Current Status
 
-Current phase: archive-reviewed drafts completed for P0, P1, and P2 target modules. Review phase pending.
+Current phase: archive-reviewed drafts and review phase completed. Business confirmation is still pending.
 
 Completed:
 
@@ -288,9 +288,7 @@ Completed:
 Not yet completed:
 
 - No content has been business-reviewed or confirmed.
-- Source leakage review is still pending.
-- Unsupported-claim review is still pending.
-- Final consistency pass is still pending.
+- All content remains `draft_pending_review` until explicit business confirmation.
 
 ## 9. Next Agent Instructions
 
@@ -298,14 +296,13 @@ The next agent should proceed in this order:
 
 1. Read this file first.
 2. Treat existing `customer-support-kb/` files as draft content, not final confirmed content.
-3. Run source leakage review for all `user-facing/` and `faq/` files.
-4. Run unsupported-claim review for all files.
-5. Run final consistency pass for the entire `customer-support-kb/` directory.
-6. Keep all content as `draft_pending_review` unless there is explicit business confirmation.
-7. Do not expose source paths in user-facing answers.
-8. Move uncertain details into `customer-support-kb/unresolved/pending-confirmation.md`.
-9. Move unsafe/non-answerable topics into `customer-support-kb/unresolved/do-not-answer.md`.
-10. Update this task board after every meaningful change.
+3. Treat all content as `draft_pending_review` until explicit business confirmation.
+4. Use `customer-support-kb/unresolved/pending-confirmation.md` as the review checklist for business confirmation.
+5. If business confirms a topic, update the relevant KB file and move or remove the corresponding pending item.
+6. Do not expose source paths in user-facing answers.
+7. Move newly discovered uncertain details into `customer-support-kb/unresolved/pending-confirmation.md`.
+8. Move newly discovered unsafe/non-answerable topics into `customer-support-kb/unresolved/do-not-answer.md`.
+9. Update this task board after every meaningful change.
 
 ## 10. Change Log
 
@@ -316,3 +313,4 @@ The next agent should proceed in this order:
 | 2026-05-10 | Reviewed P0 archive material and refined Registration/Login, KYC Wallet Opening, Wallet Asset, and Wallet Deposit/Send/Swap drafts. |
 | 2026-05-10 | Reviewed identity verification and P1 Card archive material; refined Registration/Login, Card user-facing FAQ, Card playbook, and pending confirmations. |
 | 2026-05-10 | Reviewed P1 Transaction History, P1 Notification/System Email/App FAQ, and P2 Website/Waitlist material; refined related user-facing, FAQ, playbook, and pending-confirmation files. |
+| 2026-05-10 | Completed source leakage review, unsupported-claim review, and final consistency pass for `customer-support-kb/`. |
