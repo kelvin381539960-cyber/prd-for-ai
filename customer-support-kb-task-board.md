@@ -120,11 +120,11 @@ Use these archive paths only as internal source material. Do not expose these pa
 | Card Manage | `archive/legacy-prd/card/manage/` | P1 | archive_reviewed_draft |
 | Card Transaction | `archive/legacy-prd/card/transaction/` | P1 | archive_reviewed_draft |
 | Card Me/Profile | `archive/legacy-prd/card/me/` | P1 | archive_reviewed_draft |
-| Transaction History | `archive/legacy-prd/app/transaction-history/` | P1 | not_started |
-| Notification / Push Inbox | `archive/legacy-prd/notification/push-inbox/` | P1 | not_started |
-| System Email | `archive/legacy-prd/notification/system-email/` | P1 | not_started |
-| App FAQ | `archive/legacy-prd/app/faq/` | P1 | not_started |
-| Website | `archive/legacy-prd/website/phase-1/`, `phase-2/`, `waitlist-addition/`, `waitlist-campaign/` | P2 | not_started |
+| Transaction History | `archive/legacy-prd/app/transaction-history/` | P1 | archive_reviewed_draft |
+| Notification / Push Inbox | `archive/legacy-prd/notification/push-inbox/` | P1 | archive_reviewed_draft |
+| System Email | `archive/legacy-prd/notification/system-email/` | P1 | archive_reviewed_draft |
+| App FAQ | `archive/legacy-prd/app/faq/` | P1 | archive_reviewed_draft |
+| Website | `archive/legacy-prd/website/phase-1/`, `phase-2/`, `waitlist-addition/`, `waitlist-campaign/` | P2 | archive_reviewed_draft |
 
 ## 6. File Content Standards
 
@@ -250,11 +250,11 @@ Use this format for files under `customer-support-kb/faq/`:
 | CSKB-013 | Extract Wallet internal playbook | `agent-internal/wallet-playbook.md` | archive_reviewed_draft | Reviewed wallet PRDs and refined playbook |
 | CSKB-014 | Extract Card user-facing draft | `user-facing/card-application-manage.md` and `faq/card-faq.md` | archive_reviewed_draft | Reviewed Card Application / Manage / Transaction / Me; many commercial rules unresolved |
 | CSKB-015 | Extract Card internal playbook | `agent-internal/card-playbook.md` | archive_reviewed_draft | Reviewed Card Application / Manage / Transaction / Me |
-| CSKB-016 | Extract Transaction History user-facing draft | `user-facing/transaction-history.md` and `faq/transaction-faq.md` | draft_created | Generic safe draft created; status definitions unresolved |
-| CSKB-017 | Extract Transaction internal playbook | `agent-internal/transaction-playbook.md` | draft_created | Generic safe draft created |
-| CSKB-018 | Extract Notification / System Email user-facing draft | `user-facing/notification-system-email.md` and `faq/notification-faq.md` | draft_created | Generic safe draft created; official email/domain rules unresolved |
-| CSKB-019 | Extract Notification internal playbook | `agent-internal/notification-playbook.md` | draft_created | Generic safe draft created |
-| CSKB-020 | Extract Website / Waitlist FAQ draft | `user-facing/website-faq.md` and `faq/website-faq.md` | draft_created | Generic safe draft created; waitlist status unresolved |
+| CSKB-016 | Extract Transaction History user-facing draft | `user-facing/transaction-history.md` and `faq/transaction-faq.md` | archive_reviewed_draft | Reviewed Transaction History archive; status definitions and query scope require confirmation |
+| CSKB-017 | Extract Transaction internal playbook | `agent-internal/transaction-playbook.md` | archive_reviewed_draft | Reviewed Transaction History archive and refined playbook |
+| CSKB-018 | Extract Notification / System Email user-facing draft | `user-facing/notification-system-email.md` and `faq/notification-faq.md` | archive_reviewed_draft | Reviewed Push/Inbox and System Email archives; official email/domain rules unresolved |
+| CSKB-019 | Extract Notification internal playbook | `agent-internal/notification-playbook.md` | archive_reviewed_draft | Reviewed Push/Inbox and System Email archives |
+| CSKB-020 | Extract Website / Waitlist FAQ draft | `user-facing/website-faq.md` and `faq/website-faq.md` | archive_reviewed_draft | Reviewed Website phase 1/2 and Waitlist archives; status, rewards, links, and regions unresolved |
 | CSKB-021 | Create general FAQ index | `faq/faq-index.md` and `user-facing/general-faq.md` | done | Created common-intent entry files |
 | CSKB-022 | Review all files for source leakage | All user-facing and FAQ files | pending | Must still run explicit review |
 | CSKB-023 | Review all files for unsupported claims | All files | pending | Must still run explicit review; many details intentionally unresolved |
@@ -262,7 +262,7 @@ Use this format for files under `customer-support-kb/faq/`:
 
 ## 8. Current Status
 
-Current phase: P0 archive-reviewed draft completed; P1 Card archive-reviewed draft completed.
+Current phase: archive-reviewed drafts completed for P0, P1, and P2 target modules. Review phase pending.
 
 Completed:
 
@@ -287,11 +287,6 @@ Completed:
 
 Not yet completed:
 
-- P1 Transaction History has not been archive-reviewed yet.
-- P1 Notification / Push Inbox has not been archive-reviewed yet.
-- P1 System Email has not been archive-reviewed yet.
-- App FAQ has not been archive-reviewed yet.
-- P2 Website / Waitlist material has not been archive-reviewed yet.
 - No content has been business-reviewed or confirmed.
 - Source leakage review is still pending.
 - Unsupported-claim review is still pending.
@@ -303,20 +298,14 @@ The next agent should proceed in this order:
 
 1. Read this file first.
 2. Treat existing `customer-support-kb/` files as draft content, not final confirmed content.
-3. Continue archive-based extraction/review with:
-   - P1 Transaction History
-   - P1 Notification / Push Inbox
-   - P1 System Email
-   - App FAQ
-   - P2 Website / Waitlist
-4. Keep all extracted content in Chinese.
-5. Keep all extracted content as `draft_pending_review` unless there is explicit business confirmation.
-6. Do not expose source paths in user-facing answers.
-7. Move uncertain details into `customer-support-kb/unresolved/pending-confirmation.md`.
-8. Move unsafe/non-answerable topics into `customer-support-kb/unresolved/do-not-answer.md`.
-9. Run source leakage review for all `user-facing/` and `faq/` files.
-10. Run unsupported-claim review for all files.
-11. Update this task board after every meaningful change.
+3. Run source leakage review for all `user-facing/` and `faq/` files.
+4. Run unsupported-claim review for all files.
+5. Run final consistency pass for the entire `customer-support-kb/` directory.
+6. Keep all content as `draft_pending_review` unless there is explicit business confirmation.
+7. Do not expose source paths in user-facing answers.
+8. Move uncertain details into `customer-support-kb/unresolved/pending-confirmation.md`.
+9. Move unsafe/non-answerable topics into `customer-support-kb/unresolved/do-not-answer.md`.
+10. Update this task board after every meaningful change.
 
 ## 10. Change Log
 
@@ -326,3 +315,4 @@ The next agent should proceed in this order:
 | 2026-05-10 | Created `customer-support-kb/` skeleton, base policy files, unresolved files, safe user-facing drafts, internal playbooks, and FAQ drafts. |
 | 2026-05-10 | Reviewed P0 archive material and refined Registration/Login, KYC Wallet Opening, Wallet Asset, and Wallet Deposit/Send/Swap drafts. |
 | 2026-05-10 | Reviewed identity verification and P1 Card archive material; refined Registration/Login, Card user-facing FAQ, Card playbook, and pending confirmations. |
+| 2026-05-10 | Reviewed P1 Transaction History, P1 Notification/System Email/App FAQ, and P2 Website/Waitlist material; refined related user-facing, FAQ, playbook, and pending-confirmation files. |
